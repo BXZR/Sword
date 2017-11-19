@@ -1,0 +1,23 @@
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class fixWithCamera : MonoBehaviour {
+
+	//根据摄像机来方向来设定自身的旋转方向
+	//这个脚本应用于任人物
+	public Transform theTargetCamera;
+
+	void flashRotation()
+	{
+		Vector3 now = this.transform.rotation.eulerAngles;
+		Vector3 rotation = new Vector3 (now.x , theTargetCamera.rotation .eulerAngles.y , now.z);
+		Quaternion aim = Quaternion.Euler(rotation);
+		this.transform.rotation= aim;
+	}
+
+	void FixedUpdate () 
+	{
+		flashRotation ();
+	}
+}

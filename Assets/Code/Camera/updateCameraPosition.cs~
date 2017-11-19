@@ -1,0 +1,23 @@
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class updateCameraPosition : MonoBehaviour {
+
+	//修正摄像机的位置，做的强制性跟随
+	public Transform target;
+	public float Zminus = -1f;
+	public float YAdd = 1.5f;
+    
+	void flashPosition()
+	{
+		Vector3 aim = target.position + new Vector3 (0,YAdd ,Zminus);
+		this.transform.position  = Vector3.Lerp(this.transform .position , aim , 0.3f);
+	}
+
+	void FixedUpdate () 
+	{
+		flashPosition ();
+	}
+}
+ 

@@ -46,8 +46,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-     <Compile Include="Assets\Code\Camera\MouseLook.cs" />
-     <Compile Include="Assets\Code\Camera\updateCameraPosition.cs" />
+     <Compile Include="Assets\Code\Camera\cameraUse.cs" />
      <Compile Include="Assets\Code\Player\PlayerBasic.cs" />
      <Compile Include="Assets\Code\Player\attackLink.cs" />
      <Compile Include="Assets\Code\Player\attackLinkController.cs" />
