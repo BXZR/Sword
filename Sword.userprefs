@@ -1,0 +1,18 @@
+﻿<Properties StartupItem="Assembly-CSharp.csproj">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Unity.Instance.Unity Editor" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Code\Camera\MouseLook.cs">
+    <Files>
+      <File FileName="Assets\Code\Player\PlayerBasic.cs" Line="441" Column="16" />
+      <File FileName="Assets\Code\systemValues.cs" Line="10" Column="1" />
+      <File FileName="Assets\Code\Player\move.cs" Line="129" Column="3" />
+      <File FileName="Assets\Code\Player\attackLinkController.cs" Line="194" Column="36" />
+      <File FileName="Assets\Code\Player\attackLink.cs" Line="116" Column="6" />
+      <File FileName="Assets\Code\Player\newMethodAttack.cs" Line="91" Column="5" />
+      <File FileName="Assets\Code\Camera\MouseLook.cs" Line="7" Column="40" />
+    </Files>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+</Properties>
