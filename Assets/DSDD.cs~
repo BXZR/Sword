@@ -1,0 +1,21 @@
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class DSDD : MonoBehaviour {
+
+	void CC()
+	{
+		int i = 1;
+		print (i++ +" "+ i++);
+	}
+	// Use this for initialization
+	void Start () {
+		CC ();
+	}
+	
+	// Update is called once per frame
+	void Update () {
+		
+	}
+}

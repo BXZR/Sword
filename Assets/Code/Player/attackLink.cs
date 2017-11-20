@@ -103,6 +103,22 @@ public class attackLink : MonoBehaviour {
 		
 	}
 
+	//返回这个动作的时间，用来控制显示效果的时间长短
+	public virtual float actTimer()
+	{
+		float timer = 1f;
+		try
+		{
+			timer = this.theAnimatorOfPlayer.GetCurrentAnimatorStateInfo (0).length;
+			print("get act length = " + timer);
+		}
+		catch 
+		{
+			timer = 1f;
+		}
+		return timer;
+	}
+
 	public  virtual void attackLinkEffect()//连招的效果在这里写
 	{
 		//这里其实暂时规定使用某一个攻击动作的同时不会使用另一个攻击动作

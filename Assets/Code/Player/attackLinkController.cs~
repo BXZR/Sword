@@ -102,6 +102,14 @@ public class attackLinkController :MonoBehaviour {
 	}
 
 
+	//攻击起手阶段的效果
+	private void  playStarEffect()
+	{
+		effectBasic[] Effects = this.GetComponentsInChildren<effectBasic> ();
+		for (int i = 0; i < Effects.Length; i++)
+			Effects [i].onAttackAction ();
+	}
+
 	void check()//真正进行检测的方法
 	{
 		bool isOver = false;//标记量
@@ -112,6 +120,7 @@ public class attackLinkController :MonoBehaviour {
 			{
 				//这个判断非常的重要，如果取消，任何攻击动作都有可能中间取消，这当然不符合我们的需求
 				AL.attackLinkEffect ();//发生效果
+				playStarEffect();//额外统一攻击效果
 				flashLink ();//更新列表
 				reMake();//完全重头开始
 				isOver = true;//标记量，是否已经使用了一个技能
@@ -135,7 +144,7 @@ public class attackLinkController :MonoBehaviour {
 	//如果公式集合空，则重建公式集合，之前的探索完全作废
 	void flashLink()
 	{
-		print ("makeFlash");
+		//print ("makeFlash");
 		//清空并重新获取所有的公式
 		attackLinkMayUsing.Clear ();
 		for (int i = 0; i < attackLinks.Length; i++) 
@@ -144,7 +153,7 @@ public class attackLinkController :MonoBehaviour {
 		}
 	}
 		
-	new  public void makeStart()//这个方法是用于连招本身的初始化方法
+  public void makeStart()//这个方法是用于连招本身的初始化方法
 	{
 		attackLinks = this.GetComponentsInChildren<attackLink> ();
 		attackLinkMayUsing = new List<attackLink> (); //重建这个对象

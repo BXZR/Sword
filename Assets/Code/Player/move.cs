@@ -15,9 +15,8 @@ public class move : MonoBehaviour {
 	public float speedNormal =0.6f;//一般移动的移动速度
 	public float speedRun =1.25f;//狂奔的移动速度
 	private float keyNow = 0f;//长按达到一秒钟才可以切换 这个是当前的计时器
-	private float keyTimer = 1.5f;//长按达到一定时间才可以切换 
+	private float keyTimer =2f;//长按达到一定时间才可以切换 
 	public float jumpMaxHeight =1.5f;//跳跃最高高度
-	float lookHeight = 10;	//在高空中是立即转身的，只有在一定高度范围内才会使用插值转身
 	private Vector3 moveDirection;//记录的临时变量减少引用数量
 	private CharacterController theController;//角色控制器
 	private  Animator theAnimatorOfPlayer;//动画控制器
@@ -42,8 +41,6 @@ public class move : MonoBehaviour {
 			//允许这些组件是再组物体上面，这是因为这里面的资源是拼凑得到的，并不规整，在这里不得不使用一些折衷
 			theController = this.GetComponentInChildren<CharacterController> ();
 			theAnimatorOfPlayer = this.GetComponentInChildren<Animator> ();
-			//lookHeight的值不可以太高，当两个物体重叠的时候触发lookHeight会出现死循环的互相观看
-			lookHeight = jumpMaxHeight * 0.4f;
 		}
 	}
 		
@@ -62,7 +59,7 @@ public class move : MonoBehaviour {
 		if (canMove ) 
 		{
 			this.theAnimatorOfPlayer.SetFloat ("forward", forwardA);//播放动画,具体内容需要看controller
-			this.theAnimatorOfPlayer.SetFloat ("up", upA);//播放动画传值,具体内容需要看controller
+			this.theAnimatorOfPlayer.SetFloat ("up", upA);//播放动画,具体内容需要看controller
 	        //有些平台做后退减速效果不好，例如安卓
 	 			if(backSlow)
 				    ZMove = (speedNow + forwardA / 5) * forwardA * Time.deltaTime;
@@ -93,24 +90,66 @@ public class move : MonoBehaviour {
 			} else 
 			{
 				keyNow = 0;//归零
+				speedNow = speedNormal;
 			}
 
 		}
 
 		moveDirectionAction = transform.rotation * moveDirection;//旋转角度加权
 
-		/*************************************重力控制**************************************************/
+		if (this.transform.position.y > jumpMaxHeight / 3)//在一定高度的半空中有一定的移动速度加成
+			moveDirectionAction.z += ZMove * 0.25f;//在半空中有额外25%的横向移动速度;
+			
+		/*************************************移动与高度限制**************************************************/
+
+		if (theController && theController.enabled)//有时候需要强制无法移动
+			theController.Move (moveDirectionAction);//真实地进行行动(因为使用的是characterController，因此使用坐标的方式似乎比较稳妥)
+
+	}
+
+
+
+	//有关跳跃的逻辑都在这里
+	private float jumpTimer = 0f;
+	public bool isJumping = false;
+
+	void Jump()
+	{
+		//刷新初始值
+		Vector3 jumpAction = Vector3.zero;
+		//按键检测
+		if (Input.GetKeyDown (KeyCode.Space)) 
+		{
+			this.theAnimatorOfPlayer.Play ("jump");
+		}
+		if (Input.GetKey (KeyCode.Space)) 
+		{
+			if (theController && theController.enabled)//有时候需要强制无法移动
+			{
+				float adder = speedNow == speedNormal ? 9f: 11f;
+				jumpAction  += new Vector3 (0,jumpTimer,0) * Time .deltaTime * adder;
+				jumpTimer += Time.deltaTime;
+				jumpTimer = Mathf.Clamp (jumpTimer ,0,1);
+
+			}
+			isJumping = true;
+		}
+		if (Input.GetKeyUp (KeyCode.Space)) 
+		{
+			isJumping = false;
+		}
+		//重力控制
 		//有关重力的计算不论是否可以移动都应该进行
 		//IsGrounded () == false || 
 		if (theController　&& canGravity)
 		{
-			if (theController.isGrounded == false || this.transform.position.y > 0.6f) 
+			//自编写的伪重力公式随着在半空中的时间的长短获得一个不断增加的向下移动的趋势
+			//重力会持续存在的
+			jumpAction.y -= ((overGroundTimer * 4)+5)* Time.deltaTime;
+			if (isJumping ) 
 			{
 				overGroundTimer += Time.deltaTime;//不在地上就进行计时，获得随着离地时间线性增长的向下移动的趋势
-			    moveDirectionAction.y -= (1.2f + overGroundTimer * 1.2f) * Time.deltaTime;//自编写的伪重力公式随着在半空中的时间的长短获得一个不断增加的向下移动的趋势
-			    //这里不适合恒力作为重力模拟
-				if (this.transform.position.y > jumpMaxHeight / 3)//在一定高度的半空中有一定的移动速度加成
-				moveDirectionAction.z += ZMove * 0.25f;//在半空中有额外25%的横向移动速度;
+				//这里不适合恒力作为重力模拟
 			} 
 			else 
 			{
@@ -118,18 +157,15 @@ public class move : MonoBehaviour {
 			}
 		}
 
-		/*************************************移动与高度限制**************************************************/
-
-		if (theController && theController.enabled)//有时候需要强制无法移动
-			theController.Move (moveDirectionAction);//真实地进行行动(因为使用的是characterController，因此使用坐标的方式似乎比较稳妥)
-		if (this.transform.position.y >= jumpMaxHeight)//高度达到一定限制之后不再允许继续向上移动
-			this.transform.position = new Vector3 (this.transform.position.x, jumpMaxHeight, this.transform.position.z);
 
 
+
+	   theController.Move (jumpAction);//真实地进行行动(因为使用的是characterController，因此使用坐标的方式似乎比较稳妥)
+	   if (this.transform.position.y >= jumpMaxHeight)//高度达到一定限制之后不再允许继续向上移动
+		this.transform.position = new Vector3 (this.transform.position.x, jumpMaxHeight, this.transform.position.z);
 
 	}
-
-
+     
 	void flashRotation()
 	{
 		Ray ray = Camera.main.ScreenPointToRay (Input.mousePosition);
@@ -153,10 +189,7 @@ public class move : MonoBehaviour {
 		
 			forwardA = Input.GetAxis (forwardAxisName);
 			upA = Input.GetAxis (upAxisName);
-
-			//这个强制的判断有一点太过复杂，消耗计算了
-			//if(Application .platform != RuntimePlatform.Android  || (Application .platform == RuntimePlatform.Android ) && systemValues .players [0] != this.gameObject )
 			moveAction (forwardA, upA);
-		    //flashRotation ();
+		    Jump();
 	}
 }

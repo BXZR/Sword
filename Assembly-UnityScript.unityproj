@@ -46,7 +46,13 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-     <Compile Include="Assets\Code\Camera\SmoothFollow.js" />
+     <Compile Include="Assets\KY_effects\Script\ConGUI.js" />
+     <Compile Include="Assets\KY_effects\Script\Lighting.js" />
+     <Compile Include="Assets\KY_effects\Script\ParticleAction.js" />
+     <Compile Include="Assets\KY_effects\Script\ShotSpeedSync.js" />
+     <Compile Include="Assets\KY_effects\Script\ThisDestroy.js" />
+     <None Include="Assets\KY_effects\FX_free_pack\prefab\01_shot\00_ReadMe.txt" />
+     <None Include="Assets\KY_effects\FX_free_pack\ReadMe.txt" />
  <Reference Include="UnityEngine.UI">
  <HintPath>D:/Unity3D 5.6.1/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
  </Reference>
