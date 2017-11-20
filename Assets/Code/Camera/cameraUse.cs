@@ -17,6 +17,7 @@ public class cameraUse : MonoBehaviour
 	public float minimumY = -60F;
 	public float maximumY = 60F;
 	float rotationY = 0F;
+
 	void LateUpdate()
 	{
 		if (!target)
@@ -43,5 +44,7 @@ public class cameraUse : MonoBehaviour
 		Vector3 rotation = new Vector3 (now.x , this.transform .rotation .eulerAngles.y , now.z);
 		Quaternion aim = Quaternion.Euler(rotation);
 		target.transform.rotation= aim;
+		target.GetComponent<move> ().yNow = now.y;
+
 	}
 }

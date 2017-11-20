@@ -4,14 +4,14 @@
     <Files>
       <File FileName="Assets\Code\Player\PlayerBasic.cs" Line="1" Column="1" />
       <File FileName="Assets\Code\systemValues.cs" Line="11" Column="32" />
-      <File FileName="Assets\Code\Player\move.cs" Line="129" Column="51" />
+      <File FileName="Assets\Code\Player\move.cs" Line="164" Column="50" />
       <File FileName="Assets\Code\Player\attackLinkController.cs" Line="110" Column="32" />
       <File FileName="Assets\Code\Player\attackLink.cs" Line="112" Column="36" />
-      <File FileName="Assets\Code\Camera\cameraUse.cs" Line="22" Column="15" />
+      <File FileName="Assets\Code\Camera\cameraUse.cs" Line="47" Column="45" />
       <File FileName="Assets\Code\Effects\effectBasic.cs" Line="14" Column="37" />
-      <File FileName="Assets\Code\Effects\knifeSlash\theKnifeSlashController.cs" Line="8" Column="37" />
-      <File FileName="Assets\Code\Effects\knifeSlash\MeleeWeaponTrail.cs" Line="20" Column="9" />
-      <File FileName="Assets\Code\Effects\knifeSlash\Interpolate.cs" Line="20" Column="5" />
+      <File FileName="Assets\Code\Effects\knifeSlash\theKnifeSlashController.cs" Line="1" Column="1" />
+      <File FileName="Assets\Code\Effects\knifeSlash\MeleeWeaponTrail.cs" Line="1" Column="1" />
+      <File FileName="Assets\Code\Effects\knifeSlash\Interpolate.cs" Line="1" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

@@ -17,7 +17,7 @@ public class move : MonoBehaviour {
 	private float keyNow = 0f;//长按达到一秒钟才可以切换 这个是当前的计时器
 	private float keyTimer =2f;//长按达到一定时间才可以切换 
 	public float jumpMaxHeight =1.5f;//跳跃最高高度
-	private Vector3 moveDirection;//记录的临时变量减少引用数量
+
 	private CharacterController theController;//角色控制器
 	private  Animator theAnimatorOfPlayer;//动画控制器
 	private float margin =0.1f;//距离地面距离，小于这个距离被认为是在地面上
@@ -32,6 +32,10 @@ public class move : MonoBehaviour {
 	public bool canGravity = true;//存在重力（大多数情况下是需要考虑重力的）
 
 	private bool isStarted = false;
+	private float savedYaw = 0;//跟随鼠标转身的时候的动作需要用这个判断是不是开启
+	private float yawChangeGate = 10;//超过这个数值就需要做动作了
+	public float yNow = 0;//需要传入的标记
+
 	public void makeStart()//初始化方法，由总控单元统一进行初始化
 	{
 		if (isStarted == false)
@@ -50,67 +54,84 @@ public class move : MonoBehaviour {
 	{    
 		return Physics.Raycast(transform.position, -this.transform .up,  margin);    
 	}  
-	public void moveAction(float  forwardA ,float upA , bool backSlow = true)
+
+	//计时器和额外加速在这里控制
+	private void timerCheck()
 	{
-		moveDirection = Vector3.zero;//刷新值这个值只需要计算位置增量就可以了
-		float ZMove = 0f;
-		Vector3 moveDirectionAction = Vector3.zero;
+		if (Mathf.Abs (Input.GetAxis (forwardAxisName)) > 0.1f || Mathf.Abs (Input.GetAxis (upAxisName)) > 0.1f) {//如果有输入就逐步进行检测，长按与短按的时间并不一样
+			keyNow += Time.deltaTime;//使用这个计时器进行计时
 
-		if (canMove ) 
-		{
-			this.theAnimatorOfPlayer.SetFloat ("forward", forwardA);//播放动画,具体内容需要看controller
-			this.theAnimatorOfPlayer.SetFloat ("up", upA);//播放动画,具体内容需要看controller
-	        //有些平台做后退减速效果不好，例如安卓
-	 			if(backSlow)
-				    ZMove = (speedNow + forwardA / 5) * forwardA * Time.deltaTime;
-				else
-					ZMove = (speedNow ) * forwardA * Time.deltaTime;
-				
-				if (upA > 0.1f && upA < 0.5f)
-					upA = Mathf.Max (upA, 0.5f);//
-				moveDirection.z += ZMove;//向着正方向移动会有来自方向的速度加成同样在后退的时候速度会相对较低
-			float XAdd =  speedNow * upA * Time.deltaTime;
-				//下面注释的两行是一个很好的思想，但是因为y周上面的移动出现跳变，会有较大幅度的上下抖动
-			    moveDirection.x  += XAdd;//漫游之移动
-
-			/******************************************速度修改**************************************************************/
-			//if (Mathf.Abs(Input.GetAxis (forwardAxisName) )>0.1f ||  Mathf.Abs( Input.GetAxis (upAxisName) )> 0.1f || Input.GetAxis ("lefts") != 0) {//如果有输入就逐步进行检测，长按与短按的时间并不一样
-			if (Mathf.Abs (Input.GetAxis (forwardAxisName)) > 0.1f || Mathf.Abs (Input.GetAxis (upAxisName)) > 0.1f) {//如果有输入就逐步进行检测，长按与短按的时间并不一样
-				keyNow += Time.deltaTime;//使用这个计时器进行计时
-
-				if (theController.isGrounded == false || this.transform.position.y > 0.6f) 
-				{
-					keyNow += Time.deltaTime*2;//半空中速度积累速度更快
-				}
-
-				if (keyNow > keyTimer)//切换速度
-				speedNow = speedRun;
-				else
-				speedNow = speedNormal;
-			} else 
+			if (theController.isGrounded == false || this.transform.position.y > 0.6f) 
 			{
-				keyNow = 0;//归零
-				speedNow = speedNormal;
+				keyNow += Time.deltaTime*2;//半空中速度积累速度更快
 			}
 
+			if (keyNow > keyTimer)//切换速度
+				speedNow = speedRun;
+			else
+				speedNow = speedNormal;
+		} 
+		else 
+		{
+			keyNow = 0;//归零
+			speedNow = speedNormal;
+		}
+	}
+	public void MoveForwardBack(float  AxisValue)
+	{
+		Vector3 moveDirection = Vector3.zero;//刷新值这个值只需要计算位置增量就可以了
+		float ZMove = 0f;
+		this.theAnimatorOfPlayer.SetFloat ("forward", forwardA);//播放动画,具体内容需要看controller
+		if (canMove ) 
+		{
+			ZMove = (speedNow ) * forwardA * Time.deltaTime;
+		    moveDirection.z += ZMove;//向着正方向移动会有来自方向的速度加成同样在后退的时候速度会相对较低
 		}
 
-		moveDirectionAction = transform.rotation * moveDirection;//旋转角度加权
-
+		Vector3 moveDirectionAction = transform.rotation * moveDirection;//旋转角度加权
 		if (this.transform.position.y > jumpMaxHeight / 3)//在一定高度的半空中有一定的移动速度加成
 			moveDirectionAction.z += ZMove * 0.25f;//在半空中有额外25%的横向移动速度;
-			
-		/*************************************移动与高度限制**************************************************/
 
 		if (theController && theController.enabled)//有时候需要强制无法移动
 			theController.Move (moveDirectionAction);//真实地进行行动(因为使用的是characterController，因此使用坐标的方式似乎比较稳妥)
 
 	}
 
+	void MoveLeftAndRight(float AxisValue , float forwardA)
+	{
+		Vector3 moveDirection = Vector3.zero;
+		//动作设定
+		float minus = yNow - savedYaw;
+		if (Mathf.Abs (minus) > 10)
+		{
+			savedYaw = yNow;
+			if(forwardA<0)
+			this.theAnimatorOfPlayer.Play ("rotatePoseBack");
+			else
+			this.theAnimatorOfPlayer.Play ("rotatePoseForward");
+			//.SetFloat ("up", Mathf.Asin (minus) * 0.5f);//播放动画,具体内容需要看controller
+		} 
+		else
+		{
+			this.theAnimatorOfPlayer.SetFloat ("up", upA);//播放动画,具体内容需要看controller
+		}
+		if (canMove)
+		{
+			//移动设定
+			if (AxisValue > 0.1f && AxisValue < 0.5f)
+				AxisValue = Mathf.Max (AxisValue, 0.5f);
+			float XAdd =  speedNow * AxisValue * Time.deltaTime;
+			//下面注释的两行是一个很好的思想，但是因为y周上面的移动出现跳变，会有较大幅度的上下抖动
+			moveDirection.x  += XAdd;//漫游之移动
+		}
 
+		if (theController && theController.enabled)//有时候需要强制无法移动
+			theController.Move (transform.rotation *moveDirection);//真实地进行行动(因为使用的是characterController，因此使用坐标的方式似乎比较稳妥)
+	}
 
 	//有关跳跃的逻辑都在这里
 	private float jumpTimer = 0f;
+	private float jumpTimerMax= 1.2f;
 	public bool isJumping = false;
 
 	void Jump()
@@ -121,32 +142,40 @@ public class move : MonoBehaviour {
 		if (Input.GetKeyDown (KeyCode.Space)) 
 		{
 			this.theAnimatorOfPlayer.Play ("jump");
+			if (isJumping == false) 
+			{
+				jumpTimer = jumpTimerMax;
+				isJumping = true;
+			}
+			else
+			{
+				overGroundTimer /= 2f;//减少重力持续，这样就像是继续向上用力冲
+				jumpTimer += 0.15f;//如果正在跳跃就增加跳跃持续时间
+			}
 		}
-		if (Input.GetKey (KeyCode.Space)) 
+		//如果正在跳跃
+		if (isJumping) 
 		{
+			jumpTimer -= Time.deltaTime;
+			if (jumpTimer < 0) isJumping = false;
+
 			if (theController && theController.enabled)//有时候需要强制无法移动
 			{
-				float adder = speedNow == speedNormal ? 9f: 11f;
+				float adder = speedNow == speedNormal ? 8f:10f;
+				//jumpTimer越来越小表现为上冲余力越来越不足
 				jumpAction  += new Vector3 (0,jumpTimer,0) * Time .deltaTime * adder;
-				jumpTimer += Time.deltaTime;
-				jumpTimer = Mathf.Clamp (jumpTimer ,0,1);
 
 			}
-			isJumping = true;
 		}
-		if (Input.GetKeyUp (KeyCode.Space)) 
-		{
-			isJumping = false;
-		}
+
 		//重力控制
 		//有关重力的计算不论是否可以移动都应该进行
-		//IsGrounded () == false || 
-		if (theController　&& canGravity)
-		{
+		//重力与是否跳跃也并没有关联
+		if (theController　 && canGravity) {
 			//自编写的伪重力公式随着在半空中的时间的长短获得一个不断增加的向下移动的趋势
 			//重力会持续存在的
-			jumpAction.y -= ((overGroundTimer * 4)+5)* Time.deltaTime;
-			if (isJumping ) 
+			jumpAction.y -= ((overGroundTimer * 4) + 3) * Time.deltaTime;
+			if (isJumping) 
 			{
 				overGroundTimer += Time.deltaTime;//不在地上就进行计时，获得随着离地时间线性增长的向下移动的趋势
 				//这里不适合恒力作为重力模拟
@@ -157,25 +186,9 @@ public class move : MonoBehaviour {
 			}
 		}
 
-
-
-
 	   theController.Move (jumpAction);//真实地进行行动(因为使用的是characterController，因此使用坐标的方式似乎比较稳妥)
 	   if (this.transform.position.y >= jumpMaxHeight)//高度达到一定限制之后不再允许继续向上移动
 		this.transform.position = new Vector3 (this.transform.position.x, jumpMaxHeight, this.transform.position.z);
-
-	}
-     
-	void flashRotation()
-	{
-		Ray ray = Camera.main.ScreenPointToRay (Input.mousePosition);
-		RaycastHit hitInfo;
-		if (Physics.Raycast(ray, out hitInfo, 200)) 
-		{
-			Vector3 target = hitInfo.point;
-			target.y = transform.position.y;
-			transform.LookAt(target);
-		}
 
 	}
 
@@ -186,10 +199,11 @@ public class move : MonoBehaviour {
 
 	void Update ()
 	{
-		
-			forwardA = Input.GetAxis (forwardAxisName);
-			upA = Input.GetAxis (upAxisName);
-			moveAction (forwardA, upA);
-		    Jump();
+		forwardA = Input.GetAxis (forwardAxisName);
+		upA = Input.GetAxis (upAxisName);
+	    MoveForwardBack(forwardA);
+		MoveLeftAndRight (upA,forwardA );
+	    Jump();
+		timerCheck ();
 	}
 }
