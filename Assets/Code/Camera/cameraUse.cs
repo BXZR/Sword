@@ -18,6 +18,8 @@ public class cameraUse : MonoBehaviour
 	public float maximumY = 60F;
 	float rotationY = 0F;
 
+	float YPositionFixed = 0;
+	Vector3 positionStart = Vector3.zero;
 	void LateUpdate()
 	{
 		if (!target)
@@ -34,10 +36,24 @@ public class cameraUse : MonoBehaviour
 		transform.localEulerAngles = new Vector3(-rotationY, rotationX, 0);
 
 		Vector3 nowForCamera = new Vector3 (0,transform.localEulerAngles.y,0);
+		//修正摄像机的位置
+		Vector3 thePositionWithAdd = Vector3.zero;
+		if (positionStart == Vector3.zero) 
+		{
+			positionStart = this.transform.position;
+		} 
+		else 
+		{
+			YPositionFixed -= Input.GetAxis ("Mouse Y")*0.3f;
+			YPositionFixed = Mathf.Clamp (YPositionFixed, -0.5f, 0.5f);
+			thePositionWithAdd = new Vector3 (0, YPositionFixed, 0);
+		}
+
 		transform.position = target.position;
 		transform.position -= Quaternion.Euler(nowForCamera) * Vector3.forward * distance;
 		// Set the height of the camera
-		transform.position = new Vector3(transform.position.x ,target.transform.position .y + height + heightOffset , transform.position.z);
+
+		transform.position = new Vector3(transform.position.x ,target.transform.position .y + height + heightOffset , transform.position.z) + thePositionWithAdd;
 
 
 		Vector3 now = target.transform.rotation.eulerAngles;
@@ -45,6 +61,9 @@ public class cameraUse : MonoBehaviour
 		Quaternion aim = Quaternion.Euler(rotation);
 		target.transform.rotation= aim;
 		target.GetComponent<move> ().yNow = now.y;
+
+
+
 
 	}
 }
