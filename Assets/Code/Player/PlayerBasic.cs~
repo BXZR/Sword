@@ -418,13 +418,21 @@ public class PlayerBasic : MonoBehaviour {
 		}
 	}
 
-
+	private void OnUpdateExtra()
+	{
+		effectBasic [] theEffect = this.GetComponents<effectBasic> ();
+		for (int i = 0; i < theEffect.Length; i++)
+			theEffect [i].effectOnUpdate ();
+	}
 	public void makeStart()//初始化方法，由总控单元统一进行初始化
 	{
+		//这个应该是最先初始化的，因为有一些声音可能需要提前使用
+		theAudioPlayer = this.GetComponent <audioPlayer> ();
 		startCValues();//因为只有服务器上面的英雄才会使用这些参数
 		InvokeRepeating("updateValue",0,systemValues .updateTimeWait);//每隔一秒钟计算额外的计算脚本
-		InvokeRepeating("OnUpdate",0,1f);//每隔一秒钟计算额外的计算脚本
-
+		//所有的刷新（除了一些额外的效果需要实时计算之外）都用到这个参数进行
+		//这是一个初步的优化策略
+		InvokeRepeating("OnUpdateExtra" , 0 , systemValues.updateTimeWait);
 		GUIShowStyle=new GUIStyle();
 		GUIShowStyle.normal.background = (Texture2D)Resources.Load ("pictures/hpGUI");
 
@@ -436,9 +444,7 @@ public class PlayerBasic : MonoBehaviour {
 	//由于这个类是一个究极的父类，因此具体的工作是不做的，但是留下了调用各种方法的方式木板
 	void Start () 
 	{
-		//这个应该是最先初始化的，因为有一些声音可能需要提前使用
-		theAudioPlayer = this.GetComponent <audioPlayer> ();
-		makeStart ();
+	//	makeStart ();
 	}
 
 	//这是一个原始的功能，但是在发布之后没有使用，只是不断空转并且浪费了判断用的资源，应该注销以备后用

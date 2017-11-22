@@ -30,8 +30,8 @@ public class move : MonoBehaviour {
 	float upA = 0;//记录输入轴的纵轴的值减少Input的获取
 	public bool canMove = true;//此单位可以被移动
 	public bool canGravity = true;//存在重力（大多数情况下是需要考虑重力的）
-
-	private bool isStarted = false;
+	//是否开始运动标记
+	private bool isStarted = false;//在makeStart里面才会进行唯一一次的初始化
 	private float savedYaw = 0;//跟随鼠标转身的时候的动作需要用这个判断是不是开启
 	private float yawChangeGate = 10;//超过这个数值就需要做动作了
 	public float yNow = 0;//需要传入的标记
@@ -89,8 +89,10 @@ public class move : MonoBehaviour {
 		}
 
 		Vector3 moveDirectionAction = transform.rotation * moveDirection;//旋转角度加权
-		if (this.transform.position.y > jumpMaxHeight / 3)//在一定高度的半空中有一定的移动速度加成
-			moveDirectionAction.z += ZMove * 0.25f;//在半空中有额外25%的横向移动速度;
+		//在一定高度的半空中有一定的移动速度加成
+		//这个效果只有在跳跃的时候才会触发
+		if (this.transform.position.y > jumpMaxHeight / 2 && isJumping)
+			moveDirectionAction.z += ZMove * 0.15f;//在半空中有额外25%的横向移动速度;
 
 		if (theController && theController.enabled)//有时候需要强制无法移动
 			theController.Move (moveDirectionAction);//真实地进行行动(因为使用的是characterController，因此使用坐标的方式似乎比较稳妥)
@@ -149,8 +151,11 @@ public class move : MonoBehaviour {
 			}
 			else
 			{
-				overGroundTimer /= 2f;//减少重力持续，这样就像是继续向上用力冲
-				jumpTimer += 0.15f;//如果正在跳跃就增加跳跃持续时间
+				overGroundTimer -= 0.05f;//减少重力持续，这样就像是继续向上用力冲
+				if (overGroundTimer < 0)
+					overGroundTimer = 0;
+				jumpTimer += 0.15f ;//如果正在跳跃就增加跳跃持续时间
+				systemValues.thePlayer.ActerSp *= 0.9f;//半空中施展轻功是需要消耗真气的
 			}
 		}
 		//如果正在跳跃
@@ -164,7 +169,6 @@ public class move : MonoBehaviour {
 				float adder = speedNow == speedNormal ? 8f:10f;
 				//jumpTimer越来越小表现为上冲余力越来越不足
 				jumpAction  += new Vector3 (0,jumpTimer,0) * Time .deltaTime * adder;
-
 			}
 		}
 
@@ -192,13 +196,11 @@ public class move : MonoBehaviour {
 
 	}
 
-	void Start()
-	{
-		makeStart ();
-	}
 
 	void Update ()
 	{
+		if (!isStarted)
+			return;
 		forwardA = Input.GetAxis (forwardAxisName);
 		upA = Input.GetAxis (upAxisName);
 	    MoveForwardBack(forwardA);

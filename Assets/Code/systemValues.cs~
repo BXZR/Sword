@@ -6,8 +6,6 @@ public class systemValues : MonoBehaviour {
 	//程序面板单元
 	public static float updateTimeWait = 0.1f;
 	public static  bool canAttack = false;
-
-
 	public static bool isAttacking(Animator theAnimator)
 	{
 		//如果是移动状态说明没有攻击
@@ -16,4 +14,18 @@ public class systemValues : MonoBehaviour {
 		//此外因为所有的攻击动作都在第1层，所以层的选择需要是1
 		return  !theAnimator.GetCurrentAnimatorStateInfo (1).IsName ("moveMent");
 	}
+
+	public static string[] playerNames = { "归海一刀" };
+	public static string [] playerHeadNames = {"knifeHead"};
+	public static string getHeadPictureName (string playerNameIn)
+	{
+		for (int i = 0; i < playerNames.Length; i++) 
+		{
+			if (playerNames [i] == playerNameIn)
+				return playerHeadNames [i];
+		}
+		return  "";
+	}
+	//当前控制的游戏人物，留一个引用方便使用
+	public static PlayerBasic thePlayer;
 }

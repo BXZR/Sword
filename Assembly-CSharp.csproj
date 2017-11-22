@@ -56,6 +56,8 @@
      <Compile Include="Assets\Code\Player\attackLinkController.cs" />
      <Compile Include="Assets\Code\Player\move.cs" />
      <Compile Include="Assets\Code\Player\newMethodAttack.cs" />
+     <Compile Include="Assets\Code\UI\uiShowsForBasic.cs" />
+     <Compile Include="Assets\Code\controllers\gameStarter.cs" />
      <Compile Include="Assets\Code\sound\audioPlayer.cs" />
      <Compile Include="Assets\Code\systemValues.cs" />
  <Reference Include="UnityEngine.UI">
