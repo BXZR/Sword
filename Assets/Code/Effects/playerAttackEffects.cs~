@@ -1,0 +1,16 @@
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class playerAttackEffects : effectBasic {
+
+	//游戏玩家看上去打得很爽的原因就在于这里
+	//命中敌人之后各种击飞各种飞散
+	public override void OnAttack (PlayerBasic aim)
+	{
+		base.OnAttack (aim);
+	}
+	void Update () {
+		
+	}
+}

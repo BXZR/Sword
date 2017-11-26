@@ -14,6 +14,7 @@ public class effectBasic : MonoBehaviour {
 	virtual public void onAttackAction(){}//在攻击的起手阶段触发
 	virtual public void OnAttack (){}//在攻击的时候触发
 	virtual public void OnBeAttack(float damage = 0){}//在被攻击的时候触发
+	virtual public void OnBeAttack(PlayerBasic attacker){}//在被攻击的时候触发
 	virtual public void effectOnUpdate(){}//在update里面调用的效果
 	virtual public void OnHpTowardHpMax(){}//在生命恢复到满血的时候使用
 	virtual public void OnSpTowardSpMax(){}//在法力恢复到满的时候触发

@@ -51,6 +51,7 @@
      <Compile Include="Assets\Code\Effects\knifeSlash\Interpolate.cs" />
      <Compile Include="Assets\Code\Effects\knifeSlash\MeleeWeaponTrail.cs" />
      <Compile Include="Assets\Code\Effects\knifeSlash\theKnifeSlashController.cs" />
+     <Compile Include="Assets\Code\Effects\monsterBeAttack.cs" />
      <Compile Include="Assets\Code\Player\PlayerBasic.cs" />
      <Compile Include="Assets\Code\Player\attackLink.cs" />
      <Compile Include="Assets\Code\Player\attackLinkController.cs" />
@@ -58,6 +59,7 @@
      <Compile Include="Assets\Code\Player\newMethodAttack.cs" />
      <Compile Include="Assets\Code\UI\uiShowsForBasic.cs" />
      <Compile Include="Assets\Code\controllers\gameStarter.cs" />
+     <Compile Include="Assets\Code\sound\MusicController.cs" />
      <Compile Include="Assets\Code\sound\audioPlayer.cs" />
      <Compile Include="Assets\Code\systemValues.cs" />
  <Reference Include="UnityEngine.UI">

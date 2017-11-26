@@ -105,6 +105,7 @@ public class PlayerBasic : MonoBehaviour {
 	public  float extraDamageForAnimation = 0;//设置为共有是为了传参数的时候方便，但是这个参数是不能够被主动在面板上设定的
 
 
+
 ///////////////////////////////////////////////////////////////////////////////////////////////////////	
 //下面是游戏计算中的临时变量
 	[HideInInspector]//为了保证设定面板的简洁，暂时隐藏之
@@ -137,7 +138,12 @@ public class PlayerBasic : MonoBehaviour {
 	public float TimePercent = 1;//武器冷却时间百分比，不同武器根据其动作可能会有不同的冷却时间
 	//(这个属性在使用动画关键帧的时候被暂时弃用，但这个思路还是有的)
 	public float theAttackAreaLength;//攻击范围（非常重要，同时这个是简化版本的每一种攻击招式分开计算范围的方式）
+	public float theAttackAreaAngel = 20f;//攻击范围的角度，自身前方锥形范围内都是攻击范围
 	private float DamageRead = 0;//记录已经收到的伤害，如果收到的伤害累积到一定数量就要播放受到攻击的动画
+
+	//是否可以攻击命中
+	public bool canAttack = true;
+
 	//音效播放器
 	public audioPlayer theAudioPlayer;//自己定义的音频播放器组件
 	//值得注意的是声音的播放是在attackLink里面调用的，在这里保留引用是为了减少获取的次数
@@ -228,13 +234,11 @@ public class PlayerBasic : MonoBehaviour {
 
  
 	//在攻击命中的时候触发
-	public void OnAttack(PlayerBasic thePlayerAim ,float extraDamage = 0 ,bool isSimple =false,bool isExtraAttack = false)
+	public void OnAttack(PlayerBasic thePlayerAim ,float extraDamage = 0 ,bool isSimple =false)
 	{
 		//isExtraAttack表现为不用什么特殊动作直接造成伤害的条件
 		//在这里似乎多做了一次判断
 		//判断原因在于原先的攻击做法是连续的，而现在的攻击是离散的
-		if ( isExtraAttack) 
-		{
 			this.theAudioPlayer.playAttackSound ();//播放攻击音效
 			float damage = 0;
 			if(isSimple)//如果只是简单地真实伤害
@@ -244,7 +248,17 @@ public class PlayerBasic : MonoBehaviour {
 			
 			thePlayerAim.OnBeAttack (damage);
 			extraDamageForAnimation = 0;
-		}
+
+			effectBasic[] Effects = this.GetComponentsInChildren<effectBasic> ();
+			for (int i = 0; i < Effects.Length; i++) 
+			{
+				Effects [i].OnAttack ();
+				Effects [i].OnAttack (thePlayerAim);
+				Effects [i].OnAttack (thePlayerAim,damage);
+			}
+		   effectBasic[] EffectAim = thePlayerAim.GetComponentsInChildren<effectBasic> ();
+		    for (int i = 0; i < EffectAim.Length; i++)
+			EffectAim [i].OnBeAttack (this);
 	}
 
 	public void OnAttackExtra(PlayerBasic thePlayerAim , bool isSimple =false )
@@ -256,6 +270,18 @@ public class PlayerBasic : MonoBehaviour {
 
 			thePlayerAim.OnBeAttack (damage);
 			extraDamageForAnimation = 0;
+
+
+		effectBasic[] Effects = this.GetComponentsInChildren<effectBasic> ();
+		for (int i = 0; i < Effects.Length; i++)
+		{
+			Effects [i].OnAttack ();
+			Effects [i].OnAttack (thePlayerAim);
+			Effects [i].OnAttack (thePlayerAim,damage);
+		}
+		effectBasic[] EffectAim = thePlayerAim.GetComponentsInChildren<effectBasic> ();
+		for (int i = 0; i < EffectAim.Length; i++)
+			EffectAim [i].OnBeAttack (this);
 	}
 
 	//有些攻击不想触发特效也不希望靠判断防止递归，就调用下面这两个方法
@@ -274,6 +300,17 @@ public class PlayerBasic : MonoBehaviour {
 			thePlayerAim.OnBeAttack (damage);
 
 			extraDamageForAnimation = 0;
+
+			effectBasic[] Effects = this.GetComponentsInChildren<effectBasic> ();
+			for (int i = 0; i < Effects.Length; i++) 
+			{
+				Effects [i].OnAttack ();
+				Effects [i].OnAttack (thePlayerAim);
+				Effects [i].OnAttack (thePlayerAim,damage);
+			}
+			effectBasic[] EffectAim = thePlayerAim.GetComponentsInChildren<effectBasic> ();
+			for (int i = 0; i < EffectAim.Length; i++)
+				EffectAim [i].OnBeAttack (this);
 		}
 	}
 
@@ -287,6 +324,17 @@ public class PlayerBasic : MonoBehaviour {
 		thePlayerAim.OnBeAttack (damage);
 
 		extraDamageForAnimation = 0;
+
+		effectBasic[] Effects = this.GetComponentsInChildren<effectBasic> ();
+		for (int i = 0; i < Effects.Length; i++) 
+		{
+			Effects [i].OnAttack ();
+			Effects [i].OnAttack (thePlayerAim);
+			Effects [i].OnAttack (thePlayerAim,damage);
+		}
+		effectBasic[] EffectAim = thePlayerAim.GetComponentsInChildren<effectBasic> ();
+		for (int i = 0; i < EffectAim.Length; i++)
+			EffectAim [i].OnBeAttack (this);
 	}
 
 
@@ -308,6 +356,13 @@ public class PlayerBasic : MonoBehaviour {
 				ActerShieldHp = 0;
 			}
 			this.ActerHp -= damage;
+
+			effectBasic[] Effects = this.GetComponentsInChildren<effectBasic> ();
+			for (int i = 0; i < Effects.Length; i++)
+			{
+				Effects [i].OnBeAttack ();
+				Effects [i].OnBeAttack (damage);
+			}
 			//如果收受到了较重的伤害，那么就取消当前的攻击动作，强制转为受到攻击的动作，并且攻击力转化为0
 			//此外beHit状态已经在systemValues里面标注为无法造成伤害的状态之一
 			//在这里将额外攻击力取消掉是因为这个是强制转换的，可能会有动作做到一半的情况，也许会有额外的伤害误差
@@ -414,6 +469,11 @@ public class PlayerBasic : MonoBehaviour {
 			else
 				conNameCoolingTime = conNameCoolingTimeMax;//此处多次空转赋值实际上是一个很大的浪费
 
+			effectBasic[] Effects = this.GetComponentsInChildren<effectBasic> ();
+			for (int i = 0; i < Effects.Length; i++)
+			{
+				Effects [i].effectOnUpdate ();
+			}
 		
 		}
 	}

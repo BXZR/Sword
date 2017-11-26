@@ -92,7 +92,7 @@ public class move : MonoBehaviour {
 		//在一定高度的半空中有一定的移动速度加成
 		//这个效果只有在跳跃的时候才会触发
 		if (this.transform.position.y > jumpMaxHeight / 2 && isJumping)
-			moveDirectionAction.z += ZMove * 0.15f;//在半空中有额外25%的横向移动速度;
+			moveDirectionAction.z += ZMove * 0.25f;//在半空中有额外25%的横向移动速度;
 
 		if (theController && theController.enabled)//有时候需要强制无法移动
 			theController.Move (moveDirectionAction);//真实地进行行动(因为使用的是characterController，因此使用坐标的方式似乎比较稳妥)
@@ -175,7 +175,8 @@ public class move : MonoBehaviour {
 		//重力控制
 		//有关重力的计算不论是否可以移动都应该进行
 		//重力与是否跳跃也并没有关联
-		if (theController　 && canGravity) {
+		if (theController　 && canGravity) 
+		{
 			//自编写的伪重力公式随着在半空中的时间的长短获得一个不断增加的向下移动的趋势
 			//重力会持续存在的
 			jumpAction.y -= ((overGroundTimer * 4) + 3) * Time.deltaTime;
@@ -208,4 +209,9 @@ public class move : MonoBehaviour {
 	    Jump();
 		timerCheck ();
 	}
+
+//	void Start ()
+//	{
+//
+//	}
 }
