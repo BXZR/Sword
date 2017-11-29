@@ -1,10 +1,10 @@
 ﻿<Properties StartupItem="Assembly-CSharp.csproj">
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Unity.Instance.Unity Editor" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Code\Effects\monsterBeAttack.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Code\Player\move.cs">
     <Files>
-      <File FileName="Assets\Code\Player\PlayerBasic.cs" Line="337" Column="36" />
+      <File FileName="Assets\Code\Player\PlayerBasic.cs" Line="1" Column="1" />
       <File FileName="Assets\Code\systemValues.cs" Line="1" Column="1" />
-      <File FileName="Assets\Code\Player\move.cs" Line="1" Column="1" />
+      <File FileName="Assets\Code\Player\move.cs" Line="167" Column="27" />
       <File FileName="Assets\Code\Player\attackLinkController.cs" Line="1" Column="1" />
       <File FileName="Assets\Code\Player\attackLink.cs" Line="1" Column="1" />
       <File FileName="Assets\Code\Camera\cameraUse.cs" Line="1" Column="1" />
@@ -15,8 +15,8 @@
       <File FileName="Assets\Code\controllers\gameStarter.cs" Line="1" Column="1" />
       <File FileName="Assets\Code\UI\uiShowsForBasic.cs" Line="1" Column="1" />
       <File FileName="Assets\Code\Player\newMethodAttack.cs" Line="1" Column="1" />
-      <File FileName="Assets\Code\sound\MusicController.cs" Line="1" Column="1" />
-      <File FileName="Assets\Code\Effects\monsterBeAttack.cs" Line="20" Column="107" />
+      <File FileName="Assets\Code\sound\MusicController.cs" Line="141" Column="3" />
+      <File FileName="Assets\Code\Effects\monsterBeAttack.cs" Line="1" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

@@ -35,6 +35,8 @@ public class move : MonoBehaviour {
 	private float savedYaw = 0;//跟随鼠标转身的时候的动作需要用这个判断是不是开启
 	private float yawChangeGate = 10;//超过这个数值就需要做动作了
 	public float yNow = 0;//需要传入的标记
+	//游戏玩家引用
+	private PlayerBasic thePlayer;
 
 	public void makeStart()//初始化方法，由总控单元统一进行初始化
 	{
@@ -45,6 +47,7 @@ public class move : MonoBehaviour {
 			//允许这些组件是再组物体上面，这是因为这里面的资源是拼凑得到的，并不规整，在这里不得不使用一些折衷
 			theController = this.GetComponentInChildren<CharacterController> ();
 			theAnimatorOfPlayer = this.GetComponentInChildren<Animator> ();
+			thePlayer = this.GetComponent<PlayerBasic> ();
 		}
 	}
 		
@@ -135,7 +138,9 @@ public class move : MonoBehaviour {
 	private float jumpTimer = 0f;
 	private float jumpTimerMax= 1.2f;
 	public bool isJumping = false;
-
+	private bool isCooling = false;
+	private float coolingTimerForJump = 2f;
+	private float coolingTimerForJumpMax = 2f;
 	void Jump()
 	{
 		//刷新初始值
@@ -144,23 +149,31 @@ public class move : MonoBehaviour {
 		if (Input.GetKeyDown (KeyCode.Space)) 
 		{
 			this.theAnimatorOfPlayer.Play ("jump");
-			if (isJumping == false) 
+			if (isJumping == false && isCooling == false) 
 			{
 				jumpTimer = jumpTimerMax;
+				thePlayer.ActerSp *= 0.8f;//施展轻功是需要消耗真气的
 				isJumping = true;
+				isCooling = true;
 			}
-			else
+			else if(isJumping)
 			{
-				overGroundTimer -= 0.05f;//减少重力持续，这样就像是继续向上用力冲
-				if (overGroundTimer < 0)
-					overGroundTimer = 0;
-				jumpTimer += 0.15f ;//如果正在跳跃就增加跳跃持续时间
-				systemValues.thePlayer.ActerSp *= 0.9f;//半空中施展轻功是需要消耗真气的
+				//小于一定的阀值就不可以“凌空提气”
+				//但是说实话“凌空提气的效果并不是非常的好”
+				if(thePlayer.ActerSp / thePlayer.ActerSpMax > 0.4f)
+				{
+					overGroundTimer -= 0.05f;//减少重力持续，这样就像是继续向上用力冲
+					if (overGroundTimer < 0)
+						overGroundTimer = 0;
+					jumpTimer += 0.05f ;//如果正在跳跃就增加跳跃持续时间
+					thePlayer.ActerSp *= 0.95f;//半空中施展轻功是更加需要消耗真气的
+				}
 			}
 		}
 		//如果正在跳跃
 		if (isJumping) 
 		{
+			//thePlayer.ActerSp -= thePlayer.ActerSpUp * Time.deltaTime;
 			jumpTimer -= Time.deltaTime;
 			if (jumpTimer < 0) isJumping = false;
 
@@ -171,6 +184,16 @@ public class move : MonoBehaviour {
 				jumpAction  += new Vector3 (0,jumpTimer,0) * Time .deltaTime * adder;
 			}
 		}
+		//如果正在冷却
+		if (isCooling) 
+		{
+			coolingTimerForJump -= Time.deltaTime;
+			if (coolingTimerForJump < 0)
+			{
+				coolingTimerForJump = coolingTimerForJumpMax;
+				isCooling = false;
+			}
+		}
 
 		//重力控制
 		//有关重力的计算不论是否可以移动都应该进行
@@ -179,7 +202,7 @@ public class move : MonoBehaviour {
 		{
 			//自编写的伪重力公式随着在半空中的时间的长短获得一个不断增加的向下移动的趋势
 			//重力会持续存在的
-			jumpAction.y -= ((overGroundTimer * 4) + 3) * Time.deltaTime;
+			jumpAction.y -= ((overGroundTimer * 3) + 3) * Time.deltaTime;
 			if (isJumping) 
 			{
 				overGroundTimer += Time.deltaTime;//不在地上就进行计时，获得随着离地时间线性增长的向下移动的趋势
@@ -197,6 +220,32 @@ public class move : MonoBehaviour {
 
 	}
 
+	//按住左边shift键，移动速度增加
+	private bool isShifting = false;
+	private float speedAdderWithShift = 0;//消耗真气的疯狂移动
+	private  void fastMoveCheck()
+	{
+		if (Input.GetKey (KeyCode.LeftShift))
+		{
+			if(isShifting == false)
+			{
+				isShifting = true;
+				speedAdderWithShift  = speedNormal * 0.75f;
+				speedNormal += speedAdderWithShift;
+				speedRun += speedAdderWithShift;
+
+			}
+		}
+		if (Input.GetKeyUp (KeyCode.LeftShift))
+		{
+			if (isShifting == true) 
+			{
+				isShifting = false;
+				speedNormal -= speedAdderWithShift;
+				speedRun -= speedAdderWithShift;
+			}
+		}
+	}
 
 	void Update ()
 	{
@@ -207,6 +256,7 @@ public class move : MonoBehaviour {
 	    MoveForwardBack(forwardA);
 		MoveLeftAndRight (upA,forwardA );
 	    Jump();
+		fastMoveCheck ();
 		timerCheck ();
 	}
 
