@@ -155,6 +155,7 @@ public class attackLink : MonoBehaviour {
 			case crossFadeMode.crossfade :
 				{
 				     this.theAnimatorOfPlayer.CrossFade (animationName, 0.05f);
+					print ("animationName = " + animationName);
 				}
 				break;
 			//一般播放

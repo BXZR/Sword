@@ -20,7 +20,7 @@ public class move : MonoBehaviour {
 
 	private CharacterController theController;//角色控制器
 	private  Animator theAnimatorOfPlayer;//动画控制器
-	private float margin =0.1f;//距离地面距离，小于这个距离被认为是在地面上
+	private float margin =0.5f;//距离地面距离，小于这个距离被认为是在地面上
 	private float overGroundTimer = 0f;//离开地面的时间,离开地面时间越长，迫使下降的数量就会越大
 	//所以，即便是一直按住向上的键位，也会因为时间的因素下降
 	//////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -64,7 +64,7 @@ public class move : MonoBehaviour {
 		if (Mathf.Abs (Input.GetAxis (forwardAxisName)) > 0.1f || Mathf.Abs (Input.GetAxis (upAxisName)) > 0.1f) {//如果有输入就逐步进行检测，长按与短按的时间并不一样
 			keyNow += Time.deltaTime;//使用这个计时器进行计时
 
-			if (theController.isGrounded == false || this.transform.position.y > 0.6f) 
+			if (this.transform.position.y > 0.6f) 
 			{
 				keyNow += Time.deltaTime*2;//半空中速度积累速度更快
 			}
@@ -138,9 +138,7 @@ public class move : MonoBehaviour {
 	private float jumpTimer = 0f;
 	private float jumpTimerMax= 1.2f;
 	public bool isJumping = false;
-	private bool isCooling = false;
-	private float coolingTimerForJump = 2f;
-	private float coolingTimerForJumpMax = 2f;
+
 	void Jump()
 	{
 		//刷新初始值
@@ -148,13 +146,12 @@ public class move : MonoBehaviour {
 		//按键检测
 		if (Input.GetKeyDown (KeyCode.Space)) 
 		{
-			this.theAnimatorOfPlayer.Play ("jump");
-			if (isJumping == false && isCooling == false) 
+			if (isJumping == false ) 
 			{
+				this.theAnimatorOfPlayer.Play ("jump");
 				jumpTimer = jumpTimerMax;
 				thePlayer.ActerSp *= 0.8f;//施展轻功是需要消耗真气的
 				isJumping = true;
-				isCooling = true;
 			}
 			else if(isJumping)
 			{
@@ -165,8 +162,8 @@ public class move : MonoBehaviour {
 					overGroundTimer -= 0.05f;//减少重力持续，这样就像是继续向上用力冲
 					if (overGroundTimer < 0)
 						overGroundTimer = 0;
-					jumpTimer += 0.05f ;//如果正在跳跃就增加跳跃持续时间
-					thePlayer.ActerSp *= 0.95f;//半空中施展轻功是更加需要消耗真气的
+					jumpTimer += 0.08f ;//如果正在跳跃就增加跳跃持续时间
+					thePlayer.ActerSp -=3;//半空中施展轻功是更加需要消耗真气的
 				}
 			}
 		}
@@ -175,7 +172,6 @@ public class move : MonoBehaviour {
 		{
 			//thePlayer.ActerSp -= thePlayer.ActerSpUp * Time.deltaTime;
 			jumpTimer -= Time.deltaTime;
-			if (jumpTimer < 0) isJumping = false;
 
 			if (theController && theController.enabled)//有时候需要强制无法移动
 			{
@@ -183,17 +179,13 @@ public class move : MonoBehaviour {
 				//jumpTimer越来越小表现为上冲余力越来越不足
 				jumpAction  += new Vector3 (0,jumpTimer,0) * Time .deltaTime * adder;
 			}
-		}
-		//如果正在冷却
-		if (isCooling) 
-		{
-			coolingTimerForJump -= Time.deltaTime;
-			if (coolingTimerForJump < 0)
+
+			if (IsGrounded() && jumpTimer < 0) 
 			{
-				coolingTimerForJump = coolingTimerForJumpMax;
-				isCooling = false;
+					isJumping = false;
 			}
 		}
+
 
 		//重力控制
 		//有关重力的计算不论是否可以移动都应该进行
@@ -258,6 +250,7 @@ public class move : MonoBehaviour {
 	    Jump();
 		fastMoveCheck ();
 		timerCheck ();
+
 	}
 
 //	void Start ()
