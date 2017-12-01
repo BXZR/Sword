@@ -14,8 +14,9 @@ public class systemValues : MonoBehaviour {
 		return  !theAnimator.GetCurrentAnimatorStateInfo (1).IsName ("moveMent");
 	}
 
-	public static string[] playerNames = { "归海一刀", "赵天龙" , "郭靖" };
-	public static string [] playerHeadNames = {"knifeHead" ,"tianlongHead" , "knifeHead" };
+	public static string[] playerNames = { "归海一刀", "郭靖" ,"花木兰" };
+	//head picture 被保存在里面与图片是对应的
+	public static string [] playerHeadNames = {"knifeHead"  , "guojingHead", "mulanHead"};
 	public static string getHeadPictureName (string playerNameIn)
 	{
 		for (int i = 0; i < playerNames.Length; i++) 

@@ -8,26 +8,58 @@ public class cameraUse : MonoBehaviour
 	//这个脚本兼具smoothfollow和mouseLook的做法
 
 	public  Transform target;
-	public float distance = 10.0f;
+	public float sensitivityX = 15F;
+	public float sensitivityY = 15F;
+	public float sensitivityWheel = 1f;//增大减小的参数
+	//模式1
+	public float distanceForMode1 = 3.0f;
 	public float height = 5.0f;
 	public float heightDamping;
 	public float heightOffset = 1.0f;//额外的视野偏差高度，因为人物的中心在于脚底，这不是很好的选择
-	public float sensitivityX = 15F;
-	public float sensitivityY = 15F;
 	public float minimumY = -60F;
 	public float maximumY = 60F;
 	float rotationY = 0F;
-
 	float YPositionFixed = 0;
 	Vector3 positionStart = Vector3.zero;
+	//模式2
+	private float modeX2 = 0.0f;
+	private float ModeY2 = 0.0f;
+	public float  distanceForMode2 = 2.5f;
+	public float yMinLimitForMode2 = 10;
+	public float yMaxLimitForMode2 = 80;
+	//视野距离
+	public float minFov = 5f;//摄像头最近距离
+	public float maxFov = 10f;//摄像头最远距离
+	float fov ;//获取当前摄像机的视野参数
+	//额外引用
+	private Camera theCamera;
+
+	void Start ()
+	{
+		theCamera = this.GetComponent <Camera> ();
+		fov = theCamera.fieldOfView;
+	}
 	void LateUpdate()
+	{
+
+		makeFov ();
+		if (Input.GetKey (KeyCode.LeftControl))
+			mode2 ();
+		else
+			mode1 ();
+
+
+	}
+
+	//摄像机模式1，游戏人物跟随摄像机旋转
+	void mode1()
 	{
 		if (!target)
 			return;
-		
+
 		//var wantedHeight = target.position.y + height + heightOffset;
 		//var currentHeight = transform.position.y;
- 
+
 		//currentHeight = Mathf.Lerp(currentHeight, wantedHeight, heightDamping * Time.deltaTime);
 
 		float rotationX = transform.localEulerAngles.y + Input.GetAxis("Mouse X") * sensitivityX;
@@ -50,7 +82,7 @@ public class cameraUse : MonoBehaviour
 		}
 
 		transform.position = target.position;
-		transform.position -= Quaternion.Euler(nowForCamera) * Vector3.forward * distance;
+		transform.position -= Quaternion.Euler(nowForCamera) * Vector3.forward * distanceForMode1;
 		// Set the height of the camera
 
 		transform.position = new Vector3(transform.position.x ,target.transform.position .y + height + heightOffset , transform.position.z) + thePositionWithAdd;
@@ -61,9 +93,42 @@ public class cameraUse : MonoBehaviour
 		Quaternion aim = Quaternion.Euler(rotation);
 		target.transform.rotation= aim;
 		target.GetComponent<move> ().yNow = now.y;
+	}
 
+	//摄像机模式2，旋转摄像机
+	static float ClampAngle (float angle , float min , float max) 
+	{
+		if (angle < -360)
+			angle += 360;
+		if (angle > 360)
+			angle -= 360;
+		return Mathf.Clamp (angle, min, max);
+	}
 
+	void  mode2()
+	{
+		if (target) 
+		{
+			modeX2 += Input.GetAxis("Mouse X") * sensitivityX;
+			ModeY2 -= Input.GetAxis("Mouse Y") * sensitivityY ;
 
+			ModeY2  = ClampAngle(ModeY2, yMinLimitForMode2, yMaxLimitForMode2);
 
+			var rotation = Quaternion.Euler(ModeY2, modeX2, 0);
+			var position = rotation * new Vector3(0.0f, 0.0f, -distanceForMode2) +( target.position+new Vector3 (0,heightOffset,0));
+
+			transform.rotation = rotation;
+			transform.position = position;
+		}
+	}
+
+	//修改前后视距
+	void makeFov()
+	{
+		//print("FOV: "+fov);
+		fov += Input.GetAxis("Mouse ScrollWheel") * -sensitivityWheel;//根据鼠标滚轮充值这个参数
+		//print("FOV2: "+fov);
+		fov = Mathf.Clamp(fov, minFov, maxFov);//限制参数的值
+		theCamera.fieldOfView= fov;
 	}
 }
