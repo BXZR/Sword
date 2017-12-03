@@ -128,11 +128,11 @@ public class MusicController : MonoBehaviour {
 	// Use this for initialization
 	void Start () 
 	{
-		theBackMusicController = this.GetComponent <AudioSource> ();
-		if(theBackMusicController != null)
-		theBackMusicController.loop = true;
-		theBackMusicController.Play ();
-		Cursor.visible = false;//不显示鼠标
+//		theBackMusicController = this.GetComponent <AudioSource> ();
+//		if(theBackMusicController != null)
+//		theBackMusicController.loop = true;
+//		theBackMusicController.Play ();
+//		Cursor.visible = false;//不显示鼠标
 	}
 
 	//注销，减少回调个数

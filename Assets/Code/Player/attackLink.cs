@@ -85,13 +85,19 @@ public class attackLink : MonoBehaviour {
 		return isChangeAble;
 	}
 
-	protected void makeStart()
+	//有一些网络的因素在，有一些内容不得不在这里也显示
+	void Start()
+	{
+		this.theAnimatorOfPlayer = this.GetComponentInParent<Animator> ();
+	}
+	//初始化的工作由attackLinkController统一调配
+	public void makeStart()
 	{
 		makeAttackArray ();
 		this.theAnimatorOfPlayer = this.GetComponentInParent<Animator> ();
 		this.theController = this.GetComponentInParent<CharacterController> ();
 		thePlayer = this.GetComponentInParent<PlayerBasic> ();
-
+		photonView = PhotonView.Get(this);
 	}
 
 	public virtual  void makeAttackArray()//只在初始化的时候或者需要重新构建联机字符串的时候使用
@@ -119,6 +125,16 @@ public class attackLink : MonoBehaviour {
 		return timer;
 	}
 
+
+	//在不改变下层逻辑的情况下做一次封装来保证网络做法
+
+	public void attackLinkMain()
+	{
+		attackLinkEffect ();
+		if (photonView != null)
+			this.photonView.RPC("playAttackLinkAction",PhotonTargets.All); 
+	}
+
 	public  virtual void attackLinkEffect()//连招的效果在这里写
 	{
 		//这里其实暂时规定使用某一个攻击动作的同时不会使用另一个攻击动作
@@ -130,49 +146,29 @@ public class attackLink : MonoBehaviour {
 		if (string.IsNullOrEmpty (animationName) == false )
 		{
 			//print ("play action");
-			if(thePlayer.theAudioPlayer!= null)
-			thePlayer.theAudioPlayer.playAttackActSound (this.audioWhenAct);//播放攻击动作音效
-			if (thePlayer.ActerSp >= this.spUse)
+			if (thePlayer) 
 			{
-				thePlayer.ActerSp -= this.spUse;
-			} 
-			else 
-			{
-				//法力透支的计算过程
-				float hpMinus = this.spUse - thePlayer.ActerSp;
-				thePlayer.ActerHp -= hpMinus*1.2f;
-				thePlayer.ActerSp = 0;
-				if (thePlayer.ActerHp < 10)
-					thePlayer.ActerHp = 10f;//保护机制，在格斗游戏中没有透支身亡一说
-				//但是为了保证我的个性，透支机制依旧存在，只是不会致命了
-				effectBasic [] Effects = this.transform .root.GetComponentsInChildren<effectBasic>();
-				for (int i = 0; i < Effects.Length; i++)
-					Effects [i].OnUseSP (this.spUse);
+				if (thePlayer.theAudioPlayer != null)
+					thePlayer.theAudioPlayer.playAttackActSound (this.audioWhenAct);//播放攻击动作音效
+				if (thePlayer.ActerSp >= this.spUse) 
+				{
+					thePlayer.ActerSp -= this.spUse;
+				} 
+				else 
+				{
+					//法力透支的计算过程
+					float hpMinus = this.spUse - thePlayer.ActerSp;
+					thePlayer.ActerHp -= hpMinus * 1.2f;
+					thePlayer.ActerSp = 0;
+					if (thePlayer.ActerHp < 10)
+						thePlayer.ActerHp = 10f;//保护机制，在格斗游戏中没有透支身亡一说
+					//但是为了保证我的个性，透支机制依旧存在，只是不会致命了
+					effectBasic[] Effects = this.transform.root.GetComponentsInChildren<effectBasic> ();
+					for (int i = 0; i < Effects.Length; i++)
+						Effects [i].OnUseSP (this.spUse);
+				}
 			}
-			switch( crossMode )
-			{
-			//平滑过渡
-			case crossFadeMode.crossfade :
-				{
-				     this.theAnimatorOfPlayer.CrossFade (animationName, 0.05f);
-					print ("animationName = " + animationName);
-				}
-				break;
-			//一般播放
-			case crossFadeMode.play :
-				{
-					this.theAnimatorOfPlayer.Play (animationName);
-				}
-				break;
-			//强制播放(不太推荐的做法)
-		    //其实强制播放也没用，在这上一层会有检查
-			case crossFadeMode.crossfadeFix :
-				{
-					this.theAnimatorOfPlayer.CrossFadeInFixedTime(animationName, 0.00f);
-				}
-				break;
 
-			}
 
 			thePlayer.extraDamageForAnimation = this.extraDamage;//用这样的方式修改真正的伤害
 			if(thePlayer.theAudioPlayer!= null)
@@ -185,6 +181,35 @@ public class attackLink : MonoBehaviour {
 		//print (skillName+" 发动！");
 	}
 
+	//播放攻击招式动作
+	[PunRPC]
+	public void playAttackLinkAction()
+	{
+		switch( crossMode )
+		{
+		//平滑过渡
+		case crossFadeMode.crossfade :
+			{
+				this.theAnimatorOfPlayer.CrossFade (animationName, 0.05f);
+				print ("animationName = " + animationName);
+			}
+			break;
+			//一般播放
+		case crossFadeMode.play :
+			{
+				this.theAnimatorOfPlayer.Play (animationName);
+			}
+			break;
+			//强制播放(不太推荐的做法)
+			//其实强制播放也没用，在这上一层会有检查
+		case crossFadeMode.crossfadeFix :
+			{
+				this.theAnimatorOfPlayer.CrossFadeInFixedTime(animationName, 0.00f);
+			}
+			break;
+
+		}
+	}
 
 	public char getCharWithIndex(int index)
 	{
@@ -193,12 +218,10 @@ public class attackLink : MonoBehaviour {
 		else
 		 return attackAray [index];//返回当前检测的字符
 	}
-	//初始化
-	void Start () 
-	{
-		makeStart();//初始化ARRAY，这个是为了方便输入，并且在Unity中编辑字符串要比char数组方便
 
-	}
+
+	PhotonView photonView;//网络控制单元
+
 
 	public string getInformation()//获取连招的信息
 	{
@@ -210,8 +233,5 @@ public class attackLink : MonoBehaviour {
 		information += "斗气消耗：" + this.spUse;
 		return information;
 	}
-	//更新
-	void Update () {
-		
-	}
+
 }

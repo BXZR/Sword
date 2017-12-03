@@ -239,6 +239,7 @@ public class PlayerBasic : MonoBehaviour {
 		//isExtraAttack表现为不用什么特殊动作直接造成伤害的条件
 		//在这里似乎多做了一次判断
 		//判断原因在于原先的攻击做法是连续的，而现在的攻击是离散的
+			if(this.theAudioPlayer!= null)
 			this.theAudioPlayer.playAttackSound ();//播放攻击音效
 			float damage = 0;
 			if(isSimple)//如果只是简单地真实伤害
@@ -263,6 +264,7 @@ public class PlayerBasic : MonoBehaviour {
 
 	public void OnAttackExtra(PlayerBasic thePlayerAim , bool isSimple =false )
 	{
+		if(this.theAudioPlayer!= null)
 		this.theAudioPlayer.playAttackSound ();//播放攻击音效
          //不太按规矩来的伤害计算，例如龟派气功
 			float damage = 0;
@@ -290,6 +292,7 @@ public class PlayerBasic : MonoBehaviour {
 		//isExtraAttack表现为不用什么特殊动作直接造成伤害的条件
 		if (isExtraAttack) 
 		{
+			if(this.theAudioPlayer!= null)
 			this.theAudioPlayer.playAttackSound ();//播放攻击音效
 			float damage = 0;
 			if(isSimple)//如果只是简单地真实伤害
@@ -316,6 +319,7 @@ public class PlayerBasic : MonoBehaviour {
 
 	public void OnAttackExtraWithoutEffect(PlayerBasic thePlayerAim , bool isSimple =false )
 	{
+		if(this.theAudioPlayer!= null)
 		this.theAudioPlayer.playAttackSound ();//播放攻击音效
 		//不太按规矩来的伤害计算，例如龟派气功
 		float damage = 0;
@@ -340,7 +344,9 @@ public class PlayerBasic : MonoBehaviour {
 
 	public void OnBeAttack(float damage)
 	{
-		if (this.isAlive)//只有在活着的时候才可以被攻击
+		if (!isStarted)
+			return;
+		if (this.isAlive )//只有在活着的时候才可以被攻击
 		{
 			DamageRead += damage;//累计伤害
 
@@ -430,9 +436,17 @@ public class PlayerBasic : MonoBehaviour {
 			if (ActerHp < 0) {
 				ActerHp = 0;	
 				isAlive = false;
-				this.gameObject.tag = "dead";
+				//this.gameObject.tag = "dead";
                 //Destroy (this.gameObject, 1.5f);
-
+				PhotonView photonView = PhotonView.Get(this);
+				photonView.RPC("plaDeadAnimations",PhotonTargets.All,"dead");
+				this.GetComponent <attackLinkController> ().enabled = false;
+				this.GetComponent <move> ().enabled = false;
+				this.enabled = false;
+				GameObject.Find ("Main Camera").GetComponent<cameraUse>().DeadMode = true;
+				this.GetComponent <BoxCollider> ().enabled = false;
+				this.GetComponent <CharacterController> ().enabled = false;
+				this.transform.position = new Vector3 (this.transform .position .x , -1.8f , this.transform .position .z);
 			}
 			if (ActerHp > ActerHpMax) {
 				ActerHp = ActerHpMax; //最后一个修正
@@ -477,6 +491,15 @@ public class PlayerBasic : MonoBehaviour {
 		
 		}
 	}
+
+	//网络播放动画
+	//实际上目前只播放死亡动画
+	[PunRPC]
+	public void plaDeadAnimations(string nameIn)
+	{
+		this.GetComponentInChildren <Animator>().Play(nameIn);
+	}
+
 
 	private void OnUpdateExtra()
 	{

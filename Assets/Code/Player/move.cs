@@ -37,6 +37,7 @@ public class move : MonoBehaviour {
 	public float yNow = 0;//需要传入的标记
 	//游戏玩家引用
 	private PlayerBasic thePlayer;
+	PhotonView photonView;//网络控制单元
 
 	public void makeStart()//初始化方法，由总控单元统一进行初始化
 	{
@@ -48,6 +49,7 @@ public class move : MonoBehaviour {
 			theController = this.GetComponentInChildren<CharacterController> ();
 			theAnimatorOfPlayer = this.GetComponentInChildren<Animator> ();
 			thePlayer = this.GetComponent<PlayerBasic> ();
+			photonView = PhotonView.Get(this);
 		}
 	}
 		
@@ -84,7 +86,9 @@ public class move : MonoBehaviour {
 	{
 		Vector3 moveDirection = Vector3.zero;//刷新值这个值只需要计算位置增量就可以了
 		float ZMove = 0f;
-		this.theAnimatorOfPlayer.SetFloat ("forward", forwardA);//播放动画,具体内容需要看controller
+		//单机动作控制
+		this.theAnimatorOfPlayer.SetFloat ("forward", forwardA);//播放动画,具体内容需要看controller //////////////////////////////////
+		
 		if (canMove ) 
 		{
 			ZMove = (speedNow ) * forwardA * Time.deltaTime;
@@ -111,14 +115,22 @@ public class move : MonoBehaviour {
 		{
 			savedYaw = yNow;
 			if(forwardA<0)
-			this.theAnimatorOfPlayer.Play ("rotatePoseBack");
+			{
+				//单机动作控制
+				this.theAnimatorOfPlayer.Play ("rotatePoseBack"); //////////////////////////////////
+			}
 			else
-			this.theAnimatorOfPlayer.Play ("rotatePoseForward");
+			{
+				//单机动作控制
+				this.theAnimatorOfPlayer.Play ("rotatePoseForward"); //////////////////////////////////
+			}
 			//.SetFloat ("up", Mathf.Asin (minus) * 0.5f);//播放动画,具体内容需要看controller
 		} 
 		else
 		{
-			this.theAnimatorOfPlayer.SetFloat ("up", upA);//播放动画,具体内容需要看controller
+			//单机动作控制
+			this.theAnimatorOfPlayer.SetFloat ("up", upA);//播放动画,具体内容需要看controller //////////////////////////////////
+
 		}
 		if (canMove)
 		{
@@ -148,7 +160,9 @@ public class move : MonoBehaviour {
 		{
 			if (isJumping == false ) 
 			{
-				this.theAnimatorOfPlayer.Play ("jump");
+				//单机动作控制
+				//this.theAnimatorOfPlayer.Play ("jump");//////////////////////////////////
+				this.photonView.RPC("playModeAnimations",PhotonTargets.All,"jump");
 				jumpTimer = jumpTimerMax;
 				thePlayer.ActerSp *= 0.8f;//施展轻功是需要消耗真气的
 				isJumping = true;
@@ -239,22 +253,44 @@ public class move : MonoBehaviour {
 		}
 	}
 
-	void Update ()
+
+	//移动的究极大方法
+	[PunRPC]
+	void moveForAll(float forwardA , float upA)
 	{
 		if (!isStarted)
 			return;
-		forwardA = Input.GetAxis (forwardAxisName);
-		upA = Input.GetAxis (upAxisName);
-	    MoveForwardBack(forwardA);
+		
+		MoveForwardBack(forwardA);
 		MoveLeftAndRight (upA,forwardA );
-	    Jump();
+		Jump();
 		fastMoveCheck ();
 		timerCheck ();
-
 	}
 
-//	void Start ()
-//	{
-//
-//	}
+	[PunRPC]
+	void playModeAnimations(string nameIn)
+	{
+		this.theAnimatorOfPlayer.Play(nameIn);
+	}
+	[PunRPC]
+	void playModeAnimationsAxis( string AxisName, float value)
+	{
+		this.theAnimatorOfPlayer.SetFloat (AxisName, value);
+	}
+
+
+
+	void Update ()
+	{
+		forwardA = Input.GetAxis (forwardAxisName);
+		upA = Input.GetAxis (upAxisName);
+		if(this.photonView!= null)
+		this.photonView.RPC("moveForAll",PhotonTargets.All,forwardA ,upA);
+	}
+
+	void Start ()
+	{
+		theAnimatorOfPlayer = this.GetComponentInChildren<Animator> ();
+	}
 }

@@ -34,6 +34,9 @@ public class cameraUse : MonoBehaviour
 	//额外引用
 	private Camera theCamera;
 
+	//死了才会用到的模式
+	public  bool DeadMode = false;
+
 	void Start ()
 	{
 		theCamera = this.GetComponent <Camera> ();
@@ -41,12 +44,18 @@ public class cameraUse : MonoBehaviour
 	}
 	void LateUpdate()
 	{
-
-		makeFov ();
-		if (Input.GetKey (KeyCode.LeftControl))
-			mode2 ();
+		if (!DeadMode) 
+		{
+			makeFov ();
+			if (Input.GetKey (KeyCode.LeftControl))
+				mode2 ();
+			else
+				mode1 ();
+		}
 		else
-			mode1 ();
+		{
+			mode2 ();
+		}
 
 
 	}

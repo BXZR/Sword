@@ -39,6 +39,7 @@ public class attackLinkController :MonoBehaviour {
 	private bool isStarted = true;//是否开启
 	public bool canControll = true ;//是否可以通过玩家/AI进行操作
 
+
 	//检测连招的方法，每一次按键都要求检测
 	//这个是根据玩家的输入进行控制的方法，在制作玩家AI时需要继承并重写方法
 	// useInterpret标记着是否使用对应的翻译机制
@@ -119,7 +120,7 @@ public class attackLinkController :MonoBehaviour {
 			if (AL.attackLinkString.Length == index + 1 )//因为长度和index的关系，就比本的要求就是输入正确（当然还有SP等等的需求）
 			{
 				//这个判断非常的重要，如果取消，任何攻击动作都有可能中间取消，这当然不符合我们的需求
-				AL.attackLinkEffect ();//发生效果
+				AL.attackLinkMain();//发生效果
 				playStarEffect();//额外统一攻击效果
 				flashLink ();//更新列表
 				reMake();//完全重头开始
@@ -152,7 +153,15 @@ public class attackLinkController :MonoBehaviour {
 			attackLinkMayUsing.Add (attackLinks[i]);
 		}
 	}
-		
+
+	//有一些网络必要的逻辑也需要用start进行初始化一下
+	void Start()
+	{
+	    attackLinkMayUsing = new List<attackLink> (); //重建这个对象
+		attackBeDelete = new List<attackLink> ();//重建对象
+	}
+
+
   public void makeStart()//这个方法是用于连招本身的初始化方法
 	{
 		attackLinks = this.GetComponentsInChildren<attackLink> ();
@@ -165,7 +174,12 @@ public class attackLinkController :MonoBehaviour {
 		flashLink ();//列表更新
 		reMake();//参数更新
 		makStartExtra ();//其他的初始化
+
+		foreach (attackLink A in attackLinks)
+			A.makeStart ();
+
 		isStarted = true;
+
 	}
 	private void makStartExtra()//这个是用于与工程中其他的脚本进行联系的初始化
 	{
@@ -175,11 +189,6 @@ public class attackLinkController :MonoBehaviour {
 
     ///////////////////////////////////////////////////////////////////////////////////////////////以下是真正的调用方法入口
 
-	//初始化操作
-	void Start ()
-	{
-		makeStart ();//连击初始化
-	}
 	//这个应该是因为OnGUI比起Update刷新快造成的
 	//这个方法在Update里面是无法使用的，events会被放空
 	void OnGUI()
