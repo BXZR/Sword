@@ -134,11 +134,11 @@
  <Reference Include="Newtonsoft.Json">
  <HintPath>D:/gitWorks/Sword/Sword/Assets/Photon Unity Networking/Editor/PhotonNetwork/Newtonsoft.Json.dll</HintPath>
  </Reference>
- <Reference Include="websocket-sharp">
- <HintPath>D:/gitWorks/Sword/Sword/Assets/Plugins/WebSocket/websocket-sharp.dll</HintPath>
- </Reference>
  <Reference Include="Photon3Unity3D">
  <HintPath>D:/gitWorks/Sword/Sword/Assets/Plugins/Photon3Unity3D.dll</HintPath>
+ </Reference>
+ <Reference Include="websocket-sharp">
+ <HintPath>D:/gitWorks/Sword/Sword/Assets/Plugins/WebSocket/websocket-sharp.dll</HintPath>
  </Reference>
   </ItemGroup>
   <ItemGroup>

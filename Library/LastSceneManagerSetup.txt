@@ -1,4 +1,4 @@
 sceneSetups:
-- path: Assets/theFight2.unity
+- path: Assets/Scenes/theSelectScene.unity
   isLoaded: 1
   isActive: 1

@@ -154,41 +154,6 @@ public class PlayerBasic : MonoBehaviour {
 		DamageRead += damage;
 	}
 
-	public string getPlayerInformation()
-	{
-		string information = "";
-		//information += "=======" + this.ActerName+"=======\n\n";
-		information += "生命值上限 "+(int)this.ActerHpMax+"    ";
-		information += "斗气值上限 "+(int)this.ActerSpMax+"\n";
-		information += "生命恢复 " + this.ActerHpUp .ToString ("f2")+"/秒   ";
-		information += "斗气回复 " + this.ActerSpUp .ToString ("f2") + "/秒\n";
-		information += "护甲 " + this.ActerWuliShield .ToString ("f1")+"    ";
-		information += "伤害 " + this.ActerWuliDamage .ToString("f1")+"    ";
-		information += "反伤 "+this.ActerWuliReDamage.ToString("f1")+"";
-		return information;
-	}
-
-	public string getPlayerInformationExtra()
-	{
-		string information = "";
-		information += "暴击率 "+(this.ActerSuperBaldePercent *100).ToString("f1")+"%    ";
-		information += "暴击伤害加成 "+(this.ActerSuperBaldeAdder*100).ToString("f1")+"%\n";
-		information += "闪避率 "+(this.ActerMissPercent *100).ToString("f0")+"%\n";
-		information += "格挡率 "+(this.ActerShielderPercent *100).ToString("f0")+"%    ";
-		information += "格挡真实伤害减免 " + this.ActerShielderDamageMiuns.ToString ("f1")+"    ";
-		information += "格挡百分比伤害减免 " + (this. ActerShielderDamageMiunsPercent *100).ToString("f0")+"%\n";
-
-		information += "真实穿透 "+this. ActerWuliIner.ToString("f1")+"    ";
-		information += "百分比穿透 "+(this.ActerWuliInerPercent*100).ToString("f1")+"%\n";
-		information += "真实生命偷取 "+this.ActerHpSuck.ToString("f1")+"    ";
-		information += "伤害/生命转化 "+(this.ActerHpSuckPercent*100).ToString("f0")+"%\n";
-		information += "额外伤害 "+(this.ActerDamageAdderPercent*100).ToString("f1")+"%    ";
-		information += "额外伤害加成 "+(this.ActerDamageAdder).ToString("f1")+"\n";
-		information += "攻击范围 "+this.theAttackAreaLength*100+"%";
-
-		return information;
-	}
-
 	 
 	//初始化备份的方法，只是在最开始的时候调用一次
 	void startCValues()
@@ -416,7 +381,41 @@ public class PlayerBasic : MonoBehaviour {
 	}
 
 
- 
+	public string getPlayerInformation()
+	{
+		string information = "";
+		//information += "=======" + this.ActerName+"=======\n\n";
+		information += "生命值上限 "+(int)this.ActerHpMax+"\n";
+		information += "斗气值上限 "+(int)this.ActerSpMax+"\n";
+		information += "生命恢复 " + this.ActerHpUp .ToString ("f2")+"/秒\n";
+		information += "斗气回复 " + this.ActerSpUp .ToString ("f2") + "/秒\n";
+		information += "护甲 " + this.ActerWuliShield .ToString ("f1")+"\n";
+		information += "伤害 " + this.ActerWuliDamage .ToString("f1")+"\n";
+		information += "反伤 "+this.ActerWuliReDamage.ToString("f1")+"\n";
+		return information;
+	}
+
+	public string getPlayerInformationExtra()
+	{
+		string information = "";
+		information += "暴击率 "+(this.ActerSuperBaldePercent *100).ToString("f1")+"%\n";
+		information += "暴击伤害加成 "+(this.ActerSuperBaldeAdder*100).ToString("f1")+"%\n";
+		information += "闪避率 "+(this.ActerMissPercent *100).ToString("f0")+"%\n";
+		information += "格挡率 "+(this.ActerShielderPercent *100).ToString("f0")+"%\n";
+		information += "格挡真实伤害减免 " + this.ActerShielderDamageMiuns.ToString ("f1")+"\n";
+		information += "格挡百分比伤害减免 " + (this. ActerShielderDamageMiunsPercent *100).ToString("f0")+"%\n";
+
+		information += "真实穿透 "+this. ActerWuliIner.ToString("f1")+"\n";
+		information += "百分比穿透 "+(this.ActerWuliInerPercent*100).ToString("f1")+"%\n";
+		information += "真实生命偷取 "+this.ActerHpSuck.ToString("f1")+"\n";
+		information += "伤害/生命转化 "+(this.ActerHpSuckPercent*100).ToString("f0")+"%\n";
+		information += "额外伤害 "+(this.ActerDamageAdderPercent*100).ToString("f1")+"%\n";
+		information += "额外伤害加成 "+(this.ActerDamageAdder).ToString("f1")+"\n";
+		information += "攻击距离 "+this.theAttackAreaLength*100+"%\n";
+		information += "攻击范围 " + this.theAttackAreaAngel;
+
+		return information;
+	}
 
 	/*****************************************************************************************/
 	//这个方法每一帧都会调用，刷新任务的属性

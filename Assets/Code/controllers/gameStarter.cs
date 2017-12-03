@@ -10,9 +10,15 @@ public class gameStarter : MonoBehaviour {
 	public cameraUse theCamera;//摄像机跟随控制单元
 	public uiShowsForBasic theUIController;//UI刷新新信息控制单元
 	GameObject theFighter ;
+	public GameObject theForwardImage;//没有准备好就黑屏
+	void Start()
+	{
+		Invoke ("makeStart", 2);
+	}
 
 	public  void makeStart()
 	{
+		theFighterName = systemValues.getNowPlayer ();
 		theFighter  = PhotonNetwork.Instantiate("fighters/"+theFighterName , startPoint.transform.position, Quaternion.identity, 0);
 
 		//GameObject theFighter = GameObject.Instantiate<GameObject>( Resources.Load<GameObject> ("fighters/"+theFighterName ));
@@ -27,6 +33,8 @@ public class gameStarter : MonoBehaviour {
 		theCamera.target = systemValues.thePlayer.transform;
 		systemValues.thePlayer.GetComponent <move> ().makeStart ();
 		theUIController.makeStart (systemValues.thePlayer);
+		theForwardImage.SetActive (false);//先不要删除，不知道什么时候还会用到
+		this.GetComponent <MusicController>().makeStart();
 	}
 		
 }

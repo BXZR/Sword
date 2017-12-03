@@ -117,12 +117,14 @@ public class move : MonoBehaviour {
 			if(forwardA<0)
 			{
 				//单机动作控制
-				this.theAnimatorOfPlayer.Play ("rotatePoseBack"); //////////////////////////////////
+				//this.theAnimatorOfPlayer.Play ("rotatePoseBack"); //////////////////////////////////
+				this.photonView.RPC("playModeAnimations",PhotonTargets.All,"rotatePoseBack");
 			}
 			else
 			{
 				//单机动作控制
-				this.theAnimatorOfPlayer.Play ("rotatePoseForward"); //////////////////////////////////
+				//this.theAnimatorOfPlayer.Play ("rotatePoseForward"); //////////////////////////////////
+				this.photonView.RPC("playModeAnimations",PhotonTargets.All,"rotatePoseBack");
 			}
 			//.SetFloat ("up", Mathf.Asin (minus) * 0.5f);//播放动画,具体内容需要看controller
 		} 
@@ -261,11 +263,11 @@ public class move : MonoBehaviour {
 		if (!isStarted)
 			return;
 		
-		MoveForwardBack(forwardA);
-		MoveLeftAndRight (upA,forwardA );
+		//MoveForwardBack(forwardA);
+		//MoveLeftAndRight (upA,forwardA );
 		Jump();
-		fastMoveCheck ();
-		timerCheck ();
+		//fastMoveCheck ();
+		//timerCheck ();
 	}
 
 	[PunRPC]
@@ -285,6 +287,17 @@ public class move : MonoBehaviour {
 	{
 		forwardA = Input.GetAxis (forwardAxisName);
 		upA = Input.GetAxis (upAxisName);
+
+		if (!isStarted)
+			return;
+
+		MoveForwardBack(forwardA);
+		MoveLeftAndRight (upA,forwardA );
+		Jump();
+		fastMoveCheck ();
+		timerCheck ();
+
+
 		if(this.photonView!= null)
 		this.photonView.RPC("moveForAll",PhotonTargets.All,forwardA ,upA);
 	}

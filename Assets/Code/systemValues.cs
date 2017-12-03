@@ -17,6 +17,38 @@ public class systemValues : MonoBehaviour {
 	public static string[] playerNames = { "归海一刀", "郭靖" ,"花木兰" };
 	//head picture 被保存在里面与图片是对应的
 	public static string [] playerHeadNames = {"knifeHead"  , "guojingHead", "mulanHead"};
+	public static string [] playerNamesInGame = {"theFightrSword"  , "theFightrguojing", "theFighterMulan"};
+	public static string [] playerTitleInformation = {"重剑无锋，大巧不工"  , "多段攻击，招式连发", "高速攻击，疯狂输出"};
+
+
+	//选人界面的逻辑
+	private static int indexNow = 0;
+	public static string getNextPlayer()
+	{
+		indexNow++;
+		if (indexNow > playerNamesInGame.Length-1)
+			indexNow = 0;
+
+		return playerNamesInGame [indexNow];
+	}
+
+	public static string getProPlayer()
+	{
+		indexNow--;
+		if (indexNow < 0)
+			indexNow = playerNamesInGame.Length - 1;
+		return playerNamesInGame [indexNow];
+	}
+	public static string getNowPlayer()
+	{
+		return playerNamesInGame [indexNow];
+	}
+
+	public static string getTitleForPlayer()
+	{
+		return playerTitleInformation [indexNow];
+	}
+
 	public static string getHeadPictureName (string playerNameIn)
 	{
 		for (int i = 0; i < playerNames.Length; i++) 
