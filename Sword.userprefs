@@ -6,13 +6,14 @@
       <File FileName="Assets\Code\UI\selectPlayerButton.cs" Line="1" Column="1" />
       <File FileName="Assets\Code\netWork\PUNConnect.cs" Line="1" Column="1" />
       <File FileName="Assets\Code\controllers\gameStarter.cs" Line="1" Column="1" />
-      <File FileName="Assets\Code\Player\move.cs" Line="120" Column="7" />
+      <File FileName="Assets\Code\Player\move.cs" Line="127" Column="83" />
       <File FileName="Assets\Code\systemValues.cs" Line="1" Column="1" />
       <File FileName="Assets\Code\sound\MusicController.cs" Line="1" Column="1" />
       <File FileName="Assets\Code\Extra\forStart.cs" Line="1" Column="1" />
       <File FileName="Assets\Code\Player\attackLink.cs" Line="1" Column="1" />
       <File FileName="Assets\Code\Player\attackLinkController.cs" Line="1" Column="1" />
-      <File FileName="Assets\Code\Camera\cameraUse.cs" Line="25" Column="30" />
+      <File FileName="Assets\Code\Camera\cameraUse.cs" Line="1" Column="1" />
+      <File FileName="Assets\Code\Extra\REController.cs" Line="1" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

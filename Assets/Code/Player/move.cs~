@@ -124,7 +124,7 @@ public class move : MonoBehaviour {
 			{
 				//单机动作控制
 				//this.theAnimatorOfPlayer.Play ("rotatePoseForward"); //////////////////////////////////
-				this.photonView.RPC("playModeAnimations",PhotonTargets.All,"rotatePoseBack");
+				this.photonView.RPC("playModeAnimations",PhotonTargets.All,"rotatePoseForward");
 			}
 			//.SetFloat ("up", Mathf.Asin (minus) * 0.5f);//播放动画,具体内容需要看controller
 		} 
