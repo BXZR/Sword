@@ -19,22 +19,35 @@ public class gameStarter : MonoBehaviour {
 	public  void makeStart()
 	{
 		theFighterName = systemValues.getNowPlayer ();
-		theFighter  = PhotonNetwork.Instantiate("fighters/"+theFighterName , startPoint.transform.position, Quaternion.identity, 0);
 
-		//GameObject theFighter = GameObject.Instantiate<GameObject>( Resources.Load<GameObject> ("fighters/"+theFighterName ));
+		if(systemValues.modeIndex == 1)//有些功能只在网络对战模式之下用就行
+		theFighter  = PhotonNetwork.Instantiate("fighters/"+theFighterName , startPoint.transform.position, Quaternion.identity, 0);
+		else if(systemValues.modeIndex == 0)
+		theFighter = GameObject.Instantiate<GameObject>( Resources.Load<GameObject> ("fighters/"+theFighterName ));
+		
 		Invoke("makeNetStart",1f);
 	}
 	private void makeNetStart()
 	{
 		//theFighter.transform.position = startPoint.transform.position;
-		systemValues.thePlayer = theFighter.GetComponent <PlayerBasic> ();
-		systemValues.thePlayer.makeStart ();
-		systemValues.thePlayer.GetComponent<attackLinkController> ().makeStart ();
-		theCamera.target = systemValues.thePlayer.transform;
-		systemValues.thePlayer.GetComponent <move> ().makeStart ();
-		theUIController.makeStart (systemValues.thePlayer);
-		theForwardImage.SetActive (false);//先不要删除，不知道什么时候还会用到
-		this.GetComponent <MusicController>().makeStart();
+
+			PlayerBasic thePlayerPrivate = theFighter.GetComponent <PlayerBasic> ();
+
+		    if (this.gameObject.tag != "AI") 
+		    {
+			   if (systemValues.thePlayer == null)
+			   {
+				systemValues.thePlayer = thePlayerPrivate;
+				thePlayerPrivate.isMainfighter = true;
+			  }
+		    }
+		    thePlayerPrivate.makeStart ();
+		    thePlayerPrivate.GetComponent<attackLinkController> ().makeStart ();
+		    theCamera.target = thePlayerPrivate.transform;
+	     	thePlayerPrivate.GetComponent <move> ().makeStart ();
+		    theUIController.makeStart ( thePlayerPrivate);
+			theForwardImage.SetActive (false);//先不要删除，不知道什么时候还会用到
+			this.GetComponent <MusicController> ().makeStart ();
 	}
 		
 }

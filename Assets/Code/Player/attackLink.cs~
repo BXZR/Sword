@@ -131,8 +131,10 @@ public class attackLink : MonoBehaviour {
 	public void attackLinkMain()
 	{
 		attackLinkEffect ();
-		if (photonView != null)
-			this.photonView.RPC("playAttackLinkAction",PhotonTargets.All); 
+		if (systemValues.modeIndex == 1 && photonView != null)
+			this.photonView.RPC ("playAttackLinkAction", PhotonTargets.All);
+		else if (systemValues.modeIndex == 0)
+			playAttackLinkAction ();
 	}
 
 	public  virtual void attackLinkEffect()//连招的效果在这里写

@@ -23,6 +23,10 @@ public class systemValues : MonoBehaviour {
 
 	//选人界面的逻辑
 	private static int indexNow = 0;
+	public static  void setIndexForPlayer(int indexIn)
+	{
+		indexNow = indexIn;
+	}
 	public static string getNextPlayer()
 	{
 		indexNow++;
@@ -44,7 +48,7 @@ public class systemValues : MonoBehaviour {
 		return playerNamesInGame [indexNow];
 	}
 
-	public static string getTitleForPlayer()
+	public static string getTitleForPlayer(int indexNow)
 	{
 		return playerTitleInformation [indexNow];
 	}
@@ -62,4 +66,9 @@ public class systemValues : MonoBehaviour {
 	public static PlayerBasic thePlayer;
 	//当前播放的背景音乐名
 	public static string theBackMusicNameNow = "";
+
+	//非常重要的参数，游戏模式
+	//0 单机模式
+	//1 网络模式
+	public static int modeIndex = 0;
 }

@@ -197,6 +197,7 @@ public class newMethodAttack : MonoBehaviour {
 					{//有些时候仅仅是增加脚本，例如“斗气爆发”不具备攻击效果
 						thePlayer.OnAttack (theEMY[i], 0, false);//造成直接的伤害
 						extraDamageEffect (theEMY[i]);//添加额外的计算脚本，每个脚本的效果由脚本自己决定
+						//print(theEMY[i].name+" is being attacked");
 					}
 				}
 

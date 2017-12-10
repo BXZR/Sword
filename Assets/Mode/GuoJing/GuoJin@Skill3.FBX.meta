@@ -200,14 +200,21 @@ ModelImporter:
       bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
       curves: []
       events:
-      - time: 0.3206105
+      - time: 0.12631969
         functionName: attackForAnimation
         data: 
         objectReferenceParameter: {instanceID: 0}
         floatParameter: 0
         intParameter: 0
         messageOptions: 0
-      - time: 0.66467637
+      - time: 0.42370367
+        functionName: attackForAnimation
+        data: 
+        objectReferenceParameter: {instanceID: 0}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
+      - time: 0.6870296
         functionName: attackForAnimation
         data: 
         objectReferenceParameter: {instanceID: 0}

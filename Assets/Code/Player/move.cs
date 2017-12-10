@@ -117,14 +117,19 @@ public class move : MonoBehaviour {
 			if(forwardA<0)
 			{
 				//单机动作控制
-				//this.theAnimatorOfPlayer.Play ("rotatePoseBack"); //////////////////////////////////
-				this.photonView.RPC("playModeAnimations",PhotonTargets.All,"rotatePoseBack");
+				if(systemValues.modeIndex == 0)
+					playModeAnimations("rotatePoseBack"); 
+				if(systemValues.modeIndex == 1)//有些功能只在网络对战模式之下用就行
+				   this.photonView.RPC("playModeAnimations",PhotonTargets.All,"rotatePoseBack");
+			
 			}
 			else
 			{
 				//单机动作控制
-				//this.theAnimatorOfPlayer.Play ("rotatePoseForward"); //////////////////////////////////
-				this.photonView.RPC("playModeAnimations",PhotonTargets.All,"rotatePoseForward");
+				if(systemValues.modeIndex == 0)
+					playModeAnimations("rotatePoseForward"); 
+				if(systemValues.modeIndex == 1)//有些功能只在网络对战模式之下用就行
+				   this.photonView.RPC("playModeAnimations",PhotonTargets.All,"rotatePoseForward");
 			}
 			//.SetFloat ("up", Mathf.Asin (minus) * 0.5f);//播放动画,具体内容需要看controller
 		} 
@@ -164,7 +169,11 @@ public class move : MonoBehaviour {
 			{
 				//单机动作控制
 				//this.theAnimatorOfPlayer.Play ("jump");//////////////////////////////////
-				this.photonView.RPC("playModeAnimations",PhotonTargets.All,"jump");
+				if (systemValues.modeIndex == 1)//有些功能只在网络对战模式之下用就行
+				   this.photonView.RPC ("playModeAnimations", PhotonTargets.All, "jump");
+				else if (systemValues.modeIndex == 0)
+					playModeAnimations ("jump");
+				
 				jumpTimer = jumpTimerMax;
 				thePlayer.ActerSp *= 0.8f;//施展轻功是需要消耗真气的
 				isJumping = true;
@@ -297,9 +306,10 @@ public class move : MonoBehaviour {
 		fastMoveCheck ();
 		timerCheck ();
 
-
-		if(this.photonView!= null)
-		this.photonView.RPC("moveForAll",PhotonTargets.All,forwardA ,upA);
+		if (systemValues.modeIndex == 1 && this.photonView != null)//有些功能只在网络对战模式之下用就行
+		    this.photonView.RPC ("moveForAll", PhotonTargets.All, forwardA, upA);
+		else if (systemValues.modeIndex == 0)
+			moveForAll (forwardA, upA);
 	}
 
 	void Start ()

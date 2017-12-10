@@ -1,0 +1,62 @@
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.UI;
+
+public class selectHeaderMaker : MonoBehaviour {
+
+	//制作基础的选人界面的按钮
+	//自动化读取“配置文件类”做
+
+	//按钮的预设物
+	public GameObject theButtonProfab;
+	//按钮的预设物的父物体
+	public Transform theButtonContant;
+	//显示游戏人物信息的文本
+	public Text playerInformationText;
+	//显示游戏人物信息的文本
+	public Text playerTitleText;
+	//按钮的预设物的父物体
+	public Transform modePosition;
+
+	//为了展示最开始的一个战士，需要保留一个引用
+	private selectHead theFirstHead = null;
+
+	void Start ()
+	{
+		makeButtons ();
+	}
+
+	public void makeButtons()
+	{
+		for (int i = 0; i < systemValues.playerNamesInGame.Length; i++)
+		{
+			GameObject theButton = GameObject.Instantiate<GameObject> (Resources.Load<GameObject>("UI/SelectButton"));
+			theButton.transform.SetParent (theButtonContant.transform);
+			theButton.transform.localPosition = new Vector3 (0,0,0);
+			theButton.transform.localScale = new Vector3 (1,1,1);
+			selectHead theHead = theButton.GetComponent <selectHead> ();
+			theHead.makeStart ( systemValues.playerNamesInGame[i] , playerTitleText , playerInformationText ,modePosition , i);
+			theButton.GetComponent <Image> ().sprite = makeLoadSprite ("playerHeadPicture/"+ systemValues.playerHeadNames[i]);
+			if (theFirstHead == null)
+				theFirstHead = theHead;
+		}
+	}
+
+
+	//加载图像
+	public Sprite makeLoadSprite(string textureName)
+	{
+		//textureName = "people/noOne";
+		Texture2D theTextureIn = Resources.Load <Texture2D> (textureName);
+		return Sprite .Create(theTextureIn,new Rect (0,0,theTextureIn.width,theTextureIn.height),new Vector2 (0,0));
+	}
+
+	//加载第一个战士
+	public void makeFirstFighter()
+	{
+		//print ("make first fighter");
+		if (theFirstHead)
+			theFirstHead.makePlayer ();
+	}
+}

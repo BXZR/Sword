@@ -17,7 +17,7 @@ public class monsterBeAttack : effectBasic{
 	}
 	public override void OnBeAttack (PlayerBasic attacker)
 	{
-		moveTowards = (this.transform.position - attacker.transform.position ).normalized *4 + new Vector3 (0, 9, 0);
+		moveTowards = (this.transform.position - attacker.transform.position ).normalized *4 + new Vector3 (0, 2, 1);
 		moveTimer = moveTimerAll;
 		isMoving = true;
 		//if(theMoveController)

@@ -14,7 +14,7 @@ public class PlayerBasic : MonoBehaviour {
 	public string ActerName;//这个人物的名称
 
 	[HideInInspector]//为了保证设定面板的简洁，暂时隐藏之
-	public bool isAlive=true;//是否生存，默认一定是存活的，除非死了
+	public bool isAlive = true;//是否生存，默认一定是存活的，除非死了
 
 	//最基本的属性生命法力和名字
 	public float ActerHpMax=1000f;//这个人物的生命上限
@@ -104,7 +104,7 @@ public class PlayerBasic : MonoBehaviour {
 	[HideInInspector]//为了保证设定面板的简洁，暂时隐藏之
 	public  float extraDamageForAnimation = 0;//设置为共有是为了传参数的时候方便，但是这个参数是不能够被主动在面板上设定的
 
-
+	public bool isMainfighter = false;//是玩家控制的fighter
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////	
 //下面是游戏计算中的临时变量
@@ -309,8 +309,12 @@ public class PlayerBasic : MonoBehaviour {
 
 	public void OnBeAttack(float damage)
 	{
-		if (!isStarted)
+		//this.gameObject .tag != "AI"说明是小兵
+		//只有英雄才需要被start
+
+		if ( !isStarted )
 			return;
+		
 		if (this.isAlive )//只有在活着的时候才可以被攻击
 		{
 			DamageRead += damage;//累计伤害
@@ -437,8 +441,16 @@ public class PlayerBasic : MonoBehaviour {
 				isAlive = false;
 				//this.gameObject.tag = "dead";
                 //Destroy (this.gameObject, 1.5f);
-				PhotonView photonView = PhotonView.Get(this);
-				photonView.RPC("plaDeadAnimations",PhotonTargets.All,"dead");
+				if (systemValues.modeIndex == 1)
+				{
+					PhotonView photonView = PhotonView.Get (this);
+					photonView.RPC ("plaDeadAnimations", PhotonTargets.All, "dead");
+				}
+				else if (systemValues.modeIndex == 0)
+				{
+					plaDeadAnimations ("dead");
+				}
+
 				this.GetComponent <attackLinkController> ().enabled = false;
 				this.GetComponent <move> ().enabled = false;
 				this.enabled = false;
@@ -496,7 +508,9 @@ public class PlayerBasic : MonoBehaviour {
 	[PunRPC]
 	public void plaDeadAnimations(string nameIn)
 	{
-		this.GetComponentInChildren <Animator>().Play(nameIn);
+		Animator theAnimator = this.GetComponentInChildren <Animator>();
+		if(theAnimator)
+		    theAnimator.Play(nameIn);
 	}
 
 
@@ -515,31 +529,41 @@ public class PlayerBasic : MonoBehaviour {
 		//所有的刷新（除了一些额外的效果需要实时计算之外）都用到这个参数进行
 		//这是一个初步的优化策略
 		InvokeRepeating("OnUpdateExtra" , 0 , systemValues.updateTimeWait);
-		GUIShowStyle=new GUIStyle();
-		GUIShowStyle.normal.background = (Texture2D)Resources.Load ("pictures/hpGUI");
 
 		isStarted = true;
-		isAlive=true;
 	}
 
-
+	private void makeGUIStart()
+	{
+		GUIShowStyle=new GUIStyle();
+		GUIShowStyle.normal.background = (Texture2D)Resources.Load ("UI/hpGUI");
+	}
 	//由于这个类是一个究极的父类，因此具体的工作是不做的，但是留下了调用各种方法的方式木板
 	void Start () 
 	{
-	//	makeStart ();
+		//	makeStart ();
+		if (this.gameObject.tag == "AI")
+			makeStart ();
+		makeGUIStart ();
 	}
 
 	//这是一个原始的功能，但是在发布之后没有使用，只是不断空转并且浪费了判断用的资源，应该注销以备后用
-//	void OnGUI()
-//	{ 
-//		if (systemValues.isGUIShowHP && GUIShowStyle!=null)
-//		{
-//			float roto = Mathf.Clamp ((this.ActerHp / this.ActerHpMax), 0f, 1f);
-//			Vector2 c = Camera.main.WorldToScreenPoint (new Vector3 (this.transform.position.x, this.transform.position.y + 1.25f, this.transform.position.z - 0.5f));
-//			GUI.BeginGroup (new Rect (c.x, Screen.height - c.y, 155, 100));
-//			GUI.Box (new Rect (10, 0, 127, 15), "");
-//			GUI.Box (new Rect (12, 1, 120 * roto, 13), "", GUIShowStyle);
-//			GUI.EndGroup ();
-//		}
-//	}
+	//public bool isShowing = false;
+	/*不可遮挡的GUI血条
+	 * 这或许不是一个很好的方法
+	 * 因为不存在遮挡
+	 * void OnGUI()
+	{ 
+		if ( isShowing  && this.isMainfighter == false &&  isAlive &&  GUIShowStyle!=null)
+		{
+			print (this.ActerName + " is GUI showing");
+			float roto = Mathf.Clamp ((this.ActerHp / this.ActerHpMax), 0f, 1f);
+			Vector2 c = Camera.main.WorldToScreenPoint (new Vector3 (this.transform.position.x, this.transform.position.y + 2f, this.transform.position.z));
+			GUI.BeginGroup (new Rect (c.x, Screen.height - c.y, 155, 100));
+			GUI.Box (new Rect (10, 0, 127, 15), "");
+			GUI.Box (new Rect (12, 1, 120 * roto, 13), "", GUIShowStyle);
+			GUI.EndGroup ();
+		}
+	}
+	*/
 }
