@@ -1,13 +1,14 @@
 ﻿<Properties StartupItem="Assembly-CSharp.csproj">
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Unity.Instance.Unity Editor" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Code\Player\visiableShowForPlayer.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Code\netWork\PUNConnect.cs">
     <Files>
-      <File FileName="Assets\Code\UI\selectHeaderMaker.cs" Line="1" Column="1" />
-      <File FileName="Assets\Code\UI\selectHead.cs" Line="1" Column="1" />
-      <File FileName="Assets\Code\UI\uiShowsForBasic.cs" Line="1" Column="1" />
-      <File FileName="Assets\Code\Player\move.cs" Line="1" Column="1" />
-      <File FileName="Assets\Code\UI\GameStartButton.cs" Line="1" Column="1" />
-      <File FileName="Assets\Code\Player\visiableShowForPlayer.cs" Line="11" Column="2" />
+      <File FileName="Assets\Code\bloodSlider\visiableShowForPlayer.cs" Line="34" Column="1" />
+      <File FileName="Assets\Code\Player\PlayerBasic.cs" Line="308" Column="2" />
+      <File FileName="Assets\Code\controllers\gameStarter.cs" Line="42" Column="79" />
+      <File FileName="Assets\Code\Player\newMethodAttack.cs" Line="115" Column="1" />
+      <File FileName="Assets\Code\bloodSlider\BasicMethod\BloodBasic.cs" Line="36" Column="23" />
+      <File FileName="Assets\Code\bloodSlider\BasicMethod\BloodScaner.cs" Line="16" Column="39" />
+      <File FileName="Assets\Code\netWork\PUNConnect.cs" Line="18" Column="86" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

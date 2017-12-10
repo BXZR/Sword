@@ -312,8 +312,8 @@ public class PlayerBasic : MonoBehaviour {
 		//this.gameObject .tag != "AI"说明是小兵
 		//只有英雄才需要被start
 
-		if ( !isStarted )
-			return;
+		//if ( !isStarted )
+		//	return;
 		
 		if (this.isAlive )//只有在活着的时候才可以被攻击
 		{
@@ -450,14 +450,20 @@ public class PlayerBasic : MonoBehaviour {
 				{
 					plaDeadAnimations ("dead");
 				}
-
-				this.GetComponent <attackLinkController> ().enabled = false;
-				this.GetComponent <move> ().enabled = false;
-				this.enabled = false;
-				GameObject.Find ("Main Camera").GetComponent<cameraUse>().DeadMode = true;
-				this.GetComponent <BoxCollider> ().enabled = false;
-				this.GetComponent <CharacterController> ().enabled = false;
-				this.transform.position = new Vector3 (this.transform .position .x , -1.8f , this.transform .position .z);
+				try
+				{
+					this.GetComponent <attackLinkController> ().enabled = false;
+					this.GetComponent <move> ().enabled = false;
+					this.enabled = false;
+					GameObject.Find ("Main Camera").GetComponent<cameraUse>().DeadMode = true;
+					this.GetComponent <BoxCollider> ().enabled = false;
+					this.GetComponent <CharacterController> ().enabled = false;
+					this.transform.position = new Vector3 (this.transform .position .x , -1.8f , this.transform .position .z);
+				}
+				catch 
+				{
+					print ("组件缺失或者不必存在这个组件");
+				}
 			}
 			if (ActerHp > ActerHpMax) {
 				ActerHp = ActerHpMax; //最后一个修正
@@ -548,22 +554,22 @@ public class PlayerBasic : MonoBehaviour {
 	}
 
 	//这是一个原始的功能，但是在发布之后没有使用，只是不断空转并且浪费了判断用的资源，应该注销以备后用
-	//public bool isShowing = false;
-	/*不可遮挡的GUI血条
-	 * 这或许不是一个很好的方法
-	 * 因为不存在遮挡
-	 * void OnGUI()
+	public bool isShowing = false;
+	//不可遮挡的GUI血条
+	// 这或许不是一个很好的方法
+	// 因为不存在遮挡
+	 void OnGUI()
 	{ 
 		if ( isShowing  && this.isMainfighter == false &&  isAlive &&  GUIShowStyle!=null)
 		{
-			print (this.ActerName + " is GUI showing");
+			//print (this.ActerName + " is GUI showing");
 			float roto = Mathf.Clamp ((this.ActerHp / this.ActerHpMax), 0f, 1f);
-			Vector2 c = Camera.main.WorldToScreenPoint (new Vector3 (this.transform.position.x, this.transform.position.y + 2f, this.transform.position.z));
+			Vector2 c = Camera.main.WorldToScreenPoint (new Vector3 (this.transform.position.x, this.transform.position.y + 1f, this.transform.position.z));
 			GUI.BeginGroup (new Rect (c.x, Screen.height - c.y, 155, 100));
 			GUI.Box (new Rect (10, 0, 127, 15), "");
 			GUI.Box (new Rect (12, 1, 120 * roto, 13), "", GUIShowStyle);
 			GUI.EndGroup ();
 		}
 	}
-	*/
+ 
 }
