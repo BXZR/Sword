@@ -244,26 +244,43 @@ public class move : MonoBehaviour {
 	{
 		if (Input.GetKey (KeyCode.LeftShift))
 		{
-			if(isShifting == false)
-			{
-				isShifting = true;
-				speedAdderWithShift  = speedNormal * 0.75f;
-				speedNormal += speedAdderWithShift;
-				speedRun += speedAdderWithShift;
-
-			}
+			if (systemValues.modeIndex == 1)//有些功能只在网络对战模式之下用就行
+				this.photonView.RPC ("makeShift", PhotonTargets.All);
+			else if (systemValues.modeIndex == 0)
+				makeShift();
 		}
-		if (Input.GetKeyUp (KeyCode.LeftShift))
+		if (Input.GetKeyUp (KeyCode.LeftShift) || thePlayer.ActerSp <20)
 		{
-			if (isShifting == true) 
-			{
-				isShifting = false;
-				speedNormal -= speedAdderWithShift;
-				speedRun -= speedAdderWithShift;
-			}
+			if (systemValues.modeIndex == 1)//有些功能只在网络对战模式之下用就行
+				this.photonView.RPC ("makeShiftEnd", PhotonTargets.All);
+			else if (systemValues.modeIndex == 0)
+				makeShiftEnd();
 		}
 	}
 
+
+	void makeShiftEnd()
+	{
+		if (isShifting == true) 
+		{
+			isShifting = false;
+			speedNormal -= speedAdderWithShift;
+			speedRun -= speedAdderWithShift;
+		}
+	}
+
+	void  makeShift()
+	{
+		if(isShifting == false)
+		{
+			isShifting = true;
+			speedAdderWithShift  = speedNormal * 0.75f;
+			speedNormal += speedAdderWithShift;
+			speedRun += speedAdderWithShift;
+		}
+		if (thePlayer.ActerSp > 0)
+			thePlayer.ActerSp -= 15 * Time.deltaTime;
+	}
 
 	//移动的究极大方法
 	[PunRPC]
