@@ -112,7 +112,9 @@ public class PlayerBasic : MonoBehaviour {
 	//这个参数非常重要，决定着操纵这个人物的固定按键设定（游戏手柄）
 	public int playerIndex = 0;//游戏人物的下标,因为是二人对战格斗，只有可能是0,1（在初始化的时候才会进行唯一一次的设定）
 
-	private GUIStyle GUIShowStyle;//GUI显示的人物当前生命值
+	private GUIStyle GUIShowStyleHP;//GUI显示的人物当前生命值
+	private GUIStyle GUIShowStyleSP;//GUI显示的人物当前生命值
+
 	private bool isStarted =false;//是否已经开启
 
 	//[HideInInspector]//为了保证设定面板的简洁，暂时隐藏之
@@ -148,6 +150,8 @@ public class PlayerBasic : MonoBehaviour {
 	public audioPlayer theAudioPlayer;//自己定义的音频播放器组件
 	//值得注意的是声音的播放是在attackLink里面调用的，在这里保留引用是为了减少获取的次数
  
+	//网络控制节点
+	PhotonView photonView;
 
 	public void addDamageRead(float damage=0)//有些技能是带有额外伤害的，这个伤害也需要统计到这里面去
 	{
@@ -441,9 +445,8 @@ public class PlayerBasic : MonoBehaviour {
 				isAlive = false;
 				//this.gameObject.tag = "dead";
                 //Destroy (this.gameObject, 1.5f);
-				if (systemValues.modeIndex == 1)
+				if (systemValues.modeIndex == 1 && photonView!= null)
 				{
-					PhotonView photonView = PhotonView.Get (this);
 					photonView.RPC ("plaDeadAnimations", PhotonTargets.All, "dead");
 				}
 				else if (systemValues.modeIndex == 0)
@@ -455,7 +458,8 @@ public class PlayerBasic : MonoBehaviour {
 					this.GetComponent <attackLinkController> ().enabled = false;
 					this.GetComponent <move> ().enabled = false;
 					this.enabled = false;
-					GameObject.Find ("Main Camera").GetComponent<cameraUse>().DeadMode = true;
+					if(this == systemValues.thePlayer)//自己控制的人物挂了需要调整摄像机
+					    GameObject.Find ("Main Camera").GetComponent<cameraUse>().DeadMode = true;
 					this.GetComponent <BoxCollider> ().enabled = false;
 					this.GetComponent <CharacterController> ().enabled = false;
 					this.transform.position = new Vector3 (this.transform .position .x , -1.8f , this.transform .position .z);
@@ -509,6 +513,28 @@ public class PlayerBasic : MonoBehaviour {
 		}
 	}
 
+	//自添加脚本
+	//这是对外方法，需要在这里分为两种
+	//根据的单机模式和网络对战模式做两种操作，仅此而已
+	public void addEffects(string effectName)
+	{
+		if (systemValues.modeIndex == 1 && photonView!= null)
+		{
+			photonView.RPC ("addEffectsForSelf", PhotonTargets.All, effectName);
+		}
+		else if (systemValues.modeIndex == 0)
+		{
+			addEffectsForSelf(effectName);
+		}
+	}
+
+	//真正添加脚本的能力
+	[PunRPC]
+	public void  addEffectsForSelf(string nameForEffect)
+	{
+		this.gameObject.AddComponent (System.Type.GetType (nameForEffect));
+	}
+
 	//网络播放动画
 	//实际上目前只播放死亡动画
 	[PunRPC]
@@ -536,19 +562,25 @@ public class PlayerBasic : MonoBehaviour {
 		//这是一个初步的优化策略
 		InvokeRepeating("OnUpdateExtra" , 0 , systemValues.updateTimeWait);
 
+		if (systemValues.modeIndex == 1) 
+		{
+			photonView = PhotonView.Get (this);
+		}
+
 		isStarted = true;
 	}
 
 	private void makeGUIStart()
 	{
-		GUIShowStyle=new GUIStyle();
-		GUIShowStyle.normal.background = (Texture2D)Resources.Load ("UI/hpGUI");
+		GUIShowStyleHP=new GUIStyle();
+		GUIShowStyleHP.normal.background = (Texture2D)Resources.Load ("UI/hpGUI");
+		GUIShowStyleSP=new GUIStyle();
+		GUIShowStyleSP.normal.background = (Texture2D)Resources.Load ("UI/spGUI");
 	}
 	//由于这个类是一个究极的父类，因此具体的工作是不做的，但是留下了调用各种方法的方式木板
 	void Start () 
 	{
-		//	makeStart ();
-		if (this.gameObject.tag == "AI")
+		//if (this.gameObject.tag == "AI")
 			makeStart ();
 		makeGUIStart ();
 	}
@@ -560,14 +592,18 @@ public class PlayerBasic : MonoBehaviour {
 	// 因为不存在遮挡
 	 void OnGUI()
 	{ 
-		if ( isShowing  && this.isMainfighter == false &&  isAlive &&  GUIShowStyle!=null)
+		if ( isShowing  && this.isMainfighter == false &&  isAlive &&  GUIShowStyleHP!=null &&  GUIShowStyleSP!=null)
 		{
 			//print (this.ActerName + " is GUI showing");
-			float roto = Mathf.Clamp ((this.ActerHp / this.ActerHpMax), 0f, 1f);
+			float rotoForHp = Mathf.Clamp ((this.ActerHp / this.ActerHpMax), 0f, 1f);
+			float rotoForSp = Mathf.Clamp ((this.ActerSp/ this.ActerSpMax), 0f, 1f);
 			Vector2 c = Camera.main.WorldToScreenPoint (new Vector3 (this.transform.position.x, this.transform.position.y + 1f, this.transform.position.z));
 			GUI.BeginGroup (new Rect (c.x, Screen.height - c.y, 155, 100));
-			GUI.Box (new Rect (10, 0, 127, 15), "");
-			GUI.Box (new Rect (12, 1, 120 * roto, 13), "", GUIShowStyle);
+			GUI.Box (new Rect (35, 0, 80, 23), this.ActerName);
+			GUI.Box (new Rect (10, 23, 127, 15), "");
+			GUI.Box (new Rect (12, 24, 120 * rotoForHp, 13), "", GUIShowStyleHP);
+			GUI.Box (new Rect (10, 39, 127, 15), "");
+			GUI.Box (new Rect (12, 40, 120 * rotoForSp, 13), "", GUIShowStyleSP);
 			GUI.EndGroup ();
 		}
 	}

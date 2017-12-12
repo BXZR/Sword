@@ -238,6 +238,7 @@ public class move : MonoBehaviour {
 	}
 
 	//按住左边shift键，移动速度增加
+	//其实这个功能主要用处是耗蓝的统一处理，至于位移，应该直接用transform来侦测就比较好
 	private bool isShifting = false;
 	private float speedAdderWithShift = 0;//消耗真气的疯狂移动
 	private  void fastMoveCheck()
@@ -258,7 +259,7 @@ public class move : MonoBehaviour {
 		}
 	}
 
-
+	[PunRPC]
 	void makeShiftEnd()
 	{
 		if (isShifting == true) 
@@ -268,7 +269,7 @@ public class move : MonoBehaviour {
 			speedRun -= speedAdderWithShift;
 		}
 	}
-
+	[PunRPC]
 	void  makeShift()
 	{
 		if(isShifting == false)
@@ -278,6 +279,8 @@ public class move : MonoBehaviour {
 			speedNormal += speedAdderWithShift;
 			speedRun += speedAdderWithShift;
 		}
+		if (!thePlayer)
+			thePlayer = this.GetComponent <PlayerBasic> ();//不仅仅是保险措施，也是网络实现的一个关键
 		if (thePlayer.ActerSp > 0)
 			thePlayer.ActerSp -= 15 * Time.deltaTime;
 	}

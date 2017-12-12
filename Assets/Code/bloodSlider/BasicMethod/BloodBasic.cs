@@ -45,8 +45,8 @@ public class BloodBasic : MonoBehaviour {
 			thePlayer.isShowing = false;
 		}
 	}
-	void Update () 
-	{
-
-	}
+//	void Update () 
+//	{
+//
+//	}
 }

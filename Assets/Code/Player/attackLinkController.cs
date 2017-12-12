@@ -122,6 +122,7 @@ public class attackLinkController :MonoBehaviour {
 				//这个判断非常的重要，如果取消，任何攻击动作都有可能中间取消，这当然不符合我们的需求
 				AL.attackLinkMain();//发生效果
 				playStarEffect();//额外统一攻击效果
+
 				flashLink ();//更新列表
 				reMake();//完全重头开始
 				isOver = true;//标记量，是否已经使用了一个技能

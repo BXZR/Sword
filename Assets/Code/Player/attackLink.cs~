@@ -130,13 +130,21 @@ public class attackLink : MonoBehaviour {
 
 	public void attackLinkMain()
 	{
-		attackLinkEffect ();
+		
+
 		if (systemValues.modeIndex == 1 && photonView != null)
+		{
+			this.photonView.RPC ("attackLinkEffect", PhotonTargets.All);
 			this.photonView.RPC ("playAttackLinkAction", PhotonTargets.All);
+		}
 		else if (systemValues.modeIndex == 0)
+		{
+			attackLinkEffect ();
 			playAttackLinkAction ();
+		}
 	}
 
+	[PunRPC]
 	public  virtual void attackLinkEffect()//连招的效果在这里写
 	{
 		//这里其实暂时规定使用某一个攻击动作的同时不会使用另一个攻击动作
@@ -147,6 +155,13 @@ public class attackLink : MonoBehaviour {
 		//上面的检查方法被移动到了attackLinkController里面，在attackLink里面只管实现攻击效果，不再判断是否可以转移攻击效果（多次分时的检查可能会出现卡顿）
 		if (string.IsNullOrEmpty (animationName) == false )
 		{
+			//这不仅是保险措施
+			//也是基于网络的处理
+			//因为网络对战状态下attackLinkController是不初始化的，因此这个也是不初始化的
+			if (!thePlayer) 
+			{
+				thePlayer = this.transform.root.GetComponent<PlayerBasic> ();
+			}
 			//print ("play action");
 			if (thePlayer) 
 			{

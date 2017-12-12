@@ -48,6 +48,7 @@
   <ItemGroup>
      <Compile Include="Assets\Code\Camera\cameraUse.cs" />
      <Compile Include="Assets\Code\Effects\effectBasic.cs" />
+     <Compile Include="Assets\Code\Effects\effectHpUp.cs" />
      <Compile Include="Assets\Code\Effects\knifeSlash\Interpolate.cs" />
      <Compile Include="Assets\Code\Effects\knifeSlash\MeleeWeaponTrail.cs" />
      <Compile Include="Assets\Code\Effects\knifeSlash\theKnifeSlashController.cs" />

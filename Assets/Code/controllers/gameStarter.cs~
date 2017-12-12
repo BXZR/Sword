@@ -20,11 +20,13 @@ public class gameStarter : MonoBehaviour {
 	{
 		theFighterName = systemValues.getNowPlayer ();
 
-		if(systemValues.modeIndex == 1)//有些功能只在网络对战模式之下用就行
-		theFighter  = PhotonNetwork.Instantiate("fighters/"+theFighterName , startPoint.transform.position, Quaternion.identity, 0);
-		else if(systemValues.modeIndex == 0)
-		theFighter = GameObject.Instantiate<GameObject>( Resources.Load<GameObject> ("fighters/"+theFighterName ));
-		
+		if (systemValues.modeIndex == 1)//有些功能只在网络对战模式之下用就行
+		theFighter = PhotonNetwork.Instantiate ("fighters/" + theFighterName, startPoint.transform.position, Quaternion.identity, 0);
+		else if (systemValues.modeIndex == 0) 
+		{
+			theFighter = GameObject.Instantiate<GameObject> (Resources.Load<GameObject> ("fighters/" + theFighterName));
+			theFighter.transform.position = startPoint.transform.position;
+		}
 		Invoke("makeNetStart",1f);
 	}
 	private void makeNetStart()
@@ -42,7 +44,7 @@ public class gameStarter : MonoBehaviour {
 				thePlayerPrivate.gameObject.AddComponent<BloodScaner> ();//这个游戏对象拥有观察血量的权利
 			  }
 		    }
-		    thePlayerPrivate.makeStart ();
+		    //thePlayerPrivate.makeStart ();
 		    thePlayerPrivate.GetComponent<attackLinkController> ().makeStart ();
 		    theCamera.target = thePlayerPrivate.transform;
 	     	thePlayerPrivate.GetComponent <move> ().makeStart ();
@@ -50,5 +52,15 @@ public class gameStarter : MonoBehaviour {
 			theForwardImage.SetActive (false);//先不要删除，不知道什么时候还会用到
 			this.GetComponent <MusicController> ().makeStart ();
 	}
+
+	//额外整体控制
+	//仅仅作为示例使用
+//	void Update ()
+//	{
+//		if(Input .GetKeyDown(KeyCode .Z))
+//		{
+//			systemValues.thePlayer.addEffects ("effectHpUp");
+//		}
+//	}
 		
 }

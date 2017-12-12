@@ -79,10 +79,10 @@ public class effectBasic : MonoBehaviour {
 		thePlayer = this.GetComponentInChildren<PlayerBasic> ();
 	}
 
-	void OnDestroy()
-	{
+	//void OnDestroy()
+	//{
 		
-	}
+	//}
 
 
 
