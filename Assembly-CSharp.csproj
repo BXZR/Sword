@@ -67,7 +67,6 @@
      <Compile Include="Assets\Code\UI\uiShowsForBasic.cs" />
      <Compile Include="Assets\Code\bloodSlider\BasicMethod\BloodBasic.cs" />
      <Compile Include="Assets\Code\bloodSlider\BasicMethod\BloodScaner.cs" />
-     <Compile Include="Assets\Code\bloodSlider\visiableShowForPlayer.cs" />
      <Compile Include="Assets\Code\controllers\gameStarter.cs" />
      <Compile Include="Assets\Code\netWork\PUNConnect.cs" />
      <Compile Include="Assets\Code\sound\MusicController.cs" />

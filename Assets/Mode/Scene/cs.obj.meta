@@ -1,6 +1,6 @@
 fileFormatVersion: 2
 guid: a8cb05e5f95fd8540a7405eca3c1486e
-timeCreated: 1511327976
+timeCreated: 1513090197
 licenseType: Free
 ModelImporter:
   serializedVersion: 19
@@ -42,20 +42,20 @@ ModelImporter:
     meshCompression: 0
     addColliders: 0
     importBlendShapes: 1
-    swapUVChannels: 0
+    swapUVChannels: 1
     generateSecondaryUV: 1
     useFileUnits: 1
     optimizeMeshForGPU: 1
     keepQuads: 0
-    weldVertices: 1
-    secondaryUVAngleDistortion: 8
-    secondaryUVAreaDistortion: 15.000001
-    secondaryUVHardAngle: 88
-    secondaryUVPackMargin: 4
+    weldVertices: 0
+    secondaryUVAngleDistortion: 7
+    secondaryUVAreaDistortion: 4
+    secondaryUVHardAngle: 15
+    secondaryUVPackMargin: 8
     useFileScale: 1
   tangentSpace:
     normalSmoothAngle: 60
-    normalImportMode: 0
+    normalImportMode: 1
     tangentImportMode: 3
   importAnimation: 1
   copyAvatar: 0

@@ -40,6 +40,7 @@ public class gameStarter : MonoBehaviour {
 			   if (systemValues.thePlayer == null)
 			   {
 				systemValues.thePlayer = thePlayerPrivate;
+				systemValues.thePlayerAnimator = thePlayerPrivate.GetComponentInChildren<Animator> ();
 				thePlayerPrivate.isMainfighter = true;
 				thePlayerPrivate.gameObject.AddComponent<BloodScaner> ();//这个游戏对象拥有观察血量的权利
 			  }

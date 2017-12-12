@@ -201,7 +201,7 @@ public class attackLinkController :MonoBehaviour {
 				//例如QWE等等，但是对于ctrl等等貌似无效果（作为一种替换的键位监测方案放在这里）
 				//此外值得注意的就是InputString检测到的键位输出是小写的
 				//print (Input.inputString+" isUsed");
-			if (Input.anyKeyDown ) 
+			if (Input.anyKeyDown && systemValues.checkCanAttackAct() ) 
 			{
 				events = Event.current;
 				if (events != null) 
@@ -221,6 +221,7 @@ public class attackLinkController :MonoBehaviour {
 			}
 		}
 	}
+		
 	//这里只对计时器有更新
 	void Update () 
 	{
