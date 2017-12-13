@@ -10,24 +10,33 @@ public class GameStartButton : MonoBehaviour {
 	public GameObject forwardImage;//黑屏需要的图片
 	Button theButtonOfthis;//最开始的时候是不可以直接按下的
 	public selectHeaderMaker theSelectMaker;//选人控制
+	Text showLabel ;//显示网络连接模式的信息
+	private bool isPrepareOver = false;//准备完成才能按按钮
 
 	public void makeStart()
 	{
 		if (systemValues.modeIndex == 0) 
 		{
 			Destroy (TextIn.gameObject);
+			showLabel = this.GetComponentInChildren<Text> ();
+			showLabel.text = "开始游戏";
+			isPrepareOver = true;
 		}
 		if (systemValues.modeIndex == 1) 
 		{
 			PhotonNetwork.ConnectUsingSettings ("1.0");
-			theButtonOfthis = this.GetComponent <Button> ();
-			theButtonOfthis.enabled = false;
+			showLabel = this.GetComponentInChildren<Text> ();
+			showLabel.text = "正在连接";
 		}
+
 		theSelectMaker.makeFirstFighter ();
 	}
 
 	public void gotoPlay()
 	{
+		if (!isPrepareOver)
+			return;
+		
 		if (systemValues.modeIndex == 0) 
 		{
 			Destroy (selectHead.therPlayer.gameObject);
@@ -40,6 +49,7 @@ public class GameStartButton : MonoBehaviour {
 			PhotonNetwork.JoinOrCreateRoom (TextIn.text, new RoomOptions { MaxPlayers = 16 }, null);
 			forwardImage.SetActive (true);
 			UnityEngine.SceneManagement.SceneManager.LoadScene ("theFight2");
+
 		}
 
 
@@ -58,11 +68,24 @@ public class GameStartButton : MonoBehaviour {
 		makeStart ();
 	}
 
+	//连接上之后立即链接还是会出错
+	int countWait = 0;
+	int counTWaitMax =8;
+	//所以间隔几帧作为保险
+
 	void Update ()
 	{
-		if (systemValues.modeIndex == 1 && PhotonNetwork.connected && theButtonOfthis.enabled== false )
+		if (systemValues.modeIndex == 1 && PhotonNetwork.connected )
 		{
-			theButtonOfthis.enabled = true;
+			if (!isPrepareOver) 
+			{
+				countWait++;
+				if (countWait > counTWaitMax) 
+				{
+					isPrepareOver = true;
+					showLabel.text = "开始游戏";
+				}
+			}
 		}
 	}
 

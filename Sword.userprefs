@@ -1,24 +1,24 @@
 ﻿<Properties StartupItem="Assembly-CSharp.csproj">
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Unity.Instance.Unity Editor" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Code\Player\attackLinkController.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Code\UI\GameStartButton.cs">
     <Files>
       <File FileName="Assets\Code\Player\PlayerBasic.cs" Line="1" Column="1" />
-      <File FileName="Assets\Code\controllers\gameStarter.cs" Line="43" Column="91" />
+      <File FileName="Assets\Code\controllers\gameStarter.cs" Line="1" Column="1" />
       <File FileName="Assets\Code\Player\newMethodAttack.cs" Line="1" Column="1" />
       <File FileName="Assets\Code\bloodSlider\BasicMethod\BloodBasic.cs" Line="1" Column="1" />
       <File FileName="Assets\Code\bloodSlider\BasicMethod\BloodScaner.cs" Line="1" Column="1" />
-      <File FileName="Assets\Code\netWork\PUNConnect.cs" Line="1" Column="1" />
       <File FileName="Assets\Code\UI\sceneSkipButton.cs" Line="1" Column="1" />
       <File FileName="Assets\Code\Player\move.cs" Line="1" Column="1" />
       <File FileName="Assets\Code\Effects\effectHpUp.cs" Line="1" Column="1" />
       <File FileName="Assets\Code\Effects\monsterBeAttack.cs" Line="1" Column="1" />
       <File FileName="Assets\Code\Effects\effectBasic.cs" Line="1" Column="1" />
-      <File FileName="Assets\Code\Player\attackLinkController.cs" Line="84" Column="30" />
-      <File FileName="Assets\Code\Player\attackLink.cs" Line="155" Column="51" />
+      <File FileName="Assets\Code\Player\attackLinkController.cs" Line="1" Column="1" />
+      <File FileName="Assets\Code\Player\attackLink.cs" Line="1" Column="1" />
       <File FileName="Assets\Photon Unity Networking\Plugins\PhotonNetwork\NetworkingPeer.cs" Line="1" Column="1" />
       <File FileName="Assets\Code\Extra\REController.cs" Line="1" Column="1" />
       <File FileName="Assets\Code\Camera\cameraUse.cs" Line="1" Column="1" />
-      <File FileName="Assets\Code\systemValues.cs" Line="78" Column="22" />
+      <File FileName="Assets\Code\systemValues.cs" Line="1" Column="1" />
+      <File FileName="Assets\Code\UI\GameStartButton.cs" Line="84" Column="5" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
