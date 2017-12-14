@@ -302,12 +302,14 @@ public class move : MonoBehaviour {
 	[PunRPC]
 	void playModeAnimations(string nameIn)
 	{
-		this.theAnimatorOfPlayer.Play(nameIn);
+		if(this.theAnimatorOfPlayer)
+		 this.theAnimatorOfPlayer.Play(nameIn);
 	}
 	[PunRPC]
 	void playModeAnimationsAxis( string AxisName, float value)
 	{
-		this.theAnimatorOfPlayer.SetFloat (AxisName, value);
+		if(this.theAnimatorOfPlayer)
+		 this.theAnimatorOfPlayer.SetFloat (AxisName, value);
 	}
 
 

@@ -21,12 +21,17 @@ public class gameStarter : MonoBehaviour {
 	{
 		theFighterName = systemValues.getNowPlayer ();
 
-		if (systemValues.modeIndex == 1)//有些功能只在网络对战模式之下用就行
-			theFighter = PhotonNetwork.Instantiate ("fighters/" + theFighterName, startPoint[0].transform.position, Quaternion.identity, 0);
+		if (systemValues.modeIndex == 1) //有些功能只在网络对战模式之下用就行
+		{
+			int indexUse = (PhotonNetwork.room.PlayerCount+1) % (startPoint.Length);
+			theFighter = PhotonNetwork.Instantiate ("fighters/" + theFighterName, startPoint [0].transform.position, Quaternion.identity, 0);
+			theFighter.transform.position = startPoint[indexUse].transform.position;
+		}
+		
 		else if (systemValues.modeIndex == 0) 
 		{
 			//注意目前开始点不多，最多到6，否则会有重复
-			int indexUse = (PhotonNetwork.room.PlayerCount+1) % (startPoint.Length);
+			int indexUse = 0;
 			theFighter = GameObject.Instantiate<GameObject> (Resources.Load<GameObject> ("fighters/" + theFighterName));
 			theFighter.transform.position = startPoint[indexUse].transform.position;
 		}
@@ -50,6 +55,7 @@ public class gameStarter : MonoBehaviour {
 			  }
 		    }
 		    //thePlayerPrivate.makeStart ();
+		    thePlayerPrivate.makeStartForPrivate();
 		    thePlayerPrivate.GetComponent<attackLinkController> ().makeStart ();
 		    theCamera.target = thePlayerPrivate.transform;
 		    theCamera.thePlayer = thePlayerPrivate;

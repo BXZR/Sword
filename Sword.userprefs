@@ -1,9 +1,9 @@
 ﻿<Properties StartupItem="Assembly-CSharp.csproj">
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Unity.Instance.Unity Editor" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Code\controllers\gameStarter.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Code\UI\sceneSkipButton.cs">
     <Files>
-      <File FileName="Assets\Code\Player\PlayerBasic.cs" Line="457" Column="6" />
-      <File FileName="Assets\Code\controllers\gameStarter.cs" Line="28" Column="27" />
+      <File FileName="Assets\Code\Player\PlayerBasic.cs" Line="1" Column="1" />
+      <File FileName="Assets\Code\controllers\gameStarter.cs" Line="1" Column="1" />
       <File FileName="Assets\Code\Player\newMethodAttack.cs" Line="1" Column="1" />
       <File FileName="Assets\Code\bloodSlider\BasicMethod\BloodBasic.cs" Line="1" Column="1" />
       <File FileName="Assets\Code\bloodSlider\BasicMethod\BloodScaner.cs" Line="1" Column="1" />
@@ -16,14 +16,16 @@
       <File FileName="Assets\Code\Player\attackLink.cs" Line="1" Column="1" />
       <File FileName="Assets\Photon Unity Networking\Plugins\PhotonNetwork\NetworkingPeer.cs" Line="1" Column="1" />
       <File FileName="Assets\Code\Extra\REController.cs" Line="1" Column="1" />
-      <File FileName="Assets\Code\Camera\cameraUse.cs" Line="49" Column="20" />
+      <File FileName="Assets\Code\Camera\cameraUse.cs" Line="1" Column="1" />
       <File FileName="Assets\Code\systemValues.cs" Line="1" Column="1" />
       <File FileName="Assets\Code\UI\GameStartButton.cs" Line="1" Column="1" />
       <File FileName="Assets\Code\Effects\effectSpup.cs" Line="1" Column="1" />
       <File FileName="Assets\Code\Effects\effectLastingDamage.cs" Line="1" Column="1" />
       <File FileName="Assets\Code\props\props.cs" Line="1" Column="1" />
-      <File FileName="Assets\Code\props\popMaker.cs" Line="36" Column="38" />
-      <File FileName="Assets\Photon Unity Networking\Plugins\PhotonNetwork\PhotonView.cs" Line="544" Column="1" />
+      <File FileName="Assets\Code\props\popMaker.cs" Line="1" Column="1" />
+      <File FileName="Assets\Photon Unity Networking\Plugins\PhotonNetwork\PhotonView.cs" Line="1" Column="1" />
+      <File FileName="Assets\Code\netWork\PUNConnect.cs" Line="1" Column="1" />
+      <File FileName="Assets\Code\netWork\onConnectFlash.cs" Line="1" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

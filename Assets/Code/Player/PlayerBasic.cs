@@ -316,8 +316,8 @@ public class PlayerBasic : MonoBehaviour {
 		//this.gameObject .tag != "AI"说明是小兵
 		//只有英雄才需要被start
 
-		//if ( !isStarted )
-		//	return;
+		if ( !isStarted )
+			return;
 		
 		if (this.isAlive )//只有在活着的时候才可以被攻击
 		{
@@ -440,7 +440,8 @@ public class PlayerBasic : MonoBehaviour {
 					ActerHp = ActerHpMax;	
 				}
 			}
-			if (ActerHp < 0) {
+			if (ActerHp < 0)
+			{
 				ActerHp = 0;	
 				isAlive = false;
 				//this.gameObject.tag = "dead";
@@ -507,9 +508,9 @@ public class PlayerBasic : MonoBehaviour {
 			{
 				Effects [i].effectOnUpdate ();
 			}
-		
 		}
 	}
+
 
 	//自添加脚本
 	//这是对外方法，需要在这里分为两种
@@ -526,22 +527,6 @@ public class PlayerBasic : MonoBehaviour {
 		}
 	}
 
-	//真正添加脚本的能力
-	[PunRPC]
-	public void  addEffectsForSelf(string nameForEffect)
-	{
-		this.gameObject.AddComponent (System.Type.GetType (nameForEffect));
-	}
-
-	//网络播放动画
-	//实际上目前只播放死亡动画
-	[PunRPC]
-	public void plaDeadAnimations(string nameIn)
-	{
-		Animator theAnimator = this.GetComponentInChildren <Animator>();
-		if(theAnimator)
-		    theAnimator.Play(nameIn);
-	}
 
 
 	private void OnUpdateExtra()
@@ -550,6 +535,8 @@ public class PlayerBasic : MonoBehaviour {
 		for (int i = 0; i < theEffect.Length; i++)
 			theEffect [i].effectOnUpdate ();
 	}
+
+
 	public void makeStart()//初始化方法，由总控单元统一进行初始化
 	{
 		//这个应该是最先初始化的，因为有一些声音可能需要提前使用
@@ -568,6 +555,12 @@ public class PlayerBasic : MonoBehaviour {
 		isStarted = true;
 	}
 
+	//网络主控人物才会有的方法
+	public void makeStartForPrivate()
+	{
+		InvokeRepeating("makeValueUpdate" , 0 , 5f);
+	}
+
 	private void makeGUIStart()
 	{
 		GUIShowStyleHP=new GUIStyle();
@@ -575,11 +568,29 @@ public class PlayerBasic : MonoBehaviour {
 		GUIShowStyleSP=new GUIStyle();
 		GUIShowStyleSP.normal.background = (Texture2D)Resources.Load ("UI/spGUI");
 	}
+
+	//随时都进行网络更新太费事而且还有网络延迟的问题所以这是一个很低频率的更新
+	private void makeValueUpdate()
+	{
+		//更新网络上其他客户端这个人物的属性
+		if (systemValues.modeIndex == 1 && photonView != null) 
+		{
+			photonView.RPC ("updateOthersValue", PhotonTargets.All, 
+				ActerHpMax, ActerHp, ActerSpMax, ActerSp , ActerHpUp, ActerSpUp,
+				ActerSuperBaldePercent, ActerSuperBaldeAdder, ActerMissPercent ,ActerShielderPercent,
+				ActerShielderDamageMiuns, ActerShielderDamageMiunsPercent,
+				ActerWuliDamage, ActerWuliReDamage, ActerWuliIner, ActerWuliInerPercent,
+				ActerWuliShield,  ActerHpSuck, ActerHpSuckPercent, ActerSpSuck , ActerSpSuckPercent,
+				ActerDamageAdderPercent , ActerDamageAdder , ActerMoveSpeedPercent, ActerShieldHp
+			);
+		}
+	}
+
+	//--------------------------回调方法---------------------------------------------------//
 	//由于这个类是一个究极的父类，因此具体的工作是不做的，但是留下了调用各种方法的方式木板
 	void Start () 
 	{
-		//if (this.gameObject.tag == "AI")
-			makeStart ();
+		makeStart ();
 		makeGUIStart ();
 	}
 
@@ -604,6 +615,91 @@ public class PlayerBasic : MonoBehaviour {
 			GUI.Box (new Rect (12, 40, 120 * rotoForSp, 13), "", GUIShowStyleSP);
 			GUI.EndGroup ();
 		}
+	}
+
+
+	//--------------------------网络调用方法---------------------------------------------------//
+	//真正添加脚本的能力
+	[PunRPC]
+	public void  addEffectsForSelf(string nameForEffect)
+	{
+		this.gameObject.AddComponent (System.Type.GetType (nameForEffect));
+	}
+
+	//网络播放动画
+	//实际上目前只播放死亡动画
+	[PunRPC]
+	public void plaDeadAnimations(string nameIn)
+	{
+		Animator theAnimator = this.GetComponentInChildren <Animator>();
+		if(theAnimator)
+			theAnimator.Play(nameIn);
+	}
+
+	//网络更新基础数值
+	//因为网络上出了自己客户端控制的privateFighter之外，支部会start的，也不应该这样
+	//因此需要一种技术数据保持同步的方法
+	//因为本游戏的攻击方式使用动画和坐标进行触发，而坐标已经被封装好
+	//所以只需要更新当前数值就好
+	//之所以将更多的数据传过去是想保证在各个机器上的额外效果保持一致
+	//例如一个附加当前护甲值10%伤害的效果，如果不保持同步就会出错
+	[PunRPC]
+	public void updateOthersValue
+	(
+		float ActerHpMaxIn, float ActerHpIn, float ActerSpMaxIn, float ActerSpIn , float ActerHpUpIn, float ActerSpUpIn,
+		float ActerSuperBaldePercentIn, float ActerSuperBaldeAdderIn, float ActerMissPercentIn ,float ActerShielderPercentIn,
+		float ActerShielderDamageMiunsIn ,float  ActerShielderDamageMiunsPercentIn,
+		float ActerWuliDamageIn, float ActerWuliReDamageIn, float ActerWuliInerIn, float ActerWuliInerPercentIn,
+		float ActerWuliShieldIn,  float ActerHpSuckIn, float  ActerHpSuckPercentIn, float ActerSpSuckIn , float ActerSpSuckPercentIn,
+		float ActerDamageAdderPercentIn , float ActerDamageAdderIn , float ActerMoveSpeedPercentIn , float ActerShieldHpIn
+	)
+	{
+		//最基本的属性生命法力和名字
+		ActerHpMax = ActerHpMaxIn;//这个人物的生命上限
+		ActerHp = ActerHpIn;//这个人物当前的生命值
+		ActerSpMax = ActerSpMaxIn;//这个人物的法力上限
+		ActerSp =  ActerSpIn ;//这个人物当前的法力值
+		ActerHpUp = ActerHpUpIn;//人物生命恢复
+		ActerSpUp = ActerSpUpIn ;//人物法力回复
+
+		//特殊战斗属性
+		ActerSuperBaldePercent = ActerSuperBaldePercentIn;//这个人物的暴击率
+		ActerSuperBaldeAdder = ActerSuperBaldeAdderIn;//暴击时伤害的倍数
+
+		ActerMissPercent = ActerMissPercentIn;//这个人物的闪避率
+
+		ActerShielderPercent = ActerShielderPercentIn;//这个人物的格挡率
+		ActerShielderDamageMiuns =  ActerShielderDamageMiunsIn;//格挡住的伤害值
+		ActerShielderDamageMiunsPercent = ActerShielderDamageMiunsPercentIn;//格挡住的伤害百分比 (先计算固定格挡，然后计算百分比格挡)
+
+		//物理战斗属性
+		ActerWuliDamage = ActerWuliDamageIn;//这个人物的物理攻击力
+		ActerWuliReDamage = ActerWuliReDamageIn;//这个人物的物理反伤
+		ActerWuliIner = ActerWuliInerIn;//这个人物的固定物理穿透
+		ActerWuliInerPercent = ActerWuliInerPercentIn;//这个人物百分比穿透  （先计算固定穿透，然后计算百分比穿透）
+
+		//物理防御属性
+		ActerWuliShield = ActerWuliShieldIn;//这个人物的物理护甲
+
+		//生命吸取属性
+		ActerHpSuck =  ActerHpSuckIn;//人物的固定生命偷取值
+		ActerHpSuckPercent = ActerHpSuckPercentIn;//根据所造成伤害的百分比生命吸取
+
+		//法力吸取属性
+		ActerSpSuck = ActerSpSuckIn;//人物的固定的法力偷取
+		ActerSpSuckPercent = ActerSpSuckPercentIn;//根据所造成伤害的百分比法力偷取
+
+
+		//额外战斗属性
+		ActerDamageAdderPercent = ActerDamageAdderPercentIn;//额外百分比伤害
+		ActerDamageAdder = ActerDamageAdderIn;//额外真实加成
+		//上面这些全都要放在RPC方法里面各种更新
+		//人物等级提升后加成
+
+		ActerMoveSpeedPercent  = ActerMoveSpeedPercentIn;//移动速度百分比，在移动的时候会有这个速度百分比加成
+
+		ActerShieldHp = ActerShieldHpIn;//护盾的生命值
+
 	}
  
 }

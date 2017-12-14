@@ -1,8 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Photon;
 
-public class popMaker : MonoBehaviour {
+public class popMaker : PunBehaviour  {
 
 	//生成道济的控制单元
 	//这个可以有很多，分散在地图各地
@@ -12,11 +13,24 @@ public class popMaker : MonoBehaviour {
 	//当前产生的道具
 	private GameObject thePropNow = null ;
 	//当前生产的道具为空，冷进入冷却，这个事件表示冷却时间
-	public float coolingTimer = 30f;
+	public float coolingTimer = 1000f;//最开始的时间会比较长，作为等待时间
 	//时间备份
 	public float coolingTimerMax = 30f;
 	//多客户端随机控制，现在还没有做好，因此这只是index方法
 	int indexNow = 0;
+	//网络控制节点这些是需要同步的
+    //一个简单的策略就是直接刷新时间
+	public override void OnPhotonPlayerConnected (PhotonPlayer newPlayer) 
+	{
+		makeFlash ();
+	}
+
+	void makeFlash()
+	{
+		if(thePropNow)
+		Destroy (thePropNow.gameObject);
+		coolingTimer = coolingTimerMax;
+	}
 
 	//当前道具为空，就进入冷却
 	//这个方法也是用InvokeRepeat来做
