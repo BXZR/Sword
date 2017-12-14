@@ -11,18 +11,25 @@ public class selectHead : MonoBehaviour {
 	private Text playerInformationText;
 	//显示游戏人物信息的文本
 	private Text playerTitleText;
+	//显示人物技能的信息文本
+	private Text playerSkillText;
 	//目标位置
 	private Transform thetransForShow;
 	//引用
 	public   static GameObject therPlayer;
 	//系统配置文件类的标记
 	private int  indexForSystemValues;
-	public void makeStart(string playerName , Text theTitleText , Text theDetailText , Transform thetransForShowIn , int indexForSystemValuesIn)
-	{
+	public GameObject theSelectedImage;
+
+	public static   GameObject   theStaticSelectedImage = null;
+
+	public void makeStart(string playerName , Text theTitleText , Text theDetailText , Text playerSkillTextIn,Transform thetransForShowIn , int indexForSystemValuesIn)
+	{ 
 		theFightName = playerName;
 		playerInformationText = theDetailText;
 		playerTitleText = theTitleText;
 		thetransForShow = thetransForShowIn;
+		playerSkillText = playerSkillTextIn;
 		indexForSystemValues = indexForSystemValuesIn;
 	}
 
@@ -40,10 +47,26 @@ public class selectHead : MonoBehaviour {
 		PlayerBasic thePlayerB = therPlayer.GetComponent<PlayerBasic> ();
 		playerInformationText.text = thePlayerB.getPlayerInformation () + thePlayerB.getPlayerInformationExtra ();
 		playerTitleText.text = "<color=#00FF00>"  + thePlayerB.ActerName + "</color>\n<color=#FF2400>" + systemValues.getTitleForPlayer (indexForSystemValues)+"</color>";
+		playerSkillText.text = getSkillInformation (therPlayer);
 		systemValues.setIndexForPlayer (indexForSystemValues);
+
+		if (theStaticSelectedImage!= null)
+			theStaticSelectedImage.gameObject.SetActive (false);
+		theSelectedImage.SetActive (true);
+		theStaticSelectedImage = theSelectedImage;
 	}
 
-
+	public string getSkillInformation(GameObject thePlayer)
+	{
+		string informationS = "";
+		effectBasic[] effects = thePlayer.GetComponents<effectBasic> ();
+		for (int i = 0; i < effects.Length; i++) 
+		{
+			effects [i].Init ();
+			informationS += effects [i].getInformation ()+"\n";
+		}
+		return informationS;
+	}
 
 
 }

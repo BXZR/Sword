@@ -1,0 +1,35 @@
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class effectSlash :effectBasic{
+
+	int ranNumber = 4; 
+	float addPercent = 0.08f;
+
+	void Start ()
+	{
+		Init ();
+	}
+
+
+	public override bool isBE ()
+	{
+		return true;
+	}
+
+	public override void Init ()
+	{
+		theEffectName = "迅捷一闪";
+		//注意的是，最大生命值每回合都会更新的，这个最大生命值的削弱仅仅限制于本回合(如果削减最大斗气值就太变态了)
+		theEffectInformation ="攻击时拥有"+ranNumber*10 +"%机会使最终伤害提升"+addPercent *100+"%";
+		makeStart ();
+	}
+
+	public override void OnAttack (PlayerBasic aim, float TrueDamage)
+	{
+		int RN = Random.Range (0, 10);
+		if(RN < ranNumber)
+			aim.ActerHp -= TrueDamage * addPercent;
+	}
+}

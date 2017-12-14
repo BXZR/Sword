@@ -32,9 +32,14 @@ public class effectBasic : MonoBehaviour {
 	public virtual void makeInformation(){}
 	//返回这个效果的信息
 
+	public bool isShowing = true;//有些技能并不需要查询到信息
+
 	public float extraTimer = 0;//这个是给extraEffectMaker提供的时间
 	public  virtual  string getInformation ()
 	{
+		if (!isShowing)
+			return "";
+		
 		string theInformation = "（" + this.theEffectName + "）";
 		if(isBE())
 			theInformation +="[被动]";
@@ -48,6 +53,7 @@ public class effectBasic : MonoBehaviour {
 
 	public string getEffectName()
 	{
+
 		string theInformation =  this.theEffectName ;
 		if(isBE())
 			theInformation +="\n[被动]";

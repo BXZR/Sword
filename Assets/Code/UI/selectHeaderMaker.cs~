@@ -16,6 +16,9 @@ public class selectHeaderMaker : MonoBehaviour {
 	public Text playerInformationText;
 	//显示游戏人物信息的文本
 	public Text playerTitleText;
+	//显示游戏人物技能的文本
+	public Text playerSkillText;
+
 	//按钮的预设物的父物体
 	public Transform modePosition;
 
@@ -36,7 +39,7 @@ public class selectHeaderMaker : MonoBehaviour {
 			theButton.transform.localPosition = new Vector3 (0,0,0);
 			theButton.transform.localScale = new Vector3 (1,1,1);
 			selectHead theHead = theButton.GetComponent <selectHead> ();
-			theHead.makeStart ( systemValues.playerNamesInGame[i] , playerTitleText , playerInformationText ,modePosition , i);
+			theHead.makeStart ( systemValues.playerNamesInGame[i] , playerTitleText , playerInformationText ,playerSkillText ,modePosition , i);
 			theButton.GetComponent <Image> ().sprite = makeLoadSprite ("playerHeadPicture/"+ systemValues.playerHeadNames[i]);
 			if (theFirstHead == null)
 				theFirstHead = theHead;

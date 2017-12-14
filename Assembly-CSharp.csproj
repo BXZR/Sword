@@ -48,8 +48,11 @@
   <ItemGroup>
      <Compile Include="Assets\Code\Camera\cameraUse.cs" />
      <Compile Include="Assets\Code\Effects\effectBasic.cs" />
+     <Compile Include="Assets\Code\Effects\effectDragonAttack.cs" />
      <Compile Include="Assets\Code\Effects\effectHpUp.cs" />
+     <Compile Include="Assets\Code\Effects\effectKOKnife.cs" />
      <Compile Include="Assets\Code\Effects\effectLastingDamage.cs" />
+     <Compile Include="Assets\Code\Effects\effectSlash.cs" />
      <Compile Include="Assets\Code\Effects\effectSpup.cs" />
      <Compile Include="Assets\Code\Effects\knifeSlash\Interpolate.cs" />
      <Compile Include="Assets\Code\Effects\knifeSlash\MeleeWeaponTrail.cs" />

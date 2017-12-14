@@ -103,13 +103,6 @@ public class attackLinkController :MonoBehaviour {
 	}
 
 
-	//攻击起手阶段的效果
-	private void  playStarEffect()
-	{
-		effectBasic[] Effects = this.GetComponentsInChildren<effectBasic> ();
-		for (int i = 0; i < Effects.Length; i++)
-			Effects [i].onAttackAction ();
-	}
 
 	void check()//真正进行检测的方法
 	{
@@ -121,7 +114,6 @@ public class attackLinkController :MonoBehaviour {
 			{
 				//这个判断非常的重要，如果取消，任何攻击动作都有可能中间取消，这当然不符合我们的需求
 				AL.attackLinkMain();//发生效果
-				playStarEffect();//额外统一攻击效果
 
 				flashLink ();//更新列表
 				reMake();//完全重头开始

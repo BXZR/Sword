@@ -144,6 +144,15 @@ public class attackLink : MonoBehaviour {
 		}
 	}
 
+	//攻击起手阶段的效果
+	private void  playStarEffect()
+	{
+		effectBasic[] Effects = this.transform .root.GetComponentsInChildren<effectBasic> ();
+		for (int i = 0; i < Effects.Length; i++)
+			Effects [i].onAttackAction ();
+	}
+
+
 	[PunRPC]
 	public  virtual void attackLinkEffect()//连招的效果在这里写
 	{
@@ -165,6 +174,7 @@ public class attackLink : MonoBehaviour {
 			//print ("play action");
 			if (thePlayer) 
 			{
+				playStarEffect ();
 				if (thePlayer.theAudioPlayer != null)
 					thePlayer.theAudioPlayer.playAttackActSound (this.audioWhenAct);//播放攻击动作音效
 				if (thePlayer.ActerSp >= this.spUse) 

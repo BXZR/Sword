@@ -41,13 +41,16 @@ public class GameStartButton : MonoBehaviour {
 		{
 			Destroy (selectHead.therPlayer.gameObject);
 			forwardImage.SetActive (true);
+			selectHead.theStaticSelectedImage.SetActive (false);
 			UnityEngine.SceneManagement.SceneManager.LoadScene ("theFight2");
+
 		}
 		if (systemValues.modeIndex == 1)
 		{
 			Destroy (selectHead.therPlayer.gameObject);
 			PhotonNetwork.JoinOrCreateRoom (TextIn.text, new RoomOptions { MaxPlayers = 16 }, null);
 			forwardImage.SetActive (true);
+			selectHead.theStaticSelectedImage.SetActive (false);
 			UnityEngine.SceneManagement.SceneManager.LoadScene ("theFight2");
 
 		}

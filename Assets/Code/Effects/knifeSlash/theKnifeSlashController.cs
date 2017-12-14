@@ -8,6 +8,11 @@ public class theKnifeSlashController : effectBasic {
 	public float keepTimer =0.3f;//持续时间
 	private float keepTimerMax = 0.3f;//刷新用的时间备份
 	private Animator theAnimator = null;
+
+	void Start ()
+	{
+		isShowing = false;
+	}
 	public override void onAttackAction ()//timeLength是持续时间
 	{
 		if (theEffectForKnife == null)

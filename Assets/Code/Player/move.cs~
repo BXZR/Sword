@@ -175,7 +175,7 @@ public class move : MonoBehaviour {
 					playModeAnimations ("jump");
 				
 				jumpTimer = jumpTimerMax;
-				thePlayer.ActerSp *= 0.8f;//施展轻功是需要消耗真气的
+				thePlayer.ActerSp *= 0.85f;//施展轻功是需要消耗真气的
 				isJumping = true;
 			}
 			else if(isJumping)
@@ -282,7 +282,7 @@ public class move : MonoBehaviour {
 		if (!thePlayer)
 			thePlayer = this.GetComponent <PlayerBasic> ();//不仅仅是保险措施，也是网络实现的一个关键
 		if (thePlayer.ActerSp > 0)
-			thePlayer.ActerSp -=  thePlayer.ActerSpUp* Time.deltaTime * 1.15f;
+			thePlayer.ActerSp -=  thePlayer.ActerSpUp* Time.deltaTime * 2f;
 	}
 
 	//移动的究极大方法
