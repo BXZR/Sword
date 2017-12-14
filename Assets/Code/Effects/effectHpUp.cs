@@ -4,12 +4,10 @@ using UnityEngine;
 
 public class effectHpUp : effectBasic{
 
- 
 	void Start ()
 	{
 		makeStart ();
-		this.thePlayer.ActerHp += 20;
-		this.thePlayer.ActerWuliDamage += 900;
+		this.thePlayer.ActerHp += 150;
 		Destroy (this);
 	}
 	 

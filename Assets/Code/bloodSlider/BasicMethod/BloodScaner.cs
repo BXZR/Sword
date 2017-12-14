@@ -66,7 +66,7 @@ public class BloodScaner : MonoBehaviour {
 					if (theEMY .Contains (theAIM) == false) //不重复地放到已找到的列表里面
 					{
 						theEMY.Add (theAIM);
-						print ("SeachFind "+emys [i].GetComponent<Collider> ().gameObject.name);//找到目标
+						//print ("SeachFind "+emys [i].GetComponent<Collider> ().gameObject.name);//找到目标
 					}
 				}
 			}

@@ -49,6 +49,8 @@
      <Compile Include="Assets\Code\Camera\cameraUse.cs" />
      <Compile Include="Assets\Code\Effects\effectBasic.cs" />
      <Compile Include="Assets\Code\Effects\effectHpUp.cs" />
+     <Compile Include="Assets\Code\Effects\effectLastingDamage.cs" />
+     <Compile Include="Assets\Code\Effects\effectSpup.cs" />
      <Compile Include="Assets\Code\Effects\knifeSlash\Interpolate.cs" />
      <Compile Include="Assets\Code\Effects\knifeSlash\MeleeWeaponTrail.cs" />
      <Compile Include="Assets\Code\Effects\knifeSlash\theKnifeSlashController.cs" />
@@ -69,6 +71,8 @@
      <Compile Include="Assets\Code\bloodSlider\BasicMethod\BloodScaner.cs" />
      <Compile Include="Assets\Code\controllers\gameStarter.cs" />
      <Compile Include="Assets\Code\netWork\PUNConnect.cs" />
+     <Compile Include="Assets\Code\props\popMaker.cs" />
+     <Compile Include="Assets\Code\props\props.cs" />
      <Compile Include="Assets\Code\sound\MusicController.cs" />
      <Compile Include="Assets\Code\sound\audioPlayer.cs" />
      <Compile Include="Assets\Code\systemValues.cs" />

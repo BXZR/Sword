@@ -36,6 +36,8 @@ public class cameraUse : MonoBehaviour
 
 	//死了才会用到的模式
 	public  bool DeadMode = false;
+	public  PlayerBasic thePlayer;
+
 
 	void Start ()
 	{
@@ -44,6 +46,7 @@ public class cameraUse : MonoBehaviour
 	}
 	void LateUpdate()
 	{
+		checkDeadMode ();
 		if (!DeadMode) 
 		{
 			makeFov ();
@@ -58,6 +61,13 @@ public class cameraUse : MonoBehaviour
 		}
 
 
+	}
+
+
+	void checkDeadMode()
+	{
+		if(thePlayer)
+		DeadMode = !thePlayer.isAlive;
 	}
 
 	//摄像机模式1，游戏人物跟随摄像机旋转

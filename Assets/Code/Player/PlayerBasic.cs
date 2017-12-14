@@ -458,8 +458,6 @@ public class PlayerBasic : MonoBehaviour {
 					this.GetComponent <attackLinkController> ().enabled = false;
 					this.GetComponent <move> ().enabled = false;
 					this.enabled = false;
-					if(this == systemValues.thePlayer)//自己控制的人物挂了需要调整摄像机
-					    GameObject.Find ("Main Camera").GetComponent<cameraUse>().DeadMode = true;
 					this.GetComponent <BoxCollider> ().enabled = false;
 					this.GetComponent <CharacterController> ().enabled = false;
 					this.transform.position = new Vector3 (this.transform .position .x , -1.8f , this.transform .position .z);

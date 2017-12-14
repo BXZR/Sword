@@ -188,7 +188,7 @@ public class move : MonoBehaviour {
 					if (overGroundTimer < 0)
 						overGroundTimer = 0;
 					jumpTimer += 0.08f ;//如果正在跳跃就增加跳跃持续时间
-					thePlayer.ActerSp -=3;//半空中施展轻功是更加需要消耗真气的
+					thePlayer.ActerSp -= thePlayer.ActerSpUp/2;//半空中施展轻功是更加需要消耗真气的
 				}
 			}
 		}
@@ -282,7 +282,7 @@ public class move : MonoBehaviour {
 		if (!thePlayer)
 			thePlayer = this.GetComponent <PlayerBasic> ();//不仅仅是保险措施，也是网络实现的一个关键
 		if (thePlayer.ActerSp > 0)
-			thePlayer.ActerSp -= 15 * Time.deltaTime;
+			thePlayer.ActerSp -=  thePlayer.ActerSpUp* Time.deltaTime * 1.15f;
 	}
 
 	//移动的究极大方法

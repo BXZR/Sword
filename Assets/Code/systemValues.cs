@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class systemValues : MonoBehaviour {
 	//程序面板单元
+	//统一invokeRepeat的调用时间
 	public static float updateTimeWait = 0.1f;
 	public static bool isAttacking(Animator theAnimator)
 	{
