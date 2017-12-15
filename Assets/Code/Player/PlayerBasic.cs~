@@ -558,7 +558,7 @@ public class PlayerBasic : MonoBehaviour {
 	//网络主控人物才会有的方法
 	public void makeStartForPrivate()
 	{
-		InvokeRepeating("makeValueUpdate" , 0 , 5f);
+		InvokeRepeating("makeValueUpdate" , 0 , 7f);
 	}
 
 	private void makeGUIStart()

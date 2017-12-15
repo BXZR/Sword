@@ -170,12 +170,20 @@ public class move : MonoBehaviour {
 				//单机动作控制
 				//this.theAnimatorOfPlayer.Play ("jump");//////////////////////////////////
 				if (systemValues.modeIndex == 1)//有些功能只在网络对战模式之下用就行
-				   this.photonView.RPC ("playModeAnimations", PhotonTargets.All, "jump");
+				     this.photonView.RPC ("playModeAnimations", PhotonTargets.All, "jump");
 				else if (systemValues.modeIndex == 0)
 					playModeAnimations ("jump");
 				
 				jumpTimer = jumpTimerMax;
-				thePlayer.ActerSp *= 0.85f;//施展轻功是需要消耗真气的
+
+				//耗蓝控制--------------------------------------------------
+				float spUse = thePlayer.ActerSpMax *0.15f;//施展轻功是需要消耗真气的;
+				if(systemValues.modeIndex == 0)
+					UseSP(spUse);
+				if(systemValues.modeIndex == 1)//有些功能只在网络对战模式之下用就行
+					this.photonView.RPC("UseSP",PhotonTargets.All,spUse);
+				//-----------------------------------------------------------
+				
 				isJumping = true;
 			}
 			else if(isJumping)
@@ -188,7 +196,15 @@ public class move : MonoBehaviour {
 					if (overGroundTimer < 0)
 						overGroundTimer = 0;
 					jumpTimer += 0.08f ;//如果正在跳跃就增加跳跃持续时间
-					thePlayer.ActerSp -= thePlayer.ActerSpUp/2;//半空中施展轻功是更加需要消耗真气的
+
+					//耗蓝控制--------------------------------------------------
+					float spUse = 5;//施展轻功是需要消耗真气的;
+					if(systemValues.modeIndex == 0)
+						UseSP(spUse);
+					if(systemValues.modeIndex == 1)//有些功能只在网络对战模式之下用就行
+						this.photonView.RPC("UseSP",PhotonTargets.All,spUse);
+					//-----------------------------------------------------------
+
 				}
 			}
 		}
@@ -235,6 +251,15 @@ public class move : MonoBehaviour {
 	   if (this.transform.position.y >= jumpMaxHeight)//高度达到一定限制之后不再允许继续向上移动
 		this.transform.position = new Vector3 (this.transform.position.x, jumpMaxHeight, this.transform.position.z);
 
+	}
+
+	[PunRPC]
+	private void UseSP(float SPUse)
+	{
+		if (this.thePlayer == null)
+			this.thePlayer = this.GetComponent <PlayerBasic> ();
+		
+		this.thePlayer.ActerSp -= SPUse;
 	}
 
 	//按住左边shift键，移动速度增加
@@ -329,7 +354,12 @@ public class move : MonoBehaviour {
 		timerCheck ();
 
 		if (systemValues.modeIndex == 1 && this.photonView != null)//有些功能只在网络对战模式之下用就行
-		    this.photonView.RPC ("moveForAll", PhotonTargets.All, forwardA, upA);
+			//这是一个更加强制的网络移动的调用，但是实际上没有要这样做
+			//因为transform的观察已经包含了位移
+			//所以只需要在适当的时候作出相应的动画就可以了
+			//但是为了保证更多的属性的控制，应该懂这种方法
+		    //this.photonView.RPC ("moveForAll", PhotonTargets.All, forwardA, upA);
+			moveForAll (forwardA, upA);
 		else if (systemValues.modeIndex == 0)
 			moveForAll (forwardA, upA);
 	}

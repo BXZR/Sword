@@ -1,18 +1,19 @@
 ﻿<Properties StartupItem="Assembly-CSharp.csproj">
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Unity.Instance.Unity Editor" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Code\Player\attackLinkController.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Code\Player\move.cs">
     <Files>
-      <File FileName="Assets\Code\UI\GameStartButton.cs" Line="53" Column="56" />
-      <File FileName="Assets\Code\UI\selectHead.cs" Line="24" Column="54" />
-      <File FileName="Assets\Code\Effects\effectDragonAttack.cs" Line="24" Column="68" />
-      <File FileName="Assets\Code\Effects\effectSpup.cs" Line="7" Column="1" />
+      <File FileName="Assets\Code\UI\GameStartButton.cs" Line="1" Column="1" />
+      <File FileName="Assets\Code\UI\selectHead.cs" Line="1" Column="1" />
+      <File FileName="Assets\Code\Effects\effectDragonAttack.cs" Line="1" Column="1" />
+      <File FileName="Assets\Code\Effects\effectSpup.cs" Line="1" Column="1" />
       <File FileName="Assets\Code\Effects\effectHpUp.cs" Line="1" Column="1" />
-      <File FileName="Assets\Code\Effects\effectKOKnife.cs" Line="16" Column="2" />
+      <File FileName="Assets\Code\Effects\effectKOKnife.cs" Line="1" Column="1" />
       <File FileName="Assets\Code\Effects\effectLastingDamage.cs" Line="1" Column="1" />
-      <File FileName="Assets\Code\Effects\effectSlash.cs" Line="15" Column="2" />
+      <File FileName="Assets\Code\Effects\effectSlash.cs" Line="1" Column="1" />
       <File FileName="Assets\Code\Effects\monsterBeAttack.cs" Line="1" Column="1" />
-      <File FileName="Assets\Code\Player\attackLinkController.cs" Line="114" Column="5" />
-      <File FileName="Assets\Code\Player\attackLink.cs" Line="177" Column="23" />
+      <File FileName="Assets\Code\Player\attackLinkController.cs" Line="1" Column="1" />
+      <File FileName="Assets\Code\Player\attackLink.cs" Line="1" Column="1" />
+      <File FileName="Assets\Code\Player\move.cs" Line="261" Column="3" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
