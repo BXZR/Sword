@@ -58,10 +58,12 @@ public class selectHead : MonoBehaviour {
 
 	public string getSkillInformation(GameObject thePlayer)
 	{
-		string informationS = "";
+		string informationS = "\n";
 		effectBasic[] effects = thePlayer.GetComponents<effectBasic> ();
 		for (int i = 0; i < effects.Length; i++) 
 		{
+			if (effects [i].isShowing == false)
+				continue;
 			effects [i].Init ();
 			informationS += effects [i].getInformation ()+"\n";
 		}

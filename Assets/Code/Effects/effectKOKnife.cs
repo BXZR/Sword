@@ -6,7 +6,7 @@ public class effectKOKnife : effectBasic{
 
 	int attackCount = 0;
 	int attackCountMax = 4;
-	float attackPercent= 0.05f;
+	float attackPercent= 0.02f;
 
 	void Start ()
 	{

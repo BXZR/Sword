@@ -258,8 +258,20 @@ public class move : MonoBehaviour {
 	{
 		if (this.thePlayer == null)
 			this.thePlayer = this.GetComponent <PlayerBasic> ();
-		
-		this.thePlayer.ActerSp -= SPUse;
+
+		if (this.thePlayer.ActerSp > SPUse) 
+		{
+			this.thePlayer.ActerSp -= SPUse;
+		}
+		else
+		{
+			//移动中的透支情况和攻击中的法力并不完全相同
+			float damageUse = SPUse - thePlayer.ActerSp;
+			thePlayer.ActerSp = 0;
+			thePlayer.ActerHp -= damageUse;
+			if (thePlayer.ActerHp < 10)
+				thePlayer.ActerHp = 10f;//保护机制，在格斗游戏中没有透支身亡一说
+		}
 	}
 
 	//按住左边shift键，移动速度增加
@@ -304,10 +316,8 @@ public class move : MonoBehaviour {
 			speedNormal += speedAdderWithShift;
 			speedRun += speedAdderWithShift;
 		}
-		if (!thePlayer)
-			thePlayer = this.GetComponent <PlayerBasic> ();//不仅仅是保险措施，也是网络实现的一个关键
-		if (thePlayer.ActerSp > 0)
-			thePlayer.ActerSp -=  thePlayer.ActerSpUp* Time.deltaTime * 2f;
+
+		UseSP( thePlayer.ActerSpUp* Time.deltaTime * 2f);
 	}
 
 	//移动的究极大方法
