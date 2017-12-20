@@ -186,7 +186,7 @@ public class attackLinkController :MonoBehaviour {
 	//这个方法在Update里面是无法使用的，events会被放空
 	void OnGUI()
 	{ 
-		if (isStarted)
+		if (isStarted && this.gameObject .tag != "AI")
 		{
 				//为了保证更强大的兼容性暂定使用Event的方法，虽然这种方法有额外的开销
 				//InputString是一个非常强势的方法，但是比较有缺陷的就是只是针对有输出的键位有效果
@@ -219,13 +219,13 @@ public class attackLinkController :MonoBehaviour {
 	{
 		if (isStarted&& startTimer && thePlayer.isAlive) 
 		{
-//			//存在一个等待的时间
-//			timerForLinkAtack -= Time.deltaTime;
-//			if (timerForLinkAtack <= 0) 
-//			{
-//				flashLink ();//列表更新
-//				reMake();//参数更新
-//			}
+		//存在一个等待的时间
+			timerForLinkAtack -= Time.deltaTime;
+			if (timerForLinkAtack <= 0) 
+			{
+				flashLink ();//列表更新
+				reMake();//参数更新
+			}
 		}
 
 	}

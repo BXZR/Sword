@@ -351,6 +351,9 @@ public class move : MonoBehaviour {
 
 	void Update ()
 	{
+		if (this.gameObject.tag == "AI")
+			return;
+		
 		forwardA = Input.GetAxis (forwardAxisName);
 		upA = Input.GetAxis (upAxisName);
 
