@@ -446,14 +446,6 @@ public class PlayerBasic : MonoBehaviour {
 				isAlive = false;
 				//this.gameObject.tag = "dead";
                 //Destroy (this.gameObject, 1.5f);
-				if (systemValues.modeIndex == 1 && photonView!= null)
-				{
-					photonView.RPC ("plaDeadAnimations", PhotonTargets.All, "dead");
-				}
-				else if (systemValues.modeIndex == 0)
-				{
-					plaDeadAnimations ("dead");
-				}
 				try
 				{
 					this.GetComponent <attackLinkController> ().enabled = false;
@@ -462,10 +454,20 @@ public class PlayerBasic : MonoBehaviour {
 					this.GetComponent <BoxCollider> ().enabled = false;
 					this.GetComponent <CharacterController> ().enabled = false;
 					this.transform.position = new Vector3 (this.transform .position .x , -1.8f , this.transform .position .z);
+					if(this.GetComponent <FSMStage>())
+						this.GetComponent <FSMStage>().enabled = false;
 				}
 				catch 
 				{
 					print ("组件缺失或者不必存在这个组件");
+				}
+				if (systemValues.modeIndex == 1 && photonView!= null)
+				{
+					photonView.RPC ("plaDeadAnimations", PhotonTargets.All, "dead");
+				}
+				else if (systemValues.modeIndex == 0)
+				{
+					plaDeadAnimations ("dead");
 				}
 			}
 			if (ActerHp > ActerHpMax) {

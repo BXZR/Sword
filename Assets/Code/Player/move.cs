@@ -84,14 +84,15 @@ public class move : MonoBehaviour {
 	}
 	public void MoveForwardBack(float  AxisValue)
 	{
+		//print (this.gameObject .name +" is moving forward");
 		Vector3 moveDirection = Vector3.zero;//刷新值这个值只需要计算位置增量就可以了
 		float ZMove = 0f;
 		//单机动作控制
-		this.theAnimatorOfPlayer.SetFloat ("forward", forwardA);//播放动画,具体内容需要看controller //////////////////////////////////
+		this.theAnimatorOfPlayer.SetFloat ("forward", AxisValue);//播放动画,具体内容需要看controller //////////////////////////////////
 		
 		if (canMove ) 
 		{
-			ZMove = (speedNow ) * forwardA * Time.deltaTime;
+			ZMove = (speedNow ) * AxisValue * Time.deltaTime;
 		    moveDirection.z += ZMove;//向着正方向移动会有来自方向的速度加成同样在后退的时候速度会相对较低
 		}
 
@@ -103,7 +104,12 @@ public class move : MonoBehaviour {
 
 		if (theController && theController.enabled)//有时候需要强制无法移动
 			theController.Move (moveDirectionAction);//真实地进行行动(因为使用的是characterController，因此使用坐标的方式似乎比较稳妥)
-
+		
+//		if (this.gameObject.tag == "AI")
+//		{
+//			if (theController && theController.enabled)//有时候需要强制无法移动
+//				print("AI可以移动" + moveDirectionAction.z );
+//		}
 	}
 
 	void MoveLeftAndRight(float AxisValue , float forwardA)
@@ -136,7 +142,7 @@ public class move : MonoBehaviour {
 		else
 		{
 			//单机动作控制
-			this.theAnimatorOfPlayer.SetFloat ("up", upA);//播放动画,具体内容需要看controller //////////////////////////////////
+			this.theAnimatorOfPlayer.SetFloat ("up", AxisValue);//播放动画,具体内容需要看controller //////////////////////////////////
 
 		}
 		if (canMove)
@@ -216,7 +222,7 @@ public class move : MonoBehaviour {
 
 			if (theController && theController.enabled)//有时候需要强制无法移动
 			{
-				float adder = speedNow == speedNormal ? 8f:10f;
+				float adder = speedNow == speedNormal ? 6f:9f;
 				//jumpTimer越来越小表现为上冲余力越来越不足
 				jumpAction  += new Vector3 (0,jumpTimer,0) * Time .deltaTime * adder;
 			}
@@ -226,16 +232,24 @@ public class move : MonoBehaviour {
 					isJumping = false;
 			}
 		}
+			
+	   theController.Move (jumpAction);//真实地进行行动(因为使用的是characterController，因此使用坐标的方式似乎比较稳妥)
+	   if (this.transform.position.y >= jumpMaxHeight)//高度达到一定限制之后不再允许继续向上移动
+		this.transform.position = new Vector3 (this.transform.position.x, jumpMaxHeight, this.transform.position.z);
 
+	}
 
-		//重力控制
-		//有关重力的计算不论是否可以移动都应该进行
+	//重力控制
+	//有关重力的计算不论是否可以移动都应该进行
+	void gravtyMove()
+	{
 		//重力与是否跳跃也并没有关联
 		if (theController　 && canGravity) 
 		{
+			Vector3 moveAction = Vector3.zero;
 			//自编写的伪重力公式随着在半空中的时间的长短获得一个不断增加的向下移动的趋势
 			//重力会持续存在的
-			jumpAction.y -= ((overGroundTimer * 3) + 3) * Time.deltaTime;
+			moveAction.y -= ((overGroundTimer * 3) + 5) * Time.deltaTime;
 			if (isJumping) 
 			{
 				overGroundTimer += Time.deltaTime;//不在地上就进行计时，获得随着离地时间线性增长的向下移动的趋势
@@ -245,12 +259,8 @@ public class move : MonoBehaviour {
 			{
 				overGroundTimer = 0f;//归零
 			}
+			theController.Move (moveAction);//真实地进行行动(因为使用的是characterController，因此使用坐标的方式似乎比较稳妥)
 		}
-
-	   theController.Move (jumpAction);//真实地进行行动(因为使用的是characterController，因此使用坐标的方式似乎比较稳妥)
-	   if (this.transform.position.y >= jumpMaxHeight)//高度达到一定限制之后不再允许继续向上移动
-		this.transform.position = new Vector3 (this.transform.position.x, jumpMaxHeight, this.transform.position.z);
-
 	}
 
 	[PunRPC]
@@ -351,6 +361,7 @@ public class move : MonoBehaviour {
 
 	void Update ()
 	{
+		gravtyMove ();
 		if (this.gameObject.tag == "AI")
 			return;
 		
@@ -380,5 +391,7 @@ public class move : MonoBehaviour {
 	void Start ()
 	{
 		theAnimatorOfPlayer = this.GetComponentInChildren<Animator> ();
+		if (this.gameObject.tag == "AI")
+			makeStart ();
 	}
 }

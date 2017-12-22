@@ -46,8 +46,11 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-     <Compile Include="Assets\Code\AI\FSMBasic.cs" />
-     <Compile Include="Assets\Code\AI\FSMStage.cs" />
+     <Compile Include="Assets\Code\AI\FSM\FSMBasic.cs" />
+     <Compile Include="Assets\Code\AI\FSM\FSMStage.cs" />
+     <Compile Include="Assets\Code\AI\FSM\FSM_Attack.cs" />
+     <Compile Include="Assets\Code\AI\FSM\FSM_RunAfter.cs" />
+     <Compile Include="Assets\Code\AI\FSM\FSM_Search.cs" />
      <Compile Include="Assets\Code\Camera\cameraUse.cs" />
      <Compile Include="Assets\Code\Effects\effectBasic.cs" />
      <Compile Include="Assets\Code\Effects\effectDragonAttack.cs" />

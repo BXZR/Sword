@@ -152,6 +152,8 @@ public class attackLinkController :MonoBehaviour {
 	{
 	    attackLinkMayUsing = new List<attackLink> (); //重建这个对象
 		attackBeDelete = new List<attackLink> ();//重建对象
+		if (this.gameObject.tag == "AI")
+			makeStart ();
 	}
 
 

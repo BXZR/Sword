@@ -95,6 +95,28 @@ public class systemValues : MonoBehaviour {
 		return  false;
 	}
 
+	public static bool checkCanAttackAct(Animator theAnimator)
+	{
+		//非攻击状态下的才可以转换，否则不行
+		//默认只有在攻击层的状态转换才能判断这个
+		//因为分层，这里有一些内容已经需要有改变了，人物能够进入攻击动作的条件：
+		//层1处于moveMent状态，也就是没有异常状态例如beHit
+		//层2处于moveMent状态，也就是上一个攻击动作已经完成
+		if (theAnimator == null)
+			return false;
+
+		//有一些异常的状态（例如击倒）是没有办法攻击的
+		for (int i = 0; i < canAttackStateInBasicLayer.Length; i++)
+		{
+			if (theAnimator.GetCurrentAnimatorStateInfo (theNotAttackLayerIndex).IsName (canAttackStateInBasicLayer[i]) &&
+				theAnimator.GetCurrentAnimatorStateInfo (theAttackLayerIndex).IsName (canAttackStateInAttackLayer)) //在层1中只有在移动状态下才可以进行着各种战斗动作
+				return  true;
+		}
+
+		return  false;
+	}
+
+
 
 	//当前播放的背景音乐名
 	public static string theBackMusicNameNow = "";
