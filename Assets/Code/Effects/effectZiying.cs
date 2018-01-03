@@ -24,7 +24,7 @@ public class effectZiying :effectBasic{
 	{
 		theEffectName = "五气朝元";
 		theEffectInformation ="剑气围绕周身，获得"+ shieldPercentAdd*100+"%格挡率" +
-			"\n受到攻击时储存"+damageToSavePercent*100+"%伤害\n攻击消耗储存量造成相应真实伤害\n储存量上限为"+damageSaveMax+",且每秒自减10%" ;
+			"\n受到攻击时储存"+damageToSavePercent*100+"%伤害\n攻击消耗储存量造成相应真实伤害\n储存量上限为"+damageSaveMax+",且每秒自减20%" ;
 		makeStart ();
 		this.thePlayer.ActerShielderPercent += shieldPercentAdd;
 		this.thePlayer.CActerShielderPercent += shieldPercentAdd;
@@ -43,6 +43,6 @@ public class effectZiying :effectBasic{
 	}
 	public override void effectOnUpdate ()
 	{
-		damageSave *= 0.9f;
+		damageSave *= 0.8f;
 	}
 }
