@@ -15,11 +15,11 @@ public class systemValues : MonoBehaviour {
 		return  !theAnimator.GetCurrentAnimatorStateInfo (1).IsName ("moveMent");
 	}
 
-	public static string[] playerNames = { "归海一刀", "郭靖" ,"花木兰" };
+	public static string[] playerNames = { "归海一刀", "郭靖" ,"花木兰" , "慕容紫英"};
 	//head picture 被保存在里面与图片是对应的
-	public static string [] playerHeadNames = {"knifeHead"  , "guojingHead", "mulanHead"};
-	public static string [] playerNamesInGame = {"theFightrSword"  , "theFightrguojing", "theFighterMulan"};
-	public static string [] playerTitleInformation = {"重剑无锋，大巧不工"  , "多段攻击，招式连发", "高速攻击，疯狂输出"};
+	public static string [] playerHeadNames = {"knifeHead"  , "guojingHead", "mulanHead", "ziyingHead"};
+	public static string [] playerNamesInGame = {"theFightrSword"  , "theFightrguojing", "theFighterMulan", "theFightrZiying"};
+	public static string [] playerTitleInformation = {"重剑无锋，大巧不工"  , "多段攻击，招式连发", "高速攻击，疯狂输出" , "剑气冲霄，高攻减伤"};
 
 
 	//选人界面的逻辑

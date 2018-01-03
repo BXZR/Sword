@@ -52,6 +52,7 @@
      <Compile Include="Assets\Code\AI\FSM\FSM_RunAfter.cs" />
      <Compile Include="Assets\Code\AI\FSM\FSM_Search.cs" />
      <Compile Include="Assets\Code\Camera\cameraUse.cs" />
+     <Compile Include="Assets\Code\Effects\eeffectZiyingArcher.cs" />
      <Compile Include="Assets\Code\Effects\effectBasic.cs" />
      <Compile Include="Assets\Code\Effects\effectDragonAttack.cs" />
      <Compile Include="Assets\Code\Effects\effectHpUp.cs" />
@@ -59,6 +60,8 @@
      <Compile Include="Assets\Code\Effects\effectLastingDamage.cs" />
      <Compile Include="Assets\Code\Effects\effectSlash.cs" />
      <Compile Include="Assets\Code\Effects\effectSpup.cs" />
+     <Compile Include="Assets\Code\Effects\effectZiying.cs" />
+     <Compile Include="Assets\Code\Effects\extraWeapon.cs" />
      <Compile Include="Assets\Code\Effects\knifeSlash\Interpolate.cs" />
      <Compile Include="Assets\Code\Effects\knifeSlash\MeleeWeaponTrail.cs" />
      <Compile Include="Assets\Code\Effects\knifeSlash\theKnifeSlashController.cs" />
