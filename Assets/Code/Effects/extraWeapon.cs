@@ -50,10 +50,11 @@ public class extraWeapon : MonoBehaviour {
 
 	}
 
+	List<PlayerBasic> attackAims = new List<PlayerBasic> ();
 	void OnTriggerEnter(Collider collisioner)
 	{ 
 
-		if (thePlayer && canMakeDamage == true) 
+		if (thePlayer  ) 
 		{
 
 			PlayerBasic playerAim = collisioner.gameObject.GetComponent <PlayerBasic> ();
@@ -62,9 +63,9 @@ public class extraWeapon : MonoBehaviour {
 			if (playerAim == null)
 				playerAim = collisioner.gameObject.GetComponentInChildren<PlayerBasic> ();
 
-			if (thePlayer && 　playerAim && playerAim != thePlayer)
+			if (thePlayer && 　playerAim && playerAim != thePlayer &&  attackAims .Contains(thePlayer) == false)
 			{
-				canMakeDamage = false;
+				attackAims.Add (playerAim);
 				//print (playerAim.ActerHpSuck );
 				//print (thePlayer .ActerWuliIner);
 

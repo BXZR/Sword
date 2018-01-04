@@ -17,16 +17,24 @@ public class monsterBeAttack : effectBasic{
 	}
 	public override void OnBeAttack (PlayerBasic attacker)
 	{
-		moveTowards = (this.transform.position - attacker.transform.position ).normalized *4 + new Vector3 (0, 2, 1);
-		moveTimer = moveTimerAll;
-		isMoving = true;
-		//if(theMoveController)
-		//	theMoveController.enabled = false;
+		if (attacker.gameObject.tag != "AI")
+		{
+			moveTowards = (this.transform.position - attacker.transform.position).normalized * 4 + new Vector3 (0, 2, 1);
+			moveTimer = moveTimerAll;
+			isMoving = true;
+			//if(theMoveController)
+			//	theMoveController.enabled = false;
+			if (this.GetComponent <FSMStage> ())
+				this.GetComponent <FSMStage> ().enabled = false;
+			if (this.GetComponent <NavMeshAgent> ())
+				this.GetComponent <NavMeshAgent> ().isStopped = true;
+		}
 	}
 	void Update () 
 	{
 		if (isMoving)
 		{
+
 			this.transform.Translate (moveTowards * moveSpeed * Time.deltaTime);
 			moveTimer -= Time.deltaTime;
 			if (moveTimer < 0)
@@ -35,6 +43,11 @@ public class monsterBeAttack : effectBasic{
 				//	theMoveController.enabled = true;
 				moveTimer = moveTimerAll;
 				isMoving = false;
+
+				if (this.GetComponent <FSMStage> ())
+					this.GetComponent <FSMStage> ().enabled = true;
+				if (this.GetComponent <NavMeshAgent> ())
+					this.GetComponent <NavMeshAgent> ().isStopped = false;
 			}
 		}
 	}

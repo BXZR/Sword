@@ -5,7 +5,7 @@ using UnityEngine;
 public class FSM_Search : FSMBasic {
 
 	List<PlayerBasic> theEMYGet   = null;
-	public float angle = 35;//视野角度范围的一半
+	public float angle = 125;//视野角度范围的一半
 	public float distance = 5;//视野长度
 	PlayerBasic theMainEMY = null;
 
@@ -101,7 +101,7 @@ public class FSM_Search : FSMBasic {
 		{
 			Debug.Log ("search to attack");
 			FSM_Attack attack = new FSM_Attack ();
-			attack.makeState (this.theMoveController, this.theAttackLlinkController, this.theThis,this.theMainEMY);
+			attack.makeState (this.theMoveController, this.theAttackLlinkController, this.theAnimator,this.theThis,this.theMainEMY);
 			return attack;
 		}
  

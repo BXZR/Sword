@@ -164,6 +164,33 @@ public class move : MonoBehaviour {
 	private float jumpTimerMax= 1.2f;
 	public bool isJumping = false;
 
+
+	public void makeJump(bool useSP = true)
+	{
+		if (isJumping == false)
+		{
+			//单机动作控制
+			//this.theAnimatorOfPlayer.Play ("jump");//////////////////////////////////
+			if (systemValues.modeIndex == 1)//有些功能只在网络对战模式之下用就行
+			this.photonView.RPC ("playModeAnimations", PhotonTargets.All, "jump");
+			else if (systemValues.modeIndex == 0)
+				playModeAnimations ("jump");
+
+			jumpTimer = jumpTimerMax;
+
+			if(useSP)
+			{
+			//耗蓝控制--------------------------------------------------
+			float spUse = thePlayer.ActerSpMax * 0.15f;//施展轻功是需要消耗真气的;
+			if (systemValues.modeIndex == 0)
+				UseSP (spUse);
+			if (systemValues.modeIndex == 1)//有些功能只在网络对战模式之下用就行
+			this.photonView.RPC ("UseSP", PhotonTargets.All, spUse);
+			//-----------------------------------------------------------
+			}
+			isJumping = true;
+		}
+	}
 	void Jump()
 	{
 		//刷新初始值
@@ -171,28 +198,10 @@ public class move : MonoBehaviour {
 		//按键检测
 		if (Input.GetKeyDown (KeyCode.Space)) 
 		{
-			if (isJumping == false ) 
-			{
-				//单机动作控制
-				//this.theAnimatorOfPlayer.Play ("jump");//////////////////////////////////
-				if (systemValues.modeIndex == 1)//有些功能只在网络对战模式之下用就行
-				     this.photonView.RPC ("playModeAnimations", PhotonTargets.All, "jump");
-				else if (systemValues.modeIndex == 0)
-					playModeAnimations ("jump");
-				
-				jumpTimer = jumpTimerMax;
 
-				//耗蓝控制--------------------------------------------------
-				float spUse = thePlayer.ActerSpMax *0.15f;//施展轻功是需要消耗真气的;
-				if(systemValues.modeIndex == 0)
-					UseSP(spUse);
-				if(systemValues.modeIndex == 1)//有些功能只在网络对战模式之下用就行
-					this.photonView.RPC("UseSP",PhotonTargets.All,spUse);
-				//-----------------------------------------------------------
-				
-				isJumping = true;
-			}
-			else if(isJumping)
+				makeJump ();
+
+			 if(isJumping)
 			{
 				//小于一定的阀值就不可以“凌空提气”
 				//但是说实话“凌空提气的效果并不是非常的好”
