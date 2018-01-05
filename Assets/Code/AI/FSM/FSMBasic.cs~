@@ -14,6 +14,13 @@ public class FSMBasic  {
 	//保留敌我引用
 	public PlayerBasic theEMY ;
 	public PlayerBasic theThis;
+	public int stateID = 0;//每一个状态有一个ID标识
+	//attack 1
+	//jump 2
+	//runafter 3
+	//search 4
+
+
 
 	public void makeState(NavMeshAgent theMoveControllerIn , attackLinkController theAttacklinkControllerIn , Animator theAnimatorIn,PlayerBasic thethisIn,PlayerBasic theEMYIn = null)
 	{
@@ -24,6 +31,21 @@ public class FSMBasic  {
 		theAnimator = theAnimatorIn;
 	}
 
+	public virtual int geID()
+	{
+		return 0;
+	}
+
+	//这个状态的开始阶段应该做什么
+	public virtual void OnFSMStateStart()
+	{
+	}
+
+	//这个状态的结束阶段应该做什么
+	public virtual void OnFSMStateEnd()
+	{
+		
+	}
 
 	//在这个状态下需要做什么
 	public virtual void  actInThisState()

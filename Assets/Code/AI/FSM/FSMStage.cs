@@ -22,6 +22,7 @@ public class FSMStage : MonoBehaviour {
 		theAnimator = this.GetComponentInChildren<Animator> ();
 		//这里需要建立一个初始的状态
 		theStateNow.makeState (theMoveController , theAttackLlinkController , theAnimator ,thethis);
+		theStateNow.OnFSMStateStart ();
 		//print ("AI stage is inited");
 	}
     //很多操作都是连续的，对于AI来说或许用连续的方法计算会比较好
@@ -31,7 +32,14 @@ public class FSMStage : MonoBehaviour {
 		{
 			//print ("AI is acting");
 			theStateNow.actInThisState ();
-			theStateNow = theStateNow.moveToNextState ();//思考进入到下一个状态或许可以慢一点进行
+			//print ("stateNowID = "+ theStateNow.geID());
+			FSMBasic theStateNew = theStateNow.moveToNextState ();//思考进入到下一个状态或许可以慢一点进行
+			if (theStateNew.geID() != theStateNow.geID()) 
+			{
+				theStateNow.OnFSMStateEnd ();//结束效果
+				theStateNow = theStateNew;
+				theStateNew.OnFSMStateStart ();//开始效果
+			}
 		}
 		else if (isDeadMake == false)
 		{

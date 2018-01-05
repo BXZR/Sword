@@ -6,7 +6,7 @@ public class FSM_Search : FSMBasic {
 
 	List<PlayerBasic> theEMYGet   = null;
 	public float angle = 125;//视野角度范围的一半
-	public float distance = 5;//视野长度
+	public float distance = 2;//视野长度
 	PlayerBasic theMainEMY = null;
 
 
@@ -84,6 +84,10 @@ public class FSM_Search : FSMBasic {
 	}
 
 //-------------------------------------------------------------------------//
+	public override int geID ()
+	{
+		return 4;
+	}
 
 	public override void actInThisState ()
 	{
