@@ -38,8 +38,11 @@ public class effectZiying :effectBasic{
 
 	public override void OnAttack (PlayerBasic aim)
 	{
-		aim.ActerHp -= damageSave;
-		damageSave = 0;
+		if (damageSave > 1)
+		{
+			this.thePlayer.OnAttack (aim, damageSave, true);
+			damageSave = 0;
+		}
 	}
 	public override void effectOnUpdate ()
 	{

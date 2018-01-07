@@ -1,0 +1,64 @@
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using System;
+
+public class eeffectZiyingArcher : effectBasic {
+
+	GameObject Arrow;//弹矢引用保存
+	Vector3 forward;
+	float arrowLife = 0.2f;// 弹矢生存时间
+	float lastingTime =0.05f;//根据规则产生的脚本覆盖时间间隔，这个时间越短，但是发射频率越高，也就是攻速越快
+
+	GameObject theArrow ;//真正的弹矢
+
+	void Start () 
+	{
+		Init ();//进行初始化
+	}
+
+	//手动调用的额外销毁方法
+	public override void effectDestoryExtra ()
+	{
+		if (theArrow)
+		{
+			try
+			{
+				Destroy (theArrow );
+			}
+			catch(Exception d)
+			{
+				//print (d.ToString());
+			}
+		}
+	}
+	public override void Init ()
+	{
+		theEffectName = "气剑指";
+		theEffectInformation ="剑气凝聚于手指激射而出\n可对所有剑气命中目标造成伤害\n每一束剑气持续"+arrowLife+"秒";
+		makeStart ();
+		print ("气剑指");
+		forward = this.thePlayer.transform.forward;
+		Arrow = (GameObject)  Resources.Load ("effects/ziyingarrow");
+		/////////
+		theArrow = (GameObject)GameObject .Instantiate( Arrow);
+		theArrow.GetComponentInChildren <extraWeapon> ().setPlayer (this.thePlayer);
+
+		Vector3 positionNew = thePlayer.transform.position + new Vector3 (0,0.8f*thePlayer .transform .localScale .y + 0.2f , forward .normalized.z*0.1f) ;
+		theArrow.transform.localScale *= thePlayer.transform.localScale.y;
+		theArrow.transform.position = positionNew  ;
+
+
+		theArrow.transform .forward   = thePlayer .transform .forward;
+		Destroy (theArrow, arrowLife);
+		Destroy (this.GetComponent (this.GetType ()), lastingTime);
+
+	} 
+
+ 
+	//public override void onAttackAction ()
+	//{
+
+	//}
+
+}

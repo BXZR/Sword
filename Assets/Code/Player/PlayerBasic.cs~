@@ -448,6 +448,9 @@ public class PlayerBasic : MonoBehaviour {
                 //Destroy (this.gameObject, 1.5f);
 				try
 				{
+					effectBasic [] theEffects = this.GetComponentsInChildren<effectBasic>();
+					for(int i = 0 ; i < theEffects.Length; i++)
+						theEffects[i].OnDead();
 					this.GetComponent <attackLinkController> ().enabled = false;
 					this.GetComponent <move> ().enabled = false;
 					this.enabled = false;

@@ -10,7 +10,7 @@ public class extraWeapon : MonoBehaviour {
 
 	void Update()
 	{
-		transform.Translate (new Vector3 (0,0,1) * 25*Time .deltaTime);
+		transform.Translate (new Vector3 (0,0,1) * 35*Time .deltaTime);
 	}
 
 	public void setPlayer(PlayerBasic thePlayerIn)

@@ -23,6 +23,7 @@ public class effectBasic : MonoBehaviour {
 	virtual public   void OnAttack (PlayerBasic aim){}//带目标的攻击效果
 	virtual public   void OnAttack (PlayerBasic aim,float TrueDamage){}//带目标的攻击效果此外附带造成的真实伤害
 	virtual public void OnUseSP(float spUse = 0){}//是消耗斗气的时候调用
+	virtual public void OnDead(){}//死亡的时候调用
 	//这个效果可以在中途更新，且更新方法每一种效果自己定义
 	//例如更新加长持续时间等等
 	virtual public void updateEffect(){}

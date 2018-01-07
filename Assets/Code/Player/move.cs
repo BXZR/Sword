@@ -93,14 +93,14 @@ public class move : MonoBehaviour {
 		if (canMove ) 
 		{
 			ZMove = (speedNow ) * AxisValue * Time.deltaTime;
-		    moveDirection.z += ZMove;//向着正方向移动会有来自方向的速度加成同样在后退的时候速度会相对较低
+			moveDirection.z += ZMove * thePlayer.ActerMoveSpeedPercent;//向着正方向移动会有来自方向的速度加成同样在后退的时候速度会相对较低
 		}
 
 		Vector3 moveDirectionAction = transform.rotation * moveDirection;//旋转角度加权
 		//在一定高度的半空中有一定的移动速度加成
 		//这个效果只有在跳跃的时候才会触发
 		if (this.transform.position.y > jumpMaxHeight / 2 && isJumping)
-			moveDirectionAction.z += ZMove * 0.25f;//在半空中有额外25%的横向移动速度;
+			moveDirectionAction.z += ZMove * 0.25f;//在半空中有额外25%的凌空移动速度;
 
 		if (theController && theController.enabled)//有时候需要强制无法移动
 			theController.Move (moveDirectionAction);//真实地进行行动(因为使用的是characterController，因此使用坐标的方式似乎比较稳妥)
@@ -152,7 +152,7 @@ public class move : MonoBehaviour {
 				AxisValue = Mathf.Max (AxisValue, 0.5f);
 			float XAdd =  speedNow * AxisValue * Time.deltaTime;
 			//下面注释的两行是一个很好的思想，但是因为y周上面的移动出现跳变，会有较大幅度的上下抖动
-			moveDirection.x  += XAdd;//漫游之移动
+			moveDirection.x  += XAdd * thePlayer.ActerMoveSpeedPercent;//漫游之移动
 		}
 
 		if (theController && theController.enabled)//有时候需要强制无法移动
