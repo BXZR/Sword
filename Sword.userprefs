@@ -1,25 +1,28 @@
 ﻿<Properties StartupItem="Assembly-CSharp.csproj">
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Unity.Instance.Unity Editor" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Code\Effects\bloodShower\effectShowDamageOnBeAttack.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Code\AI\FSM\FSM_Search.cs">
     <Files>
       <File FileName="Assets\Code\AI\FSM\FSM_Jump.cs" Line="1" Column="1" />
-      <File FileName="Assets\Code\systemValues.cs" Line="36" Column="3" />
-      <File FileName="Assets\Code\AI\FSM\FSMStage.cs" Line="35" Column="6" />
-      <File FileName="Assets\Code\AI\FSM\FSMBasic.cs" Line="36" Column="12" />
-      <File FileName="Assets\Code\AI\FSM\FSM_Search.cs" Line="89" Column="10" />
-      <File FileName="Assets\Code\AI\FSM\FSM_RunAfter.cs" Line="47" Column="1" />
+      <File FileName="Assets\Code\systemValues.cs" Line="1" Column="1" />
+      <File FileName="Assets\Code\AI\FSM\FSMStage.cs" Line="1" Column="1" />
+      <File FileName="Assets\Code\AI\FSM\FSMBasic.cs" Line="1" Column="1" />
+      <File FileName="Assets\Code\AI\FSM\FSM_Search.cs" Line="101" Column="101" />
+      <File FileName="Assets\Code\AI\FSM\FSM_RunAfter.cs" Line="17" Column="41" />
       <File FileName="Assets\Code\AI\FSM\FSM_Attack.cs" Line="1" Column="1" />
-      <File FileName="Assets\Code\Effects\bloodShower\effectShowDamageOnBeAttack.cs" Line="33" Column="63" />
-      <File FileName="Assets\Code\Effects\effectBasic.cs" Line="26" Column="41" />
-      <File FileName="Assets\Code\Effects\thingsEffect\effectHpUp.cs" Line="9" Column="16" />
-      <File FileName="Assets\Code\Player\PlayerBasic.cs" Line="234" Column="2" />
-      <File FileName="Assets\Code\Effects\fighterAttackEffects\eeffectZiyingArcher.cs" Line="10" Column="23" />
-      <File FileName="Assets\Code\Effects\extraEffects\extraWeapon.cs" Line="13" Column="48" />
-      <File FileName="Assets\Code\Effects\thingsEffect\effectSpeedUp.cs" Line="10" Column="44" />
-      <File FileName="Assets\Code\Effects\thingsEffect\effectLastingDamage.cs" Line="24" Column="1" />
-      <File FileName="Assets\Code\Player\move.cs" Line="155" Column="62" />
+      <File FileName="Assets\Code\Effects\bloodShower\effectShowDamageOnBeAttack.cs" Line="1" Column="1" />
+      <File FileName="Assets\Code\Effects\effectBasic.cs" Line="1" Column="1" />
+      <File FileName="Assets\Code\Effects\thingsEffect\effectHpUp.cs" Line="1" Column="1" />
+      <File FileName="Assets\Code\Player\PlayerBasic.cs" Line="1" Column="1" />
+      <File FileName="Assets\Code\Effects\fighterAttackEffects\eeffectZiyingArcher.cs" Line="40" Column="5" />
+      <File FileName="Assets\Code\Effects\extraEffects\extraWeapon.cs" Line="72" Column="22" />
+      <File FileName="Assets\Code\Effects\thingsEffect\effectSpeedUp.cs" Line="1" Column="1" />
+      <File FileName="Assets\Code\Effects\thingsEffect\effectLastingDamage.cs" Line="1" Column="1" />
+      <File FileName="Assets\Code\Player\move.cs" Line="1" Column="1" />
       <File FileName="Assets\Code\Effects\fighterAttackEffects\effectDragonAttack.cs" Line="1" Column="1" />
-      <File FileName="Assets\Code\Effects\fighterAttackEffects\effectZiying.cs" Line="42" Column="3" />
+      <File FileName="Assets\Code\Effects\fighterAttackEffects\effectZiying.cs" Line="56" Column="67" />
+      <File FileName="Assets\Code\Effects\fighterAttackEffects\effectSlash.cs" Line="36" Column="49" />
+      <File FileName="Assets\Code\Player\newMethodAttack.cs" Line="1" Column="1" />
+      <File FileName="Assets\Code\Effects\fighterAttackEffects\effectKOKnife.cs" Line="26" Column="85" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

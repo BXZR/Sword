@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class FSM_Search : FSMBasic {
 
@@ -83,6 +84,37 @@ public class FSM_Search : FSMBasic {
 		return null;
 	}
 
+
+	private Vector3 randomAimPosition = Vector3.zero;
+	float moveTimer = 2f;//每隔一段时间做一次就行
+	private void randomMove()
+	{
+		moveTimer -= Time.deltaTime;
+		bool reachCheck = (randomAimPosition == Vector3.zero  || Vector3.Distance (new Vector3( this.theThis.transform.position.z,0,this.theThis.transform.position.z),new Vector3 ( randomAimPosition.x,0, randomAimPosition.z) )< 0.3f) ;
+
+		//路径控制
+		if (moveTimer < 0 || !theMoveController.hasPath) 
+		{
+			moveTimer = 3f;
+		  if (reachCheck )
+			{
+				randomAimPosition = this.theThis.transform.position + new Vector3 (Random.Range (0f, 8f) - 2f, 0, Random.Range (0f, 8f) - 2f);
+				theMoveController.SetDestination (randomAimPosition);
+				 
+
+			}
+		}
+		//动画控制
+		if (reachCheck )
+		{
+			theAnimator.Play ("moveMent");
+		}
+		else
+		{
+			theAnimator.Play ("rotatePoseForward");
+		}
+	}
+
 //-------------------------------------------------------------------------//
 	public override int geID ()
 	{
@@ -93,6 +125,7 @@ public class FSM_Search : FSMBasic {
 	{
 		//Debug.Log ("search!");
 		searchAIMs ();
+		randomMove ();
 	}
 
 	public override FSMBasic moveToNextState ()

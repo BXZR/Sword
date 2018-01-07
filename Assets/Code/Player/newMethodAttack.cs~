@@ -163,6 +163,7 @@ public class newMethodAttack : MonoBehaviour {
 					if (theEMY .Contains (theAIM) == false) //不重复地放到已找到的列表里面
 					{
 						theEMY.Add (theAIM);
+						checkIfISAI ();
 						//print ("SeachFind "+emys [i].GetComponent<Collider> ().gameObject.name);//找到目标
 					}
 				}
@@ -172,6 +173,26 @@ public class newMethodAttack : MonoBehaviour {
 
 	}
 
+
+	//如果是AI需要加入额外的检查
+	private void  checkIfISAI()
+	{
+		List<PlayerBasic> toDelete = new List<PlayerBasic> ();
+		if (this.thePlayer.gameObject.tag == "AI") 
+		{
+			for (int i = 0; i < theEMY.Count; i++) 
+			{
+				if (theEMY [i].tag == "AI")
+				{
+					toDelete.Add (theEMY [i]);
+				}
+			}
+			for (int i = 0; i < toDelete.Count; i++) 
+			{
+				theEMY.Remove (toDelete[i]);
+			}
+		}
+	}
 	//真正的攻击方法
 	private void Attack( float makeDamage)
 	{

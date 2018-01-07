@@ -74,6 +74,7 @@ public class effectBasic : MonoBehaviour {
 	{
 		return false;//默认返回false
 	}
+		
 	//是不是公有主动技能（这种技能所有人都会）
 	virtual public bool isPublic()
 	{

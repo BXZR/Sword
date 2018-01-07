@@ -37,7 +37,7 @@ public class eeffectZiyingArcher : effectBasic {
 		theEffectName = "气剑指";
 		theEffectInformation ="剑气凝聚于手指激射而出\n可对所有剑气命中目标造成伤害\n每一束剑气持续"+arrowLife+"秒";
 		makeStart ();
-		print ("气剑指");
+		//print ("气剑指");
 		forward = this.thePlayer.transform.forward;
 		Arrow = (GameObject)  Resources.Load ("effects/ziyingarrow");
 		/////////

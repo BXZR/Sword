@@ -11,7 +11,7 @@ public class effectShowDamageOnBeAttack : effectBasic
 	private float damageAll = 0;//，记录下来收到的总伤害，用于更新
 	private bool isOn = true;//是否开启显示，死了或者其他的时候不显示
 
-	private float showTimer = 1.5f;//显示时间，多受到一次攻击就多显示一会
+	private float showTimer = 1f;//显示时间，多受到一次攻击就多显示一会
 	private Vector3 theTextMoveAim ;//这个3dtext的移动目标，移动到某地方之后就不再移动了
 
 	private void makeShow(float damage = 0)
@@ -20,7 +20,8 @@ public class effectShowDamageOnBeAttack : effectBasic
 		{
 			theShowTextProfab = Resources.Load <GameObject>("effects/bloodText");
 		}
-		if (theShowText == null) {
+		if (theShowText == null) 
+		{
 			theShowText = GameObject.Instantiate (theShowTextProfab);
 			theShowText.transform.position = this.thePlayer.transform.position + new Vector3 (0,0.3f,0);
 			//theShowText.transform.SetParent (thePlayer.transform);//作为可选选项先放在这里
@@ -45,9 +46,13 @@ public class effectShowDamageOnBeAttack : effectBasic
 	public override void OnDead ()
 	{
 		isOn = false;
-		CancelInvoke ();
 		if (theShowText)
 			Destroy (theShowText);
+	}
+
+	public override bool isExtraUse ()
+	{
+		return true;
 	}
 
 	public override void OnBeAttack (float damage = 0)

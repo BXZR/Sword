@@ -256,6 +256,7 @@ public class PlayerBasic : MonoBehaviour {
 	}
 
 	//有些攻击不想触发特效也不希望靠判断防止递归，就调用下面这两个方法
+	//只有一些被标记为特殊效果的才会在这里显示效果出来
 	public void OnAttackWithoutEffect(PlayerBasic thePlayerAim ,float extraDamage = 0 ,bool isSimple =false,bool isExtraAttack = false)
 	{
 		//isExtraAttack表现为不用什么特殊动作直接造成伤害的条件
@@ -276,13 +277,19 @@ public class PlayerBasic : MonoBehaviour {
 			effectBasic[] Effects = this.GetComponentsInChildren<effectBasic> ();
 			for (int i = 0; i < Effects.Length; i++) 
 			{
-				Effects [i].OnAttack ();
-				Effects [i].OnAttack (thePlayerAim);
-				Effects [i].OnAttack (thePlayerAim,damage);
+				if (Effects [i].isExtraUse ()) 
+				{
+					Effects [i].OnAttack ();
+					Effects [i].OnAttack (thePlayerAim);
+					Effects [i].OnAttack (thePlayerAim, damage);
+				}
 			}
 			effectBasic[] EffectAim = thePlayerAim.GetComponentsInChildren<effectBasic> ();
-			for (int i = 0; i < EffectAim.Length; i++)
+			for (int i = 0; i < EffectAim.Length; i++) 
+			{
+				if(EffectAim [i].isExtraUse())
 				EffectAim [i].OnBeAttack (this);
+			}
 		}
 	}
 
@@ -301,13 +308,19 @@ public class PlayerBasic : MonoBehaviour {
 		effectBasic[] Effects = this.GetComponentsInChildren<effectBasic> ();
 		for (int i = 0; i < Effects.Length; i++) 
 		{
-			Effects [i].OnAttack ();
-			Effects [i].OnAttack (thePlayerAim);
-			Effects [i].OnAttack (thePlayerAim,damage);
+			if (Effects [i].isExtraUse ()) 
+			{
+				Effects [i].OnAttack ();
+				Effects [i].OnAttack (thePlayerAim);
+				Effects [i].OnAttack (thePlayerAim, damage);
+			}
 		}
 		effectBasic[] EffectAim = thePlayerAim.GetComponentsInChildren<effectBasic> ();
-		for (int i = 0; i < EffectAim.Length; i++)
+		for (int i = 0; i < EffectAim.Length; i++) 
+		{
+			if(EffectAim [i].isExtraUse())
 			EffectAim [i].OnBeAttack (this);
+		}
 	}
 
 
