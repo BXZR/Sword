@@ -11,7 +11,8 @@ public class effectShowDamageOnBeAttack : effectBasic
 	private float damageAll = 0;//，记录下来收到的总伤害，用于更新
 	private bool isOn = true;//是否开启显示，死了或者其他的时候不显示
 
-	private float showTimer = 1f;//显示时间，多受到一次攻击就多显示一会
+	private float showTimer =0.5f;//显示时间，多受到一次攻击就多显示一会
+	private float showTimerMax = 0.5f;//显示时间的上限
 	private Vector3 theTextMoveAim ;//这个3dtext的移动目标，移动到某地方之后就不再移动了
 
 	private void makeShow(float damage = 0)
@@ -26,12 +27,12 @@ public class effectShowDamageOnBeAttack : effectBasic
 			theShowText.transform.position = this.thePlayer.transform.position + new Vector3 (0,0.3f,0);
 			//theShowText.transform.SetParent (thePlayer.transform);//作为可选选项先放在这里
 			theTextMoveAim = this.thePlayer.transform.position + new Vector3 (0,1.5f,0);
-			showTimer = 1.5f;
+			showTimer = showTimerMax;
 		}
 		else
 		{
-			showTimer += 0.25f;
-			theShowText.transform.Translate (new Vector3 (0,1,0) * -0.1f);
+			showTimer += 0.1f;
+			theShowText.transform.Translate (new Vector3 (0,1,0) * -0.025f);
 		}
 		damageAll += damage;
 		theShowText.GetComponentInChildren <TextMesh> ().text = damageAll.ToString ("f0");

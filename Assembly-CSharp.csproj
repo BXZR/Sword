@@ -71,6 +71,7 @@
      <Compile Include="Assets\Code\Effects\thingsEffect\effectSpup.cs" />
      <Compile Include="Assets\Code\Extra\REController.cs" />
      <Compile Include="Assets\Code\Extra\extraRotate.cs" />
+     <Compile Include="Assets\Code\Extra\singleTip.cs" />
      <Compile Include="Assets\Code\Player\PlayerBasic.cs" />
      <Compile Include="Assets\Code\Player\attackLink.cs" />
      <Compile Include="Assets\Code\Player\attackLinkController.cs" />
