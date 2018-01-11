@@ -5,9 +5,9 @@ using UnityEngine;
 public class effectZiying :effectBasic{
 
 	float shieldPercentAdd = 0.09f;
-	float extraDamagePercent = 0.02f;
-	float timer = 7f;
-	float timerMax = 7f;
+	float extraDamagePercent = 0.10f;
+	float timer = 15f;
+	float timerMax = 15f;
 	bool canExtraDamage = true;
 
 
@@ -46,7 +46,7 @@ public class effectZiying :effectBasic{
 	void  makeAreaAttack (Transform theAim )
 	{
 		float damageUse = this.thePlayer.ActerWuliDamage * extraDamagePercent;
-		Collider [] emys = Physics.OverlapSphere (theAim .transform .position, 3);
+		Collider [] emys = Physics.OverlapSphere (theAim .transform .position, 1);
 		for (int i = 0; i < emys.Length; i++)
 		{
 			PlayerBasic theAimNow = emys [i].GetComponent <PlayerBasic> ();

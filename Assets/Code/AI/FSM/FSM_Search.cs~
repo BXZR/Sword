@@ -7,7 +7,7 @@ public class FSM_Search : FSMBasic {
 
 	List<PlayerBasic> theEMYGet   = null;
 	public float angle = 125;//视野角度范围的一半
-	public float distance = 2;//视野长度
+	public float distance = 2.5f;//视野长度
 	PlayerBasic theMainEMY = null;
 
 

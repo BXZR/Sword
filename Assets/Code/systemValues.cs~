@@ -23,7 +23,7 @@ public class systemValues : MonoBehaviour {
 
 
 	//选人界面的逻辑
-	private static int indexNow =3;
+	private static int indexNow =2;
 	public static  void setIndexForPlayer(int indexIn)
 	{
 		indexNow = indexIn;

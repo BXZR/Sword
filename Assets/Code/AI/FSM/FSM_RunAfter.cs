@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class FSM_RunAfter : FSMBasic {
 
-	float timer = 1.5f;
+	float timer = 2.5f;
 
 	public override int geID ()
 	{

@@ -46,10 +46,10 @@ public class cameraUse : MonoBehaviour
 	}
 	void LateUpdate()
 	{
+		makeFov ();
 		checkDeadMode ();
 		if (!DeadMode) 
 		{
-			makeFov ();
 			if (Input.GetKey (KeyCode.LeftControl))
 				mode2 ();
 			else

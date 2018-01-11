@@ -8,6 +8,7 @@ public class uiShowsForBasic : MonoBehaviour {
 	//这个脚本用来表现HPSP头像等等的基础内容
 	public Slider theHpSlider;
 	public Slider theSpSlider;
+	public Slider theShieldSlider;
 	public Slider theHpBackSlider;
 	public Image thePlayerImage;
 	public Text thePlayerNameText;//用来显示名字
@@ -59,6 +60,7 @@ public class uiShowsForBasic : MonoBehaviour {
 		{
 			theHpSlider.value = thePlayer.ActerHp / thePlayer.ActerHpMax;
 			theSpSlider.value = thePlayer.ActerSp / thePlayer.ActerSpMax;
+			theShieldSlider.value = thePlayer.ActerShieldHp / thePlayer.ActerHpMax;
 			makeLoseShow ();
 		}
 	}

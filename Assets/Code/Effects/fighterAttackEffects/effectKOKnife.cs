@@ -34,6 +34,7 @@ public class effectKOKnife : effectBasic{
 		{
 			float damage = aim.ActerHpMax * attackPercent;
 			this.thePlayer.OnAttackWithoutEffect (aim,damage,true,true);
+			attackCount = 0;
 		}
 	}
 }
