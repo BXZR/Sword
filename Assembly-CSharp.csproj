@@ -67,6 +67,7 @@
      <Compile Include="Assets\Code\Effects\fighterAttackEffects\effectZiying.cs" />
      <Compile Include="Assets\Code\Effects\thingsEffect\effectHpUp.cs" />
      <Compile Include="Assets\Code\Effects\thingsEffect\effectLastingDamage.cs" />
+     <Compile Include="Assets\Code\Effects\thingsEffect\effectShield.cs" />
      <Compile Include="Assets\Code\Effects\thingsEffect\effectSpeedUp.cs" />
      <Compile Include="Assets\Code\Effects\thingsEffect\effectSpup.cs" />
      <Compile Include="Assets\Code\Extra\REController.cs" />

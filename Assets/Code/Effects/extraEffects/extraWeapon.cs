@@ -69,7 +69,7 @@ public class extraWeapon : MonoBehaviour {
 				//print (playerAim.ActerHpSuck );
 				//print (thePlayer .ActerWuliIner);
 
-				thePlayer.OnAttackExtra(playerAim);//造成直接的伤害
+				thePlayer.OnAttack(playerAim);//造成直接的伤害
 				extraDamageEffect (playerAim);//添加额外的计算脚本，每个脚本的效果由脚本自己决定
 			}
 		} 

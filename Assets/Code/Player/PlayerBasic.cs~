@@ -203,22 +203,29 @@ public class PlayerBasic : MonoBehaviour {
 
  
 	//在攻击命中的时候触发
-	public void OnAttack(PlayerBasic thePlayerAim ,float extraDamage = 0 ,bool isSimple =false)
+	public void OnAttack(PlayerBasic thePlayerAim ,float extraDamage = 0 ,bool isSimple =false,bool isExtraAttack = false)
 	{
 		//isExtraAttack表现为不用什么特殊动作直接造成伤害的条件
 		//在这里似乎多做了一次判断
 		//判断原因在于原先的攻击做法是连续的，而现在的攻击是离散的
 			if(this.theAudioPlayer!= null)
 			this.theAudioPlayer.playAttackSound ();//播放攻击音效
+			//-------------------------------------------------------------------------------------
 			float damage = 0;
-			if(isSimple)//如果只是简单地真实伤害
-				damage  =extraDamage;
-			else
+			if(isSimple && isExtraAttack)//附加的真实伤害
+				damage = extraDamage;
+			if(isSimple && !isExtraAttack)//整体攻击真实伤害，附带额外真实伤害
+				damage = extraDamage+extraDamageForAnimation+ActerWuliDamage;
+			if(!isSimple && isExtraAttack)//附加的物理伤害
+				damage = getTrueDamage (thePlayerAim, extraDamage,false);
+			if(!isSimple && !isExtraAttack)//整体攻击物理伤害，附带额外物理伤害
 				damage = getTrueDamage (thePlayerAim, extraDamage+extraDamageForAnimation);
+			//-------------------------------------------------------------------------------------
 			
 			thePlayerAim.OnBeAttack (damage);
 			extraDamageForAnimation = 0;
 
+		    //各种附加效果
 			effectBasic[] Effects = this.GetComponentsInChildren<effectBasic> ();
 			for (int i = 0; i < Effects.Length; i++) 
 			{
@@ -230,50 +237,29 @@ public class PlayerBasic : MonoBehaviour {
 		    for (int i = 0; i < EffectAim.Length; i++)
 			EffectAim [i].OnBeAttack (this);
 	}
-
-	public void OnAttackExtra(PlayerBasic thePlayerAim , bool isSimple =false )
-	{
-		if(this.theAudioPlayer!= null)
-		this.theAudioPlayer.playAttackSound ();//播放攻击音效
-         //不太按规矩来的伤害计算，例如龟派气功
-			float damage = 0;
-				damage = getTrueDamage (thePlayerAim,  extraDamageForAnimation);
-
-			thePlayerAim.OnBeAttack (damage);
-			extraDamageForAnimation = 0;
-
-
-		effectBasic[] Effects = this.GetComponentsInChildren<effectBasic> ();
-		for (int i = 0; i < Effects.Length; i++)
-		{
-			Effects [i].OnAttack ();
-			Effects [i].OnAttack (thePlayerAim);
-			Effects [i].OnAttack (thePlayerAim,damage);
-		}
-		effectBasic[] EffectAim = thePlayerAim.GetComponentsInChildren<effectBasic> ();
-		for (int i = 0; i < EffectAim.Length; i++)
-			EffectAim [i].OnBeAttack (this);
-	}
-
+		
 	//有些攻击不想触发特效也不希望靠判断防止递归，就调用下面这两个方法
 	//只有一些被标记为特殊效果的才会在这里显示效果出来
 	public void OnAttackWithoutEffect(PlayerBasic thePlayerAim ,float extraDamage = 0 ,bool isSimple =false,bool isExtraAttack = false)
 	{
-		//isExtraAttack表现为不用什么特殊动作直接造成伤害的条件
-		if (isExtraAttack) 
-		{
 			if(this.theAudioPlayer!= null)
 			this.theAudioPlayer.playAttackSound ();//播放攻击音效
+		    //-------------------------------------------------------------------------------------
 			float damage = 0;
-			if(isSimple)//如果只是简单地真实伤害
-				damage  =extraDamage;
-			else
-				damage = getTrueDamage (thePlayerAim, extraDamage+extraDamageForAnimation);
-
+		    if(isSimple && isExtraAttack)//附加的真实伤害
+			    damage = extraDamage;
+		    if(isSimple && !isExtraAttack)//整体攻击真实伤害，附带额外真实伤害
+			    damage = extraDamage+extraDamageForAnimation+ActerWuliDamage;
+			if(!isSimple && isExtraAttack)//附加的物理伤害
+			   damage = getTrueDamage (thePlayerAim, extraDamage,false);
+			if(!isSimple && !isExtraAttack)//整体攻击物理伤害，附带额外物理伤害
+			    damage = getTrueDamage (thePlayerAim, extraDamage+extraDamageForAnimation);
+		   //-------------------------------------------------------------------------------------
 			thePlayerAim.OnBeAttack (damage);
 
 			extraDamageForAnimation = 0;
 
+	     	//只有特殊的一类效果了才能够有效果，其余特效无效，所以是WithoutEffect
 			effectBasic[] Effects = this.GetComponentsInChildren<effectBasic> ();
 			for (int i = 0; i < Effects.Length; i++) 
 			{
@@ -290,40 +276,9 @@ public class PlayerBasic : MonoBehaviour {
 				if(EffectAim [i].isExtraUse())
 				EffectAim [i].OnBeAttack (this);
 			}
-		}
+
 	}
-
-	public void OnAttackExtraWithoutEffect(PlayerBasic thePlayerAim , bool isSimple =false )
-	{
-		if(this.theAudioPlayer!= null)
-		this.theAudioPlayer.playAttackSound ();//播放攻击音效
-		//不太按规矩来的伤害计算，例如龟派气功
-		float damage = 0;
-		damage = getTrueDamage (thePlayerAim,  extraDamageForAnimation);
-
-		thePlayerAim.OnBeAttack (damage);
-
-		extraDamageForAnimation = 0;
-
-		effectBasic[] Effects = this.GetComponentsInChildren<effectBasic> ();
-		for (int i = 0; i < Effects.Length; i++) 
-		{
-			if (Effects [i].isExtraUse ()) 
-			{
-				Effects [i].OnAttack ();
-				Effects [i].OnAttack (thePlayerAim);
-				Effects [i].OnAttack (thePlayerAim, damage);
-			}
-		}
-		effectBasic[] EffectAim = thePlayerAim.GetComponentsInChildren<effectBasic> ();
-		for (int i = 0; i < EffectAim.Length; i++) 
-		{
-			if(EffectAim [i].isExtraUse())
-			EffectAim [i].OnBeAttack (this);
-		}
-	}
-
-
+		
 	public void OnBeAttack(float damage)
 	{
 		//this.gameObject .tag != "AI"说明是小兵
@@ -370,12 +325,15 @@ public class PlayerBasic : MonoBehaviour {
 	}
 
 
-	float getTrueDamage(PlayerBasic thePlayerAim, float extraDamage =0)//真正的计算伤害的方法，这个方法被“攻击”的时候调参数为攻击者经过计算的伤害
+	float getTrueDamage(PlayerBasic thePlayerAim, float extraDamage =0,bool withBasicDamageCanculate = true)//真正的计算伤害的方法，这个方法被“攻击”的时候调参数为攻击者经过计算的伤害
 	{
 		if (Random.value < thePlayerAim.ActerMissPercent)
 			return 0f;//伤害整个被无视，也就是被闪避了
 		
-		float damageMake = this.ActerWuliDamage - this. ActerWuliIner +extraDamage;
+		float damageMake = extraDamage;
+		if (withBasicDamageCanculate)
+			damageMake += this.ActerWuliDamage   - this. ActerWuliIner;
+		
 		float hujiaGet = thePlayerAim .ActerWuliShield*(1- this.ActerWuliInerPercent);
 		damageMake *= 1 - (hujiaGet / 1500);//固定1500就是防御的上界
 		damageMake += this. ActerWuliIner;
