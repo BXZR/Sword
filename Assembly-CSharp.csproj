@@ -84,6 +84,7 @@
      <Compile Include="Assets\Code\UI\startAndSelect\sceneSkipButton.cs" />
      <Compile Include="Assets\Code\UI\startAndSelect\selectHead.cs" />
      <Compile Include="Assets\Code\UI\startAndSelect\selectHeaderMaker.cs" />
+     <Compile Include="Assets\Code\UI\systemPanel\BasicPanelController.cs" />
      <Compile Include="Assets\Code\UI\systemPanel\SystemUIController.cs" />
      <Compile Include="Assets\Code\bloodSlider\BasicMethod\BloodBasic.cs" />
      <Compile Include="Assets\Code\bloodSlider\BasicMethod\BloodScaner.cs" />

@@ -116,7 +116,13 @@ public class systemValues : MonoBehaviour {
 		return  false;
 	}
 
-
+	//加载图像全局工具方法
+	public static  Sprite makeLoadSprite(string textureName)
+	{
+		//textureName = "people/noOne";
+		Texture2D theTextureIn = Resources.Load <Texture2D> (textureName);
+		return Sprite .Create(theTextureIn,new Rect (0,0,theTextureIn.width,theTextureIn.height),new Vector2 (0,0));
+	}
 
 	//当前播放的背景音乐名
 	public static string theBackMusicNameNow = "";

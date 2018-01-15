@@ -23,6 +23,9 @@ public class SystemUIController : MonoBehaviour {
 		}
 		if(theChildPanels.Length >0)
 		   theChildPanels [0].gameObject.SetActive (true);
+		//theChildPanels [0]是基础背景面板，这一点可以参考风之幻想三的UIO设计
+		//但是估计这个面板不会比风三面板复杂，因为这个游戏的游戏乐趣或许在于复杂的装备组合和效果
+		//更加在于身临其境的打击感，算是KO和风系列的组合尝试吧
 	}
 
 	//关闭系统选项
