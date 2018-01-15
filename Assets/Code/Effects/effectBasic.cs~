@@ -19,7 +19,9 @@ public class effectBasic : MonoBehaviour {
 	virtual public void OnHpTowardHpMax(){}//在生命恢复到满血的时候使用
 	virtual public void OnSpTowardSpMax(){}//在法力恢复到满的时候触发
 	virtual public void OnHpUp(){}//在生命恢复的时候触发
+	virtual public void OnHpUp(float upValue = 0){}//在生命恢复的时候触发
 	virtual public void OnSpUp(){}//在法力恢复的时候触发
+	virtual public void OnSpUp(float upValue = 0){}//在法力恢复的时候触发
 	virtual public   void OnAttack (PlayerBasic aim){}//带目标的攻击效果
 	virtual public   void OnAttack (PlayerBasic aim,float TrueDamage){}//带目标的攻击效果此外附带造成的真实伤害
 	virtual public void OnUseSP(float spUse = 0){}//是消耗斗气的时候调用

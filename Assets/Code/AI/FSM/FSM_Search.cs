@@ -27,6 +27,8 @@ public class FSM_Search : FSMBasic {
 		//以自己为中心进行相交球体探测
 		//实际上身边一定圆周范围内的所有具有碰撞体的单位都会被被这一步探测到
 		//接下来需要的就是对坐标进行审查
+		if (!theThis)
+			return;
 		Collider [] emys = Physics.OverlapSphere (theThis.transform .position, distance);
 		//使用cos值进行比照，因为在0-180角度范围内，cos是不断下降的
 		//具体思路就是，判断探测到的物体的cos值如果这个cos值大于标准值，就认为这个单位的角度在侦查范围角度内。

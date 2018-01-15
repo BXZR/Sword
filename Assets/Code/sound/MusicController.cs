@@ -132,7 +132,7 @@ public class MusicController : MonoBehaviour {
 		if(theBackMusicController != null)
 		theBackMusicController.loop = true;
 		theBackMusicController.Play ();
-		Cursor.visible = false;//不显示鼠标
+
 	}
 
 	//注销，减少回调个数

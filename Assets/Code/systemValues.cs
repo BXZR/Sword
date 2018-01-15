@@ -125,4 +125,23 @@ public class systemValues : MonoBehaviour {
 	//0 单机模式
 	//1 网络模式
 	public static int modeIndex = 0;
+
+	//UI界面选项是否已经开启
+	//这是一个通用的全局检查用标记
+	private  static  bool isSystemPanelOpened = false;
+	public  static bool IsSystemPanelOpened
+	{
+		get {return isSystemPanelOpened; }
+		set 
+		{   isSystemPanelOpened = value ;
+			Cursor.visible = value ;//附加额外的控制操作
+		}
+	}
+
+	//当一些特殊的功能发动的时候，有一些功能应该暂停
+	//为此需要一组标记，而这组标记就在这个方法里面统一处理
+	public static bool isSystemUIUsing() 
+	{
+		return  systemValues.IsSystemPanelOpened; 
+	}
 }

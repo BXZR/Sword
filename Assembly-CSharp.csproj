@@ -71,6 +71,7 @@
      <Compile Include="Assets\Code\Effects\thingsEffect\effectSpeedUp.cs" />
      <Compile Include="Assets\Code\Effects\thingsEffect\effectSpup.cs" />
      <Compile Include="Assets\Code\Extra\REController.cs" />
+     <Compile Include="Assets\Code\Extra\extraMoveUp.cs" />
      <Compile Include="Assets\Code\Extra\extraRotate.cs" />
      <Compile Include="Assets\Code\Extra\singleTip.cs" />
      <Compile Include="Assets\Code\Player\PlayerBasic.cs" />
@@ -78,11 +79,12 @@
      <Compile Include="Assets\Code\Player\attackLinkController.cs" />
      <Compile Include="Assets\Code\Player\move.cs" />
      <Compile Include="Assets\Code\Player\newMethodAttack.cs" />
-     <Compile Include="Assets\Code\UI\GameStartButton.cs" />
-     <Compile Include="Assets\Code\UI\sceneSkipButton.cs" />
-     <Compile Include="Assets\Code\UI\selectHead.cs" />
-     <Compile Include="Assets\Code\UI\selectHeaderMaker.cs" />
-     <Compile Include="Assets\Code\UI\uiShowsForBasic.cs" />
+     <Compile Include="Assets\Code\UI\basicShow\uiShowsForBasic.cs" />
+     <Compile Include="Assets\Code\UI\startAndSelect\GameStartButton.cs" />
+     <Compile Include="Assets\Code\UI\startAndSelect\sceneSkipButton.cs" />
+     <Compile Include="Assets\Code\UI\startAndSelect\selectHead.cs" />
+     <Compile Include="Assets\Code\UI\startAndSelect\selectHeaderMaker.cs" />
+     <Compile Include="Assets\Code\UI\systemPanel\SystemUIController.cs" />
      <Compile Include="Assets\Code\bloodSlider\BasicMethod\BloodBasic.cs" />
      <Compile Include="Assets\Code\bloodSlider\BasicMethod\BloodScaner.cs" />
      <Compile Include="Assets\Code\controllers\gameStarter.cs" />

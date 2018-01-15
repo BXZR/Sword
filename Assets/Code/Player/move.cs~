@@ -99,7 +99,7 @@ public class move : MonoBehaviour {
 		Vector3 moveDirectionAction = transform.rotation * moveDirection;//旋转角度加权
 		//在一定高度的半空中有一定的移动速度加成
 		//这个效果只有在跳跃的时候才会触发
-		if (this.transform.position.y > jumpMaxHeight / 2 && isJumping)
+		if (jumpTimer > jumpTimerMax/2 && isJumping)
 			moveDirectionAction.z += ZMove * 0.25f;//在半空中有额外25%的凌空移动速度;
 
 		if (theController && theController.enabled)//有时候需要强制无法移动
@@ -161,7 +161,7 @@ public class move : MonoBehaviour {
 
 	//有关跳跃的逻辑都在这里
 	private float jumpTimer = 0f;
-	private float jumpTimerMax= 1.2f;
+	private float jumpTimerMax= 1.1f;
 	public bool isJumping = false;
 
 
@@ -181,7 +181,7 @@ public class move : MonoBehaviour {
 			if(useSP)
 			{
 			//耗蓝控制--------------------------------------------------
-			float spUse = thePlayer.ActerSpMax * 0.15f;//施展轻功是需要消耗真气的;
+			float spUse = thePlayer.ActerSpMax * 0.07f;//施展轻功是需要消耗真气的;
 			if (systemValues.modeIndex == 0)
 				UseSP (spUse);
 			if (systemValues.modeIndex == 1)//有些功能只在网络对战模式之下用就行
@@ -199,7 +199,7 @@ public class move : MonoBehaviour {
 		if (Input.GetKeyDown (KeyCode.Space)) 
 		{
 
-				makeJump ();
+			makeJump ();
 
 			 if(isJumping)
 			{
@@ -213,7 +213,7 @@ public class move : MonoBehaviour {
 					jumpTimer += 0.08f ;//如果正在跳跃就增加跳跃持续时间
 
 					//耗蓝控制--------------------------------------------------
-					float spUse = 5;//施展轻功是需要消耗真气的;
+					float spUse = thePlayer.ActerSpMax * 0.01f;//施展轻功是需要消耗真气的;
 					if(systemValues.modeIndex == 0)
 						UseSP(spUse);
 					if(systemValues.modeIndex == 1)//有些功能只在网络对战模式之下用就行

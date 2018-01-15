@@ -221,7 +221,7 @@ public class PlayerBasic : MonoBehaviour {
 			if(!isSimple && !isExtraAttack)//整体攻击物理伤害，附带额外物理伤害
 				damage = getTrueDamage (thePlayerAim, extraDamage+extraDamageForAnimation);
 			//-------------------------------------------------------------------------------------
-			
+		    float hpsuck =  makeHpSuck(  damage , thePlayerAim);//计算吸血
 			thePlayerAim.OnBeAttack (damage);
 			extraDamageForAnimation = 0;
 
@@ -232,6 +232,7 @@ public class PlayerBasic : MonoBehaviour {
 				Effects [i].OnAttack ();
 				Effects [i].OnAttack (thePlayerAim);
 				Effects [i].OnAttack (thePlayerAim,damage);
+			    Effects [i].OnHpUp (hpsuck);
 			}
 		   effectBasic[] EffectAim = thePlayerAim.GetComponentsInChildren<effectBasic> ();
 		    for (int i = 0; i < EffectAim.Length; i++)
@@ -255,10 +256,9 @@ public class PlayerBasic : MonoBehaviour {
 			if(!isSimple && !isExtraAttack)//整体攻击物理伤害，附带额外物理伤害
 			    damage = getTrueDamage (thePlayerAim, extraDamage+extraDamageForAnimation);
 		   //-------------------------------------------------------------------------------------
+		    float hpsuck =  makeHpSuck(  damage , thePlayerAim);//计算吸血
 			thePlayerAim.OnBeAttack (damage);
-
 			extraDamageForAnimation = 0;
-
 	     	//只有特殊的一类效果了才能够有效果，其余特效无效，所以是WithoutEffect
 			effectBasic[] Effects = this.GetComponentsInChildren<effectBasic> ();
 			for (int i = 0; i < Effects.Length; i++) 
@@ -268,13 +268,14 @@ public class PlayerBasic : MonoBehaviour {
 					Effects [i].OnAttack ();
 					Effects [i].OnAttack (thePlayerAim);
 					Effects [i].OnAttack (thePlayerAim, damage);
+				    Effects [i].OnHpUp (hpsuck);
 				}
 			}
 			effectBasic[] EffectAim = thePlayerAim.GetComponentsInChildren<effectBasic> ();
 			for (int i = 0; i < EffectAim.Length; i++) 
 			{
 				if(EffectAim [i].isExtraUse())
-				EffectAim [i].OnBeAttack (this);
+				  EffectAim [i].OnBeAttack (this);
 			}
 
 	}
@@ -325,7 +326,7 @@ public class PlayerBasic : MonoBehaviour {
 	}
 
 
-	float getTrueDamage(PlayerBasic thePlayerAim, float extraDamage =0,bool withBasicDamageCanculate = true)//真正的计算伤害的方法，这个方法被“攻击”的时候调参数为攻击者经过计算的伤害
+	float getTrueDamage(PlayerBasic thePlayerAim, float extraDamage =0,bool withBasicDamageCanculate = true )//真正的计算伤害的方法，这个方法被“攻击”的时候调参数为攻击者经过计算的伤害
 	{
 		if (Random.value < thePlayerAim.ActerMissPercent)
 			return 0f;//伤害整个被无视，也就是被闪避了
@@ -349,9 +350,16 @@ public class PlayerBasic : MonoBehaviour {
 		{
 			damageMake *= ActerSuperBaldeAdder;
 		}
+
+		return damageMake;
+	}
+
+	//计算吸血，反伤等等最后计算之后的生命收益（可以为正也可以为负）
+	float makeHpSuck(float damageMake , PlayerBasic thePlayerAim)
+	{
 		float hpChanger = damageMake * ActerHpSuckPercent + ActerHpSuck - thePlayerAim.ActerWuliReDamage*(1- this.ActerWuliShield/1500);
 		this.ActerHp += hpChanger;//关于反伤和吸血的制作比较简单
-		return damageMake;
+		return  hpChanger;
 	}
 
 	public void flashConNameTimer()
@@ -583,19 +591,22 @@ public class PlayerBasic : MonoBehaviour {
 	// 因为不存在遮挡
 	 void OnGUI()
 	{ 
-		if ( isShowing  && this.isMainfighter == false &&  isAlive &&  GUIShowStyleHP!=null &&  GUIShowStyleSP!=null)
+		if ( isShowing  && this.isMainfighter == false &&  isAlive &&  GUIShowStyleHP!=null &&  GUIShowStyleSP!=null )
 		{
-			//print (this.ActerName + " is GUI showing");
-			float rotoForHp = Mathf.Clamp ((this.ActerHp / this.ActerHpMax), 0f, 1f);
-			float rotoForSp = Mathf.Clamp ((this.ActerSp/ this.ActerSpMax), 0f, 1f);
-			Vector2 c = Camera.main.WorldToScreenPoint (new Vector3 (this.transform.position.x, this.transform.position.y + 1f, this.transform.position.z));
-			GUI.BeginGroup (new Rect (c.x, Screen.height - c.y, 155, 100));
-			GUI.Box (new Rect (35, 0, 80, 23), this.ActerName);
-			GUI.Box (new Rect (10, 23, 127, 15), "");
-			GUI.Box (new Rect (12, 24, 120 * rotoForHp, 13), "", GUIShowStyleHP);
-			GUI.Box (new Rect (10, 39, 127, 15), "");
-			GUI.Box (new Rect (12, 40, 120 * rotoForSp, 13), "", GUIShowStyleSP);
-			GUI.EndGroup ();
+			if (!systemValues.isSystemUIUsing ()) 
+			{
+				//print (this.ActerName + " is GUI showing");
+				float rotoForHp = Mathf.Clamp ((this.ActerHp / this.ActerHpMax), 0f, 1f);
+				float rotoForSp = Mathf.Clamp ((this.ActerSp / this.ActerSpMax), 0f, 1f);
+				Vector2 c = Camera.main.WorldToScreenPoint (new Vector3 (this.transform.position.x, this.transform.position.y + 1f, this.transform.position.z));
+				GUI.BeginGroup (new Rect (c.x, Screen.height - c.y, 155, 100));
+				GUI.Box (new Rect (35, 0, 80, 23), this.ActerName);
+				GUI.Box (new Rect (10, 23, 127, 15), "");
+				GUI.Box (new Rect (12, 24, 120 * rotoForHp, 13), "", GUIShowStyleHP);
+				GUI.Box (new Rect (10, 39, 127, 15), "");
+				GUI.Box (new Rect (12, 40, 120 * rotoForSp, 13), "", GUIShowStyleSP);
+				GUI.EndGroup ();
+			}
 		}
 	}
 

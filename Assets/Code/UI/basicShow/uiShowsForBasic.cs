@@ -28,6 +28,8 @@ public class uiShowsForBasic : MonoBehaviour {
 		}
 		thePlayerNameText.text = makeNameText (this.thePlayer.ActerName);
 		isStarted = true;
+		Cursor.visible = false;//不显示鼠标
+
 		//数值更新都是用这个方法更新的，可以大量减少额外的update计算
 		InvokeRepeating ("makeUpdate", 0, systemValues.updateTimeWait);
 

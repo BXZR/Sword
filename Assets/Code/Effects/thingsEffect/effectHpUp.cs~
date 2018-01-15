@@ -14,6 +14,20 @@ public class effectHpUp : effectBasic{
 		hpupPerSecond = hpupMax / timerMax;
 		makeStart ();
 		Destroy (this, timerMax);
+		InvokeRepeating ("makeHpUpEffect",0f,1f);
+	}
+
+
+	void makeHpUpEffect()
+	{
+		effectBasic  [] efs = this.thePlayer.GetComponents<effectBasic> ();
+		for (int i = 0; i < efs.Length; i++)
+			efs [i].OnHpUp (hpupPerSecond);
+	}
+
+	void OnDestroy()
+	{
+		CancelInvoke ();
 	}
 
 	void Update()

@@ -46,18 +46,23 @@ public class cameraUse : MonoBehaviour
 	}
 	void LateUpdate()
 	{
-		makeFov ();
-		checkDeadMode ();
-		if (!DeadMode) 
+		//systemValues.isSystemPanelOpened标记附带的是Time.TimeScale = 0
+		//但是这个只是限制了Update的运行，不会影响到这里，所以用的是标记的方法进行阻隔
+		if (!systemValues.isSystemUIUsing()) 
 		{
-			if (Input.GetKey (KeyCode.LeftControl))
+			makeFov ();
+			checkDeadMode ();
+			if (!DeadMode)
+			{
+				if (Input.GetKey (KeyCode.LeftControl))
+					mode2 ();
+				else
+					mode1 ();
+			} 
+			else 
+			{
 				mode2 ();
-			else
-				mode1 ();
-		}
-		else
-		{
-			mode2 ();
+			}
 		}
 
 
