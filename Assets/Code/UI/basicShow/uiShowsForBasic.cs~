@@ -13,7 +13,7 @@ public class uiShowsForBasic : MonoBehaviour {
 	public Image thePlayerImage;
 	public Text thePlayerNameText;//用来显示名字
 	private  PlayerBasic thePlayer;
-	private bool isStarted = false;//只有在开始之后才会刷心
+	private bool isStarted = false;//只有在开始之后才会刷新
 	public void makeStart(PlayerBasic thePlayer)
 	{
 		this.thePlayer = thePlayer;

@@ -12,9 +12,9 @@ public class eeffectZiyingArcher : effectBasic {
 
 	GameObject theArrow ;//真正的弹矢
 
-	void Start () 
+	void Start ()
 	{
-		Init ();//进行初始化
+		Init ();
 	}
 
 	//手动调用的额外销毁方法
@@ -35,7 +35,7 @@ public class eeffectZiyingArcher : effectBasic {
 	public override void Init ()
 	{
 		theEffectName = "气剑指";
-		theEffectInformation ="剑气凝聚于手指激射而出\n可对所有剑气命中目标造成伤害\n每一束剑气持续"+arrowLife+"秒";
+		theEffectInformation ="将剑气凝于手指激射而出用作普攻\n可对所有剑气命中目标造成伤害\n每一束剑气持续"+arrowLife+"秒";
 		makeStart ();
 		//print ("气剑指");
 		forward = this.thePlayer.transform.forward;

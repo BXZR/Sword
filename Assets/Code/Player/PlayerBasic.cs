@@ -308,6 +308,7 @@ public class PlayerBasic : MonoBehaviour {
 			effectBasic[] Effects = this.GetComponentsInChildren<effectBasic> ();
 			for (int i = 0; i < Effects.Length; i++)
 			{
+				//这里似乎有重复调用
 				Effects [i].OnBeAttack ();
 				Effects [i].OnBeAttack (damage);
 			}

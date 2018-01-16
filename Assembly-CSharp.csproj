@@ -63,6 +63,7 @@
      <Compile Include="Assets\Code\Effects\extraEffects\monsterBeAttack.cs" />
      <Compile Include="Assets\Code\Effects\fighterAttackEffects\eeffectZiyingArcher.cs" />
      <Compile Include="Assets\Code\Effects\fighterAttackEffects\effectDragonAttack.cs" />
+     <Compile Include="Assets\Code\Effects\fighterAttackEffects\effectDragonExtraDamage.cs" />
      <Compile Include="Assets\Code\Effects\fighterAttackEffects\effectKOKnife.cs" />
      <Compile Include="Assets\Code\Effects\fighterAttackEffects\effectSlash.cs" />
      <Compile Include="Assets\Code\Effects\fighterAttackEffects\effectZiying.cs" />

@@ -25,7 +25,7 @@ public class effectShowDamageOnBeAttack : effectBasic
 		if (theShowTextForUp == null) 
 		{
 			theShowTextForUp = GameObject.Instantiate (theShowTextProfab);
-			theShowTextForUp.transform.position = this.thePlayer.transform.position + new Vector3 (0, 0.75f, 0);
+			theShowTextForUp.transform.position = this.thePlayer.transform.position + new Vector3 (Random.Range (0f, 0.5f) - 0.25f, 0.75f, 0);
 			//theShowText.transform.SetParent (thePlayer.transform);//作为可选选项先放在这里
 			//初始化和重新构建
 			Vector3 theTextMoveAim = this.thePlayer.transform.position + new Vector3 (0, 1.5f, 0);
@@ -80,6 +80,11 @@ public class effectShowDamageOnBeAttack : effectBasic
 			Destroy (theShowText);
 	}
 
+	public override bool isShowing ()
+	{
+		return false;
+	}
+
 	public override bool isExtraUse ()
 	{
 		return true;
@@ -92,6 +97,7 @@ public class effectShowDamageOnBeAttack : effectBasic
 			makeShowForDamage(damage);
 		}
 	}
+
 
 	public override void OnHpUp (float upValue = 0)
 	{

@@ -11,7 +11,6 @@ public class theKnifeSlashController : effectBasic {
 
 	void Start ()
 	{
-		isShowing = false;
 	}
 	public override void onAttackAction ()//timeLength是持续时间
 	{
@@ -22,6 +21,12 @@ public class theKnifeSlashController : effectBasic {
 		
 		keepTimer = keepTimerMax;//每一次激活都增加一点时间
 		theEffectForKnife.Use = true;
+	}
+
+	//这个介绍没有说明，也没有必要展现粗来，就一个动画效果
+	public override bool isShowing ()
+	{
+		return false;
 	}
 
 	void Update ()

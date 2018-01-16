@@ -150,4 +150,42 @@ public class systemValues : MonoBehaviour {
 	{
 		return  systemValues.IsSystemPanelOpened; 
 	}
+		
+	//工具方法，获得所有可显示的技能效果等等的信息
+	public static string getEffectInformations(GameObject thePlayer)
+	{
+		attackLink[] attacklinks = thePlayer.GetComponentsInChildren<attackLink> (); 
+		foreach (attackLink ak in attacklinks) 
+		{
+			if (string.IsNullOrEmpty (ak.conNameToEMY) == false)
+			{
+				//初始化一下效果
+				thePlayer.gameObject.AddComponent (System.Type.GetType (ak.conNameToEMY));
+				effectBasic theEffect = thePlayer.gameObject.GetComponent (System.Type.GetType (ak.conNameToEMY)) as effectBasic;
+				//theEffect.Init ();
+				//skillsInformation += theEffect.getInformation ();
+				//Destroy (theEffect);
+			}
+			if (string.IsNullOrEmpty (ak.conNameToSELF) == false)
+			{
+				//初始化一下效果
+				thePlayer.gameObject.AddComponent (System.Type.GetType (ak.conNameToSELF));
+				effectBasic theEffect = thePlayer.gameObject.GetComponent (System.Type.GetType (ak.conNameToSELF)) as effectBasic;
+				//theEffect.Init ();
+				//skillsInformation += theEffect.getInformation ();
+				//Destroy (theEffect);
+			}
+				
+		}
+		string skillsInformation = "\n";
+		effectBasic[] effects = thePlayer.GetComponents<effectBasic> ();
+		foreach (effectBasic ef in effects) 
+		{
+			ef.Init ();
+			skillsInformation += ef.getInformation ();
+		}
+
+		return skillsInformation;
+	}
+ 
 }
