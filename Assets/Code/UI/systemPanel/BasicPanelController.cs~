@@ -14,7 +14,8 @@ public class BasicPanelController : MonoBehaviour {
 	public Slider theSPSLider;//斗气数
 	public Text theHpText;//生命值 + 护盾值
 	public Text theSpText;//斗气值
-   
+	public Text theExtraValueInformationText;//其余的战斗数值信息显示
+
 	//头像图只需要加载一次就可以了
 	private  void  makeLoad()
 	{
@@ -46,12 +47,13 @@ public class BasicPanelController : MonoBehaviour {
 
 		if(systemValues.thePlayer)
 		{
-		float theHpValue = systemValues.thePlayer.ActerHp / systemValues.thePlayer.ActerHpMax;
-		float theSpValue = systemValues.thePlayer.ActerSp / systemValues.thePlayer.ActerSpMax;
-		theHpSlider.value = theHpValue;//生命值 + 护盾值
-		theSPSLider.value = theSpValue;//斗气数
-		theHpText.text = systemValues.thePlayer.ActerHp.ToString("f0") +"/"+ systemValues.thePlayer.ActerHpMax.ToString("f0");//生命值+ 护盾值
-		theSpText.text = systemValues.thePlayer.ActerSp.ToString("f0") +"/"+ systemValues.thePlayer.ActerSpMax.ToString("f0");//斗气值 
+			float theHpValue = systemValues.thePlayer.ActerHp / systemValues.thePlayer.ActerHpMax;
+			float theSpValue = systemValues.thePlayer.ActerSp / systemValues.thePlayer.ActerSpMax;
+			theHpSlider.value = theHpValue;//生命值 + 护盾值
+			theSPSLider.value = theSpValue;//斗气数
+			theHpText.text = systemValues.thePlayer.ActerHp.ToString("f0") +"/"+ systemValues.thePlayer.ActerHpMax.ToString("f0");//生命值+ 护盾值
+			theSpText.text = systemValues.thePlayer.ActerSp.ToString("f0") +"/"+ systemValues.thePlayer.ActerSpMax.ToString("f0");//斗气值 
+			theExtraValueInformationText.text = systemValues.thePlayer.getPlayerInformation(false)+systemValues.thePlayer.getPlayerInformationExtra();
 		}
 	}
 	

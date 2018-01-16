@@ -54,6 +54,7 @@
      <Compile Include="Assets\Code\AI\FSM\FSM_Search.cs" />
      <Compile Include="Assets\Code\Camera\cameraUse.cs" />
      <Compile Include="Assets\Code\Effects\bloodShower\effectShowDamageOnBeAttack.cs" />
+     <Compile Include="Assets\Code\Effects\bloodShower\extraMoveUp.cs" />
      <Compile Include="Assets\Code\Effects\effectBasic.cs" />
      <Compile Include="Assets\Code\Effects\extraEffects\extraWeapon.cs" />
      <Compile Include="Assets\Code\Effects\extraEffects\knifeSlash\Interpolate.cs" />
@@ -71,7 +72,6 @@
      <Compile Include="Assets\Code\Effects\thingsEffect\effectSpeedUp.cs" />
      <Compile Include="Assets\Code\Effects\thingsEffect\effectSpup.cs" />
      <Compile Include="Assets\Code\Extra\REController.cs" />
-     <Compile Include="Assets\Code\Extra\extraMoveUp.cs" />
      <Compile Include="Assets\Code\Extra\extraRotate.cs" />
      <Compile Include="Assets\Code\Extra\singleTip.cs" />
      <Compile Include="Assets\Code\Player\PlayerBasic.cs" />

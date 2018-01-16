@@ -368,12 +368,15 @@ public class PlayerBasic : MonoBehaviour {
 	}
 
 
-	public string getPlayerInformation()
+	public string getPlayerInformation(bool showHpMax = true)
 	{
 		string information = "";
 		//information += "=======" + this.ActerName+"=======\n\n";
-		information += "生命值上限 "+(int)this.ActerHpMax+"\n";
-		information += "斗气值上限 "+(int)this.ActerSpMax+"\n";
+		if (showHpMax)//因为有些时候生命值上限这种显示特殊用slider来做，就没有必要多次显示了
+		{
+			information += "生命值上限 " + (int)this.ActerHpMax + "\n";
+			information += "斗气值上限 " + (int)this.ActerSpMax + "\n";
+		}
 		information += "生命恢复 " + this.ActerHpUp .ToString ("f2")+"/秒\n";
 		information += "斗气回复 " + this.ActerSpUp .ToString ("f2") + "/秒\n";
 		information += "护甲 " + this.ActerWuliShield .ToString ("f1")+"\n";
