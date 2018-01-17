@@ -15,7 +15,7 @@ public class BasicPanelController : MonoBehaviour {
 	public Text theHpText;//生命值 + 护盾值
 	public Text theSpText;//斗气值
 	public Text theExtraValueInformationText;//其余的战斗数值信息显示
-	public Text theEffectsValueInformationText;//战斗技能信息显示
+
 
 	//头像图等等一些内容只需要加载一次就可以了
 	private  void  makeLoad()
@@ -34,7 +34,8 @@ public class BasicPanelController : MonoBehaviour {
 			}
 			thePlayerName.text = systemValues.thePlayer.ActerName;
 			//自己的技能效果获得一次也就够了
-			theEffectsValueInformationText.text = systemValues.getEffectInformations (systemValues.thePlayer.gameObject);
+			//public Text theEffectsValueInformationText;//战斗技能信息显示
+			//theEffectsValueInformationText.text = systemValues.getEffectInformations (systemValues.thePlayer.gameObject);
 		}
 	}
 

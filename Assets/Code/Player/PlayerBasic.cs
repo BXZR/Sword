@@ -307,11 +307,9 @@ public class PlayerBasic : MonoBehaviour {
 
 			effectBasic[] Effects = this.GetComponentsInChildren<effectBasic> ();
 			for (int i = 0; i < Effects.Length; i++)
-			{
-				//这里似乎有重复调用
-				Effects [i].OnBeAttack ();
 				Effects [i].OnBeAttack (damage);
-			}
+
+
 			//如果收受到了较重的伤害，那么就取消当前的攻击动作，强制转为受到攻击的动作，并且攻击力转化为0
 			//此外beHit状态已经在systemValues里面标注为无法造成伤害的状态之一
 			//在这里将额外攻击力取消掉是因为这个是强制转换的，可能会有动作做到一半的情况，也许会有额外的伤害误差
@@ -371,7 +369,7 @@ public class PlayerBasic : MonoBehaviour {
 
 	public string getPlayerInformation(bool showHpMax = true)
 	{
-		string information = "";
+		string information = "\n";
 		//information += "=======" + this.ActerName+"=======\n\n";
 		if (showHpMax)//因为有些时候生命值上限这种显示特殊用slider来做，就没有必要多次显示了
 		{

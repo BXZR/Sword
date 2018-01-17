@@ -155,6 +155,9 @@ public class systemValues : MonoBehaviour {
 	public static string getEffectInformations(GameObject thePlayer)
 	{
 		attackLink[] attacklinks = thePlayer.GetComponentsInChildren<attackLink> (); 
+		//因为有顺序和统一调用的问题，建议建立之后统一进行销毁，因此建立一个预存。
+		List<effectBasic> buffer = new List<effectBasic> ();
+
 		foreach (attackLink ak in attacklinks) 
 		{
 			if (string.IsNullOrEmpty (ak.conNameToEMY) == false)
@@ -162,6 +165,7 @@ public class systemValues : MonoBehaviour {
 				//初始化一下效果
 				thePlayer.gameObject.AddComponent (System.Type.GetType (ak.conNameToEMY));
 				effectBasic theEffect = thePlayer.gameObject.GetComponent (System.Type.GetType (ak.conNameToEMY)) as effectBasic;
+				buffer.Add (theEffect);
 				//theEffect.Init ();
 				//skillsInformation += theEffect.getInformation ();
 				//Destroy (theEffect);
@@ -171,18 +175,26 @@ public class systemValues : MonoBehaviour {
 				//初始化一下效果
 				thePlayer.gameObject.AddComponent (System.Type.GetType (ak.conNameToSELF));
 				effectBasic theEffect = thePlayer.gameObject.GetComponent (System.Type.GetType (ak.conNameToSELF)) as effectBasic;
+				buffer.Add (theEffect);
 				//theEffect.Init ();
 				//skillsInformation += theEffect.getInformation ();
 				//Destroy (theEffect);
 			}
 				
 		}
+
 		string skillsInformation = "\n";
 		effectBasic[] effects = thePlayer.GetComponents<effectBasic> ();
 		foreach (effectBasic ef in effects) 
 		{
 			ef.Init ();
 			skillsInformation += ef.getInformation ();
+		}
+
+		//清空预存
+		for (int i = 0; i < buffer.Count; i++) 
+		{
+			Destroy (buffer[i]);
 		}
 
 		return skillsInformation;
