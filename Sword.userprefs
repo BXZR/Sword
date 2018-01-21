@@ -1,15 +1,16 @@
 ﻿<Properties StartupItem="Assembly-CSharp.csproj">
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Unity.Instance.Unity Editor" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Code\Effects\fighterAttackEffects\eeffectZiyingArcher.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Code\UI\systemPanel\SystemUIController.cs">
     <Files>
-      <File FileName="Assets\Code\UI\systemPanel\SystemUIController.cs" Line="1" Column="1" />
+      <File FileName="Assets\Code\UI\systemPanel\SystemUIController.cs" Line="78" Column="66" />
       <File FileName="Assets\Code\Player\PlayerBasic.cs" Line="1" Column="1" />
       <File FileName="Assets\Code\UI\systemPanel\BasicPanelController.cs" Line="1" Column="1" />
       <File FileName="Assets\Code\systemValues.cs" Line="1" Column="1" />
       <File FileName="Assets\Code\UI\systemPanel\Skill\skillPanelController.cs" Line="1" Column="1" />
-      <File FileName="Assets\Code\UI\systemPanel\Skill\skillButton.cs" Line="22" Column="1" />
+      <File FileName="Assets\Code\UI\systemPanel\Skill\skillButton.cs" Line="1" Column="1" />
       <File FileName="Assets\Code\Player\attackLink.cs" Line="1" Column="1" />
-      <File FileName="Assets\Code\Effects\fighterAttackEffects\eeffectZiyingArcher.cs" Line="41" Column="13" />
+      <File FileName="Assets\Code\UI\basicShow\uiShowsForBasic.cs" Line="1" Column="1" />
+      <File FileName="Assets\Code\Effects\fighterAttackEffects\knife\effectMonk.cs" Line="13" Column="22" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

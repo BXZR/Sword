@@ -35,7 +35,7 @@ public class skillPanelController : MonoBehaviour {
 				theButton.transform.SetParent (theButtonFather.transform);
 				skillButton theSkillInformation = theButton.GetComponent <skillButton> ();
 				theSkillInformation.attackLinkBasicInformation = theAttacklinks [i].getInformation ();
-				theSkillInformation.basicEffect = getAttacklinkEffectInformation (theAttacklinks [i], out theSkillInformation.effectInformation);
+				theSkillInformation.basicEffect = getAttacklinkEffectInformation (theAttacklinks [i], theButton, out theSkillInformation.effectInformation);
 				theSkillInformation.theShowText = theInformationText;
 				theButton.GetComponentInChildren<Text> ().text = theAttacklinks [i].skillName;
 				theButton.transform.localPosition = new Vector3 (1,1,1);
@@ -46,39 +46,33 @@ public class skillPanelController : MonoBehaviour {
 	}
 
 	//获得连招的效果信息
-	string getAttacklinkEffectInformation(attackLink theAttacklink, out string theSkillInformation )
+	string getAttacklinkEffectInformation(attackLink theAttacklink,GameObject theButton ,out string theSkillInformation )
 	{
 		string information = "";
 		string skillInformation = "";
 		if (string.IsNullOrEmpty (theAttacklink.conNameToSELF) == false) 
 		{
-			this.gameObject.AddComponent (System.Type.GetType (theAttacklink.conNameToSELF) );
-			effectBasic theselfEffect = this.GetComponent <effectBasic> ();
-			if (theselfEffect) 
-			{
-				theselfEffect.Init ();
-				information += "发动可以触发[" + systemValues.importantColor + theselfEffect.theEffectName + systemValues.colorEnd +"]";
-				skillInformation += theselfEffect.getInformation ();
-				//Destroy (theselfEffect);
-			}
+			theButton.gameObject.AddComponent (System.Type.GetType (theAttacklink.conNameToSELF) );
+			effectBasic theselfEffect = theButton.GetComponent <effectBasic> ();
+			theselfEffect.Init ();
+			information += "发动可以触发[" + systemValues.importantColor + theselfEffect.theEffectName + systemValues.colorEnd +"]";
+			skillInformation += theselfEffect.getInformation ();
+			Destroy (theselfEffect);
 		}
 		if (string.IsNullOrEmpty (theAttacklink.conNameToEMY) == false) 
 		{
-			this.gameObject.AddComponent (System.Type.GetType (theAttacklink.conNameToEMY) );
-			effectBasic theEMYEffect = this.GetComponent <effectBasic> ();
-			if (theEMYEffect) 
-			{
-				theEMYEffect.Init ();
-				if (string.IsNullOrEmpty (information) == false)
-					information += "\n";
-				information += "命中可以触发[" + systemValues.importantColor+ theEMYEffect.theEffectName + systemValues.colorEnd+"]";
-			
-				if (string.IsNullOrEmpty (skillInformation) == false)
-					skillInformation += "\n";
-				skillInformation += theEMYEffect.getInformation ();
+			theButton.gameObject.AddComponent (System.Type.GetType (theAttacklink.conNameToEMY) );
+			effectBasic theEMYEffect = theButton.GetComponent <effectBasic> ();
+			theEMYEffect.Init ();
+			if (string.IsNullOrEmpty (information) == false)
+				information += "\n";
+			information += "命中可以触发[" + systemValues.importantColor+ theEMYEffect.theEffectName + systemValues.colorEnd+"]";
+		
+			if (string.IsNullOrEmpty (skillInformation) == false)
+				skillInformation += "\n";
+			skillInformation += theEMYEffect.getInformation ();
 
-				//Destroy (theEMYEffect);
-			}
+			Destroy (theEMYEffect);
 		}
 		theSkillInformation = skillInformation;
 		return information;

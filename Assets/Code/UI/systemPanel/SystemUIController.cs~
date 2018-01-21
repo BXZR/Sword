@@ -75,7 +75,7 @@ public class SystemUIController : MonoBehaviour {
 
 	void Update ()
 	{
-		if (Input.GetKeyDown (KeyCode.Escape)) 
+		if (Input.GetKeyDown (KeyCode.Escape) && systemValues.thePlayer) 
 		{
 			if (systemValues.IsSystemPanelOpened == false)
 			{
