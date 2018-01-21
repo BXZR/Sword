@@ -254,8 +254,8 @@ public class attackLink : MonoBehaviour {
 	{
 
 		string information = "";
-
-		information += "触发方式："+"\n";
+		information += "招式名称：" + this.skillName+"\n";
+		information += "触发方式："+ systemValues.getAttacklinkInformationTranslated(this.attackLinkString) + "\n";
 		information += "额外伤害：" + this.extraDamage+"\n";
 		information += "斗气消耗：" + this.spUse;
 		return information;

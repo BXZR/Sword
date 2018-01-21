@@ -29,15 +29,43 @@ public class SystemUIController : MonoBehaviour {
 	}
 
 	//关闭系统选项
-	public void shutSystems()
+	//有的时候是不关闭菜单项目的，这里需要做一个标记
+	public void shutSystems(bool all = true)
 	{
 		for (int i = 0; i < theChildPanels.Length; i++)
 		{
 			theChildPanels [i].gameObject.SetActive (false);
 		}
-		Time.timeScale = 1f;//这里控制时间，所以有可能会有其他功能有冲突，务必注意
+		if (all)
+		{
+		  Time.timeScale = 1f;//这里控制时间，所以有可能会有其他功能有冲突，务必注意
+		}
+		else
+		{
+			theChildPanels [0].gameObject.SetActive (true);
+		}
 	}
 
+	//切换选择的时候，只有菜单项和当前选择不动
+	public void shutOtherPanels(int index = 0)
+	{
+		//主菜单默认是0
+		for (int i = 1; i < theChildPanels.Length; i++)
+		{
+			if(i != index)
+			theChildPanels [i].gameObject.SetActive (false);
+		}
+	}
+
+	//打开或者挂关闭某一个界面
+	public void controlPanelWithIndex(int index = 0)
+	{
+		shutOtherPanels(index);
+		if (index < theChildPanels.Length && theChildPanels [index] != null) 
+		{
+			theChildPanels [index].gameObject.SetActive (!theChildPanels [index].gameObject.activeInHierarchy);
+		}
+	}
 
 
 	void Start () 

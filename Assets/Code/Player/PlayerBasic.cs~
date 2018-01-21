@@ -373,13 +373,13 @@ public class PlayerBasic : MonoBehaviour {
 		//information += "=======" + this.ActerName+"=======\n\n";
 		if (showHpMax)//因为有些时候生命值上限这种显示特殊用slider来做，就没有必要多次显示了
 		{
-			information += "生命值上限 " + (int)this.ActerHpMax + "\n";
+			information += "生命值上限 " + (int)this.ActerHpMax + "   ";
 			information += "斗气值上限 " + (int)this.ActerSpMax + "\n";
 		}
-		information += "生命恢复 " + this.ActerHpUp .ToString ("f2")+"/秒\n";
+		information += "生命恢复 " + this.ActerHpUp .ToString ("f2")+"/秒   ";
 		information += "斗气回复 " + this.ActerSpUp .ToString ("f2") + "/秒\n";
-		information += "护甲 " + this.ActerWuliShield .ToString ("f1")+"\n";
-		information += "伤害 " + this.ActerWuliDamage .ToString("f1")+"\n";
+		information += "护甲 " + this.ActerWuliShield .ToString ("f1")+"   ";
+		information += "伤害 " + this.ActerWuliDamage .ToString("f1")+"   ";
 		information += "反伤 "+this.ActerWuliReDamage.ToString("f1")+"\n";
 		return information;
 	}
@@ -387,22 +387,22 @@ public class PlayerBasic : MonoBehaviour {
 	public string getPlayerInformationExtra()
 	{
 		string information = "";
-		information += "暴击率 "+(this.ActerSuperBaldePercent *100).ToString("f1")+"%\n";
+		information += "暴击率 "+(this.ActerSuperBaldePercent *100).ToString("f1")+"%   ";
 		information += "暴击伤害加成 "+(this.ActerSuperBaldeAdder*100).ToString("f1")+"%\n";
-		information += "闪避率 "+(this.ActerMissPercent *100).ToString("f0")+"%\n";
-		information += "格挡率 "+(this.ActerShielderPercent *100).ToString("f0")+"%\n";
-		information += "格挡真实伤害减免 " + this.ActerShielderDamageMiuns.ToString ("f1")+"\n";
-		information += "格挡百分比伤害减免 " + (this. ActerShielderDamageMiunsPercent *100).ToString("f0")+"%\n";
-
-		information += "真实穿透 "+this. ActerWuliIner.ToString("f1")+"\n";
+		information += "闪避率 "+(this.ActerMissPercent *100).ToString("f0")+"%   ";
+		information += "格挡率 "+(this.ActerShielderPercent *100).ToString("f0")+"%   ";
+		information += "格挡真实伤害减免 " + this.ActerShielderDamageMiuns.ToString ("f1")+"   ";
+		information += "格挡百分比伤害减免 " + (this. ActerShielderDamageMiunsPercent *100).ToString("f0")+"%   ";
+		information += "护盾上限" + (this.ActerShieldMaxPercent*100)+"%\n";
+		information += "真实穿透 "+this. ActerWuliIner.ToString("f1")+"   ";
 		information += "百分比穿透 "+(this.ActerWuliInerPercent*100).ToString("f1")+"%\n";
-		information += "真实生命偷取 "+this.ActerHpSuck.ToString("f1")+"\n";
+		information += "真实生命偷取 "+this.ActerHpSuck.ToString("f1")+"   ";
 		information += "伤害/生命转化 "+(this.ActerHpSuckPercent*100).ToString("f0")+"%\n";
-		information += "额外伤害 "+(this.ActerDamageAdderPercent*100).ToString("f1")+"%\n";
+		information += "额外伤害 "+(this.ActerDamageAdderPercent*100).ToString("f1")+"%   ";
 		information += "额外伤害加成 "+(this.ActerDamageAdder).ToString("f1")+"\n";
-		information += "攻击距离 "+this.theAttackAreaLength*100+"%\n";
-		information += "攻击范围 " + this.theAttackAreaAngel.ToString ("f1") +"\n";
-		information += "护盾上限" + (this.ActerShieldMaxPercent*100)+"%";
+		information += "攻击距离 "+this.theAttackAreaLength*100+"%   ";
+		information += "攻击范围 " + this.theAttackAreaAngel.ToString ("f1") +"   ";
+
 
 		return information;
 	}

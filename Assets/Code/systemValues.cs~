@@ -152,37 +152,39 @@ public class systemValues : MonoBehaviour {
 	}
 		
 	//工具方法，获得所有可显示的技能效果等等的信息
-	public static string getEffectInformations(GameObject thePlayer)
+	public static string getEffectInformations(GameObject thePlayer,bool withAttackLinkEffect = false)
 	{
-		attackLink[] attacklinks = thePlayer.GetComponentsInChildren<attackLink> (); 
-		//因为有顺序和统一调用的问题，建议建立之后统一进行销毁，因此建立一个预存。
 		List<effectBasic> buffer = new List<effectBasic> ();
-
-		foreach (attackLink ak in attacklinks) 
+		if (withAttackLinkEffect) 
 		{
-			if (string.IsNullOrEmpty (ak.conNameToEMY) == false)
-			{
-				//初始化一下效果
-				thePlayer.gameObject.AddComponent (System.Type.GetType (ak.conNameToEMY));
-				effectBasic theEffect = thePlayer.gameObject.GetComponent (System.Type.GetType (ak.conNameToEMY)) as effectBasic;
-				buffer.Add (theEffect);
-				//theEffect.Init ();
-				//skillsInformation += theEffect.getInformation ();
-				//Destroy (theEffect);
-			}
-			if (string.IsNullOrEmpty (ak.conNameToSELF) == false)
-			{
-				//初始化一下效果
-				thePlayer.gameObject.AddComponent (System.Type.GetType (ak.conNameToSELF));
-				effectBasic theEffect = thePlayer.gameObject.GetComponent (System.Type.GetType (ak.conNameToSELF)) as effectBasic;
-				buffer.Add (theEffect);
-				//theEffect.Init ();
-				//skillsInformation += theEffect.getInformation ();
-				//Destroy (theEffect);
-			}
-				
-		}
+			attackLink[] attacklinks = thePlayer.GetComponentsInChildren<attackLink> (); 
+			//因为有顺序和统一调用的问题，建议建立之后统一进行销毁，因此建立一个预存。
 
+			foreach (attackLink ak in attacklinks)
+			{
+				if (string.IsNullOrEmpty (ak.conNameToEMY) == false) 
+				{
+					//初始化一下效果
+					thePlayer.gameObject.AddComponent (System.Type.GetType (ak.conNameToEMY));
+					effectBasic theEffect = thePlayer.gameObject.GetComponent (System.Type.GetType (ak.conNameToEMY)) as effectBasic;
+					buffer.Add (theEffect);
+					//theEffect.Init ();
+					//skillsInformation += theEffect.getInformation ();
+					//Destroy (theEffect);
+				}
+				if (string.IsNullOrEmpty (ak.conNameToSELF) == false) 
+				{
+					//初始化一下效果
+					thePlayer.gameObject.AddComponent (System.Type.GetType (ak.conNameToSELF));
+					effectBasic theEffect = thePlayer.gameObject.GetComponent (System.Type.GetType (ak.conNameToSELF)) as effectBasic;
+					buffer.Add (theEffect);
+					//theEffect.Init ();
+					//skillsInformation += theEffect.getInformation ();
+					//Destroy (theEffect);
+				}
+				
+			}
+		}
 		string skillsInformation = "\n";
 		effectBasic[] effects = thePlayer.GetComponents<effectBasic> ();
 		foreach (effectBasic ef in effects) 
@@ -191,13 +193,64 @@ public class systemValues : MonoBehaviour {
 			skillsInformation += ef.getInformation ();
 		}
 
-		//清空预存
-		for (int i = 0; i < buffer.Count; i++) 
+		if (withAttackLinkEffect)
 		{
-			Destroy (buffer[i]);
+			//清空预存
+			for (int i = 0; i < buffer.Count; i++)
+			{
+				Destroy (buffer [i]);
+			}
 		}
 
 		return skillsInformation;
+	}
+
+	//只是获取最基本的战斗被动技能
+	public static string getBasicBEEffectInformation()
+	{
+		string skillsInformation = "\n";
+		effectBasic[] effects = thePlayer.GetComponents<effectBasic> ();
+		foreach (effectBasic ef in effects) 
+		{
+			ef.Init ();
+			skillsInformation += ef.getInformation ();
+		}
+		return (BESkillColor  + skillsInformation + colorEnd);
+	}
+
+	//所有的颜色标签都在这里设置
+	public static string normalColor = "<color=#000000>";//什么都不加成的颜色 黑色
+	public static string AbnormalSkillColor = "<color=#FF2400>";//被动技能的颜色   橙红色
+	public static string NBESkillColor = "<color=#6B238E>";//主动技能的颜色   深石板蓝
+	public static string importantColor = "<color=#7F00FF>";//公有技能的颜色
+	public static string normalAttackLinkColor  = "<color=#FFFF00>";//重点颜色
+	public static string hasSkillColor = "<color=#855E42>";//一般招式的颜色
+	public static string BESkillColor  = "<color=#8E1717>";//有技能的连招的颜色
+	public static string colorEnd = "</color>";
+
+	//获取连招出招表（中文）
+	public static string []  attackLinkChinese= {"上", "下", "左" , "右" , "击"};
+	public static string []  attackLinkEnglish= {"W", "S", "A" , "D" , "J"};
+	//这是一个非常天真的方法
+	public static string getAttacklinkInformationTranslated(string attacklink)
+	{
+		char[] attacklinkChar = attacklink.ToCharArray ();
+		string information = "";
+		for (int i = 0; i < attacklinkChar.Length; i++) 
+		{
+			bool findChar = false;
+			for (int j = 0; j < attackLinkEnglish.Length; j++) 
+			{
+				if (attacklinkChar [i].ToString() == attackLinkEnglish [j] && !findChar)
+				{
+					information += attackLinkChinese [j];
+					findChar = true;
+				}
+			}
+			if(!findChar)
+				information += "-";
+		}
+		return information;
 	}
  
 }

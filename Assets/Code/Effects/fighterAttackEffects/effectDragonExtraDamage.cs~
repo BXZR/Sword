@@ -26,7 +26,7 @@ public class effectDragonExtraDamage : effectBasic
 		{
 			//print("<或跃在渊>正在初始化");
 			theEffectName = "或跃在渊";
-			theEffectInformation = "标记目标，使得接下来这个目标受到的" +  damageCount  + "次攻击附加" + damageAddPercent * 100 + "%伤害\n对同一目标有"+timer+"秒的冷却时间";
+			theEffectInformation = "标记目标，使这个目标受到的下" +  damageCount  + "次攻击伤害提升" + damageAddPercent * 100 + "%，对同一目标有"+timer+"秒的冷却时间";
 			makeStart ();
 			Destroy (this,timer);
 		}

@@ -38,20 +38,23 @@ public class eeffectZiyingArcher : effectBasic {
 		theEffectInformation ="将剑气凝于手指激射而出用作普攻\n可对所有剑气命中目标造成伤害\n每一束剑气持续"+arrowLife+"秒";
 		makeStart ();
 		//print ("气剑指");
-		forward = this.thePlayer.transform.forward;
-		Arrow = (GameObject)  Resources.Load ("effects/ziyingarrow");
-		/////////
-		theArrow = (GameObject)GameObject .Instantiate( Arrow);
-		theArrow.GetComponentInChildren <extraWeapon> ().setPlayer (this.thePlayer);
+		//没有控制者就不发
+		if (this.thePlayer) 
+		{
+			forward = this.thePlayer.transform.forward;
+			Arrow = (GameObject)Resources.Load ("effects/ziyingarrow");
 
-		Vector3 positionNew = thePlayer.transform.position + new Vector3 (0,0.8f*thePlayer .transform .localScale .y + 0.2f , forward .normalized.z*0.1f) ;
-		theArrow.transform.localScale *= thePlayer.transform.localScale.y;
-		theArrow.transform.position = positionNew  ;
+			theArrow = (GameObject)GameObject.Instantiate (Arrow);
+			theArrow.GetComponentInChildren <extraWeapon> ().setPlayer (this.thePlayer);
 
+			Vector3 positionNew = thePlayer.transform.position + new Vector3 (0, 0.8f * thePlayer.transform.localScale.y + 0.2f, forward.normalized.z * 0.1f);
+			theArrow.transform.localScale *= thePlayer.transform.localScale.y;
+			theArrow.transform.position = positionNew;
 
-		theArrow.transform .forward   = thePlayer .transform .forward;
-		Destroy (theArrow, arrowLife);
-		Destroy (this.GetComponent (this.GetType ()), lastingTime);
+			theArrow.transform.forward = thePlayer.transform.forward;
+			Destroy (theArrow, arrowLife);
+			Destroy (this.GetComponent (this.GetType ()), lastingTime);
+		}
 
 	} 
 

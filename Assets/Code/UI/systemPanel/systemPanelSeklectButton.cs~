@@ -1,0 +1,19 @@
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class systemPanelSeklectButton : MonoBehaviour {
+
+	//游戏菜单的选择界面的按钮
+	//游戏界面总控制单元
+	public SystemUIController theController;
+	//被控制的界面的下标
+	public int index = 0;
+
+
+	public  void  makeSelect()
+	{
+		theController.controlPanelWithIndex(index);
+	}
+		
+}

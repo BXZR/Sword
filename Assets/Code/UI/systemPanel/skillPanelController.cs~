@@ -1,0 +1,18 @@
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class skillPanelController : MonoBehaviour {
+
+	//显示技能信息的面板
+
+	//来临时生成技能按钮
+	public GameObject theSkillButtonProfab;
+	//生成的按钮摆放的位置
+	public Transform thButtonFather;
+
+	void OnEnable()
+	{
+		
+	}
+}
