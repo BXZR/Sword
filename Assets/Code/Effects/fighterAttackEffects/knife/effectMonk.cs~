@@ -5,7 +5,7 @@ using UnityEngine;
 public class effectMonk :effectBasic{
 
 	float basicDamage = 15f;//每一个单位能够给出的伤害
-	float timer = 7f;//每一个段时间才能够使用这个伤害
+	float timer = 4f;//每一个段时间才能够使用这个伤害
 	bool isUsed = false;
 	void Start ()
 	{
@@ -47,7 +47,7 @@ public class effectMonk :effectBasic{
 	{
 		//print ("灭却浮屠发动");
 		theEffectName = "灭却浮屠";
-		theEffectInformation ="根据身边敌人数量追加下一击的伤害，每存在一个敌人追加"+basicDamage+"真实伤害";
+		theEffectInformation ="根据身边敌人数量追加下一击的伤害，每存在一个敌人追加"+basicDamage+"真实伤害，冷却时间为"+timer+"秒";
 		makeStart ();
  
 	}

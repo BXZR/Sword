@@ -220,12 +220,8 @@ public class systemValues : MonoBehaviour {
 
 	//所有的颜色标签都在这里设置
 	public static string normalColor = "<color=#000000>";//什么都不加成的颜色 黑色
-	public static string AbnormalSkillColor = "<color=#FF2400>";//被动技能的颜色   橙红色
-	public static string NBESkillColor = "<color=#6B238E>";//主动技能的颜色   深石板蓝
-	public static string importantColor = "<color=#7F00FF>";//公有技能的颜色
-	public static string normalAttackLinkColor  = "<color=#FFFF00>";//重点颜色
-	public static string hasSkillColor = "<color=#855E42>";//一般招式的颜色
-	public static string BESkillColor  = "<color=#8E1717>";//有技能的连招的颜色
+	public static string BESkillColor  = "<color=#FFFF8F>";//黄色
+	public static string SkillColor = "<color=#28FF28>";//绿色
 	public static string colorEnd = "</color>";
 
 	//获取连招出招表（中文）

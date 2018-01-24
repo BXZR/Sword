@@ -38,7 +38,10 @@ public class SystemUIController : MonoBehaviour {
 		}
 		if (all)
 		{
-		  Time.timeScale = 1f;//这里控制时间，所以有可能会有其他功能有冲突，务必注意
+		    Time.timeScale = 1f;//这里控制时间，所以有可能会有其他功能有冲突，务必注意
+			systemValues.IsSystemPanelOpened = false;
+			Cursor.visible = true;
+
 		}
 		else
 		{

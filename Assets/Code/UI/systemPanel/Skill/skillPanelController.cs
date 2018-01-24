@@ -28,6 +28,7 @@ public class skillPanelController : MonoBehaviour {
 	{
 		if (systemValues.thePlayer != null && isBuilt == false) 
 		{
+			theInformationText.text = "";
 			attackLink[] theAttacklinks = systemValues.thePlayer.GetComponentsInChildren < attackLink > ();
 			for (int i = 0; i < theAttacklinks.Length; i++) 
 			{
@@ -55,8 +56,8 @@ public class skillPanelController : MonoBehaviour {
 			theButton.gameObject.AddComponent (System.Type.GetType (theAttacklink.conNameToSELF) );
 			effectBasic theselfEffect = theButton.GetComponent <effectBasic> ();
 			theselfEffect.Init ();
-			information += "发动可以触发[" + systemValues.importantColor + theselfEffect.theEffectName + systemValues.colorEnd +"]";
-			skillInformation += theselfEffect.getInformation ();
+			information += "发动可以触发[" + systemValues.SkillColor + theselfEffect.theEffectName + systemValues.colorEnd +"]";
+			skillInformation += systemValues.SkillColor + theselfEffect.getInformation ()+systemValues.colorEnd;
 			Destroy (theselfEffect);
 		}
 		if (string.IsNullOrEmpty (theAttacklink.conNameToEMY) == false) 
@@ -66,11 +67,11 @@ public class skillPanelController : MonoBehaviour {
 			theEMYEffect.Init ();
 			if (string.IsNullOrEmpty (information) == false)
 				information += "\n";
-			information += "命中可以触发[" + systemValues.importantColor+ theEMYEffect.theEffectName + systemValues.colorEnd+"]";
+			information += "命中可以触发[" + systemValues.SkillColor+ theEMYEffect.theEffectName + systemValues.colorEnd+"]";
 		
 			if (string.IsNullOrEmpty (skillInformation) == false)
 				skillInformation += "\n";
-			skillInformation += theEMYEffect.getInformation ();
+			skillInformation +=  systemValues.SkillColor +  theEMYEffect.getInformation () +systemValues.colorEnd;
 
 			Destroy (theEMYEffect);
 		}

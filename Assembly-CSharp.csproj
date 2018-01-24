@@ -61,7 +61,6 @@
      <Compile Include="Assets\Code\Effects\extraEffects\knifeSlash\MeleeWeaponTrail.cs" />
      <Compile Include="Assets\Code\Effects\extraEffects\knifeSlash\theKnifeSlashController.cs" />
      <Compile Include="Assets\Code\Effects\extraEffects\monsterBeAttack.cs" />
-     <Compile Include="Assets\Code\Effects\fighterAttackEffects\effectSlash.cs" />
      <Compile Include="Assets\Code\Effects\fighterAttackEffects\dragon\effectDragonAttack.cs" />
      <Compile Include="Assets\Code\Effects\fighterAttackEffects\dragon\effectDragonExtraDamage.cs" />
      <Compile Include="Assets\Code\Effects\fighterAttackEffects\knife\effectKOKnife.cs" />
@@ -69,6 +68,7 @@
      <Compile Include="Assets\Code\Effects\fighterAttackEffects\mulan\effectSlash.cs" />
      <Compile Include="Assets\Code\Effects\fighterAttackEffects\mulan\effectSlowDamage.cs" />
      <Compile Include="Assets\Code\Effects\fighterAttackEffects\ziying\eeffectZiyingArcher.cs" />
+     <Compile Include="Assets\Code\Effects\fighterAttackEffects\ziying\effectQianfang.cs" />
      <Compile Include="Assets\Code\Effects\fighterAttackEffects\ziying\effectZiying.cs" />
      <Compile Include="Assets\Code\Effects\fighterAttackEffects\ziying\effectZiyingSumu.cs" />
      <Compile Include="Assets\Code\Effects\thingsEffect\effectHpUp.cs" />

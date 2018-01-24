@@ -8,6 +8,7 @@ public class effectZiying :effectBasic{
 	float extraDamagePercent = 0.10f;
 	float timer = 15f;
 	float timerMax = 15f;
+	float area = 1f;//范围
 	bool canExtraDamage = true;
 
 
@@ -24,8 +25,8 @@ public class effectZiying :effectBasic{
 
 	public override void Init ()
 	{
-		theEffectName = "千方残光剑";
-		theEffectInformation = "剑气围绕周身，获得" + shieldPercentAdd * 100 + "%格挡率\n每过" + timerMax + "秒可以在攻击命中的第一个目标周围造成自身当前攻击力" + extraDamagePercent * 100 + "%范围真实伤害";
+		theEffectName = "剑气";
+		theEffectInformation = "剑气围绕周身，获得" + shieldPercentAdd * 100 + "%格挡率\n每过" + timerMax + "秒可以在攻击命中的第一个目标时对目标周围"+area+"米的所有敌人造成自身当前攻击力" + extraDamagePercent * 100 + "%真实伤害";
 		makeStart ();
 		this.thePlayer.ActerShielderPercent += shieldPercentAdd;
 		this.thePlayer.CActerShielderPercent += shieldPercentAdd;
@@ -46,7 +47,7 @@ public class effectZiying :effectBasic{
 	void  makeAreaAttack (Transform theAim )
 	{
 		float damageUse = this.thePlayer.ActerWuliDamage * extraDamagePercent;
-		Collider [] emys = Physics.OverlapSphere (theAim .transform .position, 1);
+		Collider [] emys = Physics.OverlapSphere (theAim .transform .position, area );
 		for (int i = 0; i < emys.Length; i++)
 		{
 			PlayerBasic theAimNow = emys [i].GetComponent <PlayerBasic> ();
