@@ -65,6 +65,7 @@
      <Compile Include="Assets\Code\Effects\fighterAttackEffects\dragon\effectDragonExtraDamage.cs" />
      <Compile Include="Assets\Code\Effects\fighterAttackEffects\knife\effectKOKnife.cs" />
      <Compile Include="Assets\Code\Effects\fighterAttackEffects\knife\effectMonk.cs" />
+     <Compile Include="Assets\Code\Effects\fighterAttackEffects\knife\effectThreeKnife.cs" />
      <Compile Include="Assets\Code\Effects\fighterAttackEffects\mulan\effectSlash.cs" />
      <Compile Include="Assets\Code\Effects\fighterAttackEffects\mulan\effectSlowDamage.cs" />
      <Compile Include="Assets\Code\Effects\fighterAttackEffects\ziying\eeffectZiyingArcher.cs" />
