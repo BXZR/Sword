@@ -11,21 +11,25 @@ public class effectBasic : MonoBehaviour {
 	protected PlayerBasic thePlayer;//作用于（依附于）哪一个对象
 	public string theEffectName = " ";//技能名称（用于信息查询）
 	public  string theEffectInformation = " ";//技能效果
+	public string theEffedctExtraInformation = "";//技能额外的特性
 	virtual public void onAttackAction(){}//在攻击的起手阶段触发
 	virtual public void OnAttack (){}//在攻击的时候触发
 	virtual public void OnBeAttack(float damage = 0){}//在被攻击的时候触发
 	virtual public void OnBeAttack(PlayerBasic attacker){}//在被攻击的时候触发
-	virtual public void effectOnUpdate(){}//在update里面调用的效果
+	virtual public void effectOnUpdateTime(){}//在update里面调用的效果
 	virtual public void OnHpTowardHpMax(){}//在生命恢复到满血的时候使用
 	virtual public void OnSpTowardSpMax(){}//在法力恢复到满的时候触发
 	virtual public void OnHpUp(){}//在生命恢复的时候触发
 	virtual public void OnHpUp(float upValue = 0){}//在生命恢复的时候触发
 	virtual public void OnSpUp(){}//在法力恢复的时候触发
 	virtual public void OnSpUp(float upValue = 0){}//在法力恢复的时候触发
-	virtual public   void OnAttack (PlayerBasic aim){}//带目标的攻击效果
-	virtual public   void OnAttack (PlayerBasic aim,float TrueDamage){}//带目标的攻击效果此外附带造成的真实伤害
+	virtual public void OnAttack (PlayerBasic aim){}//带目标的攻击效果
+	virtual public void OnAttack (PlayerBasic aim,float TrueDamage){}//带目标的攻击效果此外附带造成的真实伤害
 	virtual public void OnUseSP(float spUse = 0){}//是消耗斗气的时候调用
 	virtual public void OnDead(){}//死亡的时候调用
+	virtual public void OnSuperBlade(PlayerBasic aim, float Damage = 0){}//暴击的时候调用
+	virtual public void OnMiss(PlayerBasic attacker){}//闪避的时候调用
+	virtual public void OnShield(PlayerBasic attacker,float damage = 0){}//格挡的时候调用
 	//这个效果可以在中途更新，且更新方法每一种效果自己定义
 	//例如更新加长持续时间等等
 	virtual public void updateEffect(){}
@@ -48,10 +52,15 @@ public class effectBasic : MonoBehaviour {
 			theInformation +="[被动]";
 		else
 			theInformation +="[主动]";
-		theInformation +="\n"+this.theEffectInformation+"\n\n";
+		theInformation +="\n"+this.theEffectInformation;
 		return theInformation;
 	}//显示完全的信息
 		
+	public virtual string getExtraInformation()
+	{
+		return theEffedctExtraInformation;
+	}
+
 	public   string getEffectInformation(){return this.theEffectInformation;}//只显示内容
 
 	public string getEffectName()

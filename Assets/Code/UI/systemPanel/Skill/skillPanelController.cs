@@ -58,6 +58,9 @@ public class skillPanelController : MonoBehaviour {
 			theselfEffect.Init ();
 			information += "发动可以触发[" + systemValues.SkillColor + theselfEffect.theEffectName + systemValues.colorEnd +"]";
 			skillInformation += systemValues.SkillColor + theselfEffect.getInformation ()+systemValues.colorEnd;
+			skillInformation += "\n";
+			skillInformation += systemValues.SkillExtraColor + theselfEffect.getExtraInformation () + systemValues.colorEnd;
+			skillInformation += "\n\n";
 			Destroy (theselfEffect);
 		}
 		if (string.IsNullOrEmpty (theAttacklink.conNameToEMY) == false) 
@@ -72,7 +75,9 @@ public class skillPanelController : MonoBehaviour {
 			if (string.IsNullOrEmpty (skillInformation) == false)
 				skillInformation += "\n";
 			skillInformation +=  systemValues.SkillColor +  theEMYEffect.getInformation () +systemValues.colorEnd;
-
+			skillInformation += "\n";
+			skillInformation += systemValues.SkillExtraColor + theEMYEffect.getExtraInformation () + systemValues.colorEnd;
+			skillInformation += "\n\n";
 			Destroy (theEMYEffect);
 		}
 		theSkillInformation = skillInformation;

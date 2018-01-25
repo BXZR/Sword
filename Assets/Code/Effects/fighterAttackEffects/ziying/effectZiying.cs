@@ -60,7 +60,7 @@ public class effectZiying :effectBasic{
 	}
 
 
-	public override void effectOnUpdate ()
+	public override void  effectOnUpdateTime ()
 	{
 		if (canExtraDamage == false)
 		{

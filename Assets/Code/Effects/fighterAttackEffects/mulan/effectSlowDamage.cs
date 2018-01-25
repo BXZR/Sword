@@ -24,7 +24,7 @@ public class effectSlowDamage  :effectBasic {
 		}
 	}
 
-	public override void effectOnUpdate ()
+	public override void effectOnUpdateTime ()
 	{
 		effectTimer += systemValues.updateTimeWait;
 	}

@@ -24,7 +24,7 @@ public class effectZiyingSumu :effectBasic {
 			this.thePlayer.OnAttackWithoutEffect (attacker,damage,false,true);
 		}
 	}
-	public override void effectOnUpdate ()
+	public override void  effectOnUpdateTime ()
 	{
 		effectTime += systemValues.updateTimeWait;
 		if (effectTime > effectTimerMax && theEffect) 

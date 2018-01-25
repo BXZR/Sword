@@ -34,8 +34,9 @@ public class effectQianfang : effectBasic {
 		{
 			for (int i = 0; i < arrowCounts ; i++)
 			{
-				forward = Quaternion.AngleAxis((float)(45*i), new Vector3(0,1,0)) *this.thePlayer.transform.forward ;
-				print ("forward = "+ forward);
+				//四元数的方法在这里似乎不是很好用
+				//forward = Quaternion.AngleAxis((float)(45*i), new Vector3(0,1,0)) *this.thePlayer.transform.forward ;
+				//print ("forward = "+ forward);
 				Arrow = (GameObject)Resources.Load ("effects/ziyingarrow2");
 
 				theArrow = (GameObject)GameObject.Instantiate (Arrow);

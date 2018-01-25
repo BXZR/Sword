@@ -328,8 +328,14 @@ public class PlayerBasic : MonoBehaviour {
 	float getTrueDamage(PlayerBasic thePlayerAim, float extraDamage =0,bool withBasicDamageCanculate = true )//真正的计算伤害的方法，这个方法被“攻击”的时候调参数为攻击者经过计算的伤害
 	{
 		if (Random.value < thePlayerAim.ActerMissPercent)
+		{
+			//攻击者暴击之后的特殊效果
+			effectBasic[] Effects = thePlayerAim.GetComponentsInChildren<effectBasic> ();
+			for (int i = 0; i < Effects.Length; i++)
+				Effects[i].OnMiss(this);
+			
 			return 0f;//伤害整个被无视，也就是被闪避了
-		
+		}
 		float damageMake = extraDamage;
 		if (withBasicDamageCanculate)
 			damageMake += this.ActerWuliDamage   - this. ActerWuliIner;
@@ -343,11 +349,20 @@ public class PlayerBasic : MonoBehaviour {
 		{
 			damageMake -= thePlayerAim.ActerShielderDamageMiuns;
 			damageMake *= (1- thePlayerAim.ActerShielderDamageMiunsPercent);
+
+			//攻击者暴击之后的特殊效果
+			effectBasic[] Effects = thePlayerAim.GetComponentsInChildren<effectBasic> ();
+			for (int i = 0; i < Effects.Length; i++)
+				Effects[i].OnShield(this,damageMake);
 		}
 
 		if (Random.value < ActerSuperBaldePercent)//攻击者暴击
 		{
-			damageMake *= ActerSuperBaldeAdder;
+			damageMake*= ActerSuperBaldeAdder;
+			//攻击者暴击之后的特殊效果
+			effectBasic[] Effects = this.GetComponentsInChildren<effectBasic> ();
+			for (int i = 0; i < Effects.Length; i++)
+				Effects[i].OnSuperBlade(thePlayerAim,damageMake);
 		}
 
 		return damageMake;
@@ -498,7 +513,7 @@ public class PlayerBasic : MonoBehaviour {
 			effectBasic[] Effects = this.GetComponentsInChildren<effectBasic> ();
 			for (int i = 0; i < Effects.Length; i++)
 			{
-				Effects [i].effectOnUpdate ();
+				Effects [i] .effectOnUpdateTime ();
 			}
 		}
 	}
@@ -525,7 +540,7 @@ public class PlayerBasic : MonoBehaviour {
 	{
 		effectBasic [] theEffect = this.GetComponents<effectBasic> ();
 		for (int i = 0; i < theEffect.Length; i++)
-			theEffect [i].effectOnUpdate ();
+			theEffect [i]. effectOnUpdateTime ();
 	}
 
 
@@ -562,6 +577,8 @@ public class PlayerBasic : MonoBehaviour {
 	}
 
 	//随时都进行网络更新太费事而且还有网络延迟的问题所以这是一个很低频率的更新
+	//强制刷新确实可以解决很多麻烦问题，但是开销不容小觑
+	//或许可以找到一个更好的架构或者方法来解决这个问题
 	private void makeValueUpdate()
 	{
 		//更新网络上其他客户端这个人物的属性

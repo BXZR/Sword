@@ -34,8 +34,8 @@ public class newMethodAttack : MonoBehaviour {
 			} 
 			else
 			{
-				//effectBasic theEffect = thePlayer.gameObject.GetComponent (System.Type.GetType (thePlayer . conNameToSELF)) as effectBasic;
-				//theEffect.updateEffect ();
+				effectBasic theEffect = thePlayer.gameObject.GetComponent (System.Type.GetType (thePlayer . conNameToSELF)) as effectBasic;
+				theEffect.updateEffect ();
 			}
 			thePlayer . conNameToSELF = "";
 		}
@@ -65,9 +65,9 @@ public class newMethodAttack : MonoBehaviour {
 			}
 			else
 			{
-				//effectBasic theEffect = playerAim.gameObject.GetComponent (System.Type.GetType (thePlayer . conNameToEMY)) as effectBasic;
-				//theEffect.updateEffect ();
-				//print ("update");
+				effectBasic theEffect = playerAim.gameObject.GetComponent (System.Type.GetType (thePlayer . conNameToEMY)) as effectBasic;
+				theEffect.updateEffect ();
+				print ("update");
 			}
 			thePlayer .conNameToEMY= "";
 		}

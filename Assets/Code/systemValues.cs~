@@ -23,7 +23,7 @@ public class systemValues : MonoBehaviour {
 
 
 	//选人界面的逻辑
-	private static int indexNow =3;
+	private static int indexNow =2;
 	public static  void setIndexForPlayer(int indexIn)
 	{
 		indexNow = indexIn;
@@ -222,6 +222,7 @@ public class systemValues : MonoBehaviour {
 	public static string normalColor = "<color=#000000>";//什么都不加成的颜色 黑色
 	public static string BESkillColor  = "<color=#FFFF8F>";//黄色
 	public static string SkillColor = "<color=#28FF28>";//绿色
+	public static string SkillExtraColor = "<color=#FF359A>";//粉色
 	public static string colorEnd = "</color>";
 
 	//获取连招出招表（中文）
