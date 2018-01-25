@@ -11,7 +11,7 @@ public class gameStarter : MonoBehaviour {
 	public uiShowsForBasic theUIController;//UI刷新新信息控制单元
 	GameObject theFighter ;
 	public GameObject theForwardImage;//没有准备好就黑屏
-
+	private MusicController theMusicController;//音乐控制单元
 	void Start()
 	{
 		Invoke ("makeStart", 2);
@@ -19,6 +19,10 @@ public class gameStarter : MonoBehaviour {
 
 	public  void makeStart()
 	{
+		theMusicController = this.GetComponent <MusicController> ();
+		theMusicController.playBackMusic (systemValues.getBackMusicName(),false);
+		theMusicController.makeStart ();
+
 		theFighterName = systemValues.getNowPlayer ();
 
 		if (systemValues.modeIndex == 1) //有些功能只在网络对战模式之下用就行
@@ -62,7 +66,7 @@ public class gameStarter : MonoBehaviour {
 	     	thePlayerPrivate.GetComponent <move> ().makeStart ();
 		    theUIController.makeStart ( thePlayerPrivate);
 			theForwardImage.SetActive (false);//先不要删除，不知道什么时候还会用到
-			this.GetComponent <MusicController> ().makeStart ();
+		 
 	}
 
 	//额外整体控制

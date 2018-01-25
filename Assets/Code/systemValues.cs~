@@ -20,7 +20,7 @@ public class systemValues : MonoBehaviour {
 	public static string [] playerHeadNames = {"knifeHead"  , "guojingHead", "mulanHead", "ziyingHead"};
 	public static string [] playerNamesInGame = {"theFightrSword"  , "theFightrguojing", "theFighterMulan", "theFightrZiying"};
 	public static string [] playerTitleInformation = {"重剑无锋，大巧不工"  , "多段攻击，招式连发", "高速攻击，疯狂输出" , "剑气冲霄，高攻减伤"};
-
+	public static string [] playerBackMusic = {"bahuangfu"  , "kai", "fightMusic", "canglangjianfu"};
 
 	//选人界面的逻辑
 	private static int indexNow =2;
@@ -35,6 +35,12 @@ public class systemValues : MonoBehaviour {
 			indexNow = 0;
 
 		return playerNamesInGame [indexNow];
+	}
+
+	//获得背景音乐名称
+	public  static string getBackMusicName()
+	{
+		return playerBackMusic [indexNow];
 	}
 
 	public static string getProPlayer()
