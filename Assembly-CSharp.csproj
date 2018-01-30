@@ -61,6 +61,7 @@
      <Compile Include="Assets\Code\Effects\extraEffects\knifeSlash\MeleeWeaponTrail.cs" />
      <Compile Include="Assets\Code\Effects\extraEffects\knifeSlash\theKnifeSlashController.cs" />
      <Compile Include="Assets\Code\Effects\extraEffects\monsterBeAttack.cs" />
+     <Compile Include="Assets\Code\Effects\fighterAttackEffects\dragon\effectDragonArea.cs" />
      <Compile Include="Assets\Code\Effects\fighterAttackEffects\dragon\effectDragonAttack.cs" />
      <Compile Include="Assets\Code\Effects\fighterAttackEffects\dragon\effectDragonExtraDamage.cs" />
      <Compile Include="Assets\Code\Effects\fighterAttackEffects\knife\effectKOKnife.cs" />

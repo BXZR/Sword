@@ -41,12 +41,13 @@ public class SystemUIController : MonoBehaviour {
 		    Time.timeScale = 1f;//这里控制时间，所以有可能会有其他功能有冲突，务必注意
 			systemValues.IsSystemPanelOpened = false;
 			Cursor.visible = true;
-
+			systemValues.IsSystemPanelOpened  = false;
 		}
 		else
 		{
 			theChildPanels [0].gameObject.SetActive (true);
 		}
+
 	}
 
 	//切换选择的时候，只有菜单项和当前选择不动
@@ -83,12 +84,11 @@ public class SystemUIController : MonoBehaviour {
 			if (systemValues.IsSystemPanelOpened == false)
 			{
 				startSystems ();
-				systemValues.IsSystemPanelOpened  = true;
+				systemValues.IsSystemPanelOpened  = !systemValues.IsSystemPanelOpened;
 			}
 			else
 			{
 				shutSystems ();
-				systemValues.IsSystemPanelOpened  = false;
 			}
 
 		}

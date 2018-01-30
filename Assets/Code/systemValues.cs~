@@ -23,7 +23,7 @@ public class systemValues : MonoBehaviour {
 	public static string [] playerBackMusic = {"bahuangfu"  , "kai", "fightMusic", "canglangjianfu"};
 
 	//选人界面的逻辑
-	private static int indexNow =2;
+	private static int indexNow =1;
 	public static  void setIndexForPlayer(int indexIn)
 	{
 		indexNow = indexIn;
@@ -140,7 +140,7 @@ public class systemValues : MonoBehaviour {
 
 	//UI界面选项是否已经开启
 	//这是一个通用的全局检查用标记
-	private  static  bool isSystemPanelOpened = false;
+	private  static  bool isSystemPanelOpened = true;
 	public  static bool IsSystemPanelOpened
 	{
 		get {return isSystemPanelOpened; }
