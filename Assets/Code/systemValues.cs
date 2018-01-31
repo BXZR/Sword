@@ -196,7 +196,10 @@ public class systemValues : MonoBehaviour {
 		foreach (effectBasic ef in effects) 
 		{
 			ef.Init ();
-			skillsInformation += ef.getInformation ();
+			string showString = ef.getInformation ();
+			skillsInformation += showString;
+			if(string.IsNullOrEmpty(showString) == false)
+			   skillsInformation += "\n\n";
 		}
 
 		if (withAttackLinkEffect)

@@ -47,7 +47,7 @@ public class selectHead : MonoBehaviour {
 		PlayerBasic thePlayerB = therPlayer.GetComponent<PlayerBasic> ();
 		playerInformationText.text = thePlayerB.getPlayerInformation () + thePlayerB.getPlayerInformationExtra ();
 		playerTitleText.text = "<color=#00FF00>"  + thePlayerB.ActerName + "</color>\n<color=#FF2400>" + systemValues.getTitleForPlayer (indexForSystemValues)+"</color>";
-		playerSkillText.text =  systemValues.getEffectInformations(therPlayer);
+		playerSkillText.text =  systemValues.getEffectInformations(therPlayer,true);
 		systemValues.setIndexForPlayer (indexForSystemValues);
 
 		if (theStaticSelectedImage!= null)

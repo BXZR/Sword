@@ -1,11 +1,18 @@
 ﻿<Properties StartupItem="Assembly-CSharp.csproj">
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Unity.Instance.Unity Editor" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Code\UI\systemPanel\SystemUIController.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Code\Player\move.cs">
     <Files>
-      <File FileName="Assets\Code\Effects\fighterAttackEffects\mulan\effectMulanBaoFa.cs" Line="37" Column="22" />
-      <File FileName="Assets\Code\UI\systemPanel\BasicPanelController.cs" Line="38" Column="63" />
+      <File FileName="Assets\Code\Effects\fighterAttackEffects\mulan\effectMulanBaoFa.cs" Line="1" Column="1" />
+      <File FileName="Assets\Code\UI\systemPanel\BasicPanelController.cs" Line="1" Column="1" />
       <File FileName="Assets\Code\UI\systemPanel\SystemUIController.cs" Line="44" Column="46" />
-      <File FileName="Assets\Code\systemValues.cs" Line="215" Column="51" />
+      <File FileName="Assets\Code\systemValues.cs" Line="202" Column="7" />
+      <File FileName="Assets\Code\UI\startAndSelect\selectHeaderMaker.cs" Line="34" Column="3" />
+      <File FileName="Assets\Code\UI\startAndSelect\sceneSkipButton.cs" Line="1" Column="1" />
+      <File FileName="Assets\Code\UI\startAndSelect\selectHead.cs" Line="50" Column="77" />
+      <File FileName="Assets\Code\Effects\effectBasic.cs" Line="47" Column="14" />
+      <File FileName="Assets\Code\sound\MusicController.cs" Line="129" Column="32" />
+      <File FileName="Assets\Code\theWorld\ColliderMake.cs" Line="8" Column="14" />
+      <File FileName="Assets\Code\Player\move.cs" Line="428" Column="6" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

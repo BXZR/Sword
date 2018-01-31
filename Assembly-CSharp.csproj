@@ -106,6 +106,7 @@
      <Compile Include="Assets\Code\sound\MusicController.cs" />
      <Compile Include="Assets\Code\sound\audioPlayer.cs" />
      <Compile Include="Assets\Code\systemValues.cs" />
+     <Compile Include="Assets\Code\theWorld\ColliderMake.cs" />
      <Compile Include="Assets\Photon Unity Networking\Plugins\PhotonNetwork\CustomTypes.cs" />
      <Compile Include="Assets\Photon Unity Networking\Plugins\PhotonNetwork\Enums.cs" />
      <Compile Include="Assets\Photon Unity Networking\Plugins\PhotonNetwork\Extensions.cs" />

@@ -6,9 +6,10 @@ using UnityEngine;
 [RequireComponent (typeof(AudioSource))]
 public class MusicController : MonoBehaviour {
 
+	public KeyCode volumnUpKey = KeyCode.Z;
+	public KeyCode volumnDownKey = KeyCode.X;
+
 	private AudioSource theBackMusicController;
-
-
 	public AudioClip theClipNow ;
 
 	//直接传入clip的模式
@@ -132,12 +133,14 @@ public class MusicController : MonoBehaviour {
 		if(theBackMusicController != null)
 		theBackMusicController.loop = true;
 		theBackMusicController.Play ();
-		Cursor.visible = false;//不显示鼠标
-	}
 
-	//注销，减少回调个数
-	// Update is called once per frame
-	//void Update () {
+	}
 		
-	//}
+	void Update () 
+	{
+		if (Input.GetKeyDown (volumnUpKey))
+			theBackMusicController.volume = Mathf.Clamp (theBackMusicController.volume+0.1f , 0f,1f);
+		if(Input .GetKeyDown(volumnDownKey))
+			theBackMusicController.volume = Mathf.Clamp (theBackMusicController.volume-0.1f , 0f,1f);
+	}
 }

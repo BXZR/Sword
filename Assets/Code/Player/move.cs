@@ -38,6 +38,11 @@ public class move : MonoBehaviour {
 	//游戏玩家引用
 	private PlayerBasic thePlayer;
 	PhotonView photonView;//网络控制单元
+	//有关跳跃的逻辑都在这里
+	private float jumpTimer = 0f;
+	private float jumpTimerMax= 1.1f;
+	public bool isJumping = false;
+	public bool isOverWall = false;//站在墙边可以进行多段跳跃
 
 	public void makeStart()//初始化方法，由总控单元统一进行初始化
 	{
@@ -159,10 +164,6 @@ public class move : MonoBehaviour {
 			theController.Move (transform.rotation *moveDirection);//真实地进行行动(因为使用的是characterController，因此使用坐标的方式似乎比较稳妥)
 	}
 
-	//有关跳跃的逻辑都在这里
-	private float jumpTimer = 0f;
-	private float jumpTimerMax= 1.1f;
-	public bool isJumping = false;
 
 
 	public void makeJump(bool useSP = true)
@@ -200,18 +201,33 @@ public class move : MonoBehaviour {
 		{
 
 			makeJump ();
-
-			 if(isJumping)
+			//小于一定的阀值就不可以“凌空提气”
+			//但是说实话“凌空提气的效果并不是非常的好”
+			if(thePlayer.ActerSp / thePlayer.ActerSpMax > 0.4f)
 			{
-				//小于一定的阀值就不可以“凌空提气”
-				//但是说实话“凌空提气的效果并不是非常的好”
-				if(thePlayer.ActerSp / thePlayer.ActerSpMax > 0.4f)
+				if(isOverWall  )
 				{
+					isOverWall = false;
 					overGroundTimer -= 0.05f;//减少重力持续，这样就像是继续向上用力冲
 					if (overGroundTimer < 0)
 						overGroundTimer = 0;
-					jumpTimer += 0.08f ;//如果正在跳跃就增加跳跃持续时间
+					jumpTimer += 0.15f ;//如果正在跳跃就增加跳跃持续时间
+					//耗蓝控制--------------------------------------------------
+					float spUse = thePlayer.ActerSpMax * 0.03f;//施展轻功是需要消耗真气的;
+					if(systemValues.modeIndex == 0)
+						UseSP(spUse);
+					if(systemValues.modeIndex == 1)//有些功能只在网络对战模式之下用就行
+						this.photonView.RPC("UseSP",PhotonTargets.All,spUse);
+					//-----------------------------------------------------------
 
+				}
+
+			  else if(isJumping)
+			   {
+					overGroundTimer -= 0.04f;//减少重力持续，这样就像是继续向上用力冲
+					if (overGroundTimer < 0)
+						overGroundTimer = 0;
+					jumpTimer += 0.07f ;//如果正在跳跃就增加跳跃持续时间
 					//耗蓝控制--------------------------------------------------
 					float spUse = thePlayer.ActerSpMax * 0.01f;//施展轻功是需要消耗真气的;
 					if(systemValues.modeIndex == 0)
@@ -221,10 +237,11 @@ public class move : MonoBehaviour {
 					//-----------------------------------------------------------
 
 				}
+
 			}
 		}
 		//如果正在跳跃
-		if (isJumping) 
+		if (isJumping ) 
 		{
 			//thePlayer.ActerSp -= thePlayer.ActerSpUp * Time.deltaTime;
 			jumpTimer -= Time.deltaTime;
@@ -402,5 +419,19 @@ public class move : MonoBehaviour {
 		theAnimatorOfPlayer = this.GetComponentInChildren<Animator> ();
 		if (this.gameObject.tag == "AI")
 			makeStart ();
+	}
+
+	void OnTriggerEnter(Collider A)
+	{
+		if (A.tag == "Wall") 
+		{
+			//print ("is over wall");
+			isOverWall = true;
+		} 
+		else 
+		{
+			isOverWall = false;
+		}
+
 	}
 }
