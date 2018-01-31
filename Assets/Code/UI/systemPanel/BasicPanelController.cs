@@ -17,10 +17,11 @@ public class BasicPanelController : MonoBehaviour {
 	public Text theExtraValueInformationText;//其余的战斗数值信息显示
 	public Text theBasicEffectInformationText;//战斗被动特性显示
 
+	private bool loaded = false;//是否已经加载完成，加载时只需要做一次就可以了
 	//头像图等等一些内容只需要加载一次就可以了
 	private  void  makeLoad()
 	{
-		if (systemValues.thePlayer != null) 
+		if ( loaded == false && systemValues.thePlayer != null) 
 		{
 			PlayerBasic thePlayer = systemValues.thePlayer;
 			string headName = systemValues.getHeadPictureName (thePlayer.ActerName);
@@ -36,6 +37,7 @@ public class BasicPanelController : MonoBehaviour {
 			//自己的技能效果获得一次也就够了
 			theBasicEffectInformationText.text = systemValues.getBasicBEEffectInformation ();
 			theExtraValueInformationText.text = systemValues.thePlayer.getPlayerInformation(false)+systemValues.thePlayer.getPlayerInformationExtra();
+			loaded = true;
 		}
 	}
 
@@ -46,9 +48,7 @@ public class BasicPanelController : MonoBehaviour {
 
 	void OnEnable () 
 	{
-		if(theHeadImage.sprite == null)
-			makeLoad();
-
+		makeLoad();
 		if(systemValues.thePlayer)
 		{
 			float theHpValue = systemValues.thePlayer.ActerHp / systemValues.thePlayer.ActerHpMax;

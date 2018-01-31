@@ -23,7 +23,7 @@ public class systemValues : MonoBehaviour {
 	public static string [] playerBackMusic = {"bahuangfu"  , "kai", "fightMusic", "canglangjianfu"};
 
 	//选人界面的逻辑
-	private static int indexNow =1;
+	private static int indexNow =2;
 	public static  void setIndexForPlayer(int indexIn)
 	{
 		indexNow = indexIn;
@@ -218,7 +218,7 @@ public class systemValues : MonoBehaviour {
 		effectBasic[] effects = thePlayer.GetComponents<effectBasic> ();
 		foreach (effectBasic ef in effects) 
 		{
-			ef.Init ();
+			//ef.Init ();
 			skillsInformation += ef.getInformation ();
 		}
 		return (BESkillColor  + skillsInformation + colorEnd);

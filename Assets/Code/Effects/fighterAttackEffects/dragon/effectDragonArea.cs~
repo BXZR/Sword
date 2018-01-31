@@ -5,7 +5,7 @@ using UnityEngine;
 public class effectDragonArea :  effectBasic 
 {
 
-	public float hpupOnBeAttack = 10f;
+	public float hpupOnBeAttack = 7f;
 	public float damageInPercentForUp = 0.1f;
 	public float spUseOnBeAttackPercent = 0.1f;
 	public float spUse = 5f;
@@ -33,7 +33,7 @@ public class effectDragonArea :  effectBasic
 		try
 		{
 			theEffectName = "密云不雨";
-			theEffectInformation = "聚集内力保护自身，在受到攻击时花费("+spUse +"+"+spUseOnBeAttackPercent*100+"%)当前斗气恢复("+hpupOnBeAttack +"+" +damageInPercentForUp*100+"%)伤害的生命\n";
+			theEffectInformation = "聚集内力保护自身，在受到攻击时花费("+spUse +"+"+spUseOnBeAttackPercent*100+"%)当前斗气恢复("+hpupOnBeAttack +"+" +damageInPercentForUp*100+"%伤害)的生命\n";
 			theEffectInformation += "此效果存在"+timerForLife+"秒且不可叠加，持续时间内最多生效"+countMax +"次";
 			makeStart ();
 			Destroy(this,timerForLife);
