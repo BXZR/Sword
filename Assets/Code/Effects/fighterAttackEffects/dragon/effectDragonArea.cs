@@ -5,9 +5,9 @@ using UnityEngine;
 public class effectDragonArea :  effectBasic 
 {
 
-	public float hpupOnBeAttack = 7f;
+	public float hpupOnBeAttack = 5f;
 	public float damageInPercentForUp = 0.1f;
-	public float spUseOnBeAttackPercent = 0.1f;
+	public float spUseOnBeAttackPercent = 0.08f;
 	public float spUse = 5f;
 	public int countMax = 5;
 	public float timerForLife = 25f;

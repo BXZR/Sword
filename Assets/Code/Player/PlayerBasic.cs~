@@ -27,7 +27,8 @@ public class PlayerBasic : MonoBehaviour {
 	//特殊战斗属性
 	public float ActerSuperBaldePercent=0f;//这个人物的暴击率
 	public float ActerSuperBaldeAdder=2f;//暴击时伤害的倍数
-	
+
+	public float ActerAttackAtPercent = 1f;//这个人物的命中率
 	public float ActerMissPercent=0f;//这个人物的闪避率
 	
 	public float ActerShielderPercent=0f;//这个人物的格挡率
@@ -77,7 +78,8 @@ public class PlayerBasic : MonoBehaviour {
 	//特殊战斗属性
 	public  float CActerSuperBaldePercent=0f;//这个人物的暴击率
 	public  float CActerSuperBaldeAdder=2f;//暴击时伤害的倍数
-		
+
+	public  float CActerAttackAtPercent = 1f;//这个人物的命中率
 	public  float CActerMissPercent=0f;//这个人物的闪避率
 
 	public  float CActerShielderPercent=0f;//这个人物的格挡率
@@ -149,7 +151,30 @@ public class PlayerBasic : MonoBehaviour {
 	//音效播放器
 	public audioPlayer theAudioPlayer;//自己定义的音频播放器组件
 	//值得注意的是声音的播放是在attackLink里面调用的，在这里保留引用是为了减少获取的次数
- 
+
+	//战斗状态标记，攻击或者受到攻击会刷新冷却时间
+	public bool isFighting = false;
+	public float fightingTimer = 7f;//战斗状态最少持续时间
+	public float fightingTimerMax = 7f;//战斗状态持续时间上限
+	//进入到战斗状态
+	public void getInFightState()
+	{
+		fightingTimer = fightingTimerMax;
+		isFighting = true;
+	}
+	//战斗状态刷新
+	public void fightStateUpdate()
+	{
+		if (isFighting) 
+		{
+			fightingTimer -= systemValues.updateTimeWait;
+			if (fightingTimer < 0) 
+			{
+				fightingTimer = fightingTimerMax;
+				isFighting = false;
+			}
+		}
+	}
 	//网络控制节点
 	PhotonView photonView;
 
@@ -237,6 +262,8 @@ public class PlayerBasic : MonoBehaviour {
 		   effectBasic[] EffectAim = thePlayerAim.GetComponentsInChildren<effectBasic> ();
 		    for (int i = 0; i < EffectAim.Length; i++)
 			EffectAim [i].OnBeAttack (this);
+           //额外的状态标记改变
+		   getInFightState();
 	}
 		
 	//有些攻击不想触发特效也不希望靠判断防止递归，就调用下面这两个方法
@@ -277,7 +304,8 @@ public class PlayerBasic : MonoBehaviour {
 				if(EffectAim [i].isExtraUse())
 				  EffectAim [i].OnBeAttack (this);
 			}
-
+		   //额外的状态标记改变
+		   getInFightState();
 	}
 		
 	public void OnBeAttack(float damage)
@@ -321,12 +349,18 @@ public class PlayerBasic : MonoBehaviour {
 				extraDamageForAnimation = 0;//消除自身攻击效果
 				DamageRead  = 0;//重新统计伤害
 			}
+			//额外的状态标记改变
+			getInFightState();
 		}
 	}
 
 
 	float getTrueDamage(PlayerBasic thePlayerAim, float extraDamage =0,bool withBasicDamageCanculate = true )//真正的计算伤害的方法，这个方法被“攻击”的时候调参数为攻击者经过计算的伤害
 	{
+		//根本就没有命中
+		if (Random.value > this.ActerAttackAtPercent)
+			return 0;
+		
 		if (Random.value < thePlayerAim.ActerMissPercent)
 		{
 			//攻击者暴击之后的特殊效果
@@ -404,8 +438,8 @@ public class PlayerBasic : MonoBehaviour {
 		string information = "";
 		information += "暴击率 "+(this.ActerSuperBaldePercent *100).ToString("f1")+"%   ";
 		information += "暴击伤害加成 "+(this.ActerSuperBaldeAdder*100).ToString("f1")+"%\n";
-		information += "闪避率 "+(this.ActerMissPercent *100).ToString("f0")+"%   ";
-		information += "格挡率 "+(this.ActerShielderPercent *100).ToString("f0")+"%   ";
+		information += "闪避率 "+(this.ActerMissPercent *100).ToString("f0")+"%   命中率"+(this.ActerAttackAtPercent*100).ToString("f0")+"%   ";
+		information += "格挡率 "+(this.ActerShielderPercent *100).ToString("f0")+"%   \n";
 		information += "格挡真实伤害减免 " + this.ActerShielderDamageMiuns.ToString ("f1")+"   ";
 		information += "格挡百分比伤害减免 " + (this. ActerShielderDamageMiunsPercent *100).ToString("f0")+"%   ";
 		information += "护盾上限" + (this.ActerShieldMaxPercent*100)+"%\n";
@@ -432,14 +466,21 @@ public class PlayerBasic : MonoBehaviour {
 		{
 			//默认机制就是每一次恢复每秒钟的生命恢复再检查是否死亡
 
+			//这一次循环可以调用的效果都在这里
+			effectBasic[] Effects = this.GetComponentsInChildren<effectBasic> ();
+
 			//护盾是有上限的 
 			if (ActerShieldHp > ActerHpMax * ActerShieldMaxPercent )
 				ActerShieldHp = ActerHpMax  * ActerShieldMaxPercent ;
 
-			if (ActerHp < ActerHpMax) {
-				ActerHp += ActerHpUp * systemValues.updateTimeWait;
-				if (ActerHp > ActerHpMax) {
-					ActerHp = ActerHpMax;	
+			if (ActerHp < ActerHpMax) 
+			{
+				float hpupValue = ActerHpUp * systemValues.updateTimeWait;
+				ActerHp += hpupValue;
+				for (int i = 0; i < Effects.Length; i++) 
+				{
+					Effects [i].OnHpUp ();
+					Effects [i].OnHpUp (hpupValue);
 				}
 			}
 			if (ActerHp < 0)
@@ -475,23 +516,36 @@ public class PlayerBasic : MonoBehaviour {
 					plaDeadAnimations ("dead");
 				}
 			}
-			if (ActerHp > ActerHpMax) {
-				ActerHp = ActerHpMax; //最后一个修正
-			}
+
 
 			//////////////////////////////////////////////
-			if (ActerSp < ActerSpMax) {
-
-				ActerSp += ActerSpUp * systemValues.updateTimeWait;
-				if (ActerSp > ActerSpMax) {
+			if (ActerSp < ActerSpMax) 
+			{
+				float spupValue = ActerSpUp * systemValues.updateTimeWait;
+				ActerSp += spupValue;
+				for (int i = 0; i < Effects.Length; i++) 
+				{
+					Effects [i].OnSpUp ();
+					Effects [i].OnSpUp (spupValue);
+				}
+				if (ActerSp > ActerSpMax)
+				{
 					ActerSp = ActerSpMax;	
 				}
 			}
-			if (ActerSp < 0) {
+
+			//统一的数值修正
+			if (ActerSp < 0) 
+			{
 				ActerSp = 0;	
 			}
-			if (ActerSp > ActerSpMax) {
+			if (ActerSp > ActerSpMax) 
+			{
 				ActerSp = ActerSpMax;
+			}
+			if (ActerHp > ActerHpMax) 
+			{
+				ActerHp = ActerHpMax; //最后一个修正
 			}
 			//此方法为物理碰撞的方法进行，但是对于动画的方法是一个阻碍，暂且注释
 			//flashWeapon ();//所有的武器共有冷却时间，攻击之后一定时间之内攻击无法命中
@@ -510,11 +564,11 @@ public class PlayerBasic : MonoBehaviour {
 			else
 				conNameCoolingTime = conNameCoolingTimeMax;//此处多次空转赋值实际上是一个很大的浪费
 
-			effectBasic[] Effects = this.GetComponentsInChildren<effectBasic> ();
 			for (int i = 0; i < Effects.Length; i++)
-			{
 				Effects [i] .effectOnUpdateTime ();
-			}
+			
+			//战斗状态的刷新管理
+			fightStateUpdate ();
 		}
 	}
 

@@ -8,6 +8,7 @@ public class effectSlowDamage  :effectBasic {
 	float effectTimer = 0;//生效时间
 	float effectTimeMax = 7f;//生效时间上限
 	float   damageMinus = 0.1f;//减少的伤害百分比
+	float attackAtMinus = 0.2f;
 	float hpmaxMinus = 100f;//暂时减少的生命上限
 	void Start () 
 	{
@@ -21,6 +22,8 @@ public class effectSlowDamage  :effectBasic {
 		{
 			thePlayer.ActerHpMax += hpmaxMinus;
 			thePlayer.CActerHpMax += hpmaxMinus;
+			thePlayer.ActerAttackAtPercent += attackAtMinus;
+			thePlayer.CActerAttackAtPercent += attackAtMinus;
 		}
 	}
 
@@ -38,12 +41,14 @@ public class effectSlowDamage  :effectBasic {
 	public override void Init ()
 	{
 		theEffectName = "封禁";
-		theEffectInformation ="目标输出伤害减少"+damageMinus*100+"%，并暂时减少"+hpmaxMinus+"生命上限\n持续"+effectTimeMax+"秒，冷却时间"+ timer+"秒";
+		theEffectInformation ="目标输出伤害减少"+damageMinus*100+"%，命中率减少"+attackAtMinus*100+"%,生命上限减少"+hpmaxMinus+"\n持续"+effectTimeMax+"秒，冷却时间"+ timer+"秒";
 		makeStart ();
 		if (thePlayer) 
 		{
 			thePlayer.ActerHpMax -= hpmaxMinus;
 			thePlayer.CActerHpMax -= hpmaxMinus;
+			thePlayer.ActerAttackAtPercent -= attackAtMinus;
+			thePlayer.CActerAttackAtPercent -= attackAtMinus;
 		}
 	} 
 }

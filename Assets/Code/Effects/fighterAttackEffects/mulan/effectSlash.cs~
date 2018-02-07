@@ -6,7 +6,7 @@ public class effectSlash :effectBasic{
 
 	float hpsuckAdd = 0.05f;
 	int ranNumber = 4; 
-	float addPercent = 0.10f;
+	float addPercent = 0.12f;
 
 	void Start ()
 	{

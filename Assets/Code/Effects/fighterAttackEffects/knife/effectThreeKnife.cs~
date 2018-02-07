@@ -5,7 +5,7 @@ using UnityEngine;
 public class effectThreeKnife : effectBasic {
 
 	int step = 0;//不同阶段的不同效果
-	float  timerForLive = 2f;//这个脚本的生存时间
+	float  timerForLive = 3f;//这个脚本的生存时间
 
 	//第一次
 	float aimDamageMinus = 0.25f;//削减15%伤害
@@ -13,10 +13,10 @@ public class effectThreeKnife : effectBasic {
 	PlayerBasic theAim ;//保留目标引用
 
 	//第二次
-	float acterhpUp = 20;//直接回复的生命值
+	float acterhpUp = 10;//直接回复的生命值
 	float actershieldHp = 15;//获得的护盾值
 	//第三次
-	float damagePercent = 0.04f;//追加的斩杀效果伤害百分比
+	float damagePercent = 0.03f;//追加的斩杀效果伤害百分比
 
 	void Start () 
 	{

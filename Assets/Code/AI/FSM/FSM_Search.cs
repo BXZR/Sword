@@ -95,7 +95,7 @@ public class FSM_Search : FSMBasic {
 		bool reachCheck = (randomAimPosition == Vector3.zero  || Vector3.Distance (new Vector3( this.theThis.transform.position.z,0,this.theThis.transform.position.z),new Vector3 ( randomAimPosition.x,0, randomAimPosition.z) )< 0.3f) ;
 
 		//路径控制
-		if (moveTimer < 0 || !theMoveController.hasPath) 
+		if (moveTimer < 0 || theMoveController && !theMoveController.hasPath) 
 		{
 			moveTimer = 3f;
 		  if (reachCheck )
