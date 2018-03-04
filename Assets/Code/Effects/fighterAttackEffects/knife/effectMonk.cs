@@ -7,6 +7,8 @@ public class effectMonk :effectBasic{
 	float basicDamage = 15f;//每一个单位能够给出的伤害
 	float timer = 4f;//每一个段时间才能够使用这个伤害
 	bool isUsed = false;
+	int  EMYCoutExtraEffect = 2;//多于这些敌人触发额外效果
+	int maxEMYCountForUse = 5;//最多触发层数
 	void Start ()
 	{
 		Init ();
@@ -36,9 +38,20 @@ public class effectMonk :effectBasic{
 	{
 		if (isUsed == false) 
 		{
-			float damage = getCount () * basicDamage;
+			int EMYCount = Mathf.Clamp(getCount (),0,maxEMYCountForUse);
+			float damage =  EMYCount  * basicDamage;
 			aim.ActerHp -= damage;
 			this.thePlayer.OnAttackWithoutEffect (aim, damage, true, true);
+
+			if (EMYCount > EMYCoutExtraEffect) 
+			{
+				thePlayer.ActerHp += damage;
+				//附加的各种效果
+				effectBasic [] effects = this.thePlayer.GetComponents<effectBasic> ();
+				foreach (effectBasic EF in effects)
+					EF.OnHpUp ( damage);
+			}
+
 			isUsed = true;
 		}
 	}
@@ -47,7 +60,7 @@ public class effectMonk :effectBasic{
 	{
 		//print ("灭却浮屠发动");
 		theEffectName = "灭却浮屠";
-		theEffectInformation ="根据身边敌人数量追加下一击的伤害，每存在一个敌人追加"+basicDamage+"真实伤害，冷却时间为"+timer+"秒";
+		theEffectInformation ="根据身边敌人数量追加下一击的伤害，每存在一个敌人追加"+basicDamage+"真实伤害\n如果身边敌人超过2个，额外真实伤害将转化为生命值\n额外伤害最多"+maxEMYCountForUse+"层，冷却时间"+ timer +"秒";
 		makeStart ();
  
 	}

@@ -35,10 +35,15 @@ public class effectZiyingSumu :effectBasic {
 		}
 	}
 
+	public override void OnAddShieldHp (float theSheildHpAdd = 0)
+	{
+		this.thePlayer.ActerSp += theSheildHpAdd * 0.17f;
+	}
+
 	public override void Init ()
 	{
 		theEffectName = "四方肃穆";
-		theEffectInformation ="将剑气交错于己身，增加"+attackAdd+"攻击力，受到攻击时回敬"+damage+"物理伤害,持续"+effectTimerMax+"秒，冷却时间"+ timer+"秒";
+		theEffectInformation ="将剑气交错于己身，增加"+attackAdd+"攻击力，受到攻击时回敬"+damage+"物理伤害\n增加任何护盾时恢复护盾值17%的斗气\n持续"+effectTimerMax+"秒，冷却时间"+ timer+"秒";
 		makeStart ();
 		if (thePlayer) 
 		{

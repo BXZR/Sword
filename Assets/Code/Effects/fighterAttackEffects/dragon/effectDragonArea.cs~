@@ -7,7 +7,7 @@ public class effectDragonArea :  effectBasic
 
 	public float hpupOnBeAttack = 5f;
 	public float damageInPercentForUp = 0.1f;
-	public float spUseOnBeAttackPercent = 0.08f;
+	public float spUseOnBeAttackPercent = 0.06f;
 	public float spUse = 5f;
 	public int countMax = 5;
 	public float timerForLife = 25f;
@@ -60,9 +60,10 @@ public class effectDragonArea :  effectBasic
 		if (this.thePlayer && countMax >=0 ) 
 		{
 			countMax--;
+			hpupOnBeAttack = hpupOnBeAttack + damage* damageInPercentForUp;
 			this.thePlayer.ActerSp *= (1 - spUseOnBeAttackPercent);
 			this.thePlayer.ActerSp -= spUse;
-			this.thePlayer.ActerHp += hpupOnBeAttack + damage* damageInPercentForUp;
+			this.thePlayer.ActerHp += hpupOnBeAttack;
 			//附加的各种效果
 			effectBasic [] effects = this.thePlayer.GetComponents<effectBasic> ();
 			foreach (effectBasic EF in effects)

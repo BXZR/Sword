@@ -62,6 +62,7 @@ public class PlayerBasic : MonoBehaviour {
 	public float ActerMoveSpeedPercent = 1f;//移动速度百分比，在移动的时候会有这个速度百分比加成
 
 	public float ActerShieldHp = 0;//护盾的生命值
+	public float ActerShieldHpSave = 10000;//护盾的生命值备份保存触发效果
 	public float ActerShieldMaxPercent = 0.15f;//护盾针对最大生命值的上限
 	//接下来是一些私有的战斗属性备份，用于计算值（作为例如护甲值提升10%这种的参数值计算）
 	//因为是私有方法，所以还要给出获取这个值和修改这个值的方法
@@ -460,6 +461,7 @@ public class PlayerBasic : MonoBehaviour {
 	//这个方法每一帧都会调用，刷新任务的属性
 	//并没有使用update方法而是使用invoke方法
 	//inovke的调用时间间隔由systemValues类进行统一配置
+
 	public void updateValue()
 	{
 		if (isStarted && isAlive) 
@@ -468,6 +470,12 @@ public class PlayerBasic : MonoBehaviour {
 
 			//这一次循环可以调用的效果都在这里
 			effectBasic[] Effects = this.GetComponentsInChildren<effectBasic> ();
+
+			//套护盾的额外效果
+			if(ActerShieldHp > ActerShieldHpSave)
+				for (int i = 0; i < Effects.Length; i++)
+					Effects [i] .OnAddShieldHp(ActerShieldHp - ActerShieldHpSave);
+			ActerShieldHpSave = ActerShieldHp;//保存备份数值
 
 			//护盾是有上限的 
 			if (ActerShieldHp > ActerHpMax * ActerShieldMaxPercent )

@@ -137,7 +137,9 @@ public class newMethodAttack : MonoBehaviour {
 		for (int i = 0; i < emys.Length; i++)//开始对相交球体探测物体进行排查
 		{ 
 			//print (emys [i].gameObject.name);
-			if (emys[i].GetComponent <PlayerBasic>() && emys [i].GetComponent <Collider>().gameObject != this.gameObject) //相交球最大的问题就是如果自身有碰撞体，自己也会被侦测到
+			PlayerBasic thePlayerAim = emys[i].GetComponent <PlayerBasic>();
+			//用alive标记减少在这里参与计算的单位数量
+			if (thePlayerAim && thePlayerAim.isAlive && emys [i].GetComponent <Collider>().gameObject != this.gameObject) //相交球最大的问题就是如果自身有碰撞体，自己也会被侦测到
 			{
 				//print ("name-"+ emys [i].name);
 				Vector3 thisToEmy = emys [i].transform.position - this.transform.position;//目标坐标减去自身坐标
@@ -148,14 +150,13 @@ public class newMethodAttack : MonoBehaviour {
 				float cosValue = (theVectorForward.x * theVectorToSearch.x + theVectorForward.y * theVectorToSearch.y);//因为已经单位化，就没必要再进行求模计算了
 				//print ("cosValue-" + cosValue);
 				/*
-				 * 先求出两个向量的模
+				    先求出两个向量的模
 					再求出两个向量的向量积
 					|a|=√[x1^2+y1^2]
 					|b|=√[x2^2+y2^2]
 					a*b=(x1,y1)(x2,y2)=x1x2+y1y2
 					cos=a*b/[|a|*|b|]
 					=(x1x2+y1y2)/[√[x1^2+y1^2]*√[x2^2+y2^2]]
-				 * 
 				*/
 				if (cosValue >= angleCosValue)//如果cos值大于基准值，认为这个就是应该被探测的目标
 				{

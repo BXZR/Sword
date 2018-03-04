@@ -30,6 +30,7 @@ public class effectBasic : MonoBehaviour {
 	virtual public void OnSuperBlade(PlayerBasic aim, float Damage = 0){}//暴击的时候调用
 	virtual public void OnMiss(PlayerBasic attacker){}//闪避的时候调用
 	virtual public void OnShield(PlayerBasic attacker,float damage = 0){}//格挡的时候调用
+	virtual public void OnAddShieldHp(float theSheildHpAdd = 0){}//增加护盾的时候的额外效果
 	//这个效果可以在中途更新，且更新方法每一种效果自己定义
 	//例如更新加长持续时间等等
 	virtual public void updateEffect(){}

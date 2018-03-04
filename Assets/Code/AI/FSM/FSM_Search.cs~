@@ -88,23 +88,21 @@ public class FSM_Search : FSMBasic {
 
 
 	private Vector3 randomAimPosition = Vector3.zero;
-	float moveTimer = 2f;//每隔一段时间做一次就行
+	float moveTimer = 1.75f;//每隔一段时间做一次就行
+	float moveTimerMax = 1.75f;//时间间隔备份
 	private void randomMove()
 	{
 		moveTimer -= Time.deltaTime;
-		bool reachCheck = (randomAimPosition == Vector3.zero  || Vector3.Distance (new Vector3( this.theThis.transform.position.z,0,this.theThis.transform.position.z),new Vector3 ( randomAimPosition.x,0, randomAimPosition.z) )< 0.3f) ;
-
+		Vector3 thisCheckVector = new Vector3 (this.theThis.transform.position.z, 0, this.theThis.transform.position.z);
+		Vector3 randomCheckVector = new Vector3 (randomAimPosition.x, 0, randomAimPosition.z);
+		bool reachCheck = (randomAimPosition == Vector3.zero  || Vector3.Distance (thisCheckVector,randomCheckVector)< 0.3f) ;
 		//路径控制
+		//没有路了就换一个目标走
 		if (moveTimer < 0 || theMoveController && !theMoveController.hasPath) 
 		{
-			moveTimer = 3f;
-		  if (reachCheck )
-			{
-				randomAimPosition = this.theThis.transform.position + new Vector3 (Random.Range (0f, 8f) - 2f, 0, Random.Range (0f, 8f) - 2f);
-				theMoveController.SetDestination (randomAimPosition);
-				 
-
-			}
+			moveTimer =  moveTimerMax;
+			randomAimPosition = this.theThis.transform.position + new Vector3 (Random.Range (0f, 8f)-4f , Random.Range (0f, 2f), Random.Range (0f, 8f)-4f );
+			theMoveController.SetDestination (randomAimPosition);
 		}
 		//动画控制
 		if (reachCheck )
@@ -138,7 +136,7 @@ public class FSM_Search : FSMBasic {
 		//找到了目标就转到下一个状态
 		else 
 		{
-			Debug.Log ("search to attack");
+			//Debug.Log ("search to attack");
 			FSM_Attack attack = new FSM_Attack ();
 			attack.makeState (this.theMoveController, this.theAttackLlinkController, this.theAnimator,this.theThis,this.theMainEMY);
 			return attack;

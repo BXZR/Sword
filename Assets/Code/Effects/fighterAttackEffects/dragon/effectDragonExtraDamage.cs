@@ -32,7 +32,7 @@ public class effectDragonExtraDamage : effectBasic
 		}
 		catch(System.Exception X)
 		{
-			print (X.Message);
+			print ("或跃在渊错误:"+X.Message);
 		}
 	}
 

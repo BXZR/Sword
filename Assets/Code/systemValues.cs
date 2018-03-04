@@ -222,6 +222,7 @@ public class systemValues : MonoBehaviour {
 		foreach (effectBasic ef in effects) 
 		{
 			//ef.Init ();
+			if(ef.isBE())
 			skillsInformation += ef.getInformation ();
 		}
 		return (BESkillColor  + skillsInformation + colorEnd);

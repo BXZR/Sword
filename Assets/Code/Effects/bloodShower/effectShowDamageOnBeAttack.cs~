@@ -103,7 +103,8 @@ public class effectShowDamageOnBeAttack : effectBasic
 	{
 		if (isOn)
 		{
-			if(upValue > 0)
+			//生命胡恢复效果的标识是需要门限的
+			if(upValue > 5)
 			makeShowForHpUp (upValue);
 		}
 	}

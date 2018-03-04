@@ -6,7 +6,7 @@ public class effectZiying :effectBasic{
 
 	float shieldPercentAdd = 0.05f;
 	float extraDamagePercent = 0.10f;
-	float spUpWhenNotFightingPercnet = 0.2f;
+	float spUpWhenNotFightingPercnet = 0.15f;
 	float timer = 15f;
 	float timerMax = 15f;
 	float area = 1f;//范围

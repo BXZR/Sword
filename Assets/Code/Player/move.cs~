@@ -15,7 +15,7 @@ public class move : MonoBehaviour {
 	public float speedNormal =0.6f;//一般移动的移动速度
 	public float speedRun =1.25f;//狂奔的移动速度
 	private float keyNow = 0f;//长按达到一秒钟才可以切换 这个是当前的计时器
-	private float keyTimer =2f;//长按达到一定时间才可以切换 
+	private float keyTimer =0.5f;//长按达到一定时间才可以切换，也就是奔跑的起步时间
 	public float jumpMaxHeight =1.5f;//跳跃最高高度
 
 	private CharacterController theController;//角色控制器
@@ -394,6 +394,12 @@ public class move : MonoBehaviour {
 		forwardA = Input.GetAxis (forwardAxisName);
 		upA = Input.GetAxis (upAxisName);
 
+		if (Mathf.Abs (forwardA) < 0.6f)
+			forwardA = 0f;
+		if (Mathf.Abs (upA) < 0.6f)
+			upA = 0f;
+		
+		
 		if (!isStarted)
 			return;
 

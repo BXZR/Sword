@@ -8,12 +8,12 @@ public class effectThreeKnife : effectBasic {
 	float  timerForLive = 3f;//这个脚本的生存时间
 
 	//第一次
-	float aimDamageMinus = 0.25f;//削减15%伤害
+	float aimDamageMinus = 0.25f;//削减伤害百分比
 	float damageMinus = 0;//寄存被削减的攻击力
 	PlayerBasic theAim ;//保留目标引用
 
 	//第二次
-	float acterhpUp = 10;//直接回复的生命值
+	float acterhpUp = 15;//直接回复的生命值
 	float actershieldHp = 15;//获得的护盾值
 	//第三次
 	float damagePercent = 0.03f;//追加的斩杀效果伤害百分比
@@ -68,6 +68,7 @@ public class effectThreeKnife : effectBasic {
 				float damage = (aim.ActerHpMax - aim.ActerHp) * damagePercent;
 				aim.ActerHp -= damage;
 				this.thePlayer.OnAttackWithoutEffect (aim, damage, true, true);
+				step++;
 			}
 		}
 

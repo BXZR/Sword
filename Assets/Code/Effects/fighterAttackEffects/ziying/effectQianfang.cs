@@ -9,7 +9,8 @@ public class effectQianfang : effectBasic {
 	float arrowLife = 0.2f;// 弹矢生存时间
 	float lastingTime =0.3f;//根据规则产生的脚本覆盖时间间隔，这个时间越短，但是发射频率越高，也就是攻速越快
 	public int arrowCounts =3;//发射的剑气数量
-	public float hpup = 0.07f;//吸收的生命值
+	public float hpup = 0.05f;//吸收的生命值百分比
+	public float hpupTrueUseExtra = 3f;//吸收的生命值
 	float angleForArrow = 20;//剑气角度
 	GameObject theArrow ;//真正的弹矢
 
@@ -26,7 +27,7 @@ public class effectQianfang : effectBasic {
 	{
 		
 		theEffectName = "千方残光剑";
-		theEffectInformation ="向前方锥形发射"+arrowCounts+"束特殊剑气\n这些剑气拥可触发攻击效果并有额外"+hpup*100+"%生命偷取\n每一束剑气持续"+arrowLife+"秒";
+		theEffectInformation ="向前方锥形发射"+arrowCounts+"束特殊剑气\n技能触发攻击效果并有额外（"+hpup*100+"%+"+hpupTrueUseExtra+"）生命偷取\n每一束剑气持续"+arrowLife+"秒";
 		makeStart ();
 		//print ("气剑指");
 		//没有控制者就不发
@@ -57,7 +58,7 @@ public class effectQianfang : effectBasic {
 	} 
 	public override void OnAttack (PlayerBasic aim, float TrueDamage)
 	{
-		float hpupHP = TrueDamage * hpup;
+		float hpupHP = TrueDamage * hpup + hpupTrueUseExtra;
 		this.thePlayer.ActerHp += hpupHP;
 		//附加的各种效果
 		effectBasic [] effects = this.thePlayer.GetComponents<effectBasic> ();

@@ -11,7 +11,8 @@ public class FSMStage : MonoBehaviour {
 	private FSMBasic theStateNow = new FSM_Search();
 	private PlayerBasic thethis; 
 	private Animator theAnimator;
-
+	public float AIThinkTimer = 2f;//AI每隔一段时间再进行思考
+	public float AIThinkTimerMax = 2f;
 	bool isDeadMake = false;
 
 	void Start ()
@@ -30,15 +31,22 @@ public class FSMStage : MonoBehaviour {
 	{
 		if (theStateNow != null && thethis.isAlive) 
 		{
+			//AI操作
 			//print ("AI is acting");
 			theStateNow.actInThisState ();
-			//print ("stateNowID = "+ theStateNow.geID());
-			FSMBasic theStateNew = theStateNow.moveToNextState ();//思考进入到下一个状态或许可以慢一点进行
-			if (theStateNew.geID() != theStateNow.geID()) 
+			//AI转换状态
+			AIThinkTimer -= Time.deltaTime;
+			if (AIThinkTimer < 0) 
 			{
-				theStateNow.OnFSMStateEnd ();//结束效果
-				theStateNow = theStateNew;
-				theStateNew.OnFSMStateStart ();//开始效果
+				AIThinkTimer = AIThinkTimerMax;
+				//print ("stateNowID = "+ theStateNow.geID());
+				FSMBasic theStateNew = theStateNow.moveToNextState ();//思考进入到下一个状态或许可以慢一点进行
+				if (theStateNew.geID () != theStateNow.geID ()) 
+				{
+					theStateNow.OnFSMStateEnd ();//结束效果
+					theStateNow = theStateNew;
+					theStateNew.OnFSMStateStart ();//开始效果
+				}
 			}
 		}
 		else if (isDeadMake == false)
@@ -46,7 +54,8 @@ public class FSMStage : MonoBehaviour {
 			isDeadMake = true;
 			this.GetComponent <NavMeshAgent> ().enabled = false;
 			this.gameObject.AddComponent<Rigidbody> ();
-			Destroy (this.gameObject ,2f);
+			this.gameObject.AddComponent<BoxCollider> ();
+			Destroy (this.gameObject ,15f);//尸体保留久一点似乎更好玩（尸体也是路障啊）
 		}
 	}
 }

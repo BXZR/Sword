@@ -25,7 +25,7 @@ public class effectMulanBaoFa : effectBasic
 		//注意的是，最大生命值每回合都会更新的，这个最大生命值的削弱仅仅限制于本回合(如果削减最大斗气值就太变态了)
 		theEffectInformation = "额外获得" + superBladePercentAdd * 100 + "%的暴击率，持" +
 		"续" + effectTimer + "秒\n并且，在暴击时造成额外伤害的" + hpDamagePercent * 100 + "%(最多" + DamageUseMax * hpDamagePercent + ")将转化为自身生命,冷却时间" + lifeTimer + "秒";
-		theEffedctExtraInformation = "(特性：裂天奏，冷却中使用这个技能可以减少冷却时间"+ timeCoolingMinus+"秒,并返还"+ spAdder +"斗气)";
+		theEffedctExtraInformation = "(特性：飞鸟，冷却中使用这个技能可以减少冷却时间"+ timeCoolingMinus+"秒,并返还"+ spAdder +"斗气)";
 		makeStart ();
 		if (this.thePlayer) 
 		{
