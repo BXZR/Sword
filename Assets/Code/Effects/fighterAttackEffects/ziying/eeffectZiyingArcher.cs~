@@ -35,7 +35,7 @@ public class eeffectZiyingArcher : effectBasic {
 	public override void Init ()
 	{
 		theEffectName = "气剑指";
-		theEffectInformation ="将剑气凝于手指激射而出用作普攻\n可对所有剑气命中目标造成普攻物理伤害\n每一束剑气持续"+arrowLife+"秒";
+		theEffectInformation ="将剑气凝于手指激射而出用作普攻\n可对所有剑气命中目标造成普攻物理伤害\n剑气最多对三个目标造成伤害，持续"+arrowLife+"秒 ";
 		makeStart ();
 		//print ("气剑指");
 		//没有控制者就不发

@@ -6,7 +6,9 @@ public class extraWeapon : MonoBehaviour {
 
 	private PlayerBasic thePlayer;//引用保存，各种信息调用
 	private bool canMakeDamage = true;
-
+	//这个额外武器最多能够对多少个目标造成伤害
+	//因为有些武器是可以穿透的，但是效果不会相同
+	public int damageCount = 3;
 
 	void Update()
 	{
@@ -63,7 +65,7 @@ public class extraWeapon : MonoBehaviour {
 			if (playerAim == null)
 				playerAim = collisioner.gameObject.GetComponentInChildren<PlayerBasic> ();
 
-			if (thePlayer && 　playerAim && playerAim != thePlayer &&  attackAims .Contains(thePlayer) == false)
+			if (thePlayer && 　playerAim && playerAim != thePlayer &&  attackAims .Contains(thePlayer) == false && attackAims.Count < damageCount)
 			{
 				attackAims.Add (playerAim);
 				//print (playerAim.ActerHpSuck );
