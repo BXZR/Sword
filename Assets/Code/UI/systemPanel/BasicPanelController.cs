@@ -36,7 +36,6 @@ public class BasicPanelController : MonoBehaviour {
 			thePlayerName.text = systemValues.thePlayer.ActerName;
 			//自己的技能效果获得一次也就够了
 			theBasicEffectInformationText.text = systemValues.getBasicBEEffectInformation ();
-			theExtraValueInformationText.text = systemValues.thePlayer.getPlayerInformation(false)+systemValues.thePlayer.getPlayerInformationExtra();
 			loaded = true;
 		}
 	}
@@ -50,7 +49,8 @@ public class BasicPanelController : MonoBehaviour {
 	{
 		makeLoad();
 		if(systemValues.thePlayer)
-		{
+		{	
+			theExtraValueInformationText.text = systemValues.thePlayer.getPlayerInformation(false)+systemValues.thePlayer.getPlayerInformationExtra();
 			float theHpValue = systemValues.thePlayer.ActerHp / systemValues.thePlayer.ActerHpMax;
 			float theSpValue = systemValues.thePlayer.ActerSp / systemValues.thePlayer.ActerSpMax;
 			theHpSlider.value = theHpValue;//生命值 + 护盾值

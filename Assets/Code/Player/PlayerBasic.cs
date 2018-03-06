@@ -40,6 +40,9 @@ public class PlayerBasic : MonoBehaviour {
 	public float ActerWuliReDamage=0f;//这个人物的物理反伤
 	public float ActerWuliIner=0f;//这个人物的固定物理穿透
 	public float ActerWuliInerPercent=0f;//这个人物百分比穿透  （先计算固定穿透，然后计算百分比穿透）
+
+	public float ActerDamageMinusPercent = 0.0f;//一直存在的伤害减免百分比
+	public float ActerDamageMinusValue = 0.0f;//一直存在的伤害减免数值
 	
 	//物理防御属性
 	public float ActerWuliShield=150f;//这个人物的物理护甲
@@ -94,6 +97,8 @@ public class PlayerBasic : MonoBehaviour {
 	public  float CActerWuliIner=0f;//这个人物的固定物理穿透
 	public  float CActerWuliInerPercent=0f;//这个人物百分比穿透  （先计算固定穿透，然后计算百分比穿透）
 
+	public float CActerDamageMinusPercent = 0.0f;//一直存在的伤害减免百分比
+	public float CActerDamageMinusValue = 0.0f;//一直存在的伤害减免数值
 
 	//物理防御属性
 	public float CActerWuliShield=150f;//这个人物的物理护甲
@@ -209,7 +214,10 @@ public class PlayerBasic : MonoBehaviour {
 		CActerWuliReDamage=ActerWuliReDamage;//这个人物的物理反伤
 		CActerWuliIner=ActerWuliIner;//这个人物的固定物理穿透
 		CActerWuliInerPercent=ActerWuliInerPercent;//这个人物百分比穿透  （先计算固定穿透，然后计算百分比穿透）
-		
+
+		CActerDamageMinusValue = ActerDamageMinusValue;//百分比减伤
+		CActerDamageMinusPercent = ActerDamageMinusPercent;//百分比减伤
+
 		//物理防御属性
 		CActerWuliShield=ActerWuliShield;//这个人物的物理护甲
 
@@ -319,6 +327,11 @@ public class PlayerBasic : MonoBehaviour {
 		
 		if (this.isAlive )//只有在活着的时候才可以被攻击
 		{
+			//计算减伤
+			damage -= ActerDamageMinusValue;
+			damage *= (1 - ActerDamageMinusPercent);
+			damage = damage < 0 ? 0 : damage;
+
 			DamageRead += damage;//累计伤害
 
 			//如果护盾比较厚，就吸收所有的伤害
@@ -423,35 +436,35 @@ public class PlayerBasic : MonoBehaviour {
 		//information += "=======" + this.ActerName+"=======\n\n";
 		if (showHpMax)//因为有些时候生命值上限这种显示特殊用slider来做，就没有必要多次显示了
 		{
-			information += "生命值上限 " + (int)this.ActerHpMax + "   ";
-			information += "斗气值上限 " + (int)this.ActerSpMax + "\n";
+			information += "生命值上限  " + (int)this.ActerHpMax + "   ";
+			information += "斗气值上限  " + (int)this.ActerSpMax + "\n";
 		}
-		information += "生命恢复 " + this.ActerHpUp .ToString ("f2")+"/秒   ";
-		information += "斗气回复 " + this.ActerSpUp .ToString ("f2") + "/秒\n";
-		information += "护甲 " + this.ActerWuliShield .ToString ("f1")+"   ";
-		information += "伤害 " + this.ActerWuliDamage .ToString("f1")+"   ";
-		information += "反伤 "+this.ActerWuliReDamage.ToString("f1")+"\n";
+		information += "生命恢复  " + this.ActerHpUp .ToString ("f2")+"/秒   ";
+		information += "斗气回复  " + this.ActerSpUp .ToString ("f2") + "/秒\n";
+		information += "护甲  " + this.ActerWuliShield .ToString ("f1")+"   ";
+		information += "伤害  " + this.ActerWuliDamage .ToString("f1")+"   ";
+		information += "反伤  "+this.ActerWuliReDamage.ToString("f1")+"\n";
 		return information;
 	}
 
 	public string getPlayerInformationExtra()
 	{
 		string information = "";
-		information += "暴击率 "+(this.ActerSuperBaldePercent *100).ToString("f1")+"%   ";
-		information += "暴击伤害加成 "+(this.ActerSuperBaldeAdder*100).ToString("f1")+"%\n";
-		information += "闪避率 "+(this.ActerMissPercent *100).ToString("f0")+"%   命中率"+(this.ActerAttackAtPercent*100).ToString("f0")+"%   ";
-		information += "格挡率 "+(this.ActerShielderPercent *100).ToString("f0")+"%   \n";
-		information += "格挡真实伤害减免 " + this.ActerShielderDamageMiuns.ToString ("f1")+"   ";
-		information += "格挡百分比伤害减免 " + (this. ActerShielderDamageMiunsPercent *100).ToString("f0")+"%   ";
-		information += "护盾上限" + (this.ActerShieldMaxPercent*100)+"%\n";
-		information += "真实穿透 "+this. ActerWuliIner.ToString("f1")+"   ";
-		information += "百分比穿透 "+(this.ActerWuliInerPercent*100).ToString("f1")+"%\n";
-		information += "真实生命偷取 "+this.ActerHpSuck.ToString("f1")+"   ";
-		information += "伤害/生命转化 "+(this.ActerHpSuckPercent*100).ToString("f0")+"%\n";
-		information += "额外伤害 "+(this.ActerDamageAdderPercent*100).ToString("f1")+"%   ";
-		information += "额外伤害加成 "+(this.ActerDamageAdder).ToString("f1")+"\n";
-		information += "攻击距离 "+this.theAttackAreaLength*100+"%   ";
-		information += "攻击范围 " + this.theAttackAreaAngel.ToString ("f1") +"   ";
+		information += "暴击率  "+(this.ActerSuperBaldePercent *100).ToString("f1")+"%   ";
+		information += "暴击伤害加成  "+(this.ActerSuperBaldeAdder*100).ToString("f1")+"%\n";
+		information += "闪避率  "+(this.ActerMissPercent *100).ToString("f0")+"%   命中率"+(this.ActerAttackAtPercent*100).ToString("f0")+"%   ";
+		information += "格挡率  "+(this.ActerShielderPercent *100).ToString("f0")+"%   \n";
+		information += "格挡伤害减免  " + this.ActerShielderDamageMiuns.ToString ("f1")+ "+"+(this. ActerShielderDamageMiunsPercent *100).ToString("f0")+"%   ";
+		information += "护盾上限  " + (this.ActerShieldMaxPercent*100)+"%\n";
+		information += "护甲穿透  "+this. ActerWuliIner.ToString("f1")+"+"+(this.ActerWuliInerPercent*100).ToString("f1")+"%\n";
+		information += "伤害/生命转化  "+this.ActerHpSuck.ToString("f1")+"+"+(this.ActerHpSuckPercent*100).ToString("f0")+"%\n";
+		information += "伤害/斗气转化  "+this.ActerSpSuck.ToString("f1")+"+"+(this.ActerSpSuckPercent*100).ToString("f0")+"%\n";
+		information += "额外伤害  "+(this.ActerDamageAdder).ToString("f1")+"+"+(this.ActerDamageAdderPercent*100).ToString("f1")+"%\n";
+		information += "额外减伤  "+(this.ActerDamageMinusValue).ToString("f1")+"+"+(this.ActerDamageMinusPercent*100).ToString("f1")+"%\n";
+		string attackLengthShow =  (this.theAttackAreaLength >0) ? this.theAttackAreaLength*100+"%   ": "[特殊]    ";
+		string attackAreaShow = (this.theAttackAreaAngel >0) ? this.theAttackAreaAngel.ToString ("f1")  : "[特殊]";
+		information += "攻击距离  "+attackLengthShow ;
+		information += "攻击范围  " + attackAreaShow;
 
 
 		return information;
@@ -652,7 +665,7 @@ public class PlayerBasic : MonoBehaviour {
 				ActerShielderDamageMiuns, ActerShielderDamageMiunsPercent,
 				ActerWuliDamage, ActerWuliReDamage, ActerWuliIner, ActerWuliInerPercent,
 				ActerWuliShield,  ActerHpSuck, ActerHpSuckPercent, ActerSpSuck , ActerSpSuckPercent,
-				ActerDamageAdderPercent , ActerDamageAdder , ActerMoveSpeedPercent, ActerShieldHp
+				ActerDamageAdderPercent , ActerDamageAdder , ActerMoveSpeedPercent, ActerShieldHp , ActerDamageMinusValue , ActerDamageAdderPercent
 			);
 		}
 	}
@@ -725,7 +738,8 @@ public class PlayerBasic : MonoBehaviour {
 		float ActerShielderDamageMiunsIn ,float  ActerShielderDamageMiunsPercentIn,
 		float ActerWuliDamageIn, float ActerWuliReDamageIn, float ActerWuliInerIn, float ActerWuliInerPercentIn,
 		float ActerWuliShieldIn,  float ActerHpSuckIn, float  ActerHpSuckPercentIn, float ActerSpSuckIn , float ActerSpSuckPercentIn,
-		float ActerDamageAdderPercentIn , float ActerDamageAdderIn , float ActerMoveSpeedPercentIn , float ActerShieldHpIn
+		float ActerDamageAdderPercentIn , float ActerDamageAdderIn , float ActerMoveSpeedPercentIn , float ActerShieldHpIn,
+		float ActerDamageMinusValueIn , float ActerDamageMinusPercentIn
 	)
 	{
 		//最基本的属性生命法力和名字
@@ -774,6 +788,8 @@ public class PlayerBasic : MonoBehaviour {
 
 		ActerShieldHp = ActerShieldHpIn;//护盾的生命值
 
+		ActerDamageMinusValue = ActerDamageMinusValueIn;//真实减伤
+		ActerDamageMinusPercent = ActerDamageMinusPercentIn;//百分比减伤
 	}
  
 }
