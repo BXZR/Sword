@@ -184,8 +184,8 @@ public class attackLink : MonoBehaviour {
 				else 
 				{
 					//法力透支的计算过程
-					float hpMinus = this.spUse - thePlayer.ActerSp;
-					thePlayer.ActerHp -= hpMinus * 1.2f;
+					float hpMinus = (this.spUse - thePlayer.ActerSp)*1.5f;
+					thePlayer.ActerHp -= hpMinus;
 					thePlayer.ActerSp = 0;
 					if (thePlayer.ActerHp < 10)
 						thePlayer.ActerHp = 10f;//保护机制，在格斗游戏中没有透支身亡一说
@@ -193,6 +193,9 @@ public class attackLink : MonoBehaviour {
 					effectBasic[] Effects = this.transform.root.GetComponentsInChildren<effectBasic> ();
 					for (int i = 0; i < Effects.Length; i++)
 						Effects [i].OnUseSP (this.spUse);
+					//法力透支也算伤害
+					for (int i = 0; i < Effects.Length; i++)
+						Effects [i].OnBeAttack (hpMinus);
 				}
 			}
 

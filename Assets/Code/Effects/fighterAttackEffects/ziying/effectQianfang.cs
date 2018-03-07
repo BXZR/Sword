@@ -9,9 +9,9 @@ public class effectQianfang : effectBasic {
 	float arrowLife = 0.15f;// 弹矢生存时间
 	float lastingTime =0.3f;//根据规则产生的脚本覆盖时间间隔，这个时间越短，但是发射频率越高，也就是攻速越快
 	public int arrowCounts =3;//发射的剑气数量
-	public float hpup = 0.05f;//吸收的生命值百分比
-	public float hpupTrueUseExtra = 3f;//吸收的生命值
-	float angleForArrow = 20;//剑气角度
+	public float hpup = 0.07f;//吸收的生命值百分比
+	public float hpupTrueUseExtra = 5f;//吸收的生命值
+	float angleForArrow = 25;//剑气角度
 	GameObject theArrow ;//真正的弹矢
 
 	void Start ()
