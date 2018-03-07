@@ -23,7 +23,7 @@ public class systemValues : MonoBehaviour {
 	public static string [] playerBackMusic = {"bahuangfu"  , "kai", "fightMusic", "canglangjianfu"};
 
 	//选人界面的逻辑
-	private static int indexNow =3;
+	private static int indexNow =1;
 	public static  void setIndexForPlayer(int indexIn)
 	{
 		indexNow = indexIn;
@@ -231,7 +231,8 @@ public class systemValues : MonoBehaviour {
 	//所有的颜色标签都在这里设置
 	public static string normalColor = "<color=#000000>";//什么都不加成的颜色 黑色
 	public static string BESkillColor  = "<color=#FFFF8F>";//黄色
-	public static string SkillColor = "<color=#28FF28>";//绿色
+	public static string SkillColorForSelf = "<color=#FF5809>";//橙色
+	public static string SkillColorForEnemy = "<color=#28FF28>";//绿色
 	public static string SkillExtraColor = "<color=#FF359A>";//粉色
 	public static string colorEnd = "</color>";
 

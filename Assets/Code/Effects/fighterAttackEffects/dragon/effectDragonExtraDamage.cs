@@ -25,7 +25,7 @@ public class effectDragonExtraDamage : effectBasic
 		try
 		{
 			//print("<或跃在渊>正在初始化");
-			theEffectName = "或跃在渊";
+			theEffectName = "损则有孚";
 			theEffectInformation = "标记目标，使这个目标受到的下" +  damageCount  + "次攻击伤害提升" + damageAddPercent * 100 + "%，对同一目标有"+timer+"秒的冷却时间";
 			makeStart ();
 			Destroy (this,timer);
@@ -35,7 +35,7 @@ public class effectDragonExtraDamage : effectBasic
 			print ("或跃在渊错误:"+X.Message);
 		}
 	}
-
+		
 
 	//这是一个主动的技能
 	//附加给目标敌人的脚本

@@ -54,27 +54,29 @@ public class skillPanelController : MonoBehaviour {
 		if (string.IsNullOrEmpty (theAttacklink.conNameToSELF) == false) 
 		{
 			theButton.gameObject.AddComponent (System.Type.GetType (theAttacklink.conNameToSELF) );
-			effectBasic theselfEffect = theButton.GetComponent <effectBasic> ();
+			//effectBasic theselfEffect = theButton.GetComponent <effectBasic> ();
+			effectBasic theselfEffect = (effectBasic)theButton.GetComponent (System.Type.GetType (theAttacklink.conNameToSELF));
 			theselfEffect.Init ();
-			information += "发动可以触发[" + systemValues.SkillColor + theselfEffect.theEffectName + systemValues.colorEnd +"]";
-			skillInformation += systemValues.SkillColor + theselfEffect.getInformation ()+systemValues.colorEnd;
+			information += "发动可以触发[" + systemValues.SkillColorForSelf + theselfEffect.theEffectName + systemValues.colorEnd +"]";
+			skillInformation += systemValues.SkillColorForSelf+ theselfEffect.getInformation ()+systemValues.colorEnd;
 			skillInformation += "\n";
 			skillInformation += systemValues.SkillExtraColor + theselfEffect.getExtraInformation () + systemValues.colorEnd;
-			skillInformation += "\n\n";
-			Destroy (theselfEffect);
+			//skillInformation += "\n";
+			Destroy (theButton.GetComponent <effectBasic> ());
 		}
 		if (string.IsNullOrEmpty (theAttacklink.conNameToEMY) == false) 
 		{
 			theButton.gameObject.AddComponent (System.Type.GetType (theAttacklink.conNameToEMY) );
-			effectBasic theEMYEffect = theButton.GetComponent <effectBasic> ();
+			//effectBasic theEMYEffect = theButton.GetComponent <effectBasic> ();
+			effectBasic theEMYEffect = (effectBasic)theButton.GetComponent (System.Type.GetType (theAttacklink.conNameToEMY));
 			theEMYEffect.Init ();
 			if (string.IsNullOrEmpty (information) == false)
 				information += "\n";
-			information += "命中可以触发[" + systemValues.SkillColor+ theEMYEffect.theEffectName + systemValues.colorEnd+"]";
+			information += "命中可以触发[" + systemValues.SkillColorForEnemy+ theEMYEffect.theEffectName + systemValues.colorEnd+"]";
 		
 			if (string.IsNullOrEmpty (skillInformation) == false)
 				skillInformation += "\n";
-			skillInformation +=  systemValues.SkillColor +  theEMYEffect.getInformation () +systemValues.colorEnd;
+			skillInformation +=  systemValues.SkillColorForEnemy+  theEMYEffect.getInformation () +systemValues.colorEnd;
 			skillInformation += "\n";
 			skillInformation += systemValues.SkillExtraColor + theEMYEffect.getExtraInformation () + systemValues.colorEnd;
 			skillInformation += "\n\n";
