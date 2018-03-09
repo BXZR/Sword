@@ -43,6 +43,7 @@ public class effectBasic : MonoBehaviour {
 
 
 	public float extraTimer = 0;//这个是给extraEffectMaker提供的时间
+	public bool isEffecting = true;//因为使用的是脚本方式，因此身上有脚本未必就是在生效，也有可能是在冷却，所以需要添加一个标记
 	public  virtual  string getInformation ()
 	{
 		if (!isShowing())

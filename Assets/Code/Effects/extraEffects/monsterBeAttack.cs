@@ -59,6 +59,7 @@ public class monsterBeAttack : effectBasic{
 					this.GetComponent <FSMStage> ().enabled = true;
 				if (this.GetComponent <NavMeshAgent> ())
 					this.GetComponent <NavMeshAgent> ().isStopped = false;
+				isEffecting = false;//标记，已经失效
 			}
 		}
 	}

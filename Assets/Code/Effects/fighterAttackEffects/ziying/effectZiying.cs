@@ -75,6 +75,7 @@ public class effectZiying :effectBasic{
 			{
 				timer = timerMax;
 				canExtraDamage = true;
+
 			}
 		}
 	}

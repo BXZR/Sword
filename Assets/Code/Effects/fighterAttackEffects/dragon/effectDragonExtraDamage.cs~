@@ -45,17 +45,21 @@ public class effectDragonExtraDamage : effectBasic
 		{
 			//print ("count");
 			damageCount--;
-			if (damageCount >= 0) 
+			if (damageCount >= 0)
 			{
 				//print ("dragon extra damage");
 				float damageTrue = damage * damageAddPercent;
 				this.thePlayer.ActerHp -= damageTrue;
 				effectBasic[] effects = this.thePlayer.GetComponents<effectBasic> ();
-				foreach (effectBasic ef in effects) 
+				foreach (effectBasic ef in effects)
 				{
 					if (ef != this)
 						ef.OnBeAttack (damageTrue);
 				}
+			} 
+			else 
+			{
+				isEffecting = false;//标记，已经失效
 			}
 		}
 	}

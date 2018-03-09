@@ -6,10 +6,10 @@ public class effectDragonArea :  effectBasic
 {
 
 	public float hpupOnBeAttack = 5f;
-	public float damageInPercentForUp = 0.1f;
+	public float damageInPercentForUp = 0.02f;
 	public float spUseOnBeAttackPercent = 0.03f;
-	public float spUse = 5f;
-	public int countMax = 5;
+	public float spUse = 2f;
+	public int countMax = 4;
 	public float timerForLife = 25f;
 	GameObject theEffect;//特效
 
@@ -33,7 +33,7 @@ public class effectDragonArea :  effectBasic
 		try
 		{
 			theEffectName = "密云不雨";
-			theEffectInformation = "聚集内力保护自身，在受到攻击时花费("+spUse +"+"+spUseOnBeAttackPercent*100+"%)当前斗气恢复("+hpupOnBeAttack +"+" +damageInPercentForUp*100+"%伤害)的生命\n";
+			theEffectInformation = "聚集内力保护自身，在受到攻击时花费("+spUse +"+"+spUseOnBeAttackPercent*100+"%)当前斗气恢复("+hpupOnBeAttack +"+" +damageInPercentForUp*100+"%已损失)的生命\n";
 			theEffectInformation += "此效果存在"+timerForLife+"秒且不可叠加，持续时间内最多生效"+countMax +"次";
 			makeStart ();
 			Destroy(this,timerForLife);
@@ -60,17 +60,20 @@ public class effectDragonArea :  effectBasic
 		if (this.thePlayer && countMax >=0 ) 
 		{
 			countMax--;
-			hpupOnBeAttack = hpupOnBeAttack + damage* damageInPercentForUp;
+			float hpup  = hpupOnBeAttack + (thePlayer.ActerHpMax - thePlayer.ActerHp) * damageInPercentForUp;
 			this.thePlayer.ActerSp *= (1 - spUseOnBeAttackPercent);
 			this.thePlayer.ActerSp -= spUse;
-			this.thePlayer.ActerHp += hpupOnBeAttack;
+			this.thePlayer.ActerHp += hpup;
 			//附加的各种效果
 			effectBasic [] effects = this.thePlayer.GetComponents<effectBasic> ();
 			foreach (effectBasic EF in effects)
-				EF.OnHpUp (hpupOnBeAttack);
+				EF.OnHpUp (hpup);
 
-			if(theEffect && countMax <0)
+			if (theEffect && countMax < 0) 
+			{
 				Destroy (theEffect);
+				isEffecting = false;//标记，已经失效
+			}
 		}
 	}
 

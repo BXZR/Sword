@@ -88,6 +88,7 @@
      <Compile Include="Assets\Code\Player\attackLinkController.cs" />
      <Compile Include="Assets\Code\Player\move.cs" />
      <Compile Include="Assets\Code\Player\newMethodAttack.cs" />
+     <Compile Include="Assets\Code\UI\basicShow\effectFlashPanel.cs" />
      <Compile Include="Assets\Code\UI\basicShow\uiShowsForBasic.cs" />
      <Compile Include="Assets\Code\UI\startAndSelect\GameStartButton.cs" />
      <Compile Include="Assets\Code\UI\startAndSelect\sceneSkipButton.cs" />
@@ -100,6 +101,7 @@
      <Compile Include="Assets\Code\bloodSlider\BasicMethod\BloodBasic.cs" />
      <Compile Include="Assets\Code\bloodSlider\BasicMethod\BloodScaner.cs" />
      <Compile Include="Assets\Code\controllers\gameStarter.cs" />
+     <Compile Include="Assets\Code\controllers\informationMouseShow.cs" />
      <Compile Include="Assets\Code\netWork\PUNConnect.cs" />
      <Compile Include="Assets\Code\netWork\onConnectFlash.cs" />
      <Compile Include="Assets\Code\props\popMaker.cs" />

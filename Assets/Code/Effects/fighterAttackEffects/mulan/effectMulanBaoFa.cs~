@@ -58,6 +58,7 @@ public class effectMulanBaoFa : effectBasic
 			this.thePlayer.ActerSuperBaldePercent -= superBladePercentAdd;
 			this.thePlayer.CActerSuperBaldePercent -= superBladePercentAdd;
 			Destroy (theEffect);
+			isEffecting = false;//标记，已经失效
 		}
 		lifeTimer -= systemValues.updateTimeWait;
 		if (lifeTimer < 0)

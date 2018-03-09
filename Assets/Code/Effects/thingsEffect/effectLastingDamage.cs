@@ -15,6 +15,9 @@ public class effectLastingDamage : effectBasic{
 
 	private  void  makeDamage()
 	{
+		theEffectName = "剧毒";
+		theEffectInformation = count +"秒内每秒减少"+ theDamage +"生命值";
+
 		this.thePlayer.ActerHp -= theDamage;
 		//附加的各种效果
 		effectBasic [] effects = this.thePlayer.GetComponents<effectBasic> ();

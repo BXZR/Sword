@@ -35,6 +35,7 @@ public class effectZiyingSumu :effectBasic {
 			thePlayer.ActerDamageMinusPercent -= damageMinusPercent;
 			thePlayer.CActerDamageMinusPercent -= damageMinusPercent;
 			Destroy (theEffect);
+			isEffecting = false;
 		}
 	}
 

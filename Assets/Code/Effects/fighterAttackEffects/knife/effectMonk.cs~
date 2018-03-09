@@ -53,6 +53,7 @@ public class effectMonk :effectBasic{
 			}
 
 			isUsed = true;
+			isEffecting = false;//标记，已经失效
 		}
 	}
 

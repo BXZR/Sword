@@ -12,6 +12,9 @@ public class effectHpUp : effectBasic{
 	void Start ()
 	{
 		hpupPerSecond = hpupMax / timerMax;
+		theEffectName = "生命回复";
+		theEffectInformation = timer+"秒内回复共"+ hpupMax +"生命";
+
 		makeStart ();
 		Destroy (this, timerMax);
 		InvokeRepeating ("makeHpUpEffect",0f,1f);

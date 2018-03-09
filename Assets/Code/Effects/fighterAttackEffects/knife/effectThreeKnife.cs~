@@ -58,17 +58,20 @@ public class effectThreeKnife : effectBasic {
 				step++;
 			} 
 
-			if (step == 1)
-			{//第二次，偷取生命值
+			if (step == 1) {//第二次，偷取生命值
 				hpup ();
 				step++;
 			} 
-			else if (step == 2)
+			else if (step == 2) 
 			{
 				float damage = (aim.ActerHpMax - aim.ActerHp) * damagePercent;
 				aim.ActerHp -= damage;
 				this.thePlayer.OnAttackWithoutEffect (aim, damage, true, true);
 				step++;
+			} 
+			else
+			{
+				isEffecting = false;//标记，已经失效
 			}
 		}
 

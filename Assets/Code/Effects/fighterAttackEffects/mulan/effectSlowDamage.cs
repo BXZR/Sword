@@ -29,13 +29,22 @@ public class effectSlowDamage  :effectBasic {
 
 	public override void effectOnUpdateTime ()
 	{
-		effectTimer += systemValues.updateTimeWait;
+		if (effectTimer < effectTimeMax) 
+		{
+			effectTimer += systemValues.updateTimeWait;
+		} 
+		else 
+		{
+			isEffecting = false;
+		}
 	}
 
 	public override void OnAttack (PlayerBasic aim, float TrueDamage)
 	{
-		if(effectTimer < effectTimeMax)
+		if (effectTimer < effectTimeMax) 
+		{
 			aim.ActerHp += TrueDamage * damageMinus;
+		}
 	}
 
 	public override void Init ()
