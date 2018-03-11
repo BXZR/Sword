@@ -1,13 +1,15 @@
 ﻿<Properties StartupItem="Assembly-CSharp.csproj">
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Unity.Instance.Unity Editor" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Code\controllers\informationMouseShow.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Code\Effects\fighterAttackEffects\ziying\effectZiyingSumu.cs">
     <Files>
-      <File FileName="Assets\Code\Effects\fighterAttackEffects\dragon\effectDragonMiss.cs" Line="1" Column="1" />
-      <File FileName="Assets\Code\UI\systemPanel\Skill\skillPanelController.cs" Line="1" Column="1" />
-      <File FileName="Assets\Code\systemValues.cs" Line="1" Column="1" />
-      <File FileName="Assets\Code\Effects\fighterAttackEffects\dragon\effectDragonExtraDamage.cs" Line="1" Column="1" />
-      <File FileName="Assets\Code\UI\basicShow\effectFlashPanel.cs" Line="1" Column="1" />
-      <File FileName="Assets\Code\controllers\informationMouseShow.cs" Line="96" Column="4" />
+      <File FileName="Assets\Code\AI\FSM\FSM_RunAfter.cs" Line="1" Column="1" />
+      <File FileName="Assets\Code\Player\newMethodAttack.cs" Line="1" Column="1" />
+      <File FileName="Assets\Code\AI\FSM\FSM_Search.cs" Line="1" Column="1" />
+      <File FileName="Assets\Code\AI\FSM\FSMStage.cs" Line="1" Column="1" />
+      <File FileName="Assets\Code\AI\FSM\FSM_Jump.cs" Line="1" Column="1" />
+      <File FileName="Assets\Code\AI\FSM\FSMBasic.cs" Line="1" Column="1" />
+      <File FileName="Assets\Code\Player\PlayerBasic.cs" Line="528" Column="6" />
+      <File FileName="Assets\Code\Effects\fighterAttackEffects\ziying\effectZiyingSumu.cs" Line="12" Column="33" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

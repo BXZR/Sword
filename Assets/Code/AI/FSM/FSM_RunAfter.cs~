@@ -51,4 +51,24 @@ public class FSM_RunAfter : FSMBasic {
 		}
 		return this;
 	}
+
+	public override void OnChangeToThisState ()
+	{
+		Collider [] AIs = Physics.OverlapSphere (this.theThis.transform .position , 1f);
+		for (int i = 0; i < AIs.Length; i++) 
+		{
+			FSMStage theStage = AIs [i].GetComponent <FSMStage> ();
+			if (AIs [i].tag == "AI" && theStage) 
+			{
+				//ID = 4表示还在search，这个时候应该把自己的敌人通知给身边的单位
+				if (theStage.theStateNow.geID () == 4 || theStage.theStateNow.geID () == 2) 
+				{
+					FSM_RunAfter runafter = new FSM_RunAfter ();
+					runafter.makeState (this.theMoveController, this.theAttackLlinkController,this.theAnimator, this.theThis,this.theEMY);
+					theStage.theStateNow = runafter;
+					theStage.theStateNow.OnChangeToThisState ();
+				}
+			}
+		}
+	}
 }

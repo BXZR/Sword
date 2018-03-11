@@ -7,9 +7,9 @@ public class effectZiyingSumu :effectBasic {
 	float timer = 20f;//总持续时间，其实也就是冷却时间
 	float effectTime = 0f;//累加计时器，超过max就无效了
 	float effectTimerMax = 10f;//最长生效时间上限
-	float damage = 8f;//回敬的物理伤害
+	float damage = 7f;//回敬的物理伤害
 	float attackAdd = 10f;//增加的攻击力
-	float damageMinusPercent = 0.15f;//增加的百分比减伤
+	float damageMinusPercent = 0.10f;//增加的百分比减伤
 	GameObject theEffect;//特效
 
 	void Start () 

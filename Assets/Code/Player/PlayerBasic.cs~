@@ -526,7 +526,7 @@ public class PlayerBasic : MonoBehaviour {
 				}
 				catch 
 				{
-					print ("组件缺失或者不必存在这个组件");
+					//print ("组件缺失或者不必存在这个组件");
 				}
 				if (systemValues.modeIndex == 1 && photonView!= null)
 				{

@@ -20,8 +20,6 @@ public class FSMBasic  {
 	//runafter 3
 	//search 4
 
-
-
 	public void makeState(NavMeshAgent theMoveControllerIn , attackLinkController theAttacklinkControllerIn , Animator theAnimatorIn,PlayerBasic thethisIn,PlayerBasic theEMYIn = null)
 	{
 		theMoveController = theMoveControllerIn;
@@ -31,32 +29,16 @@ public class FSMBasic  {
 		theAnimator = theAnimatorIn;
 	}
 
-	public virtual int geID()
-	{
-		return 0;
-	}
-
+	public virtual int geID(){return 0;}
 	//这个状态的开始阶段应该做什么
-	public virtual void OnFSMStateStart()
-	{
-	}
-
+	public virtual void OnFSMStateStart(){}
 	//这个状态的结束阶段应该做什么
-	public virtual void OnFSMStateEnd()
-	{
-		
-	}
-
+	public virtual void OnFSMStateEnd(){}
 	//在这个状态下需要做什么
-	public virtual void  actInThisState()
-	{
-		
-	}
-
+	public virtual void  actInThisState(){}
 	//思考转换到下一个状态
 	//返回下一个状态，这个状态可以是自身
-	public virtual FSMBasic moveToNextState()
-	{
-		return this;
-	}
+	public virtual FSMBasic moveToNextState(){return this;}
+	//状态转换的时候会发生一次的事情
+	public virtual void  OnChangeToThisState(){}
 }
