@@ -61,7 +61,7 @@ public class effectMonk :effectBasic{
 	{
 		//print ("灭却浮屠发动");
 		theEffectName = "灭却浮屠";
-		theEffectInformation ="根据身边敌人数量追加下一击的伤害，每存在一个敌人追加"+basicDamage+"真实伤害\n如果身边敌人超过2个，额外真实伤害将转化为生命值\n额外伤害最多"+maxEMYCountForUse+"层，冷却时间"+ timer +"秒";
+		theEffectInformation ="下一击追加(身边敌人数量×"+basicDamage+"真实伤害)\n若身边敌人超过2个，额外伤害可用于治疗自身\n额外伤害最多"+maxEMYCountForUse+"层，冷却时间"+ timer +"秒";
 		makeStart ();
  
 	}

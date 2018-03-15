@@ -14,7 +14,7 @@ public class effectThreeKnife : effectBasic {
 
 	//第二次
 	float acterhpUp = 25;//直接回复的生命值
-	float actershieldHp = 15;//获得的护盾值
+	float actershieldHp = 20;//获得的护盾值
 	//第三次
 	float damagePercent = 0.03f;//追加的斩杀效果伤害百分比
 

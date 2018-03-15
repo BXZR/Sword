@@ -197,32 +197,33 @@ public class newMethodAttack : MonoBehaviour {
 	//真正的攻击方法
 	private void Attack( float makeDamage)
 	{
-
+		//如果makeDamage是负数，就说明制作获得效果，但是不攻击
 		float theDistanceCheck = thePlayer.theAttackAreaLength;
 		if (makeDamage >= 0) 
 		{
 			theDistanceCheck += makeDamage;
-		}
-		searchAIMs ( thePlayer.theAttackAreaAngel , theDistanceCheck);
 
-		//print ("theEMY.count " + theEMY.Count);
-		for (int i = 0; i < theEMY.Count; i++)
-		{
+			searchAIMs (thePlayer.theAttackAreaAngel, theDistanceCheck);
 
-			theDistance = Vector3.Distance (thePlayer.transform.position, theEMY [i].transform.position);
-			//print (theDistanceCheck);
-			if (theDistance <= theDistanceCheck) 
+			//print ("theEMY.count " + theEMY.Count);
+			for (int i = 0; i < theEMY.Count; i++) 
 			{
-				if (thePlayer && theEMY[i]) 
-				{
-					if (makeDamage >= 0)
-					{//有些时候仅仅是增加脚本，例如“斗气爆发”不具备攻击效果
-						thePlayer.OnAttack (theEMY[i], 0, false);//造成直接的伤害
-						extraDamageEffect (theEMY[i]);//添加额外的计算脚本，每个脚本的效果由脚本自己决定
-						//print(theEMY[i].name+" is being attacked");
-					}
-				}
 
+				theDistance = Vector3.Distance (thePlayer.transform.position, theEMY [i].transform.position);
+				//print (theDistanceCheck);
+				if (theDistance <= theDistanceCheck)
+				{
+					if (thePlayer && theEMY [i]) 
+					{
+						if (makeDamage >= 0)
+						{//有些时候仅仅是增加脚本，例如“斗气爆发”不具备攻击效果
+							thePlayer.OnAttack (theEMY [i], 0, false);//造成直接的伤害
+							extraDamageEffect (theEMY [i]);//添加额外的计算脚本，每个脚本的效果由脚本自己决定
+							//print(theEMY[i].name+" is being attacked");
+						}
+					}
+
+				}
 			}
 		}
 	}

@@ -7,7 +7,7 @@ public class effectMulanBaoFa : effectBasic
 	public float superBladePercentAdd = 0.25f;
 	public float effectTimer = 12f;//生效时间
 	public float lifeTimer = 30f;//总持续时间，也是冷却时间
-	public float hpDamagePercent = 0.20f;//暴击额外伤害转化生命
+	public float hpDamagePercent = 0.40f;//暴击额外伤害转化生命
 	public float DamageUseMax = 60;//伤害中生效的部分上限
 	bool opened = true;//是否开启
 	public float timeCoolingMinus =2f;//冷却时间使用就减少冷却时间

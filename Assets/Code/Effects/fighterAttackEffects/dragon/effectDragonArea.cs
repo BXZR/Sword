@@ -4,13 +4,13 @@ using UnityEngine;
 
 public class effectDragonArea :  effectBasic 
 {
-
+	public float shieldAdd = 20f;
 	public float hpupOnBeAttack = 5f;
-	public float damageInPercentForUp = 0.02f;
+	public float damageInPercentForUp = 0.03f;
 	public float spUseOnBeAttackPercent = 0.03f;
-	public float spUse = 2f;
+	public float spUse = 3f;
 	public int countMax = 4;
-	public float timerForLife = 25f;
+	public float timerForLife = 22f;
 	GameObject theEffect;//特效
 
 	void Start () 
@@ -33,8 +33,9 @@ public class effectDragonArea :  effectBasic
 		try
 		{
 			theEffectName = "密云不雨";
-			theEffectInformation = "聚集内力保护自身，在受到攻击时花费("+spUse +"+"+spUseOnBeAttackPercent*100+"%)当前斗气恢复("+hpupOnBeAttack +"+" +damageInPercentForUp*100+"%已损失)的生命\n";
-			theEffectInformation += "此效果存在"+timerForLife+"秒且不可叠加，持续时间内最多生效"+countMax +"次";
+			theEffectInformation = "立即获得"+shieldAdd+"护盾，并获得额外特效：\n";
+			theEffectInformation += "受到攻击时自动消耗("+spUse +"+"+spUseOnBeAttackPercent*100+"%当前斗气)\n这些斗气将用于恢复("+hpupOnBeAttack +"+" +damageInPercentForUp*100+"%已损生命)\n";
+			theEffectInformation += "此效果存在"+timerForLife+"秒且不可叠加\n持续时间内最多生效"+countMax +"次";
 			makeStart ();
 			Destroy(this,timerForLife);
 
@@ -43,6 +44,7 @@ public class effectDragonArea :  effectBasic
 				theEffect = GameObject.Instantiate<GameObject> (Resources.Load<GameObject> ("effects/dragonHPShield"));
 				theEffect.transform.SetParent (this.thePlayer.transform);
 				theEffect.transform.localPosition = new Vector3 (0, 1.25f, 0);
+				thePlayer.ActerShieldHp += shieldAdd;
 			}
 
 		}
