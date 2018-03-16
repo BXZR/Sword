@@ -60,13 +60,18 @@ public class effectQianfang : effectBasic {
 					theArrow.transform.forward = theArrow.transform.forward;
 					Destroy (theArrow, arrowLife);
 					Destroy (this.GetComponent (this.GetType ()), lastingTime);
-					isEffecting = false;
+					Invoke ("shutEffecting" , arrowLife);
 				}
 			}
 		}
 
 	} 
 
+
+	void shutEffecting()
+	{
+		isEffecting = false;
+	}
 
 	public override void updateEffect ()
 	{
@@ -90,12 +95,16 @@ public class effectQianfang : effectBasic {
 
 	public override void OnAttack (PlayerBasic aim, float TrueDamage)
 	{
-		float hpupHP = TrueDamage * hpup + hpupTrueUseExtra;
-		this.thePlayer.ActerHp += hpupHP;
-		//附加的各种效果
-		effectBasic [] effects = this.thePlayer.GetComponents<effectBasic> ();
-		foreach (effectBasic EF in effects)
-			EF.OnHpUp ( hpupHP);
+		//只有特殊剑气才会有这些效果
+		if (isEffecting) 
+		{
+			float hpupHP = TrueDamage * hpup + hpupTrueUseExtra;
+			this.thePlayer.ActerHp += hpupHP;
+			//附加的各种效果
+			effectBasic[] effects = this.thePlayer.GetComponents<effectBasic> ();
+			foreach (effectBasic EF in effects)
+				EF.OnHpUp (hpupHP);
+		}
 	}
 
 
