@@ -610,24 +610,12 @@ public class PlayerBasic : MonoBehaviour {
 	}
 
 
-
-	private void OnUpdateExtra()
-	{
-		effectBasic [] theEffect = this.GetComponents<effectBasic> ();
-		for (int i = 0; i < theEffect.Length; i++)
-			theEffect [i]. effectOnUpdateTime ();
-	}
-
-
 	public void makeStart()//初始化方法，由总控单元统一进行初始化
 	{
 		//这个应该是最先初始化的，因为有一些声音可能需要提前使用
 		theAudioPlayer = this.GetComponent <audioPlayer> ();
 		startCValues();//因为只有服务器上面的英雄才会使用这些参数
 		InvokeRepeating("updateValue",0,systemValues .updateTimeWait);//每隔一秒钟计算额外的计算脚本
-		//所有的刷新（除了一些额外的效果需要实时计算之外）都用到这个参数进行
-		//这是一个初步的优化策略
-		InvokeRepeating("OnUpdateExtra" , 0 , systemValues.updateTimeWait);
 
 		if (systemValues.modeIndex == 1) 
 		{

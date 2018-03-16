@@ -12,6 +12,8 @@ public class effectFlashPanel : MonoBehaviour {
 
 	public GameObject theEffectShowButton;
 
+
+	//这是一种很好实现的思路，但是也有致命缺点：开销太大并且增加额外显示不方便
 	//更新方法
 	//每间隔一定时间刷新就可以，用Invoke
 	private void updateBuffShow()
@@ -34,6 +36,12 @@ public class effectFlashPanel : MonoBehaviour {
 					theButton.GetComponentInChildren<Text> ().text = theEffectbasics [i].theEffectName;
 					if (theEffectbasics [i].isEffecting == false)
 						theButton.GetComponentInChildren<Text> ().text += "\n[失效]";
+					Image front = theButton.transform.Find ("CoolingFrontPicture").GetComponent<Image> ();
+					front.fillAmount = theEffectbasics [i].getEffectTimerPercent ();
+					if (theEffectbasics [i].isEffecting)
+						front.color = Color.yellow;
+					else
+						front.color = Color.gray;
 				}
 			}
 		}
@@ -42,7 +50,7 @@ public class effectFlashPanel : MonoBehaviour {
 
 	void Start ()
 	{
-		InvokeRepeating ("updateBuffShow" , 0f , 0.2f);	
+		InvokeRepeating ("updateBuffShow" , 0f , systemValues.updateTimeWait);	
 	}
 	
 

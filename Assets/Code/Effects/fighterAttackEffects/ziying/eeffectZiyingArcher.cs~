@@ -8,7 +8,6 @@ public class eeffectZiyingArcher : effectBasic {
 	GameObject Arrow;//弹矢引用保存
 	Vector3 forward;
 	float arrowLife = 0.2f;// 弹矢生存时间
-	float lastingTime =0.05f;//根据规则产生的脚本覆盖时间间隔，这个时间越短，但是发射频率越高，也就是攻速越快
 
 	GameObject theArrow ;//真正的弹矢
 
@@ -34,6 +33,8 @@ public class eeffectZiyingArcher : effectBasic {
 	}
 	public override void Init ()
 	{
+		lifeTimerAll = 0.5f;
+		timerForEffect = 0.5f;
 		theEffectName = "气剑指";
 		theEffectInformation ="将剑气凝于手指激射而出用作普攻\n可对所有剑气命中目标造成普攻物理伤害\n剑气最多对三个目标造成伤害，持续"+arrowLife+"秒 ";
 		makeStart ();
@@ -53,12 +54,17 @@ public class eeffectZiyingArcher : effectBasic {
 
 			theArrow.transform.forward = thePlayer.transform.forward;
 			Destroy (theArrow, arrowLife);
-			Destroy (this.GetComponent (this.GetType ()), lastingTime);
+			Destroy (this.GetComponent (this.GetType ()), lifeTimerAll);
 		}
 
 	} 
 
- 
+	public override void effectOnUpdateTime ()
+	{
+		addTimer ();
+		//print ("timer add = "+ timerForAdd);
+	}
+
 	//public override void onAttackAction ()
 	//{
 

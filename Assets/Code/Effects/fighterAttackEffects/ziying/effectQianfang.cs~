@@ -7,7 +7,6 @@ public class effectQianfang : effectBasic {
 	GameObject Arrow;//弹矢引用保存
 	Vector3 forward;
 	float arrowLife = 0.16f;// 弹矢生存时间
-	float lastingTime =6f;//根据规则产生的脚本覆盖时间间隔，这个时间越短，但是发射频率越高，也就是攻速越快
 	public int arrowCounts =4;//发射的剑气数量
 	public float hpup = 0.08f;//吸收的生命值百分比
 	public float hpupTrueUseExtra = 5f;//吸收的生命值
@@ -26,10 +25,11 @@ public class effectQianfang : effectBasic {
 	}
 	public override void Init ()
 	{
-		
+		lifeTimerAll = 6f;
+		timerForEffect = 0.2f;
 		theEffectName = "千方残光剑";
 		theEffectInformation ="向前方锥形发射"+arrowCounts+"束特殊剑气\n技能触发攻击效果并有额外（"+hpup*100+"%+"+hpupTrueUseExtra+"）生命偷取\n每束剑气最多对三个目标造成伤害，持续"+arrowLife+"秒" +
-			"\n冷却时间为" + lastingTime +"秒，冷却中使用此技可释放普通剑气";
+			"\n冷却时间为" + lifeTimerAll +"秒，冷却中使用此技可释放普通剑气";
 		makeStart ();
 		//print ("气剑指");
 		//没有控制者就不发
@@ -59,7 +59,7 @@ public class effectQianfang : effectBasic {
 					
 					theArrow.transform.forward = theArrow.transform.forward;
 					Destroy (theArrow, arrowLife);
-					Destroy (this.GetComponent (this.GetType ()), lastingTime);
+					Destroy (this.GetComponent (this.GetType ()), lifeTimerAll);
 					Invoke ("shutEffecting" , arrowLife);
 				}
 			}
@@ -67,6 +67,12 @@ public class effectQianfang : effectBasic {
 
 	} 
 
+
+
+	public override void effectOnUpdateTime ()
+	{
+		addTimer ();
+	}
 
 	void shutEffecting()
 	{

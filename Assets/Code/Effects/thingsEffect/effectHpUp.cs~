@@ -4,22 +4,28 @@ using UnityEngine;
 
 public class effectHpUp : effectBasic{
 
-	float timer = 0f;
-	float timerMax = 3f;
+
 	float hpupMax = 210f;
 	float hpupPerSecond = 0;
 
 	void Start ()
 	{
-		hpupPerSecond = hpupMax / timerMax;
+		lifeTimerAll = 3f;
+		timerForEffect = 3f;
+		hpupPerSecond = hpupMax / lifeTimerAll;
 		theEffectName = "生命回复";
-		theEffectInformation = timer+"秒内回复共"+ hpupMax +"生命";
+		theEffectInformation = lifeTimerAll+"秒内回复共"+ hpupMax +"生命";
 
 		makeStart ();
-		Destroy (this, timerMax);
+		Destroy (this, lifeTimerAll);
 		InvokeRepeating ("makeHpUpEffect",0f,1f);
 	}
 
+	public override void effectOnUpdateTime ()
+	{
+		addTimer ();
+		//print ("timer add = "+ timerForAdd);
+	}
 
 	void makeHpUpEffect()
 	{

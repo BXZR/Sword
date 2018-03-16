@@ -44,6 +44,31 @@ public class effectBasic : MonoBehaviour {
 
 	public float extraTimer = 0;//这个是给extraEffectMaker提供的时间
 	public bool isEffecting = true;//因为使用的是脚本方式，因此身上有脚本未必就是在生效，也有可能是在冷却，所以需要添加一个标记
+	public float lifeTimerAll = 0f;//这个脚本的生存时间，被子类继承使用并且用于显示的计算
+	public float timerForAdd = 0;//这个效果已经存在了多少时间
+	public float timerForEffect = -1;//这个效果真正生效的时间长度。如果为负数就是一直会生效
+
+
+	//计时器计算，这个对于每一个有时间要求的来说都是必要的
+	public void addTimer()
+	{
+		timerForAdd += systemValues.updateTimeWait;
+	}
+
+	public float getEffectTimerPercent ()
+	{
+		//timerForEffect 即意味着有计时器
+		if (timerForEffect > 0) 
+		{
+			//生效，就是生效的百分比
+			if(timerForAdd < timerForEffect)
+			return timerForAdd / timerForEffect;
+			//冷却，就是冷却的百分比，也即是剩下的时间
+			return  (timerForAdd - timerForEffect) / (lifeTimerAll - timerForEffect);
+		}
+		return  0;
+	}
+
 	public  virtual  string getInformation ()
 	{
 		if (!isShowing())

@@ -4,16 +4,13 @@ using UnityEngine;
 
 public class effectSlowDamage  :effectBasic {
 
-	float timer = 15f;//总持续时间，其实也就是冷却时间
-	float effectTimer = 0;//生效时间
-	float effectTimeMax = 7f;//生效时间上限
 	float   damageMinus = 0.1f;//减少的伤害百分比
 	float attackAtMinus = 0.2f;
 	float hpmaxMinus = 100f;//暂时减少的生命上限
 	void Start () 
 	{
 		Init ();
-		Destroy (this,timer);
+		Destroy (this , lifeTimerAll);
 	}
 
 	void OnDestroy()
@@ -29,9 +26,9 @@ public class effectSlowDamage  :effectBasic {
 
 	public override void effectOnUpdateTime ()
 	{
-		if (effectTimer < effectTimeMax) 
+		if (timerForAdd < lifeTimerAll ) 
 		{
-			effectTimer += systemValues.updateTimeWait;
+			addTimer ();
 		} 
 		else 
 		{
@@ -41,7 +38,7 @@ public class effectSlowDamage  :effectBasic {
 
 	public override void OnAttack (PlayerBasic aim, float TrueDamage)
 	{
-		if (effectTimer < effectTimeMax) 
+		if (timerForAdd < timerForEffect) 
 		{
 			aim.ActerHp += TrueDamage * damageMinus;
 		}
@@ -49,8 +46,10 @@ public class effectSlowDamage  :effectBasic {
 
 	public override void Init ()
 	{
+		lifeTimerAll = 25f;
+		timerForEffect = 7f;
 		theEffectName = "封禁";
-		theEffectInformation ="目标输出伤害减少"+damageMinus*100+"%，命中率减少"+attackAtMinus*100+"%,生命上限减少"+hpmaxMinus+"\n持续"+effectTimeMax+"秒，冷却时间"+ timer+"秒";
+		theEffectInformation ="目标输出伤害减少"+damageMinus*100+"%，命中率减少"+attackAtMinus*100+"%,生命上限减少"+hpmaxMinus+"\n持续"+timerForEffect+"秒，冷却时间"+lifeTimerAll+"秒";
 		makeStart ();
 		if (thePlayer) 
 		{

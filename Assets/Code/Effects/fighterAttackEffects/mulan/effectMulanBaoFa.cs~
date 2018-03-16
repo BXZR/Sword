@@ -5,11 +5,8 @@ using UnityEngine;
 public class effectMulanBaoFa : effectBasic
 {
 	public float superBladePercentAdd = 0.25f;
-	public float effectTimer = 12f;//生效时间
-	public float lifeTimer = 30f;//总持续时间，也是冷却时间
 	public float hpDamagePercent = 0.40f;//暴击额外伤害转化生命
 	public float DamageUseMax = 60;//伤害中生效的部分上限
-	bool opened = true;//是否开启
 	public float timeCoolingMinus =2f;//冷却时间使用就减少冷却时间
 	public float spAdder = 10f;//冷却中使用时候返还的斗气
 	GameObject theEffect;//特效
@@ -21,10 +18,13 @@ public class effectMulanBaoFa : effectBasic
 
 	public override void Init ()
 	{
+
+		timerForEffect = 12f;//生效时间
+		lifeTimerAll = 30f;//总持续时间，也是冷却时间
 		theEffectName = "裂天";
 		//注意的是，最大生命值每回合都会更新的，这个最大生命值的削弱仅仅限制于本回合(如果削减最大斗气值就太变态了)
 		theEffectInformation = "额外获得" + superBladePercentAdd * 100 + "%的暴击率，持" +
-		"续" + effectTimer + "秒\n并且，在暴击时造成额外伤害的" + hpDamagePercent * 100 + "%(最多" + DamageUseMax * hpDamagePercent + ")将转化为自身生命,冷却时间" + lifeTimer + "秒";
+			"续" + timerForEffect + "秒\n并且，在暴击时造成额外伤害的" + hpDamagePercent * 100 + "%(最多" + DamageUseMax * hpDamagePercent + ")将转化为自身生命,冷却时间" + lifeTimerAll + "秒";
 		theEffedctExtraInformation = "(特性：飞鸟，冷却中使用这个技能可以减少冷却时间"+ timeCoolingMinus+"秒,并返还"+ spAdder +"斗气)";
 		makeStart ();
 		if (this.thePlayer) 
@@ -51,17 +51,15 @@ public class effectMulanBaoFa : effectBasic
  
 	public override void effectOnUpdateTime ()
 	{
-		effectTimer -= systemValues.updateTimeWait;
-		if (opened && effectTimer < 0) 
+		addTimer ();
+		if (isEffecting && timerForAdd > timerForEffect) 
 		{
-			opened = false;
+			isEffecting = false;
 			this.thePlayer.ActerSuperBaldePercent -= superBladePercentAdd;
 			this.thePlayer.CActerSuperBaldePercent -= superBladePercentAdd;
 			Destroy (theEffect);
-			isEffecting = false;//标记，已经失效
 		}
-		lifeTimer -= systemValues.updateTimeWait;
-		if (lifeTimer < 0)
+		if(timerForAdd > lifeTimerAll)
 		{
 			Destroy (this);
 		}
@@ -69,7 +67,7 @@ public class effectMulanBaoFa : effectBasic
 
 	public override void updateEffect ()
 	{
-		lifeTimer -= 2f;
+		timerForAdd += 2f;
 		thePlayer.ActerSp += spAdder;
 	}
 }

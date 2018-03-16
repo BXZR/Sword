@@ -5,7 +5,6 @@ using UnityEngine;
 public class effectThreeKnife : effectBasic {
 
 	int step = 0;//不同阶段的不同效果
-	float  timerForLive = 3f;//这个脚本的生存时间
 
 	//第一次
 	float aimDamageMinus = 0.25f;//削减伤害百分比
@@ -33,17 +32,25 @@ public class effectThreeKnife : effectBasic {
 
 	public override void Init ()
 	{
+		lifeTimerAll = 3f;
+		timerForEffect = 3f;
 		theEffectName = "摩诃婆娑";
-		theEffectInformation ="在"+timerForLive+"秒内的三次攻击命中触发不同特效：\n";
-		theEffectInformation += "第一次，削减目标"+aimDamageMinus*100+"%攻击力，最多"+timerForLive+"秒\n";
+		theEffectInformation ="在"+lifeTimerAll+"秒内的三次攻击命中触发不同特效：\n";
+		theEffectInformation += "第一次，削减目标"+aimDamageMinus*100+"%攻击力，最多"+lifeTimerAll+"秒\n";
 		theEffectInformation += "第二次，恢复"+acterhpUp+"生命值,获得"+actershieldHp+"护盾\n";
 		theEffectInformation += "第三次，造成目标"+damagePercent*100+"%已损生命真实伤害";
 		makeStart ();
-		Destroy (this.GetComponent (this.GetType()),timerForLive);
+		Destroy (this.GetComponent (this.GetType()),lifeTimerAll);
 
 
 
 	} 
+
+	public override void effectOnUpdateTime ()
+	{
+		addTimer ();
+		//print ("timer add = "+ timerForAdd);
+	}
 
 	public override void OnAttack (PlayerBasic aim)
 	{

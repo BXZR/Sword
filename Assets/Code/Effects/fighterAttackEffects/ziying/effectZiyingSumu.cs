@@ -4,9 +4,6 @@ using UnityEngine;
 
 public class effectZiyingSumu :effectBasic {
 
-	float timer = 20f;//总持续时间，其实也就是冷却时间
-	float effectTime = 0f;//累加计时器，超过max就无效了
-	float effectTimerMax = 10f;//最长生效时间上限
 	float damage = 7f;//回敬的物理伤害
 	float attackAdd = 10f;//增加的攻击力
 	float damageMinusPercent = 0.10f;//增加的百分比减伤
@@ -15,20 +12,20 @@ public class effectZiyingSumu :effectBasic {
 	void Start () 
 	{
 		Init ();
-		Destroy (this,timer);
+		Destroy (this , lifeTimerAll);
 	}
 
 	public override void OnBeAttack (PlayerBasic attacker)
 	{
-		if (effectTime < effectTimerMax)
+		if ( timerForAdd < timerForEffect)
 		{
 			this.thePlayer.OnAttackWithoutEffect (attacker,damage,false,true);
 		}
 	}
 	public override void  effectOnUpdateTime ()
 	{
-		effectTime += systemValues.updateTimeWait;
-		if (effectTime > effectTimerMax && theEffect) 
+		addTimer ();
+		if ( timerForAdd > timerForEffect && theEffect) 
 		{
 			thePlayer.ActerWuliDamage -= attackAdd;
 			thePlayer.CActerWuliDamage -= attackAdd;
@@ -46,8 +43,10 @@ public class effectZiyingSumu :effectBasic {
 
 	public override void Init ()
 	{
+		lifeTimerAll = 20f;
+		timerForEffect = 10f;
 		theEffectName = "四方肃穆";
-		theEffectInformation ="将剑气交错于己身，增加"+attackAdd+"攻击力和"+damageMinusPercent*100+"%减伤\n受到攻击时回敬"+damage+"物理伤害\n增加任何护盾时恢复护盾值10%的斗气\n持续"+effectTimerMax+"秒，冷却时间"+ timer+"秒";
+		theEffectInformation ="将剑气交错于己身，增加"+attackAdd+"攻击力和"+damageMinusPercent*100+"%减伤\n受到攻击时回敬"+damage+"物理伤害\n增加任何护盾时恢复护盾值10%的斗气\n持续"+ timerForEffect+"秒，冷却时间"+ lifeTimerAll +"秒";
 		makeStart ();
 		if (thePlayer) 
 		{

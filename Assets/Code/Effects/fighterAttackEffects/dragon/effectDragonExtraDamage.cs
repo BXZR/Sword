@@ -7,7 +7,6 @@ public class effectDragonExtraDamage : effectBasic
 
 	float damageAddPercent = 0.15f;//额外真实伤害百分比
 	float damageCount = 3f;//生效次数
-	float timer = 20f;//持续时间，同时也是针对一个目标的冷却时间
 
 	void Start () 
 	{
@@ -25,17 +24,25 @@ public class effectDragonExtraDamage : effectBasic
 		try
 		{
 			//print("<或跃在渊>正在初始化");
+			lifeTimerAll = 20f;//持续时间，同时也是针对一个目标的冷却时间
+			timerForEffect = 20f;
 			theEffectName = "损则有孚";
-			theEffectInformation = "标记目标，使这个目标受到的下" +  damageCount  + "次攻击伤害提升" + damageAddPercent * 100 + "%，对同一目标有"+timer+"秒的冷却时间";
+			theEffectInformation = "标记目标，使这个目标受到的下" +  damageCount  + "次攻击伤害提升" + damageAddPercent * 100 + "%，对同一目标有"+lifeTimerAll+"秒的冷却时间";
 			makeStart ();
-			Destroy (this,timer);
+			Destroy (this,lifeTimerAll);
 		}
 		catch(System.Exception X)
 		{
 			print ("或跃在渊错误:"+X.Message);
 		}
 	}
-		
+
+	public override void effectOnUpdateTime ()
+	{
+		addTimer ();
+		//print ("timer add = "+ timerForAdd);
+	}
+
 
 	//这是一个主动的技能
 	//附加给目标敌人的脚本

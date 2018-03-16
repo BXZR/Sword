@@ -5,14 +5,12 @@ using UnityEngine;
 public class effectMonk :effectBasic{
 
 	float basicDamage = 15f;//每一个单位能够给出的伤害
-	float timer = 4f;//每一个段时间才能够使用这个伤害
 	bool isUsed = false;
 	int  EMYCoutExtraEffect = 2;//多于这些敌人触发额外效果
 	int maxEMYCountForUse = 5;//最多触发层数
 	void Start ()
 	{
 		Init ();
-		Destroy (this,timer);
 	}
  
 	int getCount ()
@@ -60,10 +58,17 @@ public class effectMonk :effectBasic{
 	public override void Init ()
 	{
 		//print ("灭却浮屠发动");
+		lifeTimerAll = 4f;//每一个段时间才能够使用这个伤害
+		timerForEffect = 4f; 
 		theEffectName = "灭却浮屠";
-		theEffectInformation ="下一击追加(身边敌人数量×"+basicDamage+"真实伤害)\n若身边敌人超过2个，额外伤害可用于治疗自身\n额外伤害最多"+maxEMYCountForUse+"层，冷却时间"+ timer +"秒";
+		theEffectInformation ="下一击追加(身边敌人数量×"+basicDamage+"真实伤害)\n若身边敌人超过2个，额外伤害可用于治疗自身\n额外伤害最多"+maxEMYCountForUse+"层，冷却时间"+ lifeTimerAll  +"秒";
 		makeStart ();
- 
+		Destroy (this,lifeTimerAll);
+	}
+	public override void effectOnUpdateTime ()
+	{
+		addTimer ();
+		//print ("timer add = "+ timerForAdd);
 	}
 }
  

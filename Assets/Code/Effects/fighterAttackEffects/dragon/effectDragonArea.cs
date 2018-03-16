@@ -10,7 +10,7 @@ public class effectDragonArea :  effectBasic
 	public float spUseOnBeAttackPercent = 0.03f;
 	public float spUse = 3f;
 	public int countMax = 4;
-	public float timerForLife = 22f;
+
 	GameObject theEffect;//特效
 
 	void Start () 
@@ -32,12 +32,17 @@ public class effectDragonArea :  effectBasic
 	{
 		try
 		{
+			lifeTimerAll = 22f;
+			timerForEffect = 22f;
 			theEffectName = "密云不雨";
 			theEffectInformation = "立即获得"+shieldAdd+"护盾，并获得额外特效：\n";
 			theEffectInformation += "受到攻击时自动消耗("+spUse +"+"+spUseOnBeAttackPercent*100+"%当前斗气)\n这些斗气将用于恢复("+hpupOnBeAttack +"+" +damageInPercentForUp*100+"%已损生命)\n";
-			theEffectInformation += "此效果存在"+timerForLife+"秒且不可叠加\n持续时间内最多生效"+countMax +"次";
+			theEffectInformation += "此效果存在"+lifeTimerAll+"秒且不可叠加\n持续时间内最多生效"+countMax +"次";
+
+
 			makeStart ();
-			Destroy(this,timerForLife);
+			Destroy(this,timerForEffect);
+			Destroy (theEffect,timerForEffect);
 
 			if (this.thePlayer) 
 			{
@@ -54,6 +59,12 @@ public class effectDragonArea :  effectBasic
 		}
 	}
 
+
+	public override void effectOnUpdateTime ()
+	{
+		addTimer ();
+		//print ("timer add = "+ timerForAdd);
+	}
 
 	//这是一个主动的技能
 	//附加给目标敌人的脚本
@@ -75,6 +86,7 @@ public class effectDragonArea :  effectBasic
 			{
 				Destroy (theEffect);
 				isEffecting = false;//标记，已经失效
+				timerForAdd = timerForEffect;//计时器直接失效
 			}
 		}
 	}
