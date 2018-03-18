@@ -34,8 +34,6 @@ public class BasicPanelController : MonoBehaviour {
 				theHeadImage.gameObject.SetActive (false);//如果没有图就干脆就不显示吧
 			}
 			thePlayerName.text = systemValues.thePlayer.ActerName;
-			//自己的技能效果获得一次也就够了
-			theBasicEffectInformationText.text = systemValues.getBasicBEEffectInformation ();
 			loaded = true;
 		}
 	}
@@ -57,6 +55,8 @@ public class BasicPanelController : MonoBehaviour {
 			theSPSLider.value = theSpValue;//斗气数
 			theHpText.text = systemValues.thePlayer.ActerHp.ToString("f0") +"/"+ systemValues.thePlayer.ActerHpMax.ToString("f0");//生命值+ 护盾值
 			theSpText.text = systemValues.thePlayer.ActerSp.ToString("f0") +"/"+ systemValues.thePlayer.ActerSpMax.ToString("f0");//斗气值 
+			//自己的技能效果获得一次
+			theBasicEffectInformationText.text = systemValues.getBasicBEEffectInformation ();
 		}
 	}
 	
