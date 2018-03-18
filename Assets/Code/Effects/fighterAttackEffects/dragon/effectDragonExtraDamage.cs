@@ -71,4 +71,11 @@ public class effectDragonExtraDamage : effectBasic
 		}
 	}
 
+	public override string getOnTimeFlashInformation ()
+	{
+		if (damageCount >= 0)
+			return this.theEffectName +"\n("+damageCount+"次)";
+		return this.theEffectName + "\n[失效]";
+	}
+
 }

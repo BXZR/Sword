@@ -8,6 +8,7 @@ public class effectMonk :effectBasic{
 	bool isUsed = false;
 	int  EMYCoutExtraEffect = 2;//多于这些敌人触发额外效果
 	int maxEMYCountForUse = 5;//最多触发层数
+	int EMYCount  = 0;
 	void Start ()
 	{
 		Init ();
@@ -36,7 +37,7 @@ public class effectMonk :effectBasic{
 	{
 		if (isUsed == false) 
 		{
-			int EMYCount = Mathf.Clamp(getCount (),0,maxEMYCountForUse);
+			EMYCount = Mathf.Clamp(getCount (),0,maxEMYCountForUse);
 			float damage =  EMYCount  * basicDamage;
 			aim.ActerHp -= damage;
 			this.thePlayer.OnAttackWithoutEffect (aim, damage, true, true);
@@ -69,6 +70,11 @@ public class effectMonk :effectBasic{
 	{
 		addTimer ();
 		//print ("timer add = "+ timerForAdd);
+	}
+
+	public override string getOnTimeFlashInformation ()
+	{
+		return this.theEffectName +"\n("+EMYCount+"层)";
 	}
 }
  

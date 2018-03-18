@@ -93,4 +93,11 @@ public class effectThreeKnife : effectBasic {
 			foreach (effectBasic EF in effects)
 				EF.OnHpUp (acterhpUp);
 	}
+
+	public override string getOnTimeFlashInformation ()
+	{
+		if (isEffecting)
+			return this.theEffectName + "\n(" + step + "/3刀)";
+		return this.theEffectName + "\n[失效]";
+	}
 }

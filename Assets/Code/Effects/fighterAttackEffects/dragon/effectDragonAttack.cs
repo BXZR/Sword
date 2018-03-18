@@ -45,6 +45,12 @@ public class effectDragonAttack  : effectBasic{
 		effectBasic [] effects = this.thePlayer.GetComponents<effectBasic> ();
 		foreach (effectBasic EF in effects)
 			EF.OnHpUp (hpupTrue);
+	}
 
+	public override string getOnTimeFlashInformation ()
+	{
+		if (thePlayer.ActerHp / thePlayer.ActerHpMax > upGate)
+			return this.theEffectName;
+		return this.theEffectName +"×2";
 	}
 }

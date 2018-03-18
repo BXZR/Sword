@@ -48,5 +48,13 @@ public class effectDragonMiss : effectBasic{
 		if(thePlayer)
 		thePlayer.ActerHp += upValue * hpupPercent;
 	}
+
+	public override string getOnTimeFlashInformation ()
+	{
+		int percent = (int)(100 * this.thePlayer.ActerSp * 0.15f / this.thePlayer.ActerSpMax);
+		if(isEffecting)
+			return this.theEffectName +"\n("+percent+"%提升)";
+		return this.theEffectName + "\n[失效]";
+	}
 	 
 }

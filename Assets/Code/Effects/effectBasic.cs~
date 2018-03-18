@@ -50,9 +50,10 @@ public class effectBasic : MonoBehaviour {
 
 
 	//计时器计算，这个对于每一个有时间要求的来说都是必要的
-	public void addTimer()
+	public virtual  void addTimer()
 	{
 		timerForAdd += systemValues.updateTimeWait;
+
 	}
 
 	public float getEffectTimerPercent ()
@@ -86,6 +87,15 @@ public class effectBasic : MonoBehaviour {
 	public virtual string getExtraInformation()
 	{
 		return theEffedctExtraInformation;
+	}
+
+	//返回实时的最简略信息，这个信息表达在界面图标上
+	//
+	public virtual string getOnTimeFlashInformation()
+	{
+		if(isEffecting)
+		return this.theEffectName;
+		return this.theEffectName+"\n[失效]";
 	}
 
 	public   string getEffectInformation(){return this.theEffectInformation;}//只显示内容

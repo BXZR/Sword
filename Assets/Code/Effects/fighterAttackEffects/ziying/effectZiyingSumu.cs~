@@ -41,6 +41,7 @@ public class effectZiyingSumu :effectBasic {
 		this.thePlayer.ActerSp += theSheildHpAdd * 0.10f;
 	}
 
+
 	public override void Init ()
 	{
 		lifeTimerAll = 20f;

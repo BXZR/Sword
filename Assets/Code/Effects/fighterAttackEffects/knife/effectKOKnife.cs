@@ -39,6 +39,10 @@ public class effectKOKnife : effectBasic{
 		}
 	 
 	}
+	public override string getOnTimeFlashInformation ()
+	{
+		return this.theEffectName + "\n(" + attackCount + "/" + (attackCountMax-1) + "充能)";
+	}
 
 
 }

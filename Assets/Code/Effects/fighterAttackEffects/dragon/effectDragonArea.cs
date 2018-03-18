@@ -86,9 +86,17 @@ public class effectDragonArea :  effectBasic
 			{
 				Destroy (theEffect);
 				isEffecting = false;//标记，已经失效
-				timerForAdd = timerForEffect;//计时器直接失效
+				//timerForAdd = timerForEffect;//计时器直接失效
 			}
 		}
+	}
+
+	//图标显示信息
+	public override string getOnTimeFlashInformation ()
+	{
+		if(isEffecting)
+			return this.theEffectName+"\n("+countMax+"次)";
+		return this.theEffectName+"\n[失效]";
 	}
 
 }

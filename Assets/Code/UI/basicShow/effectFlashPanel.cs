@@ -33,9 +33,8 @@ public class effectFlashPanel : MonoBehaviour {
 					GameObject theButton = GameObject.Instantiate<GameObject> (theEffectShowButton);
 					theButton.transform.SetParent (this.transform);
 					theButton.GetComponent <informationMouseShow> ().showText = theEffectbasics [i].theEffectName + "\n" + theEffectbasics [i].theEffectInformation;
-					theButton.GetComponentInChildren<Text> ().text = theEffectbasics [i].theEffectName;
-					if (theEffectbasics [i].isEffecting == false)
-						theButton.GetComponentInChildren<Text> ().text += "\n[失效]";
+					theButton.GetComponentInChildren<Text> ().text = theEffectbasics [i].getOnTimeFlashInformation ();
+
 					Image front = theButton.transform.Find ("CoolingFrontPicture").GetComponent<Image> ();
 					front.fillAmount = theEffectbasics [i].getEffectTimerPercent ();
 					if (theEffectbasics [i].isEffecting)

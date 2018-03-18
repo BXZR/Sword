@@ -7,11 +7,7 @@ public class effectZiying :effectBasic{
 	float shieldPercentAdd = 0.05f;
 	float extraDamagePercent = 0.10f;
 	float spUpWhenNotFightingPercnet = 0.15f;
-	float timer = 15f;
-	float timerMax = 15f;
 	float area = 1f;//范围
-	bool canExtraDamage = true;
-
 
 	void Start ()
 	{
@@ -26,8 +22,10 @@ public class effectZiying :effectBasic{
 
 	public override void Init ()
 	{
+		lifeTimerAll = 15f;
+		timerForEffect = 15f;
 		theEffectName = "剑气";
-		theEffectInformation = "剑气围绕周身，获得" + shieldPercentAdd * 100 + "%格挡率\n非战斗状态下斗气恢复效率提升"+ spUpWhenNotFightingPercnet*100+"%\n每过" + timerMax + "秒可以在攻击命中的第一个目标时对目标周围"+area+"米的所有敌人造成自身当前攻击力" + extraDamagePercent * 100 + "%真实伤害";
+		theEffectInformation = "剑气围绕周身，获得" + shieldPercentAdd * 100 + "%格挡率\n非战斗状态下斗气恢复效率提升"+ spUpWhenNotFightingPercnet*100+"%\n每过" + lifeTimerAll + "秒可以在攻击命中的第一个目标时对目标周围"+area+"米的所有敌人造成自身当前攻击力" + extraDamagePercent * 100 + "%真实伤害";
 		makeStart ();
 		this.thePlayer.ActerShielderPercent += shieldPercentAdd;
 		this.thePlayer.CActerShielderPercent += shieldPercentAdd;
@@ -36,9 +34,9 @@ public class effectZiying :effectBasic{
 	public override void OnAttack (PlayerBasic aim)
 	{
 		//print ("effext using");
-		if (canExtraDamage)
+		if (isEffecting)
 		{
-			canExtraDamage = false;
+			isEffecting = false;
 			makeAreaAttack (aim.transform);
 		}
 	 
@@ -66,17 +64,31 @@ public class effectZiying :effectBasic{
 			thePlayer.ActerSp += upValue * spUpWhenNotFightingPercnet;
 	}
 
-	public override void  effectOnUpdateTime ()
+	public override void addTimer ()
 	{
-		if (canExtraDamage == false)
+		if (!isEffecting) 
 		{
-			timer -= systemValues .updateTimeWait;
-			if (timer < 0)
+			timerForAdd += systemValues.updateTimeWait;
+			if (timerForAdd > lifeTimerAll)
 			{
-				timer = timerMax;
-				canExtraDamage = true;
-
+				timerForAdd = 0;
+				isEffecting = true;
 			}
 		}
 	}
+
+	public override string getOnTimeFlashInformation ()
+	{
+		if (isEffecting)
+			return this.theEffectName;
+		return this.theEffectName + "\n(充能中)";
+	}
+
+	public override void effectOnUpdateTime ()
+	{
+		addTimer ();
+		//print ("timer add = "+ timerForAdd);
+	}
+		
+
 }
