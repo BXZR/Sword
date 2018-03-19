@@ -80,7 +80,7 @@ public class effectBasic : MonoBehaviour {
 			theInformation +="[被动]";
 		else
 			theInformation +="[主动]";
-		theInformation +="\n"+this.theEffectInformation +"\n"+this.theEffedctExtraInformation;
+		theInformation +="\n"+this.theEffectInformation;
 		return theInformation;
 	}//显示完全的信息
 		

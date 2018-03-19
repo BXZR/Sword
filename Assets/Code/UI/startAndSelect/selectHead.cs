@@ -46,7 +46,7 @@ public class selectHead : MonoBehaviour {
 		therPlayer.AddComponent<extraRotate> ();
 		PlayerBasic thePlayerB = therPlayer.GetComponent<PlayerBasic> ();
 		playerInformationText.text = thePlayerB.getPlayerInformation () + thePlayerB.getPlayerInformationExtra ();
-		playerTitleText.text = "<color=#00FF00>"  + thePlayerB.ActerName + "</color>\n<color=#FF2400>" + systemValues.getTitleForPlayer (indexForSystemValues)+"</color>";
+		playerTitleText.text = systemValues.playerNameColor  + thePlayerB.ActerName + systemValues.colorEnd+"\n"+systemValues.playerIntroductionColor + systemValues.getTitleForPlayer (indexForSystemValues)+systemValues.colorEnd;
 		playerSkillText.text =  systemValues.getEffectInformations(therPlayer,true);
 		systemValues.setIndexForPlayer (indexForSystemValues);
 

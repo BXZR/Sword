@@ -53,10 +53,10 @@ public class BasicPanelController : MonoBehaviour {
 			float theSpValue = systemValues.thePlayer.ActerSp / systemValues.thePlayer.ActerSpMax;
 			theHpSlider.value = theHpValue;//生命值 + 护盾值
 			theSPSLider.value = theSpValue;//斗气数
-			theHpText.text = systemValues.thePlayer.ActerHp.ToString("f0") +"/"+ systemValues.thePlayer.ActerHpMax.ToString("f0");//生命值+ 护盾值
+			theHpText.text = systemValues.thePlayer.ActerHp.ToString("f0")  +"+" +systemValues.thePlayer.ActerShieldHp.ToString("f0") +"/"+ systemValues.thePlayer.ActerHpMax.ToString("f0");//生命值+ 护盾值
 			theSpText.text = systemValues.thePlayer.ActerSp.ToString("f0") +"/"+ systemValues.thePlayer.ActerSpMax.ToString("f0");//斗气值 
 			//自己的技能效果获得一次
-			theBasicEffectInformationText.text = systemValues.getBasicBEEffectInformation ();
+			theBasicEffectInformationText.text = systemValues.getBasicBEEffectInformation () ;
 		}
 	}
 	

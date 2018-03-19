@@ -14,4 +14,11 @@ public class sceneSkipButton : MonoBehaviour {
 		UnityEngine.SceneManagement.SceneManager.LoadScene (aimsceneName);
 
 	}
+
+	//结束整个游戏
+	//也算是换一个场景吧.....
+	public void endTheGame()
+	{
+		Application.Quit ();
+	}
 }

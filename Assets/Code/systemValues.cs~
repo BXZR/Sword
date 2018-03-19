@@ -197,6 +197,9 @@ public class systemValues : MonoBehaviour {
 		{
 			ef.Init ();
 			string showString = ef.getInformation ();
+			string showExtra = ef.getExtraInformation ();
+			if (string.IsNullOrEmpty (showExtra) == false)
+				showString += "\n" + showExtra;
 			skillsInformation += showString;
 			if(string.IsNullOrEmpty(showString) == false)
 			   skillsInformation += "\n\n";
@@ -223,7 +226,7 @@ public class systemValues : MonoBehaviour {
 		{
 			//ef.Init ();
 			if(ef.isBE())
-			skillsInformation += ef.getInformation ();
+				skillsInformation += ef.getInformation () + "\n"+ ef.getExtraInformation();
 		}
 		return (BESkillColor  + skillsInformation + colorEnd);
 	}
@@ -234,6 +237,8 @@ public class systemValues : MonoBehaviour {
 	public static string SkillColorForSelf = "<color=#FFF809>";//橙色
 	public static string SkillColorForEnemy = "<color=#28FF28>";//绿色
 	public static string SkillExtraColor = "<color=#FF5F9A>";//粉色
+	public static string playerNameColor = "<color=#00FF00>" ;//其实也是黄色
+	public static string playerIntroductionColor = "<color=#FF2400>";//应该是绿色
 	public static string colorEnd = "</color>";
 
 	//获取连招出招表（中文）
