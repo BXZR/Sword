@@ -9,6 +9,8 @@ public class sceneSkipButton : MonoBehaviour {
 	public int GameMode = 0;
 	public void MoveToScene()
 	{
+		//时间始终要控制为最基本的状态
+		Time.timeScale = 1f;
 		systemValues.modeIndex = GameMode;
 		Cursor.visible = true;
 		UnityEngine.SceneManagement.SceneManager.LoadScene (aimsceneName);
