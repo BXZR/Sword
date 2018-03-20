@@ -30,7 +30,7 @@ public class effectSlowDamage  :effectBasic {
 		{
 			addTimer ();
 		} 
-		else 
+		else if(timerForAdd > timerForEffect)
 		{
 			isEffecting = false;
 		}

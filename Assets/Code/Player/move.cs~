@@ -352,7 +352,7 @@ public class move : MonoBehaviour {
 			speedNormal += speedAdderWithShift;
 			speedRun += speedAdderWithShift;
 		}
-
+		if(thePlayer)
 		UseSP( thePlayer.ActerSpUp* Time.deltaTime * 2f);
 	}
 

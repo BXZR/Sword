@@ -14,7 +14,7 @@ public class gameStarter : MonoBehaviour {
 	private MusicController theMusicController;//音乐控制单元
 	void Start()
 	{
-		Invoke ("makeStart", 2);
+		Invoke ("makeStart", 3f);
 	}
 
 	public  void makeStart()
@@ -27,7 +27,17 @@ public class gameStarter : MonoBehaviour {
 
 		if (systemValues.modeIndex == 1) //有些功能只在网络对战模式之下用就行
 		{
-			int indexUse = (PhotonNetwork.room.PlayerCount+1) % (startPoint.Length);
+			int indexUse = 0;
+			try
+			{
+				indexUse = (PhotonNetwork.room.PlayerCount+1) % (startPoint.Length);
+			}
+			catch
+			{
+				indexUse = Random.Range (0,startPoint.Length);
+			}
+
+
 			theFighter = PhotonNetwork.Instantiate ("fighters/" + theFighterName, startPoint [0].transform.position, Quaternion.identity, 0);
 			theFighter.transform.position = startPoint[indexUse].transform.position;
 		}

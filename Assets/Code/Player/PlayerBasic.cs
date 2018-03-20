@@ -273,6 +273,8 @@ public class PlayerBasic : MonoBehaviour {
 			EffectAim [i].OnBeAttack (this);
            //额外的状态标记改变
 		   getInFightState();
+
+		//print (this.ActerName +"攻击"+thePlayerAim.ActerName);
 	}
 		
 	//有些攻击不想触发特效也不希望靠判断防止递归，就调用下面这两个方法
@@ -365,6 +367,8 @@ public class PlayerBasic : MonoBehaviour {
 			}
 			//额外的状态标记改变
 			getInFightState();
+
+			//print (this.ActerName + " is being attacked!");
 		}
 	}
 

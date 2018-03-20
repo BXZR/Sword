@@ -65,7 +65,7 @@ public class extraWeapon : MonoBehaviour {
 			if (playerAim == null)
 				playerAim = collisioner.gameObject.GetComponentInChildren<PlayerBasic> ();
 
-			if (thePlayer && 　playerAim && playerAim != thePlayer &&  attackAims .Contains(thePlayer) == false && attackAims.Count < damageCount)
+			if (thePlayer && 　playerAim && playerAim != thePlayer &&  attackAims .Contains(playerAim) == false && attackAims.Count < damageCount)
 			{
 				attackAims.Add (playerAim);
 				//print (playerAim.ActerHpSuck );
@@ -73,6 +73,8 @@ public class extraWeapon : MonoBehaviour {
 
 				thePlayer.OnAttack(playerAim);//造成直接的伤害
 				extraDamageEffect (playerAim);//添加额外的计算脚本，每个脚本的效果由脚本自己决定
+				//print("弹矢撞击！");
+				//Destroy(this.gameObject);
 			}
 		} 
 

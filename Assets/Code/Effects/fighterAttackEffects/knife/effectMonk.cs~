@@ -7,7 +7,7 @@ public class effectMonk :effectBasic{
 	float basicDamage = 15f;//每一个单位能够给出的伤害
 	bool isUsed = false;
 	int  EMYCoutExtraEffect = 2;//多于这些敌人触发额外效果
-	int maxEMYCountForUse = 5;//最多触发层数
+	int maxEMYCountForUse = 6;//最多触发层数
 	int EMYCount  = 0;
 	void Start ()
 	{

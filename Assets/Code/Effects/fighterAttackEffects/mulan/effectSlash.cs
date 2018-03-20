@@ -9,7 +9,8 @@ public class effectSlash :effectBasic{
 	float addPercent = 0.12f;
 
 	float changeGate = 0.25f;
-	float hpsuckOnChange = 0.02f;
+	float hpsuckOnChange = 0.03f;
+	float damageSuckMax = 30;
 	void Start ()
 	{
 		Init ();
@@ -39,7 +40,7 @@ public class effectSlash :effectBasic{
 		if (thePlayer && thePlayer.ActerHp / thePlayer.ActerHpMax < changeGate)
 		{
 			float hpSuck = aim.ActerHpMax * hpsuckOnChange ;
-
+			hpSuck = Mathf.Clamp (hpSuck , 0 , damageSuckMax);
 			thePlayer.ActerHp += hpSuck;
 			//附加的各种效果
 			effectBasic[] effects = this.thePlayer.GetComponents<effectBasic> ();
@@ -75,7 +76,7 @@ public class effectSlash :effectBasic{
 		{
 			theEffectName = "红莲";
 			theEffectInformation = "额外获得" + hpsuckAdd * 100 + "%的生命偷取";
-			theEffectInformation += "\n攻击时额外吸取目标最大生命值"+hpsuckOnChange *100+"%生命";
+			theEffectInformation += "\n攻击时额外吸取目标最大生命值"+hpsuckOnChange *100+"%生命\n每一击最多额外吸取"+damageSuckMax+"生命值";
 			theEffedctExtraInformation = "特性：自身生命值高于"+changeGate*100+"%变化为[劫刃]";
 
 		}

@@ -21,6 +21,7 @@ public class monsterBeAttack : effectBasic{
 		if (attacker.gameObject.tag != "AI")
 		{
 			moveTowards = (this.transform.position - attacker.transform.position).normalized * 4 + new Vector3 (0, 2, 1);
+			//moveTowards = attacker.transform .right * 4 ;
 			moveTimer = moveTimerAll;
 			isMoving = true;
 			//if(theMoveController)
