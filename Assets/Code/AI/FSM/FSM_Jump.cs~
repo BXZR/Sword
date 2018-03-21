@@ -4,7 +4,7 @@ using UnityEngine.AI;
 
 public class FSM_Jump : FSMBasic {
 
-	float timer = 2f;
+	float timer = 1.8f;
 
 
 	public override int geID ()

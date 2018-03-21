@@ -42,6 +42,7 @@ public class FSMStage : effectBasic {
 		//Vector3 minus = new Vector3 (0f , attacker.transform.rotation.eulerAngles.y - this.transform.rotation.eulerAngles.y , 0f);
 		//this.transform.rotation = Quaternion.Lerp(this.transform.rotation , Quaternion.Euler(minus + this.transform .rotation.eulerAngles) , 360f);
 		this.transform.LookAt (attacker.transform);
+		this.GetComponent <NavMeshAgent> ().SetDestination (this.transform .position);
 	}
     //很多操作都是连续的，对于AI来说或许用连续的方法计算会比较好
 	void Update () 

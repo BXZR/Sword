@@ -76,6 +76,7 @@
      <Compile Include="Assets\Code\Effects\fighterAttackEffects\ziying\effectQianfang.cs" />
      <Compile Include="Assets\Code\Effects\fighterAttackEffects\ziying\effectZiying.cs" />
      <Compile Include="Assets\Code\Effects\fighterAttackEffects\ziying\effectZiyingSumu.cs" />
+     <Compile Include="Assets\Code\Effects\monsterEffects\AISoilderExtraAttack.cs" />
      <Compile Include="Assets\Code\Effects\thingsEffect\effectHpUp.cs" />
      <Compile Include="Assets\Code\Effects\thingsEffect\effectLastingDamage.cs" />
      <Compile Include="Assets\Code\Effects\thingsEffect\effectShield.cs" />

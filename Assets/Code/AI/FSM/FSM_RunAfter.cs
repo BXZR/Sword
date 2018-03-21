@@ -26,7 +26,7 @@ public class FSM_RunAfter : FSMBasic {
 	public override FSMBasic moveToNextState ()
 	{
 
-
+		//为了确保能真的攻击到，留下10%的多余空间
 		if (Vector3.Distance (this.theThis.transform.position , this.theEMY.transform .position) <=  this.theThis.theAttackAreaLength)
 		{
 			//Debug.Log ("runafter to attack");
