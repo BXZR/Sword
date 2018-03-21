@@ -55,7 +55,7 @@ public class MusicController : MonoBehaviour {
 		//print ("has the clip "+ theClipNow.name);
 		if(theBackMusicController == null)
 			theBackMusicController = this.GetComponent <AudioSource> ();
-		print (theBackMusicController.gameObject .name +" has audiosSource");
+		//print (theBackMusicController.gameObject .name +" has audiosSource");
 		systemValues.theBackMusicNameNow = nameIn;
 
 		if (smoothChange == false)

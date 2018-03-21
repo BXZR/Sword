@@ -45,16 +45,20 @@ public class effectZiying :effectBasic{
 
 	void  makeAreaAttack (Transform theAim )
 	{
+		//print (this.thePlayer.ActerName + " make area attack");
 		float damageUse = this.thePlayer.ActerWuliDamage * extraDamagePercent;
 		Collider [] emys = Physics.OverlapSphere (theAim .transform .position, area );
+		List<PlayerBasic> aimListWithOnly = new List<PlayerBasic> ();
 		for (int i = 0; i < emys.Length; i++)
 		{
 			PlayerBasic theAimNow = emys [i].GetComponent <PlayerBasic> ();
-			if ( theAimNow && theAimNow!= this.thePlayer )
-			{
-				//print (emys[i].name +" is being extra damage");
-				this.thePlayer.OnAttackWithoutEffect (theAimNow,damageUse,true,true);
-			}
+			if ( theAimNow && theAimNow!= this.thePlayer  && aimListWithOnly.Contains (theAimNow) == false)
+				aimListWithOnly.Add (theAimNow);
+		}
+		for (int i = 0; i < aimListWithOnly.Count; i++)
+		{
+			//print ( aimListWithOnly[i].ActerName +" is being extra damage");
+			this.thePlayer.OnAttackWithoutEffect (aimListWithOnly[i],damageUse,true,true);
 		}
 	}
 

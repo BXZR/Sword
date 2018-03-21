@@ -1,14 +1,17 @@
 ﻿<Properties StartupItem="Assembly-CSharp.csproj">
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Unity.Instance.Unity Editor" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Code\Effects\fighterAttackEffects\ziying\effectZiying.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Code\Player\PlayerBasic.cs">
     <Files>
-      <File FileName="Assets\Code\Effects\fighterAttackEffects\ziying\eeffectZiyingArcher.cs" Line="10" Column="21" />
-      <File FileName="Assets\Code\Player\extraWeapon.cs" Line="68" Column="92" />
-      <File FileName="Assets\Code\Player\newMethodAttack.cs" Line="220" Column="22" />
+      <File FileName="Assets\Code\Effects\fighterAttackEffects\ziying\eeffectZiyingArcher.cs" Line="1" Column="1" />
+      <File FileName="Assets\Code\Player\extraWeapon.cs" Line="1" Column="1" />
+      <File FileName="Assets\Code\Player\newMethodAttack.cs" Line="1" Column="1" />
       <File FileName="Assets\Code\Effects\fighterAttackEffects\ziying\effectZiyingSumu.cs" Line="1" Column="1" />
-      <File FileName="Assets\Code\Effects\fighterAttackEffects\ziying\effectZiying.cs" Line="34" Column="49" />
-      <File FileName="Assets\Code\Player\PlayerBasic.cs" Line="240" Column="22" />
+      <File FileName="Assets\Code\Effects\fighterAttackEffects\ziying\effectZiying.cs" Line="59" Column="4" />
+      <File FileName="Assets\Code\Player\PlayerBasic.cs" Line="652" Column="16" />
       <File FileName="Assets\Code\Camera\REController.cs" Line="1" Column="1" />
+      <File FileName="Assets\Code\sound\MusicController.cs" Line="58" Column="5" />
+      <File FileName="Assets\Code\systemValues.cs" Line="1" Column="1" />
+      <File FileName="Assets\Code\Player\move.cs" Line="134" Column="85" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

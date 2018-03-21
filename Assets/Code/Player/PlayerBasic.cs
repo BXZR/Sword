@@ -256,7 +256,14 @@ public class PlayerBasic : MonoBehaviour {
 				damage = getTrueDamage (thePlayerAim, extraDamage+extraDamageForAnimation);
 			//-------------------------------------------------------------------------------------
 		    float hpsuck =  makeHpSuck(  damage , thePlayerAim);//计算吸血
+
+		   //单机动作控制
+		   if(systemValues.modeIndex == 0)
 			thePlayerAim.OnBeAttack (damage);
+		   //有些功能只在网络对战模式之下用就行
+		   if(systemValues.modeIndex == 1 && this == systemValues.thePlayer)
+			thePlayerAim.photonView.RPC ("OnBeAttack" , PhotonTargets.All,damage);
+
 			extraDamageForAnimation = 0;
 
 		    //各种附加效果
@@ -295,7 +302,15 @@ public class PlayerBasic : MonoBehaviour {
 			    damage = getTrueDamage (thePlayerAim, extraDamage+extraDamageForAnimation);
 		   //-------------------------------------------------------------------------------------
 		    float hpsuck =  makeHpSuck(  damage , thePlayerAim);//计算吸血
+			
+		//单机动作控制
+		if(systemValues.modeIndex == 0)
 			thePlayerAim.OnBeAttack (damage);
+		//有些功能只在网络对战模式之下用就行
+		if(systemValues.modeIndex == 1 && this == systemValues.thePlayer)
+			thePlayerAim.photonView.RPC ("OnBeAttack" , PhotonTargets.All,damage);
+
+
 			extraDamageForAnimation = 0;
 	     	//只有特殊的一类效果了才能够有效果，其余特效无效，所以是WithoutEffect
 			effectBasic[] Effects = this.GetComponentsInChildren<effectBasic> ();
@@ -318,7 +333,9 @@ public class PlayerBasic : MonoBehaviour {
 		   //额外的状态标记改变
 		   getInFightState();
 	}
-		
+
+
+	[PunRPC]	
 	public void OnBeAttack(float damage)
 	{
 		//this.gameObject .tag != "AI"说明是小兵
@@ -632,6 +649,7 @@ public class PlayerBasic : MonoBehaviour {
 	//网络主控人物才会有的方法
 	public void makeStartForPrivate()
 	{
+		//网络上强制更新各种状态
 		InvokeRepeating("makeValueUpdate" , 0 , 7f);
 	}
 
