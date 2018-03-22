@@ -22,7 +22,7 @@ public class effectKOKnife : effectBasic{
 	public override void Init ()
 	{
 		theEffectName = "重剑无锋";
-		theEffectInformation ="每第"+ attackCountMax +"攻击命中附加目标最大生命值"+attackPercent*100+"%物理伤害\n顺势击退目标"+beAttackBackTimer+"秒";
+		theEffectInformation ="每第"+ attackCountMax +"攻击命中附加目标最大生命值"+attackPercent*100+"%物理伤害\n若目标生命百分比高于自己，则击退目标"+beAttackBackTimer+"秒";
 		makeStart ();
 	}
 
@@ -34,8 +34,11 @@ public class effectKOKnife : effectBasic{
 			float damage = aim.ActerHpMax * attackPercent;
 			this.thePlayer.OnAttackWithoutEffect (aim,damage,false,true);
 			attackCount = 0;
-			aim.gameObject.AddComponent<monsterBeAttack> ();
-			Destroy (aim.gameObject.GetComponent<monsterBeAttack> () , beAttackBackTimer);
+			if ((aim.ActerHp / aim.ActerHpMax) > (this.thePlayer.ActerHp / this.thePlayer.ActerHpMax))
+			{
+				aim.gameObject.AddComponent<monsterBeAttack> ();
+				Destroy (aim.gameObject.GetComponent<monsterBeAttack> (), beAttackBackTimer);
+			}
 		}
 	 
 	}

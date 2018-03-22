@@ -51,6 +51,6 @@ public class effectDragonAttack  : effectBasic{
 	{
 		if (thePlayer.ActerHp / thePlayer.ActerHpMax > upGate)
 			return this.theEffectName;
-		return this.theEffectName +"×2";
+		return this.theEffectName +"[效果翻倍]";
 	}
 }

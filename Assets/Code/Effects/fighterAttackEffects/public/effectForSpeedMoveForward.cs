@@ -16,11 +16,14 @@ public class effectForSpeedMoveForward : effectBasic {
 		lifeTimerAll = 3f;
 		timerForEffect = 0.18f;
 		theEffectName = "突进";
-		theEffectInformation = "迅速向前移动一小段距离，持续"+timerForEffect+"秒，冷却"+lifeTimerAll+"秒\n(突进过程中可选定和转向，无法穿越障碍)";
+		theEffectInformation = "迅速向前移动一小段距离，持续"+timerForEffect+"秒，冷却"+lifeTimerAll+"秒\n突进额外消耗4%当前斗气值\n(突进过程中可选定和转向，但无法穿越障碍)";
 		makeStart ();
 		Destroy (this, lifeTimerAll);
-		if(thePlayer)
+		if (thePlayer)
+		{
 			theMoveController = this.thePlayer.GetComponent < CharacterController> ();
+			thePlayer.ActerSp *= 0.96f;
+		}
 	}
 
 	public override void addTimer ()

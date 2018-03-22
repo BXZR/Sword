@@ -42,7 +42,14 @@ public class FSMStage : effectBasic {
 		//Vector3 minus = new Vector3 (0f , attacker.transform.rotation.eulerAngles.y - this.transform.rotation.eulerAngles.y , 0f);
 		//this.transform.rotation = Quaternion.Lerp(this.transform.rotation , Quaternion.Euler(minus + this.transform .rotation.eulerAngles) , 360f);
 		this.transform.LookAt (attacker.transform);
+		try
+		{
 		this.GetComponent <NavMeshAgent> ().SetDestination (this.transform .position);
+		}
+		catch
+		{
+			print ("当前处于无法被设置目标的状态，因此AI会继续向原先的目的地移动");
+		}
 	}
     //很多操作都是连续的，对于AI来说或许用连续的方法计算会比较好
 	void Update () 
