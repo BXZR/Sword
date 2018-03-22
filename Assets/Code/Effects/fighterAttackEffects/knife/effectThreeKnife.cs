@@ -15,12 +15,13 @@ public class effectThreeKnife : effectBasic {
 	float acterhpUp = 25;//直接回复的生命值
 	float actershieldHp = 40;//获得的护盾值
 	//第三次
-	float damagePercent = 0.03f;//追加的斩杀效果伤害百分比
+	float damagePercent = 0.035f;//追加的斩杀效果伤害百分比
 
 	void Start () 
 	{
 		Init ();//进行初始化
 
+	
 	}
 
 	void OnDestroy()

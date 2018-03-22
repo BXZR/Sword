@@ -20,7 +20,11 @@ public class monsterBeAttack : effectBasic{
 		//攻击者不是AI才能打出来击飞
 		if (attacker.gameObject.tag != "AI")
 		{
-			moveTowards = (this.transform.position - attacker.transform.position).normalized * 4 + new Vector3 (0, 2, 1);
+			//moveTowards = new Vector3 (0f, 7f, 0f);
+			float X= this.transform.position.x - attacker.transform.position.x ;
+			float Z= this.transform.position.z - attacker.transform.position.z  ;
+
+			moveTowards = new Vector3 (X, 0, Z) * 4;
 			//moveTowards = attacker.transform .right * 4 ;
 			moveTimer = moveTimerAll;
 			isMoving = true;
@@ -47,7 +51,7 @@ public class monsterBeAttack : effectBasic{
 		if (isMoving)
 		{
 
-			this.transform.Translate (moveTowards * moveSpeed * Time.deltaTime);
+			this.transform.Translate (moveTowards * moveSpeed * Time.deltaTime,Space.World);
 			moveTimer -= Time.deltaTime;
 			if (moveTimer < 0)
 			{

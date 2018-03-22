@@ -23,7 +23,7 @@ public class systemValues : MonoBehaviour {
 	public static string [] playerBackMusic = {"bahuangfu"  , "kai", "fightMusic", "canglangjianfu"};
 
 	//选人界面的逻辑
-	private static int indexNow = 2 ;
+	private static int indexNow = 0 ;
 	public static  void setIndexForPlayer(int indexIn)
 	{
 		indexNow = indexIn;
