@@ -72,6 +72,7 @@
      <Compile Include="Assets\Code\Effects\fighterAttackEffects\mulan\effectMulanBaoFa.cs" />
      <Compile Include="Assets\Code\Effects\fighterAttackEffects\mulan\effectSlash.cs" />
      <Compile Include="Assets\Code\Effects\fighterAttackEffects\mulan\effectSlowDamage.cs" />
+     <Compile Include="Assets\Code\Effects\fighterAttackEffects\public\effectForSpeedMoveForward.cs" />
      <Compile Include="Assets\Code\Effects\fighterAttackEffects\ziying\eeffectZiyingArcher.cs" />
      <Compile Include="Assets\Code\Effects\fighterAttackEffects\ziying\effectQianfang.cs" />
      <Compile Include="Assets\Code\Effects\fighterAttackEffects\ziying\effectZiying.cs" />

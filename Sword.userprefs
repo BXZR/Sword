@@ -1,34 +1,17 @@
 ﻿<Properties StartupItem="Assembly-CSharp.csproj">
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Unity.Instance.Unity Editor" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Code\AI\FSM\FSMStage.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Code\Effects\fighterAttackEffects\public\effectForSpeedMoveForward.cs">
     <Files>
-      <File FileName="Assets\Code\Effects\fighterAttackEffects\ziying\eeffectZiyingArcher.cs" Line="1" Column="1" />
-      <File FileName="Assets\Code\Player\extraWeapon.cs" Line="1" Column="1" />
-      <File FileName="Assets\Code\Player\newMethodAttack.cs" Line="1" Column="1" />
-      <File FileName="Assets\Code\Effects\fighterAttackEffects\ziying\effectZiyingSumu.cs" Line="1" Column="1" />
-      <File FileName="Assets\Code\Effects\fighterAttackEffects\ziying\effectZiying.cs" Line="81" Column="4" />
-      <File FileName="Assets\Code\Player\PlayerBasic.cs" Line="292" Column="47" />
-      <File FileName="Assets\Code\Camera\REController.cs" Line="1" Column="1" />
-      <File FileName="Assets\Code\sound\MusicController.cs" Line="1" Column="1" />
-      <File FileName="Assets\Code\systemValues.cs" Line="1" Column="1" />
-      <File FileName="Assets\Code\Player\move.cs" Line="1" Column="1" />
-      <File FileName="Assets\Code\Extra\singleTip.cs" Line="14" Column="54" />
-      <File FileName="Assets\Code\props\popMaker.cs" Line="1" Column="1" />
-      <File FileName="Assets\Code\AI\FSM\FSM_Search.cs" Line="1" Column="1" />
-      <File FileName="Assets\Code\AI\FSM\FSM_Jump.cs" Line="7" Column="19" />
-      <File FileName="Assets\Code\AI\FSM\FSM_RunAfter.cs" Line="30" Column="128" />
-      <File FileName="Assets\Code\AI\FSM\FSM_Attack.cs" Line="60" Column="127" />
-      <File FileName="Assets\Code\AI\FSM\FSMStage.cs" Line="45" Column="79" />
-      <File FileName="Assets\Code\AI\FSM\FSMBasic.cs" Line="1" Column="1" />
-      <File FileName="Assets\Code\Effects\monsterEffects\AISoilderExtraAttack.cs" Line="31" Column="72" />
-      <File FileName="Assets\Code\Effects\fighterAttackEffects\dragon\effectDragonAttack.cs" Line="55" Column="3" />
-      <File FileName="Assets\Code\Effects\fighterAttackEffects\knife\effectMonk.cs" Line="43" Column="67" />
+      <File FileName="Assets\Code\Effects\fighterAttackEffects\public\effectForSpeedMoveForward.cs" Line="19" Column="101" />
+      <File FileName="Assets\Code\Player\move.cs" Line="101" Column="23" />
+      <File FileName="Assets\Code\UI\systemPanel\Skill\skillPanelController.cs" Line="75" Column="83" />
+      <File FileName="Assets\Code\Effects\fighterAttackEffects\mulan\effectMulanBaoFa.cs" Line="39" Column="3" />
+      <File FileName="Assets\Code\Effects\effectBasic.cs" Line="1" Column="1" />
+      <File FileName="Assets\Code\Player\attackLink.cs" Line="271" Column="53" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
-    <BreakpointStore>
-      <RunToCursorBreakpoint file="D:\gitWorks\Sword\Sword\Assets\Code\Effects\fighterAttackEffects\knife\effectMonk.cs" line="42" column="26" />
-    </BreakpointStore>
+    <BreakpointStore />
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
 </Properties>
