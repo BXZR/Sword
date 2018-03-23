@@ -94,6 +94,7 @@
      <Compile Include="Assets\Code\UI\basicShow\effectFlashPanel.cs" />
      <Compile Include="Assets\Code\UI\basicShow\uiShowsForBasic.cs" />
      <Compile Include="Assets\Code\UI\startAndSelect\GameStartButton.cs" />
+     <Compile Include="Assets\Code\UI\startAndSelect\RandomSelectButton.cs" />
      <Compile Include="Assets\Code\UI\startAndSelect\sceneSkipButton.cs" />
      <Compile Include="Assets\Code\UI\startAndSelect\selectHead.cs" />
      <Compile Include="Assets\Code\UI\startAndSelect\selectHeaderMaker.cs" />
