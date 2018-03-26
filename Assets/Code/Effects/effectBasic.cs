@@ -31,6 +31,7 @@ public class effectBasic : MonoBehaviour {
 	virtual public void OnMiss(PlayerBasic attacker){}//闪避的时候调用
 	virtual public void OnShield(PlayerBasic attacker,float damage = 0){}//格挡的时候调用
 	virtual public void OnAddShieldHp(float theSheildHpAdd = 0){}//增加护盾的时候的额外效果
+	virtual public void SetAttackLinkIndex(int index = 0){}//有些技能效果是可以使用不同的连招按键触发的，但是这些效果完全相同，所以用这个来区分
 	//这个效果可以在中途更新，且更新方法每一种效果自己定义
 	//例如更新加长持续时间等等
 	virtual public void updateEffect(){}

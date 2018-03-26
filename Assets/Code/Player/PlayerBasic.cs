@@ -162,6 +162,10 @@ public class PlayerBasic : MonoBehaviour {
 	public bool isFighting = false;
 	public float fightingTimer = 7f;//战斗状态最少持续时间
 	public float fightingTimerMax = 7f;//战斗状态持续时间上限
+
+	//当前所有effect的attacklink模式
+	public int EffectAttackLinkIndex = 0;
+
 	//进入到战斗状态
 	public void getInFightState()
 	{

@@ -59,19 +59,31 @@ public class attackLinkController :MonoBehaviour {
             keyChar = keyString.ToCharArray() [0];
 			foreach (attackLink AL in attackLinkMayUsing) //输入符合要求，可以进行下一步的检测了
 			{
-				char getChar = AL.getCharWithIndex (index); //获取char
-				//正是因为获取的是char，这个方法有很大的限制
-			   //print (getChar);
-				if (   getChar != keyChar ) 
+//				char getChar = AL.getCharWithIndex (index); //获取char
+//				//正是因为获取的是char，这个方法有很大的限制
+//				//print (getChar);
+//				if (   getChar != keyChar ) 
+//				{
+//					attackBeDelete .Add (AL);//将不符合规范的输入去除掉
+//				}
+				List<char> getChars = AL.getCharListWithIndex(index);
+				if (getChars.Contains (keyChar) == false)
 				{
 					attackBeDelete .Add (AL);//将不符合规范的输入去除掉
 				}
+
 			}
 			foreach (attackLink  AL in attackBeDelete)
 			{
 				//因为List数据结构正在被使用（foreach），因此需要将删除与遍历分开进行
 				attackLinkMayUsing.Remove (AL);//记录当前需要删除的技能
 			}
+			//清空缓冲区
+			foreach (attackLink AL in attackLinkMayUsing) 
+			{
+				AL.flashBuffer (index , keyChar );	
+			}
+
 			if (attackLinkMayUsing.Count == 0) 
 			{//如果当前已经没有用于检测的串，说明输入不对，重头开始
 				flashLink ();//更新列表
@@ -110,10 +122,12 @@ public class attackLinkController :MonoBehaviour {
 		theAttackLinkNow = null;//每次检查之前都需要清空引用
 		foreach(attackLink AL in attackLinkMayUsing)
 		{
-			if (AL.attackLinkString.Length == index + 1 )//因为长度和index的关系，就比本的要求就是输入正确（当然还有SP等等的需求）
+			int selectAttackLinkIndex;
+			if (AL.isCheckToOver(index + 1 , out selectAttackLinkIndex) )//因为长度和index的关系，就比本的要求就是输入正确（当然还有SP等等的需求）
 			{
 				//这个判断非常的重要，如果取消，任何攻击动作都有可能中间取消，这当然不符合我们的需求
-				AL.attackLinkMain();//发生效果
+				//print("index Selected is "+selectAttackLinkIndex);
+				AL.attackLinkMain(selectAttackLinkIndex);//发生效果
 
 				flashLink ();//更新列表
 				reMake();//完全重头开始

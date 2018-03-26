@@ -22,6 +22,9 @@ public class newMethodAttack : MonoBehaviour {
 				try
 				{
 					thePlayer.gameObject.AddComponent (System.Type.GetType (thePlayer . conNameToSELF));
+					effectBasic theEffect = thePlayer.gameObject.GetComponent (System.Type.GetType (thePlayer . conNameToSELF)) as effectBasic;
+					theEffect.SetAttackLinkIndex(thePlayer.EffectAttackLinkIndex);
+					thePlayer.EffectAttackLinkIndex = 0;//刷新为初始数值
 				}
 				catch (Exception E)
 				{

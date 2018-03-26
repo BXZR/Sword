@@ -9,6 +9,11 @@ public class attackLink : MonoBehaviour {
 
 	public string skillName;//技能名称
 	public  string attackLinkString;//用字符串表示输入的键位串
+	private string [] attackLinkStringSplited;//用“;”分割，这样可以让不同的键位实现同一个技能而不增加新的attackLink
+
+	private List<string> attackLinkStringBuff = new List<string> ();//因为自身也存在嵌套的选择，只好也有缓冲
+	private List<int> attackLinkIndexBuff = new List<int> ();//因为自身也存在嵌套的选择，只好也有缓冲
+
 	public string animationName ;//转变的动画状态机的状态名称
 	protected Animator theAnimatorOfPlayer;//使用动作的人物的动画控制器
 	protected CharacterController theController;//角色控制器，用于获取一些当前的状态例如是否在地面上面，此处会有很大的扩展
@@ -32,6 +37,7 @@ public class attackLink : MonoBehaviour {
 	public crossFadeMode crossMode = crossFadeMode.play;
 	//[HideInInspector]//此效果没有必要在面板中被设置
 	public int AIExtraValue = 0;//用于AI计算的额外参数
+
 	/****************************************特殊攻击方法组****************************************************/
 	//攻击检测原理：
 	//用相交求获取身边所有的单位
@@ -97,15 +103,22 @@ public class attackLink : MonoBehaviour {
 		this.theAnimatorOfPlayer = this.GetComponentInParent<Animator> ();
 		this.theController = this.GetComponentInParent<CharacterController> ();
 		thePlayer = this.GetComponentInParent<PlayerBasic> ();
+
 		photonView = PhotonView.Get(this);
 	}
 
 	public virtual  void makeAttackArray()//只在初始化的时候或者需要重新构建联机字符串的时候使用
 	{
 		if(!string .IsNullOrEmpty( attackLinkString) )//如果字符串为空则不做初始化
-		attackAray = attackLinkString.ToCharArray ();//初始化数组
+		{
+		 attackLinkStringSplited = attackLinkString.Split (';');
+		 attackAray = attackLinkStringSplited[0].ToCharArray ();//初始化数组
+		}
 		if (attackAray.Length > 1)
 			isChangeAble = false;
+
+		for (int i = 0; i < attackLinkStringSplited.Length; i++)
+			attackLinkStringBuff.Add (attackLinkStringSplited[i]);
 		
 	}
 
@@ -116,7 +129,7 @@ public class attackLink : MonoBehaviour {
 		try
 		{
 			timer = this.theAnimatorOfPlayer.GetCurrentAnimatorStateInfo (0).length;
-			print("get act length = " + timer);
+			//print("get act length = " + timer);
 		}
 		catch 
 		{
@@ -128,18 +141,16 @@ public class attackLink : MonoBehaviour {
 
 	//在不改变下层逻辑的情况下做一次封装来保证网络做法
 
-	public void attackLinkMain()
+	public void attackLinkMain(int theAttackLinkIndex = 0)
 	{
-		
-
 		if (systemValues.modeIndex == 1 && photonView != null)
 		{
-			this.photonView.RPC ("attackLinkEffect", PhotonTargets.All);
+			this.photonView.RPC ("attackLinkEffect", PhotonTargets.All,theAttackLinkIndex);
 			this.photonView.RPC ("playAttackLinkAction", PhotonTargets.All);
 		}
 		else if (systemValues.modeIndex == 0)
 		{
-			attackLinkEffect ();
+			attackLinkEffect (theAttackLinkIndex);
 			playAttackLinkAction ();
 		}
 	}
@@ -154,7 +165,7 @@ public class attackLink : MonoBehaviour {
 
 
 	[PunRPC]
-	public  virtual void attackLinkEffect()//连招的效果在这里写
+	public  virtual void attackLinkEffect(int theAttackLinkIndex = 0)//连招的效果在这里写
 	{
 		//这里其实暂时规定使用某一个攻击动作的同时不会使用另一个攻击动作
 		//也就是说攻击动作之间不会发生生任何干扰
@@ -174,7 +185,10 @@ public class attackLink : MonoBehaviour {
 			//print ("play action");
 			if (thePlayer) 
 			{
+				thePlayer.EffectAttackLinkIndex = theAttackLinkIndex;
+				effectBasic[] Effects = this.transform.root.GetComponentsInChildren<effectBasic> ();
 				playStarEffect ();
+
 				if (thePlayer.theAudioPlayer != null)
 					thePlayer.theAudioPlayer.playAttackActSound (this.audioWhenAct);//播放攻击动作音效
 				if (thePlayer.ActerSp >= this.spUse) 
@@ -190,12 +204,12 @@ public class attackLink : MonoBehaviour {
 					if (thePlayer.ActerHp < 10)
 						thePlayer.ActerHp = 10f;//保护机制，在格斗游戏中没有透支身亡一说
 					//但是为了保证我的个性，透支机制依旧存在，只是不会致命了
-					effectBasic[] Effects = this.transform.root.GetComponentsInChildren<effectBasic> ();
-					for (int i = 0; i < Effects.Length; i++)
+					for (int i = 0; i < Effects.Length; i++) 
+					{
+						Effects [i].SetAttackLinkIndex (theAttackLinkIndex);
 						Effects [i].OnUseSP (this.spUse);
-					//法力透支也算伤害
-					for (int i = 0; i < Effects.Length; i++)
 						Effects [i].OnBeAttack (hpMinus);
+					}
 				}
 			}
 
@@ -221,7 +235,7 @@ public class attackLink : MonoBehaviour {
 		case crossFadeMode.crossfade :
 			{
 				this.theAnimatorOfPlayer.CrossFade (animationName, 0.05f);
-				print ("animationName = " + animationName);
+				//print ("animationName = " + animationName);
 			}
 			break;
 			//一般播放
@@ -249,6 +263,58 @@ public class attackLink : MonoBehaviour {
 		 return attackAray [index];//返回当前检测的字符
 	}
 
+	public List<char> getCharListWithIndex(int index)
+	{
+		List<char> allLinkChars = new List<char> ();
+		for (int i = 0; i < attackLinkStringSplited.Length; i++) 
+		{
+			if (attackLinkStringSplited[i].Length-1 < index)
+				allLinkChars.Add(' ');
+			else
+				allLinkChars.Add( attackLinkStringSplited[i][index]);//返回当前检测的字符
+		}
+		//for (int i = 0; i < allLinkChars.Count; i++)
+		//	print ("get chars for check: " + allLinkChars [i]);
+		
+		return allLinkChars;
+	}
+	//每一次都要手工重置Buffer，实际上这是个挺麻烦并且不是很准确的做法
+	public void flashBuffer(int index , char theKeyChar)
+	{
+		attackLinkStringBuff = new List<string> ();
+		attackLinkIndexBuff = new List<int> ();
+		for (int i = 0; i < attackLinkStringSplited.Length; i++) 
+		{
+			if (attackLinkStringSplited[i].Length-1 >= index && attackLinkStringSplited[i][index] == theKeyChar)
+			{
+				attackLinkStringBuff.Add( attackLinkStringSplited[i]);//返回当前检测的字符
+				attackLinkIndexBuff.Add(i);
+			}
+		}
+	}
+
+	//这个连招是不是完全被检测到了
+	public bool isCheckToOver(int length , out int selectAttackLinkIndex)
+	{
+		//唯一一个的时候最多
+		if (attackLinkString.Length == length)
+		{
+			selectAttackLinkIndex = -1;
+			return true;
+	    }
+		//分享很复杂倒是不太推荐
+		for (int i = 0; i < attackLinkStringBuff.Count; i++)
+		{
+			if (attackLinkStringBuff[i].Length == length)
+			{
+				selectAttackLinkIndex = attackLinkIndexBuff[i];
+				return true;
+			}
+		}
+		selectAttackLinkIndex = -1;
+		return false;
+	}
+
 
 	PhotonView photonView;//网络控制单元
 
@@ -258,7 +324,15 @@ public class attackLink : MonoBehaviour {
 
 		string information = "";
 		information += "招式名称：" + this.skillName+"\n";
-		information += "触发方式："+ systemValues.getAttacklinkInformationTranslated(this.attackLinkString) + "\n";
+		//information += "触发方式："+ systemValues.getAttacklinkInformationTranslated(this.attackLinkString) + "\n";
+		information += "触发方式：";
+		for (int i = 0; i < attackLinkStringSplited.Length; i++) 
+		{
+			information += systemValues.getAttacklinkInformationTranslated(attackLinkStringSplited[i]);
+			if(i<attackLinkStringSplited.Length-1 )
+				information+= " / ";
+		}
+		information += "\n";
 		if (this.extraDamage > 0) 
 		{
 			if (!this.thePlayer)
