@@ -101,14 +101,22 @@ public class effectBasic : MonoBehaviour {
 
 	public   string getEffectInformation(){return this.theEffectInformation;}//只显示内容
 
-	public string getEffectName()
+	public string getEffectName(bool withNewLine = true)
 	{
 
 		string theInformation =  this.theEffectName ;
-		if(isBE())
-			theInformation +="\n[被动]";
+		if (isBE ())
+		{
+			if(withNewLine)
+			theInformation += "\n";
+			theInformation += "[被动]";
+		} 
 		else
-			theInformation +="\n[主动]";
+		{
+			if(withNewLine)
+				theInformation += "\n";
+			theInformation += "[主动]";
+		}
 		return theInformation;
 	}
 

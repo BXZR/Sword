@@ -156,6 +156,86 @@ public class systemValues : MonoBehaviour {
 	{
 		return  systemValues.IsSystemPanelOpened; 
 	}
+
+
+
+	//工具方法，更为复杂的方法
+	//用于连招的显示按钮等等信息的全部获取
+	public static List<List<string>>  getEffectInformationsMore(GameObject thePlayer,bool withAttackLinkEffect = false)
+	{
+		List<List<string>> allBuffs = new List<List<string>> ();
+		List<string> skillsInformation = new List<string> ();
+		List<string> skillsNames = new List<string> ();
+		List<string> attackLinks = new List<string> ();
+		List<effectBasic> buffer = new List<effectBasic> ();
+		if (withAttackLinkEffect) 
+		{
+			attackLink[] attacklinks = thePlayer.GetComponentsInChildren<attackLink> (); 
+			//因为有顺序和统一调用的问题，建议建立之后统一进行销毁，因此建立一个预存。
+
+			foreach (attackLink ak in attacklinks)
+			{
+				if (string.IsNullOrEmpty (ak.conNameToEMY) == false) 
+				{
+					//初始化一下效果
+					thePlayer.gameObject.AddComponent (System.Type.GetType (ak.conNameToEMY));
+					effectBasic theEffect = thePlayer.gameObject.GetComponent (System.Type.GetType (ak.conNameToEMY)) as effectBasic;
+					buffer.Add (theEffect);
+
+					theEffect.Init ();
+					if(theEffect.isShowing())
+					{
+						skillsNames .Add(theEffect.theEffectName);
+
+						string showString = theEffect.getInformation ();
+						string showExtra = theEffect.getExtraInformation ();
+						if (string.IsNullOrEmpty (showExtra) == false)
+							showString += "\n" + showExtra;
+						skillsInformation.Add (showString);
+
+						attackLinks.Add (ak.attackLinkString);
+					}
+				}
+				if (string.IsNullOrEmpty (ak.conNameToSELF) == false) 
+				{
+					//初始化一下效果
+					thePlayer.gameObject.AddComponent (System.Type.GetType (ak.conNameToSELF));
+					effectBasic theEffect = thePlayer.gameObject.GetComponent (System.Type.GetType (ak.conNameToSELF)) as effectBasic;
+					buffer.Add (theEffect);
+
+					theEffect.Init ();
+					if(theEffect.isShowing())
+					{
+						skillsNames .Add(theEffect.theEffectName);
+
+						string showString = theEffect.getInformation ();
+						string showExtra = theEffect.getExtraInformation ();
+						if (string.IsNullOrEmpty (showExtra) == false)
+							showString += "\n" + showExtra;
+						skillsInformation.Add (showString);
+
+						attackLinks.Add (ak.attackLinkString);
+					}
+
+				}
+			}
+
+			//清空预存
+			for (int i = 0; i < buffer.Count; i++)
+			{
+				Destroy (buffer [i]);
+			}
+		}
+
+		//注意这个顺序，后面程序如果需要解析也必须要按照这个顺序来做
+		allBuffs.Add (skillsNames);
+		allBuffs.Add (skillsInformation);
+		allBuffs.Add (attackLinks);
+
+		return allBuffs;
+	}
+
+
 		
 	//工具方法，获得所有可显示的技能效果等等的信息
 	public static string getEffectInformations(GameObject thePlayer,bool withAttackLinkEffect = false)
@@ -192,12 +272,17 @@ public class systemValues : MonoBehaviour {
 			}
 		}
 		string skillsInformation = "\n";
+		string skillsNames = "\n";
 		effectBasic[] effects = thePlayer.GetComponents<effectBasic> ();
 		foreach (effectBasic ef in effects) 
 		{
 			ef.Init ();
 			string showString = ef.getInformation ();
 			string showExtra = ef.getExtraInformation ();
+
+			if(ef.isShowing())
+				skillsNames += ef.getEffectName(false) +"\n";
+
 			if (string.IsNullOrEmpty (showExtra) == false)
 				showString += "\n" + showExtra;
 			skillsInformation += showString;
@@ -214,7 +299,8 @@ public class systemValues : MonoBehaviour {
 			}
 		}
 
-		return skillsInformation;
+		//return skillsInformation;
+		return skillsNames;
 	}
 
 	//只是获取最基本的战斗被动技能
