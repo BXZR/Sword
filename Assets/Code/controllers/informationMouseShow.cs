@@ -11,9 +11,23 @@ public class informationMouseShow : MonoBehaviour {
 	public float width=70;
 	public bool showTextHigh=false;
 
-	void Start () 
+	public static informationMouseShow theShowingOne = null;
+	GUIStyle theGUIStyle = new GUIStyle();
+
+	public void setShow()
 	{
+		if (theShowingOne != null)
+			theShowingOne.information = false;
+
+		theShowingOne = this;
+		information = true;
+
+		Texture2D theBack = new Texture2D ((int)width,(int)height);
+		theGUIStyle.normal.background = theBack;
+		theGUIStyle.normal.textColor=new Color(0,0,0);   //设置字体颜色的
+		theGUIStyle.fontSize = 15;       //当然，这是字体大小       GUIStyle bb=new GUIStyle();
 	}
+
 	void OnGUI()  
 	{ 
 		if(information)//如果开始显示
@@ -23,64 +37,44 @@ public class informationMouseShow : MonoBehaviour {
 			{
 				if(Input .mousePosition .y >0&&Input .mousePosition .x <Screen .width -150)
 				{
-					GUI .Box (new Rect(x+20,y, width,height),showText );//动态显示装备信息
+					GUI .Box (new Rect(x+30,y, width,height),showText,theGUIStyle );//动态显示装备信息
 				}
 				else if(Input .mousePosition .y >0&&Input .mousePosition .x >Screen .width -150)
 				{
-					GUI .Box (new Rect(x-width-20,y, width,height),showText );//动态显示装备信息
+					GUI .Box (new Rect(x-width-30,y, width,height),showText,theGUIStyle );//动态显示装备信息
 				}
 				else if(Input .mousePosition .y <0&&Input .mousePosition .x <Screen .width -150)
 				{
-					GUI .Box (new Rect(x+20,0, width,height), showText );//动态显示装备信息
+					GUI .Box (new Rect(x+30,0, width,height), showText,theGUIStyle );//动态显示装备信息
 				}
 				else if(Input .mousePosition .y <0&&Input .mousePosition .x >Screen .width -150)
 				{
-					GUI .Box (new Rect(x-width-20,0, width,height), showText);//动态显示装备信息
+					GUI .Box (new Rect(x-width-30,0, width,height), showText,theGUIStyle);//动态显示装备信息
 				}
 			}
 			else
 			{
 				if(Input .mousePosition .y >0&&Input .mousePosition .x <Screen .width -150)
 				{
-					GUI .Box (new Rect(x,y-50, width,height),showText );//动态显示装备信息
+					GUI .Box (new Rect(x,y-50, width,height),showText ,theGUIStyle);//动态显示装备信息
 				}
 				else if(Input .mousePosition .y >0&&Input .mousePosition .x >Screen .width -150)
 				{
-					GUI .Box (new Rect(x-width,y-50, width,height),showText );//动态显示装备信息
+					GUI .Box (new Rect(x-width,y-50, width,height),showText,theGUIStyle );//动态显示装备信息
 				}
 				else if(Input .mousePosition .y <0&&Input .mousePosition .x <Screen .width -150)
 				{
-					GUI .Box (new Rect(x+20,0, width,height), showText );//动态显示装备信息
+					GUI .Box (new Rect(x+30,0, width,height), showText ,theGUIStyle);//动态显示装备信息
 				}
 				else if(Input .mousePosition .y <0&&Input .mousePosition .x >Screen .width -150)
 				{
-					GUI .Box (new Rect(x-width-20,0, width,height), showText);//动态显示装备信息
+					GUI .Box (new Rect(x-width-30,0, width,height), showText ,theGUIStyle);//动态显示装备信息
 				}
 			}
 			
 		}
 	}
-	void   OnHover()
-	{
-		
-		if(information==true)
-		{
-			//cursors.GetComponent <cursor >().setCursor (0);
-			information=false;
-			x=0;y=0;
-		}//鼠标进入则显示
-		
-		else 
-		{
-			information=true;
-		}
-		
-	}
 
-	public void clicked()
-	{
-		information = !information;
-	}
 	void Update () 
 	{
 	

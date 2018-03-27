@@ -1,17 +1,19 @@
 ﻿<Properties StartupItem="Assembly-CSharp.csproj">
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Unity.Instance.Unity Editor" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Code\Effects\fighterAttackEffects\public\effectForSpeedMoveForward.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Code\Extra\fixPosition.cs">
     <Files>
-      <File FileName="Assets\Code\Effects\fighterAttackEffects\knife\effectMonk.cs" Line="1" Column="1" />
+      <File FileName="Assets\Code\controllers\informationMouseShow.cs" Line="40" Column="28" />
       <File FileName="Assets\Code\Effects\fighterAttackEffects\dragon\effectDragonAttack.cs" Line="1" Column="1" />
-      <File FileName="Assets\Code\Effects\fighterAttackEffects\knife\effectKOKnife.cs" Line="1" Column="1" />
-      <File FileName="Assets\Code\UI\startAndSelect\selectHeaderMaker.cs" Line="20" Column="30" />
-      <File FileName="Assets\Code\UI\startAndSelect\RandomSelectButton.cs" Line="1" Column="1" />
-      <File FileName="Assets\Code\systemValues.cs" Line="241" Column="1" />
-      <File FileName="Assets\Code\controllers\informationMouseShow.cs" Line="1" Column="1" />
-      <File FileName="Assets\Code\Player\attackLink.cs" Line="1" Column="1" />
-      <File FileName="Assets\Code\Player\attackLinkController.cs" Line="1" Column="1" />
-      <File FileName="Assets\Code\Effects\fighterAttackEffects\public\effectForSpeedMoveForward.cs" Line="10" Column="34" />
+      <File FileName="Assets\Code\Effects\fighterAttackEffects\dragon\effectDragonExtraDamage.cs" Line="30" Column="34" />
+      <File FileName="Assets\Code\Effects\fighterAttackEffects\mulan\effectSlowDamage.cs" Line="1" Column="1" />
+      <File FileName="Assets\Code\Effects\fighterAttackEffects\mulan\effectMulanBaoFa.cs" Line="27" Column="31" />
+      <File FileName="Assets\Code\UI\startAndSelect\skillEffectShowingItem.cs" Line="33" Column="41" />
+      <File FileName="Assets\Code\systemValues.cs" Line="177" Column="73" />
+      <File FileName="Assets\Code\Player\attackLinkController.cs" Line="113" Column="6" />
+      <File FileName="Assets\Code\Extra\extraRotate.cs" Line="12" Column="2" />
+      <File FileName="Assets\Code\Extra\fixPosition.cs" Line="8" Column="17" />
+      <File FileName="Assets\Code\UI\startAndSelect\selectHead.cs" Line="58" Column="38" />
+      <File FileName="Assets\Code\UI\startAndSelect\selectHeaderMaker.cs" Line="44" Column="19" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

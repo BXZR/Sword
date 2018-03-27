@@ -50,7 +50,6 @@ public class attackLinkController :MonoBehaviour {
 		if (!canControll)
 			return;//如果当前是不可操控的，那么直接返回
 	 
-	 
 		attackBeDelete.Clear ();//每一次检测都会刷新这个集合
 		char keyChar=' ';
 
@@ -109,8 +108,11 @@ public class attackLinkController :MonoBehaviour {
 	//如果输入过长的字符串，以检测到的最后一个招式为准
 	public virtual void makeAttackLink(string keyString,bool useInterpret = true) 
 	{
-		for (int i = 0; i < keyString.Length; i++)
-			makeAttack (keyString [i].ToString(),useInterpret);
+		for (int i = 0; i < keyString.Length; i++) 
+		{
+			//print ("--> " + keyString [i].ToString ());
+			makeAttack (keyString [i].ToString (), useInterpret);
+		}
 	 
 	}
 

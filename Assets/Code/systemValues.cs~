@@ -161,12 +161,9 @@ public class systemValues : MonoBehaviour {
 
 	//工具方法，更为复杂的方法
 	//用于连招的显示按钮等等信息的全部获取
-	public static List<List<string>>  getEffectInformationsMore(GameObject thePlayer,bool withAttackLinkEffect = false)
+	public static List < attackLinkInformation>  getEffectInformationsMore(GameObject thePlayer,bool withAttackLinkEffect = false)
 	{
-		List<List<string>> allBuffs = new List<List<string>> ();
-		List<string> skillsInformation = new List<string> ();
-		List<string> skillsNames = new List<string> ();
-		List<string> attackLinks = new List<string> ();
+		List < attackLinkInformation> theAttackLinkInformaitons = new List<attackLinkInformation> ();
 		List<effectBasic> buffer = new List<effectBasic> ();
 		if (withAttackLinkEffect) 
 		{
@@ -175,6 +172,11 @@ public class systemValues : MonoBehaviour {
 
 			foreach (attackLink ak in attacklinks)
 			{
+				attackLinkInformation theInformation = new attackLinkInformation ();
+				theInformation.attackLinkName = ak.skillName;
+				theInformation.attackLinkString = ak.attackLinkString.Split(';')[0];
+				theInformation.thePlayer = thePlayer.GetComponentInChildren<PlayerBasic>();
+
 				if (string.IsNullOrEmpty (ak.conNameToEMY) == false) 
 				{
 					//初始化一下效果
@@ -185,15 +187,13 @@ public class systemValues : MonoBehaviour {
 					theEffect.Init ();
 					if(theEffect.isShowing())
 					{
-						skillsNames .Add(theEffect.theEffectName);
+						theInformation.theEffectForEMYName = theEffect.theEffectName;
 
 						string showString = theEffect.getInformation ();
 						string showExtra = theEffect.getExtraInformation ();
 						if (string.IsNullOrEmpty (showExtra) == false)
 							showString += "\n" + showExtra;
-						skillsInformation.Add (showString);
-
-						attackLinks.Add (ak.attackLinkString);
+						theInformation.theEffectForEMYInformaion =  showString;
 					}
 				}
 				if (string.IsNullOrEmpty (ak.conNameToSELF) == false) 
@@ -206,18 +206,17 @@ public class systemValues : MonoBehaviour {
 					theEffect.Init ();
 					if(theEffect.isShowing())
 					{
-						skillsNames .Add(theEffect.theEffectName);
+						theInformation.theEffectForSelfName = theEffect.theEffectName;
 
 						string showString = theEffect.getInformation ();
 						string showExtra = theEffect.getExtraInformation ();
 						if (string.IsNullOrEmpty (showExtra) == false)
 							showString += "\n" + showExtra;
-						skillsInformation.Add (showString);
-
-						attackLinks.Add (ak.attackLinkString);
+						theInformation.theEffectForSelfInformaion =  showString;
 					}
 
 				}
+				theAttackLinkInformaitons.Add (theInformation);
 			}
 
 			//清空预存
@@ -226,13 +225,7 @@ public class systemValues : MonoBehaviour {
 				Destroy (buffer [i]);
 			}
 		}
-
-		//注意这个顺序，后面程序如果需要解析也必须要按照这个顺序来做
-		allBuffs.Add (skillsNames);
-		allBuffs.Add (skillsInformation);
-		allBuffs.Add (attackLinks);
-
-		return allBuffs;
+		return theAttackLinkInformaitons;
 	}
 
 

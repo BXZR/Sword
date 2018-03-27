@@ -2,6 +2,18 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+//一种专门用来存储attackLink内容信息的一个类
+public class attackLinkInformation
+{
+	public PlayerBasic thePlayer = null;
+	public string attackLinkName = "";
+	public string attackLinkString = "";
+	public string theEffectForSelfName = "";
+	public string theEffectForSelfInformaion = "";
+	public string theEffectForEMYName = "";
+	public string theEffectForEMYInformaion = "";
+}
+
 public enum crossFadeMode { play , crossfade , crossfadeFix }
 public class attackLink : MonoBehaviour {
 

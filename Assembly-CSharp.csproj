@@ -84,6 +84,7 @@
      <Compile Include="Assets\Code\Effects\thingsEffect\effectSpeedUp.cs" />
      <Compile Include="Assets\Code\Effects\thingsEffect\effectSpup.cs" />
      <Compile Include="Assets\Code\Extra\extraRotate.cs" />
+     <Compile Include="Assets\Code\Extra\fixPosition.cs" />
      <Compile Include="Assets\Code\Extra\singleTip.cs" />
      <Compile Include="Assets\Code\Player\PlayerBasic.cs" />
      <Compile Include="Assets\Code\Player\attackLink.cs" />
@@ -98,7 +99,7 @@
      <Compile Include="Assets\Code\UI\startAndSelect\sceneSkipButton.cs" />
      <Compile Include="Assets\Code\UI\startAndSelect\selectHead.cs" />
      <Compile Include="Assets\Code\UI\startAndSelect\selectHeaderMaker.cs" />
-     <Compile Include="Assets\Code\UI\startAndSelect\startSelectEffectShowingButton.cs" />
+     <Compile Include="Assets\Code\UI\startAndSelect\skillEffectShowingItem.cs" />
      <Compile Include="Assets\Code\UI\systemPanel\BasicPanelController.cs" />
      <Compile Include="Assets\Code\UI\systemPanel\Skill\skillButton.cs" />
      <Compile Include="Assets\Code\UI\systemPanel\Skill\skillPanelController.cs" />
