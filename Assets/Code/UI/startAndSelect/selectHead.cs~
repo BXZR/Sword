@@ -67,7 +67,7 @@ public class selectHead : MonoBehaviour {
 		theStaticSelectedImage = theSelectedImage;
 
 		EffectInformations = systemValues.getEffectInformationsMore (therPlayer,true);
-		print ("EffectInformations Count = "+EffectInformations.Count);
+		//print ("EffectInformations Count = "+EffectInformations.Count);
 		makePlayerAttackAndEffect ();
 	}
 

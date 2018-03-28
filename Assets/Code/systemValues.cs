@@ -165,6 +165,24 @@ public class systemValues : MonoBehaviour {
 	{
 		List < attackLinkInformation> theAttackLinkInformaitons = new List<attackLinkInformation> ();
 		List<effectBasic> buffer = new List<effectBasic> ();
+
+		//被动没有连招，但是也应该显示
+		effectBasic [] efs = thePlayer.GetComponentsInChildren<effectBasic>();
+		for (int i = 0; i < efs.Length; i++)
+		{
+			buffer.Add (efs[i]);
+			efs [i].Init ();
+			if (efs [i].isBE ()) 
+			{
+				attackLinkInformation theInformation = new attackLinkInformation ();
+				theInformation.attackLinkName = "";
+				theInformation.attackLinkString = "";
+				theInformation.theEffectForSelfName=  efs[i].getEffectName();
+				theInformation.theEffectForSelfInformaion =  efs[i].getInformation();
+				theAttackLinkInformaitons.Add (theInformation);
+			}
+		}
+		//展示连招中触发的各种效果
 		if (withAttackLinkEffect) 
 		{
 			attackLink[] attacklinks = thePlayer.GetComponentsInChildren<attackLink> (); 

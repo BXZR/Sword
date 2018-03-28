@@ -16,6 +16,7 @@ public class skillEffectShowingItem : MonoBehaviour {
 	public Button theButtonFoirAttackLink;//连击用按钮
 	public Button theEffectForSelfButton;//自己BUFF按钮
 	public Button theEffectForEMYButton;//敌人BUFF按钮
+	public Button theEffectForShow;//展示连击用按钮
 	private informationMouseShow SelfButtonShow;//显示用
 	private informationMouseShow EMYButtonShow;//显示用
 
@@ -29,8 +30,15 @@ public class skillEffectShowingItem : MonoBehaviour {
 	//构建方法
 	public void maketheItem(attackLinkInformation theAttackLinkInformationIn)
 	{
-	    theAttackLinkContrtoller = theAttackLinkInformationIn.thePlayer.GetComponentInChildren<attackLinkController> ();
-		theAttackLinkContrtoller.makeStart ();
+		if (string.IsNullOrEmpty (theAttackLinkInformationIn.attackLinkString) == false)
+		{
+			theAttackLinkContrtoller = theAttackLinkInformationIn.thePlayer.GetComponentInChildren<attackLinkController> ();
+			theAttackLinkContrtoller.makeStart ();
+		}
+		else 
+		{
+			Destroy (theButtonFoirAttackLink.gameObject);
+		}
 		theAttackLinkInformation = theAttackLinkInformationIn;
 		SelfButtonShow = theEffectForSelfButton.GetComponent <informationMouseShow> ();
 		EMYButtonShow = theEffectForEMYButton.GetComponent<informationMouseShow> ();
@@ -56,6 +64,8 @@ public class skillEffectShowingItem : MonoBehaviour {
 			theEffectForEMYButton.GetComponentInChildren<Text> ().text = theAttackLinkInformation.theEffectForEMYName;
 			EMYButtonShow.showText = theAttackLinkInformation.theEffectForEMYInformaion;
 		}
+		if (string.IsNullOrEmpty (theAttackLinkInformationIn.attackLinkString))
+			Destroy (theEffectForShow.gameObject);
 	}
 		
 }
