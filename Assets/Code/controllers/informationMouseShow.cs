@@ -37,19 +37,19 @@ public class informationMouseShow : MonoBehaviour {
 			{
 				if(Input .mousePosition .y >0&&Input .mousePosition .x <Screen .width -150)
 				{
-					GUI .Box (new Rect(x+30,y, width,height),showText,theGUIStyle );//动态显示装备信息
+					GUI .Box (new Rect(x+40,y, width,height),showText,theGUIStyle );//动态显示装备信息
 				}
 				else if(Input .mousePosition .y >0&&Input .mousePosition .x >Screen .width -150)
 				{
-					GUI .Box (new Rect(x-width-30,y, width,height),showText,theGUIStyle );//动态显示装备信息
+					GUI .Box (new Rect(x-width-40,y, width,height),showText,theGUIStyle );//动态显示装备信息
 				}
 				else if(Input .mousePosition .y <0&&Input .mousePosition .x <Screen .width -150)
 				{
-					GUI .Box (new Rect(x+30,0, width,height), showText,theGUIStyle );//动态显示装备信息
+					GUI .Box (new Rect(x+40,0, width,height), showText,theGUIStyle );//动态显示装备信息
 				}
 				else if(Input .mousePosition .y <0&&Input .mousePosition .x >Screen .width -150)
 				{
-					GUI .Box (new Rect(x-width-30,0, width,height), showText,theGUIStyle);//动态显示装备信息
+					GUI .Box (new Rect(x-width-40,0, width,height), showText,theGUIStyle);//动态显示装备信息
 				}
 			}
 			else
@@ -64,11 +64,11 @@ public class informationMouseShow : MonoBehaviour {
 				}
 				else if(Input .mousePosition .y <0&&Input .mousePosition .x <Screen .width -150)
 				{
-					GUI .Box (new Rect(x+30,0, width,height), showText ,theGUIStyle);//动态显示装备信息
+					GUI .Box (new Rect(x+40,0, width,height), showText ,theGUIStyle);//动态显示装备信息
 				}
 				else if(Input .mousePosition .y <0&&Input .mousePosition .x >Screen .width -150)
 				{
-					GUI .Box (new Rect(x-width-30,0, width,height), showText ,theGUIStyle);//动态显示装备信息
+					GUI .Box (new Rect(x-width-40,0, width,height), showText ,theGUIStyle);//动态显示装备信息
 				}
 			}
 			

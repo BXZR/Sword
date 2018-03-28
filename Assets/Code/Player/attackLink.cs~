@@ -8,6 +8,7 @@ public class attackLinkInformation
 	public PlayerBasic thePlayer = null;
 	public string attackLinkName = "";
 	public string attackLinkString = "";
+	public string attackLinkInformationText = "";
 	public string theEffectForSelfName = "";
 	public string theEffectForSelfInformaion = "";
 	public string theEffectForEMYName = "";

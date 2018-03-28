@@ -36,7 +36,7 @@ public class skillEffectShowingItem : MonoBehaviour {
 		EMYButtonShow = theEffectForEMYButton.GetComponent<informationMouseShow> ();
 
 		theButtonFoirAttackLink.GetComponentInChildren<Text> ().text = theAttackLinkInformation.attackLinkName;
-
+		theButtonFoirAttackLink.GetComponent <informationMouseShow> ().showText = theAttackLinkInformation.attackLinkInformationText;
 		if (string.IsNullOrEmpty (theAttackLinkInformation.theEffectForSelfName))
 		{
 			Destroy (theEffectForSelfButton.gameObject);

@@ -1,0 +1,42 @@
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class AAAA : MonoBehaviour {
+
+	// Use this for initialization
+	void Start () {
+		
+	}
+	
+	// Update is called once per frame
+	void Update () {
+		
+	}
+
+	int getCount(int left , int right)
+	{
+		int sum = 0;
+		int count = 0;
+		for (int i = 0; i < left; i++)
+			sum += getNumberSum(i);
+		for (int i = left; i <= right; i++)
+		{
+			sum += getNumberSum(i);
+			if (sum % 3 == 0)
+				count ++;
+		}
+		return count;
+	}
+
+	int getNumberSum(int theNumber)
+	{
+		int sum = 0;
+		while (theNumber != 0) 
+		{
+			sum += theNumber % 10;
+			theNumber /= 10;
+		}
+		return sum;
+	}
+}
