@@ -30,6 +30,8 @@ public class selectHead : MonoBehaviour {
 
 	List < attackLinkInformation> EffectInformations = new List<attackLinkInformation> ();
 
+	UIStateShowImage [] theImagesFrState;//多边形状态图，包含两个部分，背景图和前景图
+
 	public void makeStart(string playerName , Text theTitleText , Text theDetailText , 
 	GameObject  theAttackEffectItemProfabIn , Transform theshowContantFortheAttackEffectItemIn ,Transform thetransForShowIn , int indexForSystemValuesIn)
 	{ 
@@ -42,6 +44,11 @@ public class selectHead : MonoBehaviour {
 		theAttackEffectItemProfab = theAttackEffectItemProfabIn;
 		theshowContantFortheAttackEffectItem = theshowContantFortheAttackEffectItemIn;
 
+	}
+
+	public void setStateImage(GameObject theImage)
+	{
+		theImagesFrState = theImage.GetComponentsInChildren<UIStateShowImage> ();
 	}
 
 
@@ -69,6 +76,33 @@ public class selectHead : MonoBehaviour {
 		EffectInformations = systemValues.getEffectInformationsMore (therPlayer,true);
 		//print ("EffectInformations Count = "+EffectInformations.Count);
 		makePlayerAttackAndEffect ();
+		makeStateImage ();
+	}
+
+	private void makeStateImage()
+	{
+		if (therPlayer) 
+		{
+			playerStar thePlayerStar = therPlayer.GetComponent <playerStar> ();
+			if (thePlayerStar) 
+			{
+				foreach (UIStateShowImage S in theImagesFrState) 
+				{
+					S.makeClear ();
+					S.makeDrawing (thePlayerStar.theValues, thePlayerStar.theTitles);
+				}
+			}
+		} 
+		else 
+		{
+
+			foreach (UIStateShowImage S in theImagesFrState) 
+			{
+				S.makeClear ();
+				S.makeDrawing (new List<float> (), new List<string> ());
+			}
+		}
+
 	}
 
 	public void makePlayerAttackAndEffect()

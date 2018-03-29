@@ -34,7 +34,7 @@ public class effectForSpeedMoveForward : effectBasic {
 	public override void SetAttackLinkIndex (int index = 0)
 	{
 		indexUse = index;
-		print ("move index = "+ indexUse);
+		//print ("move index = "+ indexUse);
 	}
 
 	public override void addTimer ()

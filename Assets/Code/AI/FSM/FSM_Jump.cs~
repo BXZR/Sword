@@ -5,8 +5,6 @@ using UnityEngine.AI;
 public class FSM_Jump : FSMBasic {
 
 	float timer = 1.8f;
-
-
 	public override int geID ()
 	{
 		return 2;
@@ -33,6 +31,7 @@ public class FSM_Jump : FSMBasic {
 		this.theThis.transform.LookAt (theEMY.transform);
 		this.theThis.transform.Translate (new Vector3(0,0,1)*2.5f*Time .deltaTime);
 		timer -= Time.deltaTime;
+	 
 	}
 
 	public override FSMBasic moveToNextState ()

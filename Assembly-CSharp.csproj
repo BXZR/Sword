@@ -92,6 +92,7 @@
      <Compile Include="Assets\Code\Player\extraWeapon.cs" />
      <Compile Include="Assets\Code\Player\move.cs" />
      <Compile Include="Assets\Code\Player\newMethodAttack.cs" />
+     <Compile Include="Assets\Code\Player\playerStar.cs" />
      <Compile Include="Assets\Code\UI\basicShow\effectFlashPanel.cs" />
      <Compile Include="Assets\Code\UI\basicShow\uiShowsForBasic.cs" />
      <Compile Include="Assets\Code\UI\startAndSelect\GameStartButton.cs" />

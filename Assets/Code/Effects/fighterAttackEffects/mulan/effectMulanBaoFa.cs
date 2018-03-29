@@ -5,7 +5,7 @@ using UnityEngine;
 public class effectMulanBaoFa : effectBasic
 {
 	public float superBladePercentAdd = 0.25f;
-	public float hpDamagePercent = 0.40f;//暴击额外伤害转化生命
+	public float hpDamagePercent = 0.50f;//暴击额外伤害转化生命
 	public float DamageUseMax = 60;//伤害中生效的部分上限
 	public float timeCoolingMinus =2f;//冷却时间使用就减少冷却时间
 	public float spAdder = 10f;//冷却中使用时候返还的斗气

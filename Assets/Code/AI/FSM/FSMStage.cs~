@@ -13,6 +13,11 @@ public class FSMStage : effectBasic {
 	private Animator theAnimator;
 	public float AIThinkTimer = 1.5f;//AI每隔一段时间再进行思考
 	public float AIThinkTimerMax = 1.5f;
+
+	//仇恨时间
+	public float angerTimer = 3f;//仇恨时间，也是追击的总时长
+	public float angetTimerMax = 3f;//仇恨时间上限
+
 	bool isDeadMake = false;
 
 	void Start ()
@@ -50,12 +55,40 @@ public class FSMStage : effectBasic {
 		{
 			print ("当前处于无法被设置目标的状态，因此AI会继续向原先的目的地移动");
 		}
+		angerTimer = angetTimerMax;//收到攻击的时候刷新仇恨
 	}
-    //很多操作都是连续的，对于AI来说或许用连续的方法计算会比较好
-	void Update () 
+
+
+	void angerCanculate()
 	{
 		if (theStateNow != null && thethis.isAlive) 
 		{
+			if (theStateNow.geID () == 1)//攻击状态
+			{
+				angerTimer = angetTimerMax;//攻击的时候刷新仇恨
+			}
+			else if(theStateNow.geID () == 2 || theStateNow.geID () == 3)//跳跃和追击状态实际上都是在追杀目标
+			{
+				angerTimer -= Time.deltaTime;
+				if (angerTimer < 0) //追太久就不要追下去了
+				{
+					this.GetComponent <NavMeshAgent> ().enabled = true;
+					FSM_Search search = new FSM_Search ();
+					search.makeState (this.theMoveController, this.theAttackLlinkController,this.theAnimator, theStateNow .theThis);
+					theStateNow =  search;
+				}
+			}
+		}
+	}
+
+    //很多操作都是连续的，对于AI来说或许用连续的方法计算会比较好
+	void Update () 
+	{
+		angerCanculate ();
+
+		if (theStateNow != null && thethis.isAlive) 
+		{
+			
 			//AI操作
 			//print ("AI is acting");
 			theStateNow.actInThisState ();

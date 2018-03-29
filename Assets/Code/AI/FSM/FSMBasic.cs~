@@ -15,6 +15,7 @@ public class FSMBasic  {
 	public PlayerBasic theEMY ;
 	public PlayerBasic theThis;
 	public int stateID = 0;//每一个状态有一个ID标识
+
 	//attack 1
 	//jump 2
 	//runafter 3

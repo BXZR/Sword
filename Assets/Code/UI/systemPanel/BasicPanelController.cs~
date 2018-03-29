@@ -17,6 +17,9 @@ public class BasicPanelController : MonoBehaviour {
 	public Text theExtraValueInformationText;//其余的战斗数值信息显示
 	public Text theBasicEffectInformationText;//战斗被动特性显示
 
+	public GameObject theStateImageB;//多边形状态图
+	public GameObject theStateImageF;//多边形状态图
+
 	private bool loaded = false;//是否已经加载完成，加载时只需要做一次就可以了
 	//头像图等等一些内容只需要加载一次就可以了
 	private  void  makeLoad()
@@ -43,6 +46,42 @@ public class BasicPanelController : MonoBehaviour {
 		//theHeadImage.sprite = null;
 	}
 
+
+	void  showStateImage(GameObject thePlayer)
+	{
+		playerStar thePlayerStar = thePlayer.GetComponent <playerStar> ();
+		UIStateShowImage BB = theStateImageB . GetComponent <UIStateShowImage> ();
+		BB .makeClear ();
+		BB.makeDrawing (thePlayerStar.theValues, thePlayerStar.theTitles);
+		UIStateShowImage FF = theStateImageF . GetComponent <UIStateShowImage> ();
+		FF .makeClear ();
+		FF .makeDrawing (thePlayerStar.theValues, thePlayerStar.theTitles);
+
+//		UIStateShowImage [] theImagesFrState =  theStateImage.GetComponentsInChildren<UIStateShowImage> ();
+//		if (thePlayer) 
+//		{
+//			playerStar thePlayerStar = thePlayer.GetComponent <playerStar> ();
+//			if (thePlayerStar) 
+//			{
+//				foreach (UIStateShowImage S in theImagesFrState) 
+//				{
+//					S.makeClear ();
+//					S.makeDrawing (thePlayerStar.theValues, thePlayerStar.theTitles);
+//				}
+//			}
+//		} 
+//		else 
+//		{
+//
+//			foreach (UIStateShowImage S in theImagesFrState) 
+//			{
+//				S.makeClear ();
+//				S.makeDrawing (new List<float> (), new List<string> ());
+//			}
+//		}
+
+	}
+
 	void OnEnable () 
 	{
 		makeLoad();
@@ -57,7 +96,9 @@ public class BasicPanelController : MonoBehaviour {
 			theSpText.text = systemValues.thePlayer.ActerSp.ToString("f0") +"/"+ systemValues.thePlayer.ActerSpMax.ToString("f0");//斗气值 
 			//自己的技能效果获得一次
 			theBasicEffectInformationText.text = systemValues.getBasicBEEffectInformation () ;
+			showStateImage (systemValues.thePlayer.gameObject);
 		}
+
 	}
 	
    

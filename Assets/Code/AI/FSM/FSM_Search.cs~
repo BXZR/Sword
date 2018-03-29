@@ -102,7 +102,15 @@ public class FSM_Search : FSMBasic {
 		{
 			moveTimer =  moveTimerMax;
 			randomAimPosition = this.theThis.transform.position + new Vector3 (Random.Range (0f, 8f)-4f , Random.Range (0f, 2f), Random.Range (0f, 8f)-4f );
-			theMoveController.SetDestination (randomAimPosition);
+			try
+			{
+		     if(theMoveController.isActiveAndEnabled)
+			  theMoveController.SetDestination (randomAimPosition);
+			}
+			catch
+			{
+				Debug.Log ("AI 的当前状态不允许改变目标位置");
+			}
 		}
 		//动画控制
 		if (reachCheck )

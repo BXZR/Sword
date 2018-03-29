@@ -24,6 +24,9 @@ public class selectHeaderMaker : MonoBehaviour {
 	//按钮的预设物的父物体
 	public Transform modePosition;
 
+	//多边形状态图(父物体)
+	public GameObject theStateImage;
+
 	//为了展示最开始的一个战士，需要保留一个引用
 	private selectHead theFirstHead = null;
 
@@ -43,6 +46,7 @@ public class selectHeaderMaker : MonoBehaviour {
 			selectHead theHead = theButton.GetComponent <selectHead> ();
 			theHead.makeStart ( systemValues.playerNamesInGame[i] , playerTitleText , playerInformationText ,  theAttackEffectItemProfab,
 			theshowContantFortheAttackEffectItem ,modePosition , i);
+			theHead.setStateImage (theStateImage);
 			theButton.GetComponent <Image> ().sprite = makeLoadSprite ("playerHeadPicture/"+ systemValues.playerHeadNames[i]);
 			if (theFirstHead == null)
 				theFirstHead = theHead;

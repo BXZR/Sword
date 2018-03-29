@@ -1,6 +1,6 @@
 ﻿<Properties StartupItem="Assembly-CSharp.csproj">
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Unity.Instance.Unity Editor" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Code\UI\startAndSelect\skillEffectShowingItem.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Code\AI\FSM\FSMStage.cs">
     <Files>
       <File FileName="Assets\Code\controllers\informationMouseShow.cs" Line="1" Column="1" />
       <File FileName="Assets\Code\Effects\fighterAttackEffects\dragon\effectDragonAttack.cs" Line="1" Column="1" />
@@ -8,15 +8,18 @@
       <File FileName="Assets\Code\Effects\fighterAttackEffects\mulan\effectSlowDamage.cs" Line="1" Column="1" />
       <File FileName="Assets\Code\Effects\fighterAttackEffects\mulan\effectMulanBaoFa.cs" Line="1" Column="1" />
       <File FileName="Assets\Code\UI\startAndSelect\skillEffectShowingItem.cs" Line="40" Column="47" />
-      <File FileName="Assets\Code\systemValues.cs" Line="180" Column="40" />
-      <File FileName="Assets\Code\Player\attackLinkController.cs" Line="47" Column="55" />
+      <File FileName="Assets\Code\systemValues.cs" Line="1" Column="1" />
+      <File FileName="Assets\Code\Player\attackLinkController.cs" Line="1" Column="1" />
       <File FileName="Assets\Code\Extra\extraRotate.cs" Line="1" Column="1" />
       <File FileName="Assets\Code\Extra\fixPosition.cs" Line="1" Column="1" />
-      <File FileName="Assets\Code\UI\startAndSelect\selectHead.cs" Line="73" Column="2" />
+      <File FileName="Assets\Code\UI\startAndSelect\selectHead.cs" Line="1" Column="1" />
       <File FileName="Assets\Code\UI\startAndSelect\selectHeaderMaker.cs" Line="1" Column="1" />
       <File FileName="Assets\Code\Player\attackLink.cs" Line="1" Column="1" />
-      <File FileName="Assets\Code\UI\basicShow\effectFlashPanel.cs" Line="38" Column="75" />
-      <File FileName="Assets\Code\UI\startAndSelect\UIStateShowImage.cs" Line="40" Column="20" />
+      <File FileName="Assets\Code\UI\basicShow\effectFlashPanel.cs" Line="1" Column="1" />
+      <File FileName="Assets\Code\UI\startAndSelect\UIStateShowImage.cs" Line="1" Column="1" />
+      <File FileName="Assets\Code\AI\FSM\FSMStage.cs" Line="75" Column="57" />
+      <File FileName="Assets\Code\AI\FSM\FSM_Jump.cs" Line="34" Column="3" />
+      <File FileName="Assets\Code\AI\FSM\FSM_Search.cs" Line="108" Column="22" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
