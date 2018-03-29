@@ -12,6 +12,10 @@ public class effectFlashPanel : MonoBehaviour {
 
 	public GameObject theEffectShowButton;
 
+	//生效颜色
+	public Color EffectColor = Color.yellow;
+	//失效颜色
+	public Color NotEffectColor = Color.gray;
 
 	//这是一种很好实现的思路，但是也有致命缺点：开销太大并且增加额外显示不方便
 	//更新方法
@@ -38,9 +42,9 @@ public class effectFlashPanel : MonoBehaviour {
 					Image front = theButton.transform.Find ("CoolingFrontPicture").GetComponent<Image> ();
 					front.fillAmount = theEffectbasics [i].getEffectTimerPercent ();
 					if (theEffectbasics [i].isEffecting)
-						front.color = Color.yellow;
+						front.color = EffectColor;
 					else
-						front.color = Color.gray;
+						front.color = NotEffectColor;
 				}
 			}
 		}

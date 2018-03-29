@@ -4,10 +4,10 @@ using UnityEngine;
 
 public class effectMulanBaoFa : effectBasic
 {
-	public float superBladePercentAdd = 0.25f;
-	public float hpDamagePercent = 0.50f;//暴击额外伤害转化生命
+	public float superBladePercentAdd = 0.35f;
+	public float hpDamagePercent = 0.45f;//暴击额外伤害转化生命
 	public float DamageUseMax = 60;//伤害中生效的部分上限
-	public float timeCoolingMinus =2f;//冷却时间使用就减少冷却时间
+	public float timeCoolingMinus =1.25f;//冷却时间使用就减少冷却时间
 	public float spAdder = 10f;//冷却中使用时候返还的斗气
 	GameObject theEffect;//特效
 
@@ -20,7 +20,7 @@ public class effectMulanBaoFa : effectBasic
 	{
 
 		timerForEffect = 12f;//生效时间
-		lifeTimerAll = 32f;//总持续时间，也是冷却时间
+		lifeTimerAll = 35f;//总持续时间，也是冷却时间
 		theEffectName = "裂天";
 		//注意的是，最大生命值每回合都会更新的，这个最大生命值的削弱仅仅限制于本回合(如果削减最大斗气值就太变态了)
 		theEffectInformation = "额外获得" + superBladePercentAdd * 100 + "%的暴击率，持" +

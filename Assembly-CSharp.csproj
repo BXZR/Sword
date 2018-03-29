@@ -103,6 +103,7 @@
      <Compile Include="Assets\Code\UI\startAndSelect\selectHeaderMaker.cs" />
      <Compile Include="Assets\Code\UI\startAndSelect\skillEffectShowingItem.cs" />
      <Compile Include="Assets\Code\UI\systemPanel\BasicPanelController.cs" />
+     <Compile Include="Assets\Code\UI\systemPanel\Operate\SliderForVolumn.cs" />
      <Compile Include="Assets\Code\UI\systemPanel\Skill\skillButton.cs" />
      <Compile Include="Assets\Code\UI\systemPanel\Skill\skillPanelController.cs" />
      <Compile Include="Assets\Code\UI\systemPanel\SystemUIController.cs" />
