@@ -23,7 +23,7 @@ public class effectDragonAttack  : effectBasic{
 	{
 		theEffectName = "降龙十八掌";
 		//注意的是，最大生命值每回合都会更新的，这个最大生命值的削弱仅仅限制于本回合(如果削减最大斗气值就太变态了)
-		theEffectInformation ="攻击起手时恢复("+hpupValue+"+已损生命"+hpUpWhenattack*100+"%)\n生命百分比低于"+ upGate*100 +"%效果翻倍\n（连招攻击此效果只触发一次）\n溢出的治疗效果将转化为护盾但护盾上限降低为"+shieldPercentNew*100+"%";
+		theEffectInformation ="攻击起手时恢复("+hpupValue+"+已损生命"+hpUpWhenattack*100+"%)\n生命百分比低于"+ upGate*100 +"%效果翻倍\n（连招攻击此效果只触发一次）\n治疗效果可溢出为护盾但护盾上限降低为"+shieldPercentNew*100+"%";
 		makeStart ();
 		thePlayer.ActerShieldMaxPercent = shieldPercentNew;
 	}

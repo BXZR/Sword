@@ -8,6 +8,9 @@ public class effectForSpeedMoveForward : effectBasic {
 	private int indexUse = 0;
 	private float moveSpeed = 20f;
 	private float hengPercent = 0.75f;//横向突进速度百分比
+	//允许额外连续突进一次
+	bool isOverMove = false;
+
     //公有技能效果之“向前突进”
 	void Start ()
 	{
@@ -17,19 +20,39 @@ public class effectForSpeedMoveForward : effectBasic {
 
 	public override void Init ()
 	{
-		lifeTimerAll = 3f;
+		lifeTimerAll = 5f;
 		timerForEffect = 0.15f;
 		theEffectName = "突进";
-		theEffectInformation = "迅速向指定方向移动一小段距离\n持续"+timerForEffect+"秒，冷却"+lifeTimerAll+"秒，额外消耗4%当前斗气值\n突进过程中可选定和转向，且无法穿越障碍\n横向突进速度是向前突进速度的"+hengPercent*100+"%";
+		theEffectInformation = "迅速向指定方向移动一小段距离\n持续"+timerForEffect+"秒，冷却"+lifeTimerAll+"秒\n横向突进速度是向前突进速度的"+hengPercent*100+"%";
+		theEffedctExtraInformation = "冷却中可额外消耗10%最大斗气值再突进一次";
 		makeStart ();
 		Destroy (this, lifeTimerAll);
 		if (thePlayer)
 		{
 			theMoveController = this.thePlayer.GetComponent < CharacterController> ();
-			thePlayer.ActerSp *= 0.96f;
 		}
 	}
 
+
+	public override void updateEffect ()
+	{
+		if (isOverMove == false)
+		{
+			isOverMove = true;
+
+			if(timerForAdd >= (lifeTimerAll - timerForEffect))
+			     timerForAdd -= timerForEffect;//要保证突进时间足够
+			
+			float theSPUse = thePlayer.ActerSpMax * 0.1f;
+			thePlayer.ActerSp -= theSPUse;
+			effectBasic[] Effects = thePlayer.GetComponentsInChildren<effectBasic> ();
+			for (int i = 0; i < Effects.Length; i++)
+				Effects [i].OnUseSP (theSPUse);
+			
+			isEffecting = true;
+
+		}
+	}
 
 	public override void SetAttackLinkIndex (int index = 0)
 	{

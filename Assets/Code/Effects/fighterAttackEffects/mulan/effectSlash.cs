@@ -26,7 +26,7 @@ public class effectSlash :effectBasic{
 	{
 		theEffectName = "劫刃";
 		//注意的是，最大生命值每回合都会更新的，这个最大生命值的削弱仅仅限制于本回合(如果削减最大斗气值就太变态了)
-		theEffectInformation ="额外获得"+hpsuckAdd*100+"%的生命偷取\n攻击时拥有"+ranNumber*10 +"%机会使最终伤害提升"+addPercent *100+"%，同时恢复额外伤害等额的斗气";
+		theEffectInformation ="额外获得"+hpsuckAdd*100+"%的生命偷取\n攻击时拥有"+ranNumber*10 +"%机会使最终伤害提升"+addPercent *100+"%\n同时恢复额外伤害等额的斗气";
 		theEffedctExtraInformation = "特性：自身生命值低于"+changeGate*100+"%变化为[红莲]";
 		makeStart ();
 
@@ -69,7 +69,7 @@ public class effectSlash :effectBasic{
 		{
 			theEffectName = "劫刃";
 			//注意的是，最大生命值每回合都会更新的，这个最大生命值的削弱仅仅限制于本回合(如果削减最大斗气值就太变态了)
-			theEffectInformation = "额外获得" + hpsuckAdd * 100 + "%的生命偷取\n攻击时拥有" + ranNumber * 10 + "%机会使最终伤害提升" + addPercent * 100 + "%，同时恢复额外伤害等额的斗气";
+			theEffectInformation = "额外获得" + hpsuckAdd * 100 + "%的生命偷取\n攻击时拥有" + ranNumber * 10 + "%机会使最终伤害提升" + addPercent * 100 + "%\n同时恢复额外伤害等额的斗气";
 			theEffedctExtraInformation = "特性：自身生命值低于"+changeGate*100+"%变化为[红莲]";
 		} 
 		else 

@@ -25,7 +25,7 @@ public class effectZiying :effectBasic{
 		lifeTimerAll = 15f;
 		timerForEffect = 15f;
 		theEffectName = "剑气";
-		theEffectInformation = "剑气围绕周身，获得" + shieldPercentAdd * 100 + "%格挡率\n非战斗状态下斗气恢复效率提升"+ spUpWhenNotFightingPercnet*100+"%\n每过" + lifeTimerAll + "秒可以在攻击命中的第一个目标时对目标周围"+area+"米的所有敌人造成自身当前攻击力" + extraDamagePercent * 100 + "%真实伤害";
+		theEffectInformation = "剑气围绕周身，获得" + shieldPercentAdd * 100 + "%格挡率\n非战斗状态下斗气恢复效率提升"+ spUpWhenNotFightingPercnet*100+"%\n每过" + lifeTimerAll + "秒的下一次攻击转为范围攻击\n目标周围"+area+"米的所有敌人受到额外" + extraDamagePercent * 100 + "%真实伤害";
 		makeStart ();
 		this.thePlayer.ActerShielderPercent += shieldPercentAdd;
 		this.thePlayer.CActerShielderPercent += shieldPercentAdd;

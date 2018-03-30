@@ -260,7 +260,7 @@ public class PlayerBasic : MonoBehaviour {
 				damage = getTrueDamage (thePlayerAim, extraDamage+extraDamageForAnimation);
 			//-------------------------------------------------------------------------------------
 		    float hpsuck =  makeHpSuck(  damage , thePlayerAim);//计算吸血
-
+		    float spsuck =  makeSpSuck(damage , thePlayerAim);//计算吸蓝
 		   //单机动作控制
 		   if(systemValues.modeIndex == 0)
 			thePlayerAim.OnBeAttack (damage);
@@ -278,6 +278,7 @@ public class PlayerBasic : MonoBehaviour {
 				Effects [i].OnAttack (thePlayerAim);
 				Effects [i].OnAttack (thePlayerAim,damage);
 			    Effects [i].OnHpUp (hpsuck);
+			    Effects [i].OnSpUp (spsuck);
 			}
 		   effectBasic[] EffectAim = thePlayerAim.GetComponentsInChildren<effectBasic> ();
 		    for (int i = 0; i < EffectAim.Length; i++)
@@ -306,6 +307,7 @@ public class PlayerBasic : MonoBehaviour {
 			    damage = getTrueDamage (thePlayerAim, extraDamage+extraDamageForAnimation);
 		   //-------------------------------------------------------------------------------------
 		    float hpsuck =  makeHpSuck(  damage , thePlayerAim);//计算吸血
+		    float spsuck =  makeSpSuck(damage , thePlayerAim);//计算吸蓝
 			
 		//单机动作控制
 		if(systemValues.modeIndex == 0)
@@ -326,6 +328,7 @@ public class PlayerBasic : MonoBehaviour {
 					Effects [i].OnAttack (thePlayerAim);
 					Effects [i].OnAttack (thePlayerAim, damage);
 				    Effects [i].OnHpUp (hpsuck);
+				    Effects [i].OnSpUp (spsuck);
 				}
 			}
 			effectBasic[] EffectAim = thePlayerAim.GetComponentsInChildren<effectBasic> ();
@@ -447,6 +450,13 @@ public class PlayerBasic : MonoBehaviour {
 		float hpChanger = damageMake * ActerHpSuckPercent + ActerHpSuck - thePlayerAim.ActerWuliReDamage*(1- this.ActerWuliShield/1500);
 		this.ActerHp += hpChanger;//关于反伤和吸血的制作比较简单
 		return  hpChanger;
+	}
+	//计算吸蓝
+	float makeSpSuck(float damageMake , PlayerBasic thePlayerAim)
+	{
+		float spChanger = damageMake * ActerSpSuckPercent + ActerSpSuck;
+		this.ActerSp += spChanger;//关于反伤和吸血的制作比较简单
+		return spChanger;
 	}
 
 	public void flashConNameTimer()

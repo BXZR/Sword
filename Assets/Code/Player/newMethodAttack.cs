@@ -39,6 +39,7 @@ public class newMethodAttack : MonoBehaviour {
 			{
 				effectBasic theEffect = thePlayer.gameObject.GetComponent (System.Type.GetType (thePlayer . conNameToSELF)) as effectBasic;
 				theEffect.updateEffect ();
+				theEffect.SetAttackLinkIndex(thePlayer.EffectAttackLinkIndex);
 			}
 			thePlayer . conNameToSELF = "";
 		}
@@ -70,7 +71,8 @@ public class newMethodAttack : MonoBehaviour {
 			{
 				effectBasic theEffect = playerAim.gameObject.GetComponent (System.Type.GetType (thePlayer . conNameToEMY)) as effectBasic;
 				theEffect.updateEffect ();
-				print ("update");
+				theEffect.SetAttackLinkIndex(thePlayer.EffectAttackLinkIndex);
+				//print ("update");
 			}
 			thePlayer .conNameToEMY= "";
 		}
