@@ -16,9 +16,31 @@ public class skillButton : MonoBehaviour {
 	public string effectInformation = "";
 	//用来显示的文本
 	public Text theShowText;
+	//记录连招引用
+	public attackLink theAttacklink;
+
+	//可能有一些特殊的初始化需要按照一定顺序进行
+	public void makeStart()
+	{
+		if (theAttacklink.canLvup == false)
+			Destroy (this.transform.Find("Lvup").gameObject);
+	}
 
 	public void makeShow()
 	{
 		theShowText.text = attackLinkBasicInformation + "\n" + basicEffect + "\n\n" + effectInformation;
+
+	}
+
+	//升级按钮对应的方法
+	public void makeLvUp()
+	{
+		if (theAttacklink)
+		{
+			theAttacklink.makeAttackLinkUp ();
+			attackLinkBasicInformation = theAttacklink.getInformation ();
+			makeShow ();//重新显示内容
+		}
+		
 	}
 }

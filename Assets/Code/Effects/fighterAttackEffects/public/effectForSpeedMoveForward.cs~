@@ -24,13 +24,13 @@ public class effectForSpeedMoveForward : effectBasic {
 		timerForEffect = 0.15f;
 		theEffectName = "突进";
 		theEffectInformation = "迅速向指定方向移动一小段距离\n持续"+timerForEffect+"秒，冷却"+lifeTimerAll+"秒\n横向突进速度是向前突进速度的"+hengPercent*100+"%";
-		theEffedctExtraInformation = "冷却中可额外消耗10%最大斗气值再突进一次";
+		theEffedctExtraInformation = "冷却中可额外消耗8%最大斗气值再突进一次";
 		makeStart ();
-		Destroy (this, lifeTimerAll);
 		if (thePlayer)
 		{
 			theMoveController = this.thePlayer.GetComponent < CharacterController> ();
 		}
+		Destroy (this,lifeTimerAll);
 	}
 
 
@@ -40,10 +40,11 @@ public class effectForSpeedMoveForward : effectBasic {
 		{
 			isOverMove = true;
 
-			if(timerForAdd >= (lifeTimerAll - timerForEffect))
-			     timerForAdd -= timerForEffect;//要保证突进时间足够
-			
-			float theSPUse = thePlayer.ActerSpMax * 0.1f;
+			theEffectName = "二段突进";
+
+			timerForEffect = timerForEffect + timerForAdd;
+
+			float theSPUse = thePlayer.ActerSpMax * 0.08f;
 			thePlayer.ActerSp -= theSPUse;
 			effectBasic[] Effects = thePlayer.GetComponentsInChildren<effectBasic> ();
 			for (int i = 0; i < Effects.Length; i++)
@@ -71,11 +72,20 @@ public class effectForSpeedMoveForward : effectBasic {
 			}
 		}
 	}
+
 	public override void effectOnUpdateTime ()
 	{
 		addTimer ();
 
 	}
+
+	public override string getOnTimeFlashInformation ()
+	{
+		if(isOverMove == false)
+		return this.theEffectName +"\n(第一段)";
+		return  this.theEffectName +"\n[已失效]";
+	}
+
 	void Update()
 	{
 		//print ("timer add = "+ timerForAdd);

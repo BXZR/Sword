@@ -51,6 +51,10 @@ public class attackLink : MonoBehaviour {
 	//[HideInInspector]//此效果没有必要在面板中被设置
 	public int AIExtraValue = 0;//用于AI计算的额外参数
 
+	public bool canLvup = true;//招式是否可以升级
+	public int lvupCost  = 5;//招式升级消耗的魂
+	public int theAttackLinkLv = 1;//当前招式等级
+
 	/****************************************特殊攻击方法组****************************************************/
 	//攻击检测原理：
 	//用相交求获取身边所有的单位
@@ -167,6 +171,31 @@ public class attackLink : MonoBehaviour {
 			playAttackLinkAction ();
 		}
 	}
+
+
+	//招式升级-----------------------------------------------
+	[PunRPC]
+	private void AttackLinkLvupNet()
+	{
+		//升级资源暂时先不管
+		this.spUse += 0.25f;
+		this.extraDamage += 7f;
+		this.theAttackLinkLv++;
+	}
+
+	//网络版群体升级，单机版单独升级
+	public void makeAttackLinkUp()
+	{
+		if (systemValues.modeIndex == 1 && photonView != null)
+		{
+			this.photonView.RPC ("AttackLinkLvupNet", PhotonTargets.All);
+		}
+		else if (systemValues.modeIndex == 0)
+		{
+			AttackLinkLvupNet ();
+		}
+	}
+	//招式升级OVER-----------------------------------------------
 
 	//攻击起手阶段的效果
 	private void  playStarEffect()
@@ -337,6 +366,11 @@ public class attackLink : MonoBehaviour {
 
 		string information = "";
 		information += "招式名称：" + this.skillName+"\n";
+		if (canLvup) //有些招式是没有升级的，也就没有必要显示
+		{
+			information += "招式等级：" + this.theAttackLinkLv + "\n";
+			information += "升级所需魂元：" + this.lvupCost+"\n";
+		}
 		//information += "触发方式："+ systemValues.getAttacklinkInformationTranslated(this.attackLinkString) + "\n";
 		information += "触发方式：";
 		for (int i = 0; i < attackLinkStringSplited.Length; i++) 

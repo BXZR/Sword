@@ -5,7 +5,7 @@ using UnityEngine;
 public class AISoilderExtraAttack : effectBasic {
 
 	//怪物普攻附加的伤害
-	float extraDamage = 5f;
+	public float extraDamage = 5f;
 
 	void Start ()
 	{

@@ -38,7 +38,9 @@ public class skillPanelController : MonoBehaviour {
 				theSkillInformation.attackLinkBasicInformation = theAttacklinks [i].getInformation ();
 				theSkillInformation.basicEffect = getAttacklinkEffectInformation (theAttacklinks [i], theButton, out theSkillInformation.effectInformation);
 				theSkillInformation.theShowText = theInformationText;
+				theSkillInformation.theAttacklink = theAttacklinks[i];
 				theButton.GetComponentInChildren<Text> ().text = theAttacklinks [i].skillName;
+				theSkillInformation.makeStart ();
 				theButton.transform.localPosition = new Vector3 (1,1,1);
 				theButton.transform.localScale = new Vector3 (1,1,1);
 			}

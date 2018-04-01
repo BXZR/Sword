@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class effectDragonMiss : effectBasic{
 
-	float spupOnAttack = 4;
+	float spupOnAttack = 5;
 	float hpupPercent = 0.1f;
 	void Start () 
 	{
