@@ -54,6 +54,7 @@ public class attackLink : MonoBehaviour {
 	public bool canLvup = true;//招式是否可以升级
 	public int lvupCost  = 5;//招式升级消耗的魂
 	public int theAttackLinkLv = 1;//当前招式等级
+	public float extraDamageAdd = 0;//额外攻击伤害
 
 	/****************************************特殊攻击方法组****************************************************/
 	//攻击检测原理：
@@ -177,10 +178,29 @@ public class attackLink : MonoBehaviour {
 	[PunRPC]
 	private void AttackLinkLvupNet()
 	{
-		//升级资源暂时先不管
-		this.spUse += 0.25f;
-		this.extraDamage += 7f;
-		this.theAttackLinkLv++;
+		if (systemValues.soulCount >= lvupCost) 
+		{
+			this.extraDamage += extraDamageAdd;
+			this.theAttackLinkLv++;
+			systemValues.soulCount -= lvupCost;
+		}
+	}
+
+	//计算招式升级需要的魂元数量
+	//以及招式升级带来的增益
+	//这是一个统一的计算方法，其实就是为了简化配置的过程，所以难免会有扯淡的偏颇
+	public void canculateCost()
+	{
+		int value = 7;
+		if (!string.IsNullOrEmpty (this.conNameToSELF))
+			value += 10;
+		if (!string.IsNullOrEmpty (this.conNameToEMY))
+			value += 10;
+		if (extraDamage > 0)
+			value += (int)extraDamage/2;
+		
+		lvupCost = (int)(value /2) + theAttackLinkLv * 2 ;
+		extraDamageAdd = value * 0.4f + (int)spUse/4;
 	}
 
 	//网络版群体升级，单机版单独升级
@@ -366,20 +386,8 @@ public class attackLink : MonoBehaviour {
 
 		string information = "";
 		information += "招式名称：" + this.skillName+"\n";
-		if (canLvup) //有些招式是没有升级的，也就没有必要显示
-		{
-			information += "招式等级：" + this.theAttackLinkLv + "\n";
-			information += "升级所需魂元：" + this.lvupCost+"\n";
-		}
-		//information += "触发方式："+ systemValues.getAttacklinkInformationTranslated(this.attackLinkString) + "\n";
-		information += "触发方式：";
-		for (int i = 0; i < attackLinkStringSplited.Length; i++) 
-		{
-			information += systemValues.getAttacklinkInformationTranslated(attackLinkStringSplited[i]);
-			if(i<attackLinkStringSplited.Length-1 )
-				information+= " / ";
-		}
-		information += "\n";
+		information += "招式等级：" + this.theAttackLinkLv + "\n";
+
 		if (this.extraDamage > 0) 
 		{
 			if (!this.thePlayer)
@@ -392,7 +400,24 @@ public class attackLink : MonoBehaviour {
 			information += "额外伤害：" + this.extraDamage + "\n";
 		}
 
-		information += "斗气消耗：" + this.spUse;
+		//information += "触发方式："+ systemValues.getAttacklinkInformationTranslated(this.attackLinkString) + "\n";
+		information += "触发方式：";
+		for (int i = 0; i < attackLinkStringSplited.Length; i++) 
+		{
+			information += systemValues.getAttacklinkInformationTranslated(attackLinkStringSplited[i]);
+			if(i<attackLinkStringSplited.Length-1 )
+				information+= " / ";
+		}
+		information += "\n";
+
+		information += "斗气消耗：" + this.spUse +"\n\n";
+
+		if(canLvup)
+		{
+			information += "升级所需魂元：" + this.lvupCost+"\n";
+			information += "升级增加首击伤害："+ this.extraDamageAdd+"\n";
+		}
+
 		return information;
 	}
 

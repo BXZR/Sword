@@ -65,7 +65,7 @@ public class extraWeapon : MonoBehaviour {
 			if (playerAim == null)
 				playerAim = collisioner.gameObject.GetComponentInChildren<PlayerBasic> ();
 
-			if (thePlayer && 　playerAim && playerAim != thePlayer &&  attackAims .Contains(playerAim) == false && attackAims.Count < damageCount)
+			if (thePlayer && 　playerAim && playerAim.isAlive && playerAim != thePlayer &&  attackAims .Contains(playerAim) == false && attackAims.Count < damageCount)
 			{
 				attackAims.Add (playerAim);
 				//print (playerAim.ActerHpSuck );

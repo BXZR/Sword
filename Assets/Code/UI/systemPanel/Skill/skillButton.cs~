@@ -28,6 +28,8 @@ public class skillButton : MonoBehaviour {
 
 	public void makeShow()
 	{
+		theAttacklink.canculateCost ();
+		attackLinkBasicInformation = theAttacklink.getInformation ();
 		theShowText.text = attackLinkBasicInformation + "\n" + basicEffect + "\n\n" + effectInformation;
 
 	}
@@ -37,10 +39,12 @@ public class skillButton : MonoBehaviour {
 	{
 		if (theAttacklink)
 		{
+			theAttacklink.canculateCost ();
 			theAttacklink.makeAttackLinkUp ();
 			attackLinkBasicInformation = theAttacklink.getInformation ();
 			makeShow ();//重新显示内容
 		}
 		
 	}
+
 }

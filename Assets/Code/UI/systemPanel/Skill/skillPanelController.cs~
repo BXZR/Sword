@@ -13,7 +13,8 @@ public class skillPanelController : MonoBehaviour {
 	public Transform theButtonFather;
 	//显示信息的Text
 	public Text theInformationText;
-
+	//魂元数量显示
+	public Text SoulCountText ;
 	//是否已经建立建立一次就可以了
 	private bool isBuilt = false;
 
@@ -24,6 +25,11 @@ public class skillPanelController : MonoBehaviour {
 		makeStart ();
 	}
 
+
+	void Update()
+	{
+		SoulCountText.text = "魂元数量："+systemValues.soulCount;
+	}
 	void  makeStart()
 	{
 		if (systemValues.thePlayer != null && isBuilt == false) 
@@ -44,6 +50,7 @@ public class skillPanelController : MonoBehaviour {
 				theButton.transform.localPosition = new Vector3 (1,1,1);
 				theButton.transform.localScale = new Vector3 (1,1,1);
 			}
+
 			isBuilt = true;
 		}
 	}

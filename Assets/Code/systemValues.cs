@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class systemValues : MonoBehaviour {
 	//程序面板单元
+	//也可以理解为这是每一个客户端的计分板
+	//用来记录这个客户端的相关内容
 	//统一invokeRepeat的调用时间
 	public static float updateTimeWait = 0.1f;
 	public static bool isAttacking(Animator theAnimator)
@@ -172,7 +174,7 @@ public class systemValues : MonoBehaviour {
 		{
 			buffer.Add (efs[i]);
 			efs [i].Init ();
-			if (efs [i].isBE ()) 
+			if (efs [i].isBE () && efs[i].isShowing()) 
 			{
 				attackLinkInformation theInformation = new attackLinkInformation ();
 				theInformation.attackLinkName = "";
@@ -364,5 +366,9 @@ public class systemValues : MonoBehaviour {
 		return information;
  
 	}
+
+	//收集的魂元数量
+	//魂元可以通过击杀目标来获取
+	public static int soulCount = 3;
  
 }

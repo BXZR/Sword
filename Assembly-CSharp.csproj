@@ -73,6 +73,7 @@
      <Compile Include="Assets\Code\Effects\fighterAttackEffects\mulan\effectSlash.cs" />
      <Compile Include="Assets\Code\Effects\fighterAttackEffects\mulan\effectSlowDamage.cs" />
      <Compile Include="Assets\Code\Effects\fighterAttackEffects\public\effectForSpeedMoveForward.cs" />
+     <Compile Include="Assets\Code\Effects\fighterAttackEffects\public\killerGeter.cs" />
      <Compile Include="Assets\Code\Effects\fighterAttackEffects\ziying\eeffectZiyingArcher.cs" />
      <Compile Include="Assets\Code\Effects\fighterAttackEffects\ziying\effectQianfang.cs" />
      <Compile Include="Assets\Code\Effects\fighterAttackEffects\ziying\effectZiying.cs" />
@@ -116,6 +117,7 @@
      <Compile Include="Assets\Code\netWork\PUNConnect.cs" />
      <Compile Include="Assets\Code\netWork\onConnectFlash.cs" />
      <Compile Include="Assets\Code\props\popMaker.cs" />
+     <Compile Include="Assets\Code\props\popSoulMove.cs" />
      <Compile Include="Assets\Code\props\props.cs" />
      <Compile Include="Assets\Code\sound\MusicController.cs" />
      <Compile Include="Assets\Code\sound\audioPlayer.cs" />
