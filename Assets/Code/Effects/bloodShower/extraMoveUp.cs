@@ -33,6 +33,22 @@ public class extraMoveUp : MonoBehaviour
 		}
 	}
 
+	//也可直接做颜色赋值
+	public void makeColor(Color A)
+	{
+		theTextMesh.color = A;
+	}
+
+	public void  makeStart(Vector3 theTextMoveAimIn,string theShowText,float lifeTimeIn = 1f)
+	{
+		theTextMoveAim = theTextMoveAimIn;
+		theTextMesh = this.GetComponentInChildren<TextMesh> ();
+		theTextMesh .text = theShowText;
+		timerLife = lifeTimeIn;
+		isStarted = true;
+		Destroy (this.gameObject,3);//最多持续秒，必须要消失
+	}
+
 	public void  makeStart(Vector3 theTextMoveAimIn,float showValue,float lifeTimeIn = 1f)
 	{
 		valueSave = showValue;

@@ -41,6 +41,24 @@ public class effectShowDamageOnBeAttack : effectBasic
 
 	}
 
+
+	public void makeShowTextExtra(string text)
+	{
+			//建立对象
+			if (theShowTextProfab == null)
+				theShowTextProfab = Resources.Load <GameObject>("effects/bloodText");
+
+		    GameObject 	extraShow = GameObject.Instantiate (theShowTextProfab);
+		    extraShow .transform.position = this.thePlayer.transform.position + new Vector3 (Random.Range (0f, 0.5f) - 0.25f, 0.75f, 0);
+			//theShowText.transform.SetParent (thePlayer.transform);//作为可选选项先放在这里
+			//初始化和重新构建
+			Vector3 theTextMoveAim = this.thePlayer.transform.position + new Vector3 (0, 1.5f, 0);
+		    extraMoveUp theMoveEffect = extraShow.GetComponent<extraMoveUp> ();
+		    theMoveEffect.makeStart (theTextMoveAim, text, showTimer);
+			theMoveEffect.makeColor (0);
+
+	}
+
 	public void makeShowForDamage(float damage = 0)
 	{
 		//建立对象
@@ -107,6 +125,21 @@ public class effectShowDamageOnBeAttack : effectBasic
 			if(upValue > 5)
 			makeShowForHpUp (upValue);
 		}
+	}
+
+	public override void OnSuperBlade (PlayerBasic aim, float Damage = 0)
+	{
+		makeShowTextExtra("暴击"+thePlayer.ActerSuperBaldeAdder*100 +"%!");
+	}
+
+	public override void OnMiss (PlayerBasic attacker)
+	{
+		makeShowTextExtra("闪避!");
+	}
+	public override void OnShield (PlayerBasic attacker, float damage = 0)
+	{
+		float damageMinus = thePlayer.ActerShielderDamageMiunsPercent * attacker.ActerWuliDamage  + thePlayer.ActerShielderDamageMiuns;
+		makeShowTextExtra("格挡" + damageMinus.ToString("f0") +"伤害!");
 	}
 
 	void Start ()
