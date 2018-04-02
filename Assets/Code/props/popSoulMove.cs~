@@ -35,6 +35,7 @@ public class popSoulMove : MonoBehaviour {
 			if (Vector3.Distance (this.transform.position, theAim.transform.position) < 1f) 
 			{
 				systemValues.soulCount += soulCount;
+				theAim.GetComponent<PlayerBasic> ().addJingYan (soulCount * 2 );
 				Destroy (this.gameObject);
 			}
 		}

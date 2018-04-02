@@ -36,7 +36,6 @@ public class BasicPanelController : MonoBehaviour {
 			{
 				theHeadImage.gameObject.SetActive (false);//如果没有图就干脆就不显示吧
 			}
-			thePlayerName.text = systemValues.thePlayer.ActerName;
 			loaded = true;
 		}
 	}
@@ -87,6 +86,7 @@ public class BasicPanelController : MonoBehaviour {
 		makeLoad();
 		if(systemValues.thePlayer)
 		{	
+			thePlayerName.text = systemValues.thePlayer.ActerName +"  (Lv."+systemValues.thePlayer.playerLv+")";
 			theExtraValueInformationText.text = systemValues.thePlayer.getPlayerInformation(false)+systemValues.thePlayer.getPlayerInformationExtra();
 			float theHpValue = systemValues.thePlayer.ActerHp / systemValues.thePlayer.ActerHpMax;
 			float theSpValue = systemValues.thePlayer.ActerSp / systemValues.thePlayer.ActerSpMax;

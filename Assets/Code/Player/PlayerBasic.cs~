@@ -166,6 +166,42 @@ public class PlayerBasic : MonoBehaviour {
 	//当前所有effect的attacklink模式
 	public int EffectAttackLinkIndex = 0;
 
+	//有关经验和等级-------------------------------------------------------------------------------------------
+	public int playerLv = 1;
+	public  float jingyanNow = 0;
+	public  float jingyanMax = 100;
+	public void addJingYan(float adder  = 0)
+	{
+		jingyanNow += adder;
+		int lvAdd= 0;
+		if(jingyanNow > jingyanMax ) //经验足够准备升级
+		{
+			lvAdd = (int)  (jingyanNow / jingyanMax);
+			jingyanNow =  jingyanNow % jingyanMax;
+			jingyanMax += 50f;
+		}
+		for(int i = 0 ; i <lvAdd ; i++ )
+		{
+			this.playerLv ++;
+			OnLvIp();
+		}
+	}
+	//升级的时候会发生什么效果放在这个里面
+	private void OnLvIp()
+	{
+		ActerWuliDamage += 4f;
+		CActerWuliDamage += 4f;
+		float hpPercent = ActerHp / ActerHpMax;
+		float spPercent = ActerSp / ActerSpMax;
+		ActerHpMax += 20f;
+		CActerHpMax += 20f;
+		ActerSpMax += 5f;
+		CActerSpMax += 5f;
+		ActerHp = ActerHpMax * hpPercent;
+		ActerSp = ActerSpMax * spPercent;
+	}
+	//有关经验和等级 OVER -----------------------------------------------------------------------------------------
+
 	//进入到战斗状态
 	public void getInFightState()
 	{
@@ -718,7 +754,7 @@ public class PlayerBasic : MonoBehaviour {
 				float rotoForSp = Mathf.Clamp ((this.ActerSp / this.ActerSpMax), 0f, 1f);
 				Vector2 c = Camera.main.WorldToScreenPoint (new Vector3 (this.transform.position.x, this.transform.position.y + 1f, this.transform.position.z));
 				GUI.BeginGroup (new Rect (c.x, Screen.height - c.y, 155, 100));
-				GUI.Box (new Rect (35, 0, 80, 23), this.ActerName);
+				GUI.Box (new Rect (25, 0, 100, 23), this.ActerName +"(Lv."+this.playerLv+")");
 				GUI.Box (new Rect (10, 23, 127, 15), "");
 				GUI.Box (new Rect (12, 24, 120 * rotoForHp, 13), "", GUIShowStyleHP);
 				GUI.Box (new Rect (10, 39, 127, 15), "");

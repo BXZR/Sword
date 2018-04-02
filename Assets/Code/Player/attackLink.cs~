@@ -393,7 +393,7 @@ public class attackLink : MonoBehaviour {
 			if (!this.thePlayer)
 				information += "额外伤害：" + this.extraDamage + "\n";
 			else
-				information += "伤害：(" + this.thePlayer.ActerWuliDamage + "+" + systemValues.BESkillColor + this.extraDamage + systemValues.colorEnd + ")\n";
+				information += "伤害：(" + this.thePlayer.ActerWuliDamage + "+" + systemValues.BESkillColor +(int) this.extraDamage + systemValues.colorEnd + ")\n";
 		}
 		else
 		{
@@ -415,7 +415,7 @@ public class attackLink : MonoBehaviour {
 		if(canLvup)
 		{
 			information += "升级所需魂元：" + this.lvupCost+"\n";
-			information += "升级增加首击伤害："+ this.extraDamageAdd+"\n";
+			information += "升级增加首击伤害："+ (int)this.extraDamageAdd+"\n";
 		}
 
 		return information;

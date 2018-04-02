@@ -11,7 +11,9 @@ public class uiShowsForBasic : MonoBehaviour {
 	public Slider theShieldSlider;
 	public Slider theHpBackSlider;
 	public Image thePlayerImage;
+	public Image jingyanImage;
 	public Text thePlayerNameText;//用来显示名字
+	public Text theLvText;//用来显示等级
 	private  PlayerBasic thePlayer;
 	private bool isStarted = false;//只有在开始之后才会刷新
 	public void makeStart(PlayerBasic thePlayer)
@@ -57,6 +59,8 @@ public class uiShowsForBasic : MonoBehaviour {
 			theHpSlider.value = thePlayer.ActerHp / thePlayer.ActerHpMax;
 			theSpSlider.value = thePlayer.ActerSp / thePlayer.ActerSpMax;
 			theShieldSlider.value = thePlayer.ActerShieldHp / thePlayer.ActerHpMax;
+			jingyanImage.fillAmount = thePlayer.jingyanNow / thePlayer.jingyanMax;
+			theLvText.text = "Lv." + thePlayer.playerLv;
 			makeLoseShow ();
 		}
 	}
