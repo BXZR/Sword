@@ -170,6 +170,9 @@ public class PlayerBasic : MonoBehaviour {
 	public int playerLv = 1;
 	public  float jingyanNow = 0;
 	public  float jingyanMax = 100;
+	public int LVMax= 18;//等级上限目前为18级，当然主人公也可以一些特殊方式来突破这一层天堑
+
+	//增加经验的方法
 	public void addJingYan(float adder  = 0)
 	{
 		jingyanNow += adder;
@@ -182,8 +185,11 @@ public class PlayerBasic : MonoBehaviour {
 		}
 		for(int i = 0 ; i <lvAdd ; i++ )
 		{
-			this.playerLv ++;
-			OnLvIp();
+			if (this.playerLv < this.LVMax) 
+			{
+				this.playerLv++;
+				OnLvIp ();
+			}
 		}
 	}
 	//升级的时候会发生什么效果放在这个里面
@@ -199,6 +205,10 @@ public class PlayerBasic : MonoBehaviour {
 		CActerSpMax += 5f;
 		ActerHp = ActerHpMax * hpPercent;
 		ActerSp = ActerSpMax * spPercent;
+		//effect效果的钩子也因该发挥效用
+		effectBasic [] theEffects = this.GetComponentsInChildren<effectBasic>();
+		for (int i = 0; i < theEffects.Length; i++)
+			theEffects [i].OnLvUp ();
 	}
 	//有关经验和等级 OVER -----------------------------------------------------------------------------------------
 
