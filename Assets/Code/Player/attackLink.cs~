@@ -54,7 +54,10 @@ public class attackLink : MonoBehaviour {
 	public bool canLvup = true;//招式是否可以升级
 	public int lvupCost  = 5;//招式升级消耗的魂
 	public int theAttackLinkLv = 1;//当前招式等级
+	public int theAttakLinkLvMax = 20;//最大等级上限
 	public float extraDamageAdd = 0;//额外攻击伤害
+	public int  soulCostWhenLvtoMax = 80;//等级满了之后继续叠加的消耗
+	public int  adderWhenLvtoMax = 3;//非常低性价比的叠加
 
 	/****************************************特殊攻击方法组****************************************************/
 	//攻击检测原理：
@@ -178,11 +181,25 @@ public class attackLink : MonoBehaviour {
 	[PunRPC]
 	private void AttackLinkLvupNet()
 	{
-		if (systemValues.soulCount >= lvupCost) 
+		if (this.theAttackLinkLv < this.theAttakLinkLvMax) 
 		{
-			this.extraDamage += extraDamageAdd;
-			this.theAttackLinkLv++;
-			systemValues.soulCount -= lvupCost;
+			if (systemValues.soulCount >= lvupCost)
+			{
+				this.extraDamage += extraDamageAdd;
+				this.theAttackLinkLv++;
+				systemValues.soulCount -= lvupCost;
+					
+			}
+		} 
+		else//升到顶级之后再一次增加只能够获得很微小的增益
+		{
+			extraDamageAdd = adderWhenLvtoMax;
+			lvupCost = soulCostWhenLvtoMax;
+			if (systemValues.soulCount >= lvupCost)
+			{
+				this.extraDamage += extraDamageAdd;
+				systemValues.soulCount -= lvupCost;
+			}
 		}
 	}
 
@@ -412,10 +429,22 @@ public class attackLink : MonoBehaviour {
 
 		information += "斗气消耗：" + this.spUse +"\n\n";
 
-		if(canLvup)
+		if(canLvup  )
 		{
-			information += "升级所需魂元：" + this.lvupCost+"\n";
-			information += "升级增加首击伤害："+ (int)this.extraDamageAdd+"\n";
+			if (this.theAttackLinkLv < this.theAttakLinkLvMax) 
+			{
+				information += "升级所需魂元：" + this.lvupCost + "\n";
+				information += "升级增加首击伤害：" + (int)this.extraDamageAdd + "\n";
+			}
+			else
+			{
+				information += "等级已满\n";
+
+				extraDamageAdd = adderWhenLvtoMax;
+				lvupCost = soulCostWhenLvtoMax;
+
+				information += "可以消耗"+soulCostWhenLvtoMax+"魂元继续增加"+extraDamageAdd+"首击伤害\n";
+			}
 		}
 
 		return information;
