@@ -575,15 +575,9 @@ public class PlayerBasic : MonoBehaviour {
 			//这一次循环可以调用的效果都在这里
 			effectBasic[] Effects = this.GetComponentsInChildren<effectBasic> ();
 
-			//套护盾的额外效果
-			if(ActerShieldHp > ActerShieldHpSave)
-				for (int i = 0; i < Effects.Length; i++)
-					Effects [i] .OnAddShieldHp(ActerShieldHp - ActerShieldHpSave);
-			ActerShieldHpSave = ActerShieldHp;//保存备份数值
-
 			//护盾是有上限的 
-			if (ActerShieldHp > ActerHpMax * ActerShieldMaxPercent )
-				ActerShieldHp = ActerHpMax  * ActerShieldMaxPercent ;
+			float theMaxOfShield = ActerHpMax * ActerShieldMaxPercent;
+			ActerShieldHp = Mathf.Clamp(ActerShieldHp , 0f ,theMaxOfShield ) ;
 
 			if (ActerHp < ActerHpMax) 
 			{
@@ -599,66 +593,23 @@ public class PlayerBasic : MonoBehaviour {
 			{
 				ActerHp = 0;	
 				isAlive = false;
-				//this.gameObject.tag = "dead";
-                //Destroy (this.gameObject, 1.5f);
-				try
-				{
-					effectBasic [] theEffects = this.GetComponentsInChildren<effectBasic>();
-					for(int i = 0 ; i < theEffects.Length; i++)
-						theEffects[i].OnDead();
-					this.GetComponent <attackLinkController> ().enabled = false;
-					this.GetComponent <move> ().enabled = false;
-					this.enabled = false;
-					this.GetComponent <BoxCollider> ().enabled = false;
-					this.GetComponent <CharacterController> ().enabled = false;
-					this.transform.position = new Vector3 (this.transform .position .x , -1.8f , this.transform .position .z);
-					if(this.GetComponent <FSMStage>())
-						this.GetComponent <FSMStage>().enabled = false;
-				}
-				catch 
-				{
-					//print ("组件缺失或者不必存在这个组件");
-				}
-				if (systemValues.modeIndex == 1 && photonView!= null)
-				{
-					photonView.RPC ("plaDeadAnimations", PhotonTargets.All, "dead");
-				}
-				else if (systemValues.modeIndex == 0)
-				{
-					plaDeadAnimations ("dead");
-				}
-			}
-
-
-			//////////////////////////////////////////////
-			if (ActerSp < ActerSpMax) 
-			{
-				float spupValue = ActerSpUp * systemValues.updateTimeWait;
-				ActerSp += spupValue;
-				for (int i = 0; i < Effects.Length; i++) 
-				{
-					Effects [i].OnSpUp ();
-					Effects [i].OnSpUp (spupValue);
-				}
-				if (ActerSp > ActerSpMax)
-				{
-					ActerSp = ActerSpMax;	
-				}
-			}
-
-			//统一的数值修正
-			if (ActerSp < 0) 
-			{
-				ActerSp = 0;	
-			}
-			if (ActerSp > ActerSpMax) 
-			{
-				ActerSp = ActerSpMax;
+				makeDeadEffect ();
 			}
 			if (ActerHp > ActerHpMax) 
 			{
 				ActerHp = ActerHpMax; //最后一个修正
 			}
+
+			//////////////////////////////////////////////
+			float spupValue = ActerSpUp * systemValues.updateTimeWait;
+			ActerSp += spupValue;
+			for (int i = 0; i < Effects.Length; i++) 
+			{
+				Effects [i].OnSpUp ();
+				Effects [i].OnSpUp (spupValue);
+			}
+			ActerSp = Mathf.Clamp (ActerSp, 0 , ActerSpMax );
+
 			//此方法为物理碰撞的方法进行，但是对于动画的方法是一个阻碍，暂且注释
 			//flashWeapon ();//所有的武器共有冷却时间，攻击之后一定时间之内攻击无法命中
 
@@ -684,6 +635,38 @@ public class PlayerBasic : MonoBehaviour {
 		}
 	}
 
+	//死毕竟就只有一次，耗费多一点就多一点吧
+	private void makeDeadEffect()
+	{
+		//this.gameObject.tag = "dead";
+		//Destroy (this.gameObject, 1.5f);
+		try
+		{
+			effectBasic[] Effects = this.GetComponentsInChildren<effectBasic> ();
+			for(int i = 0 ; i < Effects.Length; i++)
+				Effects[i].OnDead();
+			this.GetComponent <attackLinkController> ().enabled = false;
+			this.GetComponent <move> ().enabled = false;
+			this.enabled = false;
+			this.GetComponent <BoxCollider> ().enabled = false;
+			this.GetComponent <CharacterController> ().enabled = false;
+			this.transform.position = new Vector3 (this.transform .position .x , -1.8f , this.transform .position .z);
+			if(this.GetComponent <FSMStage>())
+				this.GetComponent <FSMStage>().enabled = false;
+		}
+		catch 
+		{
+			//print ("组件缺失或者不必存在这个组件");
+		}
+		if (systemValues.modeIndex == 1 && photonView!= null)
+		{
+			photonView.RPC ("plaDeadAnimations", PhotonTargets.All, "dead");
+		}
+		else if (systemValues.modeIndex == 0)
+		{
+			plaDeadAnimations ("dead");
+		}
+	}
 
 	//自添加脚本
 	//这是对外方法，需要在这里分为两种

@@ -163,15 +163,6 @@ public class attackLinkController :MonoBehaviour {
 		}
 	}
 
-	//有一些网络必要的逻辑也需要用start进行初始化一下
-	void Start()
-	{
-	    attackLinkMayUsing = new List<attackLink> (); //重建这个对象
-		attackBeDelete = new List<attackLink> ();//重建对象
-		if (this.gameObject.tag == "AI")
-			makeStart ();
-	}
-
 
   public void makeStart()//这个方法是用于连招本身的初始化方法
 	{
@@ -223,7 +214,9 @@ public class attackLinkController :MonoBehaviour {
 						//if (codeUse != "J")//完全鼠标操作
 							makeAttack (codeUse);//进入连招检查
 					}
-					else if ( events.isMouse) 
+					//这是非常大的鼻酸，目前还没有办法分出阿里鼠标不同按钮的不同 
+					//也是以很暴力的方法啊
+					else if ( events.isMouse)
 					{
 						makeAttack ("J");//进入连招检查
 					}
@@ -233,11 +226,12 @@ public class attackLinkController :MonoBehaviour {
 	}
 		
 	//这里只对计时器有更新
-	void Update () 
+	//有一些内容，例如计时器，需要常常更新
+	void makeUpdate()
 	{
 		if (isStarted&& startTimer && thePlayer.isAlive) 
 		{
-		//存在一个等待的时间
+			//存在一个等待的时间
 			timerForLinkAtack -= Time.deltaTime;
 			if (timerForLinkAtack <= 0) 
 			{
@@ -245,6 +239,22 @@ public class attackLinkController :MonoBehaviour {
 				reMake();//参数更新
 			}
 		}
-
 	}
+		
+	//有一些网络必要的逻辑也需要用start进行初始化一下
+	void Start()
+	{
+		attackLinkMayUsing = new List<attackLink> (); //重建这个对象
+		attackBeDelete = new List<attackLink> ();//重建对象
+		if (this.gameObject.tag == "AI") 
+			makeStart ();
+		else 
+			//不是AI，也就是游戏主人公，才会需要实时刷新检测连招信息
+			//同时这个时间也受到这个程序的统一时钟控制
+			InvokeRepeating("makeUpdate" , 0, systemValues.updateTimeWait);
+	}
+
+	//void Update () 
+	//{
+	//}
 }

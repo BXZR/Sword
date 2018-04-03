@@ -38,7 +38,7 @@ public class popMaker : PunBehaviour  {
 	{
 		if (thePropNow == null) 
 		{
-			coolingTimer -= systemValues.updateTimeWait;
+			coolingTimer --;//一秒计算一次就可以了
 			if (coolingTimer < 0) 
 			{
 				coolingTimer = coolingTimerMax;
@@ -54,9 +54,11 @@ public class popMaker : PunBehaviour  {
 		}
 	}
 
+	//这个只是一个道具，玩家对这个的时间观察似乎也不是很严厉，所以直接每一秒计算一次就好了
+	//没有必要很短的时间计算一次
 	void Start () 
 	{
-		InvokeRepeating ("WhenThePropNowNull",1f,systemValues.updateTimeWait);	
+		InvokeRepeating ("WhenThePropNowNull",1f,1f);	
 	}
 
 }

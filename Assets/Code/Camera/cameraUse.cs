@@ -15,7 +15,9 @@ public class cameraUse : MonoBehaviour
 	public float distanceForMode1 = 3.0f;
 	public float height = 5.0f;
 	public float heightDamping;
-	public float heightOffset = 1.0f;//额外的视野偏差高度，因为人物的中心在于脚底，这不是很好的选择
+	//额外的视野偏差 ，因为人物的中心在于脚底，这不是很好的选择
+	//这个偏移量也可以考虑用在做摄像机抖动的变化
+	public Vector3 Offset = Vector3.zero;
 	public float minimumY = -60F;
 	public float maximumY = 60F;
 	float rotationY = 0F;
@@ -37,7 +39,8 @@ public class cameraUse : MonoBehaviour
 	//死了才会用到的模式
 	public  bool DeadMode = false;
 	public  PlayerBasic thePlayer;
-
+	//计算用临时变量
+	private move theMoveCopntroller;
 
 	void Start ()
 	{
@@ -109,14 +112,17 @@ public class cameraUse : MonoBehaviour
 		transform.position -= Quaternion.Euler(nowForCamera) * Vector3.forward * distanceForMode1;
 		// Set the height of the camera
 
-		transform.position = new Vector3(transform.position.x ,target.transform.position .y + height + heightOffset , transform.position.z) + thePositionWithAdd;
+		transform.position = new Vector3(transform.position.x ,target.transform.position .y + height , transform.position.z) + thePositionWithAdd + transform.rotation * Offset;
 
 
 		Vector3 now = target.transform.rotation.eulerAngles;
 		Vector3 rotation = new Vector3 (now.x , this.transform .rotation .eulerAngles.y , now.z);
 		Quaternion aim = Quaternion.Euler(rotation);
 		target.transform.rotation= aim;
-		target.GetComponent<move> ().yNow = now.y;
+		if (!theMoveCopntroller)
+			theMoveCopntroller = target.GetComponent<move> ();
+		
+		theMoveCopntroller.yNow = now.y;
 	}
 
 	//摄像机模式2，旋转摄像机
@@ -139,7 +145,7 @@ public class cameraUse : MonoBehaviour
 			ModeY2  = ClampAngle(ModeY2, yMinLimitForMode2, yMaxLimitForMode2);
 
 			var rotation = Quaternion.Euler(ModeY2, modeX2, 0);
-			var position = rotation * new Vector3(0.0f, 0.0f, -distanceForMode2) +( target.position+new Vector3 (0,heightOffset,0));
+			var position = rotation * new Vector3(0.0f, 0.0f, -distanceForMode2) +( target.position+ Offset);
 
 			transform.rotation = rotation;
 			transform.position = position;

@@ -90,7 +90,6 @@ public class newMethodAttack : MonoBehaviour {
 	public  void attackForAnimation( float makeDamage)//攻击方法（带伤害）
 	{
 		//print ("prepareToAttack");
-
 			//防止空引用
 			try
 			{

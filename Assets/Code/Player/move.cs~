@@ -383,14 +383,14 @@ public class move : MonoBehaviour {
 		 this.theAnimatorOfPlayer.SetFloat (AxisName, value);
 	}
 
-
-
+	//移动的计算因为是人看到的，所以还是应该更加连贯
 	void Update ()
 	{
-		gravtyMove ();
-		if (this.gameObject.tag == "AI")
+		if (!isStarted)
 			return;
 		
+		gravtyMove ();
+
 		forwardA = Input.GetAxis (forwardAxisName);
 		upA = Input.GetAxis (upAxisName);
 
@@ -399,22 +399,18 @@ public class move : MonoBehaviour {
 		if (Mathf.Abs (upA) < 0.6f)
 			upA = 0f;
 		
-		
-		if (!isStarted)
-			return;
-
 		MoveForwardBack(forwardA);
 		MoveLeftAndRight (upA,forwardA );
 		Jump();
 		fastMoveCheck ();
 		timerCheck ();
 
+		//这是一个更加强制的网络移动的调用，但是实际上没有要这样做
+		//因为transform的观察已经包含了位移
+		//所以只需要在适当的时候作出相应的动画就可以了
+		//但是为了保证更多的属性的控制，应该懂这种方法
+		//this.photonView.RPC ("moveForAll", PhotonTargets.All, forwardA, upA);
 		if (systemValues.modeIndex == 1 && this.photonView != null)//有些功能只在网络对战模式之下用就行
-			//这是一个更加强制的网络移动的调用，但是实际上没有要这样做
-			//因为transform的观察已经包含了位移
-			//所以只需要在适当的时候作出相应的动画就可以了
-			//但是为了保证更多的属性的控制，应该懂这种方法
-		    //this.photonView.RPC ("moveForAll", PhotonTargets.All, forwardA, upA);
 			moveForAll (forwardA, upA);
 		else if (systemValues.modeIndex == 0)
 			moveForAll (forwardA, upA);
@@ -422,9 +418,13 @@ public class move : MonoBehaviour {
 
 	void Start ()
 	{
+		if (this.gameObject.tag == "AI")//AI用的是自动导航组件，这个脚本仅仅针对玩家控制的单位
+		{
+			Destroy (this);
+			//makeStart (); 
+		}
 		theAnimatorOfPlayer = this.GetComponentInChildren<Animator> ();
-		if (this.gameObject.tag == "AI")
-			makeStart ();
+
 	}
 
 	void OnTriggerEnter(Collider A)

@@ -370,5 +370,10 @@ public class systemValues : MonoBehaviour {
 	//收集的魂元数量
 	//魂元可以通过击杀目标来获取
 	public static int soulCount = 3;
+	//全球唯一计算魂元获取量的方法
+	public static int soulGet(PlayerBasic thePlayerIn)
+	{
+		return (int)(thePlayerIn.ActerHpMax / 100);
+	}
  
 }

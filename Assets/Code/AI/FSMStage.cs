@@ -64,7 +64,9 @@ public class FSMStage : effectBasic {
 		this.transform.LookAt (attacker.transform);
 		try
 		{
-		    this.GetComponent <NavMeshAgent> ().SetDestination (this.transform .position);
+			NavMeshAgent theAgent = this.GetComponent <NavMeshAgent> ();
+			if(theAgent.isActiveAndEnabled)
+			    theAgent.SetDestination (this.transform .position);
 		}
 		catch
 		{

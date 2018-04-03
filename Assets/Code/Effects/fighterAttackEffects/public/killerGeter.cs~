@@ -27,7 +27,7 @@ public class killerGeter : effectBasic
 			thePlayerKilledThis = attacker;
 			GameObject theSoul = GameObject.Instantiate<GameObject>( Resources.Load<GameObject>("effects/theSoul"));
 			theSoul.transform.position = this.thePlayer.transform.position;
-			int soulCount = (int)(this.thePlayer.ActerHpMax / 100);
+			int soulCount = systemValues.soulGet (this.thePlayer);
 			theSoul.GetComponent <popSoulMove> ().makeSTART (attacker.transform , soulCount);
 		}
 	}
