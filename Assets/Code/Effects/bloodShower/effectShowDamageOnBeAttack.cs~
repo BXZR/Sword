@@ -41,22 +41,22 @@ public class effectShowDamageOnBeAttack : effectBasic
 
 	}
 
-
-	public void makeShowTextExtra(string text)
+	//Color.yellow被认为是默认颜色，与null的功效一样
+	public void makeShowTextExtra(string text , int ColorNumber = 0)
 	{
-			//建立对象
-			if (theShowTextProfab == null)
-				theShowTextProfab = Resources.Load <GameObject>("effects/bloodText");
+		//建立对象
+		if (theShowTextProfab == null)
+			theShowTextProfab = Resources.Load <GameObject>("effects/bloodText");
 
-		    GameObject 	extraShow = GameObject.Instantiate (theShowTextProfab);
-		    extraShow .transform.position = this.thePlayer.transform.position + new Vector3 (Random.Range (0f, 0.5f) - 0.25f, 0.75f, 0);
-			//theShowText.transform.SetParent (thePlayer.transform);//作为可选选项先放在这里
-			//初始化和重新构建
-			Vector3 theTextMoveAim = this.thePlayer.transform.position + new Vector3 (0, 1.5f, 0);
-		    extraMoveUp theMoveEffect = extraShow.GetComponent<extraMoveUp> ();
-		    theMoveEffect.makeStart (theTextMoveAim, text, showTimer);
-			theMoveEffect.makeColor (0);
+	    GameObject 	extraShow = GameObject.Instantiate (theShowTextProfab);
+	    extraShow .transform.position = this.thePlayer.transform.position + new Vector3 (Random.Range (0f, 0.5f) - 0.25f, 0.75f, 0);
+		//theShowText.transform.SetParent (thePlayer.transform);//作为可选选项先放在这里
+		//初始化和重新构建
+		Vector3 theTextMoveAim = this.thePlayer.transform.position + new Vector3 (0, 1.5f, 0);
+	    extraMoveUp theMoveEffect = extraShow.GetComponent<extraMoveUp> ();
+	    theMoveEffect.makeStart (theTextMoveAim, text, showTimer);
 
+		theMoveEffect.makeColor (ColorNumber);
 	}
 
 	public void makeShowForDamage(float damage = 0)
@@ -136,10 +136,13 @@ public class effectShowDamageOnBeAttack : effectBasic
 	{
 		makeShowTextExtra("闪避!");
 	}
-	public override void OnShield (PlayerBasic attacker, float damage = 0)
+	public override void OnShield (PlayerBasic attacker, float damageMinus = 0)
 	{
-		float damageMinus = thePlayer.ActerShielderDamageMiunsPercent * attacker.ActerWuliDamage  + thePlayer.ActerShielderDamageMiuns;
 		makeShowTextExtra("格挡" + damageMinus.ToString("f0") +"伤害!");
+	}
+	public override void OnDoNotAttackAt (PlayerBasic aim)
+	{
+		makeShowTextExtra("本次攻击未命中" , 3);
 	}
 
 	void Start ()

@@ -436,8 +436,14 @@ public class PlayerBasic : MonoBehaviour {
 	float getTrueDamage(PlayerBasic thePlayerAim, float extraDamage =0,bool withBasicDamageCanculate = true )//真正的计算伤害的方法，这个方法被“攻击”的时候调参数为攻击者经过计算的伤害
 	{
 		//根本就没有命中
-		if (Random.value > this.ActerAttackAtPercent)
-			return 0;
+		if (Random.value > this.ActerAttackAtPercent) 
+		{
+			effectBasic [] effectsGet = this.GetComponentsInChildren<effectBasic> ();
+			for (int i = 0; i < effectsGet.Length; i++)
+				effectsGet [i].OnDoNotAttackAt (thePlayerAim);
+
+			return  0 ; 
+		}
 		
 		if (Random.value < thePlayerAim.ActerMissPercent)
 		{
@@ -459,13 +465,17 @@ public class PlayerBasic : MonoBehaviour {
 
 		if (Random.value < thePlayerAim.ActerShielderPercent)//目标发生格挡
 		{
+			float damageMinus = damageMake;
 			damageMake -= thePlayerAim.ActerShielderDamageMiuns;
+			damageMake = Mathf.Clamp (damageMake, 0, ActerWuliDamage);//防止格挡过多变成负数
 			damageMake *= (1- thePlayerAim.ActerShielderDamageMiunsPercent);
+			damageMake = Mathf.Clamp (damageMake, 0, ActerWuliDamage);//防止百分比格挡过多变成负数
 
+			damageMinus = damageMinus - damageMake;//计算最后格挡掉的伤害
 			//攻击者暴击之后的特殊效果
 			effectBasic[] Effects = thePlayerAim.GetComponentsInChildren<effectBasic> ();
 			for (int i = 0; i < Effects.Length; i++)
-				Effects[i].OnShield(this,damageMake);
+				Effects[i].OnShield(this,damageMinus);
 		}
 
 		if (Random.value < ActerSuperBaldePercent)//攻击者暴击

@@ -30,6 +30,9 @@ public class extraMoveUp : MonoBehaviour
 		case 2:
 			theTextMesh.color = Color.green;
 			break;
+		case 3:
+			theTextMesh.color = Color.magenta;
+			break;
 		}
 	}
 

@@ -26,7 +26,8 @@ public class effectMonk :effectBasic{
 			{//开始对相交球体探测物体进行排查
 				//相交球最大的问题就是如果自身有碰撞体，自己也会被侦测到
 				//print (emys [i].gameObject.name);
-				if (emys [i].GetComponent <PlayerBasic> () && emys [i].GetComponent <Collider> ().gameObject != this.thePlayer.gameObject)
+				PlayerBasic theP =  emys [i].GetComponent <PlayerBasic> ();
+				if (theP && theP.isAlive && emys [i].GetComponent <Collider> ().gameObject != this.thePlayer.gameObject)
 					count++;
 			}
 		}
