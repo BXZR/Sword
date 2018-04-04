@@ -24,7 +24,7 @@ public class skillEffectShowingItem : MonoBehaviour {
 	public void showAttackLink()
 	{
 		//print ("the attacklink string = " +  theAttackLinkInformation .attackLinkString);
-		theAttackLinkContrtoller.makeAttackLink(theAttackLinkInformation .attackLinkString);
+		theAttackLinkContrtoller.makeAttackLink(theAttackLinkInformation .attackLinkString ,true);
 	}
 
 	//构建方法
@@ -39,6 +39,7 @@ public class skillEffectShowingItem : MonoBehaviour {
 		{
 			Destroy (theButtonFoirAttackLink.gameObject);
 		}
+
 		theAttackLinkInformation = theAttackLinkInformationIn;
 		SelfButtonShow = theEffectForSelfButton.GetComponent <informationMouseShow> ();
 		EMYButtonShow = theEffectForEMYButton.GetComponent<informationMouseShow> ();

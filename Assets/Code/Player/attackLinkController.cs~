@@ -36,7 +36,7 @@ public class attackLinkController :MonoBehaviour {
 	//public string basicPunchKey = "J";//基础的拳头按键
 	//public string basicKickKey = "K";//基础的踢腿按键
 
-	private bool isStarted = true;//是否开启
+	private bool isStarted = false;//是否开启
 	public bool canControll = true ;//是否可以通过玩家/AI进行操作
 
 
@@ -56,6 +56,7 @@ public class attackLinkController :MonoBehaviour {
 		if (string .IsNullOrEmpty( keyString) ==false)
 		{ //此处有待商榷，用这种方式只能支持A-Z的按键输入（需要加入转换的方法）
             keyChar = keyString.ToCharArray() [0];
+			print ("theKeyChar = "+ keyChar);
 			foreach (attackLink AL in attackLinkMayUsing) //输入符合要求，可以进行下一步的检测了
 			{
 //				char getChar = AL.getCharWithIndex (index); //获取char
@@ -66,6 +67,10 @@ public class attackLinkController :MonoBehaviour {
 //					attackBeDelete .Add (AL);//将不符合规范的输入去除掉
 //				}
 				List<char> getChars = AL.getCharListWithIndex(index);
+
+				//for (int i = 0; i < getChars.Count; i++)
+				//	print (getChars[i]+"--");
+				
 				if (getChars.Contains (keyChar) == false)
 				{
 					attackBeDelete .Add (AL);//将不符合规范的输入去除掉
@@ -108,6 +113,9 @@ public class attackLinkController :MonoBehaviour {
 	//如果输入过长的字符串，以检测到的最后一个招式为准
 	public virtual void makeAttackLink(string keyString,bool useInterpret = true) 
 	{
+		flashLink ();//强制刷新一下可能用到的attacklink
+		keyString = keyString.Trim ();
+		//print ("theAttackLinkString = |"+ keyString+"|");
 		for (int i = 0; i < keyString.Length; i++) 
 		{
 			//print ("--> " + keyString [i].ToString ());
@@ -129,6 +137,7 @@ public class attackLinkController :MonoBehaviour {
 			{
 				//这个判断非常的重要，如果取消，任何攻击动作都有可能中间取消，这当然不符合我们的需求
 				//print("index Selected is "+selectAttackLinkIndex);
+			    print("the selected attacklink's linkstring = "+ AL.attackLinkString);
 				AL.attackLinkMain(selectAttackLinkIndex);//发生效果
 
 				flashLink ();//更新列表
@@ -166,6 +175,11 @@ public class attackLinkController :MonoBehaviour {
 
   public void makeStart()//这个方法是用于连招本身的初始化方法
 	{
+		//只有特殊的条件之下才可以重新开启
+		if (isStarted)
+			return;
+
+		print ("the attacklink controller started");
 		attackLinks = this.GetComponentsInChildren<attackLink> ();
 		attackLinkMayUsing = new List<attackLink> (); //重建这个对象
 		attackBeDelete = new List<attackLink> ();//重建对象
@@ -179,7 +193,7 @@ public class attackLinkController :MonoBehaviour {
 
 		foreach (attackLink A in attackLinks)
 			A.makeStart ();
-
+		
 		isStarted = true;
 
 	}
