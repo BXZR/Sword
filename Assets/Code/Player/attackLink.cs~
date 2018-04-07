@@ -397,6 +397,48 @@ public class attackLink : MonoBehaviour {
 
 	PhotonView photonView;//网络控制单元
 
+	//获取简略的信息，这就足够了
+	public string getInformationSimple()
+	{
+
+		string information = "";
+		information += "" + this.skillName;
+		if(canLvup  )
+			information += "[可升级]";
+		else
+			information += "[不可升级]";
+		information += "\n";
+		information += "招式等级：" + this.theAttackLinkLv + "\n";
+
+		if (this.extraDamage > 0) 
+		{
+			if (!this.thePlayer)
+				information += "额外伤害：" + this.extraDamage + "\n";
+			else
+				information += "伤害：(" + this.thePlayer.ActerWuliDamage + "+" + systemValues.BESkillColor +(int) this.extraDamage + systemValues.colorEnd + ")\n";
+		}
+		else
+		{
+			information += "额外伤害：" + this.extraDamage + "\n";
+		}
+
+		//information += "触发方式："+ systemValues.getAttacklinkInformationTranslated(this.attackLinkString) + "\n";
+		information += "触发方式：";
+		for (int i = 0; i < attackLinkStringSplited.Length; i++) 
+		{
+			information += systemValues.getAttacklinkInformationTranslated(attackLinkStringSplited[i]);
+			if(i<attackLinkStringSplited.Length-1 )
+				information+= " / ";
+		}
+		information += "\n";
+
+		information += "斗气消耗：" + this.spUse ;
+
+
+
+		return information;
+	}
+
 
 	public string getInformation()//获取连招的信息
 	{

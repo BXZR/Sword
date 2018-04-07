@@ -63,6 +63,7 @@ public class PlayerBasic : MonoBehaviour {
 	//人物等级提升后加成
 
 	public float ActerMoveSpeedPercent = 1f;//移动速度百分比，在移动的时候会有这个速度百分比加成
+	public float ActerAttackSpeedPercent = 1f;//攻击速度百分比，所有的动作的速度会受到这个限制
 
 	public float ActerShieldHp = 0;//护盾的生命值
 	public float ActerShieldHpSave = 10000;//护盾的生命值备份保存触发效果
@@ -108,6 +109,7 @@ public class PlayerBasic : MonoBehaviour {
 	public  float CActerHpSuckPercent=0f;//根据所造成伤害的百分比生命吸取
 
 	public float CActerMoveSpeedPercent = 1f;//移动速度百分比，在移动的时候会有这个速度百分比加成
+	public float CActerAttackSpeedPercent = 1f;//攻击速度百分比，所有的动作的速度会受到这个限制
 
 	[HideInInspector]//为了保证设定面板的简洁，暂时隐藏之
 	public  float extraDamageForAnimation = 0;//设置为共有是为了传参数的时候方便，但是这个参数是不能够被主动在面板上设定的
@@ -555,9 +557,10 @@ public class PlayerBasic : MonoBehaviour {
 		string attackLengthShow =  (this.theAttackAreaLength >0) ? this.theAttackAreaLength*100+"%   ": "[特殊]    ";
 		string attackAreaShow = (this.theAttackAreaAngel >0) ? this.theAttackAreaAngel.ToString ("f1")  : "[特殊]";
 		information += "攻击距离  "+attackLengthShow ;
-		information += "攻击范围  " + attackAreaShow;
-
-
+		information += "   攻击范围  " + attackAreaShow +"\n";
+		information += "攻击速度  " + (ActerAttackSpeedPercent * 100).ToString ("f0") + "%";
+		information += "   移动速度  " + (ActerMoveSpeedPercent*100).ToString("f0")+"%";
+			
 		return information;
 	}
 
@@ -728,7 +731,8 @@ public class PlayerBasic : MonoBehaviour {
 				ActerShielderDamageMiuns, ActerShielderDamageMiunsPercent,
 				ActerWuliDamage, ActerWuliReDamage, ActerWuliIner, ActerWuliInerPercent,
 				ActerWuliShield,  ActerHpSuck, ActerHpSuckPercent, ActerSpSuck , ActerSpSuckPercent,
-				ActerDamageAdderPercent , ActerDamageAdder , ActerMoveSpeedPercent, ActerShieldHp , ActerDamageMinusValue , ActerDamageAdderPercent
+				ActerDamageAdderPercent , ActerDamageAdder , ActerMoveSpeedPercent, ActerShieldHp , ActerDamageMinusValue ,
+				ActerDamageAdderPercent ,ActerAttackSpeedPercent
 			);
 		}
 	}
@@ -802,7 +806,7 @@ public class PlayerBasic : MonoBehaviour {
 		float ActerWuliDamageIn, float ActerWuliReDamageIn, float ActerWuliInerIn, float ActerWuliInerPercentIn,
 		float ActerWuliShieldIn,  float ActerHpSuckIn, float  ActerHpSuckPercentIn, float ActerSpSuckIn , float ActerSpSuckPercentIn,
 		float ActerDamageAdderPercentIn , float ActerDamageAdderIn , float ActerMoveSpeedPercentIn , float ActerShieldHpIn,
-		float ActerDamageMinusValueIn , float ActerDamageMinusPercentIn
+		float ActerDamageMinusValueIn , float ActerDamageMinusPercentIn , float ActerAttackspeedPercentIn
 	)
 	{
 		//最基本的属性生命法力和名字
@@ -848,6 +852,7 @@ public class PlayerBasic : MonoBehaviour {
 		//人物等级提升后加成
 
 		ActerMoveSpeedPercent  = ActerMoveSpeedPercentIn;//移动速度百分比，在移动的时候会有这个速度百分比加成
+		ActerAttackSpeedPercent =  ActerAttackspeedPercentIn; //攻击速度百分比
 
 		ActerShieldHp = ActerShieldHpIn;//护盾的生命值
 

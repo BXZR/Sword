@@ -179,7 +179,7 @@ public class attackLinkController :MonoBehaviour {
 		if (isStarted)
 			return;
 
-		print ("the attacklink controller started");
+		//print ("the attacklink controller started");
 		attackLinks = this.GetComponentsInChildren<attackLink> ();
 		attackLinkMayUsing = new List<attackLink> (); //重建这个对象
 		attackBeDelete = new List<attackLink> ();//重建对象
@@ -238,12 +238,27 @@ public class attackLinkController :MonoBehaviour {
 			}
 		}
 	}
-		
+
+
+	//额外的一些动作控制内容
+	private void controllWithPlayer()
+	{
+		//theAnimator.speed = thePlayer.ActerAttackSpeedPercent;
+		if(theAnimator && thePlayer)
+		theAnimator.SetFloat("ATKSpeed", thePlayer.ActerAttackSpeedPercent);   
+	}
+    
+	//有些东西应该保持实时，例如攻击速度的变化不允许有太多的延迟
+	void Update()
+	{
+		controllWithPlayer ();
+	}
+
 	//这里只对计时器有更新
 	//有一些内容，例如计时器，需要常常更新
 	void makeUpdate()
 	{
-		if (isStarted&& startTimer && thePlayer.isAlive) 
+		if (isStarted&& startTimer && thePlayer && thePlayer.isAlive) 
 		{
 			//存在一个等待的时间
 			timerForLinkAtack -= Time.deltaTime;

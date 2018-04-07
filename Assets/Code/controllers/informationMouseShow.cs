@@ -13,8 +13,25 @@ public class informationMouseShow : MonoBehaviour {
 
 	public static informationMouseShow theShowingOne = null;
 	GUIStyle theGUIStyle = new GUIStyle();
-
+	//入口方法，激活消息显示
 	public void setShow()
+	{
+		method2 ();
+	}
+
+
+	//方法2 消息框的方法(UGUI)
+	void method2()
+	{
+		GameObject theMessageBox = GameObject.Instantiate<GameObject>( Resources.Load<GameObject> ("UI/MessageBox"));
+		theMessageBox.transform.SetParent (this.transform .root);//也就是Canvas
+		theMessageBox.transform .localScale =  new Vector3 (2,2,2);
+		theMessageBox.transform.localPosition = Vector3.zero;
+		theMessageBox.GetComponent <theMessageBoxPanel> ().setInformation ("技能介绍", showText);
+	}
+
+	//方法1 OnGUI的方法
+	void method1()
 	{
 		if (theShowingOne != null)
 			theShowingOne.information = false;
@@ -27,6 +44,7 @@ public class informationMouseShow : MonoBehaviour {
 		theGUIStyle.normal.textColor=new Color(0,0,0);   //设置字体颜色的
 		theGUIStyle.fontSize = 15;       //当然，这是字体大小       GUIStyle bb=new GUIStyle();
 	}
+
 
 	void OnGUI()  
 	{ 
