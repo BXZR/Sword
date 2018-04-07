@@ -43,9 +43,12 @@ public class skillEffectShowingItem : MonoBehaviour {
 		theAttackLinkInformation = theAttackLinkInformationIn;
 		SelfButtonShow = theEffectForSelfButton.GetComponent <informationMouseShow> ();
 		EMYButtonShow = theEffectForEMYButton.GetComponent<informationMouseShow> ();
+		informationMouseShow theAttackLinkShow = theButtonFoirAttackLink.GetComponent <informationMouseShow> ();
 
 		theButtonFoirAttackLink.GetComponentInChildren<Text> ().text = theAttackLinkInformation.attackLinkName;
-		theButtonFoirAttackLink.GetComponent <informationMouseShow> ().showText = theAttackLinkInformation.attackLinkInformationText;
+		theAttackLinkShow.showText = theAttackLinkInformation.attackLinkInformationText;
+		theAttackLinkShow.showTitle = theAttackLinkInformation.attackLinkName;
+
 		if (string.IsNullOrEmpty (theAttackLinkInformation.theEffectForSelfName))
 		{
 			Destroy (theEffectForSelfButton.gameObject);
@@ -54,6 +57,7 @@ public class skillEffectShowingItem : MonoBehaviour {
 		{
 			theEffectForSelfButton.GetComponentInChildren<Text> ().text = theAttackLinkInformation.theEffectForSelfName;
 			SelfButtonShow.showText = theAttackLinkInformation.theEffectForSelfInformaion;
+			SelfButtonShow.showTitle = theAttackLinkInformation.theEffectForSelfName;
 		}
 
 		if (string.IsNullOrEmpty (theAttackLinkInformation.theEffectForEMYName))
@@ -64,7 +68,9 @@ public class skillEffectShowingItem : MonoBehaviour {
 		{
 			theEffectForEMYButton.GetComponentInChildren<Text> ().text = theAttackLinkInformation.theEffectForEMYName;
 			EMYButtonShow.showText = theAttackLinkInformation.theEffectForEMYInformaion;
+			EMYButtonShow.showTitle = theAttackLinkInformation.theEffectForEMYName;
 		}
+
 		if (string.IsNullOrEmpty (theAttackLinkInformationIn.attackLinkString))
 			Destroy (theEffectForShow.gameObject);
 	}

@@ -3,6 +3,7 @@ using System.Collections;
 
 public class informationMouseShow : MonoBehaviour {
 
+	public string showTitle = "技能介绍";
 	public  string showText; 
 	public  bool information=false;
 	float x;//状态显示的位置，x轴
@@ -23,11 +24,7 @@ public class informationMouseShow : MonoBehaviour {
 	//方法2 消息框的方法(UGUI)
 	void method2()
 	{
-		GameObject theMessageBox = GameObject.Instantiate<GameObject>( Resources.Load<GameObject> ("UI/MessageBox"));
-		theMessageBox.transform.SetParent (this.transform .root);//也就是Canvas
-		theMessageBox.transform .localScale =  new Vector3 (2,2,2);
-		theMessageBox.transform.localPosition = Vector3.zero;
-		theMessageBox.GetComponent <theMessageBoxPanel> ().setInformation ("技能介绍", showText);
+		systemValues.messageBoxShow(showTitle , showText);
 	}
 
 	//方法1 OnGUI的方法

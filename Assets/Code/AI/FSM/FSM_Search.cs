@@ -104,8 +104,8 @@ public class FSM_Search : FSMBasic {
 			randomAimPosition = this.theThis.transform.position + new Vector3 (Random.Range (0f, 8f)-4f , Random.Range (0f, 2f), Random.Range (0f, 8f)-4f );
 			try
 			{
-		     if(theMoveController.isActiveAndEnabled)
-			  theMoveController.SetDestination (randomAimPosition);
+				if(theMoveController.isActiveAndEnabled && theMoveController.isOnNavMesh)
+			   theMoveController.SetDestination (randomAimPosition);
 			}
 			catch
 			{

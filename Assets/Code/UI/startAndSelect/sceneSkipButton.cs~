@@ -13,6 +13,7 @@ public class sceneSkipButton : MonoBehaviour {
 		Time.timeScale = 1f;
 		systemValues.modeIndex = GameMode;
 		Cursor.visible = true;
+		systemValues.messageBoxClose ();
 		UnityEngine.SceneManagement.SceneManager.LoadScene (aimsceneName);
 
 	}
@@ -21,6 +22,7 @@ public class sceneSkipButton : MonoBehaviour {
 	//也算是换一个场景吧.....
 	public void endTheGame()
 	{
+		systemValues.messageBoxClose ();
 		Application.Quit ();
 	}
 }

@@ -76,7 +76,7 @@ public class UIStateShowImage : Graphic {
 			{
 				//平面计算，没有Z分量
 				Vector3 postionAdd = new Vector3 (Mathf.Cos (angleNow * Mathf.Deg2Rad) * fullDistance * values [i], Mathf.Sin (angleNow * Mathf.Deg2Rad) * fullDistance * values [i], 0);
-				Vector3 pos = this.transform.position + postionAdd;
+				//Vector3 pos = this.transform.position + postionAdd;
 				//postions.Add (pos);
 				postions.Add (postionAdd);
 			}

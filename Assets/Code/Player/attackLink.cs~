@@ -398,16 +398,19 @@ public class attackLink : MonoBehaviour {
 	PhotonView photonView;//网络控制单元
 
 	//获取简略的信息，这就足够了
-	public string getInformationSimple()
+	public string getInformationSimple(bool withName = true)
 	{
 
 		string information = "";
-		information += "" + this.skillName;
-		if(canLvup  )
-			information += "[可升级]";
-		else
-			information += "[不可升级]";
-		information += "\n";
+		if (withName)
+		{
+			information += "" + this.skillName;
+			if (canLvup)
+				information += "[可升级]";
+			else
+				information += "[不可升级]";
+			information += "\n";
+		}
 		information += "招式等级：" + this.theAttackLinkLv + "\n";
 
 		if (this.extraDamage > 0) 

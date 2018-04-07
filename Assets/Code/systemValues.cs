@@ -180,7 +180,7 @@ public class systemValues : MonoBehaviour {
 				theInformation.attackLinkName = "";
 				theInformation.attackLinkString = "";
 				theInformation.theEffectForSelfName=  efs[i].getEffectName();
-				theInformation.theEffectForSelfInformaion =  efs[i].getInformation();
+				theInformation.theEffectForSelfInformaion =  efs[i].getInformation(false);
 				theAttackLinkInformaitons.Add (theInformation);
 			}
 		}
@@ -197,7 +197,8 @@ public class systemValues : MonoBehaviour {
 				theInformation.attackLinkName = ak.skillName;
 				theInformation.attackLinkString = ak.attackLinkString.Split(';')[0];
 				theInformation.thePlayer = thePlayer.GetComponentInChildren<PlayerBasic>();
-				theInformation.attackLinkInformationText = ak.getInformationSimple ();//获取简略的信息就足够了
+				theInformation.attackLinkInformationText = ak.getInformationSimple (false);//获取简略的信息就足够了
+
 				if (string.IsNullOrEmpty (ak.conNameToEMY) == false) 
 				{
 					//初始化一下效果
@@ -208,9 +209,8 @@ public class systemValues : MonoBehaviour {
 					theEffect.Init ();
 					if(theEffect.isShowing())
 					{
-						theInformation.theEffectForEMYName = theEffect.theEffectName;
-
-						string showString = theEffect.getInformation ();
+						theInformation.theEffectForEMYName = theEffect.getEffectName();
+						string showString = theEffect.getInformation (false);
 						string showExtra = theEffect.getExtraInformation ();
 						if (string.IsNullOrEmpty (showExtra) == false)
 							showString += "\n" + showExtra;
@@ -227,15 +227,13 @@ public class systemValues : MonoBehaviour {
 					theEffect.Init ();
 					if(theEffect.isShowing())
 					{
-						theInformation.theEffectForSelfName = theEffect.theEffectName;
-
-						string showString = theEffect.getInformation ();
+						theInformation.theEffectForSelfName = theEffect.getEffectName();
+						string showString = theEffect.getInformation (false);
 						string showExtra = theEffect.getExtraInformation ();
 						if (string.IsNullOrEmpty (showExtra) == false)
 							showString += "\n" + showExtra;
 						theInformation.theEffectForSelfInformaion =  showString;
 					}
-
 				}
 				theAttackLinkInformaitons.Add (theInformation);
 			}
@@ -374,6 +372,29 @@ public class systemValues : MonoBehaviour {
 	public static int soulGet(PlayerBasic thePlayerIn)
 	{
 		return (int)(thePlayerIn.ActerHpMax / 100);
+	}
+
+
+	public static void  messageBoxShow(string showTitle , string  showText)
+	{
+		GameObject theMessageBox = GameObject.Instantiate<GameObject>( Resources.Load<GameObject> ("UI/MessageBox"));
+		theMessageBox.transform .localScale =  new Vector3 (2,2,2);
+		theMessageBox.transform.localPosition = Vector3.zero;
+		theMessageBox.GetComponent <theMessageBoxPanel> ().setInformation (showTitle, showText);
+	}
+	public static void  messageBoxShow(string showTitle , string  showText , float timer )
+	{
+		GameObject theMessageBox = GameObject.Instantiate<GameObject>( Resources.Load<GameObject> ("UI/MessageBox"));
+		theMessageBox.transform .localScale =  new Vector3 (2,2,2);
+		theMessageBox.transform.localPosition = Vector3.zero;
+		theMessageBoxPanel theMesage = theMessageBox.GetComponent <theMessageBoxPanel> ();
+		theMesage.setInformation (showTitle, showText);
+		theMesage.setTimer (timer);
+	}
+	public static void messageBoxClose()
+	{
+		if (theMessageBoxPanel.theMessageSave)
+			Destroy (theMessageBoxPanel.theMessageSave.gameObject);
 	}
  
 }

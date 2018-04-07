@@ -56,7 +56,7 @@ public class attackLinkController :MonoBehaviour {
 		if (string .IsNullOrEmpty( keyString) ==false)
 		{ //此处有待商榷，用这种方式只能支持A-Z的按键输入（需要加入转换的方法）
             keyChar = keyString.ToCharArray() [0];
-			print ("theKeyChar = "+ keyChar);
+			//print ("theKeyChar = "+ keyChar);
 			foreach (attackLink AL in attackLinkMayUsing) //输入符合要求，可以进行下一步的检测了
 			{
 //				char getChar = AL.getCharWithIndex (index); //获取char
@@ -137,7 +137,7 @@ public class attackLinkController :MonoBehaviour {
 			{
 				//这个判断非常的重要，如果取消，任何攻击动作都有可能中间取消，这当然不符合我们的需求
 				//print("index Selected is "+selectAttackLinkIndex);
-			    print("the selected attacklink's linkstring = "+ AL.attackLinkString);
+			    //print("the selected attacklink's linkstring = "+ AL.attackLinkString);
 				AL.attackLinkMain(selectAttackLinkIndex);//发生效果
 
 				flashLink ();//更新列表
@@ -244,8 +244,11 @@ public class attackLinkController :MonoBehaviour {
 	private void controllWithPlayer()
 	{
 		//theAnimator.speed = thePlayer.ActerAttackSpeedPercent;
-		if(theAnimator && thePlayer)
-		theAnimator.SetFloat("ATKSpeed", thePlayer.ActerAttackSpeedPercent);   
+		if (theAnimator && thePlayer && isStarted) 
+		{
+			theAnimator.SetFloat ("ATKSpeed", thePlayer.ActerAttackSpeedPercent); 
+			theAnimator.SetFloat ("MoveSpeed", thePlayer.ActerMoveSpeedPercent); 
+		}
 	}
     
 	//有些东西应该保持实时，例如攻击速度的变化不允许有太多的延迟

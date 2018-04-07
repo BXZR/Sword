@@ -47,7 +47,7 @@ public class effectQianfang : effectBasic {
 					theArrow = (GameObject)GameObject.Instantiate (Arrow);
 					theArrow.GetComponentInChildren <extraWeapon> ().setPlayer (this.thePlayer);
 
-					Vector3 positionNew = thePlayer.transform.position + new Vector3 (0, 0.8f * thePlayer.transform.localScale.y + 0.2f, forward.normalized.z * 0.1f);
+					Vector3 positionNew = thePlayer.transform.position + new Vector3 (0, 0.8f * thePlayer.transform.localScale.y + 0.3f, forward.normalized.z * 0.1f);
 					theArrow.transform.localScale *= thePlayer.transform.localScale.y;
 					theArrow.transform.position = positionNew;
 
@@ -90,7 +90,7 @@ public class effectQianfang : effectBasic {
 		theArrow = (GameObject)GameObject.Instantiate (Arrow);
 		theArrow.GetComponentInChildren <extraWeapon> ().setPlayer (this.thePlayer);
 
-		Vector3 positionNew = thePlayer.transform.position + new Vector3 (0, 0.8f * thePlayer.transform.localScale.y + 0.2f, forward.normalized.z * 0.1f);
+		Vector3 positionNew = thePlayer.transform.position + new Vector3 (0, 0.8f * thePlayer.transform.localScale.y + 0.3f, forward.normalized.z * 0.1f);
 		theArrow.transform.localScale *= thePlayer.transform.localScale.y;
 		theArrow.transform.position = positionNew;
 
