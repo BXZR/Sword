@@ -13,6 +13,16 @@ public class PlayerBasic : MonoBehaviour {
 	public string headPictureName;//人物头像的
 	public string ActerName;//这个人物的名称
 
+	//有关经验和等级
+	[HideInInspector]
+	public int playerLv = 1;
+	[HideInInspector]
+	public  float jingyanNow = 0;
+	[HideInInspector]
+	public  float jingyanMax = 100;
+	[HideInInspector]
+	public int LVMax= 18;//等级上限目前为18级，当然主人公也可以一些特殊方式来突破这一层天堑
+
 	[HideInInspector]//为了保证设定面板的简洁，暂时隐藏之
 	public bool isAlive = true;//是否生存，默认一定是存活的，除非死了
 
@@ -75,61 +85,79 @@ public class PlayerBasic : MonoBehaviour {
 	//顺带一提，之所以使用私有方法是因为不想让共有属性表太长，此外这些私有只会在特殊情况之下服务器才会使用
 
 	//最基本的属性生命法力和名字
+	[HideInInspector]
 	public float CActerHpMax=1000f;//这个人物的生命上限
+	[HideInInspector]
 	public  float CActerSpMax=500f;//这个人物的法力上限
+	[HideInInspector]
 	public  float CActerHpUp=0.5f;//人物生命恢复
+	[HideInInspector]
 	public  float CActerSpUp=0.5f;//人物法力回复
 
 	//特殊战斗属性
+	[HideInInspector]
 	public  float CActerSuperBaldePercent=0f;//这个人物的暴击率
+	[HideInInspector]
 	public  float CActerSuperBaldeAdder=2f;//暴击时伤害的倍数
 
+	[HideInInspector]
 	public  float CActerAttackAtPercent = 1f;//这个人物的命中率
+	[HideInInspector]
 	public  float CActerMissPercent=0f;//这个人物的闪避率
 
+	[HideInInspector]
 	public  float CActerShielderPercent=0f;//这个人物的格挡率
+	[HideInInspector]
 	public  float CActerShielderDamageMiuns=1;//格挡住的伤害值
+	[HideInInspector]
 	public  float CActerShielderDamageMiunsPercent=0.1f;//格挡住的伤害百分比 (先计算固定格挡，然后计算百分比格挡)
 	
 
 	//物理战斗属性
+	[HideInInspector]
 	public  float CActerWuliDamage=25f;//这个人物的物理攻击力
+	[HideInInspector]
 	public  float CActerWuliReDamage=0f;//这个人物的物理反伤
+	[HideInInspector]
 	public  float CActerWuliIner=0f;//这个人物的固定物理穿透
+	[HideInInspector]
 	public  float CActerWuliInerPercent=0f;//这个人物百分比穿透  （先计算固定穿透，然后计算百分比穿透）
 
+	[HideInInspector]
 	public float CActerDamageMinusPercent = 0.0f;//一直存在的伤害减免百分比
+	[HideInInspector]
 	public float CActerDamageMinusValue = 0.0f;//一直存在的伤害减免数值
 
 	//物理防御属性
+	[HideInInspector]
 	public float CActerWuliShield=150f;//这个人物的物理护甲
 
 	//生命吸取属性
+	[HideInInspector]
 	public  float CActerHpSuck=0f;//人物的固定生命偷取值
+	[HideInInspector]
 	public  float CActerHpSuckPercent=0f;//根据所造成伤害的百分比生命吸取
 
+	[HideInInspector]
 	public float CActerMoveSpeedPercent = 1f;//移动速度百分比，在移动的时候会有这个速度百分比加成
+	[HideInInspector]
 	public float CActerAttackSpeedPercent = 1f;//攻击速度百分比，所有的动作的速度会受到这个限制
 
 	[HideInInspector]//为了保证设定面板的简洁，暂时隐藏之
 	public  float extraDamageForAnimation = 0;//设置为共有是为了传参数的时候方便，但是这个参数是不能够被主动在面板上设定的
-
+	[HideInInspector]
 	public bool isMainfighter = false;//是玩家控制的fighter
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////	
 //下面是游戏计算中的临时变量
-	[HideInInspector]//为了保证设定面板的简洁，暂时隐藏之
-	//这个参数非常重要，决定着操纵这个人物的固定按键设定（游戏手柄）
-	public int playerIndex = 0;//游戏人物的下标,因为是二人对战格斗，只有可能是0,1（在初始化的时候才会进行唯一一次的设定）
-
 	private GUIStyle GUIShowStyleHP;//GUI显示的人物当前生命值
 	private GUIStyle GUIShowStyleSP;//GUI显示的人物当前生命值
 
 	private bool isStarted =false;//是否已经开启
 
-	//[HideInInspector]//为了保证设定面板的简洁，暂时隐藏之
+	[HideInInspector]//为了保证设定面板的简洁，暂时隐藏之
 	public string conNameToEMY ;//用于记录连招给出的额外buff
-	//[HideInInspector]//为了保证设定面板的简洁，暂时隐藏之
+	[HideInInspector]//为了保证设定面板的简洁，暂时隐藏之
 	public string conNameToSELF;//用于记录连招给出的额外buff
 	private float conNameCoolingTime = 0.2f;//如果这个特效脚本在1.5秒内还没有被使用，就认为无效
 	//（否则准备一个脚本招式，然后等半天莫名其妙生效了不是好事）
@@ -147,43 +175,52 @@ public class PlayerBasic : MonoBehaviour {
 	[HideInInspector]
 	public  int winCountNow =0 ;//这个人物已经胜利的次数
 	//有了静态的转换方法之后这个参数就不需要指定了，这样耦合性更低
-	public float TimePercent = 1;//武器冷却时间百分比，不同武器根据其动作可能会有不同的冷却时间
+	//public float TimePercent = 1;//武器冷却时间百分比，不同武器根据其动作可能会有不同的冷却时间
 	//(这个属性在使用动画关键帧的时候被暂时弃用，但这个思路还是有的)
 	public float theAttackAreaLength;//攻击范围（非常重要，同时这个是简化版本的每一种攻击招式分开计算范围的方式）
 	public float theAttackAreaAngel = 20f;//攻击范围的角度，自身前方锥形范围内都是攻击范围
+	public float theViewAreaLength = 4f;//视野长度，在不同的模式之下。例如暗夜模式，是很有需要实际的地方的
+	public float theViewAreaAngel = 30f;//视野的角度，同样，在不同的模式之下。例如暗夜模式，是很有需要实际的地方的
 	private float DamageRead = 0;//记录已经收到的伤害，如果收到的伤害累积到一定数量就要播放受到攻击的动画
 
 	//是否可以攻击命中
 	public bool canAttack = true;
 
 	//音效播放器
+	[HideInInspector]
 	public audioPlayer theAudioPlayer;//自己定义的音频播放器组件
 	//值得注意的是声音的播放是在attackLink里面调用的，在这里保留引用是为了减少获取的次数
 
 	//战斗状态标记，攻击或者受到攻击会刷新冷却时间
 	public bool isFighting = false;
 	public float fightingTimer = 7f;//战斗状态最少持续时间
+	[HideInInspector]
 	public float fightingTimerMax = 7f;//战斗状态持续时间上限
 
 	//当前所有effect的attacklink模式
+	[HideInInspector]
 	public int EffectAttackLinkIndex = 0;
 
-	//有关经验和等级-------------------------------------------------------------------------------------------
-	public int playerLv = 1;
-	public  float jingyanNow = 0;
-	public  float jingyanMax = 100;
-	public int LVMax= 18;//等级上限目前为18级，当然主人公也可以一些特殊方式来突破这一层天堑
-
 	//负重系数
+	//是否负重参与计算
+	public bool isWeightCanChangeSpeed = true;
 	//负重越沉重，移动速度和攻击速度就会越慢
 	[Range(0f,2f)]
 	public float weightPercent = 0f;
+	//此外一些额外的限制参数
+	[HideInInspector]
+	public float ActerAttackSpeedMaxPercent= 5f;//攻击速度百分比上限
+	[HideInInspector]
+	public float ActerMoveSpeedMaxPercent = 2.5f;//移动速度百分比上限
+
 
 	//这是一个原始的功能，但是在发布之后没有使用，只是不断空转并且浪费了判断用的资源，应该注销以备后用
+	[HideInInspector]
 	public bool isShowingOnGUI = false;
 	//不可遮挡的GUI血条
 	// 这或许不是一个很好的方法
 	// 因为不存在遮挡
+
 
 	//增加经验的方法
 	public void addJingYan(float adder  = 0)
@@ -648,9 +685,14 @@ public class PlayerBasic : MonoBehaviour {
 			fightStateUpdate ();
 
 			//负重计算
-			float trueSpeedPercnet = Mathf.Clamp((0.85f + (1-weightPercent) * 0.15f) , 0.6f, 1f);
-			ActerAttackSpeedPercent = CActerAttackSpeedPercent * trueSpeedPercnet;
-			ActerMoveSpeedPercent = CActerMoveSpeedPercent * trueSpeedPercnet;
+			if (isWeightCanChangeSpeed) 
+			{
+				float trueSpeedPercnet = Mathf.Clamp ((0.85f + (1 - weightPercent) * 0.15f), 0.6f, 1f);
+				ActerAttackSpeedPercent = CActerAttackSpeedPercent * trueSpeedPercnet;
+				ActerMoveSpeedPercent = CActerMoveSpeedPercent * trueSpeedPercnet;
+			}
+			ActerAttackSpeedPercent = Mathf.Clamp( ActerAttackSpeedPercent ,0f, ActerAttackSpeedMaxPercent);
+			ActerMoveSpeedPercent = Mathf.Clamp( ActerMoveSpeedPercent ,0f, ActerMoveSpeedMaxPercent);
 		}
 	}
 

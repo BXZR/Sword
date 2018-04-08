@@ -15,6 +15,7 @@ public class effectBasic : MonoBehaviour {
 	virtual public void onAttackAction(){}//在攻击的起手阶段触发
 	virtual public void OnAttack (){}//在攻击的时候触发
 	virtual public void OnBeAttack(float damage = 0){}//在被攻击的时候触发
+	virtual public void OnDoNotAttackAt(PlayerBasic aim = null){}//没有命中的时候调用表
 	virtual public void OnBeAttack(PlayerBasic attacker){}//在被攻击的时候触发
 	virtual public void effectOnUpdateTime(){}//在update里面调用的效果
 	virtual public void OnHpTowardHpMax(){}//在生命恢复到满血的时候使用
@@ -28,13 +29,12 @@ public class effectBasic : MonoBehaviour {
 	virtual public void OnUseSP(float spUse = 0){}//是消耗斗气的时候调用
 	virtual public void OnKill(){}//玩家杀死一个单位的时候触发
 	virtual public void OnDead(){}//死亡的时候调用
-	virtual public void OnDoNotAttackAt(PlayerBasic aim = null){}//没有命中的时候调用表
 	virtual public void OnSuperBlade(PlayerBasic aim, float Damage = 0){}//暴击的时候调用
 	virtual public void OnMiss(PlayerBasic attacker){}//闪避的时候调用
 	virtual public void OnShield(PlayerBasic attacker,float damageMinus = 0){}//格挡的时候调用
 	virtual public void OnAddShieldHp(float theSheildHpAdd = 0){}//增加护盾的时候的额外效果
 	virtual public void OnLvUp(){}//玩家升级的时候触发
-
+	virtual public void OnAddSoul(int soulCount){}//当玩家收集到一个魂元的时候
 	virtual public void SetAttackLinkIndex(int index = 0){}//有些技能效果是可以使用不同的连招按键触发的，但是这些效果完全相同，所以用这个来区分
 	//这个效果可以在中途更新，且更新方法每一种效果自己定义
 	//例如更新加长持续时间等等
@@ -83,7 +83,7 @@ public class effectBasic : MonoBehaviour {
 		string theInformation = "";
 		if (withName) 
 		{
-			print ("show the name");
+			//print ("show the name");
 			theInformation += "（" + this.theEffectName + "）";
 			if (isBE ())
 				theInformation += "[被动]";

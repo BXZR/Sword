@@ -10,10 +10,21 @@ public class BloodScaner : MonoBehaviour {
 	List<BloodBasic> theEMY  = new List<BloodBasic> ();
 	public float angle = 30f;
 	public float distance = 4f;
+	private PlayerBasic thePlayer;//这个脚本是依附于playerBasic上面的，没有玩家，就没有必要展示了
 
 	void Start ()
 	{
-		InvokeRepeating ("searchAIMs",2f,0.2f); 
+		thePlayer = this.GetComponent <PlayerBasic> ();
+		if (thePlayer)
+		{
+			angle = thePlayer.theViewAreaAngel;
+			distance = thePlayer.theViewAreaLength;
+			InvokeRepeating ("searchAIMs", 2f, 0.2f); 
+		} 
+		else 
+		{
+			Destroy (this);
+		}
 	}
 	float change(float angle)//角度转弧度的方法
 	{
@@ -26,6 +37,9 @@ public class BloodScaner : MonoBehaviour {
 	//选择目标的方法，这年头普攻都是AOE
 	void searchAIMs()//不使用射线而是使用向量计算方法
 	{
+		//视野很有可能可以受到限制，而是这也许就是“致盲”效果的初始阶段了
+		angle = thePlayer.theViewAreaAngel;
+		distance = thePlayer.theViewAreaLength;
 		//这个方法的正方向使用的是X轴正方向
 		//具体使用的时候非常需要注意正方向的朝向
 		theEMY = new List<BloodBasic> ();

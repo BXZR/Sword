@@ -144,6 +144,10 @@ public class effectShowDamageOnBeAttack : effectBasic
 	{
 		makeShowTextExtra("本次攻击未命中" , 3);
 	}
+	public override void OnAddSoul (int soulCount)
+	{
+		makeShowTextExtra("获得"+soulCount+"魂元" , 0);
+	}
 
 	void Start ()
 	{

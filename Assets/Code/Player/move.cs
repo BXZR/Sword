@@ -249,6 +249,7 @@ public class move : MonoBehaviour {
 			if (theController && theController.enabled)//有时候需要强制无法移动
 			{
 				float adder =  (speedNow == speedNormal ? 6f:9f) *thePlayer.ActerMoveSpeedPercent;
+				adder = Mathf.Clamp (adder ,  6f , 10f);
 				//jumpTimer越来越小表现为上冲余力越来越不足
 				jumpAction  += new Vector3 (0,jumpTimer,0) * Time .deltaTime * adder;
 			}

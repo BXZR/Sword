@@ -36,6 +36,10 @@ public class popSoulMove : MonoBehaviour {
 			{
 				systemValues.soulCount += soulCount;
 				theAim.GetComponent<PlayerBasic> ().addJingYan (soulCount * 2 );
+				effectBasic[] theEffects = theAim.GetComponentsInChildren<effectBasic> ();
+				for (int i = 0; i < theEffects.Length; i++)
+					theEffects [i].OnAddSoul (soulCount);
+				
 				Destroy (this.gameObject);
 			}
 		}

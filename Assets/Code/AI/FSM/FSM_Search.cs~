@@ -92,6 +92,9 @@ public class FSM_Search : FSMBasic {
 	float moveTimerMax = 1.75f;//时间间隔备份
 	private void randomMove()
 	{
+		if (!this.theThis)
+			return;
+		
 		moveTimer -= Time.deltaTime;
 		Vector3 thisCheckVector = new Vector3 (this.theThis.transform.position.z, 0, this.theThis.transform.position.z);
 		Vector3 randomCheckVector = new Vector3 (randomAimPosition.x, 0, randomAimPosition.z);
