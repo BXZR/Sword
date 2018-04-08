@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+public enum messageMethod {method1 , method2}
 public class informationMouseShow : MonoBehaviour {
 
 	public string showTitle = "技能介绍";
@@ -11,13 +12,17 @@ public class informationMouseShow : MonoBehaviour {
 	public float height=40;
 	public float width=70;
 	public bool showTextHigh=false;
+	public messageMethod theMethod = messageMethod.method2;
 
 	public static informationMouseShow theShowingOne = null;
 	GUIStyle theGUIStyle = new GUIStyle();
 	//入口方法，激活消息显示
 	public void setShow()
 	{
-		method2 ();
+		if(theMethod == messageMethod.method2)
+		    method2 ();
+		if(theMethod == messageMethod.method1)
+			method1 ();
 	}
 
 
@@ -92,7 +97,9 @@ public class informationMouseShow : MonoBehaviour {
 
 	void Update () 
 	{
-	
+		if (theMethod != messageMethod.method1)
+			return;
+		
 		if(Input .GetMouseButtonDown (1))
 		{
 			information =false;

@@ -14,7 +14,7 @@ public class gameStarter : MonoBehaviour {
 	private MusicController theMusicController;//音乐控制单元
 	void Start()
 	{
-		Invoke ("makeStart", 3f);
+		Invoke ("makeStart", 2.5f);
 	}
 
 	public  void makeStart()

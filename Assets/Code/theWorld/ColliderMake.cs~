@@ -11,6 +11,7 @@ public class ColliderMake : MonoBehaviour {
 		Collider[] theColliders = this.GetComponentsInChildren<Collider> ();
 		foreach (Collider AS in theColliders)
 			AS.tag = "Wall";
+		Destroy (this);//这个对象可以销毁了
 	}
 	
  

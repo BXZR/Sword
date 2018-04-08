@@ -38,7 +38,7 @@ public class popMaker : PunBehaviour  {
 	{
 		if (thePropNow == null) 
 		{
-			coolingTimer --;//一秒计算一次就可以了
+			coolingTimer -= 3f;//一秒计算一次就可以了
 			if (coolingTimer < 0) 
 			{
 				coolingTimer = coolingTimerMax;
@@ -58,7 +58,7 @@ public class popMaker : PunBehaviour  {
 	//没有必要很短的时间计算一次
 	void Start () 
 	{
-		InvokeRepeating ("WhenThePropNowNull",1f,1f);	
+		InvokeRepeating ("WhenThePropNowNull",1f,3f);	
 	}
 
 }

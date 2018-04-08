@@ -45,7 +45,7 @@ public class popSoulMove : MonoBehaviour {
 		}
 		else 
 		{
-			this.transform.Translate (new Vector3 (0,1,0) *0.4f*Time .deltaTime);
+			this.transform.Translate (new Vector3 (0,1,0) *0.4f*Time .deltaTime, Space.World);
 		}
 	}
 }

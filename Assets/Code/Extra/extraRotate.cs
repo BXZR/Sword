@@ -10,6 +10,8 @@ public class extraRotate : MonoBehaviour {
 
 	public  Vector3 theRotateVector = new Vector3 (0,1,0);
 
+	public bool isPrivate = true;
+
 	public void makeDestory()//这个脚本的自毁
 	{
 		Destroy (this.gameObject .GetComponent (this.GetType()));
@@ -17,6 +19,9 @@ public class extraRotate : MonoBehaviour {
 
 	void Update () 
 	{
-		this.transform.Rotate (theRotateVector * RotateSpeed * Time.deltaTime);
+		if(isPrivate)
+			this.transform.Rotate (theRotateVector * RotateSpeed * Time.deltaTime , Space.Self);
+		else
+			this.transform.Rotate (theRotateVector * RotateSpeed * Time.deltaTime , Space.World);
 	}
 }

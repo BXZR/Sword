@@ -6,6 +6,8 @@ public class BloodBasic : MonoBehaviour {
 
 	//非主要任务的头顶血条只有在被看到的时候才会真正地被激活
 	//需要meshrenderer
+	//有这个脚本的单位可以被BloodScanner所看到的
+
 	PlayerBasic thePlayer;
 	Renderer theRender;
 
@@ -34,7 +36,7 @@ public class BloodBasic : MonoBehaviour {
 			if (thePlayer.isShowingOnGUI) 
 			{
 				showHpTimer -= 0.2f;
-				if (showHpTimer < 0) 
+				if (showHpTimer <= 0) 
 				{
 					thePlayer.isShowingOnGUI = false;
 				}

@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Text;
 
 public class PlayerBasic : MonoBehaviour {
 
@@ -573,43 +574,135 @@ public class PlayerBasic : MonoBehaviour {
 
 	public string getPlayerInformation(bool showHpMax = true)
 	{
-		string information = "\n";
-		//information += "=======" + this.ActerName+"=======\n\n";
-		if (showHpMax)//因为有些时候生命值上限这种显示特殊用slider来做，就没有必要多次显示了
-		{
-			information += "生命值上限  " + (int)this.ActerHpMax + "   ";
-			information += "斗气值上限  " + (int)this.ActerSpMax + "\n";
-		}
-		information += "生命恢复  " + this.ActerHpUp .ToString ("f2")+"/秒   ";
-		information += "斗气回复  " + this.ActerSpUp .ToString ("f2") + "/秒\n";
-		information += "护甲  " + this.ActerWuliShield .ToString ("f1")+"   ";
-		information += "伤害  " + this.ActerWuliDamage .ToString("f1")+"   ";
-		information += "反伤  "+this.ActerWuliReDamage.ToString("f1")+"\n";
-		return information;
+		StringBuilder theString = new StringBuilder ();
+		theString.Append ("生命值上限  ");
+		theString.Append ((int)this.ActerHpMax);
+		theString.Append ("");
+		theString.Append ("斗气值上限  ");
+		theString.Append ((int)this.ActerSpMax) ;
+		theString.Append ("\n");
+		theString.Append ("生命恢复  " );
+		theString.Append (this.ActerHpUp .ToString ("f2"));
+		theString.Append ("/秒   ");
+		theString.Append ("斗气回复  ");
+		theString.Append (this.ActerSpUp .ToString ("f2"));
+		theString.Append ("/秒\n");
+
+		theString.Append ("护甲  ");
+		theString.Append (this.ActerWuliShield .ToString ("f1"));
+		theString.Append ("   ");
+		theString.Append ("伤害  ");
+		theString.Append (this.ActerWuliDamage .ToString("f1"));
+		theString.Append ("   ");
+		theString.Append ("反伤  ");
+		theString.Append (this.ActerWuliReDamage.ToString("f1"));
+		theString.Append ("\n");
+
+		return theString.ToString ();
+
+		//下面这些内容是上面文本的排版
+		//因为string相加的开销有点大，所以用了StringBuilder来做这件事，可以减少不少的GC
+//		string information = "";
+//		//information += "=======" + this.ActerName+"=======\n\n";
+//		if (showHpMax)//因为有些时候生命值上限这种显示特殊用slider来做，就没有必要多次显示了
+//		{
+//			information += "生命值上限  " + (int)this.ActerHpMax + "   ";
+//			information += "斗气值上限  " + (int)this.ActerSpMax + "\n";
+//		}
+//		information += "生命恢复  " + this.ActerHpUp .ToString ("f2")+"/秒   ";
+//		information += "斗气回复  " + this.ActerSpUp .ToString ("f2") + "/秒\n";
+//		information += "护甲  " + this.ActerWuliShield .ToString ("f1")+"   ";
+//		information += "伤害  " + this.ActerWuliDamage .ToString("f1")+"   ";
+//		information += "反伤  "+this.ActerWuliReDamage.ToString("f1")+"\n";
+//		return information;
 	}
 
 	public string getPlayerInformationExtra()
 	{
-		string information = "";
-		information += "暴击率  "+(this.ActerSuperBaldePercent *100).ToString("f1")+"%   ";
-		information += "暴击伤害加成  "+(this.ActerSuperBaldeAdder*100).ToString("f1")+"%\n";
-		information += "闪避率  "+(this.ActerMissPercent *100).ToString("f0")+"%   命中率"+(this.ActerAttackAtPercent*100).ToString("f0")+"%   ";
-		information += "格挡率  "+(this.ActerShielderPercent *100).ToString("f0")+"%   \n";
-		information += "格挡伤害减免  " + this.ActerShielderDamageMiuns.ToString ("f1")+ "+"+(this. ActerShielderDamageMiunsPercent *100).ToString("f0")+"%   ";
-		information += "护盾上限  " + (this.ActerShieldMaxPercent*100)+"%\n";
-		information += "护甲穿透  "+this. ActerWuliIner.ToString("f1")+"+"+(this.ActerWuliInerPercent*100).ToString("f1")+"%\n";
-		information += "伤害/生命转化  "+this.ActerHpSuck.ToString("f1")+"+"+(this.ActerHpSuckPercent*100).ToString("f0")+"%\n";
-		information += "伤害/斗气转化  "+this.ActerSpSuck.ToString("f1")+"+"+(this.ActerSpSuckPercent*100).ToString("f0")+"%\n";
-		information += "额外伤害  "+(this.ActerDamageAdder).ToString("f1")+"+"+(this.ActerDamageAdderPercent*100).ToString("f1")+"%\n";
-		information += "额外减伤  "+(this.ActerDamageMinusValue).ToString("f1")+"+"+(this.ActerDamageMinusPercent*100).ToString("f1")+"%\n";
+		StringBuilder theString = new StringBuilder ();
+		theString.Append ("暴击率  ");
+		theString.Append ((this.ActerSuperBaldePercent *100).ToString("f1"));
+		theString.Append ("%   ");
+		theString.Append ("暴击伤害加成  ");
+		theString.Append ((this.ActerSuperBaldeAdder*100).ToString("f1"));
+		theString.Append ("%\n闪避率  ");
+		theString.Append ((this.ActerMissPercent *100).ToString("f0"));
+		theString.Append ("%   命中率"+(this.ActerAttackAtPercent*100).ToString("f0"));
+		theString.Append ("%   格挡率");
+		theString.Append ((this.ActerShielderPercent *100).ToString("f0"));
+		theString.Append ("%   \n");
+		theString.Append ("格挡伤害减免  ");
+		theString.Append (this.ActerShielderDamageMiuns.ToString ("f1"));
+		theString.Append ("+");
+		theString.Append ((this. ActerShielderDamageMiunsPercent *100).ToString("f0"));
+		theString.Append ("%   ");
+		theString.Append ("护盾上限  ");
+		theString.Append ((this.ActerShieldMaxPercent*100));
+		theString.Append ("%\n");
+		theString.Append ("护甲穿透  ");
+		theString.Append (this. ActerWuliIner.ToString("f1"));
+		theString.Append ("+");
+		theString.Append ((this.ActerWuliInerPercent*100).ToString("f1"));
+		theString.Append ("%\n");
+		theString.Append ("伤害/生命转化  ");
+		theString.Append (this.ActerHpSuck.ToString("f1"));
+		theString.Append ("+");
+		theString.Append ((this.ActerHpSuckPercent*100).ToString("f0"));
+		theString.Append ("%\n");
+		theString.Append ("伤害/斗气转化  ");
+		theString.Append (this.ActerSpSuck.ToString("f1"));
+		theString.Append ("+");
+		theString.Append ((this.ActerSpSuckPercent*100).ToString("f0"));
+		theString.Append ("%\n");
+		theString.Append ("额外伤害  ");
+		theString.Append ((this.ActerDamageAdder).ToString("f1"));
+		theString.Append ("+");
+		theString.Append ((this.ActerDamageAdderPercent*100).ToString("f1"));
+		theString.Append ("%\n");
+		theString.Append ("额外减伤  ");
+		theString.Append ((this.ActerDamageMinusValue).ToString("f1"));
+		theString.Append ("+");
+		theString.Append ((this.ActerDamageMinusPercent*100).ToString("f1"));
+		theString.Append ("%\n");
+
 		string attackLengthShow =  (this.theAttackAreaLength >0) ? this.theAttackAreaLength*100+"%   ": "[特殊]    ";
 		string attackAreaShow = (this.theAttackAreaAngel >0) ? this.theAttackAreaAngel.ToString ("f1")  : "[特殊]";
-		information += "攻击距离  "+attackLengthShow ;
-		information += "   攻击范围  " + attackAreaShow +"\n";
-		information += "攻击速度  " + (ActerAttackSpeedPercent * 100).ToString ("f0") + "%";
-		information += "   移动速度  " + (ActerMoveSpeedPercent*100).ToString("f0")+"%";
-			
-		return information;
+
+		theString.Append ("攻击距离  ");
+		theString.Append (attackLengthShow);
+		theString.Append ("   攻击范围  ");
+		theString.Append (attackAreaShow);
+		theString.Append ("\n");
+		theString.Append ("攻击速度  ");
+		theString.Append ((ActerAttackSpeedPercent * 100).ToString ("f0"));
+		theString.Append ("%");
+		theString.Append ("   移动速度  ");
+		theString.Append ((ActerMoveSpeedPercent*100).ToString("f0"));
+		theString.Append ("%");
+		return theString.ToString ();
+
+		//下面这些内容是上面文本的排版
+		//因为string相加的开销有点大，所以用了StringBuilder来做这件事，可以减少不少的GC
+//		string information = "";
+//		information += "暴击率  "+(this.ActerSuperBaldePercent *100).ToString("f1")+"%   ";
+//		information += "暴击伤害加成  "+(this.ActerSuperBaldeAdder*100).ToString("f1")+"%\n";
+//		information += "闪避率  "+(this.ActerMissPercent *100).ToString("f0")+"%   命中率"+(this.ActerAttackAtPercent*100).ToString("f0")+"%   ";
+//		information += "格挡率  "+(this.ActerShielderPercent *100).ToString("f0")+"%   \n";
+//		information += "格挡伤害减免  " + this.ActerShielderDamageMiuns.ToString ("f1")+ "+"+(this. ActerShielderDamageMiunsPercent *100).ToString("f0")+"%   ";
+//		information += "护盾上限  " + (this.ActerShieldMaxPercent*100)+"%\n";
+//		information += "护甲穿透  "+this. ActerWuliIner.ToString("f1")+"+"+(this.ActerWuliInerPercent*100).ToString("f1")+"%\n";
+//		information += "伤害/生命转化  "+this.ActerHpSuck.ToString("f1")+"+"+(this.ActerHpSuckPercent*100).ToString("f0")+"%\n";
+//		information += "伤害/斗气转化  "+this.ActerSpSuck.ToString("f1")+"+"+(this.ActerSpSuckPercent*100).ToString("f0")+"%\n";
+//		information += "额外伤害  "+(this.ActerDamageAdder).ToString("f1")+"+"+(this.ActerDamageAdderPercent*100).ToString("f1")+"%\n";
+//		information += "额外减伤  "+(this.ActerDamageMinusValue).ToString("f1")+"+"+(this.ActerDamageMinusPercent*100).ToString("f1")+"%\n";
+//		string attackLengthShow =  (this.theAttackAreaLength >0) ? this.theAttackAreaLength*100+"%   ": "[特殊]    ";
+//		string attackAreaShow = (this.theAttackAreaAngel >0) ? this.theAttackAreaAngel.ToString ("f1")  : "[特殊]";
+//		information += "攻击距离  "+attackLengthShow ;
+//		information += "   攻击范围  " + attackAreaShow +"\n";
+//		information += "攻击速度  " + (ActerAttackSpeedPercent * 100).ToString ("f0") + "%";
+//		information += "   移动速度  " + (ActerMoveSpeedPercent*100).ToString("f0")+"%";
+//			
+//		return information;
 	}
 
 	/*****************************************************************************************/
@@ -769,10 +862,14 @@ public class PlayerBasic : MonoBehaviour {
 
 	private void makeGUIStart()
 	{
-		GUIShowStyleHP=new GUIStyle();
-		GUIShowStyleHP.normal.background = (Texture2D)Resources.Load ("UI/hpGUI");
-		GUIShowStyleSP=new GUIStyle();
-		GUIShowStyleSP.normal.background = (Texture2D)Resources.Load ("UI/spGUI");
+		//只有有BloodBasic，也就是血条显示能力的Player才需要Load资源
+		if (this.GetComponent<BloodBasic> ()) 
+		{
+			GUIShowStyleHP = new GUIStyle ();
+			GUIShowStyleHP.normal.background = (Texture2D)Resources.Load ("UI/hpGUI");
+			GUIShowStyleSP = new GUIStyle ();
+			GUIShowStyleSP.normal.background = (Texture2D)Resources.Load ("UI/spGUI");
+		}
 	}
 
 	//随时都进行网络更新太费事而且还有网络延迟的问题所以这是一个很低频率的更新

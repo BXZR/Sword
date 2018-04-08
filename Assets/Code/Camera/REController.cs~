@@ -3,18 +3,18 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class REController : MonoBehaviour {
-
+	//这个脚本强制修改分辨率
 
 	public int screenHeight = 1024;
 	public int screenWidth = 768;
-	//这个脚本强制就改分辨率
+
 	void Start () 
 	{
 //		if (Application.platform != RuntimePlatform.Android)
 //		{
 //			Screen.fullScreen = false;
 //		}
-//
+
 		Screen.SetResolution (screenHeight, screenWidth, true, 60);
 		this.GetComponent <Camera > ().aspect = (float)screenHeight / (float)screenWidth;
 

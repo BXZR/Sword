@@ -22,8 +22,8 @@ public class FSMStage : effectBasic {
 	public float angetTimerMax = 3f;//仇恨时间上限
 
 	//AI进行计算的时间
-	public float AIStagetimer = 30f;//AI至少计算30秒
-	public float AIStagetimerMax = 30f;//AI至少计算30秒
+	public float AIStagetimer = 40f;//AI至少计算30秒
+	public float AIStagetimerMax = 40f;//AI至少计算30秒
 
 	bool isDeadMake = false;
 
@@ -153,6 +153,7 @@ public class FSMStage : effectBasic {
 			}
 			else if (isDeadMake == false) 
 			{
+				theAiIsActing = false;//结束循环
 				isDeadMake = true;
 				this.GetComponent <NavMeshAgent> ().enabled = false;
 				this.gameObject.AddComponent<Rigidbody> ();

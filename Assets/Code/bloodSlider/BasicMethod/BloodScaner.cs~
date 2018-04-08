@@ -7,6 +7,8 @@ public class BloodScaner : MonoBehaviour {
 	//观察显示血条
 	//主动搜索的策略而不是被动接受的策略
 	//搜索会有开销，但是会减少整体显示的时间和内容，似乎更为合适
+	//有这个脚本的单位以看到BloodBasic
+
 	List<BloodBasic> theEMY  = new List<BloodBasic> ();
 	public float angle = 30f;
 	public float distance = 4f;
@@ -42,7 +44,7 @@ public class BloodScaner : MonoBehaviour {
 		distance = thePlayer.theViewAreaLength;
 		//这个方法的正方向使用的是X轴正方向
 		//具体使用的时候非常需要注意正方向的朝向
-		theEMY = new List<BloodBasic> ();
+		theEMY.Clear();
 		//以自己为中心进行相交球体探测
 		//实际上身边一定圆周范围内的所有具有碰撞体的单位都会被被这一步探测到
 		//接下来需要的就是对坐标进行审查
@@ -76,7 +78,7 @@ public class BloodScaner : MonoBehaviour {
 				*/
 				if (cosValue >= angleCosValue)//如果cos值大于基准值，认为这个就是应该被探测的目标
 				{
-					BloodBasic theAIM = emys [i].GetComponent<Collider> ().gameObject.GetComponent<BloodBasic> ();
+					BloodBasic theAIM = emys [i].gameObject.GetComponent<BloodBasic> ();
 					if (theEMY .Contains (theAIM) == false) //不重复地放到已找到的列表里面
 					{
 						theEMY.Add (theAIM);
@@ -84,7 +86,6 @@ public class BloodScaner : MonoBehaviour {
 					}
 				}
 			}
-
 		}
 		foreach(BloodBasic B in theEMY)
 			B.flashBloodShowTimer();

@@ -8,6 +8,7 @@ public class props : MonoBehaviour {
 	//字符串不同，效果自然也就不同
 	public string nameForEffectOfProp;
 	private bool isUsed = false;//简单的标记
+	//public popMaker theMaker;//生成控制单元，销毁的时候通知开始生成下一个
 	//道具效果在某一个物体上面生效
 	//其实就是添加一个脚本
 	//难点就是怎么做网络上的同步
@@ -24,9 +25,10 @@ public class props : MonoBehaviour {
 	void OnTriggerEnter(Collider collisioner)
 	//void OnCollisionEnter(Collision collisioner)
 	{
-		if (collisioner.gameObject.GetComponent <PlayerBasic> ())
+		GameObject theUser = collisioner.gameObject;
+		if (theUser.GetComponent <PlayerBasic> ())
 		{
-			gameEffect(collisioner.gameObject);
+			gameEffect(theUser);
 		}
 	}
 }
