@@ -23,7 +23,7 @@ public class BloodBasic : MonoBehaviour {
 	public void flashBloodShowTimer()
 	{
 		showHpTimer = showHPTimerMax;
-		thePlayer.isShowing = true;
+		thePlayer.isShowingOnGUI = true;
 	}
 
 	void showBlood()
@@ -31,18 +31,18 @@ public class BloodBasic : MonoBehaviour {
 		//方法1，GUI方法，因为不存在遮挡，有点不想用
 		if (theRender.isVisible)
 		{
-			if (thePlayer.isShowing) 
+			if (thePlayer.isShowingOnGUI) 
 			{
 				showHpTimer -= 0.2f;
 				if (showHpTimer < 0) 
 				{
-					thePlayer.isShowing = false;
+					thePlayer.isShowingOnGUI = false;
 				}
 			}
 		}
 		else 
 		{
-			thePlayer.isShowing = false;
+			thePlayer.isShowingOnGUI = false;
 		}
 	}
 //	void Update () 

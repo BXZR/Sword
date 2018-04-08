@@ -174,6 +174,17 @@ public class PlayerBasic : MonoBehaviour {
 	public  float jingyanMax = 100;
 	public int LVMax= 18;//等级上限目前为18级，当然主人公也可以一些特殊方式来突破这一层天堑
 
+	//负重系数
+	//负重越沉重，移动速度和攻击速度就会越慢
+	[Range(0f,2f)]
+	public float weightPercent = 0f;
+
+	//这是一个原始的功能，但是在发布之后没有使用，只是不断空转并且浪费了判断用的资源，应该注销以备后用
+	public bool isShowingOnGUI = false;
+	//不可遮挡的GUI血条
+	// 这或许不是一个很好的方法
+	// 因为不存在遮挡
+
 	//增加经验的方法
 	public void addJingYan(float adder  = 0)
 	{
@@ -635,6 +646,11 @@ public class PlayerBasic : MonoBehaviour {
 			
 			//战斗状态的刷新管理
 			fightStateUpdate ();
+
+			//负重计算
+			float trueSpeedPercnet = Mathf.Clamp((0.85f + (1-weightPercent) * 0.15f) , 0.6f, 1f);
+			ActerAttackSpeedPercent = CActerAttackSpeedPercent * trueSpeedPercnet;
+			ActerMoveSpeedPercent = CActerMoveSpeedPercent * trueSpeedPercnet;
 		}
 	}
 
@@ -745,14 +761,10 @@ public class PlayerBasic : MonoBehaviour {
 		makeGUIStart ();
 	}
 
-	//这是一个原始的功能，但是在发布之后没有使用，只是不断空转并且浪费了判断用的资源，应该注销以备后用
-	public bool isShowing = false;
-	//不可遮挡的GUI血条
-	// 这或许不是一个很好的方法
-	// 因为不存在遮挡
+
 	 void OnGUI()
 	{ 
-		if ( isShowing  && this.isMainfighter == false &&  isAlive &&  GUIShowStyleHP!=null &&  GUIShowStyleSP!=null )
+		if ( isShowingOnGUI  && this.isMainfighter == false &&  isAlive &&  GUIShowStyleHP!=null &&  GUIShowStyleSP!=null )
 		{
 			if (!systemValues.isSystemUIUsing ()) 
 			{
