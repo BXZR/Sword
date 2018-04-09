@@ -19,14 +19,14 @@
       <File FileName="Assets\Code\UI\basicShow\effectFlashPanel.cs" Line="1" Column="1" />
       <File FileName="Assets\Code\UI\basicShow\uiShowsForBasic.cs" Line="1" Column="1" />
       <File FileName="Assets\Code\UI\messageBox\theMessageBoxPanel.cs" Line="1" Column="1" />
-      <File FileName="Assets\Code\UI\packagePanel\thePackagePanelShow.cs" Line="1" Column="1" />
+      <File FileName="Assets\Code\UI\packagePanel\thePackagePanelShow.cs" Line="25" Column="41" />
       <File FileName="Assets\Code\UI\startAndSelect\GameStartButton.cs" Line="1" Column="1" />
       <File FileName="Assets\Code\UI\startAndSelect\RandomSelectButton.cs" Line="1" Column="1" />
       <File FileName="Assets\Code\UI\startAndSelect\sceneSkipButton.cs" Line="1" Column="1" />
       <File FileName="Assets\Code\UI\startAndSelect\selectHead.cs" Line="1" Column="1" />
       <File FileName="Assets\Code\UI\startAndSelect\selectHeaderMaker.cs" Line="1" Column="1" />
-      <File FileName="Assets\Code\Player\PlayerBasic.cs" Line="883" Column="60" />
-      <File FileName="Assets\Code\Player\newMethodAttack.cs" Line="20" Column="4" />
+      <File FileName="Assets\Code\Player\PlayerBasic.cs" Line="507" Column="4" />
+      <File FileName="Assets\Code\Player\newMethodAttack.cs" Line="1" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
