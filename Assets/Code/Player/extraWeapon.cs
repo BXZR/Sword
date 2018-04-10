@@ -25,11 +25,12 @@ public class extraWeapon : MonoBehaviour {
 		
 		if (string.IsNullOrEmpty (thePlayer . conNameToEMY) == false)//效果不可叠加
 		{
-			if(!playerAim.gameObject.GetComponent (System.Type.GetType (thePlayer . conNameToEMY)))
-			{
+			System.Type theType = System.Type.GetType (thePlayer.conNameToEMY);
+				if(!playerAim.gameObject.GetComponent (theType))
+			 {
 				try
 				{
-					playerAim.gameObject.AddComponent (System.Type.GetType (thePlayer . conNameToEMY) );
+						playerAim.gameObject.AddComponent (theType);
 					//print("makeEffect3");
 				}
 				catch
@@ -42,7 +43,7 @@ public class extraWeapon : MonoBehaviour {
 			}
 			else
 			{
-				effectBasic theEffect = playerAim.gameObject.GetComponent (System.Type.GetType (thePlayer . conNameToEMY)) as effectBasic;
+					effectBasic theEffect = playerAim.gameObject.GetComponent (theType) as effectBasic;
 				theEffect.updateEffect ();
 				//print ("update");
 			}

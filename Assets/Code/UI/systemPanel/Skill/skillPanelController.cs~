@@ -62,9 +62,10 @@ public class skillPanelController : MonoBehaviour {
 		string skillInformation = "";
 		if (string.IsNullOrEmpty (theAttacklink.conNameToSELF) == false) 
 		{
-			theButton.gameObject.AddComponent (System.Type.GetType (theAttacklink.conNameToSELF) );
+			System.Type theType = System.Type.GetType (theAttacklink.conNameToSELF);
+		    theButton.gameObject.AddComponent (theType);
 			//effectBasic theselfEffect = theButton.GetComponent <effectBasic> ();
-			effectBasic theselfEffect = (effectBasic)theButton.GetComponent (System.Type.GetType (theAttacklink.conNameToSELF));
+			effectBasic theselfEffect = (effectBasic)theButton.GetComponent (theType);
 			theselfEffect.Init ();
 			information += "发动可以触发[" + systemValues.SkillColorForSelf + theselfEffect.theEffectName + systemValues.colorEnd +"]";
 			skillInformation += systemValues.SkillColorForSelf+ theselfEffect.getInformation ()+systemValues.colorEnd;
@@ -75,9 +76,10 @@ public class skillPanelController : MonoBehaviour {
 		}
 		if (string.IsNullOrEmpty (theAttacklink.conNameToEMY) == false) 
 		{
-			theButton.gameObject.AddComponent (System.Type.GetType (theAttacklink.conNameToEMY) );
+			System.Type theType = System.Type.GetType (theAttacklink.conNameToEMY);
+			theButton.gameObject.AddComponent (theType);
 			//effectBasic theEMYEffect = theButton.GetComponent <effectBasic> ();
-			effectBasic theEMYEffect = (effectBasic)theButton.GetComponent (System.Type.GetType (theAttacklink.conNameToEMY));
+			effectBasic theEMYEffect = (effectBasic)theButton.GetComponent (theType);
 			theEMYEffect.Init ();
 			if (string.IsNullOrEmpty (information) == false)
 				information += "\n";

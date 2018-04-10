@@ -202,8 +202,9 @@ public class systemValues : MonoBehaviour {
 				if (string.IsNullOrEmpty (ak.conNameToEMY) == false) 
 				{
 					//初始化一下效果
-					thePlayer.gameObject.AddComponent (System.Type.GetType (ak.conNameToEMY));
-					effectBasic theEffect = thePlayer.gameObject.GetComponent (System.Type.GetType (ak.conNameToEMY)) as effectBasic;
+					System.Type theType = System.Type.GetType (ak.conNameToEMY);
+					thePlayer.gameObject.AddComponent (theType);
+					effectBasic theEffect = thePlayer.gameObject.GetComponent (theType) as effectBasic;
 					buffer.Add (theEffect);
 
 					theEffect.Init ();
@@ -220,8 +221,9 @@ public class systemValues : MonoBehaviour {
 				if (string.IsNullOrEmpty (ak.conNameToSELF) == false) 
 				{
 					//初始化一下效果
-					thePlayer.gameObject.AddComponent (System.Type.GetType (ak.conNameToSELF));
-					effectBasic theEffect = thePlayer.gameObject.GetComponent (System.Type.GetType (ak.conNameToSELF)) as effectBasic;
+					System.Type theType = System.Type.GetType (ak.conNameToSELF);
+					thePlayer.gameObject.AddComponent (theType);
+					effectBasic theEffect = thePlayer.gameObject.GetComponent (theType) as effectBasic;
 					buffer.Add (theEffect);
 
 					theEffect.Init ();
@@ -263,8 +265,9 @@ public class systemValues : MonoBehaviour {
 				if (string.IsNullOrEmpty (ak.conNameToEMY) == false) 
 				{
 					//初始化一下效果
-					thePlayer.gameObject.AddComponent (System.Type.GetType (ak.conNameToEMY));
-					effectBasic theEffect = thePlayer.gameObject.GetComponent (System.Type.GetType (ak.conNameToEMY)) as effectBasic;
+					System.Type theType = System.Type.GetType (ak.conNameToEMY);
+					thePlayer.gameObject.AddComponent (theType);
+					effectBasic theEffect = thePlayer.gameObject.GetComponent (theType) as effectBasic;
 					buffer.Add (theEffect);
 					//theEffect.Init ();
 					//skillsInformation += theEffect.getInformation ();
@@ -273,8 +276,9 @@ public class systemValues : MonoBehaviour {
 				if (string.IsNullOrEmpty (ak.conNameToSELF) == false) 
 				{
 					//初始化一下效果
-					thePlayer.gameObject.AddComponent (System.Type.GetType (ak.conNameToSELF));
-					effectBasic theEffect = thePlayer.gameObject.GetComponent (System.Type.GetType (ak.conNameToSELF)) as effectBasic;
+					System.Type theType = System.Type.GetType (ak.conNameToSELF);
+					thePlayer.gameObject.AddComponent (theType);
+					effectBasic theEffect = thePlayer.gameObject.GetComponent (theType) as effectBasic;
 					buffer.Add (theEffect);
 					//theEffect.Init ();
 					//skillsInformation += theEffect.getInformation ();

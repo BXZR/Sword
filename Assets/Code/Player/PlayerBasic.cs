@@ -66,7 +66,6 @@ public class PlayerBasic : MonoBehaviour {
 	public float ActerSpSuck=0f;//人物的固定的法力偷取
 	public float ActerSpSuckPercent=0f;//根据所造成伤害的百分比法力偷取
 
-
 	//额外战斗属性
 	public float ActerDamageAdderPercent=0;//额外百分比伤害
 	public float ActerDamageAdder=0;//额外真实加成
@@ -84,7 +83,12 @@ public class PlayerBasic : MonoBehaviour {
 	//总体上讲，这些值是战斗属性的备份值，当有特殊计算方法的时候作为参数计算更新战斗属性
 	//例如 战斗属性 = 备份值 *1.1f
 	//顺带一提，之所以使用私有方法是因为不想让共有属性表太长，此外这些私有只会在特殊情况之下服务器才会使用
+	public float theAttackAreaLength;//攻击范围（非常重要，同时这个是简化版本的每一种攻击招式分开计算范围的方式）
+	public float theAttackAreaAngel = 20f;//攻击范围的角度，自身前方锥形范围内都是攻击范围
+	public float theViewAreaLength = 4f;//视野长度，在不同的模式之下。例如暗夜模式，是很有需要实际的地方的
+	public float theViewAreaAngel = 30f;//视野的角度，同样，在不同的模式之下。例如暗夜模式，是很有需要实际的地方的
 
+	//副本数据，在额外脚本计算的时候会有奇效------------------------------------------------------------------------
 	//最基本的属性生命法力和名字
 	[HideInInspector]
 	public float CActerHpMax=1000f;//这个人物的生命上限
@@ -139,18 +143,39 @@ public class PlayerBasic : MonoBehaviour {
 	[HideInInspector]
 	public  float CActerHpSuckPercent=0f;//根据所造成伤害的百分比生命吸取
 
+	//法力吸取属性
+	[HideInInspector]
+	public float CActerSpSuck=0f;//人物的固定的法力偷取
+	[HideInInspector]
+	public float CActerSpSuckPercent=0f;//根据所造成伤害的百分比法力偷取
+
+	//额外战斗属性
+	public float CActerDamageAdderPercent=0;//额外百分比伤害
+	public float CActerDamageAdder=0;//额外真实加成
+
 	[HideInInspector]
 	public float CActerMoveSpeedPercent = 1f;//移动速度百分比，在移动的时候会有这个速度百分比加成
 	[HideInInspector]
 	public float CActerAttackSpeedPercent = 1f;//攻击速度百分比，所有的动作的速度会受到这个限制
+
+	[HideInInspector]
+	public float CtheAttackAreaLength;//攻击范围（非常重要，同时这个是简化版本的每一种攻击招式分开计算范围的方式）
+	[HideInInspector]
+	public float CtheAttackAreaAngel = 20f;//攻击范围的角度，自身前方锥形范围内都是攻击范围
+	[HideInInspector]
+	public float CtheViewAreaLength = 4f;//视野长度，在不同的模式之下。例如暗夜模式，是很有需要实际的地方的
+	[HideInInspector]
+	public float CtheViewAreaAngel = 30f;//视野的角度，同样，在不同的模式之下。例如暗夜模式，是很有需要实际的地方的
+	[HideInInspector]
+	public float CActerShieldMaxPercent = 0.15f;//护盾针对最大生命值的上限
+///////////////////////////////////////////////////////////////////////////////////////////////////////	
+//下面是游戏计算中的临时变量
 
 	[HideInInspector]//为了保证设定面板的简洁，暂时隐藏之
 	public  float extraDamageForAnimation = 0;//设置为共有是为了传参数的时候方便，但是这个参数是不能够被主动在面板上设定的
 	[HideInInspector]
 	public bool isMainfighter = false;//是玩家控制的fighter
 
-///////////////////////////////////////////////////////////////////////////////////////////////////////	
-//下面是游戏计算中的临时变量
 	private GUIStyle GUIShowStyleHP;//GUI显示的人物当前生命值
 	private GUIStyle GUIShowStyleSP;//GUI显示的人物当前生命值
 
@@ -178,12 +203,7 @@ public class PlayerBasic : MonoBehaviour {
 	//有了静态的转换方法之后这个参数就不需要指定了，这样耦合性更低
 	//public float TimePercent = 1;//武器冷却时间百分比，不同武器根据其动作可能会有不同的冷却时间
 	//(这个属性在使用动画关键帧的时候被暂时弃用，但这个思路还是有的)
-	public float theAttackAreaLength;//攻击范围（非常重要，同时这个是简化版本的每一种攻击招式分开计算范围的方式）
-	public float theAttackAreaAngel = 20f;//攻击范围的角度，自身前方锥形范围内都是攻击范围
-	public float theViewAreaLength = 4f;//视野长度，在不同的模式之下。例如暗夜模式，是很有需要实际的地方的
-	public float theViewAreaAngel = 30f;//视野的角度，同样，在不同的模式之下。例如暗夜模式，是很有需要实际的地方的
 	private float DamageRead = 0;//记录已经收到的伤害，如果收到的伤害累积到一定数量就要播放受到攻击的动画
-
 	//是否可以攻击命中
 	public bool canAttack = true;
 
@@ -213,7 +233,6 @@ public class PlayerBasic : MonoBehaviour {
 	public float ActerAttackSpeedMaxPercent= 5f;//攻击速度百分比上限
 	[HideInInspector]
 	public float ActerMoveSpeedMaxPercent = 2.5f;//移动速度百分比上限
-
 
 	//这是一个原始的功能，但是在发布之后没有使用，只是不断空转并且浪费了判断用的资源，应该注销以备后用
 	[HideInInspector]

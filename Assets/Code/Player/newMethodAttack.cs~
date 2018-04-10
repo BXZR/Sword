@@ -10,7 +10,7 @@ public class newMethodAttack : MonoBehaviour {
 	//这个是在动画中插入关键帧的方法，没有使用碰撞检测的方法制作的
 	//但同时也有限制，就是只能用于这种唯一目标的游戏而没有办法很好地模拟武器AOE
 
-	private List<PlayerBasic> theEMY;//为了打得爽，其实所有攻击都是AOE
+	private List<PlayerBasic> theEMY;//为了打得爽，其实所有攻击都是AOE，AOE获取方式为自制的扇形检测
 	private PlayerBasic thePlayer;//自身
 	float theDistance = 0;//距离中间变量
 
@@ -18,11 +18,13 @@ public class newMethodAttack : MonoBehaviour {
 	{
 		if (string.IsNullOrEmpty (thePlayer . conNameToSELF) == false) //效果不可叠加
 		{
-			if (!thePlayer.gameObject.GetComponent (System.Type.GetType (thePlayer . conNameToSELF))) {
+			System.Type theType = System.Type.GetType (thePlayer . conNameToSELF);
+			if (!thePlayer.gameObject.GetComponent ( theType))
+			{
 				try
 				{
-					thePlayer.gameObject.AddComponent (System.Type.GetType (thePlayer . conNameToSELF));
-					effectBasic theEffect = thePlayer.gameObject.GetComponent (System.Type.GetType (thePlayer . conNameToSELF)) as effectBasic;
+					thePlayer.gameObject.AddComponent (theType);
+					effectBasic theEffect = thePlayer.gameObject.GetComponent (theType) as effectBasic;
 					theEffect.SetAttackLinkIndex(thePlayer.EffectAttackLinkIndex);
 					thePlayer.EffectAttackLinkIndex = 0;//刷新为初始数值
 				}
@@ -37,25 +39,24 @@ public class newMethodAttack : MonoBehaviour {
 			} 
 			else
 			{
-				effectBasic theEffect = thePlayer.gameObject.GetComponent (System.Type.GetType (thePlayer . conNameToSELF)) as effectBasic;
+				effectBasic theEffect = thePlayer.gameObject.GetComponent (theType) as effectBasic;
 				theEffect.updateEffect ();
 				theEffect.SetAttackLinkIndex(thePlayer.EffectAttackLinkIndex);
 			}
 			thePlayer . conNameToSELF = "";
 		}
 	}
-
-
-
+		
 	private void extraDamageEffect(PlayerBasic playerAim)//额外添加挂在的计算脚本
 	{
 		if (string.IsNullOrEmpty (thePlayer . conNameToEMY) == false)//效果不可叠加
 		{
-			if(!playerAim.gameObject.GetComponent (System.Type.GetType (thePlayer . conNameToEMY)))
+			System.Type theType = System.Type.GetType (thePlayer.conNameToEMY);
+			if(!playerAim.gameObject.GetComponent (theType))
 			{
 				try
 				{
-					playerAim.gameObject.AddComponent (System.Type.GetType (thePlayer . conNameToEMY) );
+					playerAim.gameObject.AddComponent (theType );
 					//print("makeEffect");
 				}
 				catch(Exception E)
@@ -69,7 +70,7 @@ public class newMethodAttack : MonoBehaviour {
 			}
 			else
 			{
-				effectBasic theEffect = playerAim.gameObject.GetComponent (System.Type.GetType (thePlayer . conNameToEMY)) as effectBasic;
+				effectBasic theEffect = playerAim.gameObject.GetComponent (theType) as effectBasic;
 				theEffect.updateEffect ();
 				theEffect.SetAttackLinkIndex(thePlayer.EffectAttackLinkIndex);
 				//print ("update");

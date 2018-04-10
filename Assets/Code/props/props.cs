@@ -18,17 +18,23 @@ public class props : MonoBehaviour {
 	void gameEffect(GameObject aim)
 	{
 		aim.gameObject.AddComponent (System.Type.GetType (nameForEffectOfProp));
-		Destroy (this.gameObject);
+	
 	}
 
 
 	void OnTriggerEnter(Collider collisioner)
 	//void OnCollisionEnter(Collision collisioner)
 	{
-		GameObject theUser = collisioner.gameObject;
-		if (theUser.GetComponent <PlayerBasic> ())
+		//有效碰撞只可以发生一次，否则会有开销和莫名其妙的卡顿
+		if (isUsed == false)
 		{
-			gameEffect(theUser);
+			GameObject theUser = collisioner.gameObject;
+			if (theUser.GetComponent <PlayerBasic> ())
+			{
+				gameEffect (theUser);
+				isUsed = true;
+				Destroy (this.gameObject);
+			}
 		}
 	}
 }

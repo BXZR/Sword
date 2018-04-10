@@ -26,6 +26,7 @@ public class effectDragonAttack  : effectBasic{
 		theEffectInformation ="招式起手时恢复("+hpupValue+"+已损生命"+hpUpWhenattack*100+"%)\n生命百分比低于"+ upGate*100 +"%效果翻倍\n（连招攻击此效果只触发一次）\n治疗效果可溢出为护盾但护盾上限降低为"+shieldPercentNew*100+"%";
 		makeStart ();
 		thePlayer.ActerShieldMaxPercent = shieldPercentNew;
+		thePlayer.CActerShieldMaxPercent = shieldPercentNew;//注意备份数值也需要变化
 	}
 
 	public override void onAttackAction ()

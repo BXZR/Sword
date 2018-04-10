@@ -85,6 +85,7 @@
      <Compile Include="Assets\Code\Effects\thingsEffect\effectShield.cs" />
      <Compile Include="Assets\Code\Effects\thingsEffect\effectSpeedUp.cs" />
      <Compile Include="Assets\Code\Effects\thingsEffect\effectSpup.cs" />
+     <Compile Include="Assets\Code\Equips\equipBasics.cs" />
      <Compile Include="Assets\Code\Extra\extraRotate.cs" />
      <Compile Include="Assets\Code\Extra\fixPosition.cs" />
      <Compile Include="Assets\Code\Extra\singleTip.cs" />
