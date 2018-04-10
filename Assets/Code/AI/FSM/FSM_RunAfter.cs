@@ -17,7 +17,8 @@ public class FSM_RunAfter : FSMBasic {
 		theAnimator.Play("rotatePoseForward");
 		this.theThis.transform.LookAt (theEMY.transform);
 		if(this.theMoveController.isActiveAndEnabled)
-		this.theMoveController.SetDestination(theEMY.transform .position);
+		if(this.theMoveController.isOnNavMesh)
+		 this.theMoveController.SetDestination(theEMY.transform .position);
 
 		timer -= Time.deltaTime;
 		//Debug.Log ("runafterTimer : "+ timer);

@@ -56,8 +56,8 @@ public class attackLink : MonoBehaviour {
 	public int theAttackLinkLv = 1;//当前招式等级
 	public int theAttakLinkLvMax = 18;//最大等级上限
 	public float extraDamageAdd = 0;//额外攻击伤害
-	public int  soulCostWhenLvtoMax = 80;//等级满了之后继续叠加的消耗
-	public int  adderWhenLvtoMax = 2;//非常低性价比的叠加
+	public int  soulCostWhenLvtoMax = 100;//等级满了之后继续叠加的消耗
+	public int  adderWhenLvtoMax = 1;//极其低性价比的叠加
 
 	/****************************************特殊攻击方法组****************************************************/
 	//攻击检测原理：
@@ -411,7 +411,9 @@ public class attackLink : MonoBehaviour {
 				information += "[不可升级]";
 			information += "\n";
 		}
-		information += "招式等级：" + this.theAttackLinkLv + "\n";
+
+		if (canLvup)
+		  information += "招式等级：" + this.theAttackLinkLv + "/" + this.theAttakLinkLvMax +"\n";
 
 		if (this.extraDamage > 0) 
 		{
@@ -437,8 +439,6 @@ public class attackLink : MonoBehaviour {
 
 		information += "斗气消耗：" + this.spUse ;
 
-
-
 		return information;
 	}
 
@@ -448,7 +448,9 @@ public class attackLink : MonoBehaviour {
 
 		string information = "";
 		information += "招式名称：" + this.skillName+"\n";
-		information += "招式等级：" + this.theAttackLinkLv + "\n";
+
+		if(canLvup)
+		information += "招式等级：" + this.theAttackLinkLv +  "/" + this.theAttakLinkLvMax +"\n";
 
 		if (this.extraDamage > 0) 
 		{
@@ -472,7 +474,9 @@ public class attackLink : MonoBehaviour {
 		}
 		information += "\n";
 
-		information += "斗气消耗：" + this.spUse +"\n\n";
+		information += "斗气消耗：" + this.spUse +"\n";
+		if (canLvup)
+			information += "\n";
 
 		if(canLvup  )
 		{

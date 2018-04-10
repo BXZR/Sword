@@ -42,8 +42,9 @@ public class monsterBeAttack : effectBasic{
 	{
 		if (this.GetComponent <FSMStage> ())
 			this.GetComponent <FSMStage> ().enabled = true;
-		if (this.GetComponent <NavMeshAgent> ())
-			this.GetComponent <NavMeshAgent> ().isStopped = false;
+		NavMeshAgent theAgent = this.GetComponent <NavMeshAgent> ();
+		if (theAgent && theAgent.isActiveAndEnabled)
+			theAgent.isStopped = false;
 	}
 
 	void Update () 

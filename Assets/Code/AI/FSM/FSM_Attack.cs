@@ -23,8 +23,8 @@ public class FSM_Attack : FSMBasic {
 	//看向目标
 	private void makeLook()
 	{
-		if(theEMY!= null)
-		theThis.transform.LookAt (theEMY.transform);
+		if(theEMY!= null &&  theThis!= null)
+		  theThis.transform.LookAt (theEMY.transform);
 	}
 
 //真正的操作-----------------------------------------------------

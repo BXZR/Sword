@@ -44,6 +44,7 @@ public class move : MonoBehaviour {
 	public bool isJumping = false;
 	public bool isOverWall = false;//站在墙边可以进行多段跳跃
 
+
 	public void makeStart()//初始化方法，由总控单元统一进行初始化
 	{
 		if (isStarted == false)
@@ -197,7 +198,7 @@ public class move : MonoBehaviour {
 		//刷新初始值
 		Vector3 jumpAction = Vector3.zero;
 		//按键检测
-		if (Input.GetKeyDown (KeyCode.Space)) 
+		if (Input.GetKeyDown (KeyCode.Space) && canMove) 
 		{
 
 			makeJump ();

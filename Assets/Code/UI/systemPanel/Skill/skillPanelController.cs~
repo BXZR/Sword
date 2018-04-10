@@ -28,12 +28,20 @@ public class skillPanelController : MonoBehaviour {
 
 	void Update()
 	{
+		//其实UI交互是需要开一帧的
 		SoulCountText.text = "魂元数量："+systemValues.soulCount;
 	}
 	void  makeStart()
 	{
-		if (systemValues.thePlayer != null && isBuilt == false) 
+		//单次初始化吧性能自然会好，但是初始对于动态增加效果的时候的灵活性或许不够强大
+		//if (systemValues.thePlayer != null && !isBuilt) 
+		if (systemValues.thePlayer != null) 
 		{
+			//简单的清理工作
+			skillButton[] buttons = theButtonFather.GetComponentsInChildren<skillButton> ();
+			for (int i = 0; i < buttons.Length; i++)
+				Destroy (buttons[i].gameObject);
+			
 			theInformationText.text = "";
 			attackLink[] theAttacklinks = systemValues.thePlayer.GetComponentsInChildren < attackLink > ();
 			for (int i = 0; i < theAttacklinks.Length; i++) 
@@ -51,7 +59,7 @@ public class skillPanelController : MonoBehaviour {
 				theButton.transform.localScale = new Vector3 (1,1,1);
 			}
 
-			isBuilt = true;
+			//isBuilt = true;
 		}
 	}
 
