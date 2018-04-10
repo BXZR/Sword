@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+//物品装备的类别
+public enum equiptype {head,body,weapon,shoe,extra  }
 public class equipBasics : MonoBehaviour {
 
 	//这个类是装备，物品等等相关东西的基类
@@ -10,6 +12,7 @@ public class equipBasics : MonoBehaviour {
 
 	public string equipName = "" ;//装备的名字
 	public float equipValue = 0;//装备的价值
+	public equiptype theEquipType;//装备种类也是分类的标记
 	//加成属性如下-------------------------------------------------------------------------------------------------------------------------
 	//最基本的属性生命法力和名字
 	public float equipActerHpMax=1000f;//这个人物的生命上限

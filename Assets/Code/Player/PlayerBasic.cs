@@ -241,6 +241,9 @@ public class PlayerBasic : MonoBehaviour {
 	// 这或许不是一个很好的方法
 	// 因为不存在遮挡
 
+	//网络控制节点=============================
+	PhotonView photonView;
+	//=========================================
 
 	//增加经验的方法
 	public void addJingYan(float adder  = 0)
@@ -301,8 +304,7 @@ public class PlayerBasic : MonoBehaviour {
 			}
 		}
 	}
-	//网络控制节点
-	PhotonView photonView;
+
 
 	public void addDamageRead(float damage=0)//有些技能是带有额外伤害的，这个伤害也需要统计到这里面去
 	{

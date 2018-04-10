@@ -67,8 +67,6 @@ public class cameraUse : MonoBehaviour
 				mode2 ();
 			}
 		}
-
-
 	}
 
 
@@ -117,8 +115,13 @@ public class cameraUse : MonoBehaviour
 
 		Vector3 now = target.transform.rotation.eulerAngles;
 		Vector3 rotation = new Vector3 (now.x , this.transform .rotation .eulerAngles.y , now.z);
+
 		Quaternion aim = Quaternion.Euler(rotation);
-		target.transform.rotation= aim;
+		//target.transform.rotation= aim;
+		//原则上插值法一定会有一个微妙的延迟，感觉只有大佬才有可能用到
+		//但是这确实要比赋值有了一点发挥的余地，至少感觉更有操作的感觉了
+		target.transform.rotation = Quaternion.Lerp (target.transform.rotation , aim , 30f*Time .deltaTime);
+			
 		if (!theMoveCopntroller)
 			theMoveCopntroller = target.GetComponent<move> ();
 		
