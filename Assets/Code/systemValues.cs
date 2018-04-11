@@ -333,6 +333,25 @@ public class systemValues : MonoBehaviour {
 		return (BESkillColor  + skillsInformation + colorEnd);
 	}
 
+	public static string getEffectInfromationWithName(string nameIn)
+	{
+		string information = "";
+		try
+		{
+			System.Type thetype = System.Type.GetType (nameIn);
+			systemValues.thePlayer.gameObject.AddComponent (thetype);
+			effectBasic theEf =  (effectBasic)systemValues.thePlayer .GetComponent(thetype);
+			theEf.Init ();
+			information = theEf.getInformation ();
+			Destroy (theEf);
+			return information;
+		}
+		catch
+		{
+			return "";
+		}
+	}
+
 	//所有的颜色标签都在这里设置
 	public static string normalColor = "<color=#000000>";//什么都不加成的颜色 黑色
 	public static string BESkillColor  = "<color=#FFFF8F>";//黄色

@@ -28,10 +28,14 @@ public class equipSelectTypeButton : MonoBehaviour {
 		makeFather (eqs.Count);
 		for (int i = 0; i < eqs.Count; i++) 
 		{
+			if (eqs [i] == null || eqs[i].isUsing)
+				continue;
 			GameObject theButton = GameObject.Instantiate<GameObject> (theShowingButtonProfab);
 			theButton.transform.SetParent (theViewFather.transform);
-			theButton.GetComponentInChildren<Text> ().text = eqs [i].equipName;
+			theButton.GetComponentInChildren<Text> ().text = "";
+			//theButton.GetComponentInChildren<Text> ().text = eqs [i].equipName;
 			theButton.GetComponent <equipShowingButton> ().theEquip = eqs [i];
+			theButton.GetComponent <Image> ().sprite =  systemValues.makeLoadSprite ("equipPicture/"+eqs[i].equipPictureName);
             //因为有grid控件，所以这些都没有必要使用了
 		}
 	}
@@ -55,10 +59,14 @@ public class equipSelectTypeButton : MonoBehaviour {
 		makeFather (eqs.Count);
 		for (int i = 0; i < eqs.Count; i++) 
 		{
+			if (eqs [i] == null || eqs[i].isUsing)
+				continue;
 			GameObject theButton = GameObject.Instantiate<GameObject> (theShowingButtonProfab);
 			theButton.transform.SetParent (theViewFather.transform);
-			theButton.GetComponentInChildren<Text> ().text = eqs [i].equipName;
+			theButton.GetComponentInChildren<Text> ().text = "";
+			//theButton.GetComponentInChildren<Text> ().text = eqs [i].equipName;
 			theButton.GetComponent <equipShowingButton> ().theEquip = eqs [i];
+			theButton.GetComponent <Image> ().sprite =  systemValues.makeLoadSprite ("equipPicture/"+eqs[i].equipPictureName);
 			//因为有grid控件，所以这些都没有必要使用了
 		}
 	}

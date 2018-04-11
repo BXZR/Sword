@@ -18,6 +18,7 @@ public class equipBasics : MonoBehaviour {
 	public float equipValue = 0;//装备的价值
 	public equiptype theEquipType;//装备种类也是分类的标记
 	public string theEquipStroy = "";//装备的故事
+	public bool isUsing = false;//是否已经被装备了
 	//加成属性如下-------------------------------------------------------------------------------------------------------------------------
 	//最基本的属性生命法力和名字
 	public float equipActerHpMax=0f;//这个人物的生命上限
@@ -70,6 +71,13 @@ public class equipBasics : MonoBehaviour {
 	//当然，可以有多个被动技能
 	public string [] theEffectNames ;
 
+
+	public string getEquipName()
+	{
+		if(isUsing)
+			return equipName +"[已装备]";
+		return equipName +"[未装备]";
+	}
 	//获得装备
 	public void GetThisThing(PlayerBasic thePlayer)
 	{
@@ -344,6 +352,11 @@ public class equipBasics : MonoBehaviour {
 		if (equiptheViewAreaAngel > 0)
 		{information.Append ("侦查范围 + ");information.Append ((equiptheViewAreaAngel).ToString("f0"));information.Append ("\n");}
 		return information.ToString ();
+	}
+
+	public static string equipTrast(equipBasics newOne , equipBasics oldOne)
+	{
+		return "";
 	}
 
 	//添加特效

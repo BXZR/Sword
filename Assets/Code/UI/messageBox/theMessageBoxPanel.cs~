@@ -103,6 +103,7 @@ public class theMessageBoxPanel : MonoBehaviour {
 		GUIShowStyleForInformation.fontStyle = FontStyle.Bold;
 		GUIShowStyleForInformation.alignment = TextAnchor.UpperCenter;
 		GUIShowStyleForInformation.fontSize = 16;
+		GUIShowStyleForInformation.wordWrap = true;
 
 		GUIShowStyleForBack = new GUIStyle ();
 		GUIShowStyleForBack.normal.background = theBackPicture;

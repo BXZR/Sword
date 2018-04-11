@@ -702,6 +702,9 @@ public class PlayerBasic : MonoBehaviour {
 		theString.Append ("   移动速度  ");
 		theString.Append ((ActerMoveSpeedPercent*100).ToString("f0"));
 		theString.Append ("%");
+		theString.Append ("\n负重  ");
+		theString.Append ((weightPercent * 100).ToString ("f0"));
+		theString.Append ("%");
 		return theString.ToString ();
 
 		//下面这些内容是上面文本的排版
