@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class effectSlash :effectBasic{
 
-	float hpsuckAdd = 0.05f;
+	float hpsuckAdd = 0.04f;
 	int ranNumber = 4; 
-	float addPercent = 0.12f;
+	float addPercent = 0.10f;
 
 	float changeGate = 0.25f;
 	float hpsuckOnChange = 0.03f;
@@ -30,7 +30,7 @@ public class effectSlash :effectBasic{
 		theEffectName = "劫刃";
 		//注意的是，最大生命值每回合都会更新的，这个最大生命值的削弱仅仅限制于本回合(如果削减最大斗气值就太变态了)
 		theEffectInformation ="额外获得"+hpsuckAdd*100+"%的生命偷取\n攻击时拥有"+ranNumber*10 +"%机会使最终伤害提升"+addPercent *100+"%\n恢复额外伤害值的斗气，最多"+spAddMax+"斗气";
-		theEffedctExtraInformation = "特性：自身生命值低于"+changeGate*100+"%变化为[红莲]";
+		theEffedctExtraInformation = "特性：魔中佛，生命值低于"+changeGate*100+"%变化为[红莲]";
 		makeStart ();
 
 		thePlayer.ActerHpSuckPercent += hpsuckAdd;
@@ -73,14 +73,14 @@ public class effectSlash :effectBasic{
 			theEffectName = "劫刃";
 			//注意的是，最大生命值每回合都会更新的，这个最大生命值的削弱仅仅限制于本回合(如果削减最大斗气值就太变态了)
 			theEffectInformation ="额外获得"+hpsuckAdd*100+"%的生命偷取\n攻击时拥有"+ranNumber*10 +"%机会使最终伤害提升"+addPercent *100+"%\n恢复额外伤害值的斗气，最多"+spAddMax+"斗气";
-			theEffedctExtraInformation = "特性：自身生命值低于"+changeGate*100+"%变化为[红莲]";
+			theEffedctExtraInformation = "特性：魔中佛，生命值低于"+changeGate*100+"%变化为[红莲]";
 		} 
 		else 
 		{
 			theEffectName = "红莲";
 			theEffectInformation = "额外获得" + hpsuckAdd * 100 + "%的生命偷取";
 			theEffectInformation += "\n攻击时额外吸取目标最大生命值"+hpsuckOnChange *100+"%生命\n每一击最多额外吸取"+damageSuckMax+"生命值";
-			theEffedctExtraInformation = "特性：自身生命值高于"+changeGate*100+"%变化为[劫刃]";
+			theEffedctExtraInformation = "特性：佛中魔，生命值高于"+changeGate*100+"%变化为[劫刃]";
 
 		}
 	}

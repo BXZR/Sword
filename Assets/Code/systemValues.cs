@@ -180,7 +180,7 @@ public class systemValues : MonoBehaviour {
 				theInformation.attackLinkName = "";
 				theInformation.attackLinkString = "";
 				theInformation.theEffectForSelfName=  efs[i].getEffectName();
-				theInformation.theEffectForSelfInformaion =  efs[i].getInformation(false);
+				theInformation.theEffectForSelfInformaion =  efs[i].getInformation(false) +"\n"+efs[i].getExtraInformation();
 				theAttackLinkInformaitons.Add (theInformation);
 			}
 		}
@@ -357,7 +357,7 @@ public class systemValues : MonoBehaviour {
 	public static string BESkillColor  = "<color=#FFFF8F>";//黄色
 	public static string SkillColorForSelf = "<color=#FFF809>";//橙色
 	public static string SkillColorForEnemy = "<color=#28FF28>";//绿色
-	public static string SkillExtraColor = "<color=#FF5F9A>";//粉色
+	public static string SkillExtraColor = "<color=#AFFF3A>";//标记淡绿色
 	public static string playerNameColor = "<color=#00FF00>" ;//其实也是黄色
 	public static string playerIntroductionColor = "<color=#FF2400>";//应该是绿色
 	public static string colorEnd = "</color>";
