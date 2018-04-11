@@ -377,24 +377,27 @@ public class systemValues : MonoBehaviour {
 	{
 		return (int)(thePlayerIn.ActerHpMax / 100);
 	}
-
-
-	public static void  messageBoxShow(string showTitle , string  showText)
+		
+	public static void  messageBoxShow(string showTitle , string  showText , bool autoSize = false)
 	{
 		GameObject theMessageBox = GameObject.Instantiate<GameObject>( Resources.Load<GameObject> ("UI/MessageBox"));
 		theMessageBox.transform .localScale =  new Vector3 (2,2,2);
 		theMessageBox.transform.localPosition = Vector3.zero;
-		theMessageBox.GetComponent <theMessageBoxPanel> ().setInformation (showTitle, showText);
+		theMessageBoxPanel theMesage = theMessageBox.GetComponent <theMessageBoxPanel> ();
+		theMesage.isAutoResize = autoSize;
+		theMesage.setInformation (showTitle, showText);
 	}
-	public static void  messageBoxShow(string showTitle , string  showText , float timer )
+	public static void  messageBoxShow(string showTitle , string  showText , float timer , bool autoSize = false )
 	{
 		GameObject theMessageBox = GameObject.Instantiate<GameObject>( Resources.Load<GameObject> ("UI/MessageBox"));
 		theMessageBox.transform .localScale =  new Vector3 (2,2,2);
 		theMessageBox.transform.localPosition = Vector3.zero;
 		theMessageBoxPanel theMesage = theMessageBox.GetComponent <theMessageBoxPanel> ();
 		theMesage.setInformation (showTitle, showText);
+		theMesage.isAutoResize = autoSize;
 		theMesage.setTimer (timer);
 	}
+
 	public static void messageBoxClose()
 	{
 		if (theMessageBoxPanel.theMessageSave)

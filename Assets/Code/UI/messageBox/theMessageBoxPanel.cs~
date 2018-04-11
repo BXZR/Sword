@@ -21,6 +21,7 @@ public class theMessageBoxPanel : MonoBehaviour {
 	private float heightForScreen = 0.24f;
 	private string stringForTitle = "";
 	private string stringForInformation = "";
+	public bool isAutoResize = false;
 
 	//有一个缩放的效果
 	private bool isClosing = false;//开始还是关闭
@@ -43,6 +44,12 @@ public class theMessageBoxPanel : MonoBehaviour {
 		theInformationText.text = information;
 		stringForTitle = title;
 		stringForInformation = information;
+		if (isAutoResize) 
+		{
+			float arr = Mathf.Clamp( (float)stringForInformation.Split ('\n').Length / 7 ,1f,2.8f);
+			setSize (new Vector2(1f , arr));
+		}
+
 	}
 	//设定显示时间
 	//不设定就是不用计时器
@@ -51,6 +58,22 @@ public class theMessageBoxPanel : MonoBehaviour {
 		timer = timerIn;
 		withTimer = true;
 	}
+
+	//设定大小
+	//用的是百分比
+	public void setSize ( Vector2 theSize)
+	{
+		float widthSave = widthForScreen;
+		float heightSave = heightForScreen;
+		widthForScreen *= theSize.x;
+		heightForScreen *= theSize.y;
+
+		if (widthForScreen< widthSave)
+			widthForScreen = widthSave;
+		if (heightForScreen < heightSave)
+			heightForScreen = heightSave;
+	}
+
 	//自我销毁
 	public void makeEnd()
 	{
@@ -72,7 +95,7 @@ public class theMessageBoxPanel : MonoBehaviour {
 		GUIShowStyleForTitle =new GUIStyle();
 		GUIShowStyleForTitle.normal.textColor = Color.green;
 		GUIShowStyleForTitle.fontStyle = FontStyle.Bold;
-		GUIShowStyleForTitle.alignment = TextAnchor.MiddleCenter;
+		GUIShowStyleForTitle.alignment = TextAnchor.UpperCenter;
 		GUIShowStyleForTitle.fontSize = 19;
 
 		GUIShowStyleForInformation=new GUIStyle();
@@ -104,7 +127,6 @@ public class theMessageBoxPanel : MonoBehaviour {
 	//messageOnGUI的做法
 	void OnGUI()
 	{ 
-		
 		float startPointX = (1 - widthForScreen*showPercent) * Screen.width / 2;
 		float startPointY = (1 - heightForScreen*showPercent) * Screen.height / 2;
 		startPointY *= 0.4f;//稍微向上移动一点
@@ -112,10 +134,10 @@ public class theMessageBoxPanel : MonoBehaviour {
 		float height = heightForScreen* Screen.width*showPercent;
 		GUI.BeginGroup (new Rect (startPointX  ,startPointY , width, height));
 		GUI.Box (new Rect (0, 0, width, height ), "" ,GUIShowStyleForBack );//背景
-		GUI.Box (new Rect (width/3,  height * 0.05f , width/3, height/5 ), stringForTitle ,GUIShowStyleForTitle);//标题
-		GUI.Box (new Rect (width*0.05f, height* 0.25f , width*0.9f, height*3/5 ), stringForInformation , GUIShowStyleForInformation);//文本
+		GUI.Box (new Rect (width/3,  height * 0.05f , width/3, height*0.12f ), stringForTitle ,GUIShowStyleForTitle);//标题
+		GUI.Box (new Rect (width*0.05f, height* 0.2f , width*0.9f, height*3/5 ), stringForInformation , GUIShowStyleForInformation);//文本
 		string showOnButton = withTimer? "我已知晓("+timer.ToString("f0")+")" : "我已知晓";
-		if (GUI.Button (new Rect (width * 2 / 5, height * 4 / 5, width / 5, height / 8), showOnButton)) {makeEnd ();}
+		if (GUI.Button (new Rect (width * 2 / 5, Mathf.Max( height * 4 / 5, height-80), width / 5, 40), showOnButton)) {makeEnd ();}
 
 		GUI.EndGroup ();
 

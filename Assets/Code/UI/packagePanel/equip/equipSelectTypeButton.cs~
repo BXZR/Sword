@@ -31,6 +31,7 @@ public class equipSelectTypeButton : MonoBehaviour {
 			GameObject theButton = GameObject.Instantiate<GameObject> (theShowingButtonProfab);
 			theButton.transform.SetParent (theViewFather.transform);
 			theButton.GetComponentInChildren<Text> ().text = eqs [i].equipName;
+			theButton.GetComponent <equipShowingButton> ().theEquip = eqs [i];
             //因为有grid控件，所以这些都没有必要使用了
 		}
 	}
@@ -57,6 +58,7 @@ public class equipSelectTypeButton : MonoBehaviour {
 			GameObject theButton = GameObject.Instantiate<GameObject> (theShowingButtonProfab);
 			theButton.transform.SetParent (theViewFather.transform);
 			theButton.GetComponentInChildren<Text> ().text = eqs [i].equipName;
+			theButton.GetComponent <equipShowingButton> ().theEquip = eqs [i];
 			//因为有grid控件，所以这些都没有必要使用了
 		}
 	}

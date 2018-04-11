@@ -101,6 +101,7 @@
      <Compile Include="Assets\Code\UI\basicShow\effectFlashPanel.cs" />
      <Compile Include="Assets\Code\UI\basicShow\uiShowsForBasic.cs" />
      <Compile Include="Assets\Code\UI\messageBox\theMessageBoxPanel.cs" />
+     <Compile Include="Assets\Code\UI\packagePanel\equip\equipPersonForAllInforamtion.cs" />
      <Compile Include="Assets\Code\UI\packagePanel\equip\equipSelectTypeButton.cs" />
      <Compile Include="Assets\Code\UI\packagePanel\equip\equipShowingButton.cs" />
      <Compile Include="Assets\Code\UI\packagePanel\thePackagePanelShow.cs" />
