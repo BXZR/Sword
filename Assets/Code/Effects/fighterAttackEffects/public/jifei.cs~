@@ -54,33 +54,44 @@ public class jifei :effectBasic {
 	public override void Init ()
 	{
 		//print ("灭却浮屠发动");
-		lifeTimerAll = 1.5f;//每一个段时间才能够使用这个伤害
+		lifeTimerAll = 7f;//每一个段时间才能够使用这个伤害
 		timerForEffect = 1.5f; 
 		theEffectName = "击飞";
-		theEffectInformation ="将目标击飞，持续"+ lifeTimerAll  +"秒\n在击飞期间目标无法移动";
+		theEffectInformation ="将目标击飞，持续"+ timerForEffect +"秒\n在击飞期间目标无法移动\n同一个单位在"+lifeTimerAll +"秒内只会被击飞一次";
 		makeStart ();
 		Destroy (this,lifeTimerAll);
 		//额外限制
 		makeShut();
 		if(this.thePlayer)//很多用于显示的调用没有playerBasic对象也不会有效果，所以需要常常考虑关于这个错误的小屏蔽		 
-        aim = new Vector3 (this.thePlayer.transform.position.x , 4f+ this.thePlayer.transform.position.y, this.thePlayer.transform.position.z);
+        aim = new Vector3 (this.thePlayer.transform.position.x , 3f+ this.thePlayer.transform.position.y, this.thePlayer.transform.position.z);
 
 	}
 	public override void effectOnUpdateTime ()
 	{
 		addTimer ();
 		//print ("timer add = "+ timerForAdd);
+		if (isEffecting) 
+		{
+			if (timerForAdd > timerForEffect)
+			{
+				isEffecting = false;
+				makeOpen ();//重新允许移动
+			}
+		}
 
 	}
 
 
 	void Update()
 	{
-		this.transform.position = Vector3.Lerp (this.transform .position , aim , 2f *Time.deltaTime /lifeTimerAll  );
+		if(isEffecting)
+			this.transform.position = Vector3.Lerp (this.transform .position , aim , 7f *Time.deltaTime /timerForEffect  );
 	}
 
 	public override string getOnTimeFlashInformation ()
 	{
-		return this.theEffectName+"\n[不可移动]";
+		if(isEffecting)
+		    return this.theEffectName+"\n[不可移动]";
+		return this.theEffectName+"\n[免疫]";
 	}
 }

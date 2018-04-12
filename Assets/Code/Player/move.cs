@@ -95,12 +95,9 @@ public class move : MonoBehaviour {
 		float ZMove = 0f;
 		//单机动作控制
 		this.theAnimatorOfPlayer.SetFloat ("forward", AxisValue);//播放动画,具体内容需要看controller //////////////////////////////////
-		
-		if (canMove ) 
-		{
-			ZMove = (speedNow ) * AxisValue * Time.deltaTime;
-			moveDirection.z += ZMove * thePlayer.ActerMoveSpeedPercent;//向着正方向移动会有来自方向的速度加成同样在后退的时候速度会相对较低
-		}
+
+		ZMove = (speedNow ) * AxisValue * Time.deltaTime;
+		moveDirection.z += ZMove * thePlayer.ActerMoveSpeedPercent;//向着正方向移动会有来自方向的速度加成同样在后退的时候速度会相对较低
 
 		Vector3 moveDirectionAction = transform.rotation * moveDirection;//旋转角度加权
 		//在一定高度的半空中有一定的移动速度加成
@@ -133,7 +130,6 @@ public class move : MonoBehaviour {
 					playModeAnimations("rotatePoseBack"); 
 				if(systemValues.modeIndex == 1)//有些功能只在网络对战模式之下用就行
 				   this.photonView.RPC("playModeAnimations",PhotonTargets.All,"rotatePoseBack");
-			
 			}
 			else
 			{
@@ -149,17 +145,14 @@ public class move : MonoBehaviour {
 		{
 			//单机动作控制
 			this.theAnimatorOfPlayer.SetFloat ("up", AxisValue);//播放动画,具体内容需要看controller //////////////////////////////////
+		}
 
-		}
-		if (canMove)
-		{
-			//移动设定
-			if (AxisValue > 0.1f && AxisValue < 0.5f)
-				AxisValue = Mathf.Max (AxisValue, 0.5f);
-			float XAdd =  speedNow * AxisValue * Time.deltaTime;
-			//下面注释的两行是一个很好的思想，但是因为y周上面的移动出现跳变，会有较大幅度的上下抖动
-			moveDirection.x  += XAdd * thePlayer.ActerMoveSpeedPercent;//漫游之移动
-		}
+		//移动设定
+		if (AxisValue > 0.1f && AxisValue < 0.5f)
+			AxisValue = Mathf.Max (AxisValue, 0.5f);
+		float XAdd =  speedNow * AxisValue * Time.deltaTime;
+		//下面注释的两行是一个很好的思想，但是因为y周上面的移动出现跳变，会有较大幅度的上下抖动
+		moveDirection.x  += XAdd * thePlayer.ActerMoveSpeedPercent;//漫游之移动
 
 		if (theController && theController.enabled)//有时候需要强制无法移动
 			theController.Move (transform.rotation *moveDirection);//真实地进行行动(因为使用的是characterController，因此使用坐标的方式似乎比较稳妥)
@@ -198,7 +191,7 @@ public class move : MonoBehaviour {
 		//刷新初始值
 		Vector3 jumpAction = Vector3.zero;
 		//按键检测
-		if (Input.GetKeyDown (KeyCode.Space) && canMove) 
+		if (Input.GetKeyDown (KeyCode.Space) ) 
 		{
 
 			makeJump ();
@@ -238,7 +231,6 @@ public class move : MonoBehaviour {
 					//-----------------------------------------------------------
 
 				}
-
 			}
 		}
 		//如果正在跳跃
@@ -388,7 +380,7 @@ public class move : MonoBehaviour {
 	//移动的计算因为是人看到的，所以还是应该更加连贯
 	void Update ()
 	{
-		if (!isStarted)
+		if (!isStarted || !canMove)
 			return;
 		
 		gravtyMove ();
