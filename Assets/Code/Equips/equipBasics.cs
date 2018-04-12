@@ -259,11 +259,7 @@ public class equipBasics : MonoBehaviour {
 		thePlayer.CActerMoveSpeedPercent -= equipActerMoveSpeedPercent;//移动速度百分比，在移动的时候会有这个速度百分比加成
 		thePlayer.CActerAttackSpeedPercent -= equipActerAttackSpeedPercent;//攻击速度百分比，所有的动作的速度会受到这个限制
 		thePlayer.CActerShieldMaxPercent -= equipActerShieldMaxPercent ;//护盾针对最大生命值的上限
-		//接下来是一些私有的战斗属性备份，用于计算值（作为例如护甲值提升10%这种的参数值计算）
-		//因为是私有方法，所以还要给出获取这个值和修改这个值的方法
-		//总体上讲，这些值是战斗属性的备份值，当有特殊计算方法的时候作为参数计算更新战斗属性
-		//例如 战斗属性 = 备份值 *1.1f
-		//顺带一提，之所以使用私有方法是因为不想让共有属性表太长，此外这些私有只会在特殊情况之下服务器才会使用
+        //攻击范围和侦查范围
 		thePlayer.CtheAttackAreaLength -= equiptheAttackAreaLength;//攻击范围（非常重要，同时这个是简化版本的每一种攻击招式分开计算范围的方式）
 		thePlayer.CtheAttackAreaAngel -= equiptheAttackAreaAngel;//攻击范围的角度，自身前方锥形范围内都是攻击范围
 		thePlayer.CtheViewAreaLength -= equiptheViewAreaLength;//视野长度，在不同的模式之下。例如暗夜模式，是很有需要实际的地方的
@@ -350,13 +346,216 @@ public class equipBasics : MonoBehaviour {
 		if (equiptheViewAreaLength > 0)
 		{information.Append ("侦查距离 + ");information.Append ((equiptheViewAreaLength).ToString("f0"));information.Append ("\n");}
 		if (equiptheViewAreaAngel > 0)
-		{information.Append ("侦查范围 + ");information.Append ((equiptheViewAreaAngel).ToString("f0"));information.Append ("\n");}
+		{information.Append ("侦查广度 + ");information.Append ((equiptheViewAreaAngel).ToString("f0"));information.Append ("\n");}
 		return information.ToString ();
 	}
 
-	public static string equipTrast(equipBasics newOne , equipBasics oldOne)
+	public static string equipTrast(equipBasics newOne , equipBasics oldOne = null)
 	{
-		return "";
+		//生命法力数值
+		float hpMaxAdder =  0f;
+		float spMaxAdder =  0f;
+		float equipActerHpUp =  0f;
+		float equipActerSpUp =   0f;
+		//物理战斗属性
+		float equipActerWuliDamage =   0f;
+		float equipActerWuliReDamage =   0f;
+		float equipActerWuliIner =   0f;
+		float equipActerWuliInerPercent =   0f;
+		float equipActerDamageMinusPercent =   0f;
+		float equipActerDamageMinusValue =   0f;
+		//特殊战斗属性
+		float equipActerSuperBaldePercent =   0f;
+		float equipActerSuperBaldeAdder =   0f;
+		float equipActerMissPercent =   0f;
+		float equipActerShielderPercent =   0f;
+		float equipActerShielderDamageMiuns =   0f;
+		float equipActerShielderDamageMiunsPercent =   0f;
+		//物理防御属性
+		float equipActerWuliShield =   0f;
+		float equipActerShieldMaxPercent =   0f;
+		//生命吸取属性
+		float equipActerHpSuck =  0f;
+		float equipActerHpSuckPercent =   0f;
+		//法力吸取属性
+		float equipActerSpSuck =  0f;
+		float equipActerSpSuckPercent =   0f;
+		//额外战斗属性
+		float equipActerDamageAdderPercent =   0f;
+		float equipActerDamageAdder =   0f;
+		//人物的一些范围属性
+		float equipActerMoveSpeedPercent =   0f;
+		float equipActerAttackSpeedPercent =   0f;
+		float equiptheAttackAreaLength =  0f;
+		float equiptheAttackAreaAngel =  0f;
+		float equiptheViewAreaLength =   0f;
+		float equiptheViewAreaAngel =   0f;
+
+		//一次性判断要比三目靠谱
+		if (oldOne == null) 
+		{
+			//生命法力数值
+			hpMaxAdder =  newOne.equipActerHpMax  ;
+			spMaxAdder =  newOne.equipActerSpMax  ;
+			equipActerHpUp =  newOne.equipActerHpUp  ;
+		    equipActerSpUp =  newOne.equipActerSpUp   ;
+			//物理战斗属性
+			equipActerWuliDamage =  newOne.equipActerWuliDamage  ;
+			equipActerWuliReDamage =  newOne.equipActerWuliReDamage   ;
+			equipActerWuliIner =  newOne.equipActerWuliIner  ;
+			equipActerWuliInerPercent =  newOne.equipActerWuliInerPercent   ;
+			equipActerDamageMinusPercent =  newOne.equipActerDamageMinusPercent  ;
+			equipActerDamageMinusValue =  newOne.equipActerDamageMinusValue ;
+			//特殊战斗属性
+			equipActerSuperBaldePercent =  newOne.equipActerSuperBaldePercent ;
+			equipActerSuperBaldeAdder =  newOne.equipActerSuperBaldeAdder ;
+			equipActerMissPercent =  newOne.equipActerMissPercent  ;
+			equipActerShielderPercent =  newOne.equipActerShielderPercent  ;
+			equipActerShielderDamageMiuns =  newOne.equipActerShielderDamageMiuns  ;
+			equipActerShielderDamageMiunsPercent =  newOne.equipActerShielderDamageMiunsPercent  ;
+			//物理防御属性
+			equipActerWuliShield =  newOne.equipActerWuliShield  ;
+			equipActerShieldMaxPercent =  newOne.equipActerShieldMaxPercent ;
+			//生命吸取属性
+			equipActerHpSuck =  newOne.equipActerHpSuck ;
+			equipActerHpSuckPercent =  newOne.equipActerHpSuckPercent  ;
+			//法力吸取属性
+			equipActerSpSuck =  newOne.equipActerSpSuck  ;
+			equipActerSpSuckPercent =  newOne.equipActerSpSuckPercent  ;
+			//额外战斗属性
+			equipActerDamageAdderPercent =  newOne.equipActerDamageAdderPercent  ;
+			equipActerDamageAdder =  newOne.equipActerDamageAdder  ;
+			//人物的一些范围属性
+			equipActerMoveSpeedPercent =  newOne.equipActerMoveSpeedPercent  ;
+			equipActerAttackSpeedPercent =  newOne.equipActerAttackSpeedPercent  ;
+			equiptheAttackAreaLength =  newOne.equiptheAttackAreaLength  ;
+		    equiptheAttackAreaAngel =  newOne.equiptheAttackAreaAngel  ;
+			equiptheViewAreaLength =  newOne.equiptheViewAreaLength  ;
+			equiptheViewAreaAngel =  newOne.equiptheViewAreaAngel  ;
+		}
+		else
+		{
+	        //生命法力数值
+			hpMaxAdder =  newOne.equipActerHpMax  - oldOne.equipActerHpMax;
+			spMaxAdder =  newOne.equipActerSpMax  - oldOne.equipActerSpMax;
+			equipActerHpUp =  newOne.equipActerHpUp  - oldOne.equipActerHpUp;
+			equipActerSpUp =  newOne.equipActerSpUp  - oldOne.equipActerSpUp;
+			//物理战斗属性
+			equipActerWuliDamage =  newOne.equipActerWuliDamage  - oldOne.equipActerWuliDamage;
+			equipActerWuliReDamage =  newOne.equipActerWuliReDamage  - oldOne.equipActerWuliReDamage;
+			equipActerWuliIner =  newOne.equipActerWuliIner  - oldOne.equipActerWuliIner;
+			equipActerWuliInerPercent =  newOne.equipActerWuliInerPercent  - oldOne.equipActerWuliInerPercent;
+			equipActerDamageMinusPercent =  newOne.equipActerDamageMinusPercent - oldOne.equipActerDamageMinusPercent;
+			equipActerDamageMinusValue =  newOne.equipActerDamageMinusValue- oldOne.equipActerDamageMinusValue;
+			//特殊战斗属性
+			equipActerSuperBaldePercent =  newOne.equipActerSuperBaldePercent- oldOne.equipActerSuperBaldePercent;
+			equipActerSuperBaldeAdder =  newOne.equipActerSuperBaldeAdder - oldOne.equipActerSuperBaldeAdder;
+			equipActerMissPercent =  newOne.equipActerMissPercent - oldOne.equipActerMissPercent;
+			equipActerShielderPercent =  newOne.equipActerShielderPercent - oldOne.equipActerShielderPercent;
+			equipActerShielderDamageMiuns =  newOne.equipActerShielderDamageMiuns - oldOne.equipActerShielderDamageMiuns;
+			equipActerShielderDamageMiunsPercent =  newOne.equipActerShielderDamageMiunsPercent - oldOne.equipActerShielderDamageMiunsPercent;
+			//物理防御属性
+			equipActerWuliShield =  newOne.equipActerWuliShield - oldOne.equipActerWuliShield;
+			equipActerShieldMaxPercent =  newOne.equipActerShieldMaxPercent - oldOne.equipActerShieldMaxPercent;
+			//生命吸取属性
+			equipActerHpSuck =  newOne.equipActerHpSuck - oldOne.equipActerHpSuck;
+			equipActerHpSuckPercent =  newOne.equipActerHpSuckPercent - oldOne.equipActerHpSuckPercent;
+			//法力吸取属性
+			equipActerSpSuck =  newOne.equipActerSpSuck - oldOne.equipActerSpSuck;
+			equipActerSpSuckPercent =  newOne.equipActerSpSuckPercent - oldOne.equipActerSpSuckPercent;
+			//额外战斗属性
+			equipActerDamageAdderPercent =  newOne.equipActerDamageAdderPercent - oldOne.equipActerDamageAdderPercent;
+			equipActerDamageAdder =  newOne.equipActerDamageAdder - oldOne.equipActerDamageAdder;
+			//人物的一些范围属性
+			equipActerMoveSpeedPercent =  newOne.equipActerMoveSpeedPercent  - oldOne.equipActerMoveSpeedPercent;
+			equipActerAttackSpeedPercent =  newOne.equipActerAttackSpeedPercent  - oldOne.equipActerAttackSpeedPercent;
+			equiptheAttackAreaLength =  newOne.equiptheAttackAreaLength  - oldOne.equiptheAttackAreaLength;
+			equiptheAttackAreaAngel =  newOne.equiptheAttackAreaAngel  - oldOne.equiptheAttackAreaAngel;
+			equiptheViewAreaLength =  newOne.equiptheViewAreaLength - oldOne.equiptheViewAreaLength;
+			equiptheViewAreaAngel =  newOne.equiptheViewAreaAngel - oldOne.equiptheViewAreaAngel;
+		}
+
+		StringBuilder theString = new StringBuilder ();
+		if (newOne == oldOne)
+			return "";
+		theString.Append (newOne.equipName);
+		if (oldOne != null) 
+		{
+			theString.Append ("  对比  ");
+			theString.Append (oldOne.equipName);
+		}
+		theString.Append ("\n");
+		//生命法力数值
+		if (hpMaxAdder != 0) 
+		{theString.Append ("生命上限 ");theString.Append (hpMaxAdder.ToString("f0"));theString.Append ("\n");}
+		if (spMaxAdder != 0) 
+		{theString.Append ("斗气上限 ");theString.Append (spMaxAdder.ToString("f0"));theString.Append ("\n");}
+		if (equipActerHpUp  != 0) 
+		{theString.Append ("生命回复 ");theString.Append (equipActerHpUp .ToString("f1"));theString.Append ("/秒\n");}
+		if (equipActerSpUp  != 0) 
+		{theString.Append ("斗气回复 ");theString.Append (equipActerSpUp .ToString("f1"));theString.Append ("/秒\n");}
+		//物理战斗属性
+		if (equipActerWuliDamage  != 0) 
+		{theString.Append ("攻击力 ");theString.Append (equipActerWuliDamage.ToString("f0"));theString.Append ("\n");}
+		if (equipActerWuliReDamage != 0) 
+		{theString.Append ("反伤 ");theString.Append (equipActerWuliReDamage.ToString("f0"));theString.Append ("\n");}
+		if (equipActerWuliIner != 0) 
+		{theString.Append ("真实穿透 ");theString.Append (equipActerWuliIner.ToString("f0"));theString.Append ("\n");}
+		if (equipActerWuliInerPercent != 0) 
+		{theString.Append ("百分比穿透 ");theString.Append ((equipActerWuliInerPercent*100).ToString("f0"));theString.Append ("%\n");}
+		if (equipActerDamageMinusValue != 0) 
+		{theString.Append ("真实减伤 ");theString.Append (equipActerDamageMinusValue.ToString("f0"));theString.Append ("\n");}
+		if (equipActerDamageMinusPercent != 0) 
+		{theString.Append ("百分比减伤 ");theString.Append ((equipActerDamageMinusPercent*100).ToString("f0"));theString.Append ("%\n");}
+		//特殊战斗属性
+		if (equipActerSuperBaldePercent != 0) 
+		{theString.Append ("暴击率 ");theString.Append ((equipActerSuperBaldePercent*100).ToString("f0"));theString.Append ("%\n");}
+		if (equipActerSuperBaldeAdder != 0) 
+		{theString.Append ("暴击伤害 ");theString.Append ((equipActerSuperBaldeAdder*100).ToString("f0"));theString.Append ("%\n");}
+		if (equipActerMissPercent  != 0) 
+		{theString.Append ("闪避率 ");theString.Append ((equipActerMissPercent *100).ToString("f0"));theString.Append ("%\n");}
+		if (equipActerShielderPercent  != 0) 
+		{theString.Append ("格挡率 ");theString.Append ((equipActerShielderPercent *100).ToString("f0"));theString.Append ("%\n");}
+		if (equipActerShielderDamageMiuns != 0) 
+		{theString.Append ("格挡真实减伤 ");theString.Append (equipActerShielderDamageMiuns.ToString("f0"));theString.Append ("\n");}
+		if (equipActerShielderDamageMiunsPercent != 0) 
+		{theString.Append ("格挡百分比减伤 ");theString.Append ((equipActerShielderDamageMiunsPercent *100).ToString("f0"));theString.Append ("%\n");}
+		//物理防御属性
+		equipActerWuliShield =  newOne.equipActerWuliShield  ;
+		if (equipActerWuliShield != 0) 
+		{theString.Append ("护甲 ");theString.Append (equipActerWuliShield.ToString("f0"));theString.Append ("\n");}
+		if (equipActerShieldMaxPercent != 0) 
+		{theString.Append ("护盾上限 ");theString.Append ((equipActerShieldMaxPercent*100).ToString("f0"));theString.Append ("%\n");}
+		//生命吸取属性
+		if (equipActerHpSuck != 0) 
+		{theString.Append ("真实生命偷取 ");theString.Append (equipActerHpSuck.ToString("f0"));theString.Append ("\n");}
+		if (equipActerHpSuckPercent != 0) 
+		{theString.Append ("百分比生命偷取 ");theString.Append ((equipActerHpSuckPercent*100).ToString("f0"));theString.Append ("%\n");}
+		//法力吸取属性
+		if (equipActerSpSuck != 0) 
+		{theString.Append ("真实斗气偷取 ");theString.Append (equipActerSpSuck.ToString("f0"));theString.Append ("\n");}
+		if (equipActerSpSuckPercent != 0) 
+		{theString.Append ("百分比斗气偷取 ");theString.Append ((equipActerSpSuckPercent*100).ToString("f0"));theString.Append ("%\n");}
+		//额外战斗属性
+		if (equipActerDamageAdder != 0) 
+		{theString.Append ("真实最终伤害增加 ");theString.Append (equipActerDamageAdder.ToString("f0"));theString.Append ("\n");}
+		if (equipActerDamageAdderPercent != 0) 
+		{theString.Append ("百分比最终伤害增加 ");theString.Append ((equipActerDamageAdderPercent*100).ToString("f0"));theString.Append ("%\n");}
+		//人物的速度属性
+		if (equipActerMoveSpeedPercent != 0) 
+		{theString.Append ("移动速度 ");theString.Append ((equipActerMoveSpeedPercent*100).ToString("f0"));theString.Append ("%\n");}
+		if (equipActerAttackSpeedPercent != 0) 
+		{theString.Append ("移动速度 ");theString.Append ((equipActerAttackSpeedPercent*100).ToString("f0"));theString.Append ("%\n");}
+		//人物的一些范围属性
+		if (equiptheAttackAreaLength != 0) 
+		{theString.Append ("攻击距离 ");theString.Append (equiptheAttackAreaLength.ToString("f0"));theString.Append ("\n");}
+		if (equiptheAttackAreaAngel != 0) 
+		{theString.Append ("攻击广度 ");theString.Append (equiptheAttackAreaAngel.ToString("f0"));theString.Append ("\n");}
+		if (equiptheViewAreaLength != 0) 
+		{theString.Append ("侦查距离 ");theString.Append (equiptheViewAreaLength.ToString("f0"));theString.Append ("\n");}
+		if (equiptheViewAreaAngel != 0) 
+		{theString.Append ("侦查广度 ");theString.Append (equiptheViewAreaAngel.ToString("f0"));theString.Append ("\n");}
+		return theString.ToString();
 	}
 
 	//添加特效

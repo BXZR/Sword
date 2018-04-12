@@ -53,6 +53,8 @@ public class FSM_RunAfter : FSMBasic {
 		return this;
 	}
 
+	//AI最简单的群体行为操作
+	//一人追杀则群体追杀
 	public override void OnChangeToThisState ()
 	{
 		Collider [] AIs = Physics.OverlapSphere (this.theThis.transform .position , 1f);

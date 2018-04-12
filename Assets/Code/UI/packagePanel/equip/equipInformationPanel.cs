@@ -59,8 +59,9 @@ public class equipInformationPanel : MonoBehaviour {
 
 	public void showEquipStory()
 	{
-		string theShowString = theEquipStatic.theEquipStroy;
-		systemValues.messageBoxShow (theEquipStatic.equipName , theShowString , autoSize: true );
+		string theShowString = theEquipStatic != null ?  theEquipStatic.theEquipStroy : "目前尚未选定任何装备";
+		string theShowTitle = theEquipStatic != null ?  theEquipStatic.equipName : "";
+		systemValues.messageBoxShow ( theShowTitle , theShowString , autoSize: true );
 	}
 
 	void Start () 

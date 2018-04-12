@@ -16,6 +16,7 @@ public class equipPackage : MonoBehaviour {
 	public equipBasics thEquipForHeadUsed = null;//当前装备上的头部装备
 	public equipBasics thEquipForBodyUsed = null;//当前装备上的身体装备
 	public equipBasics thEquipForWeaponUsed = null;//当前装备上的武器装备
+	public equipBasics thEquipForShoeUsed = null;//当前装备上的鞋子装备
 	public equipBasics thEquipForExtraUsed1 = null;//当前装备上的饰品装备1
 	public equipBasics thEquipForExtraUsed2 = null;//当前装备上的饰品装备2
 

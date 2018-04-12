@@ -1,19 +1,24 @@
 ﻿<Properties StartupItem="Assembly-CSharp.csproj">
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Unity.Instance.Unity Editor" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Code\Effects\fighterAttackEffects\public\jifei.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Code\Player\PlayerBasic.cs">
     <Files>
       <File FileName="Assets\Code\UI\packagePanel\equip\equipShowingButton.cs" Line="1" Column="1" />
       <File FileName="Assets\Code\UI\packagePanel\equip\equipPersonForAllInforamtion.cs" Line="1" Column="1" />
       <File FileName="Assets\Code\UI\packagePanel\equip\equipRemakePanel.cs" Line="1" Column="1" />
       <File FileName="Assets\Code\UI\systemPanel\BasicPanelController.cs" Line="1" Column="1" />
       <File FileName="Assets\Code\systemValues.cs" Line="1" Column="1" />
-      <File FileName="Assets\Code\Effects\fighterAttackEffects\public\effectForSpeedMoveForward.cs" Line="67" Column="1" />
+      <File FileName="Assets\Code\Effects\fighterAttackEffects\public\effectForSpeedMoveForward.cs" Line="1" Column="1" />
       <File FileName="Assets\Code\Effects\fighterAttackEffects\mulan\effectMulanBaoFa.cs" Line="1" Column="1" />
       <File FileName="Assets\Code\Effects\fighterAttackEffects\mulan\effectSlash.cs" Line="1" Column="1" />
-      <File FileName="Assets\Code\Effects\effectBasic.cs" Line="58" Column="2" />
+      <File FileName="Assets\Code\Effects\effectBasic.cs" Line="1" Column="1" />
       <File FileName="Assets\Code\Player\PlayerBasic.cs" Line="1" Column="1" />
       <File FileName="Assets\Code\Effects\fighterAttackEffects\public\jifei.cs" Line="83" Column="2" />
       <File FileName="Assets\Code\Player\move.cs" Line="234" Column="5" />
+      <File FileName="Assets\Code\AI\FSMStage.cs" Line="21" Column="38" />
+      <File FileName="Assets\Code\Equips\equipBasics.cs" Line="1" Column="1" />
+      <File FileName="Assets\Code\UI\basicShow\uiShowsForBasic.cs" Line="1" Column="1" />
+      <File FileName="Assets\Code\UI\basicShow\effectFlashPanel.cs" Line="35" Column="2" />
+      <File FileName="Assets\Code\UI\packagePanel\thePackagePanelShow.cs" Line="1" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
