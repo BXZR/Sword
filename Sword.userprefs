@@ -1,10 +1,10 @@
 ﻿<Properties StartupItem="Assembly-CSharp.csproj">
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Unity.Instance.Unity Editor" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Code\UI\packagePanel\thePackagePanelShow.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Code\Equips\equipBasics.cs">
     <Files>
       <File FileName="Assets\Code\UI\packagePanel\equip\equipShowingButton.cs" Line="1" Column="1" />
       <File FileName="Assets\Code\UI\packagePanel\equip\equipPersonForAllInforamtion.cs" Line="1" Column="1" />
-      <File FileName="Assets\Code\UI\packagePanel\equip\equipRemakePanel.cs" Line="1" Column="1" />
+      <File FileName="Assets\Code\UI\packagePanel\equip\equipRemakePanel.cs" Line="47" Column="40" />
       <File FileName="Assets\Code\UI\systemPanel\BasicPanelController.cs" Line="1" Column="1" />
       <File FileName="Assets\Code\systemValues.cs" Line="1" Column="1" />
       <File FileName="Assets\Code\Effects\fighterAttackEffects\public\effectForSpeedMoveForward.cs" Line="1" Column="1" />
@@ -15,10 +15,11 @@
       <File FileName="Assets\Code\Effects\fighterAttackEffects\public\jifei.cs" Line="1" Column="1" />
       <File FileName="Assets\Code\Player\move.cs" Line="1" Column="1" />
       <File FileName="Assets\Code\AI\FSMStage.cs" Line="1" Column="1" />
-      <File FileName="Assets\Code\Equips\equipBasics.cs" Line="1" Column="1" />
+      <File FileName="Assets\Code\Equips\equipBasics.cs" Line="549" Column="25" />
       <File FileName="Assets\Code\UI\basicShow\uiShowsForBasic.cs" Line="1" Column="1" />
       <File FileName="Assets\Code\UI\basicShow\effectFlashPanel.cs" Line="1" Column="1" />
-      <File FileName="Assets\Code\UI\packagePanel\thePackagePanelShow.cs" Line="56" Column="16" />
+      <File FileName="Assets\Code\UI\packagePanel\thePackagePanelShow.cs" Line="231" Column="3" />
+      <File FileName="Assets\Code\UI\packagePanel\equip\equipSelectTypeButton.cs" Line="101" Column="32" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

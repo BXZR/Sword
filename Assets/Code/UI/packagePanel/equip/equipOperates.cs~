@@ -1,0 +1,17 @@
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class equipOperates : MonoBehaviour {
+
+	//这个脚本用来记录装备的操作
+	//装备，卸下，合成，熔锻......
+	void Start () {
+		
+	}
+	
+	// Update is called once per frame
+	void Update () {
+		
+	}
+}

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.EventSystems;
 
 public class equipSelectTypeButton : MonoBehaviour {
 
@@ -9,6 +10,17 @@ public class equipSelectTypeButton : MonoBehaviour {
 	public Transform theViewFather;//显示按钮的容器
 	public equiptype theTypeSelect;//类别
 	public GameObject theShowingButtonProfab;//显示按钮的预设物，需要各种初始化
+	private GameObject thisButton;//自身保存引用
+	public static GameObject theButtonSave;//静态保存
+
+	public static  void flashThePanel()
+	{
+		PointerEventData theData = new PointerEventData (EventSystem.current );//创建事件数据
+		//传值：大概理解是：目标Gameobject ，事件数据 ， 类型（与那边接收的时候做匹配（大概））
+		ExecuteEvents .Execute<IPointerClickHandler> ( theButtonSave, theData ,ExecuteEvents.pointerClickHandler);
+	}
+
+
 	//按下按钮选择
 	public void makeClickWithType()
 	{
@@ -38,6 +50,7 @@ public class equipSelectTypeButton : MonoBehaviour {
 			theButton.GetComponent <Image> ().sprite =  systemValues.makeLoadSprite ("equipPicture/"+eqs[i].equipPictureName);
             //因为有grid控件，所以这些都没有必要使用了
 		}
+		theButtonSave = thisButton ;
 	}
 
 	public void makeClickWithoutType()
@@ -69,6 +82,7 @@ public class equipSelectTypeButton : MonoBehaviour {
 			theButton.GetComponent <Image> ().sprite =  systemValues.makeLoadSprite ("equipPicture/"+eqs[i].equipPictureName);
 			//因为有grid控件，所以这些都没有必要使用了
 		}
+		theButtonSave = thisButton ;
 	}
 
 	//根据数组长度修改content的height
@@ -80,5 +94,10 @@ public class equipSelectTypeButton : MonoBehaviour {
 		Rect newRect = new Rect (0,0,theFatherRect.rect.width , height);
 		theFatherRect.SetSizeWithCurrentAnchors( RectTransform.Axis.Vertical,  height);
 		//额外增加一点点数值以备不测
+	}
+
+	void Start()
+	{
+		thisButton =  this.gameObject;
 	}
 }

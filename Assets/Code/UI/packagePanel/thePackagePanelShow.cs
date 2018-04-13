@@ -64,7 +64,7 @@ public class thePackagePanelShow : MonoBehaviour {
 		makeFlash ();
 	}
 
-	public void makeFlash()
+	public static void makeFlash()
 	{
 		staticHeadButton.theEquip = theEquipPackage .thEquipForHeadUsed;
 		staticBodyButton.theEquip = theEquipPackage.thEquipForBodyUsed;
@@ -121,6 +121,119 @@ public class thePackagePanelShow : MonoBehaviour {
 
 		}
 
+	}
+
+	public static void wearEquip(equipBasics theEquip)
+	{
+		string oldEquipName = "";
+		//这是一件已经装备上的装备，所以需要卸下
+		if (theEquip.isUsing) 
+		{
+			//theTextForStatic.text = equipBasics.equipTrast (theEquip , null);//样例方法调用
+			switch (theEquip.theEquipType) 
+			{
+			case equiptype.body:
+				theEquipPackage.thEquipForBodyUsed = null;
+				break;
+			case equiptype.head:
+				theEquipPackage.thEquipForHeadUsed = null;
+				break;
+			case equiptype.weapon:
+				theEquipPackage.thEquipForWeaponUsed = null;
+				break;
+			case equiptype.shoe:
+				theEquipPackage.thEquipForShoeUsed = null;
+				break;
+			case equiptype.extra:
+				{
+					if (theEquipPackage.thEquipForExtraUsed1 == theEquip)
+						theEquipPackage.thEquipForExtraUsed1 = null;
+					else
+						theEquipPackage.thEquipForExtraUsed2 = null;
+				}
+				break;
+			}
+			theEquip.DropThisThing (systemValues.thePlayer);
+		}
+		//替换当前的装备
+		else
+		{
+			//theTextForStatic.text = equipBasics.equipTrast (theEquip , null);//样例方法调用
+			switch (theEquip.theEquipType) 
+			{
+			case equiptype.body:
+				{
+					if (theEquipPackage.thEquipForBodyUsed != null) 
+					{
+						oldEquipName = theEquipPackage.thEquipForBodyUsed.equipName;
+						theEquipPackage.thEquipForBodyUsed.DropThisThing (systemValues.thePlayer);
+					}
+					theEquipPackage.thEquipForBodyUsed = theEquip;
+					theEquip.GetThisThing (systemValues.thePlayer);
+				}
+				break;
+			case equiptype.head:
+				{
+					if (theEquipPackage.thEquipForHeadUsed != null) 
+					{
+						oldEquipName = theEquipPackage.thEquipForHeadUsed.equipName;
+						theEquipPackage.thEquipForHeadUsed.DropThisThing (systemValues.thePlayer);
+					}
+					theEquipPackage.thEquipForHeadUsed = theEquip;
+					theEquip.GetThisThing (systemValues.thePlayer);
+				}
+				break;
+			case equiptype.weapon:
+				{
+					if (theEquipPackage.thEquipForWeaponUsed != null) 
+					{
+						oldEquipName = theEquipPackage.thEquipForWeaponUsed.equipName;
+						theEquipPackage.thEquipForWeaponUsed.DropThisThing (systemValues.thePlayer);
+					}
+					theEquipPackage.thEquipForWeaponUsed = theEquip;
+					theEquip.GetThisThing (systemValues.thePlayer);
+				}
+				break;
+			case equiptype.shoe:
+				{
+					if (theEquipPackage.thEquipForShoeUsed != null)
+					{					
+						oldEquipName = theEquipPackage.thEquipForShoeUsed.equipName;
+						theEquipPackage.thEquipForShoeUsed.DropThisThing (systemValues.thePlayer);
+					}
+					theEquipPackage.thEquipForShoeUsed = theEquip;
+					theEquip.GetThisThing (systemValues.thePlayer);
+				}
+				break;
+			case equiptype.extra:
+				{
+					if (theEquipPackage.thEquipForExtraUsed1 == null) 
+					{
+						theEquipPackage.thEquipForExtraUsed1 = theEquip;
+						theEquip.GetThisThing (systemValues.thePlayer);
+					}
+					else if (theEquipPackage.thEquipForExtraUsed2 == null) 
+					{
+						theEquipPackage.thEquipForExtraUsed2 = theEquip;
+						theEquip.GetThisThing (systemValues.thePlayer);
+					} 
+					else 
+					{
+						oldEquipName = theEquipPackage.thEquipForExtraUsed1.equipName;
+						theEquipPackage.thEquipForExtraUsed1 = theEquip;
+						theEquip.GetThisThing (systemValues.thePlayer);
+					}
+				}
+				break;
+			}
+		}
+		makeFlash ();
+
+//		if(string.IsNullOrEmpty(oldEquipName))
+//			systemValues.messageBoxShow ("装备装载" ,theEquip.equipName+"已经投入使用" );
+//		else
+//			systemValues.messageBoxShow ("装备替换" ,"["+oldEquipName+"]替换为["+theEquip.equipName+ "]");
+	
 	}
 
 }

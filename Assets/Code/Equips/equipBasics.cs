@@ -172,6 +172,7 @@ public class equipBasics : MonoBehaviour {
 		thePlayer.CtheAttackAreaAngel += equiptheAttackAreaAngel;//攻击范围的角度，自身前方锥形范围内都是攻击范围
 		thePlayer.CtheViewAreaLength += equiptheViewAreaLength;//视野长度，在不同的模式之下。例如暗夜模式，是很有需要实际的地方的
 		thePlayer.CtheViewAreaAngel += equiptheViewAreaAngel;//视野的角度，同样，在不同的模式之下。例如暗夜模式，是很有需要实际的地方的
+		isUsing = true;//这个装备是一个已经被装备的装备
 	}
 
 	//扔掉这个装备
@@ -264,6 +265,7 @@ public class equipBasics : MonoBehaviour {
 		thePlayer.CtheAttackAreaAngel -= equiptheAttackAreaAngel;//攻击范围的角度，自身前方锥形范围内都是攻击范围
 		thePlayer.CtheViewAreaLength -= equiptheViewAreaLength;//视野长度，在不同的模式之下。例如暗夜模式，是很有需要实际的地方的
 		thePlayer.CtheViewAreaAngel -= equiptheViewAreaAngel;//视野的角度，同样，在不同的模式之下。例如暗夜模式，是很有需要实际的地方的
+		isUsing = false;//这个装备不再是一个已经被装备的装备
 	}
 
 	//获得装备的加成信息
@@ -521,7 +523,6 @@ public class equipBasics : MonoBehaviour {
 		if (equipActerShielderDamageMiunsPercent != 0) 
 		{theString.Append ("格挡百分比减伤 ");theString.Append ((equipActerShielderDamageMiunsPercent *100).ToString("f0"));theString.Append ("%\n");}
 		//物理防御属性
-		equipActerWuliShield =  newOne.equipActerWuliShield  ;
 		if (equipActerWuliShield != 0) 
 		{theString.Append ("护甲 ");theString.Append (equipActerWuliShield.ToString("f0"));theString.Append ("\n");}
 		if (equipActerShieldMaxPercent != 0) 
@@ -545,7 +546,7 @@ public class equipBasics : MonoBehaviour {
 		if (equipActerMoveSpeedPercent != 0) 
 		{theString.Append ("移动速度 ");theString.Append ((equipActerMoveSpeedPercent*100).ToString("f0"));theString.Append ("%\n");}
 		if (equipActerAttackSpeedPercent != 0) 
-		{theString.Append ("移动速度 ");theString.Append ((equipActerAttackSpeedPercent*100).ToString("f0"));theString.Append ("%\n");}
+		{theString.Append ("攻击速度 ");theString.Append ((equipActerAttackSpeedPercent*100).ToString("f0"));theString.Append ("%\n");}
 		//人物的一些范围属性
 		if (equiptheAttackAreaLength != 0) 
 		{theString.Append ("攻击距离 ");theString.Append (equiptheAttackAreaLength.ToString("f0"));theString.Append ("\n");}
