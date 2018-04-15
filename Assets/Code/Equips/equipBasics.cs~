@@ -342,7 +342,7 @@ public class equipBasics : MonoBehaviour {
 			
 		//攻击范围（非常重要，同时这个是简化版本的每一种攻击招式分开计算范围的方式）
 		if (equiptheAttackAreaLength> 0)
-		{information.Append ("攻击距离 + ");information.Append ((equiptheAttackAreaLength).ToString("f0"));information.Append ("\n");}
+		{information.Append ("攻击距离 + ");information.Append ((equiptheAttackAreaLength*100).ToString("f0"));information.Append ("%\n");}
 		if (equiptheAttackAreaAngel> 0)
 		{information.Append ("攻击广度 + ");information.Append ((equiptheAttackAreaAngel).ToString("f0"));information.Append ("\n");}
 		if (equiptheViewAreaLength > 0)
@@ -354,6 +354,10 @@ public class equipBasics : MonoBehaviour {
 
 	public static string equipTrast(equipBasics newOne , equipBasics oldOne = null)
 	{
+		//装备比较是用在已经装备的装备和没有装备的装备上的，两个已经装备上的装备就不用这样了
+		if (newOne.isUsing && oldOne.isUsing)
+			return "";
+		
 		//生命法力数值
 		float hpMaxAdder =  0f;
 		float spMaxAdder =  0f;

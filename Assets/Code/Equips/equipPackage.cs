@@ -64,13 +64,15 @@ public class equipPackage : MonoBehaviour {
 		allEquipsForSave = new List<equipBasics> ();
 	}
 
-	void Start ()
+	void OnTriggerEnter(Collider collisioner)
 	{
-		
-	}
-
-	void Update ()
-	{
-		
+		if (collisioner.gameObject.tag == "equip") 
+		{
+			equipBasics theEquip = collisioner.gameObject.GetComponent <equipBasics> ();
+			if(allEquipsForSave.Contains(theEquip) == false)
+				allEquipsForSave.Add (theEquip);
+		    
+			collisioner.gameObject.SetActive(false);
+		}
 	}
 }

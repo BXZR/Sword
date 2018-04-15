@@ -38,7 +38,7 @@ public class equipInformationPanel : MonoBehaviour {
 	{
 		if (theEquipStatic)
 		{
-			theButtonImageStatic.sprite = systemValues.makeLoadSprite ("equipPicture/" + theEquipStatic.equipPictureName);
+			theButtonImageStatic.sprite = systemValues.makeLoadSprite ("equipPicture/"+ theEquipStatic.theEquipType + "/"+ theEquipStatic.equipPictureName);
 			theBasicTextStatic.text = theEquipStatic.getEquipName() +"\n"+theEquipStatic.getEquipAdderInformation ();
 			//技能介绍
 			if (theEquipStatic.theEffectNames.Length == 0)

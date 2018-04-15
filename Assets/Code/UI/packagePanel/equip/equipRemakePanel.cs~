@@ -43,7 +43,10 @@ public class equipRemakePanel : MonoBehaviour {
 	//装备或者替换这个装备
 	public void wearThEquip()
 	{
-		thePackagePanelShow.wearEquip (theEquip);
-		equipSelectTypeButton.flashThePanel();
+		if (theEquip)
+		{
+			thePackagePanelShow.wearEquip (theEquip);
+			equipSelectTypeButton.flashThePanel ();
+		}
 	}
 }

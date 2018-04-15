@@ -217,7 +217,7 @@ public class attackLink : MonoBehaviour {
 			value += (int)extraDamage/2;
 		
 		lvupCost = (int)(value /2) + theAttackLinkLv * 2 ;
-		extraDamageAdd = value * 0.4f + (int)spUse/4;
+		extraDamageAdd = value * 0.3f + (int)spUse/7;
 	}
 
 	//网络版群体升级，单机版单独升级

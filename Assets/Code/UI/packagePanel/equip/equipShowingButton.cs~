@@ -19,7 +19,8 @@ public class equipShowingButton : MonoBehaviour {
 		}
 		else 
 		{
-			systemValues.messageBoxShow ("" , "尚且没有装备");
+			//因为有UI穿透的问题，这个消息框实现不用了
+			//systemValues.messageBoxShow ("" , "尚且没有装备",1f);
 		}
 	}
 

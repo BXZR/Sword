@@ -381,6 +381,7 @@ public class PlayerBasic : MonoBehaviour {
 			//-------------------------------------------------------------------------------------
 		    float hpsuck =  makeHpSuck(  damage , thePlayerAim);//计算吸血
 		    float spsuck =  makeSpSuck(damage , thePlayerAim);//计算吸蓝
+		   float reDamage = makeReDamage(thePlayerAim);;//计算反伤
 		   //单机动作控制
 		   if(systemValues.modeIndex == 0)
 			thePlayerAim.OnBeAttack (damage);
@@ -399,6 +400,7 @@ public class PlayerBasic : MonoBehaviour {
 				Effects [i].OnAttack (thePlayerAim,damage);
 			    Effects [i].OnHpUp (hpsuck);
 			    Effects [i].OnSpUp (spsuck);
+				Effects [i].OnBeAttack (reDamage);
 			}
 		   effectBasic[] EffectAim = thePlayerAim.GetComponentsInChildren<effectBasic> ();
 		    for (int i = 0; i < EffectAim.Length; i++)
@@ -428,7 +430,7 @@ public class PlayerBasic : MonoBehaviour {
 		   //-------------------------------------------------------------------------------------
 		    float hpsuck =  makeHpSuck(  damage , thePlayerAim);//计算吸血
 		    float spsuck =  makeSpSuck(damage , thePlayerAim);//计算吸蓝
-			
+		    float reDamage = makeReDamage(thePlayerAim);;//计算反伤
 		//单机动作控制
 		if(systemValues.modeIndex == 0)
 			thePlayerAim.OnBeAttack (damage);
@@ -449,6 +451,7 @@ public class PlayerBasic : MonoBehaviour {
 					Effects [i].OnAttack (thePlayerAim, damage);
 				    Effects [i].OnHpUp (hpsuck);
 				    Effects [i].OnSpUp (spsuck);
+				    Effects [i].OnBeAttack (reDamage);
 				}
 			}
 			effectBasic[] EffectAim = thePlayerAim.GetComponentsInChildren<effectBasic> ();
@@ -577,9 +580,15 @@ public class PlayerBasic : MonoBehaviour {
 	//计算吸血，反伤等等最后计算之后的生命收益（可以为正也可以为负）
 	float makeHpSuck(float damageMake , PlayerBasic thePlayerAim)
 	{
-		float hpChanger = damageMake * ActerHpSuckPercent + ActerHpSuck - thePlayerAim.ActerWuliReDamage*(1- this.ActerWuliShield/1500);
+		float hpChanger = damageMake * ActerHpSuckPercent + ActerHpSuck;
 		this.ActerHp += hpChanger;//关于反伤和吸血的制作比较简单
 		return  hpChanger;
+	}
+	float makeReDamage(PlayerBasic thePlayerAim)
+	{
+		float damge = thePlayerAim.ActerWuliReDamage * (1 - this.ActerWuliShield / 1500);
+		this.ActerHp -= damge;
+		return damge;
 	}
 	//计算吸蓝
 	float makeSpSuck(float damageMake , PlayerBasic thePlayerAim)
