@@ -48,11 +48,18 @@ public class eeffectZiyingArcher : effectBasic {
 			theArrow = (GameObject)GameObject.Instantiate (Arrow);
 			theArrow.GetComponentInChildren <extraWeapon> ().setPlayer (this.thePlayer);
 
+			theArrow.transform.forward = thePlayer.transform.forward;
+
+			float extraX = Camera.main.transform.rotation.eulerAngles.x;
+			extraX = extraX > 180 ? extraX - 360 : extraX;
+			extraX = Mathf.Clamp (extraX , -15f,5f);
+			//print ("theExtraX = "+ extraX);
+			theArrow.transform.Rotate (new Vector3 ( extraX, 0, 0), Space.Self);
+
 			Vector3 positionNew = thePlayer.transform.position + new Vector3 (0, 0.8f * thePlayer.transform.localScale.y + 0.3f, forward.normalized.z * 0.1f);
 			theArrow.transform.localScale *= thePlayer.transform.localScale.y;
 			theArrow.transform.position = positionNew;
 
-			theArrow.transform.forward = thePlayer.transform.forward;
 			Destroy (theArrow, arrowLife);
 			Destroy (this.GetComponent (this.GetType ()), lifeTimerAll);
 		}

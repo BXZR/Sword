@@ -10,9 +10,14 @@ public class extraWeapon : MonoBehaviour {
 	//因为有些武器是可以穿透的，但是效果不会相同
 	public int damageCount = 3;
 
+
+//	void Start()
+//	{
+//
+//	}
 	void Update()
 	{
-		transform.Translate (new Vector3 (0,0,1) * 35*Time .deltaTime);
+		transform.Translate (new Vector3 (0,0,1) * 35f *Time .deltaTime);
 	}
 
 	public void setPlayer(PlayerBasic thePlayerIn)

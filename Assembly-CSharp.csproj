@@ -100,6 +100,7 @@
      <Compile Include="Assets\Code\Player\playerStar.cs" />
      <Compile Include="Assets\Code\UI\basicShow\effectFlashPanel.cs" />
      <Compile Include="Assets\Code\UI\basicShow\uiShowsForBasic.cs" />
+     <Compile Include="Assets\Code\UI\buttonWithSound.cs" />
      <Compile Include="Assets\Code\UI\messageBox\theMessageBoxPanel.cs" />
      <Compile Include="Assets\Code\UI\packagePanel\equip\equipInformationPanel.cs" />
      <Compile Include="Assets\Code\UI\packagePanel\equip\equipPersonForAllInforamtion.cs" />

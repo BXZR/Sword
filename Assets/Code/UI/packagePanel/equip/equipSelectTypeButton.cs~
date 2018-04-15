@@ -47,7 +47,7 @@ public class equipSelectTypeButton : MonoBehaviour {
 			theButton.GetComponentInChildren<Text> ().text = "";
 			//theButton.GetComponentInChildren<Text> ().text = eqs [i].equipName;
 			theButton.GetComponent <equipShowingButton> ().theEquip = eqs [i];
-			print ("equipPicture/" +eqs[i].theEquipType +"/"+eqs[i].equipPictureName);
+			//print ("equipPicture/" +eqs[i].theEquipType +"/"+eqs[i].equipPictureName);
 
 			theButton.GetComponent <Image> ().sprite =  systemValues.makeLoadSprite ("equipPicture/" +eqs[i].theEquipType +"/"+ eqs[i].equipPictureName);
             //因为有grid控件，所以这些都没有必要使用了

@@ -1,0 +1,11 @@
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class equipRemakeButtonsd : MonoBehaviour {
+
+	//装备操作的一些按钮
+
+	//装备或者替换这个装备
+ 
+}
