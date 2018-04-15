@@ -220,6 +220,7 @@ public class thePackagePanelShow : MonoBehaviour {
 					else 
 					{
 						oldEquipName = theEquipPackage.thEquipForExtraUsed1.equipName;
+						theEquipPackage.thEquipForExtraUsed1.DropThisThing (systemValues.thePlayer);
 						theEquipPackage.thEquipForExtraUsed1 = theEquip;
 						theEquip.GetThisThing (systemValues.thePlayer);
 					}
