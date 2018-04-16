@@ -13,11 +13,18 @@ public class SliderForVolumn : MonoBehaviour {
 	void Start()
 	{
 		theSlider = this.GetComponent <Slider> ();
-		theSlider.value = theSource.volume;
+		if(theSource)
+		    theSlider.value = theSource.volume;
 	}
 
 	public void OnChangeSliderValue()
 	{
 		theSource.volume = theSlider.value;
+	}
+
+	public void changeSoundVolumn()
+	{
+		if (systemValues.thePlayer)
+			systemValues.thePlayer.theAudioPlayer.theSource.volume = theSlider.value;
 	}
 }

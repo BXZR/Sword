@@ -7,7 +7,7 @@ public class audioPlayer : MonoBehaviour
 {
 	//游戏人物战斗播放器
 	public AudioClip theBasicAudio;//默认播放音效攻击命中
-	private AudioSource theSource;//声源组件
+	public AudioSource theSource;//声源组件
 	[HideInInspector]//不需要设定
 	public AudioClip audioNow;//当前需要播放的音效
 

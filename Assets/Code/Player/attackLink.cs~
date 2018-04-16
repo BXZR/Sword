@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 
 //一种专门用来存储attackLink内容信息的一个类
+using System.Text;
+
+
 public class attackLinkInformation
 {
 	public PlayerBasic thePlayer = null;
@@ -400,103 +403,153 @@ public class attackLink : MonoBehaviour {
 	//获取简略的信息，这就足够了
 	public string getInformationSimple(bool withName = true)
 	{
-
-		string information = "";
+		StringBuilder theString = new StringBuilder ();
 		if (withName)
 		{
-			information += "" + this.skillName;
+			theString .Append( this.skillName);
 			if (canLvup)
-				information += "[可升级]";
+				theString .Append("[可升级]");
 			else
-				information += "[不可升级]";
-			information += "\n";
+				theString .Append("[不可升级]");
+			theString.Append ("\n");
 		}
 
-		if (canLvup)
-		  information += "招式等级：" + this.theAttackLinkLv + "/" + this.theAttakLinkLvMax +"\n";
+		if (canLvup) 
+		{
+			theString.Append ( "招式等级：" );
+			theString.Append ( this.theAttackLinkLv );
+			theString.Append ( "/");
+			theString.Append ( this.theAttakLinkLvMax );
+			theString.Append ( "\n");
+		}
 
 		if (this.extraDamage > 0) 
 		{
-			if (!this.thePlayer)
-				information += "额外伤害：" + this.extraDamage.ToString("f0") + "\n";
-			else
-				information += "伤害：(" + this.thePlayer.ActerWuliDamage.ToString("f0") + "+" + systemValues.BESkillColor +(int) this.extraDamage + systemValues.colorEnd + ")\n";
+			if (!this.thePlayer) 
+			{
+				theString.Append ("额外伤害：");
+				theString.Append (this.extraDamage.ToString ("f0"));
+				theString.Append ("\n");
+			}
+			else 
+			{
+				theString.Append ("伤害：(" );
+				theString.Append (this.thePlayer.ActerWuliDamage.ToString("f0"));
+				theString.Append ("+" );
+				theString.Append (systemValues.BESkillColor +(int) this.extraDamage + systemValues.colorEnd + ")\n");
+				theString.Append ((int) this.extraDamage);
+				theString.Append (systemValues.colorEnd );
+				theString.Append (")\n");
+			}
 		}
 		else
 		{
-			information += "额外伤害：" + this.extraDamage + "\n";
+			theString.Append ("额外伤害：");
+			theString.Append (this.extraDamage );
+			theString.Append ("\n");
 		}
 
 		//information += "触发方式："+ systemValues.getAttacklinkInformationTranslated(this.attackLinkString) + "\n";
-		information += "触发方式：";
+		theString.Append ("触发方式：");
 		for (int i = 0; i < attackLinkStringSplited.Length; i++) 
 		{
-			information += systemValues.getAttacklinkInformationTranslated(attackLinkStringSplited[i]);
+			theString.Append (systemValues.getAttacklinkInformationTranslated(attackLinkStringSplited[i]));
 			if(i<attackLinkStringSplited.Length-1 )
-				information+= " / ";
+				theString.Append (" / ");
 		}
-		information += "\n";
+		theString.Append ("\n");
 
-		information += "斗气消耗：" + this.spUse ;
+		theString.Append ("斗气消耗：");
+		theString.Append (this.spUse.ToString("f0") );
 
-		return information;
+		return theString.ToString();
 	}
 
 
 	public string getInformation()//获取连招的信息
 	{
+		StringBuilder theString = new StringBuilder ();
+		theString.Append( "招式名称：" );
+		theString.Append( this.skillName);
+		theString.Append( "\n");
 
-		string information = "";
-		information += "招式名称：" + this.skillName+"\n";
+		if (canLvup)
+		{
+			theString.Append( "招式等级：");
+			theString.Append( this.theAttackLinkLv);
+			theString.Append( "/");
+			theString.Append( this.theAttakLinkLvMax);		
+			theString.Append( "\n");
 
-		if(canLvup)
-		information += "招式等级：" + this.theAttackLinkLv +  "/" + this.theAttakLinkLvMax +"\n";
+		}
 
 		if (this.extraDamage > 0) 
 		{
-			if (!this.thePlayer)
-				information += "额外伤害：" + this.extraDamage.ToString("f0") + "\n";
-			else
-				information += "伤害：(" + this.thePlayer.ActerWuliDamage.ToString("f0") + "+" + systemValues.BESkillColor +(int) this.extraDamage + systemValues.colorEnd + ")\n";
-		}
-		else
-		{
-			information += "额外伤害：" + this.extraDamage + "\n";
-		}
-
-		//information += "触发方式："+ systemValues.getAttacklinkInformationTranslated(this.attackLinkString) + "\n";
-		information += "触发方式：";
-		for (int i = 0; i < attackLinkStringSplited.Length; i++) 
-		{
-			information += systemValues.getAttacklinkInformationTranslated(attackLinkStringSplited[i]);
-			if(i<attackLinkStringSplited.Length-1 )
-				information+= " / ";
-		}
-		information += "\n";
-
-		information += "斗气消耗：" + this.spUse +"\n";
-		if (canLvup)
-			information += "\n";
-
-		if(canLvup  )
-		{
-			if (this.theAttackLinkLv < this.theAttakLinkLvMax) 
+			if (!this.thePlayer) 
 			{
-				information += "升级所需灵力：" + this.lvupCost + "\n";
-				information += "升级增加首击伤害：" + (int)this.extraDamageAdd + "\n";
+				theString.Append( "额外伤害：");
+				theString.Append( this.extraDamage.ToString("f0"));
+				theString.Append( "\n");
 			}
 			else
 			{
-				information += "等级已满\n";
+				theString.Append ("伤害：(");
+				theString.Append ( this.thePlayer.ActerWuliDamage.ToString("f0") );
+				theString.Append ( "+" );
+				theString.Append ( systemValues.BESkillColor);
+				theString.Append ( (int) this.extraDamage );
+				theString.Append ( systemValues.colorEnd );
+				theString.Append (")\n");
+			}
+		}
+		else
+		{
+			theString.Append ("额外伤害：");
+			theString.Append (this.extraDamage );
+			theString.Append ("\n");
+		}
+
+		theString.Append ("触发方式：");
+		for (int i = 0; i < attackLinkStringSplited.Length; i++) 
+		{
+			theString.Append (systemValues.getAttacklinkInformationTranslated(attackLinkStringSplited[i]));
+			if(i<attackLinkStringSplited.Length-1 )
+				theString.Append (" / ");
+		}
+		theString.Append ("\n");
+
+		theString.Append ("斗气消耗：");
+		theString.Append (this.spUse);
+		theString.Append ("\n");
+
+		if(canLvup  )
+		{
+			theString.Append("\n");
+			if (this.theAttackLinkLv < this.theAttakLinkLvMax) 
+			{
+				theString.Append("升级所需灵力：");
+				theString.Append(this.lvupCost);
+				theString.Append("\n");
+				theString.Append("升级增加首击伤害：");
+				theString.Append((int)this.extraDamageAdd );
+				theString.Append("\n");
+			}
+			else
+			{
+				theString.Append("等级已满\n");
 
 				extraDamageAdd = adderWhenLvtoMax;
 				lvupCost = soulCostWhenLvtoMax;
 
-				information += "可以消耗"+soulCostWhenLvtoMax+"灵力继续增加"+extraDamageAdd+"首击伤害\n";
+				theString.Append("可以消耗");
+				theString.Append(soulCostWhenLvtoMax);
+				theString.Append("灵力继续增加");
+				theString.Append("extraDamageAdd");
+				theString.Append("首击伤害\n");
 			}
 		}
 
-		return information;
+		return theString.ToString ();
 	}
 
 }

@@ -167,7 +167,8 @@ public class systemValues : MonoBehaviour {
 	{
 		List < attackLinkInformation> theAttackLinkInformaitons = new List<attackLinkInformation> ();
 		List<effectBasic> buffer = new List<effectBasic> ();
-
+		string showString = "";
+		string showExtra = "";
 		//被动没有连招，但是也应该显示
 		effectBasic [] efs = thePlayer.GetComponentsInChildren<effectBasic>();
 		for (int i = 0; i < efs.Length; i++)
@@ -211,8 +212,8 @@ public class systemValues : MonoBehaviour {
 					if(theEffect.isShowing())
 					{
 						theInformation.theEffectForEMYName = theEffect.getEffectName();
-						string showString = theEffect.getInformation (false);
-						string showExtra = theEffect.getExtraInformation ();
+						showString = theEffect.getInformation (false);
+						showExtra = theEffect.getExtraInformation ();
 						if (string.IsNullOrEmpty (showExtra) == false)
 							showString += "\n" + showExtra;
 						theInformation.theEffectForEMYInformaion =  showString;
@@ -230,8 +231,8 @@ public class systemValues : MonoBehaviour {
 					if(theEffect.isShowing())
 					{
 						theInformation.theEffectForSelfName = theEffect.getEffectName();
-						string showString = theEffect.getInformation (false);
-						string showExtra = theEffect.getExtraInformation ();
+						showString = theEffect.getInformation (false);
+						showExtra = theEffect.getExtraInformation ();
 						if (string.IsNullOrEmpty (showExtra) == false)
 							showString += "\n" + showExtra;
 						theInformation.theEffectForSelfInformaion =  showString;
@@ -243,7 +244,8 @@ public class systemValues : MonoBehaviour {
 			//清空预存
 			for (int i = 0; i < buffer.Count; i++)
 			{
-				Destroy (buffer [i]);
+				DestroyImmediate (buffer [i]);
+				//Destroy (buffer [i]);
 			}
 		}
 		return theAttackLinkInformaitons;

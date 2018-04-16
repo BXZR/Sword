@@ -1,23 +1,14 @@
 ﻿<Properties StartupItem="Assembly-CSharp.csproj">
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Unity.Instance.Unity Editor" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Code\UI\packagePanel\equip\equipRemakePanel.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Code\UI\startAndSelect\selectHead.cs">
     <Files>
-      <File FileName="Assets\Code\UI\packagePanel\equip\equipRemakePanel.cs" Line="65" Column="73" />
-      <File FileName="Assets\Code\UI\packagePanel\equip\equipSelectTypeButton.cs" Line="1" Column="1" />
-      <File FileName="Assets\Code\UI\packagePanel\thePackagePanelShow.cs" Line="16" Column="10" />
-      <File FileName="Assets\Code\UI\packagePanel\equip\equipInformationPanel.cs" Line="61" Column="24" />
-      <File FileName="Assets\Code\UI\messageBox\theMessageBoxPanel.cs" Line="1" Column="1" />
-      <File FileName="Assets\Code\Player\PlayerBasic.cs" Line="1" Column="1" />
-      <File FileName="Assets\Code\UI\messageBox\titleMessageBox.cs" Line="1" Column="1" />
-      <File FileName="Assets\Code\systemValues.cs" Line="441" Column="88" />
-      <File FileName="Assets\Code\Equips\equipPackage.cs" Line="1" Column="1" />
-      <File FileName="Assets\Code\Effects\effectBasic.cs" Line="40" Column="16" />
-      <File FileName="Assets\Code\UI\systemPanel\Skill\skillPanelController.cs" Line="25" Column="3" />
-      <File FileName="Assets\Code\Equips\equipBasics.cs" Line="580" Column="28" />
-      <File FileName="Assets\Code\UI\packagePanel\equip\equipShowingButton.cs" Line="15" Column="1" />
-      <File FileName="Assets\Code\UI\packagePanel\equip\equipPersonForAllInforamtion.cs" Line="1" Column="1" />
-      <File FileName="Assets\Code\UI\basicShow\soulShowText.cs" Line="18" Column="25" />
-      <File FileName="Assets\Code\Player\attackLink.cs" Line="421" Column="61" />
+      <File FileName="Assets\Code\UI\systemPanel\Operate\SliderForVolumn.cs" Line="28" Column="77" />
+      <File FileName="Assets\Code\UI\startAndSelect\selectHeaderMaker.cs" Line="36" Column="23" />
+      <File FileName="Assets\Code\UI\startAndSelect\selectHead.cs" Line="175" Column="2" />
+      <File FileName="Assets\Code\systemValues.cs" Line="201" Column="60" />
+      <File FileName="Assets\Code\Player\attackLink.cs" Line="501" Column="48" />
+      <File FileName="Assets\Code\UI\systemPanel\SystemUIController.cs" Line="32" Column="27" />
+      <File FileName="Assets\Code\UI\startAndSelect\skillEffectShowingItem.cs" Line="30" Column="2" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

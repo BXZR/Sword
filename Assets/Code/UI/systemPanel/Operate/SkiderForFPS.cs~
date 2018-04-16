@@ -1,0 +1,13 @@
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class SkiderForFPS : MonoBehaviour {
+
+	//设定FPS上限的Slider
+	public voidsetFPS（）
+	{
+		
+	}
+	 
+}

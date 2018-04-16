@@ -27,6 +27,14 @@ public class skillEffectShowingItem : MonoBehaviour {
 		theAttackLinkContrtoller.makeAttackLink(theAttackLinkInformation .attackLinkString ,true);
 	}
 
+	public void makeClean()
+	{
+		theButtonFoirAttackLink.gameObject.SetActive (true);
+		theEffectForSelfButton.gameObject.SetActive (true);
+		theEffectForEMYButton.gameObject.SetActive (true);
+		theEffectForShow.gameObject.SetActive (true);
+	}
+
 	//构建方法
 	public void maketheItem(attackLinkInformation theAttackLinkInformationIn)
 	{
@@ -37,7 +45,8 @@ public class skillEffectShowingItem : MonoBehaviour {
 		}
 		else 
 		{
-			Destroy (theButtonFoirAttackLink.gameObject);
+			//Destroy (theButtonFoirAttackLink.gameObject);
+			theButtonFoirAttackLink.gameObject.SetActive(false);
 		}
 
 		theAttackLinkInformation = theAttackLinkInformationIn;
@@ -51,7 +60,8 @@ public class skillEffectShowingItem : MonoBehaviour {
 
 		if (string.IsNullOrEmpty (theAttackLinkInformation.theEffectForSelfName))
 		{
-			Destroy (theEffectForSelfButton.gameObject);
+			//Destroy (theEffectForSelfButton.gameObject);
+			theEffectForSelfButton.gameObject.SetActive(false);
 		}
 		else
 		{
@@ -62,7 +72,8 @@ public class skillEffectShowingItem : MonoBehaviour {
 
 		if (string.IsNullOrEmpty (theAttackLinkInformation.theEffectForEMYName))
 		{
-			Destroy (theEffectForEMYButton.gameObject);
+			//Destroy (theEffectForEMYButton.gameObject);
+			theEffectForEMYButton.gameObject.SetActive(false);
 		}
 		else
 		{
@@ -72,7 +83,10 @@ public class skillEffectShowingItem : MonoBehaviour {
 		}
 
 		if (string.IsNullOrEmpty (theAttackLinkInformationIn.attackLinkString))
-			Destroy (theEffectForShow.gameObject);
+		{
+			//Destroy (theEffectForShow.gameObject);
+			theEffectForShow.gameObject.SetActive(false);
+		}
 	}
 		
 }
