@@ -10,6 +10,7 @@ public class equipInformationPanel : MonoBehaviour {
 	public Button theButton;//现实的图片，同时也是也个按钮
 	public Text theBasicText;//基本加成信息
 	public Text theSkillText;//装备技能信息
+	public Text theEquipLvText;//装备的当前等级
 	//装备的故事被封装到按钮点击messageBox中
 	private Image theButtonImage;//装备他图
 
@@ -19,6 +20,7 @@ public class equipInformationPanel : MonoBehaviour {
 	static Text theBasicTextStatic;//基本加成信息
 	static Text theSkillTextStatic;//装备技能信息
 	static Image theButtonImageStatic ;//装备他图
+	static Text theEquipLvTextStatic;//装备的当前等级
 
 	void makeSTART()
 	{
@@ -26,6 +28,7 @@ public class equipInformationPanel : MonoBehaviour {
 		theBasicTextStatic = theBasicText;
 		theSkillTextStatic = theSkillText;
 		theButtonImageStatic = theButtonImage;
+		theEquipLvTextStatic = theEquipLvText;
 	}
 
 	public static void changeEquipToIntroduct(equipBasics theEquipIn)
@@ -40,6 +43,7 @@ public class equipInformationPanel : MonoBehaviour {
 		{
 			theButtonImageStatic.sprite = systemValues.makeLoadSprite ("equipPicture/"+ theEquipStatic.theEquipType + "/"+ theEquipStatic.equipPictureName);
 			theBasicTextStatic.text = theEquipStatic.getEquipName() +"\n"+theEquipStatic.getEquipAdderInformation ();
+			theEquipLvTextStatic.text = theEquipStatic.EquipLvNow.ToString();
 			//技能介绍
 			if (theEquipStatic.theEffectNames.Length == 0)
 				theSkillTextStatic.text = "此物品没有附加效果";
@@ -54,6 +58,7 @@ public class equipInformationPanel : MonoBehaviour {
 		{
 			theSkillTextStatic.text = "";
 			theBasicTextStatic.text = "";
+			theEquipLvTextStatic.text = "";
 		}
 	}
 

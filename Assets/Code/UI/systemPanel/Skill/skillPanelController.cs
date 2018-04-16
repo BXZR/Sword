@@ -13,8 +13,6 @@ public class skillPanelController : MonoBehaviour {
 	public Transform theButtonFather;
 	//显示信息的Text
 	public Text theInformationText;
-	//灵力数量显示
-	public Text SoulCountText ;
 	//是否已经建立建立一次就可以了
 	private bool isBuilt = false;
 
@@ -24,13 +22,7 @@ public class skillPanelController : MonoBehaviour {
 		
 		makeStart ();
 	}
-
-
-	void Update()
-	{
-		//其实UI交互是需要开一帧的
-		SoulCountText.text = "灵力数量："+systemValues.soulCount;
-	}
+		
 	void  makeStart()
 	{
 		//单次初始化吧性能自然会好，但是初始对于动态增加效果的时候的灵活性或许不够强大

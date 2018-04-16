@@ -70,6 +70,13 @@ public class equipBasics : MonoBehaviour {
 	//这些特效也会是effectBasic的脚本
 	//当然，可以有多个被动技能
 	public string [] theEffectNames ;
+	//装备等级
+	private int equipLvNow = 1;
+	public int EquipLvNow{get{ return equipLvNow;}}//等级是只读的
+	//装备等级上限
+	private int equipLvMax = 10;
+	//装备升级速率
+	private float equipLvUpRate = 0.07f;//每一次升级各个属性增加当前的7%，可以滚雪球
 
 
 	public string getEquipName()
@@ -172,6 +179,9 @@ public class equipBasics : MonoBehaviour {
 		thePlayer.CtheAttackAreaAngel += equiptheAttackAreaAngel;//攻击范围的角度，自身前方锥形范围内都是攻击范围
 		thePlayer.CtheViewAreaLength += equiptheViewAreaLength;//视野长度，在不同的模式之下。例如暗夜模式，是很有需要实际的地方的
 		thePlayer.CtheViewAreaAngel += equiptheViewAreaAngel;//视野的角度，同样，在不同的模式之下。例如暗夜模式，是很有需要实际的地方的
+
+		addEffects (thePlayer);
+		thePlayer.makeValueUpdate();//网络版本需要强制更新，不能等自动的更新数值
 		isUsing = true;//这个装备是一个已经被装备的装备
 	}
 
@@ -265,6 +275,9 @@ public class equipBasics : MonoBehaviour {
 		thePlayer.CtheAttackAreaAngel -= equiptheAttackAreaAngel;//攻击范围的角度，自身前方锥形范围内都是攻击范围
 		thePlayer.CtheViewAreaLength -= equiptheViewAreaLength;//视野长度，在不同的模式之下。例如暗夜模式，是很有需要实际的地方的
 		thePlayer.CtheViewAreaAngel -= equiptheViewAreaAngel;//视野的角度，同样，在不同的模式之下。例如暗夜模式，是很有需要实际的地方的
+
+		dropEffects (thePlayer);
+		thePlayer.makeValueUpdate();//网络版本需要强制更新，不能等自动的更新数值
 		isUsing = false;//这个装备不再是一个已经被装备的装备
 	}
 
@@ -282,9 +295,9 @@ public class equipBasics : MonoBehaviour {
 		if (equipActerSpMax > 0)
 		{information.Append ("斗气上限 + ");information.Append (equipActerSpMax.ToString("f0"));information.Append ("\n");}
 		if (equipActerHpUp > 0)
-		{information.Append ("生命回复 + ");information.Append (equipActerHpUp.ToString("f0"));information.Append ("/秒\n");}
+		{information.Append ("生命回复 + ");information.Append (equipActerHpUp.ToString("f1"));information.Append ("/秒\n");}
 		if (equipActerSpUp > 0)
-		{information.Append ("斗气回复 + ");information.Append (equipActerSpUp.ToString("f0"));information.Append ("/秒\n");}
+		{information.Append ("斗气回复 + ");information.Append (equipActerSpUp.ToString("f1"));information.Append ("/秒\n");}
 
 		//特殊战斗属性
 		if (equipActerSuperBaldePercent > 0)
@@ -563,10 +576,74 @@ public class equipBasics : MonoBehaviour {
 		return theString.ToString();
 	}
 
+	//检查是不是可以升级装备
+	public bool checkCanLvUp()
+	{
+		if (equipLvNow >= equipLvMax)
+			return false;
+		return true;
+		
+	}
 	//装备升级
 	public void makeEquipLvUp()
 	{
-		
+		//如果已经装备上了，就需要先卸下来升级再装上去
+		if (isUsing) 
+		{
+			DropThisThing (systemValues.thePlayer);
+			makeValueAdd ();
+			GetThisThing (systemValues.thePlayer);
+		}
+		else
+			makeValueAdd ();
+	}
+
+	private void makeValueAdd()
+	{
+		float valueUse = 1 + equipLvUpRate;
+
+		//最基本的属性生命法力和名字
+		equipActerHpMax *= valueUse;
+		equipActerSpMax *= valueUse;
+		equipActerHpUp *= valueUse;
+		equipActerSpUp *= valueUse;
+		//特殊战斗属性
+		equipActerSuperBaldePercent *= valueUse;
+		equipActerSuperBaldeAdder *= valueUse;
+		equipActerMissPercent *= valueUse;
+		equipActerShielderPercent *= valueUse;
+		equipActerShielderDamageMiuns*= valueUse;
+		equipActerShielderDamageMiunsPercent*= valueUse;
+		//物理战斗属性
+		equipActerWuliDamage*= valueUse;
+		equipActerWuliReDamage*= valueUse;
+		equipActerWuliIner*= valueUse;
+		equipActerWuliInerPercent*= valueUse;
+		equipActerDamageMinusPercent*= valueUse;
+		equipActerDamageMinusValue*= valueUse;
+		//物理防御属性
+		equipActerWuliShield*= valueUse;
+		//生命吸取属性
+		equipActerHpSuck*= valueUse;
+		equipActerHpSuckPercent*= valueUse;
+		//法力吸取属性
+		equipActerSpSuck*= valueUse;
+		equipActerSpSuckPercent*= valueUse;
+		//额外战斗属性
+		equipActerDamageAdderPercent*= valueUse;
+		equipActerDamageAdder*= valueUse;
+		//上面这些全都要放在RPC方法里面各种更新
+		//人物等级提升后加成
+		equipActerMoveSpeedPercent*= valueUse;
+		equipActerAttackSpeedPercent*= valueUse;
+		equipActerShieldMaxPercent*= valueUse;
+		//范围属性
+		equiptheAttackAreaLength*= valueUse;
+		equiptheAttackAreaAngel*= valueUse;
+		equiptheViewAreaLength*= valueUse;
+		equiptheViewAreaAngel*= valueUse;
+
+		equipLvNow++;
 	}
 
 	//添加特效
@@ -577,6 +654,9 @@ public class equipBasics : MonoBehaviour {
 		for (int i = 0; i < theEffectNames.Length; i++)
 		{
 			System.Type theType = System.Type.GetType (theEffectNames[i]);
+			if (theType == null)
+				continue;
+
 			if (!thePlayer.gameObject.GetComponent ( theType))
 				thePlayer.gameObject.AddComponent (theType);
 			else
@@ -588,10 +668,19 @@ public class equipBasics : MonoBehaviour {
 	//实际上应该装备栏中所有的这个装备都不要了这个效果才会消失
 	//但是因为装备已经有了明确的分类，这里就算是有一点简化
 	//当然具体要做的时候还是应该参照thePlayer的装备容器，所以后面这种判断再行补上
-	private void dropEffects(PlayerBasic thePlayer)
+	private void dropEffects (PlayerBasic thePlayer)
 	{
-		for(int i = 0 ; i < theEffectNames.Length ; i++)
-		  Destroy (thePlayer.gameObject.GetComponent ( System.Type.GetType (theEffectNames[i])));
+		for (int i = 0; i < theEffectNames.Length; i++)
+		{
+			System.Type theType = System.Type.GetType (theEffectNames[i]);
+			if (theType == null)
+				continue;
+			
+			effectBasic theEffect = (effectBasic)thePlayer.GetComponent (theType);
+			if(theEffect)
+			   Destroy (theEffect);
+		}
+	
 	}
 
 }

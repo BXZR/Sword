@@ -434,5 +434,15 @@ public class systemValues : MonoBehaviour {
 		if (titleMessageBox.theMessageSave)
 			Destroy (titleMessageBox.theMessageSave.gameObject);
 	}
+		
 	//消息框的操作OVER---------------------------------------------------------------------------------------------------------
+
+	//升级这个装备需要的灵力数量
+	public static  int getSoulCountForEquipLvUp(equipBasics theEquip, bool withLv1 = false)
+	{
+		if(withLv1)
+			return 8 * (theEquip.EquipLvNow-1);
+		
+		return 8 * theEquip.EquipLvNow;
+	}
 }

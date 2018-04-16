@@ -911,7 +911,8 @@ public class PlayerBasic : MonoBehaviour {
 	//随时都进行网络更新太费事而且还有网络延迟的问题所以这是一个很低频率的更新
 	//强制刷新确实可以解决很多麻烦问题，但是开销不容小觑
 	//或许可以找到一个更好的架构或者方法来解决这个问题
-	private void makeValueUpdate()
+	//有些地方需要强制更新
+	public  void makeValueUpdate()
 	{
 		//更新网络上其他客户端这个人物的属性
 		if (systemValues.modeIndex == 1 && photonView != null) 

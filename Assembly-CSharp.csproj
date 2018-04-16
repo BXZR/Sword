@@ -99,6 +99,7 @@
      <Compile Include="Assets\Code\Player\newMethodAttack.cs" />
      <Compile Include="Assets\Code\Player\playerStar.cs" />
      <Compile Include="Assets\Code\UI\basicShow\effectFlashPanel.cs" />
+     <Compile Include="Assets\Code\UI\basicShow\soulShowText.cs" />
      <Compile Include="Assets\Code\UI\basicShow\uiShowsForBasic.cs" />
      <Compile Include="Assets\Code\UI\buttonWithSound.cs" />
      <Compile Include="Assets\Code\UI\messageBox\theMessageBoxPanel.cs" />

@@ -52,7 +52,7 @@ public class eeffectZiyingArcher : effectBasic {
 
 			float extraX = Camera.main.transform.rotation.eulerAngles.x;
 			extraX = extraX > 180 ? extraX - 360 : extraX;
-			extraX = Mathf.Clamp (extraX , -15f,5f);
+			extraX = Mathf.Clamp (extraX , -10f,3f);
 			//print ("theExtraX = "+ extraX);
 			theArrow.transform.Rotate (new Vector3 ( extraX, 0, 0), Space.Self);
 

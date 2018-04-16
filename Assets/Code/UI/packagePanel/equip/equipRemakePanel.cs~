@@ -59,9 +59,10 @@ public class equipRemakePanel : MonoBehaviour {
 			return;
 		if (theEquip.isUsing)
 			theEquip.DropThisThing (systemValues.thePlayer);
-		
-		systemValues.soulCount += 10;
-		systemValues.messageTitleBoxShow ("【"+theEquip.equipName+"】熔为10灵力");
+
+		int soulGet = 20 + systemValues.getSoulCountForEquipLvUp (theEquip , true);
+		systemValues.soulCount += soulGet;
+		systemValues.messageTitleBoxShow ("【"+theEquip.equipName+"】熔为"+soulGet+"灵力");
 		DestroyImmediate(theEquip.gameObject);
 		theEquip = null;
 		equipSelectTypeButton.flashThePanel ();
@@ -72,8 +73,19 @@ public class equipRemakePanel : MonoBehaviour {
 	//装备的升级
 	public void makeEquipLvUp()
 	{
-		if (!theEquip)
+		if (!theEquip || !theEquip.checkCanLvUp())
 			return;
+
+		int cost = systemValues.getSoulCountForEquipLvUp (theEquip);
+		if (systemValues.soulCount < cost)
+			return;
+		
+		systemValues.soulCount -= cost;
 		theEquip.makeEquipLvUp ();
+		//数值改变了，还是刷新一下比较好
+		equipInformationPanel.changeEquipToIntroduct (theEquip);
+		thePackagePanelShow.setNewEquip (theEquip);
+		equipRemakePanel.getEquipForOperate (theEquip);
+
 	}
 }

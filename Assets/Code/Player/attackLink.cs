@@ -216,8 +216,8 @@ public class attackLink : MonoBehaviour {
 		if (extraDamage > 0)
 			value += (int)extraDamage/2;
 		
-		lvupCost = (int)(value /2) + theAttackLinkLv * 2 ;
-		extraDamageAdd = value * 0.3f + (int)spUse/7;
+		lvupCost = (int)(value *0.15f) + theAttackLinkLv * 2 ;
+		extraDamageAdd = value * 0.15f + (int)spUse*0.1f;
 	}
 
 	//网络版群体升级，单机版单独升级
@@ -418,9 +418,9 @@ public class attackLink : MonoBehaviour {
 		if (this.extraDamage > 0) 
 		{
 			if (!this.thePlayer)
-				information += "额外伤害：" + this.extraDamage + "\n";
+				information += "额外伤害：" + this.extraDamage.ToString("f0") + "\n";
 			else
-				information += "伤害：(" + this.thePlayer.ActerWuliDamage + "+" + systemValues.BESkillColor +(int) this.extraDamage + systemValues.colorEnd + ")\n";
+				information += "伤害：(" + this.thePlayer.ActerWuliDamage.ToString("f0") + "+" + systemValues.BESkillColor +(int) this.extraDamage + systemValues.colorEnd + ")\n";
 		}
 		else
 		{
@@ -455,9 +455,9 @@ public class attackLink : MonoBehaviour {
 		if (this.extraDamage > 0) 
 		{
 			if (!this.thePlayer)
-				information += "额外伤害：" + this.extraDamage + "\n";
+				information += "额外伤害：" + this.extraDamage.ToString("f0") + "\n";
 			else
-				information += "伤害：(" + this.thePlayer.ActerWuliDamage + "+" + systemValues.BESkillColor +(int) this.extraDamage + systemValues.colorEnd + ")\n";
+				information += "伤害：(" + this.thePlayer.ActerWuliDamage.ToString("f0") + "+" + systemValues.BESkillColor +(int) this.extraDamage + systemValues.colorEnd + ")\n";
 		}
 		else
 		{
