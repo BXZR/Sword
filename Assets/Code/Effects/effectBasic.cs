@@ -84,11 +84,11 @@ public class effectBasic : MonoBehaviour {
 		if (withName) 
 		{
 			//print ("show the name");
-			theInformation += "（" + this.theEffectName + "）";
+			theInformation += "【" + this.theEffectName + "】";
 			if (isBE ())
-				theInformation += "[被动]";
+				theInformation += "（被动）";
 			else
-				theInformation += "[主动]";
+				theInformation += "（主动）";
 		}
 		theInformation +="\n"+this.theEffectInformation;
 		return theInformation;
@@ -105,7 +105,7 @@ public class effectBasic : MonoBehaviour {
 	{
 		if(isEffecting)
 		return this.theEffectName;
-		return this.theEffectName+"\n[失效]";
+		return this.theEffectName+"\n【失效】";
 	}
 
 	public   string getEffectInformation(){return this.theEffectInformation;}//只显示内容
@@ -118,13 +118,13 @@ public class effectBasic : MonoBehaviour {
 		{
 			if(withNewLine)
 			theInformation += "\n";
-			theInformation += "[被动]";
+			theInformation += "（被动）";
 		} 
 		else
 		{
 			if(withNewLine)
 				theInformation += "\n";
-			theInformation += "[主动]";
+			theInformation += "（主动）";
 		}
 		return theInformation;
 	}

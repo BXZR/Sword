@@ -5,11 +5,11 @@ using UnityEngine;
 public class popSoulMove : MonoBehaviour {
 
 	//死亡的时候的灵魂
-	//玩家通过收集这些“魂元”来获得升级连击招数的技能点
+	//玩家通过收集这些“灵力”来获得升级连击招数的技能点
    
-	//这个魂元容纳的魂魄数量
+	//这个魂元容纳的灵力数量
 	public int soulCount = 1;
-	//魂元飞向的目标
+	//魂元灵力飞向的目标
 	public Transform theAim;
 	//开始标记，也就是一个延迟效果的开始
 	bool isStart = false;

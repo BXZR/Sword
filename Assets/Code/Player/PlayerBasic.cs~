@@ -284,6 +284,7 @@ public class PlayerBasic : MonoBehaviour {
 		effectBasic [] theEffects = this.GetComponentsInChildren<effectBasic>();
 		for (int i = 0; i < theEffects.Length; i++)
 			theEffects [i].OnLvUp ();
+		systemValues.messageTitleBoxShow ("等级提升");
 	}
 	//有关经验和等级 OVER -----------------------------------------------------------------------------------------
 

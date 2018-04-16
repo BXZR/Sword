@@ -553,7 +553,7 @@ public class equipBasics : MonoBehaviour {
 		{theString.Append ("攻击速度 ");theString.Append ((equipActerAttackSpeedPercent*100).ToString("f0"));theString.Append ("%\n");}
 		//人物的一些范围属性
 		if (equiptheAttackAreaLength != 0) 
-		{theString.Append ("攻击距离 ");theString.Append (equiptheAttackAreaLength.ToString("f0"));theString.Append ("\n");}
+		{theString.Append ("攻击距离 ");theString.Append ((equiptheAttackAreaLength*100).ToString("f0"));theString.Append ("%\n");}
 		if (equiptheAttackAreaAngel != 0) 
 		{theString.Append ("攻击广度 ");theString.Append (equiptheAttackAreaAngel.ToString("f0"));theString.Append ("\n");}
 		if (equiptheViewAreaLength != 0) 
@@ -561,6 +561,12 @@ public class equipBasics : MonoBehaviour {
 		if (equiptheViewAreaAngel != 0) 
 		{theString.Append ("侦查广度 ");theString.Append (equiptheViewAreaAngel.ToString("f0"));theString.Append ("\n");}
 		return theString.ToString();
+	}
+
+	//装备升级
+	public void makeEquipLvUp()
+	{
+		
 	}
 
 	//添加特效

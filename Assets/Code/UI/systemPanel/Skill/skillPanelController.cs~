@@ -13,7 +13,7 @@ public class skillPanelController : MonoBehaviour {
 	public Transform theButtonFather;
 	//显示信息的Text
 	public Text theInformationText;
-	//魂元数量显示
+	//灵力数量显示
 	public Text SoulCountText ;
 	//是否已经建立建立一次就可以了
 	private bool isBuilt = false;
@@ -29,7 +29,7 @@ public class skillPanelController : MonoBehaviour {
 	void Update()
 	{
 		//其实UI交互是需要开一帧的
-		SoulCountText.text = "魂元数量："+systemValues.soulCount;
+		SoulCountText.text = "灵力数量："+systemValues.soulCount;
 	}
 	void  makeStart()
 	{
@@ -75,7 +75,7 @@ public class skillPanelController : MonoBehaviour {
 			//effectBasic theselfEffect = theButton.GetComponent <effectBasic> ();
 			effectBasic theselfEffect = (effectBasic)theButton.GetComponent (theType);
 			theselfEffect.Init ();
-			information += "发动可以触发[" + systemValues.SkillColorForSelf + theselfEffect.theEffectName + systemValues.colorEnd +"]";
+			information += "发动可以触发【" + systemValues.SkillColorForSelf + theselfEffect.theEffectName + systemValues.colorEnd +"】";
 			skillInformation += systemValues.SkillColorForSelf+ theselfEffect.getInformation ()+systemValues.colorEnd;
 			skillInformation += "\n";
 			skillInformation += systemValues.SkillExtraColor + theselfEffect.getExtraInformation () + systemValues.colorEnd;
@@ -91,7 +91,7 @@ public class skillPanelController : MonoBehaviour {
 			theEMYEffect.Init ();
 			if (string.IsNullOrEmpty (information) == false)
 				information += "\n";
-			information += "命中可以触发[" + systemValues.SkillColorForEnemy+ theEMYEffect.theEffectName + systemValues.colorEnd+"]";
+			information += "命中可以触发【" + systemValues.SkillColorForEnemy+ theEMYEffect.theEffectName + systemValues.colorEnd+"】";
 		
 			if (string.IsNullOrEmpty (skillInformation) == false)
 				skillInformation += "\n";

@@ -45,8 +45,35 @@ public class equipRemakePanel : MonoBehaviour {
 	{
 		if (theEquip)
 		{
+			systemValues.messageTitleBoxShow ("装备【"+theEquip.equipName+"】");
 			thePackagePanelShow.wearEquip (theEquip);
 			equipSelectTypeButton.flashThePanel ();
 		}
+	}
+
+	//熔锻这个装备
+	//这个装备被消熔之后，将会转化为灵力
+	public void soulTheEquip()
+	{
+		if (!theEquip)
+			return;
+		if (theEquip.isUsing)
+			theEquip.DropThisThing (systemValues.thePlayer);
+		
+		systemValues.soulCount += 10;
+		systemValues.messageTitleBoxShow ("【"+theEquip.equipName+"】熔为10灵力");
+		DestroyImmediate(theEquip.gameObject);
+		theEquip = null;
+		equipSelectTypeButton.flashThePanel ();
+		thePackagePanelShow.makeFlash ();
+		equipInformationPanel.makeFlash ();
+	}
+
+	//装备的升级
+	public void makeEquipLvUp()
+	{
+		if (!theEquip)
+			return;
+		theEquip.makeEquipLvUp ();
 	}
 }

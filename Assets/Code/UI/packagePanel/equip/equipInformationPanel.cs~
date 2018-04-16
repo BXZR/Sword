@@ -57,6 +57,13 @@ public class equipInformationPanel : MonoBehaviour {
 		}
 	}
 
+	public static void makeFlash()
+	{
+		theSkillTextStatic.text = "";
+		theBasicTextStatic.text = "";
+		theButtonImageStatic.sprite = null;
+	}
+
 	public void showEquipStory()
 	{
 		string theShowString = theEquipStatic != null ?  theEquipStatic.theEquipStroy : "目前尚未选定任何装备";
@@ -72,8 +79,8 @@ public class equipInformationPanel : MonoBehaviour {
 		showEquipInformation ();
 	}
 	
-	// Update is called once per frame
-	void Update () {
-		
-	}
+// Update is called once per frame
+//	void Update () {
+//		
+//	}
 }

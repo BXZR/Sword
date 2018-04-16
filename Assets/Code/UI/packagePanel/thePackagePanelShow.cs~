@@ -79,6 +79,7 @@ public class thePackagePanelShow : MonoBehaviour {
 		staticShoeButtonText .text = staticShoeButton.theEquip != null ? staticShoeButton.theEquip.equipName : "[尚未装备]";
 		staticExtraButton1Text .text = staticExtraButton1.theEquip != null ? staticExtraButton1.theEquip.equipName : "[尚未装备]";
 		staticExtraButton2Text.text  = staticExtraButton2.theEquip != null ? staticExtraButton2.theEquip.equipName : "[尚未装备]";
+		theTextForStatic.text = "";
 	}
 
 

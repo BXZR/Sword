@@ -356,7 +356,7 @@ public class systemValues : MonoBehaviour {
 	public static string normalColor = "<color=#000000>";//什么都不加成的颜色 黑色
 	public static string BESkillColor  = "<color=#FFFF8F>";//黄色
 	public static string SkillColorForSelf = "<color=#FFF809>";//橙色
-	public static string SkillColorForEnemy = "<color=#28FF28>";//绿色
+	public static string SkillColorForEnemy = "<color=#92FFFF>";//绿色
 	public static string SkillExtraColor = "<color=#AFFF3A>";//标记淡绿色
 	public static string playerNameColor = "<color=#00FF00>" ;//其实也是黄色
 	public static string playerIntroductionColor = "<color=#FF2400>";//应该是绿色
@@ -388,15 +388,17 @@ public class systemValues : MonoBehaviour {
  
 	}
 
-	//收集的魂元数量
-	//魂元可以通过击杀目标来获取
+	//收集的灵力数量
+	//灵力可以通过击杀目标来获取
 	public static int soulCount = 3;
-	//全球唯一计算魂元获取量的方法
+	//全球唯一计算灵力获取量的方法
 	public static int soulGet(PlayerBasic thePlayerIn)
 	{
 		return (int)(thePlayerIn.ActerHpMax / 100);
 	}
-		
+
+
+	//消息框的操作---------------------------------------------------------------------------------------------------------
 	public static void  messageBoxShow(string showTitle , string  showText , bool autoSize = false)
 	{
 		GameObject theMessageBox = GameObject.Instantiate<GameObject>( Resources.Load<GameObject> ("UI/MessageBox"));
@@ -417,10 +419,20 @@ public class systemValues : MonoBehaviour {
 		theMesage.setTimer (timer);
 	}
 
+	public static void messageTitleBoxShow(string information)
+	{
+		GameObject theMessageBox = GameObject.Instantiate<GameObject>( Resources.Load<GameObject> ("UI/MessageBoxForTitle"));
+		theMessageBox.transform .localScale =  new Vector3 (2,2,2);
+		theMessageBox.transform.localPosition = Vector3.zero;
+		titleMessageBox theMesage = theMessageBox.GetComponent <titleMessageBox> ();
+		theMesage.setInformation (information);
+	}
 	public static void messageBoxClose()
 	{
 		if (theMessageBoxPanel.theMessageSave)
 			Destroy (theMessageBoxPanel.theMessageSave.gameObject);
+		if (titleMessageBox.theMessageSave)
+			Destroy (titleMessageBox.theMessageSave.gameObject);
 	}
- 
+	//消息框的操作OVER---------------------------------------------------------------------------------------------------------
 }

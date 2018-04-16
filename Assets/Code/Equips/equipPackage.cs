@@ -73,6 +73,7 @@ public class equipPackage : MonoBehaviour {
 				allEquipsForSave.Add (theEquip);
 		    
 			collisioner.gameObject.SetActive(false);
+			systemValues.messageTitleBoxShow ("获得【"+theEquip.equipName+"】");
 		}
 	}
 }

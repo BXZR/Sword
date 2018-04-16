@@ -146,7 +146,7 @@ public class effectShowDamageOnBeAttack : effectBasic
 	}
 	public override void OnAddSoul (int soulCount)
 	{
-		makeShowTextExtra("获得"+soulCount+"魂元" , 0);
+		makeShowTextExtra("获得"+soulCount+"灵力" , 0);
 	}
 
 	void Start ()
