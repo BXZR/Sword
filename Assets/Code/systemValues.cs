@@ -208,9 +208,9 @@ public class systemValues : MonoBehaviour {
 					effectBasic theEffect = thePlayer.gameObject.GetComponent (theType) as effectBasic;
 					buffer.Add (theEffect);
 
-					theEffect.Init ();
 					if(theEffect.isShowing())
 					{
+						theEffect.Init ();
 						theInformation.theEffectForEMYName = theEffect.getEffectName();
 						showString = theEffect.getInformation (false);
 						showExtra = theEffect.getExtraInformation ();
@@ -227,9 +227,9 @@ public class systemValues : MonoBehaviour {
 					effectBasic theEffect = thePlayer.gameObject.GetComponent (theType) as effectBasic;
 					buffer.Add (theEffect);
 
-					theEffect.Init ();
 					if(theEffect.isShowing())
 					{
+						theEffect.Init ();
 						theInformation.theEffectForSelfName = theEffect.getEffectName();
 						showString = theEffect.getInformation (false);
 						showExtra = theEffect.getExtraInformation ();

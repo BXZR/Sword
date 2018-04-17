@@ -43,8 +43,10 @@ public class eeffectZiyingArcher : effectBasic {
 		if (this.thePlayer) 
 		{
 			forward = this.thePlayer.transform.forward;
-			Arrow = (GameObject)Resources.Load ("effects/ziyingarrow");
-
+			if (!Arrow) //加载资源仅仅需要一次，后面的引用就好了
+				Arrow = (GameObject)Resources.Load ("effects/ziyingarrow");
+			
+			//考虑到多种连发的情况，暂时还是不做弹矢的对象池子，后期优化吧
 			theArrow = (GameObject)GameObject.Instantiate (Arrow);
 			theArrow.GetComponentInChildren <extraWeapon> ().setPlayer (this.thePlayer);
 

@@ -55,8 +55,14 @@ public class selectHead : MonoBehaviour {
 
 	public void makePlayer()
 	{
-		if(therPlayer!=null)
-			Destroy(therPlayer);
+       
+		if (therPlayer != null)
+		{
+			//正在显示的单位没有必要重新创建一次
+			if (theFightName + "(Clone)" == therPlayer.name)
+				return;
+			Destroy (therPlayer);
+		}
 		
 		GameObject theProfab = Resources.Load<GameObject> ("fighters/"+theFightName);
 		therPlayer = GameObject.Instantiate (theProfab );
@@ -69,7 +75,7 @@ public class selectHead : MonoBehaviour {
 		playerTitleText.text = makeTitleText(thePlayerB);
 		systemValues.setIndexForPlayer (indexForSystemValues);
 
-		if (theStaticSelectedImage!= null)
+		if (theStaticSelectedImage!= null && theStaticSelectedImage!= theSelectedImage)
 			theStaticSelectedImage.gameObject.SetActive (false);
 		theSelectedImage.SetActive (true);
 		theStaticSelectedImage = theSelectedImage;

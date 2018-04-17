@@ -1,14 +1,21 @@
 ﻿<Properties StartupItem="Assembly-CSharp.csproj">
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Unity.Instance.Unity Editor" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Code\UI\startAndSelect\selectHead.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Code\Effects\fighterAttackEffects\ziying\effectQianfang.cs">
     <Files>
-      <File FileName="Assets\Code\UI\systemPanel\Operate\SliderForVolumn.cs" Line="28" Column="77" />
-      <File FileName="Assets\Code\UI\startAndSelect\selectHeaderMaker.cs" Line="36" Column="23" />
+      <File FileName="Assets\Code\UI\systemPanel\Operate\SliderForVolumn.cs" Line="1" Column="1" />
+      <File FileName="Assets\Code\UI\startAndSelect\selectHeaderMaker.cs" Line="1" Column="1" />
       <File FileName="Assets\Code\UI\startAndSelect\selectHead.cs" Line="175" Column="2" />
-      <File FileName="Assets\Code\systemValues.cs" Line="201" Column="60" />
-      <File FileName="Assets\Code\Player\attackLink.cs" Line="501" Column="48" />
-      <File FileName="Assets\Code\UI\systemPanel\SystemUIController.cs" Line="32" Column="27" />
-      <File FileName="Assets\Code\UI\startAndSelect\skillEffectShowingItem.cs" Line="30" Column="2" />
+      <File FileName="Assets\Code\systemValues.cs" Line="1" Column="1" />
+      <File FileName="Assets\Code\Player\attackLink.cs" Line="1" Column="1" />
+      <File FileName="Assets\Code\UI\systemPanel\SystemUIController.cs" Line="1" Column="1" />
+      <File FileName="Assets\Code\UI\startAndSelect\skillEffectShowingItem.cs" Line="1" Column="1" />
+      <File FileName="Assets\Code\Player\PlayerBasic.cs" Line="32" Column="41" />
+      <File FileName="Assets\Code\Effects\effectForWuling\wind.cs" Line="1" Column="1" />
+      <File FileName="Assets\Code\Effects\fighterAttackEffects\public\jifei.cs" Line="1" Column="1" />
+      <File FileName="Assets\Code\Effects\fighterAttackEffects\public\effectForSpeedMoveForward.cs" Line="59" Column="3" />
+      <File FileName="Assets\Code\Effects\bloodShower\extraMoveUp.cs" Line="1" Column="1" />
+      <File FileName="Assets\Code\Effects\bloodShower\effectShowDamageOnBeAttack.cs" Line="1" Column="1" />
+      <File FileName="Assets\Code\Effects\fighterAttackEffects\ziying\effectQianfang.cs" Line="23" Column="15" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

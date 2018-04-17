@@ -48,21 +48,12 @@ public class selectHeaderMaker : MonoBehaviour {
 			theHead.makeStart ( systemValues.playerNamesInGame[i] , playerTitleText , playerInformationText ,  theAttackEffectItemProfab,
 			theshowContantFortheAttackEffectItem ,modePosition , i);
 			theHead.setStateImage (theStateImage);
-			theButton.GetComponent <Image> ().sprite = makeLoadSprite ("playerHeadPicture/"+ systemValues.playerHeadNames[i]);
+			theButton.GetComponent <Image> ().sprite = systemValues.makeLoadSprite ("playerHeadPicture/"+ systemValues.playerHeadNames[i]);
 			if (theFirstHead == null)
 				theFirstHead = theHead;
 		}
 	}
-
-
-	//加载图像
-	public Sprite makeLoadSprite(string textureName)
-	{
-		//textureName = "people/noOne";
-		Texture2D theTextureIn = Resources.Load <Texture2D> (textureName);
-		return Sprite .Create(theTextureIn,new Rect (0,0,theTextureIn.width,theTextureIn.height),new Vector2 (0,0));
-	}
-
+		
 	//加载第一个战士
 	public void makeFirstFighter()
 	{

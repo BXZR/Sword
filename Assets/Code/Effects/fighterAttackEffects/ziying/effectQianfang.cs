@@ -5,11 +5,12 @@ using UnityEngine;
 public class effectQianfang : effectBasic {
 
 	GameObject Arrow;//弹矢引用保存
+	GameObject Arrow2;//弹矢引用保存
 	Vector3 forward;
 	float arrowLife = 0.16f;// 弹矢生存时间
-	public int arrowCounts =4;//发射的剑气数量
-	public float hpup = 0.08f;//吸收的生命值百分比
-	public float hpupTrueUseExtra = 5f;//吸收的生命值
+	public int arrowCounts = 5;//发射的剑气数量
+	public float hpup = 0.04f;//吸收的生命值百分比
+	public float hpupTrueUseExtra = 4f;//吸收的生命值
 	float angleForArrow = 25;//剑气角度
 	GameObject theArrow ;//真正的弹矢
 
@@ -42,7 +43,8 @@ public class effectQianfang : effectBasic {
 					//四元数的方法在这里似乎不是很好用
 					//forward = Quaternion.AngleAxis((float)(45*i), new Vector3(0,1,0)) *this.thePlayer.transform.forward ;
 					//print ("forward = "+ forward);
-					Arrow = (GameObject)Resources.Load ("effects/ziyingarrow2");
+					if(!Arrow)
+					  Arrow = (GameObject)Resources.Load ("effects/ziyingarrow2");
 
 					theArrow = (GameObject)GameObject.Instantiate (Arrow);
 					theArrow.GetComponentInChildren <extraWeapon> ().setPlayer (this.thePlayer);
@@ -85,9 +87,10 @@ public class effectQianfang : effectBasic {
 			return;
 		
 		forward = this.thePlayer.transform.forward;
-		Arrow = (GameObject)Resources.Load ("effects/ziyingarrow");
+		if(!Arrow2)
+		  Arrow2 = (GameObject)Resources.Load ("effects/ziyingarrow");
 
-		theArrow = (GameObject)GameObject.Instantiate (Arrow);
+		theArrow = (GameObject)GameObject.Instantiate (Arrow2);
 		theArrow.GetComponentInChildren <extraWeapon> ().setPlayer (this.thePlayer);
 
 		Vector3 positionNew = thePlayer.transform.position + new Vector3 (0, 0.8f * thePlayer.transform.localScale.y + 0.3f, forward.normalized.z * 0.1f);

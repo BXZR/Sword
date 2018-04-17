@@ -48,6 +48,7 @@ public class equipRemakePanel : MonoBehaviour {
 			systemValues.messageTitleBoxShow ("装备【"+theEquip.equipName+"】");
 			thePackagePanelShow.wearEquip (theEquip);
 			equipSelectTypeButton.flashThePanel ();
+			ShowMake ();
 		}
 	}
 
@@ -68,6 +69,7 @@ public class equipRemakePanel : MonoBehaviour {
 		equipSelectTypeButton.flashThePanel ();
 		thePackagePanelShow.makeFlash ();
 		equipInformationPanel.makeFlash ();
+		ShowMake ();
 	}
 
 	//装备的升级

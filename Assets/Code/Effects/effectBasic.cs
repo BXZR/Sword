@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Text;
 
 public class effectBasic : MonoBehaviour {
 	//游戏最灵动的地方在这里
@@ -79,19 +80,22 @@ public class effectBasic : MonoBehaviour {
 	{
 		if (!isShowing())
 			return "";
-		
-		string theInformation = "";
+
+		StringBuilder theString = new StringBuilder ();
 		if (withName) 
 		{
 			//print ("show the name");
-			theInformation += "【" + this.theEffectName + "】";
+			theString.Append( "【");
+			theString.Append (this.theEffectName);
+			theString.Append( "】");
 			if (isBE ())
-				theInformation += "（被动）";
+				theString.Append( "（被动）");
 			else
-				theInformation += "（主动）";
+				theString.Append( "（主动）");
 		}
-		theInformation +="\n"+this.theEffectInformation;
-		return theInformation;
+		theString.Append ("\n");
+		theString.Append(this.theEffectInformation);
+		return theString.ToString();
 	}//显示完全的信息
 		
 	public virtual string getExtraInformation()
@@ -112,21 +116,21 @@ public class effectBasic : MonoBehaviour {
 
 	public string getEffectName(bool withNewLine = true)
 	{
-
-		string theInformation =  this.theEffectName ;
+		StringBuilder theString = new StringBuilder ();
+		theString.Append (this.theEffectName);
 		if (isBE ())
 		{
 			if(withNewLine)
-			theInformation += "\n";
-			theInformation += "（被动）";
+				theString.Append( "\n");
+			theString.Append("（被动）");
 		} 
 		else
 		{
 			if(withNewLine)
-				theInformation += "\n";
-			theInformation += "（主动）";
+				theString.Append( "\n");
+			theString.Append( "（主动）");
 		}
-		return theInformation;
+		return theString.ToString();
 	}
 
 	//特殊用途不被认为是技能
