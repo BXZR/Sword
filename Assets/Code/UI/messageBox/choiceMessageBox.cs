@@ -15,6 +15,8 @@ public class choiceMessageBox : MonoBehaviour {
 	public Text theInformationText;
 	//一个背景图
 	public Texture2D theBackPicture;
+	public Texture2D theOKButtonPicture;
+	public Texture2D theNOButtonPicture;
 
 	//GUI方法需要的参数
 	//所有的东西都是按照屏幕百分比来计算
@@ -34,6 +36,8 @@ public class choiceMessageBox : MonoBehaviour {
 	GUIStyle GUIShowStyleForTitle;
 	GUIStyle GUIShowStyleForInformation;
 	GUIStyle GUIShowStyleForBack;
+	GUIStyle GUIShowStyleForOKButton;
+	GUIStyle GUIShowStyleForNOButton;
 
 	//额外的操作
 	MesageOperate theOperate;
@@ -101,6 +105,11 @@ public class choiceMessageBox : MonoBehaviour {
 
 		GUIShowStyleForBack = new GUIStyle ();
 		GUIShowStyleForBack.normal.background = theBackPicture;
+
+		GUIShowStyleForOKButton = new GUIStyle ();
+		GUIShowStyleForNOButton = new GUIStyle ();
+		GUIShowStyleForOKButton.normal.background = theOKButtonPicture;
+		GUIShowStyleForNOButton.normal.background = theNOButtonPicture;
 	}
 
 	void Start()
@@ -123,8 +132,10 @@ public class choiceMessageBox : MonoBehaviour {
 		GUI.Box (new Rect (0, 0, width, height ), "" ,GUIShowStyleForBack );//背景
 		GUI.Box (new Rect (width/3,  height * 0.05f , width/3, height*0.12f ), stringForTitle ,GUIShowStyleForTitle);//标题
 		GUI.Box (new Rect (width*0.05f, height* 0.2f , width*0.9f, height*3/5 ), stringForInformation , GUIShowStyleForInformation);//文本
-		if (GUI.Button (new Rect (width * 1 / 5, Mathf.Max( height * 4 / 5, height-80), width / 5, 35), "是")) {theOperate();makeEnd ();}
-		if (GUI.Button (new Rect (width * 3 / 5, Mathf.Max( height * 4 / 5, height-80), width / 5, 35), "否")) {makeEnd ();}
+		if (GUI.Button (new Rect (width * 1 / 5, Mathf.Max( height * 4 / 5, height-80), width / 5, 35), "是")) 
+			{theOperate();makeEnd ();}
+		if (GUI.Button (new Rect (width * 3 / 5, Mathf.Max( height * 4 / 5, height-80), width / 5, 35), "否"))
+			{makeEnd ();}
 
 		GUI.EndGroup ();
 
