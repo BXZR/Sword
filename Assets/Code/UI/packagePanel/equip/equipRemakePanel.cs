@@ -60,7 +60,7 @@ public class equipRemakePanel : MonoBehaviour {
 	{
 		if (!theEquip)
 			return;
-		systemValues.choiceMessageBoxShow ("熔铸装备？", "熔铸装备将会获得一些灵力，但是这个装备会永远消失，是否熔铸？", true, new MesageOperate (makeTheEquipToSoul));
+		systemValues.choiceMessageBoxShow ("熔锻装备？", "熔铸装备将会获得一些灵力，但是这个装备会永远消失，是否熔锻？", true, new MesageOperate (makeTheEquipToSoul));
 
 	}
 

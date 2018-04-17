@@ -18,6 +18,15 @@ public class sceneSkipButton : MonoBehaviour {
 
 	}
 
+	public void GamingToStart()
+	{
+		systemValues.choiceMessageBoxShow ("返回？", "返回初始则当前游戏进度将会随风而逝，是否返回？", true, new MesageOperate (MoveToScene));
+	}
+	public void GamingToEnd()
+	{
+		systemValues.choiceMessageBoxShow ("结束？", "是否希望推出整个游戏？", true, new MesageOperate (endTheGame));
+	}
+
 	//结束整个游戏
 	//也算是换一个场景吧.....
 	public void endTheGame()

@@ -36,6 +36,7 @@ public class theMessageBoxPanel : MonoBehaviour {
 	GUIStyle GUIShowStyleForTitle;
 	GUIStyle GUIShowStyleForInformation;
 	GUIStyle GUIShowStyleForBack;
+	public GUISkin theButtonGUISkin;
 
 	//设定显示信息
 	public void setInformation(string title = "", string information = "" )
@@ -138,7 +139,7 @@ public class theMessageBoxPanel : MonoBehaviour {
 		GUI.Box (new Rect (width/3,  height * 0.05f , width/3, height*0.12f ), stringForTitle ,GUIShowStyleForTitle);//标题
 		GUI.Box (new Rect (width*0.05f, height* 0.2f , width*0.9f, height*3/5 ), stringForInformation , GUIShowStyleForInformation);//文本
 		string showOnButton = withTimer? "我已知晓("+timer.ToString("f0")+")" : "我已知晓";
-		if (GUI.Button (new Rect (width * 2 / 5, Mathf.Max( height * 4 / 5, height-80), width / 5, 40), showOnButton)) {makeEnd ();}
+		if (GUI.Button (new Rect (width * 2 / 5, Mathf.Max( height * 4 / 5, height-80), width / 5, 40), showOnButton , theButtonGUISkin.button)) {makeEnd ();}
 
 		GUI.EndGroup ();
 

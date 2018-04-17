@@ -17,7 +17,7 @@ public class extraWeapon : MonoBehaviour {
 //	}
 	void Update()
 	{
-		transform.Translate (new Vector3 (0,0,1) * 35f *Time .deltaTime);
+		transform.Translate (new Vector3 (0,0,1) * 30f *Time .deltaTime);
 	}
 
 	public void setPlayer(PlayerBasic thePlayerIn)

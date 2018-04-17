@@ -17,7 +17,7 @@ public class titleMessageBox : MonoBehaviour {
 
 	//GUI方法需要的参数
 	//所有的东西都是按照屏幕百分比来计算
-	private float widthForScreen = 0.2f;
+	private float widthForScreen = 0.3f;
 	private float heightForScreen = 0.05f;
 
 	private string stringForInformation = "";
