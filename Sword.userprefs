@@ -1,23 +1,12 @@
 ﻿<Properties StartupItem="Assembly-CSharp.csproj">
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Unity.Instance.Unity Editor" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Code\Player\attackLink.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Code\systemValues.cs">
     <Files>
-      <File FileName="Assets\Code\UI\systemPanel\Operate\SliderForVolumn.cs" Line="1" Column="1" />
-      <File FileName="Assets\Code\UI\startAndSelect\selectHeaderMaker.cs" Line="1" Column="1" />
-      <File FileName="Assets\Code\UI\startAndSelect\selectHead.cs" Line="1" Column="1" />
-      <File FileName="Assets\Code\systemValues.cs" Line="1" Column="1" />
-      <File FileName="Assets\Code\Player\attackLink.cs" Line="548" Column="25" />
-      <File FileName="Assets\Code\UI\systemPanel\SystemUIController.cs" Line="1" Column="1" />
-      <File FileName="Assets\Code\UI\startAndSelect\skillEffectShowingItem.cs" Line="1" Column="1" />
-      <File FileName="Assets\Code\Player\PlayerBasic.cs" Line="501" Column="1" />
-      <File FileName="Assets\Code\Effects\effectForWuling\wind.cs" Line="1" Column="1" />
-      <File FileName="Assets\Code\Effects\fighterAttackEffects\public\jifei.cs" Line="1" Column="1" />
-      <File FileName="Assets\Code\Effects\fighterAttackEffects\public\effectForSpeedMoveForward.cs" Line="1" Column="1" />
-      <File FileName="Assets\Code\Effects\bloodShower\extraMoveUp.cs" Line="1" Column="1" />
-      <File FileName="Assets\Code\Effects\bloodShower\effectShowDamageOnBeAttack.cs" Line="1" Column="1" />
-      <File FileName="Assets\Code\Effects\fighterAttackEffects\ziying\effectQianfang.cs" Line="1" Column="1" />
-      <File FileName="Assets\Code\Effects\extraEffects\knifeSlash\theKnifeSlashController.cs" Line="1" Column="1" />
-      <File FileName="Assets\Code\Player\attackLinkController.cs" Line="268" Column="32" />
+      <File FileName="Assets\Code\UI\packagePanel\equip\equipInformationPanel.cs" Line="69" Column="23" />
+      <File FileName="Assets\Code\UI\messageBox\theMessageBoxPanel.cs" Line="1" Column="1" />
+      <File FileName="Assets\Code\UI\messageBox\choiceMessageBox.cs" Line="121" Column="60" />
+      <File FileName="Assets\Code\UI\packagePanel\equip\equipRemakePanel.cs" Line="31" Column="2" />
+      <File FileName="Assets\Code\systemValues.cs" Line="440" Column="68" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

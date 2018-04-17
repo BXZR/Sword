@@ -429,12 +429,25 @@ public class systemValues : MonoBehaviour {
 		titleMessageBox theMesage = theMessageBox.GetComponent <titleMessageBox> ();
 		theMesage.setInformation (information);
 	}
+
+	public static void  choiceMessageBoxShow(string showTitle , string  showText , bool autoSize = false , MesageOperate theOperateMethod = null)
+	{
+		GameObject theMessageBox = GameObject.Instantiate<GameObject>( Resources.Load<GameObject> ("UI/MessageBoxForChoice"));
+		theMessageBox.transform .localScale =  new Vector3 (2,2,2);
+		theMessageBox.transform.localPosition = Vector3.zero;
+		choiceMessageBox theMesage = theMessageBox.GetComponent <choiceMessageBox> ();
+		theMesage.isAutoResize = autoSize;
+		theMesage.setInformation (showTitle, showText,theOperateMethod );
+	}
+
 	public static void messageBoxClose()
 	{
 		if (theMessageBoxPanel.theMessageSave)
 			Destroy (theMessageBoxPanel.theMessageSave.gameObject);
 		if (titleMessageBox.theMessageSave)
 			Destroy (titleMessageBox.theMessageSave.gameObject);
+		if (choiceMessageBox.theMessageSave)
+			Destroy (choiceMessageBox.theMessageSave.gameObject);
 	}
 		
 	//消息框的操作OVER---------------------------------------------------------------------------------------------------------

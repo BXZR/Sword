@@ -14,11 +14,13 @@ public class equipRemakePanel : MonoBehaviour {
 	private static equipBasics theEquip;
 	private static Button theEquipButtonStatic;
 	private static Text theEquipButtonText;
+	private buttonWithSound theSound;
 
 	void Start()
 	{
 		theEquipButtonStatic = theEquipButton  ;
 		theEquipButtonText = theEquipButton.GetComponentInChildren<Text> ();
+		theSound = this.GetComponentInChildren<buttonWithSound> ();
 	}
 
 	public static void getEquipForOperate(equipBasics theEquipIn)
@@ -58,6 +60,14 @@ public class equipRemakePanel : MonoBehaviour {
 	{
 		if (!theEquip)
 			return;
+		systemValues.choiceMessageBoxShow ("熔铸装备？", "熔铸装备将会获得一些灵力，但是这个装备会永远消失，是否熔铸？", true, new MesageOperate (makeTheEquipToSoul));
+
+	}
+
+	void makeTheEquipToSoul()
+	{
+		theSound.makeSoundShow ();
+		
 		if (theEquip.isUsing)
 			theEquip.DropThisThing (systemValues.thePlayer);
 
@@ -70,6 +80,7 @@ public class equipRemakePanel : MonoBehaviour {
 		thePackagePanelShow.makeFlash ();
 		equipInformationPanel.makeFlash ();
 		ShowMake ();
+
 	}
 
 	//装备的升级

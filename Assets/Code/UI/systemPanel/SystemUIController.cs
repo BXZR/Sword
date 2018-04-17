@@ -69,6 +69,7 @@ public class SystemUIController : MonoBehaviour {
 		{
 			theChildPanels [index].gameObject.SetActive (!theChildPanels [index].gameObject.activeInHierarchy);
 		}
+		systemValues.messageBoxClose ();//消息框强制关闭
 	}
 
 
