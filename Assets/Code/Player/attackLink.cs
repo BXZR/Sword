@@ -530,7 +530,7 @@ public class attackLink : MonoBehaviour {
 				theString.Append("升级所需灵力：");
 				theString.Append(this.lvupCost);
 				theString.Append("\n");
-				theString.Append("升级增加首击伤害：");
+				theString.Append("升级增加额外伤害：");
 				theString.Append((int)this.extraDamageAdd );
 				theString.Append("\n");
 			}
@@ -544,8 +544,8 @@ public class attackLink : MonoBehaviour {
 				theString.Append("可以消耗");
 				theString.Append(soulCostWhenLvtoMax);
 				theString.Append("灵力继续增加");
-				theString.Append("extraDamageAdd");
-				theString.Append("首击伤害\n");
+				theString.Append(extraDamageAdd);
+				theString.Append("额外伤害\n");
 			}
 		}
 

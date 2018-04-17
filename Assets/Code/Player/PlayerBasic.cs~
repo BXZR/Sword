@@ -152,7 +152,9 @@ public class PlayerBasic : MonoBehaviour {
 	public float CActerSpSuckPercent=0f;//根据所造成伤害的百分比法力偷取
 
 	//额外战斗属性
+	[HideInInspector]
 	public float CActerDamageAdderPercent=0;//额外百分比伤害
+	[HideInInspector]
 	public float CActerDamageAdder=0;//额外真实加成
 
 	[HideInInspector]
@@ -173,7 +175,7 @@ public class PlayerBasic : MonoBehaviour {
 ///////////////////////////////////////////////////////////////////////////////////////////////////////	
 //下面是游戏计算中的临时变量
 
-	[HideInInspector]//为了保证设定面板的简洁，暂时隐藏之
+	//[HideInInspector]//为了保证设定面板的简洁，暂时隐藏之
 	public  float extraDamageForAnimation = 0;//设置为共有是为了传参数的时候方便，但是这个参数是不能够被主动在面板上设定的
 	[HideInInspector]
 	public bool isMainfighter = false;//是玩家控制的fighter
@@ -390,8 +392,6 @@ public class PlayerBasic : MonoBehaviour {
 		   if(systemValues.modeIndex == 1 && this == systemValues.thePlayer)
 			thePlayerAim.photonView.RPC ("OnBeAttack" , PhotonTargets.All,damage);
 
-			extraDamageForAnimation = 0;
-
 		    //各种附加效果
 			effectBasic[] Effects = this.GetComponentsInChildren<effectBasic> ();
 			for (int i = 0; i < Effects.Length; i++) 
@@ -438,9 +438,7 @@ public class PlayerBasic : MonoBehaviour {
 		//有些功能只在网络对战模式之下用就行
 		if(systemValues.modeIndex == 1 && this == systemValues.thePlayer)
 			thePlayerAim.photonView.RPC ("OnBeAttack" , PhotonTargets.All,damage);
-
-
-			extraDamageForAnimation = 0;
+		
 	     	//只有特殊的一类效果了才能够有效果，其余特效无效，所以是WithoutEffect
 			effectBasic[] Effects = this.GetComponentsInChildren<effectBasic> ();
 			for (int i = 0; i < Effects.Length; i++) 
@@ -822,6 +820,8 @@ public class PlayerBasic : MonoBehaviour {
 			}
 			ActerAttackSpeedPercent = Mathf.Clamp( ActerAttackSpeedPercent ,0f, ActerAttackSpeedMaxPercent);
 			ActerMoveSpeedPercent = Mathf.Clamp( ActerMoveSpeedPercent ,0f, ActerMoveSpeedMaxPercent);
+
+
 		}
 	}
 
