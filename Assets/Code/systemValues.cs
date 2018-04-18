@@ -468,4 +468,39 @@ public class systemValues : MonoBehaviour {
 		
 		return 8 * theEquip.EquipLvNow;
 	}
+
+
+
+	//3D bloodText和其他显示3D Text的对象池
+	private static List<GameObject> theShowingTexts = new List<GameObject> ();
+	private static GameObject theShowTextProfab;//显示文本预设物需要加载一次
+	public static void addIntoTheTextPool(GameObject theTextIn)
+	{
+		//保留一个引用
+		theShowingTexts.Add (theTextIn);
+		theTextIn.SetActive (false);
+		//print (" text pool count = "+theShowingTexts.Count);
+	}
+
+	public static GameObject getTextFromTextPool()
+	{
+		if (theShowingTexts.Count > 0) 
+		{
+			
+			GameObject theTextOut = theShowingTexts [0];
+			theShowingTexts.RemoveAt(0);
+			theTextOut.SetActive (true);
+			//print (theTextOut.name);
+			return theTextOut;
+		}
+		else
+		{
+			//print ("new");
+			if(!theShowTextProfab)//实际上加载一次就可以了
+			    theShowTextProfab = Resources.Load <GameObject>("effects/bloodText");
+			GameObject  theShowText = GameObject.Instantiate (theShowTextProfab);
+			return  theShowText;
+		}
+	}
+
 }

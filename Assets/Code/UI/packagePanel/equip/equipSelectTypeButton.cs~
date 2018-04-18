@@ -92,7 +92,15 @@ public class equipSelectTypeButton : MonoBehaviour {
 	{
 		GridLayoutGroup theGroup = theViewFather.GetComponent<GridLayoutGroup> ();
 		RectTransform theFatherRect = theViewFather.GetComponent<RectTransform> ();
-		float height = (float)(30+ theGroup.cellSize.y * count /( theFatherRect.rect.width / theGroup.cellSize.x));
+
+		int countPerLine = (int)( ( theFatherRect.rect.width - theFatherRect.rect.xMin ) / theGroup.cellSize.x);
+		int lines = count / countPerLine + 1;
+		//print ("CL = "+ countPerLine);
+		//print ("lines = "+ lines);
+		//print ("heightPerLine = "+theGroup.cellSize.y);
+		float height = 30 + (int)(theGroup.cellSize.y)  * lines ;
+		//print ("height = "+ height);
+
 		Rect newRect = new Rect (0,0,theFatherRect.rect.width , height);
 		theFatherRect.SetSizeWithCurrentAnchors( RectTransform.Axis.Vertical,  height);
 		//额外增加一点点数值以备不测

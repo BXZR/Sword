@@ -49,7 +49,7 @@ public class extraMoveUp : MonoBehaviour
 		theTextMesh .text = theShowText;
 		timerLife = lifeTimeIn;
 		isStarted = true;
-		Destroy (this.gameObject,3);//最多持续秒，必须要消失
+		Invoke ("makeEnd", 3f);//最多持续秒，必须要消失
 	}
 
 	public void  makeStart(Vector3 theTextMoveAimIn,float showValue,float lifeTimeIn = 1f)
@@ -60,7 +60,16 @@ public class extraMoveUp : MonoBehaviour
 		theTextMesh .text = showValue.ToString ("f0");
 		timerLife = lifeTimeIn;
 		isStarted = true;
-		Destroy (this.gameObject,3);//最多持续秒，必须要消失
+		Invoke ("makeEnd", 3f);//最多持续秒，必须要消失
+	}
+
+	void makeEnd()
+	{
+		CancelInvoke ();
+		systemValues.addIntoTheTextPool (this.gameObject);
+		isStarted = false;
+		valueSave = 0;
+		timerLife = 0.5f;//显示（生存）的时间
 	}
 
 	public void  makeUpdate(float showValue,float lifeTimeAdd = 0.1f)
@@ -78,7 +87,8 @@ public class extraMoveUp : MonoBehaviour
 			this.transform.position = Vector3.Lerp (this.transform.position, theTextMoveAim, Time.deltaTime / 2);
 			timerLife -= Time.deltaTime;
 			if (timerLife < 0)
-				Destroy (this.gameObject);
+				systemValues.addIntoTheTextPool (this.gameObject);
+				//Destroy (this.gameObject);
 		}
 	}
 }

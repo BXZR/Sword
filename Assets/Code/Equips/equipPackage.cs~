@@ -76,4 +76,16 @@ public class equipPackage : MonoBehaviour {
 			systemValues.messageTitleBoxShow ("获得【"+theEquip.equipName+"】");
 		}
 	}
+	void OnCollisionEnter(Collision collisioner)
+	{
+		if (collisioner.gameObject.tag == "equip") 
+		{
+			equipBasics theEquip = collisioner.gameObject.GetComponent <equipBasics> ();
+			if(allEquipsForSave.Contains(theEquip) == false)
+				allEquipsForSave.Add (theEquip);
+
+			collisioner.gameObject.SetActive(false);
+			systemValues.messageTitleBoxShow ("获得【"+theEquip.equipName+"】");
+		}
+	}
 }

@@ -6,9 +6,8 @@ public class effectShowDamageOnBeAttack : effectBasic
 {
 
 	//受到攻击时候显示受到了多少伤害
-	private GameObject theShowTextProfab;//预设物保存
-	private GameObject theShowText;//生成的物体的保存
-	private GameObject theShowTextForUp;//生成的物体的保存
+	private extraMoveUp theShowText;//生成的物体的保存
+	private extraMoveUp theShowTextForUp;//生成的物体的保存
 
 	private bool isOn = true;//是否开启显示，死了或者其他的时候不显示
 	private float showTimer =0.5f;//显示时间，多受到一次攻击就多显示一会
@@ -19,83 +18,58 @@ public class effectShowDamageOnBeAttack : effectBasic
 
 	public  void makeShowForHpUp(float hpup = 0)
 	{
-		//建立对象
-		if (theShowTextProfab == null)
-			theShowTextProfab = Resources.Load <GameObject>("effects/bloodText");
 		if (theShowTextForUp == null) 
 		{
-			theShowTextForUp = GameObject.Instantiate (theShowTextProfab);
-			theShowTextForUp.transform.position = this.thePlayer.transform.position + new Vector3 (Random.Range (0f, 0.5f) - 0.25f, 0.75f, 0);
-			//theShowText.transform.SetParent (thePlayer.transform);//作为可选选项先放在这里
-			//初始化和重新构建
-			Vector3 theTextMoveAim = this.thePlayer.transform.position + new Vector3 (0, 1.5f, 0);
-			extraMoveUp theMoveEffect = theShowTextForUp.GetComponent<extraMoveUp> ();
-			theMoveEffect.makeStart (theTextMoveAim, hpup, showTimer);
-			theMoveEffect.makeColor (2);
+			GameObject theOBJ = systemValues.getTextFromTextPool();
+			theShowTextForUp = theOBJ.GetComponent<extraMoveUp> ();
+			reSetText (theShowTextForUp  , hpup.ToString("f0") , 2);
 		}
 		else 
 		{
-			extraMoveUp theMoveEffect = theShowTextForUp.GetComponent<extraMoveUp> ();
-			theMoveEffect.makeUpdate (hpup);
+			theShowTextForUp.makeUpdate (hpup);
 		}
-
 	}
 
 	//Color.yellow被认为是默认颜色，与null的功效一样
 	public void makeShowTextExtra(string text , int ColorNumber = 0)
 	{
-		//建立对象
-		if (theShowTextProfab == null)
-			theShowTextProfab = Resources.Load <GameObject>("effects/bloodText");
-
-	    GameObject 	extraShow = GameObject.Instantiate (theShowTextProfab);
-	    extraShow .transform.position = this.thePlayer.transform.position + new Vector3 (Random.Range (0f, 0.5f) - 0.25f, 0.75f, 0);
-		//theShowText.transform.SetParent (thePlayer.transform);//作为可选选项先放在这里
-		//初始化和重新构建
-		Vector3 theTextMoveAim = this.thePlayer.transform.position + new Vector3 (0, 1.5f, 0);
-	    extraMoveUp theMoveEffect = extraShow.GetComponent<extraMoveUp> ();
-	    theMoveEffect.makeStart (theTextMoveAim, text, showTimer);
-
-		theMoveEffect.makeColor (ColorNumber);
+		GameObject 	extraShow = systemValues.getTextFromTextPool();
+		reSetText (extraShow.GetComponent<extraMoveUp> () , text , ColorNumber);
 	}
 
 	public void makeShowForDamage(float damage = 0)
 	{
-		//建立对象
-		if (theShowTextProfab == null)
-			theShowTextProfab = Resources.Load <GameObject>("effects/bloodText");
-		if (damage > 0) 
+		if (damage <= 0)
+			return;
+
+		if (theShowText == null || !theShowText.gameObject.activeInHierarchy) 
 		{
-			if (theShowText == null) 
-			{
-				theShowText = GameObject.Instantiate (theShowTextProfab);
-				theShowText.transform.position = this.thePlayer.transform.position + new Vector3 (0, 0.75f, 0);
-				//theShowText.transform.SetParent (thePlayer.transform);//作为可选选项先放在这里
-				//初始化和重新构建
-				Vector3 theTextMoveAim = this.thePlayer.transform.position + new Vector3 (Random.Range (0f, 0.5f) - 0.25f, 1.5f, 0);
-				extraMoveUp theMoveEffect = theShowText.GetComponent<extraMoveUp> ();
-				theMoveEffect.makeStart (theTextMoveAim, damage, showTimer);
-				if (this.thePlayer == systemValues.thePlayer) 
-				{
-					//theShowText.transform.localScale = new Vector3 (0.3f, 0.3f, 0.3f);//默认大小是0.5,0.5,0.5
-					theMoveEffect.makeColor (1);
-				} 
-				else
-					theMoveEffect.makeColor (0);
-			}
-			else
-			{
-				extraMoveUp theMoveEffect = theShowText.GetComponent<extraMoveUp> ();
-				theMoveEffect.makeUpdate (damage);
-			}
+			GameObject theOBJ = systemValues.getTextFromTextPool();
+			theShowText = theOBJ.GetComponent<extraMoveUp> ();
+			int colorNumber = this.thePlayer == systemValues.thePlayer ? 1 : 0;
+			reSetText (theShowText,damage.ToString("f0"),colorNumber);
 		}
+		else
+		{
+			theShowText .makeUpdate (damage);
+		}
+
+	}
+
+
+	public void reSetText(extraMoveUp theMoveEffect , string theText , int colorNumber = 0)
+	{
+		theMoveEffect.transform.position = this.thePlayer.transform.position + new Vector3 (0, 1f, 0);
+		Vector3 theTextMoveAim = this.thePlayer.transform.position + new Vector3 (Random.Range (0f, 0.5f) - 0.25f, 1.75f, 0);
+		theMoveEffect.makeStart (theTextMoveAim, theText, showTimer);
+		theMoveEffect.makeColor (colorNumber);
 	}
 
 	public override void OnDead ()
 	{
 		isOn = false;
-		if (theShowText)
-			Destroy (theShowText);
+		//if (theShowText)
+		//	Destroy (theShowText);
 	}
 
 	public override bool isShowing ()
@@ -111,20 +85,15 @@ public class effectShowDamageOnBeAttack : effectBasic
 	public override void OnBeAttack (float damage = 0)
 	{
 		if (isOn)
-		{
 			makeShowForDamage(damage);
-		}
 	}
 
 
 	public override void OnHpUp (float upValue = 0)
 	{
-		if (isOn)
-		{
-			//生命胡恢复效果的标识是需要门限的
-			if(upValue > 5)
-			makeShowForHpUp (upValue);
-		}
+		//生命胡恢复效果的标识是需要门限的
+		if(isOn && upValue > 5)
+		    makeShowForHpUp (upValue);
 	}
 
 	public override void OnSuperBlade (PlayerBasic aim, float Damage = 0)
@@ -142,7 +111,7 @@ public class effectShowDamageOnBeAttack : effectBasic
 	}
 	public override void OnDoNotAttackAt (PlayerBasic aim)
 	{
-		makeShowTextExtra("本次攻击未命中" , 3);
+		makeShowTextExtra("攻击未命中" , 3);
 	}
 	public override void OnAddSoul (int soulCount)
 	{
