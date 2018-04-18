@@ -18,7 +18,7 @@ public class effectShowDamageOnBeAttack : effectBasic
 
 	public  void makeShowForHpUp(float hpup = 0)
 	{
-		if (theShowTextForUp == null) 
+		if (theShowTextForUp == null || !theShowTextForUp.gameObject.activeInHierarchy ) 
 		{
 			GameObject theOBJ = systemValues.getTextFromTextPool();
 			theShowTextForUp = theOBJ.GetComponent<extraMoveUp> ();

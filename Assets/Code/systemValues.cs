@@ -503,4 +503,27 @@ public class systemValues : MonoBehaviour {
 		}
 	}
 
+
+	public static void quickSort(List<int> theP, int low, int high)
+	{
+		if (low >= high)
+			return;
+
+		int first = low;
+		int last = high;
+		int keyValue = theP[low];
+		while (low < high)
+		{
+			while (low < high && theP[high] >= keyValue)
+				high--;
+			theP[low] = theP[high];
+			while (low < high && theP[low] <= keyValue)
+				low++;
+			theP[high] = theP[low];
+		}
+		theP[low] = keyValue;
+		quickSort(theP, first, low - 1);
+		quickSort(theP, low + 1, last);
+	}
+
 }

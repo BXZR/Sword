@@ -75,7 +75,7 @@ public class equipRemakePanel : MonoBehaviour {
 		systemValues.soulCount += soulGet;
 		systemValues.messageTitleBoxShow ("【"+theEquip.equipName+"】熔为"+soulGet+"灵力");
 		DestroyImmediate(theEquip.gameObject);
-		theEquip = null;
+		//theEquip = null;
 		equipSelectTypeButton.flashThePanel ();
 		thePackagePanelShow.makeFlash ();
 		equipInformationPanel.makeFlash ();

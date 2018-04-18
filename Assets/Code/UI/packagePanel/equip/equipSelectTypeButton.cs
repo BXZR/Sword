@@ -24,68 +24,70 @@ public class equipSelectTypeButton : MonoBehaviour {
 	//按下按钮选择
 	public void makeClickWithType()
 	{
-        //前期清理工作
-		equipShowingButton []  es = theViewFather.GetComponentsInChildren<equipShowingButton>();
-		for (int i = 0; i < es.Length; i++)
-			Destroy (es[i].gameObject);
-		//因为所有的显示都是针对本机角色的
-		if (!systemValues.thePlayer)
-			return;
-		
 		equipPackage  thePackage = systemValues.thePlayer.GetComponent <equipPackage> ();
-		if (!thePackage)
-			return;
-		
-		List<equipBasics> eqs = thePackage.getEquipWithType (theTypeSelect);
-		makeFather (eqs.Count);
-		for (int i = 0; i < eqs.Count; i++) 
-		{
-			if (eqs [i] == null || eqs[i].isUsing)
-				continue;
-			GameObject theButton = GameObject.Instantiate<GameObject> (theShowingButtonProfab);
-			theButton.transform.SetParent (theViewFather.transform);
-			theButton.GetComponentInChildren<Text> ().text = "";
-			//theButton.GetComponentInChildren<Text> ().text = eqs [i].equipName;
-			theButton.GetComponent <equipShowingButton> ().theEquip = eqs [i];
-			//print ("equipPicture/" +eqs[i].theEquipType +"/"+eqs[i].equipPictureName);
-
-			theButton.GetComponent <Image> ().sprite =  systemValues.makeLoadSprite ("equipPicture/" +eqs[i].theEquipType +"/"+ eqs[i].equipPictureName);
-            //因为有grid控件，所以这些都没有必要使用了
-		}
-		theButtonSave = thisButton ;
+		thePackage.sortThePackage ();
+		List<equipBasics> eqs = thePackage.allEquipsForSave.FindAll(a => a!= null &&  a.isUsing == false  );
+		eqs = thePackage.getEquipWithType (eqs , theTypeSelect);
+		makeShow (eqs);
 	}
 
 	public void makeClickWithoutType()
 	{
-		//前期清理工作
-		equipShowingButton []  es = theViewFather.GetComponentsInChildren<equipShowingButton>();
-		for (int i = 0; i < es.Length; i++)
-			Destroy (es[i].gameObject);
+		equipPackage thePackage = systemValues.thePlayer.GetComponent <equipPackage> ();
+		thePackage.sortThePackage ();
+		List<equipBasics> eqs = thePackage.allEquipsForSave.FindAll(a => a!= null && a.isUsing == false  );
+		makeShow (eqs);
+	}
+
+
+	private void makeShow(List<equipBasics> eqs)
+	{
 		//因为所有的显示都是针对本机角色的
 		if (!systemValues.thePlayer)
 			return;
 
-		equipPackage  thePackage = systemValues.thePlayer.GetComponent <equipPackage> ();
-		if (!thePackage)
-			return;
-
-
-		List<equipBasics> eqs = thePackage.allEquipsForSave;
+		//前期清理工作
+		equipShowingButton []  es = theViewFather.GetComponentsInChildren<equipShowingButton>();
+		//直接用lambda表达式查询吧还是
 		makeFather (eqs.Count);
-		for (int i = 0; i < eqs.Count; i++) 
+
+		if (eqs.Count > es.Length) 
 		{
-			if (eqs [i] == null || eqs[i].isUsing)
-				continue;
-			GameObject theButton = GameObject.Instantiate<GameObject> (theShowingButtonProfab);
-			theButton.transform.SetParent (theViewFather.transform);
-			theButton.GetComponentInChildren<Text> ().text = "";
-			//theButton.GetComponentInChildren<Text> ().text = eqs [i].equipName;
-			theButton.GetComponent <equipShowingButton> ().theEquip = eqs [i];
-			theButton.GetComponent <Image> ().sprite =  systemValues.makeLoadSprite ("equipPicture/" +eqs[i].theEquipType +"/"+eqs[i].equipPictureName);
-			//因为有grid控件，所以这些都没有必要使用了
+			int i = 0;
+			for (; i < es.Length; i++) 
+			{
+				es [i].theEquip = eqs [i];
+				es [i].GetComponent <Image> ().sprite = systemValues.makeLoadSprite ("equipPicture/" + eqs [i].theEquipType + "/" + eqs [i].equipPictureName);
+			}
+			for (; i < eqs.Count; i++) 
+			{
+				GameObject theButton = GameObject.Instantiate<GameObject> (theShowingButtonProfab);
+				theButton.transform.SetParent (theViewFather.transform);
+				theButton.GetComponentInChildren<Text> ().text = "";
+				//theButton.GetComponentInChildren<Text> ().text = eqs [i].equipName;
+				theButton.GetComponent <equipShowingButton> ().theEquip = eqs [i];
+				theButton.GetComponent <Image> ().sprite = systemValues.makeLoadSprite ("equipPicture/" + eqs [i].theEquipType + "/" + eqs [i].equipPictureName);
+				//因为有grid控件，所以这些都没有必要使用了
+			}
+			//print ("重建次数："+( i- es.Length));
+		}
+		else
+		{
+			//print ("deletes343434");
+			int i = 0;
+			for (; i < eqs.Count; i++) 
+			{
+				es [i].theEquip = eqs [i];
+				es [i].GetComponent <Image> ().sprite = systemValues.makeLoadSprite ("equipPicture/" + eqs [i].theEquipType + "/" + eqs [i].equipPictureName);
+			}
+			for (; i>=0 && i < es.Length; i++) 
+			{
+				Destroy (es [i].gameObject);
+			}
 		}
 		theButtonSave = thisButton ;
 	}
+
 
 	//根据数组长度修改content的height
 	void makeFather(int count)

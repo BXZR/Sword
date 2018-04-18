@@ -19,6 +19,7 @@ public class equipPackage : MonoBehaviour {
 	public equipBasics thEquipForShoeUsed = null;//当前装备上的鞋子装备
 	public equipBasics thEquipForExtraUsed1 = null;//当前装备上的饰品装备1
 	public equipBasics thEquipForExtraUsed2 = null;//当前装备上的饰品装备2
+	public AudioClip theGetEquipSoundClip = null;//获得装备的时候播放的音效
 
 	//根据类别查询装备
 	//如果返回所有已经获得的装备，就直接访问allEquipsForSave
@@ -26,6 +27,16 @@ public class equipPackage : MonoBehaviour {
 	{
 		List<equipBasics> theGets = new List<equipBasics> ();
 		for (int i = 0; i < allEquipsForSave.Count; i++) 
+		{
+			if (allEquipsForSave [i].theEquipType == theType)
+				theGets.Add (allEquipsForSave[i]);
+		}
+		return theGets;
+	}
+	public List<equipBasics> getEquipWithType(List<equipBasics> eqs,equiptype theType)
+	{
+		List<equipBasics> theGets = new List<equipBasics> ();
+		for (int i = 0; i < eqs .Count; i++) 
 		{
 			if (allEquipsForSave [i].theEquipType == theType)
 				theGets.Add (allEquipsForSave[i]);
@@ -58,6 +69,36 @@ public class equipPackage : MonoBehaviour {
 		//至于 theEquipObj 想个办法看看怎么销毁或者显示一下
 	}
  
+
+	//给背包进行排序
+	//这将会是一个开销挺大的方法，或有优化
+	List<equipBasics> theSortBuffer = new List<equipBasics> ();
+	List<equipBasics> theNewPackage = new List<equipBasics> ();
+	equiptype[] thetypes = { equiptype.weapon, equiptype.body, equiptype.head, equiptype.shoe, equiptype.extra };
+	public void sortThePackage()
+	{
+		//这里还真的需要新建一个副本对象
+		theNewPackage = new List<equipBasics> ();
+		for (int k = 0; k < thetypes.Length; k++)
+		{
+			theSortBuffer.Clear ();
+			for (int i = 0; i < allEquipsForSave.Count; i++) 
+			{
+				if (allEquipsForSave [i].theEquipType == thetypes[k] && allEquipsForSave [i]!=null)
+					theSortBuffer.Add (allEquipsForSave [i]);
+			}
+//			if (theSortBuffer.Count == 0)
+//				continue;
+			
+			quickSort (theSortBuffer, 0, theSortBuffer.Count-1);
+			for (int i = 0; i < theSortBuffer.Count; i++)
+				theNewPackage.Add (theSortBuffer[i]);
+		}
+		allEquipsForSave = theNewPackage;
+		//print ("sorted count = "+ allEquipsForSave.Count);
+	}
+
+
 	//初始化
 	private void makeStart()
 	{
@@ -74,18 +115,49 @@ public class equipPackage : MonoBehaviour {
 		    
 			collisioner.gameObject.SetActive(false);
 			systemValues.messageTitleBoxShow ("获得【"+theEquip.equipName+"】");
+			systemValues.thePlayer.theAudioPlayer.playClip (theGetEquipSoundClip);
 		}
 	}
-	void OnCollisionEnter(Collision collisioner)
-	{
-		if (collisioner.gameObject.tag == "equip") 
-		{
-			equipBasics theEquip = collisioner.gameObject.GetComponent <equipBasics> ();
-			if(allEquipsForSave.Contains(theEquip) == false)
-				allEquipsForSave.Add (theEquip);
 
-			collisioner.gameObject.SetActive(false);
-			systemValues.messageTitleBoxShow ("获得【"+theEquip.equipName+"】");
+
+//	void OnCollisionEnter(Collision collisioner)
+//	{
+//		if (collisioner.gameObject.tag == "equip") 
+//		{
+//			equipBasics theEquip = collisioner.gameObject.GetComponent <equipBasics> ();
+//			if(allEquipsForSave.Contains(theEquip) == false)
+//				allEquipsForSave.Add (theEquip);
+//
+//			collisioner.gameObject.SetActive(false);
+//			systemValues.messageTitleBoxShow ("获得【"+theEquip.equipName+"】");
+//			systemValues.thePlayer.theAudioPlayer.playClip (theGetEquipSoundClip);
+//		}
+//	}
+
+
+
+	//工具方法
+
+	private  void quickSort(List<equipBasics> theP, int low, int high)
+	{
+		if (low >= high)
+			return;
+
+		int first = low;
+		int last = high;
+		equipBasics keySave = theP [low];
+		char  keyValue = theP[low].equipName[0];
+		while (low < high)
+		{
+			while (low < high && theP[high].equipName[0] >= keyValue)
+				high--;
+			theP[low] = theP[high];
+			while (low < high && theP[low].equipName[0] <= keyValue)
+				low++;
+			theP[high] = theP[low];
 		}
+		theP[low] = keySave;
+		quickSort(theP, first, low - 1);
+		quickSort(theP, low + 1, last);
 	}
 }
