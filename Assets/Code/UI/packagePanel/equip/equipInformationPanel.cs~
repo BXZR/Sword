@@ -43,7 +43,7 @@ public class equipInformationPanel : MonoBehaviour {
 		{
 			theButtonImageStatic.sprite = systemValues.makeLoadSprite ("equipPicture/"+ theEquipStatic.theEquipType + "/"+ theEquipStatic.equipPictureName);
 			theBasicTextStatic.text = theEquipStatic.getEquipName() +"\n"+theEquipStatic.getEquipAdderInformation ();
-			theEquipLvTextStatic.text = theEquipStatic.EquipLvNow.ToString();
+			theEquipLvTextStatic.text = theEquipStatic.EquipLvNow +"/"+theEquipStatic.equipLvMax;
 			//技能介绍
 			if (theEquipStatic.theEffectNames.Length == 0)
 				theSkillTextStatic.text = "此物品没有附加效果";
@@ -66,7 +66,7 @@ public class equipInformationPanel : MonoBehaviour {
 	{
 		theSkillTextStatic.text = "";
 		theBasicTextStatic.text = "";
-		theEquipLvTextStatic.text = "1";
+		theEquipLvTextStatic.text = "";
 		theButtonImageStatic.sprite = null;
 	}
 

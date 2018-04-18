@@ -57,7 +57,7 @@ public class attackLink : MonoBehaviour {
 	public bool canLvup = true;//招式是否可以升级
 	public int lvupCost  = 5;//招式升级消耗的魂
 	public int theAttackLinkLv = 1;//当前招式等级
-	private  int theAttakLinkLvMax = 18;//最大等级上限
+	public int theAttakLinkLvMax = 18;//最大等级上限
 	public float extraDamageAdd = 0;//额外攻击伤害
 	private int  soulCostWhenLvtoMax = 100;//等级满了之后继续叠加的消耗
 	private  int  adderWhenLvtoMax = 1;//极其低性价比的叠加

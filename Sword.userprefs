@@ -1,9 +1,13 @@
 ﻿<Properties StartupItem="Assembly-CSharp.csproj">
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Unity.Instance.Unity Editor" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Code\Player\attackLink.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Code\UI\packagePanel\equip\equipInformationPanel.cs">
     <Files>
-      <File FileName="Assets\Code\UI\systemPanel\Skill\skillPanelController.cs" Line="104" Column="2" />
-      <File FileName="Assets\Code\Player\attackLink.cs" Line="72" Column="23" />
+      <File FileName="Assets\Code\UI\systemPanel\Skill\skillPanelController.cs" Line="1" Column="1" />
+      <File FileName="Assets\Code\Player\attackLink.cs" Line="76" Column="15" />
+      <File FileName="Assets\Code\Player\PlayerBasic.cs" Line="1" Column="1" />
+      <File FileName="Assets\Code\UI\packagePanel\equip\equipRemakePanel.cs" Line="1" Column="1" />
+      <File FileName="Assets\Code\UI\packagePanel\equip\equipInformationPanel.cs" Line="46" Column="57" />
+      <File FileName="Assets\Code\Equips\equipBasics.cs" Line="75" Column="33" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
