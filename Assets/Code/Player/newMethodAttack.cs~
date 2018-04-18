@@ -16,7 +16,7 @@ public class newMethodAttack : MonoBehaviour {
 
 	private void extraEffectSELF()
 	{
-		if (string.IsNullOrEmpty (thePlayer . conNameToSELF) == false) //效果不可叠加
+		if (systemValues.isNullOrEmpty (thePlayer . conNameToSELF) == false) //效果不可叠加
 		{
 			System.Type theType = System.Type.GetType (thePlayer . conNameToSELF);
 			if (!thePlayer.gameObject.GetComponent ( theType))
@@ -49,7 +49,7 @@ public class newMethodAttack : MonoBehaviour {
 		
 	private void extraDamageEffect(PlayerBasic playerAim)//额外添加挂在的计算脚本
 	{
-		if (string.IsNullOrEmpty (thePlayer . conNameToEMY) == false)//效果不可叠加
+		if (systemValues.isNullOrEmpty (thePlayer . conNameToEMY) == false)//效果不可叠加
 		{
 			System.Type theType = System.Type.GetType (thePlayer.conNameToEMY);
 			if(!playerAim.gameObject.GetComponent (theType))
@@ -179,11 +179,15 @@ public class newMethodAttack : MonoBehaviour {
 
 	}
 
-
+	List<PlayerBasic> toDelete ;
 	//如果是AI需要加入额外的检查
 	private void  checkIfISAI()
 	{
-		List<PlayerBasic> toDelete = new List<PlayerBasic> ();
+		if (toDelete == null)
+			toDelete = new List<PlayerBasic> ();
+		else
+			toDelete.Clear ();
+		
 		if (this.thePlayer.gameObject.tag == "AI") 
 		{
 			for (int i = 0; i < theEMY.Count; i++) 

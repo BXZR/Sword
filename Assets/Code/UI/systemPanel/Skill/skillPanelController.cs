@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using System.Text;
 
 public class skillPanelController : MonoBehaviour {
 
@@ -58,42 +59,66 @@ public class skillPanelController : MonoBehaviour {
 	//获得连招的效果信息
 	string getAttacklinkEffectInformation(attackLink theAttacklink,GameObject theButton ,out string theSkillInformation )
 	{
-		string information = "";
-		string skillInformation = "";
-		if (string.IsNullOrEmpty (theAttacklink.conNameToSELF) == false) 
+		StringBuilder theInformationString = new StringBuilder ();
+		StringBuilder theSkillInformationString = new StringBuilder ();
+
+		if (systemValues.isNullOrEmpty (theAttacklink.conNameToSELF) == false) 
 		{
 			System.Type theType = System.Type.GetType (theAttacklink.conNameToSELF);
 		    theButton.gameObject.AddComponent (theType);
 			//effectBasic theselfEffect = theButton.GetComponent <effectBasic> ();
 			effectBasic theselfEffect = (effectBasic)theButton.GetComponent (theType);
 			theselfEffect.Init ();
-			information += "发动可以触发【" + systemValues.SkillColorForSelf + theselfEffect.theEffectName + systemValues.colorEnd +"】";
-			skillInformation += systemValues.SkillColorForSelf+ theselfEffect.getInformation ()+systemValues.colorEnd;
-			skillInformation += "\n";
-			skillInformation += systemValues.SkillExtraColor + theselfEffect.getExtraInformation () + systemValues.colorEnd;
-			//skillInformation += "\n";
-			Destroy (theButton.GetComponent <effectBasic> ());
+
+			theInformationString.Append ("发动可以触发【");
+			theInformationString.Append (systemValues.SkillColorForSelf);
+			theInformationString.Append (theselfEffect.theEffectName);
+			theInformationString.Append (systemValues.colorEnd);
+			theInformationString.Append ("】");
+
+			theSkillInformationString.Append (systemValues.SkillColorForSelf);
+			theSkillInformationString.Append (theselfEffect.getInformation ());
+			theSkillInformationString.Append (systemValues.colorEnd);
+
+			theSkillInformationString.Append ("\n");
+			theSkillInformationString.Append (systemValues.SkillExtraColor );
+			theSkillInformationString.Append (theselfEffect.getExtraInformation ());
+			theSkillInformationString.Append (systemValues.colorEnd);
+
+			Destroy (theselfEffect);
 		}
-		if (string.IsNullOrEmpty (theAttacklink.conNameToEMY) == false) 
+		if (systemValues.isNullOrEmpty (theAttacklink.conNameToEMY) == false) 
 		{
 			System.Type theType = System.Type.GetType (theAttacklink.conNameToEMY);
 			theButton.gameObject.AddComponent (theType);
 			//effectBasic theEMYEffect = theButton.GetComponent <effectBasic> ();
 			effectBasic theEMYEffect = (effectBasic)theButton.GetComponent (theType);
 			theEMYEffect.Init ();
-			if (string.IsNullOrEmpty (information) == false)
-				information += "\n";
-			information += "命中可以触发【" + systemValues.SkillColorForEnemy+ theEMYEffect.theEffectName + systemValues.colorEnd+"】";
+			if ( (theInformationString.Length)!= 0 )
+				theInformationString.Append( "\n");
+			
+			theInformationString.Append ("命中可以触发【");
+			theInformationString.Append (systemValues.SkillColorForEnemy);
+			theInformationString.Append (theEMYEffect.theEffectName);
+			theInformationString.Append (systemValues.colorEnd);
+			theInformationString.Append ("】");
+
 		
-			if (string.IsNullOrEmpty (skillInformation) == false)
-				skillInformation += "\n";
-			skillInformation +=  systemValues.SkillColorForEnemy+  theEMYEffect.getInformation () +systemValues.colorEnd;
-			skillInformation += "\n";
-			skillInformation += systemValues.SkillExtraColor + theEMYEffect.getExtraInformation () + systemValues.colorEnd;
-			skillInformation += "\n\n";
+			if (theSkillInformationString.Length != 0)
+				theSkillInformationString.Append("\n");
+
+			theSkillInformationString.Append (systemValues.SkillColorForEnemy);
+			theSkillInformationString.Append ( theEMYEffect.getInformation ());
+			theSkillInformationString.Append (systemValues.colorEnd);
+			theSkillInformationString.Append ("\n");
+			theSkillInformationString.Append (systemValues.SkillExtraColor);
+			theSkillInformationString.Append (theEMYEffect.getExtraInformation () );
+			theSkillInformationString.Append (systemValues.colorEnd);
+			theSkillInformationString.Append ("\n\n");
+
 			Destroy (theEMYEffect);
 		}
-		theSkillInformation = skillInformation;
-		return information;
+		theSkillInformation = theSkillInformationString .ToString();
+		return theInformationString.ToString();
 	}
 }

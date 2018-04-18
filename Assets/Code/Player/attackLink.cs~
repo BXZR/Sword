@@ -57,7 +57,7 @@ public class attackLink : MonoBehaviour {
 	public bool canLvup = true;//招式是否可以升级
 	public int lvupCost  = 5;//招式升级消耗的魂
 	public int theAttackLinkLv = 1;//当前招式等级
-	public int theAttakLinkLvMax = 18;//最大等级上限
+	private  int theAttakLinkLvMax = 18;//最大等级上限
 	public float extraDamageAdd = 0;//额外攻击伤害
 	private int  soulCostWhenLvtoMax = 100;//等级满了之后继续叠加的消耗
 	private  int  adderWhenLvtoMax = 1;//极其低性价比的叠加
@@ -212,9 +212,9 @@ public class attackLink : MonoBehaviour {
 	public void canculateCost()
 	{
 		int value = 7;
-		if (!string.IsNullOrEmpty (this.conNameToSELF))
+		if (!systemValues.isNullOrEmpty (this.conNameToSELF))
 			value += 10;
-		if (!string.IsNullOrEmpty (this.conNameToEMY))
+		if (!systemValues.isNullOrEmpty(this.conNameToEMY))
 			value += 10;
 		if (extraDamage > 0)
 			value += (int)extraDamage/2;
@@ -363,8 +363,16 @@ public class attackLink : MonoBehaviour {
 	//每一次都要手工重置Buffer，实际上这是个挺麻烦并且不是很准确的做法
 	public void flashBuffer(int index , char theKeyChar)
 	{
-		attackLinkStringBuff = new List<string> ();
-		attackLinkIndexBuff = new List<int> ();
+		if (attackLinkStringBuff == null)
+			attackLinkStringBuff = new List<string> ();
+		else
+			attackLinkStringBuff.Clear();
+
+		if (attackLinkIndexBuff == null)
+			attackLinkIndexBuff = new List<int> ();
+		else
+			attackLinkIndexBuff.Clear ();
+		
 		for (int i = 0; i < attackLinkStringSplited.Length; i++) 
 		{
 			if (attackLinkStringSplited[i].Length-1 >= index && attackLinkStringSplited[i][index] == theKeyChar)
@@ -436,7 +444,7 @@ public class attackLink : MonoBehaviour {
 				theString.Append ("伤害：(" );
 				theString.Append (this.thePlayer.ActerWuliDamage.ToString("f0"));
 				theString.Append ("+" );
-				theString.Append (systemValues.BESkillColor +(int) this.extraDamage + systemValues.colorEnd + ")\n");
+				theString.Append (systemValues.BESkillColor);
 				theString.Append ((int) this.extraDamage);
 				theString.Append (systemValues.colorEnd );
 				theString.Append (")\n");

@@ -159,7 +159,11 @@ public class systemValues : MonoBehaviour {
 		return  systemValues.IsSystemPanelOpened; 
 	}
 
-
+	//检查一个字符串是不是空的
+	public static bool isNullOrEmpty(string value)
+	{
+		return (value + "").Length == 0;
+	}
 
 	//工具方法，更为复杂的方法
 	//用于连招的显示按钮等等信息的全部获取
@@ -200,7 +204,8 @@ public class systemValues : MonoBehaviour {
 				theInformation.thePlayer = thePlayer.GetComponentInChildren<PlayerBasic>();
 				theInformation.attackLinkInformationText = ak.getInformationSimple (false);//获取简略的信息就足够了
 
-				if (string.IsNullOrEmpty (ak.conNameToEMY) == false) 
+				//if (string.IsNullOrEmpty (ak.conNameToEMY) == false) 
+				if (!isNullOrEmpty(ak.conNameToEMY)) 
 				{
 					//初始化一下效果
 					System.Type theType = System.Type.GetType (ak.conNameToEMY);
@@ -214,12 +219,13 @@ public class systemValues : MonoBehaviour {
 						theInformation.theEffectForEMYName = theEffect.getEffectName();
 						showString = theEffect.getInformation (false);
 						showExtra = theEffect.getExtraInformation ();
-						if (string.IsNullOrEmpty (showExtra) == false)
+						if (isNullOrEmpty  (showExtra) == false)
 							showString += "\n" + showExtra;
 						theInformation.theEffectForEMYInformaion =  showString;
 					}
 				}
-				if (string.IsNullOrEmpty (ak.conNameToSELF) == false) 
+				//if (string.IsNullOrEmpty (ak.conNameToSELF) == false) 
+				if (!isNullOrEmpty(ak.conNameToSELF)) 
 				{
 					//初始化一下效果
 					System.Type theType = System.Type.GetType (ak.conNameToSELF);
@@ -233,7 +239,7 @@ public class systemValues : MonoBehaviour {
 						theInformation.theEffectForSelfName = theEffect.getEffectName();
 						showString = theEffect.getInformation (false);
 						showExtra = theEffect.getExtraInformation ();
-						if (string.IsNullOrEmpty (showExtra) == false)
+						if (isNullOrEmpty (showExtra) == false)
 							showString += "\n" + showExtra;
 						theInformation.theEffectForSelfInformaion =  showString;
 					}
@@ -264,7 +270,8 @@ public class systemValues : MonoBehaviour {
 
 			foreach (attackLink ak in attacklinks)
 			{
-				if (string.IsNullOrEmpty (ak.conNameToEMY) == false) 
+				//if (string.IsNullOrEmpty (ak.conNameToEMY) == false) 
+				if (!isNullOrEmpty(ak.conNameToEMY)) 
 				{
 					//初始化一下效果
 					System.Type theType = System.Type.GetType (ak.conNameToEMY);
@@ -275,7 +282,8 @@ public class systemValues : MonoBehaviour {
 					//skillsInformation += theEffect.getInformation ();
 					//Destroy (theEffect);
 				}
-				if (string.IsNullOrEmpty (ak.conNameToSELF) == false) 
+				//if (string.IsNullOrEmpty (ak.conNameToSELF) == false) 
+				if (!isNullOrEmpty(ak.conNameToSELF )) 
 				{
 					//初始化一下效果
 					System.Type theType = System.Type.GetType (ak.conNameToSELF);
