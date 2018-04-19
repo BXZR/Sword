@@ -35,8 +35,15 @@ public class equipSelectTypeButton : MonoBehaviour {
 	{
 		equipPackage thePackage = systemValues.thePlayer.GetComponent <equipPackage> ();
 		thePackage.sortThePackage ();
-		List<equipBasics> eqs = thePackage.allEquipsForSave.FindAll(a => a!= null && a.isUsing == false  );
+		List<equipBasics> eqs = thePackage.allEquipsForSave.FindAll(a => a!= null && a.isUsing == false && a.theEquipType != equiptype.equipSkill  );
 		makeShow (eqs);
+	}
+
+	//显示注灵内容
+	public void makeShowEquipSkillAdder()
+	{
+
+		theButtonSave = thisButton ;
 	}
 
 
@@ -49,7 +56,7 @@ public class equipSelectTypeButton : MonoBehaviour {
 		//前期清理工作
 		equipShowingButton []  es = theViewFather.GetComponentsInChildren<equipShowingButton>();
 		//直接用lambda表达式查询吧还是
-		makeFather (eqs.Count);
+		systemValues. makeFather (eqs.Count , theViewFather);
 
 		if (eqs.Count > es.Length) 
 		{
@@ -87,27 +94,7 @@ public class equipSelectTypeButton : MonoBehaviour {
 		}
 		theButtonSave = thisButton ;
 	}
-
-
-	//根据数组长度修改content的height
-	void makeFather(int count)
-	{
-		GridLayoutGroup theGroup = theViewFather.GetComponent<GridLayoutGroup> ();
-		RectTransform theFatherRect = theViewFather.GetComponent<RectTransform> ();
-
-		int countPerLine = (int)( ( theFatherRect.rect.width - theFatherRect.rect.xMin ) / theGroup.cellSize.x);
-		int lines = count / countPerLine + 1;
-		//print ("CL = "+ countPerLine);
-		//print ("lines = "+ lines);
-		//print ("heightPerLine = "+theGroup.cellSize.y);
-		float height = 30 + (int)(theGroup.cellSize.y)  * lines ;
-		//print ("height = "+ height);
-
-		Rect newRect = new Rect (0,0,theFatherRect.rect.width , height);
-		theFatherRect.SetSizeWithCurrentAnchors( RectTransform.Axis.Vertical,  height);
-		//额外增加一点点数值以备不测
-	}
-
+		
 	void Start()
 	{
 		thisButton =  this.gameObject;

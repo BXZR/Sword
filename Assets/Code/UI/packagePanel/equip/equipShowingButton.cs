@@ -9,16 +9,26 @@ public class equipShowingButton : MonoBehaviour {
 	//按下的时候的功能
 	public void makeClick()
 	{
-		if (theEquip) {
+		if (theEquip) 
+		{
 			//三个静态方法传递对象
 			//于是区域自治（伪观察者模式）
-			equipInformationPanel.changeEquipToIntroduct (this.theEquip);
-			//返回两个装备对比的结果（可能会很长，需要控制）
-			thePackagePanelShow.setNewEquip (this.theEquip);
-			equipRemakePanel.getEquipForOperate (theEquip);
+
+			if (theEquip.theEquipType != equiptype.equipSkill)
+			{
+				equipInformationPanel.changeEquipToIntroduct (this.theEquip);
+				//返回两个装备对比的结果（可能会很长，需要控制）
+				thePackagePanelShow.setNewEquip (this.theEquip);
+				equipRemakePanel.getEquipForOperate (theEquip);
+			} 
+			else 
+			{
+				equipRemakePanel.showEquipSkillAdderGet(theEquip);
+			}
 		}
 		else 
 		{
+
 			//因为有UI穿透的问题，这个消息框实现不用了
 			//systemValues.messageBoxShow ("" , "尚且没有装备",1f);
 		}

@@ -1,0 +1,16 @@
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class equipSkillAddShowingButton : MonoBehaviour {
+
+	// Use this for initialization
+	void Start () {
+		print ("吸就是真理");
+	}
+	
+	// Update is called once per frame
+	void Update () {
+		print ("我曹为什么吸这么伟大啊，受不了了啊！！！！！！！！！！！");
+	}
+}

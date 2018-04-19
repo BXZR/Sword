@@ -6,7 +6,8 @@ using UnityEngine;
 using System.Text;
 
 //五种装备类型分别对应 头部 身体 武器 鞋子 饰品
-public enum equiptype {head,body,weapon,shoe,extra}
+//equipSkill对应注灵，这不是真正的装备，而是装备的装备
+public enum equiptype {head,body,weapon,shoe,extra,equipSkill}
 public class equipBasics : MonoBehaviour {
 
 	//这个类是装备，物品等等相关东西的基类
@@ -14,6 +15,7 @@ public class equipBasics : MonoBehaviour {
 	//特殊性在于不得不给所有的playerBasic增加一个属性
 
 	public string equipName = "" ;//装备的名字
+	public string equipExtraName = "";//装备因为技能而存在的额外附加名字
 	public string equipPictureName = "";//装备的图片
 	public float equipValue = 0;//装备的价值
 	public equiptype theEquipType;//装备种类也是分类的标记
@@ -69,7 +71,8 @@ public class equipBasics : MonoBehaviour {
 	//这件装备能够带来的特效名字
 	//这些特效也会是effectBasic的脚本
 	//当然，可以有多个被动技能
-	public string [] theEffectNames ;
+	//顺带一提，多个技能的情况非常的稀少
+	public List< string>  theEffectNames = new List<string> ();//注意这个初始化，这是非常重要的
 	//装备等级
 	private int equipLvNow = 1;
 	public int EquipLvNow{get{ return equipLvNow;}}//等级是只读的
@@ -82,8 +85,8 @@ public class equipBasics : MonoBehaviour {
 	public string getEquipName()
 	{
 		if(isUsing)
-			return equipName +"[已装备]";
-		return equipName +"[未装备]";
+			return equipName +equipExtraName +"[已装备]";
+		return equipName +equipExtraName+"[未装备]";
 	}
 	//获得装备
 	public void GetThisThing(PlayerBasic thePlayer)
@@ -584,6 +587,28 @@ public class equipBasics : MonoBehaviour {
 		return true;
 		
 	}
+
+	//装备注灵
+	public void makeEquipAddSkill(string theEffectName)
+	{
+		//如果已经装备上了，就需要先卸下来升级再装上去
+		if (isUsing)
+		{
+			DropThisThing (systemValues.thePlayer);
+			theEffectNames.Add (theEffectName);
+			equipExtraName += "[" + systemValues.getEffectNameWithName (theEffectName , this.gameObject) + "]";
+			GetThisThing (systemValues.thePlayer);
+		}
+		else 
+		{
+			theEffectNames.Add (theEffectName);
+			equipExtraName +="["+systemValues.getEffectNameWithName(theEffectName, this.gameObject)+"]";
+			GetThisThing (systemValues.thePlayer);
+			DropThisThing (systemValues.thePlayer);
+		}
+	}
+
+
 	//装备升级
 	public void makeEquipLvUp()
 	{
@@ -651,7 +676,7 @@ public class equipBasics : MonoBehaviour {
 	{
 		//所有脚本都确定只是唯一被动脚本存在一个
 		//可叠加被动就用updateEffect来做了
-		for (int i = 0; i < theEffectNames.Length; i++)
+		for (int i = 0; i < theEffectNames.Count; i++)
 		{
 			System.Type theType = System.Type.GetType (theEffectNames[i]);
 			if (theType == null)
@@ -670,7 +695,7 @@ public class equipBasics : MonoBehaviour {
 	//当然具体要做的时候还是应该参照thePlayer的装备容器，所以后面这种判断再行补上
 	private void dropEffects (PlayerBasic thePlayer)
 	{
-		for (int i = 0; i < theEffectNames.Length; i++)
+		for (int i = 0; i < theEffectNames.Count; i++)
 		{
 			System.Type theType = System.Type.GetType (theEffectNames[i]);
 			if (theType == null)
@@ -678,7 +703,7 @@ public class equipBasics : MonoBehaviour {
 			
 			effectBasic theEffect = (effectBasic)thePlayer.GetComponent (theType);
 			if(theEffect)
-			   Destroy (theEffect);
+				DestroyImmediate (theEffect);
 		}
 	
 	}

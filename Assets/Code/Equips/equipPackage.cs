@@ -12,6 +12,7 @@ public class equipPackage : MonoBehaviour {
 	PhotonView photonView;
 	//=========================================
 	public List<equipBasics> allEquipsForSave;//没有被装备的装备都是在这里完成的
+	public List<string> equipSkills;//装备注灵的原料在这里收集
 
 	public equipBasics thEquipForHeadUsed = null;//当前装备上的头部装备
 	public equipBasics thEquipForBodyUsed = null;//当前装备上的身体装备
@@ -74,7 +75,7 @@ public class equipPackage : MonoBehaviour {
 	//这将会是一个开销挺大的方法，或有优化
 	List<equipBasics> theSortBuffer = new List<equipBasics> ();
 	List<equipBasics> theNewPackage = new List<equipBasics> ();
-	equiptype[] thetypes = { equiptype.weapon, equiptype.body, equiptype.head, equiptype.shoe, equiptype.extra };
+	equiptype[] thetypes = { equiptype.weapon, equiptype.body, equiptype.head, equiptype.shoe, equiptype.extra , equiptype.equipSkill };
 	public void sortThePackage()
 	{
 		//这里还真的需要新建一个副本对象
@@ -103,6 +104,7 @@ public class equipPackage : MonoBehaviour {
 	private void makeStart()
 	{
 		allEquipsForSave = new List<equipBasics> ();
+		equipSkills = new List<string> ();
 	}
 
 	void OnTriggerEnter(Collider collisioner)
@@ -114,7 +116,11 @@ public class equipPackage : MonoBehaviour {
 				allEquipsForSave.Add (theEquip);
 		    
 			collisioner.gameObject.SetActive(false);
-			systemValues.messageTitleBoxShow ("获得【"+theEquip.equipName+"】");
+
+			if(theEquip.theEquipType!= equiptype.equipSkill)
+			    systemValues.messageTitleBoxShow ("获得装备\n【"+theEquip.equipName+"】");
+			else
+				systemValues.messageTitleBoxShow ("获得图谱\n《"+systemValues.getEffectNameWithName( theEquip.equipName, this.gameObject)+"》");
 			systemValues.thePlayer.theAudioPlayer.playClip (theGetEquipSoundClip);
 		}
 	}

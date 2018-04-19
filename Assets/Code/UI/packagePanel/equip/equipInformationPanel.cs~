@@ -45,13 +45,13 @@ public class equipInformationPanel : MonoBehaviour {
 			theBasicTextStatic.text = theEquipStatic.getEquipName() +"\n"+theEquipStatic.getEquipAdderInformation ();
 			theEquipLvTextStatic.text = theEquipStatic.EquipLvNow +"/"+theEquipStatic.equipLvMax;
 			//技能介绍
-			if (theEquipStatic.theEffectNames.Length == 0)
+			if (theEquipStatic.theEffectNames.Count == 0)
 				theSkillTextStatic.text = "此物品没有附加效果";
 			else 
 			{
 				theSkillTextStatic.text = "";
-				for (int i = 0; i < theEquipStatic.theEffectNames.Length; i++)
-					theSkillTextStatic.text += systemValues.getEffectInfromationWithName (theEquipStatic.theEffectNames [i]) +"\n";
+				for (int i = 0; i < theEquipStatic.theEffectNames.Count; i++)
+					theSkillTextStatic.text += systemValues.getEffectInfromationWithName (theEquipStatic.theEffectNames [i], theButtonStatic.gameObject) +"\n";
 			}
 		}
 		else

@@ -9,18 +9,39 @@ public class equipRemakePanel : MonoBehaviour {
 	//这个脚本用来记录装备的操作
 	//装备，卸下，合成，熔锻......
 	public Button theEquipButton;//装备/卸下的按钮
+	public Transform theViewFather;
+	public Text equipSkillAddInformation;
+	public GameObject theShowingButtonProfab;
 
     //静态信息保存
 	private static equipBasics theEquip;
+	public static equipBasics equipSkillAdderNow  = null ;
 	private static Button theEquipButtonStatic;
 	private static Text theEquipButtonText;
 	private panelSoundController theSoundController;
+	private static Text equipSkillAddInformationStatic;
+	private static Transform equipSkillAdderViewFatherStatic;
+	private static GameObject theShowingButtonProfabStatic;
 
+	private bool isStarted = false;
 	void Start()
 	{
 		theEquipButtonStatic = theEquipButton  ;
 		theEquipButtonText = theEquipButton.GetComponentInChildren<Text> ();
 		theSoundController = this.GetComponentInChildren<panelSoundController> ();
+		equipSkillAddInformationStatic = equipSkillAddInformation;
+		equipSkillAdderViewFatherStatic = theViewFather;
+		theShowingButtonProfabStatic = theShowingButtonProfab;
+		flashThePanel ();
+		isStarted = true;
+	}
+
+
+	//展示这个注灵的效果
+	public static void showEquipSkillAdderGet(equipBasics theEquip)
+	{
+		equipSkillAdderNow = theEquip;
+		equipSkillAddInformationStatic.text = systemValues.getEffectInfromationWithName (theEquip.equipName,equipSkillAdderViewFatherStatic.gameObject);
 	}
 
 	public static void getEquipForOperate(equipBasics theEquipIn)
@@ -42,6 +63,52 @@ public class equipRemakePanel : MonoBehaviour {
 			theEquipButtonText.text = "装备";
 	}
 
+	public static  void flashThePanel()
+	{
+		//因为所有的显示都是针对本机角色的
+		if (!systemValues.thePlayer )
+			return;
+		//前期清理工作
+		equipShowingButton []  es = equipSkillAdderViewFatherStatic.GetComponentsInChildren<equipShowingButton>();
+		List<equipBasics> eqs = systemValues.thePlayer.GetComponent <equipPackage> ().allEquipsForSave.FindAll (x => x!=null && x.theEquipType == equiptype.equipSkill);
+		//直接用lambda表达式查询吧还是
+		systemValues. makeFather (eqs.Count , equipSkillAdderViewFatherStatic);
+
+		if (eqs.Count > es.Length) 
+		{
+			int i = 0;
+			for (; i < es.Length; i++) 
+			{
+				es [i].theEquip = eqs [i];
+				es [i].GetComponentInChildren<Text>().text = "灵";
+			}
+			for (; i < eqs.Count; i++) 
+			{
+				GameObject theButton = GameObject.Instantiate<GameObject> (theShowingButtonProfabStatic);
+				theButton.transform.SetParent (equipSkillAdderViewFatherStatic.transform);
+				theButton.GetComponent <equipShowingButton> ().theEquip = eqs [i];
+				theButton.GetComponentInChildren<Text>().text = "灵";
+				//因为有grid控件，所以这些都没有必要使用了
+			}
+			//print ("重建次数："+( i- es.Length));
+		}
+		else
+		{
+			//print ("deletes343434");
+			int i = 0;
+			for (; i < eqs.Count; i++) 
+			{
+				es [i].theEquip = eqs [i];
+				es [i].GetComponentInChildren<Text>().text = "灵";
+			}
+			for (; i>=0 && i < es.Length; i++) 
+			{
+				Destroy (es [i].gameObject);
+			}
+		}
+		equipSkillAddInformationStatic.text = "";
+	}
+
 	//装备或者替换这个装备
 	public void wearThEquip()
 	{
@@ -59,6 +126,46 @@ public class equipRemakePanel : MonoBehaviour {
 		}
 	}
 
+
+
+	void OnEnable()
+	{
+		if(isStarted)
+			flashThePanel ();
+	}
+
+	//UI调用方法和回调方法=================================================================================================
+	public void makeTheEquipGetSkill()
+	{
+		if (!theEquip || !equipSkillAdderNow) 
+		{
+			systemValues.messageTitleBoxShow ("尚未选定装备或者注灵材料");
+			return;
+		}
+
+		if (theEquip.theEffectNames.Contains (equipSkillAdderNow.equipName)) 
+		{
+			systemValues.messageTitleBoxShow ("此装备已经注有同类型的灵力，无法叠加");
+			return;
+		}
+		string theEffectName = systemValues.getEffectNameWithName (equipSkillAdderNow.equipName,this.gameObject);
+		string theEffectInformation = systemValues.getEffectInfromationWithName (equipSkillAdderNow.equipName,this.gameObject);
+		systemValues.choiceMessageBoxShow ("是否注灵？", "注灵将会使【"+theEquip.equipName+"】获得“"+theEffectName+"”效果，需要永久消耗《"+theEffectName+"》图谱\n\n效果："+theEffectInformation +"\n\n是否注灵？", true, new MesageOperate (getTheSkill));
+	}
+
+	void getTheSkill()
+	{
+		theEquip.makeEquipAddSkill (equipSkillAdderNow.equipName);
+		DestroyImmediate(equipSkillAdderNow.gameObject);
+		equipInformationPanel.changeEquipToIntroduct (theEquip);
+		thePackagePanelShow.setNewEquip (theEquip);
+		equipRemakePanel.getEquipForOperate (theEquip);
+		flashThePanel();
+	}
+
+
+
+
 	//熔锻这个装备
 	//这个装备被消熔之后，将会转化为灵力
 	public void soulTheEquip()
@@ -68,7 +175,7 @@ public class equipRemakePanel : MonoBehaviour {
 			systemValues.messageTitleBoxShow ("尚未选定装备");
 			return;
 		}
-		systemValues.choiceMessageBoxShow ("熔锻装备？", "熔铸装备将会获得一些灵力，但是这个装备会永远消失。\n是否熔锻？", true, new MesageOperate (makeTheEquipToSoul));
+		systemValues.choiceMessageBoxShow ("熔锻装备？", "熔铸装备将会获得一些灵力，但是这个装备会永远消失。\n\n是否熔锻？", true, new MesageOperate (makeTheEquipToSoul));
 
 	}
 
@@ -106,7 +213,7 @@ public class equipRemakePanel : MonoBehaviour {
 			systemValues.messageTitleBoxShow ("升级装备所需的灵力不足，还需要"+(cost - systemValues.soulCount)+"灵力");
 			return;
 		}
-		systemValues.choiceMessageBoxShow ("升级装备？", "本次升级需要消耗"+cost+"灵力，效果为提升"+(theEquip.equipLvUpRate*100).ToString("f0")+"%的当前加成效果。\n是否升级？", true, new MesageOperate (makeEquipLvupForUse));
+		systemValues.choiceMessageBoxShow ("升级装备？", "本次升级需要消耗"+cost+"灵力，效果为提升"+(theEquip.equipLvUpRate*100).ToString("f0")+"%的当前加成效果。\n\n是否升级？", true, new MesageOperate (makeEquipLvupForUse));
 	}
 	//委托方法
 	void makeEquipLvupForUse()

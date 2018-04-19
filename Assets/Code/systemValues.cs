@@ -1,22 +1,30 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class systemValues : MonoBehaviour {
 	//程序面板单元
 	//也可以理解为这是每一个客户端的计分板
+
+	#region系统记录静态信息
 	//用来记录这个客户端的相关内容
 	//统一invokeRepeat的调用时间
 	public static float updateTimeWait = 0.1f;
-	public static bool isAttacking(Animator theAnimator)
-	{
-		//如果是移动状态说明没有攻击
-		//如果不是移动状态就说明正在攻击
-		//所以要加上“非”
-		//此外因为所有的攻击动作都在第1层，所以层的选择需要是1
-		return  !theAnimator.GetCurrentAnimatorStateInfo (1).IsName ("moveMent");
-	}
+	//当前播放的背景音乐名
+	public static string theBackMusicNameNow = "";
+	//当前控制的游戏人物，留一个引用方便使用
+	public static PlayerBasic thePlayer;
+	//当前控制的游戏人物，留一个引用方便使用
+	public static Animator thePlayerAnimator;
+	//非常重要的参数，游戏模式
+	//0 单机模式
+	//1 网络模式
+	public static int modeIndex = 0;
+	#endregion
 
+	#region游戏角色信息设定查询
+	//游戏角色相关信息设定和查询
 	public static string[] playerNames = { "归海一刀", "郭靖" ,"花木兰" , "慕容紫英"};
 	//head picture 被保存在里面与图片是对应的
 	public static string [] playerHeadNames = {"knifeHead"  , "guojingHead", "mulanHead", "ziyingHead"};
@@ -71,17 +79,23 @@ public class systemValues : MonoBehaviour {
 		}
 		return  "";
 	}
-	//当前控制的游戏人物，留一个引用方便使用
-	public static PlayerBasic thePlayer;
-	//当前控制的游戏人物，留一个引用方便使用
-	public static Animator thePlayerAnimator;
+	#endregion
+
+	#region连招状态检查
 	//动画层1只有在这个状态之下才可以运行战斗动画
 	public static string [] canAttackStateInBasicLayer = {"moveMent","rotatePoseBack" ,"rotatePoseForward","jump"};
 	public static string canAttackStateInAttackLayer = "moveMent";
 	//是否在战斗状态
 	public static int theNotAttackLayerIndex = 0;//不攻击的状态全放在这一个动画层
 	public static int theAttackLayerIndex  = 1;//攻击状态都放在这个层里面
-
+	public static bool isAttacking(Animator theAnimator)
+	{
+		//如果是移动状态说明没有攻击
+		//如果不是移动状态就说明正在攻击
+		//所以要加上“非”
+		//此外因为所有的攻击动作都在第1层，所以层的选择需要是1
+		return  !theAnimator.GetCurrentAnimatorStateInfo (1).IsName ("moveMent");
+	}
 	public static bool checkCanAttackAct()
 	{
 		//非攻击状态下的才可以转换，否则不行
@@ -123,48 +137,36 @@ public class systemValues : MonoBehaviour {
 
 		return  false;
 	}
+	#endregion
 
-	//加载图像全局工具方法
-	public static  Sprite makeLoadSprite(string textureName)
+	#region连招基本信息
+	//获取连招出招表（中文）
+	public static string []  attackLinkChinese= {"上", "下", "左" , "右" , "击"};
+	public static string []  attackLinkEnglish= {"W", "S", "A" , "D" , "J"};
+	//这是一个非常天真的方法
+	public static string getAttacklinkInformationTranslated(string attacklink)
 	{
-		//textureName = "people/noOne";
-		Texture2D theTextureIn = Resources.Load <Texture2D> (textureName);
-		return Sprite .Create(theTextureIn,new Rect (0,0,theTextureIn.width,theTextureIn.height),new Vector2 (0,0));
-	}
-
-	//当前播放的背景音乐名
-	public static string theBackMusicNameNow = "";
-
-	//非常重要的参数，游戏模式
-	//0 单机模式
-	//1 网络模式
-	public static int modeIndex = 0;
-
-	//UI界面选项是否已经开启
-	//这是一个通用的全局检查用标记
-	private  static  bool isSystemPanelOpened = true;
-	public  static bool IsSystemPanelOpened
-	{
-		get {return isSystemPanelOpened; }
-		set 
-		{   isSystemPanelOpened = value ;
-			Cursor.visible = value ;//附加额外的控制操作
+		char[] attacklinkChar = attacklink.ToCharArray ();
+		string information = "";
+		for (int i = 0; i < attacklinkChar.Length; i++) 
+		{
+			bool findChar = false;
+			for (int j = 0; j < attackLinkEnglish.Length; j++) 
+			{
+				if (attacklinkChar [i].ToString() == attackLinkEnglish [j] && !findChar)
+				{
+					information += attackLinkChinese [j];
+					findChar = true;
+				}
+			}
+			if(!findChar)
+				information += "-";
 		}
+		return information;
 	}
+	#endregion
 
-	//当一些特殊的功能发动的时候，有一些功能应该暂停
-	//为此需要一组标记，而这组标记就在这个方法里面统一处理
-	public static bool isSystemUIUsing() 
-	{
-		return  systemValues.IsSystemPanelOpened; 
-	}
-
-	//检查一个字符串是不是空的
-	public static bool isNullOrEmpty(string value)
-	{
-		return (value + "").Length == 0;
-	}
-
+	#region获取连招、效果信息
 	//工具方法，更为复杂的方法
 	//用于连招的显示按钮等等信息的全部获取
 	public static List < attackLinkInformation>  getEffectInformationsMore(GameObject thePlayer,bool withAttackLinkEffect = false)
@@ -248,17 +250,13 @@ public class systemValues : MonoBehaviour {
 			}
 
 			//清空预存
-			for (int i = 0; i < buffer.Count; i++)
-			{
-				DestroyImmediate (buffer [i]);
-				//Destroy (buffer [i]);
-			}
+			for (int i = 0; i < buffer.Count; i++){
+				DestroyImmediate (buffer [i]);}
 		}
 		return theAttackLinkInformaitons;
 	}
 
 
-		
 	//工具方法，获得所有可显示的技能效果等等的信息
 	public static string getEffectInformations(GameObject thePlayer,bool withAttackLinkEffect = false)
 	{
@@ -267,10 +265,8 @@ public class systemValues : MonoBehaviour {
 		{
 			attackLink[] attacklinks = thePlayer.GetComponentsInChildren<attackLink> (); 
 			//因为有顺序和统一调用的问题，建议建立之后统一进行销毁，因此建立一个预存。
-
 			foreach (attackLink ak in attacklinks)
 			{
-				//if (string.IsNullOrEmpty (ak.conNameToEMY) == false) 
 				if (!isNullOrEmpty(ak.conNameToEMY)) 
 				{
 					//初始化一下效果
@@ -278,11 +274,7 @@ public class systemValues : MonoBehaviour {
 					thePlayer.gameObject.AddComponent (theType);
 					effectBasic theEffect = thePlayer.gameObject.GetComponent (theType) as effectBasic;
 					buffer.Add (theEffect);
-					//theEffect.Init ();
-					//skillsInformation += theEffect.getInformation ();
-					//Destroy (theEffect);
 				}
-				//if (string.IsNullOrEmpty (ak.conNameToSELF) == false) 
 				if (!isNullOrEmpty(ak.conNameToSELF )) 
 				{
 					//初始化一下效果
@@ -290,11 +282,7 @@ public class systemValues : MonoBehaviour {
 					thePlayer.gameObject.AddComponent (theType);
 					effectBasic theEffect = thePlayer.gameObject.GetComponent (theType) as effectBasic;
 					buffer.Add (theEffect);
-					//theEffect.Init ();
-					//skillsInformation += theEffect.getInformation ();
-					//Destroy (theEffect);
 				}
-				
 			}
 		}
 		string skillsInformation = "\n";
@@ -315,16 +303,10 @@ public class systemValues : MonoBehaviour {
 			if(string.IsNullOrEmpty(showString) == false)
 			   skillsInformation += "\n\n";
 		}
-
+		//清空预存
 		if (withAttackLinkEffect)
-		{
-			//清空预存
 			for (int i = 0; i < buffer.Count; i++)
-			{
-				Destroy (buffer [i]);
-			}
-		}
-
+				DestroyImmediate (buffer [i]);
 		//return skillsInformation;
 		return skillsNames;
 	}
@@ -343,14 +325,16 @@ public class systemValues : MonoBehaviour {
 		return (BESkillColor  + skillsInformation + colorEnd);
 	}
 
-	public static string getEffectInfromationWithName(string nameIn)
+	//使用名字获得effectBasic效果信息
+	//重用行很好的方法
+	public static string getEffectInfromationWithName(string nameIn,GameObject theGameOBJ)
 	{
 		string information = "";
 		try
 		{
 			System.Type thetype = System.Type.GetType (nameIn);
-			systemValues.thePlayer.gameObject.AddComponent (thetype);
-			effectBasic theEf =  (effectBasic)systemValues.thePlayer .GetComponent(thetype);
+			theGameOBJ.AddComponent (thetype);
+			effectBasic theEf =  (effectBasic)theGameOBJ.GetComponent(thetype);
 			theEf.Init ();
 			information = theEf.getInformation ();
 			Destroy (theEf);
@@ -361,7 +345,50 @@ public class systemValues : MonoBehaviour {
 			return "";
 		}
 	}
+	//使用名字获得effectBasic效果信息
+	//重用行很好的方法
+	public static string getEffectNameWithName(string nameIn , GameObject theGameOBJ)
+	{
+		string information = "";
+		try
+		{
+			System.Type thetype = System.Type.GetType (nameIn);
+			theGameOBJ.AddComponent (thetype);
+			effectBasic theEf =  (effectBasic)theGameOBJ.GetComponent(thetype);
+			theEf.Init ();
+			information = theEf.theEffectName;
+			Destroy (theEf);
+			return information;
+		}
+		catch
+		{
+			return "";
+		}
+	}
+	#endregion
 
+	#region系统状态检查
+	//UI界面选项是否已经开启
+	//这是一个通用的全局检查用标记
+	private  static  bool isSystemPanelOpened = true;
+	public  static bool IsSystemPanelOpened
+	{
+		get {return isSystemPanelOpened; }
+		set 
+		{   isSystemPanelOpened = value ;
+			Cursor.visible = value ;//附加额外的控制操作
+		}
+	}
+
+	//当一些特殊的功能发动的时候，有一些功能应该暂停
+	//为此需要一组标记，而这组标记就在这个方法里面统一处理
+	public static bool isSystemUIUsing() 
+	{
+		return  systemValues.IsSystemPanelOpened; 
+	}
+	#endregion
+
+	#region 颜色编码
 	//所有的颜色标签都在这里设置
 	public static string normalColor = "<color=#000000>";//什么都不加成的颜色 黑色
 	public static string BESkillColor  = "<color=#FFFF8F>";//黄色
@@ -371,33 +398,10 @@ public class systemValues : MonoBehaviour {
 	public static string playerNameColor = "<color=#00FF00>" ;//其实也是黄色
 	public static string playerIntroductionColor = "<color=#FF2400>";//应该是绿色
 	public static string colorEnd = "</color>";
+	#endregion
 
-	//获取连招出招表（中文）
-	public static string []  attackLinkChinese= {"上", "下", "左" , "右" , "击"};
-	public static string []  attackLinkEnglish= {"W", "S", "A" , "D" , "J"};
-	//这是一个非常天真的方法
-	public static string getAttacklinkInformationTranslated(string attacklink)
-	{
-		char[] attacklinkChar = attacklink.ToCharArray ();
-		string information = "";
-		for (int i = 0; i < attacklinkChar.Length; i++) 
-		{
-			bool findChar = false;
-			for (int j = 0; j < attackLinkEnglish.Length; j++) 
-			{
-				if (attacklinkChar [i].ToString() == attackLinkEnglish [j] && !findChar)
-				{
-					information += attackLinkChinese [j];
-					findChar = true;
-				}
-			}
-			if(!findChar)
-				information += "-";
-		}
-		return information;
- 
-	}
-
+	#region 灵力计算
+	//灵力相关的计算------------------------------------------------------------------------------------------------------
 	//收集的灵力数量
 	//灵力可以通过击杀目标来获取
 	public static int soulCount = 3;
@@ -406,8 +410,17 @@ public class systemValues : MonoBehaviour {
 	{
 		return (int)(thePlayerIn.ActerHpMax / 100);
 	}
+	//升级这个装备需要的灵力数量
+	public static  int getSoulCountForEquipLvUp(equipBasics theEquip, bool withLv1 = false)
+	{
+		if(withLv1)
+			return 8 * (theEquip.EquipLvNow-1);
 
+		return 8 * theEquip.EquipLvNow;
+	}
+	#endregion
 
+	#region 消息框操作
 	//消息框的操作---------------------------------------------------------------------------------------------------------
 	public static void  messageBoxShow(string showTitle , string  showText , bool autoSize = false)
 	{
@@ -459,18 +472,9 @@ public class systemValues : MonoBehaviour {
 	}
 		
 	//消息框的操作OVER---------------------------------------------------------------------------------------------------------
+	#endregion
 
-	//升级这个装备需要的灵力数量
-	public static  int getSoulCountForEquipLvUp(equipBasics theEquip, bool withLv1 = false)
-	{
-		if(withLv1)
-			return 8 * (theEquip.EquipLvNow-1);
-		
-		return 8 * theEquip.EquipLvNow;
-	}
-
-
-
+	#region 3DText显示对象池
 	//3D bloodText和其他显示3D Text的对象池============================================================================
 	private static List<GameObject> theShowingTexts = new List<GameObject> ();
 	private static GameObject theShowTextProfab;//显示文本预设物需要加载一次
@@ -529,8 +533,22 @@ public class systemValues : MonoBehaviour {
 	}
 
 	//3D bloodText和其他显示3D Text的对象池============================================================================
+	#endregion
 
+	#region通用静态方法
+	//加载图像全局工具方法
+	public static  Sprite makeLoadSprite(string textureName)
+	{
+		//textureName = "people/noOne";
+		Texture2D theTextureIn = Resources.Load <Texture2D> (textureName);
+		return Sprite .Create(theTextureIn,new Rect (0,0,theTextureIn.width,theTextureIn.height),new Vector2 (0,0));
+	}
 
+	//检查一个字符串是不是空的
+	public static bool isNullOrEmpty(string value)
+	{
+		return (value + "").Length == 0;
+	}
 	public static void quickSort(List<int> theP, int low, int high)
 	{
 		if (low >= high)
@@ -553,6 +571,26 @@ public class systemValues : MonoBehaviour {
 		quickSort(theP, low + 1, last);
 	}
 
+	//根据数组长度修改content的height
+	public  static void makeFather(int count , Transform theViewFather)
+	{
+		GridLayoutGroup theGroup = theViewFather.GetComponent<GridLayoutGroup> ();
+		RectTransform theFatherRect = theViewFather.GetComponent<RectTransform> ();
+
+		int countPerLine = (int)( ( theFatherRect.rect.width - theFatherRect.rect.xMin ) / theGroup.cellSize.x);
+		int lines = countPerLine != 0 ?  count / countPerLine + 1 : 1;
+		//print ("CL = "+ countPerLine);
+		//print ("lines = "+ lines);
+		//print ("heightPerLine = "+theGroup.cellSize.y);
+		float height = 30 + (int)(theGroup.cellSize.y)  * lines ;
+		//print ("height = "+ height);
+
+		Rect newRect = new Rect (0,0,theFatherRect.rect.width , height);
+		theFatherRect.SetSizeWithCurrentAnchors( RectTransform.Axis.Vertical,  height);
+		//额外增加一点点数值以备不测
+	}
+
+	#endregion
 
 	//GM的初始化==============================================================================
 	void Start()
