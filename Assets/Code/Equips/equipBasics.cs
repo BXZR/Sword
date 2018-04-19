@@ -76,7 +76,7 @@ public class equipBasics : MonoBehaviour {
 	//装备等级上限
 	public int equipLvMax = 10;
 	//装备升级速率
-	private float equipLvUpRate = 0.07f;//每一次升级各个属性增加当前的7%，可以滚雪球
+	public float equipLvUpRate = 0.07f;//每一次升级各个属性增加当前的7%，可以滚雪球
 
 
 	public string getEquipName()

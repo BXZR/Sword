@@ -98,10 +98,11 @@
      <Compile Include="Assets\Code\Player\move.cs" />
      <Compile Include="Assets\Code\Player\newMethodAttack.cs" />
      <Compile Include="Assets\Code\Player\playerStar.cs" />
+     <Compile Include="Assets\Code\UI\UISound\buttonWithSound.cs" />
+     <Compile Include="Assets\Code\UI\UISound\panelSoundController.cs" />
      <Compile Include="Assets\Code\UI\basicShow\effectFlashPanel.cs" />
      <Compile Include="Assets\Code\UI\basicShow\soulShowText.cs" />
      <Compile Include="Assets\Code\UI\basicShow\uiShowsForBasic.cs" />
-     <Compile Include="Assets\Code\UI\buttonWithSound.cs" />
      <Compile Include="Assets\Code\UI\messageBox\choiceMessageBox.cs" />
      <Compile Include="Assets\Code\UI\messageBox\theMessageBoxPanel.cs" />
      <Compile Include="Assets\Code\UI\messageBox\titleMessageBox.cs" />

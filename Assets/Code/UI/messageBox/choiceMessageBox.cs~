@@ -127,7 +127,7 @@ public class choiceMessageBox : MonoBehaviour {
 		GUI.BeginGroup (new Rect (startPointX  ,startPointY , width, height));
 		GUI.Box (new Rect (0, 0, width, height ), "" ,GUIShowStyleForBack );//背景
 		GUI.Box (new Rect (width/3,  height * 0.05f , width/3, height*0.12f ), stringForTitle ,GUIShowStyleForTitle);//标题
-		GUI.Box (new Rect (width*0.05f, height* 0.2f , width*0.9f, height*3/5 ), stringForInformation , GUIShowStyleForInformation);//文本
+		GUI.Box (new Rect (width*0.1f, height* 0.2f , width*0.8f, height*3/5 ), stringForInformation , GUIShowStyleForInformation);//文本
 		if (GUI.Button (new Rect (width * 1 / 5, Mathf.Max( height * 4 / 5, height-80), width / 5, 35), "是" , theSkinForGUIButton.button)) 
 			{theOperate();makeEnd ();}
 		if (GUI.Button (new Rect (width * 3 / 5, Mathf.Max( height * 4 / 5, height-80), width / 5, 35), "否" , theSkinForGUIButton.button))

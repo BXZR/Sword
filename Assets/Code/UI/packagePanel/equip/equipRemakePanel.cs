@@ -14,13 +14,13 @@ public class equipRemakePanel : MonoBehaviour {
 	private static equipBasics theEquip;
 	private static Button theEquipButtonStatic;
 	private static Text theEquipButtonText;
-	private buttonWithSound theSound;
+	private panelSoundController theSoundController;
 
 	void Start()
 	{
 		theEquipButtonStatic = theEquipButton  ;
 		theEquipButtonText = theEquipButton.GetComponentInChildren<Text> ();
-		theSound = this.GetComponentInChildren<buttonWithSound> ();
+		theSoundController = this.GetComponentInChildren<panelSoundController> ();
 	}
 
 	public static void getEquipForOperate(equipBasics theEquipIn)
@@ -47,10 +47,15 @@ public class equipRemakePanel : MonoBehaviour {
 	{
 		if (theEquip)
 		{
-			systemValues.messageTitleBoxShow ("装备【"+theEquip.equipName+"】");
+			theSoundController.makeSoundShow (2);
+			systemValues.messageTitleBoxShow ("装备【" + theEquip.equipName + "】");
 			thePackagePanelShow.wearEquip (theEquip);
 			equipSelectTypeButton.flashThePanel ();
 			ShowMake ();
+		}
+		else 
+		{
+			systemValues.messageTitleBoxShow ("尚未选定装备");
 		}
 	}
 
@@ -58,15 +63,19 @@ public class equipRemakePanel : MonoBehaviour {
 	//这个装备被消熔之后，将会转化为灵力
 	public void soulTheEquip()
 	{
-		if (!theEquip)
+		if (!theEquip) 
+		{
+			systemValues.messageTitleBoxShow ("尚未选定装备");
 			return;
-		systemValues.choiceMessageBoxShow ("熔锻装备？", "熔铸装备将会获得一些灵力，但是这个装备会永远消失，是否熔锻？", true, new MesageOperate (makeTheEquipToSoul));
+		}
+		systemValues.choiceMessageBoxShow ("熔锻装备？", "熔铸装备将会获得一些灵力，但是这个装备会永远消失。\n是否熔锻？", true, new MesageOperate (makeTheEquipToSoul));
 
 	}
 
+	//委托方法
 	void makeTheEquipToSoul()
 	{
-		theSound.makeSoundShow ();
+		theSoundController.makeSoundShow (1);
 		
 		if (theEquip.isUsing)
 			theEquip.DropThisThing (systemValues.thePlayer);
@@ -86,19 +95,29 @@ public class equipRemakePanel : MonoBehaviour {
 	//装备的升级
 	public void makeEquipLvUp()
 	{
-		if (!theEquip || !theEquip.checkCanLvUp())
+		if (!theEquip || !theEquip.checkCanLvUp ()) 
+		{
+			systemValues.messageTitleBoxShow ("尚未选定装备");
 			return;
-
+		}
 		int cost = systemValues.getSoulCountForEquipLvUp (theEquip);
 		if (systemValues.soulCount < cost)
+		{
+			systemValues.messageTitleBoxShow ("升级装备所需的灵力不足，还需要"+(cost - systemValues.soulCount)+"灵力");
 			return;
-		
+		}
+		systemValues.choiceMessageBoxShow ("升级装备？", "本次升级需要消耗"+cost+"灵力，效果为提升"+(theEquip.equipLvUpRate*100).ToString("f0")+"%的当前加成效果。\n是否升级？", true, new MesageOperate (makeEquipLvupForUse));
+	}
+	//委托方法
+	void makeEquipLvupForUse()
+	{
+		theSoundController.makeSoundShow (0);
+		int cost = systemValues.getSoulCountForEquipLvUp (theEquip);
 		systemValues.soulCount -= cost;
 		theEquip.makeEquipLvUp ();
 		//数值改变了，还是刷新一下比较好
 		equipInformationPanel.changeEquipToIntroduct (theEquip);
 		thePackagePanelShow.setNewEquip (theEquip);
 		equipRemakePanel.getEquipForOperate (theEquip);
-
 	}
 }
