@@ -5,6 +5,7 @@ public class extraMoveUp : MonoBehaviour
 {
 	//显示生命变化信息的数值的向上移动(使用插值的方法)
 
+	public PlayerBasic thePlayer;//所属
 	private bool isStarted = false;
 	private Vector3 theTextMoveAim ;//这个3dtext的移动目标，移动到某地方之后就不再移动了
 	//可以累加显示数值
@@ -49,7 +50,7 @@ public class extraMoveUp : MonoBehaviour
 		theTextMesh .text = theShowText;
 		timerLife = lifeTimeIn;
 		isStarted = true;
-		Invoke ("makeEnd", 3f);//最多持续秒，必须要消失
+		Invoke ("makeEnd", 3f);//最多持续3秒，必须要消失
 	}
 
 	public void  makeStart(Vector3 theTextMoveAimIn,float showValue,float lifeTimeIn = 1f)
@@ -60,16 +61,18 @@ public class extraMoveUp : MonoBehaviour
 		theTextMesh .text = showValue.ToString ("f0");
 		timerLife = lifeTimeIn;
 		isStarted = true;
-		Invoke ("makeEnd", 3f);//最多持续秒，必须要消失
+		Invoke ("makeEnd", 3f);//最多持续3秒，必须要消失
 	}
 
 	void makeEnd()
 	{
-		CancelInvoke ();
-		systemValues.addIntoTheTextPool (this.gameObject);
+
 		isStarted = false;
 		valueSave = 0;
 		timerLife = 0.5f;//显示（生存）的时间
+		theTextMesh .text = "";
+		systemValues.addIntoTheTextPool (this.gameObject);
+		CancelInvoke ();
 	}
 
 	public void  makeUpdate(float showValue,float lifeTimeAdd = 0.1f)
@@ -87,7 +90,7 @@ public class extraMoveUp : MonoBehaviour
 			this.transform.position = Vector3.Lerp (this.transform.position, theTextMoveAim, Time.deltaTime / 2);
 			timerLife -= Time.deltaTime;
 			if (timerLife < 0)
-				systemValues.addIntoTheTextPool (this.gameObject);
+				makeEnd ();
 				//Destroy (this.gameObject);
 		}
 	}

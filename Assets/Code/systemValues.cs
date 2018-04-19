@@ -471,25 +471,48 @@ public class systemValues : MonoBehaviour {
 
 
 
-	//3D bloodText和其他显示3D Text的对象池
+	//3D bloodText和其他显示3D Text的对象池============================================================================
 	private static List<GameObject> theShowingTexts = new List<GameObject> ();
 	private static GameObject theShowTextProfab;//显示文本预设物需要加载一次
+	private static Transform  transStatic ;
 	public static void addIntoTheTextPool(GameObject theTextIn)
 	{
 		//保留一个引用
-		theShowingTexts.Add (theTextIn);
+		if(!theShowingTexts.Contains(theTextIn))
+		    theShowingTexts.Add (theTextIn);
 		theTextIn.SetActive (false);
 		//print (" text pool count = "+theShowingTexts.Count);
 	}
 
 	public static GameObject getTextFromTextPool()
 	{
+//		//这是对象池的另一种实习方案，因为有循环查找，暂时先不用
+//		GameObject findOne = null;
+//		for (int i = 0; i < theShowingTexts.Count; i++) 
+//		{
+//			if (!theShowingTexts [i].activeInHierarchy) 
+//			{
+//				findOne = theShowingTexts [i];
+//				break;
+//			}
+//		}
+//		if (!findOne) 
+//		{
+//			if(!theShowTextProfab)//实际上加载一次就可以了
+//			    theShowTextProfab = Resources.Load <GameObject>("effects/bloodText");
+//			findOne = GameObject.Instantiate (theShowTextProfab);
+//			theShowingTexts.Add (findOne);
+//		}
+//		findOne.SetActive (true);
+//		return findOne;
+
 		if (theShowingTexts.Count > 0) 
 		{
-			
+			//print ("move pre -> have "+ theShowingTexts.Count  );
 			GameObject theTextOut = theShowingTexts [0];
-			theShowingTexts.RemoveAt(0);
 			theTextOut.SetActive (true);
+			theShowingTexts.RemoveAt(0);
+			//print ("move out -> have "+ theShowingTexts.Count );
 			//print (theTextOut.name);
 			return theTextOut;
 		}
@@ -499,9 +522,13 @@ public class systemValues : MonoBehaviour {
 			if(!theShowTextProfab)//实际上加载一次就可以了
 			    theShowTextProfab = Resources.Load <GameObject>("effects/bloodText");
 			GameObject  theShowText = GameObject.Instantiate (theShowTextProfab);
+			if(transStatic)
+			  theShowText.transform.SetParent (transStatic);
 			return  theShowText;
 		}
 	}
+
+	//3D bloodText和其他显示3D Text的对象池============================================================================
 
 
 	public static void quickSort(List<int> theP, int low, int high)
@@ -524,6 +551,13 @@ public class systemValues : MonoBehaviour {
 		theP[low] = keyValue;
 		quickSort(theP, first, low - 1);
 		quickSort(theP, low + 1, last);
+	}
+
+
+	//GM的初始化==============================================================================
+	void Start()
+	{
+		transStatic = this.transform;
 	}
 
 }

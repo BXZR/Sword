@@ -18,11 +18,12 @@ public class effectShowDamageOnBeAttack : effectBasic
 
 	public  void makeShowForHpUp(float hpup = 0)
 	{
-		if (theShowTextForUp == null || !theShowTextForUp.gameObject.activeInHierarchy ) 
+		if (theShowTextForUp == null || !theShowTextForUp.gameObject.activeInHierarchy || theShowTextForUp .thePlayer!= this.thePlayer) 
 		{
 			GameObject theOBJ = systemValues.getTextFromTextPool();
 			theShowTextForUp = theOBJ.GetComponent<extraMoveUp> ();
-			reSetText (theShowTextForUp  , hpup.ToString("f0") , 2);
+			theShowTextForUp.thePlayer = this.thePlayer;
+			reSetText (theShowTextForUp , hpup.ToString("f0") , 2);
 		}
 		else 
 		{
@@ -39,28 +40,28 @@ public class effectShowDamageOnBeAttack : effectBasic
 
 	public void makeShowForDamage(float damage = 0)
 	{
-		if (damage <= 0)
+		if (damage <= 0) 
 			return;
 
-		if (theShowText == null || !theShowText.gameObject.activeInHierarchy) 
+		if (theShowText == null || !theShowText.gameObject.activeInHierarchy || theShowText.thePlayer!= this.thePlayer) 
 		{
 			GameObject theOBJ = systemValues.getTextFromTextPool();
 			theShowText = theOBJ.GetComponent<extraMoveUp> ();
+			theShowText.thePlayer = this.thePlayer;
 			int colorNumber = this.thePlayer == systemValues.thePlayer ? 1 : 0;
-			reSetText (theShowText,damage.ToString("f0"),colorNumber);
+			reSetText (theShowText ,damage.ToString("f0"),colorNumber);
 		}
 		else
 		{
-			theShowText .makeUpdate (damage);
+			theShowText.makeUpdate (damage);
 		}
-
 	}
 
 
 	public void reSetText(extraMoveUp theMoveEffect , string theText , int colorNumber = 0)
 	{
-		theMoveEffect.transform.position = this.thePlayer.transform.position + new Vector3 (0, 1f, 0);
-		Vector3 theTextMoveAim = this.thePlayer.transform.position + new Vector3 (Random.Range (0f, 0.5f) - 0.25f, 1.75f, 0);
+		theMoveEffect.transform.position = this.thePlayer.transform.position + new Vector3 (Random.Range (0f, 0.6f) - 0.3f, 1f, 0);
+		Vector3 theTextMoveAim = this.thePlayer.transform.position + new Vector3 (Random.Range (0f, 0.9f) - 0.45f, 1.75f, 0);
 		theMoveEffect.makeStart (theTextMoveAim, theText, showTimer);
 		theMoveEffect.makeColor (colorNumber);
 	}
