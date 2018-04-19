@@ -109,7 +109,7 @@ public class equipPackage : MonoBehaviour {
 
 	void OnTriggerEnter(Collider collisioner)
 	{
-		if (collisioner.gameObject.tag == "equip") 
+		if (collisioner.gameObject.tag.Equals( "equip") ) 
 		{
 			equipBasics theEquip = collisioner.gameObject.GetComponent <equipBasics> ();
 			if(allEquipsForSave.Contains(theEquip) == false)
@@ -120,7 +120,8 @@ public class equipPackage : MonoBehaviour {
 			if(theEquip.theEquipType!= equiptype.equipSkill)
 			    systemValues.messageTitleBoxShow ("获得装备\n【"+theEquip.equipName+"】");
 			else
-				systemValues.messageTitleBoxShow ("获得图谱\n《"+systemValues.getEffectNameWithName( theEquip.equipName, this.gameObject)+"》");
+				//systemValues.messageTitleBoxShow ("获得图谱\n《"+systemValues.getEffectNameWithName( theEquip.equipName)+"》");
+				systemValues.messageTitleBoxShow ("获得图谱\n《"+theEquip.equipExtraName+"》");
 			systemValues.thePlayer.theAudioPlayer.playClip (theGetEquipSoundClip);
 		}
 	}

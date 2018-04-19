@@ -14,14 +14,19 @@ public class extraRotate : MonoBehaviour {
 
 	public void makeDestory()//这个脚本的自毁
 	{
-		Destroy (this.gameObject .GetComponent (this.GetType()));
+		Destroy (this);
+	}
+
+	void Start()
+	{
+		theRotateVector *= RotateSpeed; 
 	}
 
 	void Update () 
 	{
 		if(isPrivate)
-			this.transform.Rotate (theRotateVector * RotateSpeed * Time.deltaTime , Space.Self);
+			this.transform.Rotate (theRotateVector* Time.deltaTime , Space.Self);
 		else
-			this.transform.Rotate (theRotateVector * RotateSpeed * Time.deltaTime , Space.World);
+			this.transform.Rotate (theRotateVector * Time.deltaTime , Space.World);
 	}
 }

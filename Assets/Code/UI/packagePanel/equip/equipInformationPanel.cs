@@ -51,7 +51,7 @@ public class equipInformationPanel : MonoBehaviour {
 			{
 				theSkillTextStatic.text = "";
 				for (int i = 0; i < theEquipStatic.theEffectNames.Count; i++)
-					theSkillTextStatic.text += systemValues.getEffectInfromationWithName (theEquipStatic.theEffectNames [i], theButtonStatic.gameObject) +"\n";
+					theSkillTextStatic.text += systemValues.getEffectInfromationWithName (theEquipStatic.theEffectNames [i]) +"\n";
 			}
 		}
 		else

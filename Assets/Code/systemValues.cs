@@ -327,43 +327,54 @@ public class systemValues : MonoBehaviour {
 
 	//使用名字获得effectBasic效果信息
 	//重用行很好的方法
-	public static string getEffectInfromationWithName(string nameIn,GameObject theGameOBJ)
+	public static string getEffectInfromationWithName(string nameIn,GameObject theGameOBJ = null)
 	{
+		if (theGameOBJ == null)
+			theGameOBJ = transStatic.gameObject;
+
 		string information = "";
-		try
+
+		System.Type thetype = System.Type.GetType (nameIn);
+		effectBasic  theEf =  (effectBasic)theGameOBJ.GetComponent(thetype);
+		if (theEf == null)
 		{
-			System.Type thetype = System.Type.GetType (nameIn);
 			theGameOBJ.AddComponent (thetype);
-			effectBasic theEf =  (effectBasic)theGameOBJ.GetComponent(thetype);
+			theEf = (effectBasic)theGameOBJ.GetComponent (thetype);
 			theEf.Init ();
-			information = theEf.getInformation ();
-			Destroy (theEf);
-			return information;
 		}
-		catch
-		{
-			return "";
-		}
+		information = theEf.getInformation ();
+		Destroy (theEf);
+		return information;
 	}
 	//使用名字获得effectBasic效果信息
 	//重用行很好的方法
-	public static string getEffectNameWithName(string nameIn , GameObject theGameOBJ)
+	public static string getEffectNameWithName(string nameIn , GameObject theGameOBJ= null)
 	{
+		if (theGameOBJ == null)
+			theGameOBJ = transStatic.gameObject;
+
 		string information = "";
-		try
+
+		System.Type thetype = System.Type.GetType (nameIn);
+		effectBasic  theEf =  (effectBasic)theGameOBJ.GetComponent(thetype);
+		if (theEf == null)
 		{
-			System.Type thetype = System.Type.GetType (nameIn);
 			theGameOBJ.AddComponent (thetype);
-			effectBasic theEf =  (effectBasic)theGameOBJ.GetComponent(thetype);
+			theEf = (effectBasic)theGameOBJ.GetComponent (thetype);
 			theEf.Init ();
-			information = theEf.theEffectName;
-			Destroy (theEf);
-			return information;
 		}
-		catch
-		{
-			return "";
-		}
+		information = theEf.theEffectName;
+		Destroy (theEf);
+		return information;
+
+	}
+
+	//最扯淡的弥补方法
+	private  void flashRubbish()
+	{
+		effectBasic []efs = this.gameObject.GetComponents<effectBasic> ();
+		for (int i = 0; i < efs.Length; i++)
+			Destroy (efs[i]);
 	}
 	#endregion
 
@@ -422,20 +433,30 @@ public class systemValues : MonoBehaviour {
 
 	#region 消息框操作
 	//消息框的操作---------------------------------------------------------------------------------------------------------
+	private static GameObject theMessageProfab;
+	private static GameObject theTitleMessageBoxProfab;
+	private static GameObject theChoiceMessageBoxProfab;
+	private static titleMessageBox theTitleMessageBox;
 	public static void  messageBoxShow(string showTitle , string  showText , bool autoSize = false)
 	{
-		GameObject theMessageBox = GameObject.Instantiate<GameObject>( Resources.Load<GameObject> ("UI/MessageBox"));
-		theMessageBox.transform .localScale =  new Vector3 (2,2,2);
-		theMessageBox.transform.localPosition = Vector3.zero;
+		if (!theMessageProfab)
+			theMessageProfab = Resources.Load<GameObject> ("UI/MessageBox");
+
+		GameObject theMessageBox = GameObject.Instantiate<GameObject>( theMessageProfab);
+		//theMessageBox.transform .localScale =  new Vector3 (2,2,2);
+		//theMessageBox.transform.localPosition = Vector3.zero;
 		theMessageBoxPanel theMesage = theMessageBox.GetComponent <theMessageBoxPanel> ();
 		theMesage.isAutoResize = autoSize;
 		theMesage.setInformation (showTitle, showText);
 	}
 	public static void  messageBoxShow(string showTitle , string  showText , float timer , bool autoSize = false )
 	{
-		GameObject theMessageBox = GameObject.Instantiate<GameObject>( Resources.Load<GameObject> ("UI/MessageBox"));
-		theMessageBox.transform .localScale =  new Vector3 (2,2,2);
-		theMessageBox.transform.localPosition = Vector3.zero;
+		if (!theMessageProfab)
+			theMessageProfab = Resources.Load<GameObject> ("UI/MessageBox");
+
+		GameObject theMessageBox = GameObject.Instantiate<GameObject>(theMessageProfab);
+		//theMessageBox.transform .localScale =  new Vector3 (2,2,2);
+		//theMessageBox.transform.localPosition = Vector3.zero;
 		theMessageBoxPanel theMesage = theMessageBox.GetComponent <theMessageBoxPanel> ();
 		theMesage.setInformation (showTitle, showText);
 		theMesage.isAutoResize = autoSize;
@@ -444,18 +465,32 @@ public class systemValues : MonoBehaviour {
 
 	public static void messageTitleBoxShow(string information)
 	{
-		GameObject theMessageBox = GameObject.Instantiate<GameObject>( Resources.Load<GameObject> ("UI/MessageBoxForTitle"));
-		theMessageBox.transform .localScale =  new Vector3 (2,2,2);
-		theMessageBox.transform.localPosition = Vector3.zero;
-		titleMessageBox theMesage = theMessageBox.GetComponent <titleMessageBox> ();
-		theMesage.setInformation (information);
+		if (!theTitleMessageBoxProfab)
+			theTitleMessageBoxProfab = Resources.Load<GameObject> ("UI/MessageBoxForTitle");
+
+		if (!theTitleMessageBox) 
+		{
+			GameObject theMessageBox = GameObject.Instantiate<GameObject> (theTitleMessageBoxProfab);
+			//theMessageBox.transform .localScale =  new Vector3 (2,2,2);
+			//theMessageBox.transform.localPosition = Vector3.zero;
+			theTitleMessageBox = theMessageBox.GetComponent <titleMessageBox> ();
+			theTitleMessageBox.setInformation (information);
+		} 
+		else
+		{
+			theTitleMessageBox.enabled = true;
+			theTitleMessageBox.setInformation (information);
+		}
 	}
 
 	public static void  choiceMessageBoxShow(string showTitle , string  showText , bool autoSize = false , MesageOperate theOperateMethod = null)
 	{
-		GameObject theMessageBox = GameObject.Instantiate<GameObject>( Resources.Load<GameObject> ("UI/MessageBoxForChoice"));
-		theMessageBox.transform .localScale =  new Vector3 (2,2,2);
-		theMessageBox.transform.localPosition = Vector3.zero;
+		if (!theChoiceMessageBoxProfab)
+			theChoiceMessageBoxProfab = Resources.Load<GameObject> ("UI/MessageBoxForChoice");
+		
+		GameObject theMessageBox = GameObject.Instantiate<GameObject>(theChoiceMessageBoxProfab);
+		//theMessageBox.transform .localScale =  new Vector3 (2,2,2);
+		//theMessageBox.transform.localPosition = Vector3.zero;
 		choiceMessageBox theMesage = theMessageBox.GetComponent <choiceMessageBox> ();
 		theMesage.isAutoResize = autoSize;
 		theMesage.setInformation (showTitle, showText,theOperateMethod );
@@ -574,6 +609,7 @@ public class systemValues : MonoBehaviour {
 	//根据数组长度修改content的height
 	public  static void makeFather(int count , Transform theViewFather)
 	{
+		print ("make height: "+ theViewFather.name);
 		GridLayoutGroup theGroup = theViewFather.GetComponent<GridLayoutGroup> ();
 		RectTransform theFatherRect = theViewFather.GetComponent<RectTransform> ();
 
@@ -596,6 +632,7 @@ public class systemValues : MonoBehaviour {
 	void Start()
 	{
 		transStatic = this.transform;
+		//InvokeRepeating ("flashRubbish", 5f, 5f);
 	}
 
 }

@@ -136,11 +136,11 @@ public class MusicController : MonoBehaviour {
 
 	}
 		
-	void Update () 
-	{
-		if (Input.GetKeyDown (volumnUpKey))
-			theBackMusicController.volume = Mathf.Clamp (theBackMusicController.volume+0.1f , 0f,1f);
-		if(Input .GetKeyDown(volumnDownKey))
-			theBackMusicController.volume = Mathf.Clamp (theBackMusicController.volume-0.1f , 0f,1f);
-	}
+//	void Update () 
+//	{
+//		if (Input.GetKeyDown (volumnUpKey))
+//			theBackMusicController.volume = Mathf.Clamp (theBackMusicController.volume+0.1f , 0f,1f);
+//		if(Input .GetKeyDown(volumnDownKey))
+//			theBackMusicController.volume = Mathf.Clamp (theBackMusicController.volume-0.1f , 0f,1f);
+//	}
 }

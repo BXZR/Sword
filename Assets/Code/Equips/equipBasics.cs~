@@ -596,13 +596,13 @@ public class equipBasics : MonoBehaviour {
 		{
 			DropThisThing (systemValues.thePlayer);
 			theEffectNames.Add (theEffectName);
-			equipExtraName += "[" + systemValues.getEffectNameWithName (theEffectName , this.gameObject) + "]";
+			equipExtraName += "[" + systemValues.getEffectNameWithName (theEffectName) + "]";
 			GetThisThing (systemValues.thePlayer);
 		}
 		else 
 		{
 			theEffectNames.Add (theEffectName);
-			equipExtraName +="["+systemValues.getEffectNameWithName(theEffectName, this.gameObject)+"]";
+			equipExtraName +="["+systemValues.getEffectNameWithName(theEffectName)+"]";
 			GetThisThing (systemValues.thePlayer);
 			DropThisThing (systemValues.thePlayer);
 		}
@@ -706,6 +706,15 @@ public class equipBasics : MonoBehaviour {
 				DestroyImmediate (theEffect);
 		}
 	
+	}
+
+	void Start()
+	{
+		if (this.theEquipType == equiptype.equipSkill) 
+		{
+			this.equipExtraName = systemValues.getEffectNameWithName (this.equipName,this.gameObject);
+			this.theEquipStroy = systemValues.getEffectInfromationWithName (this.equipName , this.gameObject);
+		}
 	}
 
 }

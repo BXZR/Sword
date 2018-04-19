@@ -209,7 +209,7 @@ public class attackLinkController :MonoBehaviour {
 	//这个方法在Update里面是无法使用的，events会被放空
 	void OnGUI()
 	{ 
-		if (isStarted && this.gameObject .tag != "AI")
+		if (isStarted && ! this.gameObject .tag.Equals( "AI"))
 		{
 				//为了保证更强大的兼容性暂定使用Event的方法，虽然这种方法有额外的开销
 				//InputString是一个非常强势的方法，但是比较有缺陷的就是只是针对有输出的键位有效果
@@ -251,16 +251,18 @@ public class attackLinkController :MonoBehaviour {
 		}
 	}
     
-	//有些东西应该保持实时，例如攻击速度的变化不允许有太多的延迟
-	void Update()
-	{
-		controllWithPlayer ();
-	}
 
+//	void Update()
+//	{
+//		
+//	}
+//
 	//这里只对计时器有更新
 	//有一些内容，例如计时器，需要常常更新
 	void makeUpdate()
 	{
+		//有些东西应该保持实时，例如攻击速度的变化不允许有太多的延迟
+		controllWithPlayer ();
 		if (isStarted&& startTimer && thePlayer && thePlayer.isAlive) 
 		{
 			//存在一个等待的时间

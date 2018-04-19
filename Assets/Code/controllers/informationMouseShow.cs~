@@ -108,7 +108,6 @@ public class informationMouseShow : MonoBehaviour {
 		{
 			x= Input .mousePosition .x ;//获取鼠标位置
 			y=Screen .height - Input .mousePosition .y  ;//获取 鼠标位置
-			 
 		}
 	}
 }

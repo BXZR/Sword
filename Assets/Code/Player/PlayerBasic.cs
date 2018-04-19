@@ -286,6 +286,7 @@ public class PlayerBasic : MonoBehaviour {
 		effectBasic [] theEffects = this.GetComponentsInChildren<effectBasic>();
 		for (int i = 0; i < theEffects.Length; i++)
 			theEffects [i].OnLvUp ();
+		OnGUIStringForNAmeLV = this.ActerName + "(Lv." + this.playerLv + ")";//重新做一个GUI字符串
 		systemValues.messageTitleBoxShow ("等级提升");
 	}
 	//有关经验和等级 OVER -----------------------------------------------------------------------------------------
@@ -905,6 +906,7 @@ public class PlayerBasic : MonoBehaviour {
 			GUIShowStyleHP.normal.background = (Texture2D)Resources.Load ("UI/hpGUI");
 			GUIShowStyleSP = new GUIStyle ();
 			GUIShowStyleSP.normal.background = (Texture2D)Resources.Load ("UI/spGUI");
+			OnGUIStringForNAmeLV = this.ActerName + "(Lv." + this.playerLv + ")";//重新做一个GUI字符串
 		}
 	}
 
@@ -937,8 +939,13 @@ public class PlayerBasic : MonoBehaviour {
 		makeGUIStart ();
 	}
 
+	//有些东西可以提前计算，之后直接引用啊！
+	private Rect Rect1 = new Rect (25, 0, 100, 23);
+	private Rect Rect2 = new Rect (10, 23, 127, 15);
+	private Rect Rect3 = new Rect (10, 39, 127, 15);
+	private string OnGUIStringForNAmeLV = "";
 
-	 void OnGUI()
+	void OnGUI()
 	{ 
 		if ( isShowingOnGUI  && this.isMainfighter == false &&  isAlive &&  GUIShowStyleHP!=null &&  GUIShowStyleSP!=null )
 		{
@@ -949,10 +956,10 @@ public class PlayerBasic : MonoBehaviour {
 				float rotoForSp = Mathf.Clamp ((this.ActerSp / this.ActerSpMax), 0f, 1f);
 				Vector2 c = Camera.main.WorldToScreenPoint (new Vector3 (this.transform.position.x, this.transform.position.y + 1f, this.transform.position.z));
 				GUI.BeginGroup (new Rect (c.x, Screen.height - c.y, 155, 100));
-				GUI.Box (new Rect (25, 0, 100, 23), this.ActerName +"(Lv."+this.playerLv+")");
-				GUI.Box (new Rect (10, 23, 127, 15), "");
+				GUI.Box (Rect1 ,OnGUIStringForNAmeLV );
+				GUI.Box (Rect2, "");
 				GUI.Box (new Rect (12, 24, 120 * rotoForHp, 13), "", GUIShowStyleHP);
-				GUI.Box (new Rect (10, 39, 127, 15), "");
+				GUI.Box (Rect3, "");
 				GUI.Box (new Rect (12, 40, 120 * rotoForSp, 13), "", GUIShowStyleSP);
 				GUI.EndGroup ();
 			}
