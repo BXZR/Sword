@@ -59,6 +59,7 @@
      <Compile Include="Assets\Code\Effects\bloodShower\extraMoveUp.cs" />
      <Compile Include="Assets\Code\Effects\effectBasic.cs" />
      <Compile Include="Assets\Code\Effects\effectForWuling\wind.cs" />
+     <Compile Include="Assets\Code\Effects\equipEffects\equipEffect_ExtraDamage.cs" />
      <Compile Include="Assets\Code\Effects\equipEffects\equipEffect_ExtraSuck.cs" />
      <Compile Include="Assets\Code\Effects\extraEffects\knifeSlash\Interpolate.cs" />
      <Compile Include="Assets\Code\Effects\extraEffects\knifeSlash\MeleeWeaponTrail.cs" />

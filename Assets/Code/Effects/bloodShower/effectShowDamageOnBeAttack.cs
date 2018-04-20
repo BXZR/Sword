@@ -48,11 +48,13 @@ public class effectShowDamageOnBeAttack : effectBasic
 			GameObject theOBJ = systemValues.getTextFromTextPool();
 			theShowText = theOBJ.GetComponent<extraMoveUp> ();
 			theShowText.thePlayer = this.thePlayer;
+			theShowText.valueSave = damage;
 			int colorNumber = this.thePlayer == systemValues.thePlayer ? 1 : 0;
 			reSetText (theShowText ,damage.ToString("f0"),colorNumber);
 		}
 		else
 		{
+			//print ("update");
 			theShowText.makeUpdate (damage);
 		}
 	}

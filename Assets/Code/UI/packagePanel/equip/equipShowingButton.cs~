@@ -1,11 +1,14 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class equipShowingButton : MonoBehaviour {
 
 	//这个类用来描述在显示背包中内容的时候view里面的button功能
 	public equipBasics theEquip;
+	public  static Image selectedEffectPictureSave;
+	public Image selectedEffectPicture;
 	//按下的时候的功能
 	public void makeClick()
 	{
@@ -25,12 +28,25 @@ public class equipShowingButton : MonoBehaviour {
 			{
 				equipRemakePanel.showEquipSkillAdderGet(theEquip);
 			}
+			makePictureShow ();
 		}
 		else 
 		{
 
 			//因为有UI穿透的问题，这个消息框实现不用了
 			//systemValues.messageBoxShow ("" , "尚且没有装备",1f);
+		}
+	}
+
+	private void makePictureShow()
+	{
+		//额外显示内容
+		if(selectedEffectPictureSave)
+			selectedEffectPictureSave.enabled = false;
+		if (this.selectedEffectPicture) 
+		{
+			selectedEffectPictureSave = this.selectedEffectPicture;
+			selectedEffectPictureSave.enabled = true;
 		}
 	}
 

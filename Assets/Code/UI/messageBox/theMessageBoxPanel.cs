@@ -59,37 +59,16 @@ public class theMessageBoxPanel : MonoBehaviour {
 		timer = timerIn;
 		withTimer = true;
 	}
-
-	//设定大小
-	//用的是百分比
-	public void setSize ( Vector2 theSize)
-	{
-		float widthSave = widthForScreen;
-		float heightSave = heightForScreen;
-		widthForScreen *= theSize.x;
-		heightForScreen *= theSize.y;
-
-		if (widthForScreen< widthSave)
-			widthForScreen = widthSave;
-		if (heightForScreen < heightSave)
-			heightForScreen = heightSave;
-	}
-
+		
 	//自我销毁
 	public void makeEnd()
 	{
-		isClosing = true;
-		Destroy (this.gameObject , 0.5f);
+		isAutoResize = false;
+		isClosing = false;
+		enabled = false;
+		showPercent = 0f;
 	}
 		
-	//消息框全局唯一
-	private void makeAlone()
-	{
-		if (theMessageSave != null)
-			Destroy (theMessageSave.gameObject);
-		theMessageSave = this;
-		
-	}
 	//初始化
 	private  void makeStart()
 	{
@@ -112,8 +91,12 @@ public class theMessageBoxPanel : MonoBehaviour {
 
 	void Start()
 	{
-		makeAlone ();
 		makeStart ();
+	}
+
+	void OnEnable()
+	{
+		canculateValuesForGUI ();
 	}
 
 	void Update()
@@ -126,14 +109,45 @@ public class theMessageBoxPanel : MonoBehaviour {
 		}
 	}
 
+	//设定大小
+	//用的是百分比
+	public void setSize ( Vector2 theSize)
+	{
+		float widthSave = widthForScreen;
+		float heightSave = heightForScreen;
+		widthBasic *= theSize.x;
+		heightBasic *= theSize.y;
+
+		if (widthBasic< widthSave)
+			widthBasic = widthSave;
+		if (heightBasic < heightSave)
+			heightBasic = heightSave;
+	}
+
+	//提前就把一些内容计算好了======================================================================================================
+	float startPointXBasic = 10f;
+	float startPointYBasic = 10f;
+	float widthBasic = 10f;
+	float heightBasic = 10f;
+	private  void canculateValuesForGUI()
+	{
+		startPointXBasic = Screen.width * 0.5f;   
+		startPointYBasic = Screen.height * 0.5f; 
+
+		widthBasic = widthForScreen * Screen.width;
+		heightBasic = heightForScreen* Screen.width;
+	}
+	//============================================================================================================================
 	//messageOnGUI的做法
 	void OnGUI()
 	{ 
-		float startPointX = (1 - widthForScreen*showPercent) * Screen.width / 2;
-		float startPointY = (1 - heightForScreen*showPercent) * Screen.height / 2;
+		//print ("show the messageBox");
+		float startPointX = startPointXBasic * (1 - widthForScreen*showPercent);
+		float startPointY = startPointYBasic * (1 - widthForScreen*showPercent);
 		startPointY *= 0.4f;//稍微向上移动一点
-		float width = widthForScreen * Screen.width*showPercent;
-		float height = heightForScreen* Screen.width*showPercent;
+		float width = widthBasic*showPercent;
+		float height = heightBasic*showPercent;
+
 		GUI.BeginGroup (new Rect (startPointX  ,startPointY , width, height));
 		GUI.Box (new Rect (0, 0, width, height ), "" ,GUIShowStyleForBack );//背景
 		GUI.Box (new Rect (width/3,  height * 0.05f , width/3, height*0.12f ), stringForTitle ,GUIShowStyleForTitle);//标题

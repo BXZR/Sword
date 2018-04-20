@@ -41,7 +41,7 @@ public class equipRemakePanel : MonoBehaviour {
 	public static void showEquipSkillAdderGet(equipBasics theEquip)
 	{
 		equipSkillAdderNow = theEquip;
-		equipSkillAddInformationStatic.text = systemValues.getEffectInfromationWithName (theEquip.equipName,equipSkillAdderViewFatherStatic.gameObject);
+		equipSkillAddInformationStatic.text = systemValues.getEffectInfromationWithName (theEquip.equipName);
 	}
 
 	public static void getEquipForOperate(equipBasics theEquipIn)
@@ -61,6 +61,9 @@ public class equipRemakePanel : MonoBehaviour {
 
 		else 
 			theEquipButtonText.text = "装备";
+
+		if(equipShowingButton.selectedEffectPictureSave)
+		equipShowingButton.selectedEffectPictureSave.enabled = false;
 	}
 
 	public static  void flashThePanel()
@@ -148,13 +151,14 @@ public class equipRemakePanel : MonoBehaviour {
 			systemValues.messageTitleBoxShow ("此装备已经注有同类型的灵力，无法叠加");
 			return;
 		}
-		string theEffectName = systemValues.getEffectNameWithName (equipSkillAdderNow.equipName,this.gameObject);
-		string theEffectInformation = systemValues.getEffectInfromationWithName (equipSkillAdderNow.equipName,this.gameObject);
+		string theEffectName = systemValues.getEffectNameWithName (equipSkillAdderNow.equipName);
+		string theEffectInformation = systemValues.getEffectInfromationWithName (equipSkillAdderNow.equipName);
 		systemValues.choiceMessageBoxShow ("是否注灵？", "注灵将会使【"+theEquip.equipName+"】获得“"+theEffectName+"”效果，需要永久消耗《"+theEffectName+"》图谱\n\n效果："+theEffectInformation +"\n\n是否注灵？", true, new MesageOperate (getTheSkill));
 	}
 
 	void getTheSkill()
 	{
+		theSoundController.makeSoundShow (3);
 		theEquip.makeEquipAddSkill (equipSkillAdderNow.equipName);
 		DestroyImmediate(equipSkillAdderNow.gameObject);
 		equipInformationPanel.changeEquipToIntroduct (theEquip);

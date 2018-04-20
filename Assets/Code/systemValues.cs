@@ -436,31 +436,54 @@ public class systemValues : MonoBehaviour {
 	private static GameObject theMessageProfab;
 	private static GameObject theTitleMessageBoxProfab;
 	private static GameObject theChoiceMessageBoxProfab;
-	private static titleMessageBox theTitleMessageBox;
+	//一些引用保留，没有必要每一次都重建一个本就唯一的预设物
+	private static titleMessageBox theTitleMessageBoxSave;
+	private static theMessageBoxPanel theMessageBoxSave;
+
 	public static void  messageBoxShow(string showTitle , string  showText , bool autoSize = false)
 	{
 		if (!theMessageProfab)
 			theMessageProfab = Resources.Load<GameObject> ("UI/MessageBox");
 
-		GameObject theMessageBox = GameObject.Instantiate<GameObject>( theMessageProfab);
-		//theMessageBox.transform .localScale =  new Vector3 (2,2,2);
-		//theMessageBox.transform.localPosition = Vector3.zero;
-		theMessageBoxPanel theMesage = theMessageBox.GetComponent <theMessageBoxPanel> ();
-		theMesage.isAutoResize = autoSize;
-		theMesage.setInformation (showTitle, showText);
+		if (!theMessageBoxSave) 
+		{
+			GameObject theMessageBox = GameObject.Instantiate<GameObject> (theMessageProfab);
+			theMessageBox.transform.SetParent (transStatic);
+			//theMessageBox.transform .localScale =  new Vector3 (2,2,2);
+			//theMessageBox.transform.localPosition = Vector3.zero;
+			theMessageBoxSave = theMessageBox.GetComponent <theMessageBoxPanel> ();
+			theMessageBoxSave.isAutoResize = autoSize;
+			theMessageBoxSave.setInformation (showTitle, showText);
+		} 
+		else
+		{
+			theMessageBoxSave.enabled = true;
+			theMessageBoxSave.isAutoResize = autoSize;
+			theMessageBoxSave.setInformation (showTitle, showText);
+		}
 	}
 	public static void  messageBoxShow(string showTitle , string  showText , float timer , bool autoSize = false )
 	{
 		if (!theMessageProfab)
 			theMessageProfab = Resources.Load<GameObject> ("UI/MessageBox");
 
-		GameObject theMessageBox = GameObject.Instantiate<GameObject>(theMessageProfab);
-		//theMessageBox.transform .localScale =  new Vector3 (2,2,2);
-		//theMessageBox.transform.localPosition = Vector3.zero;
-		theMessageBoxPanel theMesage = theMessageBox.GetComponent <theMessageBoxPanel> ();
-		theMesage.setInformation (showTitle, showText);
-		theMesage.isAutoResize = autoSize;
-		theMesage.setTimer (timer);
+		if (!theMessageBoxSave) 
+		{
+			GameObject theMessageBox = GameObject.Instantiate<GameObject> (theMessageProfab);
+			theMessageBox.transform.SetParent (transStatic);
+			//theMessageBox.transform .localScale =  new Vector3 (2,2,2);
+			//theMessageBox.transform.localPosition = Vector3.zero;
+			theMessageBoxSave = theMessageBox.GetComponent <theMessageBoxPanel> ();
+			theMessageBoxSave .setInformation (showTitle, showText);
+			theMessageBoxSave .isAutoResize = autoSize;
+			theMessageBoxSave .setTimer (timer);
+		}
+		else
+		{
+			theMessageBoxSave.enabled = true;
+			theMessageBoxSave.isAutoResize = autoSize;
+			theMessageBoxSave.setInformation (showTitle, showText);
+		}
 	}
 
 	public static void messageTitleBoxShow(string information)
@@ -468,18 +491,19 @@ public class systemValues : MonoBehaviour {
 		if (!theTitleMessageBoxProfab)
 			theTitleMessageBoxProfab = Resources.Load<GameObject> ("UI/MessageBoxForTitle");
 
-		if (!theTitleMessageBox) 
+		if (!theTitleMessageBoxSave) 
 		{
 			GameObject theMessageBox = GameObject.Instantiate<GameObject> (theTitleMessageBoxProfab);
+			theMessageBox.transform.SetParent (transStatic);
 			//theMessageBox.transform .localScale =  new Vector3 (2,2,2);
 			//theMessageBox.transform.localPosition = Vector3.zero;
-			theTitleMessageBox = theMessageBox.GetComponent <titleMessageBox> ();
-			theTitleMessageBox.setInformation (information);
+			theTitleMessageBoxSave = theMessageBox.GetComponent <titleMessageBox> ();
+			theTitleMessageBoxSave.setInformation (information);
 		} 
 		else
 		{
-			theTitleMessageBox.enabled = true;
-			theTitleMessageBox.setInformation (information);
+			theTitleMessageBoxSave.enabled = true;
+			theTitleMessageBoxSave.setInformation (information);
 		}
 	}
 
@@ -609,7 +633,7 @@ public class systemValues : MonoBehaviour {
 	//根据数组长度修改content的height
 	public  static void makeFather(int count , Transform theViewFather)
 	{
-		print ("make height: "+ theViewFather.name);
+		//print ("make height: "+ theViewFather.name);
 		GridLayoutGroup theGroup = theViewFather.GetComponent<GridLayoutGroup> ();
 		RectTransform theFatherRect = theViewFather.GetComponent<RectTransform> ();
 

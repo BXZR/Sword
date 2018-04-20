@@ -682,10 +682,13 @@ public class equipBasics : MonoBehaviour {
 			if (theType == null)
 				continue;
 
-			if (!thePlayer.gameObject.GetComponent ( theType))
+			//装备的注灵效果应该是可以叠加的，这部是唯一被动
+			//顺带解决了多个具有相同注灵效果的装备同时装备，当卸下一个装备的时候所有效果都消失的问题
+
+			//if (!thePlayer.gameObject.GetComponent ( theType))
 				thePlayer.gameObject.AddComponent (theType);
-			else
-				((effectBasic)thePlayer.GetComponent (theType)).updateEffect ();
+			//else
+			//	((effectBasic)thePlayer.GetComponent (theType)).updateEffect ();
 		}
 	}
 

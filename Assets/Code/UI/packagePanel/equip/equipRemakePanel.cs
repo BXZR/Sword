@@ -61,6 +61,9 @@ public class equipRemakePanel : MonoBehaviour {
 
 		else 
 			theEquipButtonText.text = "装备";
+
+		if(equipShowingButton.selectedEffectPictureSave)
+		equipShowingButton.selectedEffectPictureSave.enabled = false;
 	}
 
 	public static  void flashThePanel()
@@ -155,6 +158,7 @@ public class equipRemakePanel : MonoBehaviour {
 
 	void getTheSkill()
 	{
+		theSoundController.makeSoundShow (3);
 		theEquip.makeEquipAddSkill (equipSkillAdderNow.equipName);
 		DestroyImmediate(equipSkillAdderNow.gameObject);
 		equipInformationPanel.changeEquipToIntroduct (theEquip);

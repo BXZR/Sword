@@ -1,23 +1,23 @@
 ﻿<Properties StartupItem="Assembly-CSharp.csproj">
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Unity.Instance.Unity Editor" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Code\Player\PlayerBasic.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Code\UI\packagePanel\equip\equipRemakePanel.cs">
     <Files>
-      <File FileName="Assets\Code\UI\packagePanel\equip\equipRemakePanel.cs" Line="152" Column="46" />
-      <File FileName="Assets\Code\systemValues.cs" Line="474" Column="65" />
-      <File FileName="Assets\Code\UI\packagePanel\equip\equipInformationPanel.cs" Line="54" Column="46" />
-      <File FileName="Assets\Code\Equips\equipPackage.cs" Line="111" Column="3" />
-      <File FileName="Assets\Code\Equips\equipBasics.cs" Line="715" Column="79" />
+      <File FileName="Assets\Code\UI\packagePanel\equip\equipRemakePanel.cs" Line="65" Column="50" />
+      <File FileName="Assets\Code\systemValues.cs" Line="1" Column="1" />
+      <File FileName="Assets\Code\UI\packagePanel\equip\equipInformationPanel.cs" Line="1" Column="1" />
+      <File FileName="Assets\Code\Equips\equipPackage.cs" Line="1" Column="1" />
+      <File FileName="Assets\Code\Equips\equipBasics.cs" Line="1" Column="1" />
       <File FileName="Assets\Code\UI\packagePanel\thePackagePanelShow.cs" Line="1" Column="1" />
-      <File FileName="Assets\Code\UI\messageBox\titleMessageBox.cs" Line="79" Column="41" />
-      <File FileName="Assets\Code\sound\MusicController.cs" Line="137" Column="3" />
-      <File FileName="Assets\Code\Effects\fighterAttackEffects\public\jifei.cs" Line="20" Column="11" />
-      <File FileName="Assets\Code\controllers\informationMouseShow.cs" Line="110" Column="58" />
+      <File FileName="Assets\Code\UI\messageBox\titleMessageBox.cs" Line="1" Column="1" />
+      <File FileName="Assets\Code\sound\MusicController.cs" Line="1" Column="1" />
+      <File FileName="Assets\Code\Effects\fighterAttackEffects\public\jifei.cs" Line="1" Column="1" />
+      <File FileName="Assets\Code\controllers\informationMouseShow.cs" Line="1" Column="1" />
       <File FileName="Assets\Code\UI\systemPanel\SystemUIController.cs" Line="1" Column="1" />
-      <File FileName="Assets\Code\Extra\extraRotate.cs" Line="17" Column="16" />
-      <File FileName="Assets\Code\Player\attackLinkController.cs" Line="212" Column="56" />
-      <File FileName="Assets\Code\AI\FSMStage.cs" Line="117" Column="2" />
+      <File FileName="Assets\Code\Extra\extraRotate.cs" Line="1" Column="1" />
+      <File FileName="Assets\Code\Player\attackLinkController.cs" Line="1" Column="1" />
+      <File FileName="Assets\Code\AI\FSMStage.cs" Line="1" Column="1" />
       <File FileName="Assets\Code\Player\PlayerBasic.cs" Line="909" Column="86" />
-      <File FileName="Assets\Code\Effects\effectBasic.cs" Line="37" Column="2" />
+      <File FileName="Assets\Code\Effects\effectBasic.cs" Line="1" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

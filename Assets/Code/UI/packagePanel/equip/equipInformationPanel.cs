@@ -68,6 +68,7 @@ public class equipInformationPanel : MonoBehaviour {
 		theBasicTextStatic.text = "";
 		theEquipLvTextStatic.text = "";
 		theButtonImageStatic.sprite = null;
+
 	}
 
 	public void showEquipStory()

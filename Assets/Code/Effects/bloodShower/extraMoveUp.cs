@@ -9,7 +9,7 @@ public class extraMoveUp : MonoBehaviour
 	private bool isStarted = false;
 	private Vector3 theTextMoveAim ;//这个3dtext的移动目标，移动到某地方之后就不再移动了
 	//可以累加显示数值
-	private float valueSave = 0;
+	public float valueSave = 0;
 	//TextMesh引用
 	private TextMesh theTextMesh ;
 	float timerLife = 0.5f;//显示（生存）的时间
