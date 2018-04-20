@@ -34,6 +34,7 @@ public class equipInformationPanel : MonoBehaviour {
 	public static void changeEquipToIntroduct(equipBasics theEquipIn)
 	{
 		theEquipStatic = theEquipIn;
+		//print ("name = "+ theEquipStatic.equipName);
 		showEquipInformation ();
 	}
 

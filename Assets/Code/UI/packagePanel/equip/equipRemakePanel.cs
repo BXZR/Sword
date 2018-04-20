@@ -61,9 +61,6 @@ public class equipRemakePanel : MonoBehaviour {
 
 		else 
 			theEquipButtonText.text = "装备";
-
-		if(equipShowingButton.selectedEffectPictureSave)
-		equipShowingButton.selectedEffectPictureSave.enabled = false;
 	}
 
 	public static  void flashThePanel()
@@ -83,14 +80,14 @@ public class equipRemakePanel : MonoBehaviour {
 			for (; i < es.Length; i++) 
 			{
 				es [i].theEquip = eqs [i];
-				es [i].GetComponentInChildren<Text>().text = "灵";
+				es [i].GetComponentInChildren<Text>().text = "";
 			}
 			for (; i < eqs.Count; i++) 
 			{
 				GameObject theButton = GameObject.Instantiate<GameObject> (theShowingButtonProfabStatic);
 				theButton.transform.SetParent (equipSkillAdderViewFatherStatic.transform);
 				theButton.GetComponent <equipShowingButton> ().theEquip = eqs [i];
-				theButton.GetComponentInChildren<Text>().text = "灵";
+				theButton.GetComponentInChildren<Text>().text = "";
 				//因为有grid控件，所以这些都没有必要使用了
 			}
 			//print ("重建次数："+( i- es.Length));
@@ -102,7 +99,7 @@ public class equipRemakePanel : MonoBehaviour {
 			for (; i < eqs.Count; i++) 
 			{
 				es [i].theEquip = eqs [i];
-				es [i].GetComponentInChildren<Text>().text = "灵";
+				es [i].GetComponentInChildren<Text>().text = "";
 			}
 			for (; i>=0 && i < es.Length; i++) 
 			{
@@ -151,11 +148,11 @@ public class equipRemakePanel : MonoBehaviour {
 			systemValues.messageTitleBoxShow ("此装备已经注有同类型的灵力，无法叠加");
 			return;
 		}
-		string theEffectName = systemValues.getEffectNameWithName (equipSkillAdderNow.equipName);
-		string theEffectInformation = systemValues.getEffectInfromationWithName (equipSkillAdderNow.equipName);
+		string theEffectName = equipSkillAdderNow.equipExtraName;// systemValues.getEffectNameWithName (equipSkillAdderNow.equipName);
+		string theEffectInformation = equipSkillAdderNow .theEquipStroy;//systemValues.getEffectInfromationWithName (equipSkillAdderNow.equipName);
 		systemValues.choiceMessageBoxShow ("是否注灵？", "注灵将会使【"+theEquip.equipName+"】获得“"+theEffectName+"”效果，需要永久消耗《"+theEffectName+"》图谱\n\n效果："+theEffectInformation +"\n\n是否注灵？", true, new MesageOperate (getTheSkill));
 	}
-
+		
 	void getTheSkill()
 	{
 		theSoundController.makeSoundShow (3);
@@ -165,6 +162,7 @@ public class equipRemakePanel : MonoBehaviour {
 		thePackagePanelShow.setNewEquip (theEquip);
 		equipRemakePanel.getEquipForOperate (theEquip);
 		flashThePanel();
+		equipShowingButton.flashPicture ();
 	}
 
 
@@ -176,10 +174,10 @@ public class equipRemakePanel : MonoBehaviour {
 	{
 		if (!theEquip) 
 		{
-			systemValues.messageTitleBoxShow ("尚未选定装备");
+			systemValues.messageTitleBoxShow ("尚未选定目标");
 			return;
 		}
-		systemValues.choiceMessageBoxShow ("熔锻装备？", "熔铸装备将会获得一些灵力，但是这个装备会永远消失。\n\n是否熔锻？", true, new MesageOperate (makeTheEquipToSoul));
+		systemValues.choiceMessageBoxShow ("熔锻？", "熔锻这个物品将会获得一些灵力，但是这个物品会永远消失。\n\n是否熔锻？", true, new MesageOperate (makeTheEquipToSoul));
 
 	}
 

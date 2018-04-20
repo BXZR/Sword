@@ -439,7 +439,8 @@ public class systemValues : MonoBehaviour {
 	//一些引用保留，没有必要每一次都重建一个本就唯一的预设物
 	private static titleMessageBox theTitleMessageBoxSave;
 	private static theMessageBoxPanel theMessageBoxSave;
-
+	private static choiceMessageBox theChoiceMessageBoxSave;
+	public static bool isMessageBoxShowing = false;//消息框打开的时候有些功能需要被限制，否则就会有UI穿透的问题
 	public static void  messageBoxShow(string showTitle , string  showText , bool autoSize = false)
 	{
 		if (!theMessageProfab)
@@ -511,13 +512,23 @@ public class systemValues : MonoBehaviour {
 	{
 		if (!theChoiceMessageBoxProfab)
 			theChoiceMessageBoxProfab = Resources.Load<GameObject> ("UI/MessageBoxForChoice");
-		
-		GameObject theMessageBox = GameObject.Instantiate<GameObject>(theChoiceMessageBoxProfab);
-		//theMessageBox.transform .localScale =  new Vector3 (2,2,2);
-		//theMessageBox.transform.localPosition = Vector3.zero;
-		choiceMessageBox theMesage = theMessageBox.GetComponent <choiceMessageBox> ();
-		theMesage.isAutoResize = autoSize;
-		theMesage.setInformation (showTitle, showText,theOperateMethod );
+
+		if (!theChoiceMessageBoxSave) 
+		{
+			GameObject theMessageBox = GameObject.Instantiate<GameObject> (theChoiceMessageBoxProfab);
+			//theMessageBox.transform .localScale =  new Vector3 (2,2,2);
+			//theMessageBox.transform.localPosition = Vector3.zero;
+			theMessageBox.transform.SetParent (transStatic);
+			theChoiceMessageBoxSave = theMessageBox.GetComponent <choiceMessageBox> ();
+			theChoiceMessageBoxSave.isAutoResize = autoSize;
+			theChoiceMessageBoxSave.setInformation (showTitle, showText, theOperateMethod);
+		} 
+		else
+		{
+			theChoiceMessageBoxSave.enabled = true;
+			theChoiceMessageBoxSave.isAutoResize = autoSize;
+			theChoiceMessageBoxSave.setInformation (showTitle, showText, theOperateMethod);
+		}
 	}
 
 	public static void messageBoxClose()
@@ -637,12 +648,12 @@ public class systemValues : MonoBehaviour {
 		GridLayoutGroup theGroup = theViewFather.GetComponent<GridLayoutGroup> ();
 		RectTransform theFatherRect = theViewFather.GetComponent<RectTransform> ();
 
-		int countPerLine = (int)( ( theFatherRect.rect.width - theFatherRect.rect.xMin ) / theGroup.cellSize.x);
+		int countPerLine = (int)( ( theFatherRect.rect.width - theFatherRect.rect.xMin ) / (theGroup.cellSize.x + theGroup.spacing.x));
 		int lines = countPerLine != 0 ?  count / countPerLine + 1 : 1;
 		//print ("CL = "+ countPerLine);
 		//print ("lines = "+ lines);
 		//print ("heightPerLine = "+theGroup.cellSize.y);
-		float height = 30 + (int)(theGroup.cellSize.y)  * lines ;
+		float height = 30 + (int)(theGroup.cellSize.y+ theGroup.spacing.y)  * lines ;
 		//print ("height = "+ height);
 
 		Rect newRect = new Rect (0,0,theFatherRect.rect.width , height);

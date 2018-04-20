@@ -603,8 +603,8 @@ public class equipBasics : MonoBehaviour {
 		{
 			theEffectNames.Add (theEffectName);
 			equipExtraName +="["+systemValues.getEffectNameWithName(theEffectName)+"]";
-			GetThisThing (systemValues.thePlayer);
-			DropThisThing (systemValues.thePlayer);
+			//GetThisThing (systemValues.thePlayer);
+			//DropThisThing (systemValues.thePlayer);
 		}
 	}
 

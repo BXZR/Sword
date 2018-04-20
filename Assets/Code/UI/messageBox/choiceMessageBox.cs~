@@ -45,7 +45,7 @@ public class choiceMessageBox : MonoBehaviour {
 	//设定显示信息
 	public void setInformation(string title, string information, MesageOperate theOperateIn )
 	{
-		theOperate = theOperateIn;
+		theOperate = new MesageOperate ( theOperateIn);
 		theTitleText.text = title;
 		theInformationText.text = information;
 		stringForTitle = title;
@@ -55,6 +55,7 @@ public class choiceMessageBox : MonoBehaviour {
 			float arr = Mathf.Clamp( (float)stringForInformation.Split ('\n').Length / 7 ,1f,2.8f);
 			setSize (new Vector2(1f , arr));
 		}
+		systemValues.isMessageBoxShowing = true;
 	}
 
 	//设定大小
@@ -76,17 +77,16 @@ public class choiceMessageBox : MonoBehaviour {
 	public void makeEnd()
 	{
 		isClosing = true;
-		Destroy (this.gameObject , 0.5f);
 	}
 
-	//消息框全局唯一
-	private void makeAlone()
+	private void makeEndTrue()
 	{
-		if (theMessageSave != null)
-			Destroy (theMessageSave.gameObject);
-		theMessageSave = this;
-
+		showPercent = 0.0f;
+		systemValues.isMessageBoxShowing = false;
+		enabled = false;
+		isClosing = false;
 	}
+		
 	//初始化
 	private  void makeStart()
 	{
@@ -110,17 +110,13 @@ public class choiceMessageBox : MonoBehaviour {
 
 	void Start()
 	{
-		makeAlone ();
 		makeStart ();
 	}
-
-
-
-	//messageOnGUI的做法
+		
 	void OnGUI()
 	{ 
-		float startPointX = (1 - widthForScreen*showPercent) * Screen.width / 2;
-		float startPointY = (1 - heightForScreen*showPercent) * Screen.height / 2;
+		float startPointX = (1 - widthForScreen*showPercent) * Screen.width * 0.5f;
+		float startPointY = (1 - heightForScreen*showPercent) * Screen.height * 0.5f;
 		startPointY *= 0.4f;//稍微向上移动一点
 		float width = widthForScreen * Screen.width*showPercent;
 		float height = heightForScreen* Screen.width*showPercent;
@@ -138,8 +134,13 @@ public class choiceMessageBox : MonoBehaviour {
 		if(showPercent  < 1 && !isClosing)
 			showPercent += showPercentAdder;
 
-		if(isClosing)
+		if (isClosing)
+		{
 			showPercent -= showPercentAdder;
+			if (showPercent <= 0.5f)
+				makeEndTrue ();
+
+		}
 
 	}
 

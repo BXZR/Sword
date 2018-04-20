@@ -26,9 +26,10 @@ public class equipSelectTypeButton : MonoBehaviour {
 	{
 		equipPackage  thePackage = systemValues.thePlayer.GetComponent <equipPackage> ();
 		thePackage.sortThePackage ();
-		List<equipBasics> eqs = thePackage.allEquipsForSave.FindAll(a => a!= null &&  a.isUsing == false  );
-		eqs = thePackage.getEquipWithType (eqs , theTypeSelect);
+		List<equipBasics> eqs = thePackage.allEquipsForSave.FindAll(a => a!= null &&  a.isUsing == false && a.theEquipType == theTypeSelect );
+		//eqs = thePackage.getEquipWithType (eqs , theTypeSelect);
 		makeShow (eqs);
+		equipShowingButton.flashPicture ();
 	}
 
 	public void makeClickWithoutType()
@@ -37,12 +38,12 @@ public class equipSelectTypeButton : MonoBehaviour {
 		thePackage.sortThePackage ();
 		List<equipBasics> eqs = thePackage.allEquipsForSave.FindAll(a => a!= null && a.isUsing == false && a.theEquipType != equiptype.equipSkill  );
 		makeShow (eqs);
+		equipShowingButton.flashPicture ();
 	}
 
 	//显示注灵内容
 	public void makeShowEquipSkillAdder()
 	{
-
 		theButtonSave = thisButton ;
 	}
 

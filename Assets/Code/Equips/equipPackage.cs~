@@ -22,28 +22,30 @@ public class equipPackage : MonoBehaviour {
 	public equipBasics thEquipForExtraUsed2 = null;//当前装备上的饰品装备2
 	public AudioClip theGetEquipSoundClip = null;//获得装备的时候播放的音效
 
-	//根据类别查询装备
-	//如果返回所有已经获得的装备，就直接访问allEquipsForSave
-	public List<equipBasics> getEquipWithType(equiptype theType)
-	{
-		List<equipBasics> theGets = new List<equipBasics> ();
-		for (int i = 0; i < allEquipsForSave.Count; i++) 
-		{
-			if (allEquipsForSave [i].theEquipType == theType)
-				theGets.Add (allEquipsForSave[i]);
-		}
-		return theGets;
-	}
-	public List<equipBasics> getEquipWithType(List<equipBasics> eqs,equiptype theType)
-	{
-		List<equipBasics> theGets = new List<equipBasics> ();
-		for (int i = 0; i < eqs .Count; i++) 
-		{
-			if (allEquipsForSave [i].theEquipType == theType)
-				theGets.Add (allEquipsForSave[i]);
-		}
-		return theGets;
-	}
+//下面两个方法可能会有引用回收的问题，暂时先不用=====================================================================
+//根据类别查询装备
+//如果返回所有已经获得的装备，就直接访问allEquipsForSave
+//	public List<equipBasics> getEquipWithType(equiptype theType)
+//	{
+//		List<equipBasics> theGets = new List<equipBasics> ();
+//		for (int i = 0; i < allEquipsForSave.Count; i++) 
+//		{
+//			if (allEquipsForSave [i].theEquipType == theType)
+//				theGets.Add (allEquipsForSave[i]);
+//		}
+//		return theGets;
+//	}
+//	public List<equipBasics> getEquipWithType(List<equipBasics> eqs,equiptype theType)
+//	{
+//		List<equipBasics> theGets = new List<equipBasics> ();
+//		for (int i = 0; i < eqs .Count; i++) 
+//		{
+//			if (allEquipsForSave [i].theEquipType == theType)
+//				theGets.Add (allEquipsForSave[i]);
+//		}
+//		return theGets;
+//	}
+//===================================================================================================================
 
 	//因为网络传输的传输的内容是需要传参数的，所以尽可能希望这个参数能足够简单
 	//这就需要考虑一些限制的设计了

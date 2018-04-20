@@ -50,7 +50,7 @@ public class theMessageBoxPanel : MonoBehaviour {
 			float arr = Mathf.Clamp( (float)stringForInformation.Split ('\n').Length / 7 ,1f,2.8f);
 			setSize (new Vector2(1f , arr));
 		}
-
+		systemValues.isMessageBoxShowing = true;
 	}
 	//设定显示时间
 	//不设定就是不用计时器
@@ -67,6 +67,7 @@ public class theMessageBoxPanel : MonoBehaviour {
 		isClosing = false;
 		enabled = false;
 		showPercent = 0f;
+		systemValues.isMessageBoxShowing = false;
 	}
 		
 	//初始化
@@ -162,8 +163,6 @@ public class theMessageBoxPanel : MonoBehaviour {
 
 		if(isClosing)
 			showPercent -= showPercentAdder;
-
 	}
-
 
 }

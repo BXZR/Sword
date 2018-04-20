@@ -15,7 +15,7 @@ public class thePackagePanelShow : MonoBehaviour {
 	public equipShowingButton theExtraButton2;
 	//静态变量保存
 	static Text theTextForStatic;
-	static equipBasics theEquip;
+	public static equipBasics theEquip;
 	static equipPackage theEquipPackage;
 	static equipShowingButton staticHeadButton;
 	static equipShowingButton staticBodyButton;
