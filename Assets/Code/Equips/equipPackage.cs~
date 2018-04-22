@@ -100,6 +100,7 @@ public class equipPackage : MonoBehaviour {
 		allEquipsForSave = theNewPackage;
 		//print ("sorted count = "+ allEquipsForSave.Count);
 	}
+		
 
 
 	//初始化

@@ -6,7 +6,7 @@ public class equipEffect_ExtraDamage : effectBasic{
 
 	int count = 0;
 	int countMax = 5;
-	float damage = 100f;
+	float damage = 30f;
 	void Start ()
 	{
 		Init ();

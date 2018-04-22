@@ -267,12 +267,13 @@ public class attackLink : MonoBehaviour {
 			//print ("play action");
 			if (thePlayer) 
 			{
+				effectBasic[] Effects = thePlayer.GetComponentsInChildren<effectBasic> ();
 				thePlayer.EffectAttackLinkIndex = theAttackLinkIndex;
-				effectBasic[] Effects = this.transform.root.GetComponentsInChildren<effectBasic> ();
 				playStarEffect ();
 
 				if (thePlayer.theAudioPlayer != null)
 					thePlayer.theAudioPlayer.playAttackActSound (this.audioWhenAct);//播放攻击动作音效
+				
 				if (thePlayer.ActerSp >= this.spUse) 
 				{
 					thePlayer.ActerSp -= this.spUse;
@@ -285,13 +286,18 @@ public class attackLink : MonoBehaviour {
 					thePlayer.ActerSp = 0;
 					if (thePlayer.ActerHp < 10)
 						thePlayer.ActerHp = 10f;//保护机制，在格斗游戏中没有透支身亡一说
-					//但是为了保证我的个性，透支机制依旧存在，只是不会致命了
+
 					for (int i = 0; i < Effects.Length; i++) 
 					{
-						Effects [i].SetAttackLinkIndex (theAttackLinkIndex);
-						Effects [i].OnUseSP (this.spUse);
 						Effects [i].OnBeAttack (hpMinus);
 					}
+				}
+				//但是为了保证我的个性，透支机制依旧存在，只是不会致命了
+
+				for (int i = 0; i < Effects.Length; i++) 
+				{
+					Effects [i].SetAttackLinkIndex (theAttackLinkIndex);
+					Effects [i].OnUseSP (this.spUse);
 				}
 			}
 

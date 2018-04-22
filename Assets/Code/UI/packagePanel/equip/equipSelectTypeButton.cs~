@@ -10,14 +10,15 @@ public class equipSelectTypeButton : MonoBehaviour {
 	public Transform theViewFather;//显示按钮的容器
 	public equiptype theTypeSelect;//类别
 	public GameObject theShowingButtonProfab;//显示按钮的预设物，需要各种初始化
-	private GameObject thisButton;//自身保存引用
-	public static GameObject theButtonSave;//静态保存
+	private equipSelectTypeButton  thisButton;//自身保存引用
+	public static equipSelectTypeButton theButtonSave;//静态保存
+	public Image SelectedHighLightPicture;//选中的时候的按钮
 
 	public static  void flashThePanel()
 	{
 		PointerEventData theData = new PointerEventData (EventSystem.current );//创建事件数据
 		//传值：大概理解是：目标Gameobject ，事件数据 ， 类型（与那边接收的时候做匹配（大概））
-		ExecuteEvents .Execute<IPointerClickHandler> ( theButtonSave, theData ,ExecuteEvents.pointerClickHandler);
+		ExecuteEvents .Execute<IPointerClickHandler> ( theButtonSave.gameObject, theData ,ExecuteEvents.pointerClickHandler);
 	}
 
 
@@ -93,11 +94,15 @@ public class equipSelectTypeButton : MonoBehaviour {
 				Destroy (es [i].gameObject);
 			}
 		}
+		if (theButtonSave)
+			theButtonSave.SelectedHighLightPicture.enabled = false;
 		theButtonSave = thisButton ;
+		if (theButtonSave)
+			theButtonSave.SelectedHighLightPicture.enabled = true;
 	}
 		
 	void Start()
 	{
-		thisButton =  this.gameObject;
+		thisButton = this;
 	}
 }

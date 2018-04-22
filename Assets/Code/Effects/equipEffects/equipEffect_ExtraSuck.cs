@@ -6,7 +6,7 @@ public class equipEffect_ExtraSuck : effectBasic{
 
 	int count = 0;
 	int countMax = 3;
-	float hpsuck = 30f;
+	float hpsuck = 20f;
 	void Start ()
 	{
 		Init ();
@@ -15,7 +15,7 @@ public class equipEffect_ExtraSuck : effectBasic{
 	public override void Init ()
 	{
 		theEffectName = "三叠吸血";
-		theEffectInformation = "每第"+countMax +"次攻击额外偷取"+hpsuck+"生命";
+		theEffectInformation = "第"+countMax +"次攻击额外偷取"+hpsuck+"生命";
 		makeStart ();
 	}
 

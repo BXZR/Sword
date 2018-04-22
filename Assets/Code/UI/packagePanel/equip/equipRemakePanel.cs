@@ -72,6 +72,7 @@ public class equipRemakePanel : MonoBehaviour {
 		equipShowingButton []  es = equipSkillAdderViewFatherStatic.GetComponentsInChildren<equipShowingButton>();
 		List<equipBasics> eqs = systemValues.thePlayer.GetComponent <equipPackage> ().allEquipsForSave.FindAll (x => x!=null && x.theEquipType == equiptype.equipSkill);
 		//直接用lambda表达式查询吧还是
+		eqs.Sort((a,b) => {return (a.equipName[0] - b.equipName[0]);} );//linq排序
 		systemValues. makeFather (eqs.Count , equipSkillAdderViewFatherStatic);
 
 		if (eqs.Count > es.Length) 
@@ -81,6 +82,8 @@ public class equipRemakePanel : MonoBehaviour {
 			{
 				es [i].theEquip = eqs [i];
 				es [i].GetComponentInChildren<Text>().text = "";
+				//print ("equipPicture/" + equiptype.equipSkill + "/" + eqs [i].equipPictureName);
+				es[i].GetComponent <Image> ().sprite = systemValues.makeLoadSprite ("equipPicture/" + equiptype.equipSkill + "/" + eqs [i].equipPictureName);
 			}
 			for (; i < eqs.Count; i++) 
 			{
@@ -88,6 +91,8 @@ public class equipRemakePanel : MonoBehaviour {
 				theButton.transform.SetParent (equipSkillAdderViewFatherStatic.transform);
 				theButton.GetComponent <equipShowingButton> ().theEquip = eqs [i];
 				theButton.GetComponentInChildren<Text>().text = "";
+				//print ("equipPicture/" + equiptype.equipSkill + "/" + eqs [i].equipPictureName);
+				theButton.GetComponent <Image> ().sprite = systemValues.makeLoadSprite ("equipPicture/" + equiptype.equipSkill + "/" + eqs [i].equipPictureName);
 				//因为有grid控件，所以这些都没有必要使用了
 			}
 			//print ("重建次数："+( i- es.Length));
@@ -100,6 +105,7 @@ public class equipRemakePanel : MonoBehaviour {
 			{
 				es [i].theEquip = eqs [i];
 				es [i].GetComponentInChildren<Text>().text = "";
+				es[i].GetComponent <Image> ().sprite = systemValues.makeLoadSprite ("equipPicture/" + equiptype.equipSkill + "/" + eqs [i].equipPictureName);
 			}
 			for (; i>=0 && i < es.Length; i++) 
 			{

@@ -10,15 +10,15 @@ public class popSoulMove : MonoBehaviour {
 	//这个魂元容纳的灵力数量
 	public int soulCount = 1;
 	//魂元灵力飞向的目标
-	public Transform theAim;
+	public PlayerBasic theAim;
 	//开始标记，也就是一个延迟效果的开始
 	bool isStart = false;
 
-	public void makeSTART(Transform theAimIn , int soulC = 1)
+	public void makeSTART(PlayerBasic theAimIn , int soulC = 1)
 	{
 		this.theAim = theAimIn;
 		soulCount = soulC;
-		Invoke ("theStart" , 5f);
+		Invoke ("theStart" , 4f);
 
 	}
 
@@ -35,7 +35,7 @@ public class popSoulMove : MonoBehaviour {
 			if (Vector3.Distance (this.transform.position, theAim.transform.position) < 1f) 
 			{
 				systemValues.soulCount += soulCount;
-				theAim.GetComponent<PlayerBasic> ().addJingYan (soulCount * 2 );
+				theAim.addJingYan (soulCount * 2 );
 				effectBasic[] theEffects = theAim.GetComponentsInChildren<effectBasic> ();
 				for (int i = 0; i < theEffects.Length; i++)
 					theEffects [i].OnAddSoul (soulCount);
