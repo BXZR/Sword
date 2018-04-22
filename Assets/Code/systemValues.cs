@@ -662,12 +662,21 @@ public class systemValues : MonoBehaviour {
 	}
 
 	#endregion
+	//反复跳转场景应该做一些清理工作
+	public static void makeSystemClean()
+	{
+		theShowingTexts.Clear ();
+	}
 
 	//GM的初始化==============================================================================
 	void Start()
 	{
 		transStatic = this.transform;
 		//InvokeRepeating ("flashRubbish", 5f, 5f);
+	}
+	void OnDestroy()
+	{
+		makeSystemClean ();
 	}
 
 }

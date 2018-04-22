@@ -16,6 +16,9 @@ public class equipSelectTypeButton : MonoBehaviour {
 
 	public static  void flashThePanel()
 	{
+		if (!theButtonSave)
+			return;
+		
 		PointerEventData theData = new PointerEventData (EventSystem.current );//创建事件数据
 		//传值：大概理解是：目标Gameobject ，事件数据 ， 类型（与那边接收的时候做匹配（大概））
 		ExecuteEvents .Execute<IPointerClickHandler> ( theButtonSave.gameObject, theData ,ExecuteEvents.pointerClickHandler);

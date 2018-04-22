@@ -29,11 +29,7 @@ public class equipEffect_ExtraDamage : effectBasic {
 			this.thePlayer.OnAttackWithoutEffect (aim,damage,false,true);
 		}
 	}
-
-	public override bool isBE ()
-	{
-		return true;
-	}
+ 
 
 	public override string getOnTimeFlashInformation ()
 	{

@@ -32,10 +32,7 @@ public class equipEffect_ExtraSuck : effectBasic {
 		}
 	}
 
-	public override bool isBE ()
-	{
-		return true;
-	}
+ 
 
 	public override string getOnTimeFlashInformation ()
 	{

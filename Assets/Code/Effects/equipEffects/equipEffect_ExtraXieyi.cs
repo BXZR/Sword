@@ -22,9 +22,5 @@ public class equipEffect_ExtraXieyi  : effectBasic{
 		this.thePlayer.ActerSp += spUse * 0.05f;
 	}
 
-	public override bool isBE ()
-	{
-		return true;
-	}
-		
+ 
 }

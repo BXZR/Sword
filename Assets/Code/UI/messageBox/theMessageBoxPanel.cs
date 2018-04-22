@@ -59,6 +59,11 @@ public class theMessageBoxPanel : MonoBehaviour {
 		timer = timerIn;
 		withTimer = true;
 	}
+
+	void OnDestroy()
+	{
+		systemValues.isMessageBoxShowing = false;
+	}
 		
 	//自我销毁
 	public void makeEnd()

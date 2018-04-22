@@ -274,7 +274,7 @@ public class attackLinkController :MonoBehaviour {
 			}
 		}
 		//如果不在攻击状态就重置招式攻击伤害
-		if (theAnimator && !systemValues.isAttacking (theAnimator))
+		if (theAnimator && !systemValues.isAttacking (theAnimator) && thePlayer)
 			thePlayer.extraDamageForAnimation = 0;
 	}
 		

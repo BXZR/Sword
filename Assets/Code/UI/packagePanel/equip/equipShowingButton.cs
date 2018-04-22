@@ -15,8 +15,11 @@ public class equipShowingButton : MonoBehaviour {
 	public void makeClickForSelect()
 	{
 		//消息框显示的时候这个功能无效
-		if (systemValues.isMessageBoxShowing)
+		if (systemValues.isMessageBoxShowing) 
+		{
+			//print ("isMessageBoxing");
 			return;
+		}
 		if (theEquip) 
 		{
 			//三个静态方法传递对象

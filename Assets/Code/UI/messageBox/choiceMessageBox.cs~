@@ -107,7 +107,10 @@ public class choiceMessageBox : MonoBehaviour {
 		GUIShowStyleForBack.normal.background = theBackPicture;
 
 	}
-
+	void OnDestroy()
+	{
+		systemValues.isMessageBoxShowing = false;
+	}
 	void Start()
 	{
 		makeStart ();

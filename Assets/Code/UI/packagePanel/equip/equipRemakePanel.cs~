@@ -185,7 +185,7 @@ public class equipRemakePanel : MonoBehaviour {
 	//这个装备被消熔之后，将会转化为灵力
 	public void soulTheEquip()
 	{
-		if (!theEquip) 
+		if (!theEquip && !equipSkillAdderNow) 
 		{
 			systemValues.messageTitleBoxShow ("尚未选定目标");
 			return;
@@ -198,28 +198,35 @@ public class equipRemakePanel : MonoBehaviour {
 	void makeTheEquipToSoul()
 	{
 		theSoundController.makeSoundShow (1);
-		
-		if (theEquip.isUsing)
-			theEquip.DropThisThing (systemValues.thePlayer);
+		equipBasics theEquipUse = theEquip != null ? theEquip : equipSkillAdderNow;
+		string nameUse = theEquip != null ? theEquip.equipName : equipSkillAdderNow.equipExtraName;
 
-		int soulGet = 20 + systemValues.getSoulCountForEquipLvUp (theEquip , true);
+		if (theEquipUse.isUsing)
+			theEquipUse.DropThisThing (systemValues.thePlayer);
+
+		int soulGet = 20 + systemValues.getSoulCountForEquipLvUp (theEquipUse , true);
 		systemValues.soulCount += soulGet;
-		systemValues.messageTitleBoxShow ("【"+theEquip.equipName+"】熔为"+soulGet+"灵力");
-		DestroyImmediate(theEquip.gameObject);
+		systemValues.messageTitleBoxShow ("【"+nameUse+"】熔为"+soulGet+"灵力");
+		DestroyImmediate(theEquipUse.gameObject);
 		//theEquip = null;
 		equipSelectTypeButton.flashThePanel ();
 		thePackagePanelShow.makeFlash ();
 		equipInformationPanel.makeFlash ();
 		ShowMake ();
-
+		flashThePanel ();
 	}
 
 	//装备的升级
 	public void makeEquipLvUp()
 	{
-		if (!theEquip || !theEquip.checkCanLvUp ()) 
+		if (!theEquip ) 
 		{
 			systemValues.messageTitleBoxShow ("尚未选定装备");
+			return;
+		}
+		if( !theEquip.checkCanLvUp ())
+		{
+			systemValues.messageTitleBoxShow ("装备已经满级");
 			return;
 		}
 		int cost = systemValues.getSoulCountForEquipLvUp (theEquip);

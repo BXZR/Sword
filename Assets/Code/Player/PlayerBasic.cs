@@ -621,13 +621,13 @@ public class PlayerBasic : MonoBehaviour {
 		theString.Append ("/秒\n");
 
 		theString.Append ("护甲  ");
-		theString.Append (this.ActerWuliShield .ToString ("f1"));
+		theString.Append (this.ActerWuliShield .ToString ("f0"));
 		theString.Append ("   ");
 		theString.Append ("伤害  ");
-		theString.Append (this.ActerWuliDamage .ToString("f1"));
+		theString.Append (this.ActerWuliDamage .ToString("f0"));
 		theString.Append ("   ");
 		theString.Append ("反伤  ");
-		theString.Append (this.ActerWuliReDamage.ToString("f1"));
+		theString.Append (this.ActerWuliReDamage.ToString("f0"));
 		theString.Append ("\n");
 
 		return theString.ToString ();
