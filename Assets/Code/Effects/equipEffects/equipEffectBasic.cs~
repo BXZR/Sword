@@ -1,0 +1,11 @@
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+//装备技能效果专用类
+//额外增加属性：灵力
+//注灵需要消耗装备的潜力，消耗的就是装备的灵力数值
+public class equipEffectBasic : effectBasic  {
+
+	public int theEquipSkillValue = 0;//这个装备技能的灵力，也就是消耗的装备的潜力
+}

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class equipEffect_ExtraDamage : effectBasic{
+public class equipEffect_ExtraDamage : effectBasic {
 
 	int count = 0;
 	int countMax = 5;
@@ -15,7 +15,8 @@ public class equipEffect_ExtraDamage : effectBasic{
 	public override void Init ()
 	{
 		theEffectName = "青丘狐刃";
-		theEffectInformation = "每第"+countMax +"次攻击造成额外"+damage+"物理伤害";
+		theEffectInformation = "第"+countMax +"次攻击造成额外"+damage+"物理伤害";
+
 		makeStart ();
 	}
 		

@@ -1,24 +1,25 @@
 ﻿<Properties StartupItem="Assembly-CSharp.csproj">
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Unity.Instance.Unity Editor" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Code\Effects\equipEffects\equipEffect_ExtraSuck.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Code\UI\packagePanel\equip\equipRemakePanel.cs">
     <Files>
-      <File FileName="Assets\Code\UI\packagePanel\thePackagePanelShow.cs" Line="78" Column="37" />
-      <File FileName="Assets\Code\UI\packagePanel\equip\equipRemakePanel.cs" Line="108" Column="146" />
-      <File FileName="Assets\Code\UI\messageBox\theMessageBoxPanel.cs" Line="70" Column="43" />
-      <File FileName="Assets\Code\UI\UISound\panelSoundController.cs" Line="10" Column="2" />
-      <File FileName="Assets\Code\Equips\equipBasics.cs" Line="587" Column="15" />
-      <File FileName="Assets\Code\UI\packagePanel\equip\equipShowingButton.cs" Line="18" Column="14" />
-      <File FileName="Assets\Code\systemValues.cs" Line="612" Column="34" />
-      <File FileName="Assets\Code\UI\packagePanel\equip\equipInformationPanel.cs" Line="37" Column="5" />
-      <File FileName="Assets\Code\UI\messageBox\choiceMessageBox.cs" Line="141" Column="20" />
-      <File FileName="Assets\Code\UI\packagePanel\equip\equipSelectTypeButton.cs" Line="83" Column="7" />
-      <File FileName="Assets\Code\Effects\equipEffects\equipEffect_ExtraXieyi.cs" Line="23" Column="3" />
+      <File FileName="Assets\Code\UI\packagePanel\thePackagePanelShow.cs" Line="1" Column="1" />
+      <File FileName="Assets\Code\UI\packagePanel\equip\equipRemakePanel.cs" Line="45" Column="46" />
+      <File FileName="Assets\Code\UI\messageBox\theMessageBoxPanel.cs" Line="1" Column="1" />
+      <File FileName="Assets\Code\UI\UISound\panelSoundController.cs" Line="1" Column="1" />
+      <File FileName="Assets\Code\Equips\equipBasics.cs" Line="611" Column="31" />
+      <File FileName="Assets\Code\UI\packagePanel\equip\equipShowingButton.cs" Line="50" Column="4" />
+      <File FileName="Assets\Code\systemValues.cs" Line="1" Column="1" />
+      <File FileName="Assets\Code\UI\packagePanel\equip\equipInformationPanel.cs" Line="57" Column="111" />
+      <File FileName="Assets\Code\UI\messageBox\choiceMessageBox.cs" Line="1" Column="1" />
+      <File FileName="Assets\Code\UI\packagePanel\equip\equipSelectTypeButton.cs" Line="1" Column="1" />
+      <File FileName="Assets\Code\Effects\equipEffects\equipEffect_ExtraXieyi.cs" Line="17" Column="16" />
       <File FileName="Assets\Code\Player\attackLink.cs" Line="298" Column="6" />
-      <File FileName="Assets\Code\Effects\effectBasic.cs" Line="30" Column="28" />
-      <File FileName="Assets\Code\Effects\fighterAttackEffects\public\effectForSpeedMoveForward.cs" Line="51" Column="17" />
-      <File FileName="Assets\Code\Effects\equipEffects\equipEffect_ExtraDamage.cs" Line="44" Column="1" />
-      <File FileName="Assets\Code\Effects\equipEffects\equipEffect_ExtraSuck.cs" Line="8" Column="19" />
+      <File FileName="Assets\Code\Effects\effectBasic.cs" Line="1" Column="1" />
+      <File FileName="Assets\Code\Effects\fighterAttackEffects\public\effectForSpeedMoveForward.cs" Line="1" Column="1" />
+      <File FileName="Assets\Code\Effects\equipEffects\equipEffect_ExtraDamage.cs" Line="17" Column="26" />
+      <File FileName="Assets\Code\Effects\equipEffects\equipEffect_ExtraSuck.cs" Line="22" Column="49" />
       <File FileName="Assets\Code\Equips\equipPackage.cs" Line="90" Column="71" />
+      <File FileName="Assets\Code\UI\packagePanel\equip\equipPersonForAllInforamtion.cs" Line="1" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

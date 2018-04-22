@@ -42,6 +42,7 @@ public class equipRemakePanel : MonoBehaviour {
 	{
 		equipSkillAdderNow = theEquip;
 		equipSkillAddInformationStatic.text = systemValues.getEffectInfromationWithName (theEquip.equipName);
+		equipSkillAddInformationStatic.text += "\n【潜力要求：" + theEquip.skillValueCountAll +"】";
 	}
 
 	public static void getEquipForOperate(equipBasics theEquipIn)
@@ -154,6 +155,12 @@ public class equipRemakePanel : MonoBehaviour {
 			systemValues.messageTitleBoxShow ("此装备已经注有同类型的灵力，无法叠加");
 			return;
 		}
+		if ((theEquip.skillValueCountAll - theEquip.skillValueCount) < equipSkillAdderNow.skillValueCountAll) 
+		{
+			systemValues.messageTitleBoxShow ("此装备已经没有足够的天赋继续开发了");
+			return;
+		}
+			
 		string theEffectName = equipSkillAdderNow.equipExtraName;// systemValues.getEffectNameWithName (equipSkillAdderNow.equipName);
 		string theEffectInformation = equipSkillAdderNow .theEquipStroy;//systemValues.getEffectInfromationWithName (equipSkillAdderNow.equipName);
 		systemValues.choiceMessageBoxShow ("是否注灵？", "注灵将会使【"+theEquip.equipName+"】获得“"+theEffectName+"”效果，需要永久消耗《"+theEffectName+"》图谱\n\n效果："+theEffectInformation +"\n\n是否注灵？", true, new MesageOperate (getTheSkill));
@@ -162,7 +169,7 @@ public class equipRemakePanel : MonoBehaviour {
 	void getTheSkill()
 	{
 		theSoundController.makeSoundShow (3);
-		theEquip.makeEquipAddSkill (equipSkillAdderNow.equipName);
+		theEquip.makeEquipAddSkill (equipSkillAdderNow);
 		DestroyImmediate(equipSkillAdderNow.gameObject);
 		equipInformationPanel.changeEquipToIntroduct (theEquip);
 		thePackagePanelShow.setNewEquip (theEquip);

@@ -58,15 +58,16 @@ public class equipBasics : MonoBehaviour {
 	public float equipActerMoveSpeedPercent = 0f;//移动速度百分比，在移动的时候会有这个速度百分比加成
 	public float equipActerAttackSpeedPercent = 0f;//攻击速度百分比，所有的动作的速度会受到这个限制
 	public float equipActerShieldMaxPercent = 0f;//护盾针对最大生命值的上限
-	//接下来是一些私有的战斗属性备份，用于计算值（作为例如护甲值提升10%这种的参数值计算）
-	//因为是私有方法，所以还要给出获取这个值和修改这个值的方法
-	//总体上讲，这些值是战斗属性的备份值，当有特殊计算方法的时候作为参数计算更新战斗属性
-	//例如 战斗属性 = 备份值 *1.1f
-	//顺带一提，之所以使用私有方法是因为不想让共有属性表太长，此外这些私有只会在特殊情况之下服务器才会使用
+	//范围百分比属性
 	public float equiptheAttackAreaLength;//攻击范围（非常重要，同时这个是简化版本的每一种攻击招式分开计算范围的方式）
 	public float equiptheAttackAreaAngel = 0f;//攻击范围的角度，自身前方锥形范围内都是攻击范围
 	public float equiptheViewAreaLength = 0f;//视野长度，在不同的模式之下。例如暗夜模式，是很有需要实际的地方的
 	public float equiptheViewAreaAngel = 0f;//视野的角度，同样，在不同的模式之下。例如暗夜模式，是很有需要实际的地方的
+	//装备的潜力，也就是可以消耗的总的点数
+	//如果这“装备”是注灵，则表示消耗的潜力
+	public int skillValueCount = 0;
+	//当前的总装备天赋
+	public int skillValueCountAll = 1;
 	//加成属性-------------------------------------------------------------------------------------------------------------------------
 	//这件装备能够带来的特效名字
 	//这些特效也会是effectBasic的脚本
@@ -589,8 +590,9 @@ public class equipBasics : MonoBehaviour {
 	}
 
 	//装备注灵
-	public void makeEquipAddSkill(string theEffectName)
+	public void makeEquipAddSkill(equipBasics theEquip)
 	{
+		string theEffectName = theEquip.equipName;
 		//如果已经装备上了，就需要先卸下来升级再装上去
 		if (isUsing)
 		{
@@ -606,6 +608,7 @@ public class equipBasics : MonoBehaviour {
 			//GetThisThing (systemValues.thePlayer);
 			//DropThisThing (systemValues.thePlayer);
 		}
+		skillValueCount += theEquip.skillValueCountAll;
 	}
 
 

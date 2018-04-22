@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class equipEffect_ExtraSuck : effectBasic{
+public class equipEffect_ExtraSuck : effectBasic {
 
 	int count = 0;
 	int countMax = 3;
