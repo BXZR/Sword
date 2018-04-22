@@ -1,31 +1,11 @@
 ﻿<Properties StartupItem="Assembly-CSharp.csproj">
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Unity.Instance.Unity Editor" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Code\Effects\equipEffects\equipEffect_ExtraXieyi.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Photon Unity Networking\Plugins\PhotonNetwork\NetworkingPeer.cs">
     <Files>
-      <File FileName="Assets\Code\UI\packagePanel\thePackagePanelShow.cs" Line="1" Column="1" />
-      <File FileName="Assets\Code\UI\packagePanel\equip\equipRemakePanel.cs" Line="1" Column="1" />
-      <File FileName="Assets\Code\UI\messageBox\theMessageBoxPanel.cs" Line="1" Column="1" />
-      <File FileName="Assets\Code\UI\UISound\panelSoundController.cs" Line="1" Column="1" />
-      <File FileName="Assets\Code\Equips\equipBasics.cs" Line="1" Column="1" />
-      <File FileName="Assets\Code\UI\packagePanel\equip\equipShowingButton.cs" Line="20" Column="6" />
-      <File FileName="Assets\Code\systemValues.cs" Line="315" Column="2" />
-      <File FileName="Assets\Code\UI\packagePanel\equip\equipInformationPanel.cs" Line="1" Column="1" />
-      <File FileName="Assets\Code\UI\messageBox\choiceMessageBox.cs" Line="1" Column="1" />
-      <File FileName="Assets\Code\UI\packagePanel\equip\equipSelectTypeButton.cs" Line="1" Column="1" />
-      <File FileName="Assets\Code\Effects\equipEffects\equipEffect_ExtraXieyi.cs" Line="24" Column="2" />
-      <File FileName="Assets\Code\Player\attackLink.cs" Line="1" Column="1" />
-      <File FileName="Assets\Code\Effects\effectBasic.cs" Line="1" Column="1" />
-      <File FileName="Assets\Code\Effects\fighterAttackEffects\public\effectForSpeedMoveForward.cs" Line="1" Column="1" />
-      <File FileName="Assets\Code\Effects\equipEffects\equipEffect_ExtraDamage.cs" Line="32" Column="2" />
-      <File FileName="Assets\Code\Effects\equipEffects\equipEffect_ExtraSuck.cs" Line="35" Column="2" />
-      <File FileName="Assets\Code\Equips\equipPackage.cs" Line="1" Column="1" />
-      <File FileName="Assets\Code\UI\packagePanel\equip\equipPersonForAllInforamtion.cs" Line="1" Column="1" />
-      <File FileName="Assets\Code\Player\PlayerBasic.cs" Line="1" Column="1" />
-      <File FileName="Assets\Code\Player\attackLinkController.cs" Line="277" Column="65" />
-      <File FileName="Assets\Code\UI\basicShow\uiShowsForBasic.cs" Line="1" Column="1" />
-      <File FileName="Assets\Code\UI\basicShow\soulShowText.cs" Line="1" Column="1" />
-      <File FileName="Assets\Code\UI\basicShow\effectFlashPanel.cs" Line="1" Column="1" />
-      <File FileName="Assets\Code\UI\systemPanel\BasicPanelController.cs" Line="98" Column="72" />
+      <File FileName="Assets\Code\Equips\equipBasics.cs" Line="696" Column="26" />
+      <File FileName="Assets\Code\Player\PlayerBasic.cs" Line="945" Column="2" />
+      <File FileName="Assets\Code\Equips\equipPackage.cs" Line="137" Column="42" />
+      <File FileName="Assets\Photon Unity Networking\Plugins\PhotonNetwork\NetworkingPeer.cs" Line="2941" Column="86" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

@@ -2938,7 +2938,8 @@ internal class NetworkingPeer : LoadBalancingPeer, IPhotonPeerListener
             MonoBehaviour monob = photonNetview.RpcMonoBehaviours[componentsIndex];
             if (monob == null)
             {
-                Debug.LogError("ERROR You have missing MonoBehaviours on your gameobjects!");
+				Debug.Log("RPC ERROR  ERROR You have missing MonoBehaviours on your gameobjects!");
+                //Debug.LogError("ERROR You have missing MonoBehaviours on your gameobjects!");
                 continue;
             }
 

@@ -930,6 +930,56 @@ public class PlayerBasic : MonoBehaviour {
 			);
 		}
 	}
+	public void addEffectUpdate(string theEffect)
+	{
+		if (systemValues.modeIndex == 1) 
+		{
+			photonView.RPC ("addEffectRpc", PhotonTargets.All,theEffect);
+		} 
+		else 
+		{
+			addEffectRpc(theEffect);
+		}
+	}
+
+	public void dropEffectUpdate(string theEffectName)
+	{
+		if (systemValues.modeIndex == 1)
+		{
+			photonView.RPC ("dropEffectRpc", PhotonTargets.All,theEffectName);
+		} 
+		else 
+		{
+			dropEffectRpc(theEffectName);
+		}
+	}
+
+	[PunRPC]
+	private void dropEffectRpc(string theEffectName)
+	{
+		System.Type theType = System.Type.GetType (theEffectName);
+		if (theType == null)
+			return;
+
+		effectBasic theEffect = (effectBasic)this.GetComponent (theType);
+		if(theEffect)
+			DestroyImmediate (theEffect);
+	}
+	[PunRPC]
+	private void addEffectRpc(string theEffect)
+	{
+		System.Type theType = System.Type.GetType (theEffect);
+		if (theType == null)
+			return;
+
+		//装备的注灵效果应该是可以叠加的，这部是唯一被动
+		//顺带解决了多个具有相同注灵效果的装备同时装备，当卸下一个装备的时候所有效果都消失的问题
+
+		//if (!thePlayer.gameObject.GetComponent ( theType))
+		  gameObject.AddComponent (theType);
+		//else
+		//	((effectBasic)thePlayer.GetComponent (theType)).updateEffect ();
+	}
 
 	//--------------------------回调方法---------------------------------------------------//
 	//由于这个类是一个究极的父类，因此具体的工作是不做的，但是留下了调用各种方法的方式木板

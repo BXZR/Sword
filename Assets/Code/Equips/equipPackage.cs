@@ -10,6 +10,7 @@ public class equipPackage : MonoBehaviour {
 
 	//网络控制节点=============================
 	PhotonView photonView;
+	private PlayerBasic thePlayer;
 	//=========================================
 	public List<equipBasics> allEquipsForSave;//没有被装备的装备都是在这里完成的
 	public List<string> equipSkills;//装备注灵的原料在这里收集
@@ -46,6 +47,13 @@ public class equipPackage : MonoBehaviour {
 //		return theGets;
 //	}
 //===================================================================================================================
+
+
+	void Start()
+	{
+		thePlayer = this.GetComponent <PlayerBasic> ();
+	}
+
 
 	//因为网络传输的传输的内容是需要传参数的，所以尽可能希望这个参数能足够简单
 	//这就需要考虑一些限制的设计了
@@ -112,20 +120,23 @@ public class equipPackage : MonoBehaviour {
 
 	void OnTriggerEnter(Collider collisioner)
 	{
-		if (collisioner.gameObject.tag.Equals( "equip") ) 
+		if (collisioner.gameObject.tag.Equals ("equip")) 
 		{
 			equipBasics theEquip = collisioner.gameObject.GetComponent <equipBasics> ();
-			if(allEquipsForSave.Contains(theEquip) == false)
+			if (allEquipsForSave.Contains (theEquip) == false)
 				allEquipsForSave.Add (theEquip);
 		    
-			collisioner.gameObject.SetActive(false);
+			collisioner.gameObject.SetActive (false);
 
-			if(theEquip.theEquipType!= equiptype.equipSkill)
-			    systemValues.messageTitleBoxShow ("获得装备\n【"+theEquip.equipName+"】");
-			else
+			if (thePlayer == systemValues.thePlayer) 
+			{
+				if (theEquip.theEquipType != equiptype.equipSkill)
+					systemValues.messageTitleBoxShow ("获得装备\n【" + theEquip.equipName + "】");
+				else
 				//systemValues.messageTitleBoxShow ("获得图谱\n《"+systemValues.getEffectNameWithName( theEquip.equipName)+"》");
-				systemValues.messageTitleBoxShow ("获得图谱\n《"+theEquip.equipExtraName+"》");
-			systemValues.thePlayer.theAudioPlayer.playClip (theGetEquipSoundClip);
+				systemValues.messageTitleBoxShow ("获得图谱\n《" + theEquip.equipExtraName + "》");
+				systemValues.thePlayer.theAudioPlayer.playClip (theGetEquipSoundClip);
+			}
 		}
 	}
 

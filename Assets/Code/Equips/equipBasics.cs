@@ -681,17 +681,7 @@ public class equipBasics : MonoBehaviour {
 		//可叠加被动就用updateEffect来做了
 		for (int i = 0; i < theEffectNames.Count; i++)
 		{
-			System.Type theType = System.Type.GetType (theEffectNames[i]);
-			if (theType == null)
-				continue;
-
-			//装备的注灵效果应该是可以叠加的，这部是唯一被动
-			//顺带解决了多个具有相同注灵效果的装备同时装备，当卸下一个装备的时候所有效果都消失的问题
-
-			//if (!thePlayer.gameObject.GetComponent ( theType))
-				thePlayer.gameObject.AddComponent (theType);
-			//else
-			//	((effectBasic)thePlayer.GetComponent (theType)).updateEffect ();
+			thePlayer.addEffectUpdate (theEffectNames[i]);
 		}
 	}
 
@@ -703,15 +693,8 @@ public class equipBasics : MonoBehaviour {
 	{
 		for (int i = 0; i < theEffectNames.Count; i++)
 		{
-			System.Type theType = System.Type.GetType (theEffectNames[i]);
-			if (theType == null)
-				continue;
-			
-			effectBasic theEffect = (effectBasic)thePlayer.GetComponent (theType);
-			if(theEffect)
-				DestroyImmediate (theEffect);
+			thePlayer.dropEffectUpdate (theEffectNames[i]);
 		}
-	
 	}
 
 	void Start()
