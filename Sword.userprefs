@@ -1,11 +1,15 @@
 ﻿<Properties StartupItem="Assembly-CSharp.csproj">
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Unity.Instance.Unity Editor" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Photon Unity Networking\Plugins\PhotonNetwork\NetworkingPeer.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Code\Camera\cameraUse.cs">
     <Files>
-      <File FileName="Assets\Code\Equips\equipBasics.cs" Line="696" Column="26" />
+      <File FileName="Assets\Code\Equips\equipBasics.cs" Line="1" Column="1" />
       <File FileName="Assets\Code\Player\PlayerBasic.cs" Line="945" Column="2" />
       <File FileName="Assets\Code\Equips\equipPackage.cs" Line="137" Column="42" />
-      <File FileName="Assets\Photon Unity Networking\Plugins\PhotonNetwork\NetworkingPeer.cs" Line="2941" Column="86" />
+      <File FileName="Assets\Photon Unity Networking\Plugins\PhotonNetwork\NetworkingPeer.cs" Line="1" Column="1" />
+      <File FileName="Assets\Code\Effects\fighterAttackEffects\ziying\effectZiyingSumu.cs" Line="64" Column="1" />
+      <File FileName="Assets\Code\Effects\thingsEffect\effectHpUp.cs" Line="48" Column="1" />
+      <File FileName="Assets\Code\Effects\thingsEffect\effectSoul.cs" Line="5" Column="14" />
+      <File FileName="Assets\Code\Camera\cameraUse.cs" Line="1" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

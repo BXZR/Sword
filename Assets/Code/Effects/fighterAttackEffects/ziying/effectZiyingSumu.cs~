@@ -53,7 +53,7 @@ public class effectZiyingSumu :effectBasic {
 		{
 			theEffect = GameObject.Instantiate<GameObject> (Resources.Load<GameObject> ("effects/ziyingShield"));
 			theEffect.transform.SetParent (this.thePlayer.transform);
-			theEffect.transform.localPosition = new Vector3 (0, 1.5f, 0);
+			theEffect.transform.localPosition = new Vector3 (0, 1.2f, 0);
 			thePlayer.ActerWuliDamage += attackAdd;
 			thePlayer.CActerWuliDamage += attackAdd;
 			thePlayer.ActerDamageMinusPercent += damageMinusPercent;
