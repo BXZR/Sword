@@ -21,6 +21,9 @@ public class systemValues : MonoBehaviour {
 	//0 单机模式
 	//1 网络模式
 	public static int modeIndex = 0;
+	//网络控制节点=============================
+	static PhotonView photonView;
+	//=========================================
 	#endregion
 
 	#region游戏角色信息设定查询
@@ -606,6 +609,56 @@ public class systemValues : MonoBehaviour {
 	#endregion
 
 	#region通用静态方法
+	//让某一个物体出现到指定位置
+	public static  void setPositionForGameOject(string playerName , string thingName , float x , float y , float z)
+	{
+		if (systemValues.modeIndex == 1) 
+		{
+			photonView.RPC ("setPositionForGameOjectRPC", PhotonTargets.All,playerName ,  thingName, x , y , z);
+		} 
+		else 
+		{
+			GameObject thePlayer = GameObject.Find (playerName);
+			if (!thePlayer)
+				return;
+
+			equipPackage thePackage = thePlayer.GetComponent <equipPackage> ();
+			if (!thePackage)
+				return;
+
+			equipBasics theThing = thePackage.allEquipsForSave.Find (s => s.equipName == thingName);
+			if (!theThing)
+				return;
+
+			thePackage.allEquipsForSave.Remove (theThing);
+			GameObject theOBJ = theThing.gameObject;
+			theOBJ.SetActive (true);
+			theOBJ.transform.position = new Vector3 (x,y,z);
+		}
+
+	}
+
+	[PunRPC]
+	public   void  setPositionForGameOjectRPC(string playerName , string thingName , float x , float y , float z)
+	{
+		GameObject thePlayer = GameObject.Find (playerName);
+		if (!thePlayer)
+			return;
+		
+		equipPackage thePackage = thePlayer.GetComponent <equipPackage> ();
+		if (!thePackage)
+			return;
+		
+		equipBasics theThing = thePackage.allEquipsForSave.Find (s => s.equipName == thingName);
+		if (!theThing)
+			return;
+
+		thePackage.allEquipsForSave.Remove (theThing);
+		GameObject theOBJ = theThing.gameObject;
+		theOBJ.SetActive (true);
+		theOBJ.transform.position = new Vector3 (x,y,z);
+	}
+
 	//加载图像全局工具方法
 	public static  Sprite makeLoadSprite(string textureName)
 	{
@@ -672,6 +725,8 @@ public class systemValues : MonoBehaviour {
 	void Start()
 	{
 		transStatic = this.transform;
+		if (systemValues.modeIndex == 1) 
+			photonView = PhotonView.Get (this);
 		//InvokeRepeating ("flashRubbish", 5f, 5f);
 	}
 	void OnDestroy()

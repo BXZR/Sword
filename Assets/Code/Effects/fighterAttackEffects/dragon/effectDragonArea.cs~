@@ -10,7 +10,7 @@ public class effectDragonArea :  effectBasic
 	public float spUseOnBeAttackPercent = 0.03f;
 	public float spUse = 3f;
 	public int countMax = 4;
-
+	private GameObject theEffectProfab;
 	GameObject theEffect;//特效
 
 	void Start () 
@@ -46,7 +46,10 @@ public class effectDragonArea :  effectBasic
 
 			if (this.thePlayer) 
 			{
-				theEffect = GameObject.Instantiate<GameObject> (Resources.Load<GameObject> ("effects/dragonHPShield"));
+				if(!theEffectProfab)
+					theEffectProfab = Resources.Load<GameObject> ("effects/dragonHPShield");
+				
+				theEffect = GameObject.Instantiate<GameObject> (theEffectProfab);
 				theEffect.transform.SetParent (this.thePlayer.transform);
 				theEffect.transform.localPosition = new Vector3 (0, 1.25f, 0);
 				thePlayer.ActerShieldHp += shieldAdd;

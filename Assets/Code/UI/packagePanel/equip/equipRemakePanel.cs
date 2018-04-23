@@ -142,6 +142,34 @@ public class equipRemakePanel : MonoBehaviour {
 	}
 
 	//UI调用方法和回调方法=================================================================================================
+	//将装备扔出出来给别人用
+	//这个在网络游戏中应该是比较需要的
+	public void dropTheEquip()
+	{
+		if (!theEquip && !equipSkillAdderNow) 
+		{
+			systemValues.messageTitleBoxShow ("尚未选定装备或者注灵材料");
+			return;
+		}
+
+		equipBasics theEquipUse = theEquip != null ? theEquip : equipSkillAdderNow;
+		string nameUse = theEquip != null ? theEquip.equipName : equipSkillAdderNow.equipExtraName;
+
+		if (theEquipUse.isUsing) 
+			theEquipUse.DropThisThing (systemValues.thePlayer);
+
+		Vector3 position = systemValues.thePlayer.transform.position + systemValues.thePlayer.transform.forward*2.5f;
+		systemValues.setPositionForGameOject(systemValues.thePlayer.gameObject.name, theEquipUse.equipName , position.x , position.y , position.z);
+
+		//界面刷新
+		equipSelectTypeButton.flashThePanel ();
+		thePackagePanelShow.makeFlash ();
+		equipInformationPanel.makeFlash ();
+		ShowMake ();
+		flashThePanel ();
+	}
+
+
 	public void makeTheEquipGetSkill()
 	{
 		if (!theEquip || !equipSkillAdderNow) 
@@ -190,7 +218,9 @@ public class equipRemakePanel : MonoBehaviour {
 			systemValues.messageTitleBoxShow ("尚未选定目标");
 			return;
 		}
-		systemValues.choiceMessageBoxShow ("熔锻？", "熔锻这个物品将会获得一些灵力，但是这个物品会永远消失。\n\n是否熔锻？", true, new MesageOperate (makeTheEquipToSoul));
+		equipBasics theEq = theEquip != null ? theEquip : equipSkillAdderNow;
+		string nameUse = theEquip != null ? theEquip.equipName : equipSkillAdderNow.equipExtraName;
+		systemValues.choiceMessageBoxShow ("熔锻？", "熔锻【"+nameUse+"】将会获得一些灵力，但是这个物品会永远消失。\n\n是否熔锻？", true, new MesageOperate (makeTheEquipToSoul));
 
 	}
 

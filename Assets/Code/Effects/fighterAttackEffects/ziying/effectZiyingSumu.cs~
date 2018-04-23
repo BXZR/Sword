@@ -8,7 +8,7 @@ public class effectZiyingSumu :effectBasic {
 	float attackAdd = 10f;//增加的攻击力
 	float damageMinusPercent = 0.10f;//增加的百分比减伤
 	GameObject theEffect;//特效
-
+	private GameObject theEffectProfab;
 	void Start () 
 	{
 		Init ();
@@ -51,7 +51,10 @@ public class effectZiyingSumu :effectBasic {
 		makeStart ();
 		if (thePlayer) 
 		{
-			theEffect = GameObject.Instantiate<GameObject> (Resources.Load<GameObject> ("effects/ziyingShield"));
+			if (!theEffectProfab)
+				theEffectProfab = Resources.Load<GameObject> ("effects/ziyingShield");
+			
+			theEffect = GameObject.Instantiate<GameObject> (theEffectProfab);
 			theEffect.transform.SetParent (this.thePlayer.transform);
 			theEffect.transform.localPosition = new Vector3 (0, 1.2f, 0);
 			thePlayer.ActerWuliDamage += attackAdd;

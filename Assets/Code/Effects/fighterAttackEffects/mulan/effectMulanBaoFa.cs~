@@ -11,6 +11,7 @@ public class effectMulanBaoFa : effectBasic
 	public float timeCoolingMinus =1.25f;//冷却时间使用就减少冷却时间
 	public float spAdder = 10f;//冷却中使用时候返还的斗气
 	GameObject theEffect;//特效
+	private GameObject theEffectProfab;//预设物引用保存
 
 	void Start ()
 	{
@@ -30,7 +31,10 @@ public class effectMulanBaoFa : effectBasic
 		makeStart ();
 		if (this.thePlayer) 
 		{
-			theEffect = GameObject.Instantiate<GameObject> (Resources.Load<GameObject> ("effects/mulanBaoFA"));
+			if(!theEffectProfab)
+				theEffectProfab = Resources.Load<GameObject> ("effects/mulanBaoFA");
+			
+			theEffect = GameObject.Instantiate<GameObject> (theEffectProfab);
 			theEffect.transform.SetParent (this.thePlayer.transform);
 			theEffect.transform.localPosition = new Vector3 (0, 1.25f, 0);
 
