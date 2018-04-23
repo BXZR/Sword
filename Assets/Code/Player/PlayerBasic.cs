@@ -630,28 +630,6 @@ public class PlayerBasic : MonoBehaviour {
 		theString.Append (this.ActerWuliReDamage.ToString("f0"));
 		theString.Append ("\n");
 
-		return theString.ToString ();
-
-		//下面这些内容是上面文本的排版
-		//因为string相加的开销有点大，所以用了StringBuilder来做这件事，可以减少不少的GC
-//		string information = "";
-//		//information += "=======" + this.ActerName+"=======\n\n";
-//		if (showHpMax)//因为有些时候生命值上限这种显示特殊用slider来做，就没有必要多次显示了
-//		{
-//			information += "生命值上限  " + (int)this.ActerHpMax + "   ";
-//			information += "斗气值上限  " + (int)this.ActerSpMax + "\n";
-//		}
-//		information += "生命恢复  " + this.ActerHpUp .ToString ("f2")+"/秒   ";
-//		information += "斗气回复  " + this.ActerSpUp .ToString ("f2") + "/秒\n";
-//		information += "护甲  " + this.ActerWuliShield .ToString ("f1")+"   ";
-//		information += "伤害  " + this.ActerWuliDamage .ToString("f1")+"   ";
-//		information += "反伤  "+this.ActerWuliReDamage.ToString("f1")+"\n";
-//		return information;
-	}
-
-	public string getPlayerInformationExtra()
-	{
-		StringBuilder theString = new StringBuilder ();
 		theString.Append ("暴击率  ");
 		theString.Append ((this.ActerSuperBaldePercent *100).ToString("f1"));
 		theString.Append ("%   ");
@@ -720,10 +698,27 @@ public class PlayerBasic : MonoBehaviour {
 		theString.Append ("\n负重  ");
 		theString.Append ((weightPercent * 100).ToString ("f0"));
 		theString.Append ("%");
+
 		return theString.ToString ();
 
 		//下面这些内容是上面文本的排版
 		//因为string相加的开销有点大，所以用了StringBuilder来做这件事，可以减少不少的GC
+//		string information = "";
+//		//information += "=======" + this.ActerName+"=======\n\n";
+//		if (showHpMax)//因为有些时候生命值上限这种显示特殊用slider来做，就没有必要多次显示了
+//		{
+//			information += "生命值上限  " + (int)this.ActerHpMax + "   ";
+//			information += "斗气值上限  " + (int)this.ActerSpMax + "\n";
+//		}
+//		information += "生命恢复  " + this.ActerHpUp .ToString ("f2")+"/秒   ";
+//		information += "斗气回复  " + this.ActerSpUp .ToString ("f2") + "/秒\n";
+//		information += "护甲  " + this.ActerWuliShield .ToString ("f1")+"   ";
+//		information += "伤害  " + this.ActerWuliDamage .ToString("f1")+"   ";
+//		information += "反伤  "+this.ActerWuliReDamage.ToString("f1")+"\n";
+//		return information;
+
+//下面这些内容是上面文本的排版
+//因为string相加的开销有点大，所以用了StringBuilder来做这件事，可以减少不少的GC
 //		string information = "";
 //		information += "暴击率  "+(this.ActerSuperBaldePercent *100).ToString("f1")+"%   ";
 //		information += "暴击伤害加成  "+(this.ActerSuperBaldeAdder*100).ToString("f1")+"%\n";
@@ -745,7 +740,7 @@ public class PlayerBasic : MonoBehaviour {
 //			
 //		return information;
 	}
-
+		
 	/*****************************************************************************************/
 	//这个方法每一帧都会调用，刷新任务的属性
 	//并没有使用update方法而是使用invoke方法

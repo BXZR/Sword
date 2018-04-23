@@ -42,7 +42,7 @@ public class BasicPanelController : MonoBehaviour {
 
 	void Start()
 	{
-		//theHeadImage.sprite = null;
+		makeLoad ();
 	}
 
 
@@ -83,11 +83,10 @@ public class BasicPanelController : MonoBehaviour {
 
 	void OnEnable () 
 	{
-		makeLoad();
 		if(systemValues.thePlayer)
 		{	
 			thePlayerName.text = systemValues.thePlayer.ActerName +"  (Lv."+systemValues.thePlayer.playerLv+")";
-			theExtraValueInformationText.text = systemValues.thePlayer.getPlayerInformation(false)+systemValues.thePlayer.getPlayerInformationExtra();
+			theExtraValueInformationText.text = systemValues.thePlayer.getPlayerInformation (false);
 			float theHpValue = systemValues.thePlayer.ActerHp / systemValues.thePlayer.ActerHpMax;
 			float theSpValue = systemValues.thePlayer.ActerSp / systemValues.thePlayer.ActerSpMax;
 			theHpSlider.value = theHpValue;//生命值 + 护盾值

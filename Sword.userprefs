@@ -1,21 +1,14 @@
 ﻿<Properties StartupItem="Assembly-CSharp.csproj">
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Unity.Instance.Unity Editor" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Code\Player\move.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Code\UI\systemPanel\BasicPanelController.cs">
     <Files>
-      <File FileName="Assets\Code\UI\systemPanel\Skill\skillPanelController.cs" Line="27" Column="5" />
-      <File FileName="Assets\Code\UI\packagePanel\thePackagePanelShow.cs" Line="59" Column="2" />
-      <File FileName="Assets\Code\UI\packagePanel\equip\equipSelectTypeButton.cs" Line="100" Column="21" />
-      <File FileName="Assets\Code\UI\packagePanel\equip\equipInformationPanel.cs" Line="67" Column="2" />
-      <File FileName="Assets\Code\UI\packagePanel\equip\equipShowingButton.cs" Line="1" Column="1" />
-      <File FileName="Assets\Code\systemValues.cs" Line="713" Column="2" />
-      <File FileName="Assets\Code\AI\FSMStage.cs" Line="146" Column="35" />
-      <File FileName="Assets\Code\UI\basicShow\effectFlashPanel.cs" Line="155" Column="40" />
-      <File FileName="Assets\Code\Player\move.cs" Line="398" Column="10" />
-      <File FileName="Assets\Code\Player\newMethodAttack.cs" Line="37" Column="32" />
-      <File FileName="Assets\Code\Player\PlayerBasic.cs" Line="301" Column="2" />
-      <File FileName="Assets\Code\Player\attackLinkController.cs" Line="213" Column="21" />
-      <File FileName="Assets\Code\bloodSlider\BasicMethod\BloodScaner.cs" Line="24" Column="42" />
-      <File FileName="Assets\Code\Effects\thingsEffect\effectSoul.cs" Line="11" Column="5" />
+      <File FileName="Assets\Code\Effects\fighterAttackEffects\public\killerGeter.cs" Line="36" Column="57" />
+      <File FileName="Assets\Code\systemValues.cs" Line="315" Column="3" />
+      <File FileName="Assets\Code\UI\systemPanel\BasicPanelController.cs" Line="98" Column="55" />
+      <File FileName="Assets\Code\Effects\effectBasic.cs" Line="101" Column="2" />
+      <File FileName="Assets\Code\Player\PlayerBasic.cs" Line="751" Column="29" />
+      <File FileName="Assets\Code\UI\packagePanel\equip\equipPersonForAllInforamtion.cs" Line="12" Column="50" />
+      <File FileName="Assets\Code\UI\startAndSelect\selectHead.cs" Line="74" Column="56" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

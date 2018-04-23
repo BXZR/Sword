@@ -71,7 +71,7 @@ public class selectHead : MonoBehaviour {
 		therPlayer.AddComponent<extraRotate> ();
 		therPlayer.AddComponent<fixPosition> ();
 		PlayerBasic thePlayerB = therPlayer.GetComponent<PlayerBasic> ();
-		playerInformationText.text = thePlayerB.getPlayerInformation () + thePlayerB.getPlayerInformationExtra ();
+		playerInformationText.text = thePlayerB.getPlayerInformation ();
 		playerTitleText.text = makeTitleText(thePlayerB);
 		systemValues.setIndexForPlayer (indexForSystemValues);
 

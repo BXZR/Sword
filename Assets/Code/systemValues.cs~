@@ -323,7 +323,7 @@ public class systemValues : MonoBehaviour {
 		{
 			//ef.Init ();
 			if(ef.isBE())
-				skillsInformation += ef.getInformation () + "\n"+ ef.getExtraInformation();
+				skillsInformation += ef.getInformation () + "\n"+ ef.getExtraInformation() +"\n";
 		}
 		return (BESkillColor  + skillsInformation + colorEnd);
 	}
@@ -608,6 +608,56 @@ public class systemValues : MonoBehaviour {
 	//3D bloodText和其他显示3D Text的对象池============================================================================
 	#endregion
 
+	#region 图片池与图像加载
+
+	static List<Sprite> theSavedSprite = new List<Sprite> ();
+	//加载图像全局工具方法
+	public static  Sprite makeLoadSprite(string textureName)
+	{
+		Sprite theSprite = theSavedSprite.Find (x => x.name == textureName);
+	    if (theSprite != null)
+			return theSprite;
+
+		Texture2D theTextureIn = Resources.Load <Texture2D> (textureName);
+		theSprite = Sprite .Create(theTextureIn,new Rect (0,0,theTextureIn.width,theTextureIn.height),new Vector2 (0,0));
+		theSprite.name = textureName;
+		theSavedSprite.Add (theSprite);
+		return theSprite;
+	}
+	#endregion
+
+	#region 灵力效果池(其实就是保存一下引用)
+	public static List<popSoulMove> thePopSoul = new List<popSoulMove> ();
+	private static GameObject theSoulProfab = null;
+
+	public static popSoulMove getPopSoul()
+	{
+		if (!theSoulProfab)
+			theSoulProfab = Resources.Load<GameObject> ("effects/theSoul");
+
+		if (thePopSoul.Count <= 0)
+		{
+			GameObject theSoul = GameObject.Instantiate<GameObject> (theSoulProfab);
+			theSoul.transform.SetParent (transStatic);
+			return theSoul.GetComponent<popSoulMove> ();
+		}
+		else 
+		{
+			popSoulMove A = thePopSoul [0];
+			A.gameObject.SetActive (true);
+			thePopSoul.RemoveAt(0);
+			return A;
+		}
+
+	}
+
+	public static void savePopSoul(popSoulMove A)
+	{
+		thePopSoul.Add (A);
+		A.gameObject.SetActive (false);
+	}
+	#endregion
+
 	#region通用静态方法
 	//让某一个物体出现到指定位置
 	public static  void setPositionForGameOject(string playerName , string thingName , float x , float y , float z)
@@ -644,11 +694,11 @@ public class systemValues : MonoBehaviour {
 		GameObject thePlayer = GameObject.Find (playerName);
 		if (!thePlayer)
 			return;
-		
+
 		equipPackage thePackage = thePlayer.GetComponent <equipPackage> ();
 		if (!thePackage)
 			return;
-		
+
 		equipBasics theThing = thePackage.allEquipsForSave.Find (s => s.equipName == thingName);
 		if (!theThing)
 			return;
@@ -706,25 +756,6 @@ public class systemValues : MonoBehaviour {
 		//额外增加一点点数值以备不测
 	}
 
-	#endregion
-
-
-	#region 图片池与图像加载
-
-	static List<Sprite> theSavedSprite = new List<Sprite> ();
-	//加载图像全局工具方法
-	public static  Sprite makeLoadSprite(string textureName)
-	{
-		Sprite theSprite = theSavedSprite.Find (x => x.name == textureName);
-	    if (theSprite != null)
-			return theSprite;
-
-		Texture2D theTextureIn = Resources.Load <Texture2D> (textureName);
-		theSprite = Sprite .Create(theTextureIn,new Rect (0,0,theTextureIn.width,theTextureIn.height),new Vector2 (0,0));
-		theSprite.name = textureName;
-		theSavedSprite.Add (theSprite);
-		return theSprite;
-	}
 	#endregion
 
 	#region系统清理

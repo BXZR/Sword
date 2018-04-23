@@ -15,7 +15,7 @@ public class FSMBasic  {
 	public PlayerBasic theEMY ;
 	public PlayerBasic theThis;
 	public int stateID = 0;//每一个状态有一个ID标识
-
+	public float timer;//持续时间
 	//attack 1
 	//jump 2
 	//runafter 3
@@ -28,6 +28,12 @@ public class FSMBasic  {
 		theEMY = theEMYIn;
 		theThis = thethisIn;
 		theAnimator = theAnimatorIn;
+	}
+
+	//有些状态不需要timer，所以也就无所谓了
+	public void setTimer(float timerIn)
+	{
+		timer = timerIn;
 	}
 
 	public virtual int geID(){return 0;}

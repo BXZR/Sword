@@ -4,7 +4,6 @@ using UnityEngine.AI;
 
 public class FSM_Jump : FSMBasic {
 
-	float timer = 1.8f;
 	public override int geID ()
 	{
 		return 2;
@@ -20,7 +19,7 @@ public class FSM_Jump : FSMBasic {
 	public override void OnFSMStateStart ()
 	{
 		this.theThis.GetComponent <NavMeshAgent> ().enabled = false;
-
+		timer = 1.8f;
 	}
 
 	public override void actInThisState ()

@@ -11,19 +11,15 @@ public class FSMStage : effectBasic {
 	public FSMBasic theStateNow = new FSM_Search();
 	private PlayerBasic thethis; 
 	private Animator theAnimator;
-	public float AIThinkTimer = 1.5f;//AI每隔一段时间再进行思考
-	public float AIThinkTimerMax = 1.5f;
+	public float AIThinkTimer = 1f;//AI每隔一段时间再进行思考
 	//这是一个值得优化的点，在一些条件下关闭掉AI计算会非常省事
 	//AI的计算很重并且同时计算的很多
 	public bool theAiIsActing = true;//AI是否计算的标记
 
 	//仇恨时间
-	public float angerTimer = 3f;//仇恨时间，也是追击的总时长
-	public float angetTimerMax = 3f;//仇恨时间上限
+	public float angerTimer = 4f;//仇恨时间，也是追击的总时长
+	public float angetTimerMax = 4f;//仇恨时间上限
 
-	//AI进行计算的时间
-	public float AIStagetimer = 40f;//AI至少计算40秒
-	public float AIStagetimerMax = 40f;//AI至少计算30秒
 
 	bool isDeadMake = false;
 
@@ -57,6 +53,7 @@ public class FSMStage : effectBasic {
 	{
 		makeAIStart();//AI重新激活，刷新时间
 	}
+
 	public override void OnBeAttack (PlayerBasic attacker)
 	{
 		//Vector3 minus = new Vector3 (0f , attacker.transform.rotation.eulerAngles.y - this.transform.rotation.eulerAngles.y , 0f);
@@ -95,13 +92,7 @@ public class FSMStage : effectBasic {
 			else if(theStateNow.geID () == 2 || theStateNow.geID () == 3)//跳跃和追击状态实际上都是在追杀目标
 			{
 				angerTimer --;
-				if (angerTimer < 0) //追太久就不要追下去了
-				{
-					this.GetComponent <NavMeshAgent> ().enabled = true;
-					FSM_Search search = new FSM_Search ();
-					search.makeState (this.theMoveController, this.theAttackLlinkController,this.theAnimator, theStateNow .theThis);
-					theStateNow =  search;
-				}
+				theStateNow.timer = angerTimer;
 			}
 		}
 	}
@@ -110,25 +101,29 @@ public class FSMStage : effectBasic {
 	//刷新AI计算时间
 	public void makeAIStart()
 	{
+		CancelInvoke ();
 		theAiIsActing = true;
-		AIStagetimer = AIStagetimerMax;
 
 		//这里可能会因为数值设定有一定时间上的误差，但是我觉得没什么所谓
-		InvokeRepeating ("AIStageTimeCanculate" , 2f , 5f);
 		InvokeRepeating ("angerCanculate" , 2f , 1f);
+		InvokeRepeating ("think", 2f, AIThinkTimer);
 	}
 
-	private void AIStageTimeCanculate()
+	void  think()
 	{
-		if (theAiIsActing == false)
-			return;
-		AIStagetimer -= 5f;
-		if (AIStagetimer < 0) 
+		if (theStateNow != null && thethis.isAlive)
 		{
-			AIStagetimer = AIStagetimerMax;
-			theAiIsActing = false;
+			//AI转换状态
+			FSMBasic theStateNew = theStateNow.moveToNextState ();//思考进入到下一个状态或许可以慢一点进行
+			if (theStateNew.geID () != theStateNow.geID ())
+			{
+				theStateNow.OnFSMStateEnd ();//结束效果
+				theStateNow = theStateNew;
+				theStateNew.OnFSMStateStart ();//开始效果
+			}
 		}
 	}
+
 	//有关AI计算状态-----------------------------------------------------------
 
 
@@ -144,20 +139,6 @@ public class FSMStage : effectBasic {
 				//AI操作
 				//print ("AI is acting");
 				theStateNow.actInThisState ();
-				//AI转换状态
-				AIThinkTimer -= Time.deltaTime;
-				if (AIThinkTimer < 0) 
-				{
-					AIThinkTimer = AIThinkTimerMax;
-					//print ("stateNowID = "+ theStateNow.geID());
-					FSMBasic theStateNew = theStateNow.moveToNextState ();//思考进入到下一个状态或许可以慢一点进行
-					if (theStateNew.geID () != theStateNow.geID ()) 
-					{
-						theStateNow.OnFSMStateEnd ();//结束效果
-						theStateNow = theStateNew;
-						theStateNew.OnFSMStateStart ();//开始效果
-					}
-				}
 			}
 			else if (isDeadMake == false) 
 			{

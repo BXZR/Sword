@@ -39,13 +39,15 @@ public class popSoulMove : MonoBehaviour {
 				effectBasic[] theEffects = theAim.GetComponentsInChildren<effectBasic> ();
 				for (int i = 0; i < theEffects.Length; i++)
 					theEffects [i].OnAddSoul (soulCount);
-				
-				Destroy (this.gameObject);
+
+				CancelInvoke ();
+				isStart = false;
+				systemValues.savePopSoul (this);
 			}
 		}
 		else 
 		{
-			this.transform.Translate (new Vector3 (0,1,0) *0.4f*Time .deltaTime, Space.World);
+			this.transform.Translate (Vector3.up * 0.4f * Time .deltaTime, Space.World);
 		}
 	}
 }

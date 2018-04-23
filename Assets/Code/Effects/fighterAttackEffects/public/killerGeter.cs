@@ -6,6 +6,7 @@ public class killerGeter : effectBasic
 {
 
 	private static GameObject theSoulProfab = null;
+
 	//这个脚本挂在人身上用来记录击杀者
 	PlayerBasic thePlayerKilledThis = null;
 	 
@@ -27,14 +28,12 @@ public class killerGeter : effectBasic
 		if( (this.thePlayer.ActerHp < 0 || this.thePlayer.isAlive == false) && thePlayerKilledThis == null )
 		{
 			//print ("dead");
-			if (!theSoulProfab)
-				theSoulProfab = Resources.Load<GameObject> ("effects/theSoul");
-			
+
 			thePlayerKilledThis = attacker;
-			GameObject theSoul = GameObject.Instantiate<GameObject>(theSoulProfab);
-			theSoul.transform.position = this.transform.position;
+			popSoulMove theSoul = systemValues.getPopSoul ();
 			int soulCount = systemValues.soulGet (this.thePlayer);
-			theSoul.GetComponent <popSoulMove> ().makeSTART (attacker , soulCount);
+			theSoul.makeSTART (attacker, soulCount);
+			theSoul.transform.position = this.transform.position;
 		}
 	}
     

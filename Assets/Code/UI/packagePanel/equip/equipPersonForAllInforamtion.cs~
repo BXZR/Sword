@@ -9,7 +9,7 @@ public class equipPersonForAllInforamtion : MonoBehaviour {
 	{
 		if (systemValues.thePlayer)
 		{
-			string theShowString = systemValues.thePlayer.getPlayerInformation () + systemValues.thePlayer.getPlayerInformationExtra ();
+			string theShowString = systemValues.thePlayer.getPlayerInformation ();
 			systemValues.messageBoxShow ("[人物信息]",theShowString , true);
 		}
 	}
