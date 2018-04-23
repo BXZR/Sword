@@ -40,6 +40,7 @@ public class attackLinkController :MonoBehaviour {
 	public bool canControll = true ;//是否可以通过玩家/AI进行操作
 
 
+
 	//检测连招的方法，每一次按键都要求检测
 	//这个是根据玩家的输入进行控制的方法，在制作玩家AI时需要继承并重写方法
 	// useInterpret标记着是否使用对应的翻译机制

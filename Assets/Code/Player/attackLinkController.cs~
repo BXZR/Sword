@@ -39,6 +39,10 @@ public class attackLinkController :MonoBehaviour {
 	private bool isStarted = false;//是否开启
 	public bool canControll = true ;//是否可以通过玩家/AI进行操作
 
+	//装备重量
+	//是一个装备都会有重量，有重量就会对速度有影响
+	//至于特性加攻速，不代表本身的重量也不会有影响
+	public float theEquipWeight = 0.05f;
 
 	//检测连招的方法，每一次按键都要求检测
 	//这个是根据玩家的输入进行控制的方法，在制作玩家AI时需要继承并重写方法

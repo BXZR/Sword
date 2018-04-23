@@ -63,6 +63,10 @@ public class equipBasics : MonoBehaviour {
 	public float equiptheAttackAreaAngel = 0f;//攻击范围的角度，自身前方锥形范围内都是攻击范围
 	public float equiptheViewAreaLength = 0f;//视野长度，在不同的模式之下。例如暗夜模式，是很有需要实际的地方的
 	public float equiptheViewAreaAngel = 0f;//视野的角度，同样，在不同的模式之下。例如暗夜模式，是很有需要实际的地方的
+	//装备重量
+	//是一个装备都会有重量，有重量就会对速度有影响
+	//至于特性加攻速，不代表本身的重量也不会有影响
+	public float theEquipWeight = 0.05f;
 	//装备的潜力，也就是可以消耗的总的点数
 	//如果这“装备”是注灵，则表示消耗的潜力
 	public int skillValueCount = 0;
@@ -183,6 +187,7 @@ public class equipBasics : MonoBehaviour {
 		thePlayer.CtheAttackAreaAngel += equiptheAttackAreaAngel;//攻击范围的角度，自身前方锥形范围内都是攻击范围
 		thePlayer.CtheViewAreaLength += equiptheViewAreaLength;//视野长度，在不同的模式之下。例如暗夜模式，是很有需要实际的地方的
 		thePlayer.CtheViewAreaAngel += equiptheViewAreaAngel;//视野的角度，同样，在不同的模式之下。例如暗夜模式，是很有需要实际的地方的
+		thePlayer.weightPercent += this.theEquipWeight;//装备重量，游戏角色负重
 
 		addEffects (thePlayer);
 		thePlayer.makeValueUpdate();//网络版本需要强制更新，不能等自动的更新数值
@@ -279,6 +284,7 @@ public class equipBasics : MonoBehaviour {
 		thePlayer.CtheAttackAreaAngel -= equiptheAttackAreaAngel;//攻击范围的角度，自身前方锥形范围内都是攻击范围
 		thePlayer.CtheViewAreaLength -= equiptheViewAreaLength;//视野长度，在不同的模式之下。例如暗夜模式，是很有需要实际的地方的
 		thePlayer.CtheViewAreaAngel -= equiptheViewAreaAngel;//视野的角度，同样，在不同的模式之下。例如暗夜模式，是很有需要实际的地方的
+		thePlayer.weightPercent -= this.theEquipWeight;//装备重量，游戏角色负重
 
 		dropEffects (thePlayer);
 		thePlayer.makeValueUpdate();//网络版本需要强制更新，不能等自动的更新数值
@@ -366,6 +372,8 @@ public class equipBasics : MonoBehaviour {
 		{information.Append ("侦查距离 + ");information.Append ((equiptheViewAreaLength).ToString("f0"));information.Append ("\n");}
 		if (equiptheViewAreaAngel > 0)
 		{information.Append ("侦查广度 + ");information.Append ((equiptheViewAreaAngel).ToString("f0"));information.Append ("\n");}
+		if (theEquipWeight > 0) 
+		{information.Append ("负重 + ");information.Append ((theEquipWeight*100).ToString("f0"));information.Append ("%\n");}
 		return information.ToString ();
 	}
 
@@ -413,6 +421,7 @@ public class equipBasics : MonoBehaviour {
 		float equiptheAttackAreaAngel =  0f;
 		float equiptheViewAreaLength =   0f;
 		float equiptheViewAreaAngel =   0f;
+		float equipWeight = 0f;
 
 		//一次性判断要比三目靠谱
 		if (oldOne == null) 
@@ -455,6 +464,7 @@ public class equipBasics : MonoBehaviour {
 		    equiptheAttackAreaAngel =  newOne.equiptheAttackAreaAngel  ;
 			equiptheViewAreaLength =  newOne.equiptheViewAreaLength  ;
 			equiptheViewAreaAngel =  newOne.equiptheViewAreaAngel  ;
+			equipWeight = newOne.theEquipWeight;
 		}
 		else
 		{
@@ -496,6 +506,7 @@ public class equipBasics : MonoBehaviour {
 			equiptheAttackAreaAngel =  newOne.equiptheAttackAreaAngel  - oldOne.equiptheAttackAreaAngel;
 			equiptheViewAreaLength =  newOne.equiptheViewAreaLength - oldOne.equiptheViewAreaLength;
 			equiptheViewAreaAngel =  newOne.equiptheViewAreaAngel - oldOne.equiptheViewAreaAngel;
+			equipWeight = newOne.theEquipWeight - oldOne.theEquipWeight;
 		}
 
 		StringBuilder theString = new StringBuilder ();
@@ -577,6 +588,8 @@ public class equipBasics : MonoBehaviour {
 		{theString.Append ("侦查距离 ");theString.Append (equiptheViewAreaLength.ToString("f0"));theString.Append ("\n");}
 		if (equiptheViewAreaAngel != 0) 
 		{theString.Append ("侦查广度 ");theString.Append (equiptheViewAreaAngel.ToString("f0"));theString.Append ("\n");}
+		if (equipWeight != 0)
+		{theString.Append ("负重 ");theString.Append ((equipWeight *100).ToString("f0"));theString.Append ("%\n");}
 		return theString.ToString();
 	}
 
