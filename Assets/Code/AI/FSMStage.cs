@@ -22,7 +22,7 @@ public class FSMStage : effectBasic {
 	public float angetTimerMax = 3f;//仇恨时间上限
 
 	//AI进行计算的时间
-	public float AIStagetimer = 40f;//AI至少计算30秒
+	public float AIStagetimer = 40f;//AI至少计算40秒
 	public float AIStagetimerMax = 40f;//AI至少计算30秒
 
 	bool isDeadMake = false;
@@ -94,7 +94,7 @@ public class FSMStage : effectBasic {
 			}
 			else if(theStateNow.geID () == 2 || theStateNow.geID () == 3)//跳跃和追击状态实际上都是在追杀目标
 			{
-				angerTimer -= Time.deltaTime;
+				angerTimer --;
 				if (angerTimer < 0) //追太久就不要追下去了
 				{
 					this.GetComponent <NavMeshAgent> ().enabled = true;
@@ -112,14 +112,17 @@ public class FSMStage : effectBasic {
 	{
 		theAiIsActing = true;
 		AIStagetimer = AIStagetimerMax;
+
+		//这里可能会因为数值设定有一定时间上的误差，但是我觉得没什么所谓
+		InvokeRepeating ("AIStageTimeCanculate" , 2f , 5f);
+		InvokeRepeating ("angerCanculate" , 2f , 1f);
 	}
 
 	private void AIStageTimeCanculate()
 	{
 		if (theAiIsActing == false)
 			return;
-		
-		AIStagetimer -= Time.deltaTime;
+		AIStagetimer -= 5f;
 		if (AIStagetimer < 0) 
 		{
 			AIStagetimer = AIStagetimerMax;
@@ -132,12 +135,10 @@ public class FSMStage : effectBasic {
     //很多操作都是连续的，对于AI来说或许用连续的方法计算会比较好
 	void Update () 
 	{
-		AIStageTimeCanculate ();
 		//出于优化考虑不必让AI一直计算下去
 		//此外这也可是“怪物僵直”状态的一个做法
 		if (theAiIsActing)
 		{
-			angerCanculate ();
 			if (theStateNow != null && thethis.isAlive) 
 			{
 				//AI操作

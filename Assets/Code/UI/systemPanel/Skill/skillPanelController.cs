@@ -16,20 +16,40 @@ public class skillPanelController : MonoBehaviour {
 	public Text theInformationText;
 	//是否已经建立建立一次就可以了
 	private bool isBuilt = false;
-
+	//保存下来的引用
+	private List<attackLink> saved;
     //技能介绍按钮生成一次就可以
 	void OnEnable()
 	{
-		
-		makeStart ();
+		bool changed = IsChanged ();
+		if(changed)
+		     makeStart ();
+		//print ("ischanged = "+changed);
 	}
 		
+
+	//如果连招没有变化，那就没有必要重新加载重建连招信息
+	bool IsChanged()
+	{
+		if (saved == null)
+			return true;
+		attackLink[] theAttacklinks = systemValues.thePlayer.GetComponentsInChildren < attackLink > ();
+		if (theAttacklinks.Length != saved.Count)
+			return true;
+		for (int i = 0; i < saved.Count; i++)
+			if (saved [i] != theAttacklinks [i])
+				return true;
+		return false;
+		
+	}
+
 	void  makeStart()
 	{
 		//单次初始化吧性能自然会好，但是初始对于动态增加效果的时候的灵活性或许不够强大
 		//if (systemValues.thePlayer != null && !isBuilt) 
 		if (systemValues.thePlayer != null) 
 		{
+			saved = new List<attackLink> ();
 			//简单的清理工作
 			skillButton[] buttons = theButtonFather.GetComponentsInChildren<skillButton> ();
 			for (int i = 0; i < buttons.Length; i++)
@@ -50,6 +70,7 @@ public class skillPanelController : MonoBehaviour {
 				theSkillInformation.makeStart ();
 				theButton.transform.localPosition = new Vector3 (1,1,1);
 				theButton.transform.localScale = new Vector3 (1,1,1);
+				saved.Add (theAttacklinks[i]);
 			}
 
 			//isBuilt = true;

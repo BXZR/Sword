@@ -140,7 +140,7 @@ class ButtonEffectflasher
 	public effectBasic theEffect;
 	public Color EffectColor;//生效颜色
 	public Color NotEffectColor;//失效颜色
-
+	private bool isEffecting = true;//保存引用，这样就不用每一次都颜色赋值了
 	public void makeStart(GameObject theEffectShowButton , Transform father , effectBasic theEffectIn , Color effectColorIn , Color notEffectColorIn)
 	{
 		theButton = GameObject.Instantiate<GameObject> (theEffectShowButton);
@@ -151,6 +151,8 @@ class ButtonEffectflasher
 		EffectColor = effectColorIn;
 		NotEffectColor = notEffectColorIn;
 		theEffect = theEffectIn;
+		theFillAmountImage.color = EffectColor;
+		isEffecting = theEffectIn.isEffecting;
 
 	}
 
@@ -160,10 +162,11 @@ class ButtonEffectflasher
 		{
 			theShowText.text = theEffect.getOnTimeFlashInformation ();
 			theFillAmountImage.fillAmount = theEffect.getEffectTimerPercent ();
-			if (theEffect.isEffecting)
-				theFillAmountImage.color = EffectColor;
-			else
+			if (theEffect.isEffecting != isEffecting) 
+			{
+				isEffecting = theEffect.isEffecting;
 				theFillAmountImage.color = NotEffectColor;
+			}
 		}
 	}
 	public void makeDestroy()

@@ -55,15 +55,7 @@ public class thePackagePanelShow : MonoBehaviour {
 
 		makeFlash ();
 	}
-
-	void OnEnable()
-	{
-		if (!theEquipPackage)
-			return;
 		
-		makeFlash ();
-	}
-
 	public static void makeFlash()
 	{
 		staticHeadButton.theEquip = theEquipPackage .thEquipForHeadUsed;

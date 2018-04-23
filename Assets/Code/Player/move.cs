@@ -412,7 +412,7 @@ public class move : MonoBehaviour {
 
 	void Start ()
 	{
-		if (this.gameObject.tag == "AI")//AI用的是自动导航组件，这个脚本仅仅针对玩家控制的单位
+		if (this.gameObject.Equals("AI"))//AI用的是自动导航组件，这个脚本仅仅针对玩家控制的单位
 		{
 			Destroy (this);
 			//makeStart (); 
@@ -423,7 +423,7 @@ public class move : MonoBehaviour {
 
 	void OnTriggerEnter(Collider A)
 	{
-		if (A.tag == "Wall") 
+		if (A.tag.Equals( "Wall")) 
 		{
 			//print ("is over wall");
 			isOverWall = true;

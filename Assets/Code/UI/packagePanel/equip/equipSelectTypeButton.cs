@@ -75,7 +75,7 @@ public class equipSelectTypeButton : MonoBehaviour {
 			{
 				GameObject theButton = GameObject.Instantiate<GameObject> (theShowingButtonProfab);
 				theButton.transform.SetParent (theViewFather.transform);
-				theButton.GetComponentInChildren<Text> ().text = "";
+				//theButton.GetComponentInChildren<Text> ().text = "";
 				//theButton.GetComponentInChildren<Text> ().text = eqs [i].equipName;
 				theButton.GetComponent <equipShowingButton> ().theEquip = eqs [i];
 				theButton.GetComponent <Image> ().sprite = systemValues.makeLoadSprite ("equipPicture/" + eqs [i].theEquipType + "/" + eqs [i].equipPictureName);

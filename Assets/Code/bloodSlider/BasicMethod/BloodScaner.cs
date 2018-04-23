@@ -21,7 +21,7 @@ public class BloodScaner : MonoBehaviour {
 		{
 			angle = thePlayer.theViewAreaAngel;
 			distance = thePlayer.theViewAreaLength;
-			InvokeRepeating ("searchAIMs", 2f, 0.2f); 
+			InvokeRepeating ("searchAIMs", 2f, 0.5f); 
 		} 
 		else 
 		{

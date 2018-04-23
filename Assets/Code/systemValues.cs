@@ -659,14 +659,6 @@ public class systemValues : MonoBehaviour {
 		theOBJ.transform.position = new Vector3 (x,y,z);
 	}
 
-	//加载图像全局工具方法
-	public static  Sprite makeLoadSprite(string textureName)
-	{
-		//textureName = "people/noOne";
-		Texture2D theTextureIn = Resources.Load <Texture2D> (textureName);
-		return Sprite .Create(theTextureIn,new Rect (0,0,theTextureIn.width,theTextureIn.height),new Vector2 (0,0));
-	}
-
 	//检查一个字符串是不是空的
 	public static bool isNullOrEmpty(string value)
 	{
@@ -715,12 +707,34 @@ public class systemValues : MonoBehaviour {
 	}
 
 	#endregion
+
+
+	#region 图片池与图像加载
+
+	static List<Sprite> theSavedSprite = new List<Sprite> ();
+	//加载图像全局工具方法
+	public static  Sprite makeLoadSprite(string textureName)
+	{
+		Sprite theSprite = theSavedSprite.Find (x => x.name == textureName);
+	    if (theSprite != null)
+			return theSprite;
+
+		Texture2D theTextureIn = Resources.Load <Texture2D> (textureName);
+		theSprite = Sprite .Create(theTextureIn,new Rect (0,0,theTextureIn.width,theTextureIn.height),new Vector2 (0,0));
+		theSprite.name = textureName;
+		theSavedSprite.Add (theSprite);
+		return theSprite;
+	}
+	#endregion
+
+	#region系统清理
 	//反复跳转场景应该做一些清理工作
 	public static void makeSystemClean()
 	{
 		theShowingTexts.Clear ();
+		theSavedSprite.Clear ();
 	}
-
+	#endregion
 	//GM的初始化==============================================================================
 	void Start()
 	{

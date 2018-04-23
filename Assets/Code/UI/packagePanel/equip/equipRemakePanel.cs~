@@ -36,6 +36,17 @@ public class equipRemakePanel : MonoBehaviour {
 		isStarted = true;
 	}
 
+	void OnEnable()
+	{
+		if (!isStarted)
+			return;
+		//界面刷新
+		equipSelectTypeButton.flashThePanel ();
+		thePackagePanelShow.makeFlash ();
+		equipInformationPanel.makeFlash ();
+		ShowMake ();
+		flashThePanel ();
+	}
 
 	//展示这个注灵的效果
 	public static void showEquipSkillAdderGet(equipBasics theEquip)
@@ -82,7 +93,7 @@ public class equipRemakePanel : MonoBehaviour {
 			for (; i < es.Length; i++) 
 			{
 				es [i].theEquip = eqs [i];
-				es [i].GetComponentInChildren<Text>().text = "";
+				//es [i].GetComponentInChildren<Text>().text = "";
 				//print ("equipPicture/" + equiptype.equipSkill + "/" + eqs [i].equipPictureName);
 				es[i].GetComponent <Image> ().sprite = systemValues.makeLoadSprite ("equipPicture/" + equiptype.equipSkill + "/" + eqs [i].equipPictureName);
 			}
@@ -91,7 +102,7 @@ public class equipRemakePanel : MonoBehaviour {
 				GameObject theButton = GameObject.Instantiate<GameObject> (theShowingButtonProfabStatic);
 				theButton.transform.SetParent (equipSkillAdderViewFatherStatic.transform);
 				theButton.GetComponent <equipShowingButton> ().theEquip = eqs [i];
-				theButton.GetComponentInChildren<Text>().text = "";
+				//theButton.GetComponentInChildren<Text>().text = "";
 				//print ("equipPicture/" + equiptype.equipSkill + "/" + eqs [i].equipPictureName);
 				theButton.GetComponent <Image> ().sprite = systemValues.makeLoadSprite ("equipPicture/" + equiptype.equipSkill + "/" + eqs [i].equipPictureName);
 				//因为有grid控件，所以这些都没有必要使用了
@@ -105,7 +116,7 @@ public class equipRemakePanel : MonoBehaviour {
 			for (; i < eqs.Count; i++) 
 			{
 				es [i].theEquip = eqs [i];
-				es [i].GetComponentInChildren<Text>().text = "";
+				//es [i].GetComponentInChildren<Text>().text = "";
 				es[i].GetComponent <Image> ().sprite = systemValues.makeLoadSprite ("equipPicture/" + equiptype.equipSkill + "/" + eqs [i].equipPictureName);
 			}
 			for (; i>=0 && i < es.Length; i++) 
@@ -134,13 +145,6 @@ public class equipRemakePanel : MonoBehaviour {
 	}
 
 
-
-	void OnEnable()
-	{
-		if(isStarted)
-			flashThePanel ();
-	}
-
 	//UI调用方法和回调方法=================================================================================================
 	//将装备扔出出来给别人用
 	//这个在网络游戏中应该是比较需要的
@@ -156,7 +160,7 @@ public class equipRemakePanel : MonoBehaviour {
 		string nameUse = theEquip != null ? theEquip.equipName : equipSkillAdderNow.equipExtraName;
 
 		if (theEquipUse.isUsing) 
-			theEquipUse.DropThisThing (systemValues.thePlayer);
+			thePackagePanelShow.wearEquip (theEquip);
 
 		Vector3 position = systemValues.thePlayer.transform.position + systemValues.thePlayer.transform.forward*2.5f;
 		systemValues.setPositionForGameOject(systemValues.thePlayer.gameObject.name, theEquipUse.equipName , position.x , position.y , position.z);

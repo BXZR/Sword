@@ -708,8 +708,14 @@ public class PlayerBasic : MonoBehaviour {
 		theString.Append ("攻击速度  ");
 		theString.Append ((ActerAttackSpeedPercent * 100).ToString ("f0"));
 		theString.Append ("%");
+		theString.Append ("/");
+		theString.Append ((ActerAttackSpeedMaxPercent * 100).ToString ("f0"));
+		theString.Append ("%");
 		theString.Append ("   移动速度  ");
 		theString.Append ((ActerMoveSpeedPercent*100).ToString("f0"));
+		theString.Append ("%");
+		theString.Append ("/");
+		theString.Append ((ActerMoveSpeedMaxPercent*100).ToString("f0"));
 		theString.Append ("%");
 		theString.Append ("\n负重  ");
 		theString.Append ((weightPercent * 100).ToString ("f0"));
@@ -779,7 +785,6 @@ public class PlayerBasic : MonoBehaviour {
 				ActerHp = ActerHpMax; //最后一个修正
 			}
 
-			//////////////////////////////////////////////
 			float spupValue = ActerSpUp * systemValues.updateTimeWait;
 			ActerSp += spupValue;
 			for (int i = 0; i < Effects.Length; i++) 
@@ -793,7 +798,7 @@ public class PlayerBasic : MonoBehaviour {
 			//flashWeapon ();//所有的武器共有冷却时间，攻击之后一定时间之内攻击无法命中
 
 
-			if (!string.IsNullOrEmpty (conNameToEMY) || !string.IsNullOrEmpty (conNameToSELF)) 
+			if (!systemValues.isNullOrEmpty (conNameToEMY) || !systemValues.isNullOrEmpty(conNameToSELF)) 
 			{
 				conNameCoolingTime -= systemValues.updateTimeWait;
 				if (conNameCoolingTime <= 0)
@@ -803,8 +808,8 @@ public class PlayerBasic : MonoBehaviour {
 					conNameToSELF = "";
 				}
 			}
-			else
-				conNameCoolingTime = conNameCoolingTimeMax;//此处多次空转赋值实际上是一个很大的浪费
+			//else
+			//	conNameCoolingTime = conNameCoolingTimeMax;//此处多次空转赋值实际上是一个很大的浪费
 
 			for (int i = 0; i < Effects.Length; i++)
 				Effects [i] .effectOnUpdateTime ();
@@ -821,8 +826,6 @@ public class PlayerBasic : MonoBehaviour {
 			}
 			ActerAttackSpeedPercent = Mathf.Clamp( ActerAttackSpeedPercent ,0f, ActerAttackSpeedMaxPercent);
 			ActerMoveSpeedPercent = Mathf.Clamp( ActerMoveSpeedPercent ,0f, ActerMoveSpeedMaxPercent);
-
-
 		}
 	}
 

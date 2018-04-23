@@ -8,7 +8,7 @@ public class effectSoul : effectBasic{
 	void Start ()
 	{
 		systemValues.soulCount += 30;
-		systemValues.messageTitleBoxShow ("获得30灵力");
+		//systemValues.messageTitleBoxShow ("获得30灵力");
 		Destroy (this);
 	}
 
