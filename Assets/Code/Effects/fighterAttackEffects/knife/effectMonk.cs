@@ -63,7 +63,7 @@ public class effectMonk :effectBasic{
 		lifeTimerAll = 4f;//每一个段时间才能够使用这个伤害
 		timerForEffect = 4f; 
 		theEffectName = "灭却浮屠";
-		theEffectInformation ="下一击追加(身边敌人数量×"+basicDamage+"真实伤害)\n若持有两层以上效果，额外伤害可用于治疗自身\n额外伤害最多"+maxEMYCountForUse+"层，冷却时间"+ lifeTimerAll  +"秒";
+		theEffectInformation ="下一击追加(身边敌人数量×"+basicDamage+"真实伤害)\n若持有两层以上效果，额外伤害可用于治疗自身\n额外伤害最多"+maxEMYCountForUse+"层，冷却时间"+  (lifeTimerAll) +"秒";
 		makeStart ();
 		Destroy (this,lifeTimerAll);
 	}

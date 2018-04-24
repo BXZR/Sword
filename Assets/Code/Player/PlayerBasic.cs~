@@ -185,11 +185,11 @@ public class PlayerBasic : MonoBehaviour {
 
 	private bool isStarted =false;//是否已经开启
 
-	[HideInInspector]//为了保证设定面板的简洁，暂时隐藏之
+	//[HideInInspector]//为了保证设定面板的简洁，暂时隐藏之
 	public string conNameToEMY ;//用于记录连招给出的额外buff
-	[HideInInspector]//为了保证设定面板的简洁，暂时隐藏之
+	//[HideInInspector]//为了保证设定面板的简洁，暂时隐藏之
 	public string conNameToSELF;//用于记录连招给出的额外buff
-	private float conNameCoolingTime = 0.2f;//如果这个特效脚本在1.5秒内还没有被使用，就认为无效
+	private float conNameCoolingTime = 1.5f;//如果这个特效脚本在1.5秒内还没有被使用，就认为无效
 	//（否则准备一个脚本招式，然后等半天莫名其妙生效了不是好事）
 	private float conNameCoolingTimeMax = 1.5f;
 
@@ -803,8 +803,8 @@ public class PlayerBasic : MonoBehaviour {
 					conNameToSELF = "";
 				}
 			}
-			//else
-			//	conNameCoolingTime = conNameCoolingTimeMax;//此处多次空转赋值实际上是一个很大的浪费
+			else
+				conNameCoolingTime = conNameCoolingTimeMax;//此处多次空转赋值实际上是一个很大的浪费但是这句话非常必要
 
 			for (int i = 0; i < Effects.Length; i++)
 				Effects [i] .effectOnUpdateTime ();
@@ -842,6 +842,9 @@ public class PlayerBasic : MonoBehaviour {
 			this.transform.position = new Vector3 (this.transform .position .x , -1.8f , this.transform .position .z);
 			if(this.GetComponent <FSMStage>())
 				this.GetComponent <FSMStage>().enabled = false;
+
+			if(systemValues.thePlayer == this)
+			    systemValues.makeGameEnd();
 		}
 		catch 
 		{
@@ -995,7 +998,7 @@ public class PlayerBasic : MonoBehaviour {
 
 	void OnGUI()
 	{ 
-		if ( isShowingOnGUI  && this.isMainfighter == false &&  isAlive &&  GUIShowStyleHP!=null &&  GUIShowStyleSP!=null )
+		if ( 	systemValues.isGamming &&  isShowingOnGUI  && this.isMainfighter == false &&  isAlive &&  GUIShowStyleHP!=null &&  GUIShowStyleSP!=null )
 		{
 			if (!systemValues.isSystemUIUsing ()) 
 			{

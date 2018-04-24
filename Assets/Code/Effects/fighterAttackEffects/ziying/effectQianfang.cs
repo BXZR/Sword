@@ -29,8 +29,8 @@ public class effectQianfang : effectBasic {
 		lifeTimerAll = 6f;
 		timerForEffect = 0.2f;
 		theEffectName = "千方残光剑";
-		theEffectInformation ="向前方锥形发射"+arrowCounts+"束特殊剑气\n技能触发攻击效果并有额外（"+hpup*100+"%+"+hpupTrueUseExtra+"）生命偷取\n每束剑气最多对三个目标造成伤害，持续"+arrowLife+"秒" +
-			"\n冷却时间为" + lifeTimerAll +"秒，冷却中使用此技可释放普通剑气";
+		theEffectInformation ="向前方锥形发射"+arrowCounts+"束特殊剑气\n这些剑气可触发攻击效果并有额外（"+hpup*100+"%+"+hpupTrueUseExtra+"）生命偷取\n每束剑气最多对三个目标造成伤害，持续"+arrowLife+"秒" +
+			"\n冷却时间为" + (lifeTimerAll-timerForEffect) +"秒，冷却中使用此技可释放普通剑气";
 		makeStart ();
 		//print ("气剑指");
 		//没有控制者就不发

@@ -16,36 +16,51 @@ public class eeffectZiyingArcher : effectBasic {
 		Init ();
 	}
 
-	//手动调用的额外销毁方法
-	public override void effectDestoryExtra ()
-	{
-		if (theArrow)
-		{
-			try
-			{
-				Destroy (theArrow );
-			}
-			catch(Exception d)
-			{
-				//print (d.ToString());
-			}
-		}
-	}
+
 	public override void Init ()
 	{
-		lifeTimerAll = 0.5f;
-		timerForEffect = 0.5f;
+		lifeTimerAll = 0.25f;
+		timerForEffect = 0.25f;
 		theEffectName = "气剑指";
-		theEffectInformation ="将剑气凝于手指激射而出用作普攻\n可对剑气命中目标造成普攻物理伤害\n剑气最多对三个目标造成伤害，持续"+arrowLife+"秒\n同一时刻只能存在一束剑气";
+		theEffectInformation ="将剑气凝于手指激射而出用作普攻\n剑气可对命中的最多三个目标造成伤害\n"+lifeTimerAll +"秒内只能发射一束剑气\n无法发射剑气时触发可以恢复10斗气";
+		//这个效果算是气剑指的特性，并且也是手速狂魔的福音，手速快的话在高攻速的时候就是无消耗输出
 		makeStart ();
+		if (!Arrow) //加载资源仅仅需要一次，后面的引用就好了
+			Arrow = (GameObject)Resources.Load ("effects/ziyingarrow");
+		makeArrow ();
+	} 
+
+	public override void updateEffect ()
+	{
+		//print ("up");
+		if (isEffecting)
+			makeArrow ();
+		else
+		    thePlayer.ActerSp += 10f;
+	}
+
+	public override void effectOnUpdateTime ()
+	{
+
+		if (!isEffecting) 
+		{
+			timerForAdd += systemValues.updateTimeWait;
+			if (timerForAdd > lifeTimerAll)
+			{
+				timerForAdd = 0;
+				isEffecting = true;
+			}
+		}
+		//print ("timer add = "+ timerForAdd);
+	}
+
+	private  void makeArrow()
+	{
 		//print ("气剑指");
 		//没有控制者就不发
-		if (this.thePlayer) 
+		if (this.thePlayer && isEffecting) 
 		{
 			forward = this.thePlayer.transform.forward;
-			if (!Arrow) //加载资源仅仅需要一次，后面的引用就好了
-				Arrow = (GameObject)Resources.Load ("effects/ziyingarrow");
-			
 			//考虑到多种连发的情况，暂时还是不做弹矢的对象池子，后期优化吧
 			theArrow = (GameObject)GameObject.Instantiate (Arrow);
 			theArrow.GetComponentInChildren <extraWeapon> ().setPlayer (this.thePlayer);
@@ -62,21 +77,24 @@ public class eeffectZiyingArcher : effectBasic {
 			theArrow.transform.localScale *= thePlayer.transform.localScale.y;
 			theArrow.transform.position = positionNew;
 
-			Destroy (theArrow, arrowLife);
-			Destroy (this.GetComponent (this.GetType ()), lifeTimerAll);
+			Destroy (theArrow.gameObject, arrowLife);
+			isEffecting = false;
 		}
-
-	} 
-
-	public override void effectOnUpdateTime ()
-	{
-		addTimer ();
-		//print ("timer add = "+ timerForAdd);
 	}
 
-	//public override void onAttackAction ()
-	//{
-
-	//}
-
+	//手动调用的额外销毁方法
+	public override void effectDestoryExtra ()
+	{
+		if (theArrow)
+		{
+			try
+			{
+				Destroy (theArrow );
+			}
+			catch(Exception d)
+			{
+				//print (d.ToString());
+			}
+		}
+	}
 }

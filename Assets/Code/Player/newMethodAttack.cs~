@@ -19,12 +19,13 @@ public class newMethodAttack : MonoBehaviour {
 		if (systemValues.isNullOrEmpty (thePlayer . conNameToSELF) == false) //效果不可叠加
 		{
 			System.Type theType = System.Type.GetType (thePlayer . conNameToSELF);
-			if (!thePlayer.gameObject.GetComponent ( theType))
+			effectBasic theEffect = thePlayer.gameObject.GetComponent (theType) as effectBasic;
+			if (!theEffect)
 			{
 				try
 				{
 					thePlayer.gameObject.AddComponent (theType);
-					effectBasic theEffect = thePlayer.gameObject.GetComponent (theType) as effectBasic;
+					theEffect = thePlayer.gameObject.GetComponent (theType) as effectBasic;
 					theEffect.SetAttackLinkIndex(thePlayer.EffectAttackLinkIndex);
 					thePlayer.EffectAttackLinkIndex = 0;//刷新为初始数值
 				}
@@ -39,7 +40,6 @@ public class newMethodAttack : MonoBehaviour {
 			} 
 			else
 			{
-				effectBasic theEffect = thePlayer.gameObject.GetComponent (theType) as effectBasic;
 				theEffect.updateEffect ();
 				theEffect.SetAttackLinkIndex(thePlayer.EffectAttackLinkIndex);
 			}
@@ -52,7 +52,8 @@ public class newMethodAttack : MonoBehaviour {
 		if (systemValues.isNullOrEmpty (thePlayer . conNameToEMY) == false)//效果不可叠加
 		{
 			System.Type theType = System.Type.GetType (thePlayer.conNameToEMY);
-			if(!playerAim.gameObject.GetComponent (theType))
+			effectBasic theEffect = playerAim.gameObject.GetComponent (theType) as effectBasic;
+			if(!theEffect)
 			{
 				try
 				{
@@ -70,7 +71,6 @@ public class newMethodAttack : MonoBehaviour {
 			}
 			else
 			{
-				effectBasic theEffect = playerAim.gameObject.GetComponent (theType) as effectBasic;
 				theEffect.updateEffect ();
 				theEffect.SetAttackLinkIndex(thePlayer.EffectAttackLinkIndex);
 				//print ("update");

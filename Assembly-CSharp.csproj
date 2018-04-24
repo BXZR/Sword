@@ -107,6 +107,7 @@
      <Compile Include="Assets\Code\UI\basicShow\effectFlashPanel.cs" />
      <Compile Include="Assets\Code\UI\basicShow\soulShowText.cs" />
      <Compile Include="Assets\Code\UI\basicShow\uiShowsForBasic.cs" />
+     <Compile Include="Assets\Code\UI\deadPanel\theDeadPanel.cs" />
      <Compile Include="Assets\Code\UI\messageBox\choiceMessageBox.cs" />
      <Compile Include="Assets\Code\UI\messageBox\theMessageBoxPanel.cs" />
      <Compile Include="Assets\Code\UI\messageBox\titleMessageBox.cs" />

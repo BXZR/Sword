@@ -23,7 +23,7 @@ public class effectForSpeedMoveForward : effectBasic {
 		lifeTimerAll = 7f;
 		timerForEffect = 0.15f;
 		theEffectName = "突进";
-		theEffectInformation = "迅速向指定方向移动一小段距离\n持续"+timerForEffect+"秒，冷却"+lifeTimerAll+"秒\n横向突进速度是前向突进速度的"+hengPercent*100+"%";
+		theEffectInformation = "迅速向指定方向移动一小段距离\n持续"+timerForEffect+"秒，冷却"+(lifeTimerAll-timerForEffect)+"秒\n横向突进速度是前向突进速度的"+hengPercent*100+"%";
 		theEffedctExtraInformation = "特性：勉力冲刺，冷却状态中可再突进一次，额外消耗12%最大斗气值并且余下冷却时间内斗气恢复效率减半。";
 		makeStart ();
 		if (thePlayer)

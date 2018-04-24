@@ -11,9 +11,12 @@ public class gameStarter : MonoBehaviour {
 	public uiShowsForBasic theUIController;//UI刷新新信息控制单元
 	GameObject theFighter ;
 	public GameObject theForwardImage;//没有准备好就黑屏
+	public GameObject theDeadPanel;//记录下来这个引用
 	private MusicController theMusicController;//音乐控制单元
 	void Start()
 	{
+		systemValues.theDeadPanel = theDeadPanel;
+		theDeadPanel.SetActive (false);
 		Invoke ("makeStart", 2.5f);
 	}
 

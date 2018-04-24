@@ -151,8 +151,8 @@ class ButtonEffectflasher
 		EffectColor = effectColorIn;
 		NotEffectColor = notEffectColorIn;
 		theEffect = theEffectIn;
-		theFillAmountImage.color = EffectColor;
 		isEffecting = theEffectIn.isEffecting;
+		theFillAmountImage.color = theEffect.isEffecting ? EffectColor : NotEffectColor;
 
 	}
 
@@ -162,10 +162,11 @@ class ButtonEffectflasher
 		{
 			theShowText.text = theEffect.getOnTimeFlashInformation ();
 			theFillAmountImage.fillAmount = theEffect.getEffectTimerPercent ();
-			if (theEffect.isEffecting != isEffecting) 
+			//改变状态的时候换颜色，顺带保存状态
+			if (theEffect.isEffecting != isEffecting)
 			{
 				isEffecting = theEffect.isEffecting;
-				theFillAmountImage.color = NotEffectColor;
+				theFillAmountImage.color = theEffect.isEffecting ? EffectColor : NotEffectColor;
 			}
 		}
 	}

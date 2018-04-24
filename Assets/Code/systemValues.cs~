@@ -21,6 +21,9 @@ public class systemValues : MonoBehaviour {
 	//0 单机模式
 	//1 网络模式
 	public static int modeIndex = 0;
+	//游戏是否正在进行标记，如果没有再进行，各种东西都没有必要进行计算了
+	public static bool isGamming = true;
+
 	//网络控制节点=============================
 	static PhotonView photonView;
 	//=========================================
@@ -772,8 +775,24 @@ public class systemValues : MonoBehaviour {
 	//反复跳转场景应该做一些清理工作
 	public static void makeSystemClean()
 	{
+		isGamming = true;
 		theShowingTexts.Clear ();
 		theSavedSprite.Clear ();
+		thePopSoul.Clear ();
+	}
+	#endregion
+
+	#region 死亡处理，也算是游戏的收尾工作
+	//死亡的面板
+	public static GameObject theDeadPanel;
+	public static void  makeGameEnd()
+	{
+		isGamming = false;
+		if (theDeadPanel)
+		{
+			theDeadPanel.SetActive (true);
+			theDeadPanel.GetComponent <theDeadPanel> ().makeStart ();
+		}
 	}
 	#endregion
 	//GM的初始化==============================================================================

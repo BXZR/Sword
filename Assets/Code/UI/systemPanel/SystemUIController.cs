@@ -80,7 +80,7 @@ public class SystemUIController : MonoBehaviour {
 
 	void Update ()
 	{
-		if (Input.GetKeyDown (KeyCode.Escape) && systemValues.thePlayer) 
+		if (Input.GetKeyDown (KeyCode.Escape) && systemValues.thePlayer && systemValues.isGamming) 
 		{
 			if (systemValues.IsSystemPanelOpened == false)
 			{
@@ -91,7 +91,6 @@ public class SystemUIController : MonoBehaviour {
 			{
 				shutSystems ();
 			}
-
 		}
 	}
 }

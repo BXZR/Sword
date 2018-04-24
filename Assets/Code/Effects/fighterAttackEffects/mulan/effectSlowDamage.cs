@@ -49,7 +49,7 @@ public class effectSlowDamage  :effectBasic {
 		lifeTimerAll = 25f;
 		timerForEffect = 7f;
 		theEffectName = "禁咒封";
-		theEffectInformation ="目标输出伤害减少"+damageMinus*100+"%，命中率减少"+attackAtMinus*100+"%\n削减目标"+hpmaxMinus+"生命上限\n持续"+timerForEffect+"秒，冷却时间"+lifeTimerAll+"秒";
+		theEffectInformation ="目标输出伤害减少"+damageMinus*100+"%，命中率减少"+attackAtMinus*100+"%\n削减目标"+hpmaxMinus+"生命上限\n持续"+timerForEffect+"秒，冷却时间"+ (lifeTimerAll-timerForEffect)+"秒";
 		makeStart ();
 		if (thePlayer) 
 		{

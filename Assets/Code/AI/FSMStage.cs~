@@ -132,7 +132,7 @@ public class FSMStage : effectBasic {
 	{
 		//出于优化考虑不必让AI一直计算下去
 		//此外这也可是“怪物僵直”状态的一个做法
-		if (theAiIsActing)
+		if (theAiIsActing && systemValues.isGamming)
 		{
 			if (theStateNow != null && thethis.isAlive) 
 			{
