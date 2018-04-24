@@ -427,10 +427,20 @@ public class systemValues : MonoBehaviour {
 	//升级这个装备需要的灵力数量
 	public static  int getSoulCountForEquipLvUp(equipBasics theEquip, bool withLv1 = false)
 	{
+		int theSoulGet = 0;
 		if(withLv1)
-			return 8 * (theEquip.EquipLvNow-1);
+			theSoulGet +=8 * (theEquip.EquipLvNow-1);
+		else
+			theSoulGet +=8 * (theEquip.EquipLvNow);
+		return theSoulGet;
+	}
 
-		return 8 * theEquip.EquipLvNow;
+	public static int getSoulInForDestroyTheEquip(equipBasics theEquip)
+	{
+		int theSoulGet = 0;
+		theSoulGet += 8 * (theEquip.EquipLvNow-1);
+		theSoulGet += theEquip.theEffectNames.Count * 20;
+		return theSoulGet;
 	}
 	#endregion
 

@@ -32,8 +32,8 @@ public class equipRemakePanel : MonoBehaviour {
 		equipSkillAddInformationStatic = equipSkillAddInformation;
 		equipSkillAdderViewFatherStatic = theViewFather;
 		theShowingButtonProfabStatic = theShowingButtonProfab;
-		flashThePanel ();
 		isStarted = true;
+		flashThePanel ();
 	}
 
 	void OnEnable()
@@ -84,7 +84,7 @@ public class equipRemakePanel : MonoBehaviour {
 		equipShowingButton []  es = equipSkillAdderViewFatherStatic.GetComponentsInChildren<equipShowingButton>();
 		List<equipBasics> eqs = systemValues.thePlayer.GetComponent <equipPackage> ().allEquipsForSave.FindAll (x => x!=null && x.theEquipType == equiptype.equipSkill);
 		//直接用lambda表达式查询吧还是
-		eqs.Sort((a,b) => {return (a.equipName[0] - b.equipName[0]);} );//linq排序
+		eqs.Sort((a,b) => {return (a.equipName[0] - b.equipName[0] + a.equipName.Length - b.equipName.Length);} );//linq排序
 		systemValues. makeFather (eqs.Count , equipSkillAdderViewFatherStatic);
 
 		if (eqs.Count > es.Length) 
@@ -224,7 +224,8 @@ public class equipRemakePanel : MonoBehaviour {
 		}
 		equipBasics theEq = theEquip != null ? theEquip : equipSkillAdderNow;
 		string nameUse = theEquip != null ? theEquip.equipName : equipSkillAdderNow.equipExtraName;
-		systemValues.choiceMessageBoxShow ("熔锻？", "熔锻【"+nameUse+"】将会获得一些灵力，但是这个物品会永远消失。\n\n是否熔锻？", true, new MesageOperate (makeTheEquipToSoul));
+		int soulGet = 20 + systemValues.getSoulInForDestroyTheEquip(theEq);
+		systemValues.choiceMessageBoxShow ("熔锻？", "熔锻【"+nameUse+"】将会获得"+ soulGet +"灵力，但是这个物品会永远消失。\n\n是否熔锻？", true, new MesageOperate (makeTheEquipToSoul));
 
 	}
 
@@ -238,7 +239,7 @@ public class equipRemakePanel : MonoBehaviour {
 		if (theEquipUse.isUsing)
 			theEquipUse.DropThisThing (systemValues.thePlayer);
 
-		int soulGet = 20 + systemValues.getSoulCountForEquipLvUp (theEquipUse , true);
+		int soulGet = 20 + systemValues.getSoulInForDestroyTheEquip (theEquipUse );
 		systemValues.soulCount += soulGet;
 		systemValues.messageTitleBoxShow ("【"+nameUse+"】熔为"+soulGet+"灵力");
 		DestroyImmediate(theEquipUse.gameObject);

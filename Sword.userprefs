@@ -1,14 +1,17 @@
 ﻿<Properties StartupItem="Assembly-CSharp.csproj">
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Unity.Instance.Unity Editor" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Code\UI\systemPanel\BasicPanelController.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Code\UI\packagePanel\equip\equipInformationPanel.cs">
     <Files>
-      <File FileName="Assets\Code\Effects\fighterAttackEffects\public\killerGeter.cs" Line="36" Column="57" />
-      <File FileName="Assets\Code\systemValues.cs" Line="315" Column="3" />
-      <File FileName="Assets\Code\UI\systemPanel\BasicPanelController.cs" Line="98" Column="55" />
-      <File FileName="Assets\Code\Effects\effectBasic.cs" Line="101" Column="2" />
-      <File FileName="Assets\Code\Player\PlayerBasic.cs" Line="751" Column="29" />
-      <File FileName="Assets\Code\UI\packagePanel\equip\equipPersonForAllInforamtion.cs" Line="12" Column="50" />
-      <File FileName="Assets\Code\UI\startAndSelect\selectHead.cs" Line="74" Column="56" />
+      <File FileName="Assets\Code\Effects\fighterAttackEffects\public\killerGeter.cs" Line="1" Column="1" />
+      <File FileName="Assets\Code\systemValues.cs" Line="1" Column="1" />
+      <File FileName="Assets\Code\UI\systemPanel\BasicPanelController.cs" Line="1" Column="1" />
+      <File FileName="Assets\Code\Effects\effectBasic.cs" Line="1" Column="1" />
+      <File FileName="Assets\Code\Player\PlayerBasic.cs" Line="1" Column="1" />
+      <File FileName="Assets\Code\UI\packagePanel\equip\equipPersonForAllInforamtion.cs" Line="1" Column="1" />
+      <File FileName="Assets\Code\UI\startAndSelect\selectHead.cs" Line="1" Column="1" />
+      <File FileName="Assets\Code\UI\packagePanel\equip\equipRemakePanel.cs" Line="34" Column="57" />
+      <File FileName="Assets\Code\Equips\equipBasics.cs" Line="1" Column="1" />
+      <File FileName="Assets\Code\UI\packagePanel\equip\equipInformationPanel.cs" Line="57" Column="38" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
