@@ -414,6 +414,8 @@ public class systemValues : MonoBehaviour {
 	public static string SkillExtraColor = "<color=#AFFF3A>";//标记淡绿色
 	public static string playerNameColor = "<color=#00FF00>" ;//其实也是黄色
 	public static string playerIntroductionColor = "<color=#FF2400>";//应该是绿色
+	public  static string equipAddColor = "<color=#009100>";//装备相比增加的内容
+	public static string equipMinusColor = "<color=#FF0000>";//装备相比减少的内容
 	public static string colorEnd = "</color>";
 	#endregion
 

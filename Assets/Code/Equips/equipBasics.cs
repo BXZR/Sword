@@ -521,78 +521,298 @@ public class equipBasics : MonoBehaviour {
 		theString.Append ("\n");
 		//生命法力数值
 		if (hpMaxAdder != 0) 
-		{theString.Append ("生命上限 ");theString.Append (hpMaxAdder.ToString("f0"));theString.Append ("\n");}
+		{
+			theString.Append ("生命上限 ");
+			if (hpMaxAdder >= 0){theString.Append ( systemValues.equipAddColor);theString.Append ( "+");} 
+			else {theString.Append (systemValues.equipMinusColor);}
+			theString.Append (hpMaxAdder.ToString("f0"));
+			theString.Append ("\n");
+			theString.Append (systemValues.colorEnd);
+		}
 		if (spMaxAdder != 0) 
-		{theString.Append ("斗气上限 ");theString.Append (spMaxAdder.ToString("f0"));theString.Append ("\n");}
+		{
+			theString.Append ("斗气上限 ");
+			if (spMaxAdder >= 0){theString.Append ( systemValues.equipAddColor);theString.Append ( "+");} 
+			else {theString.Append (systemValues.equipMinusColor);}
+			theString.Append (spMaxAdder.ToString("f0"));
+			theString.Append ("\n");
+			theString.Append (systemValues.colorEnd);
+		}
 		if (equipActerHpUp  != 0) 
-		{theString.Append ("生命回复 ");theString.Append (equipActerHpUp .ToString("f1"));theString.Append ("/秒\n");}
+		{
+			theString.Append ("生命回复 ");
+			if (equipActerHpUp >= 0){theString.Append ( systemValues.equipAddColor);theString.Append ( "+");} 
+			else {theString.Append (systemValues.equipMinusColor);}
+			theString.Append (equipActerHpUp .ToString("f1"));
+			theString.Append ("/秒\n");
+			theString.Append (systemValues.colorEnd);
+		}
 		if (equipActerSpUp  != 0) 
-		{theString.Append ("斗气回复 ");theString.Append (equipActerSpUp .ToString("f1"));theString.Append ("/秒\n");}
+		{
+			theString.Append ("斗气回复 ");
+			if (equipActerSpUp >= 0){theString.Append ( systemValues.equipAddColor);theString.Append ( "+");} 
+			else {theString.Append (systemValues.equipMinusColor);}
+			theString.Append (equipActerSpUp.ToString("f1"));
+			theString.Append ("/秒\n");
+			theString.Append (systemValues.colorEnd);
+		}
 		//物理战斗属性
 		if (equipActerWuliDamage  != 0) 
-		{theString.Append ("攻击力 ");theString.Append (equipActerWuliDamage.ToString("f0"));theString.Append ("\n");}
+		{
+			theString.Append ("攻击力 ");
+			if (equipActerWuliDamage >= 0){theString.Append ( systemValues.equipAddColor);theString.Append ( "+");} 
+			else {theString.Append (systemValues.equipMinusColor);}
+			theString.Append (equipActerWuliDamage.ToString("f0"));
+			theString.Append ("\n");
+			theString.Append (systemValues.colorEnd);
+		}
+
 		if (equipActerWuliReDamage != 0) 
-		{theString.Append ("反伤 ");theString.Append (equipActerWuliReDamage.ToString("f0"));theString.Append ("\n");}
+		{
+			theString.Append ("反伤 ");
+			if (equipActerWuliReDamage >= 0){theString.Append ( systemValues.equipAddColor);theString.Append ( "+");} 
+			else {theString.Append (systemValues.equipMinusColor);}
+			theString.Append (equipActerWuliReDamage.ToString("f0"));
+			theString.Append ("\n");
+			theString.Append (systemValues.colorEnd);
+		}
 		if (equipActerWuliIner != 0) 
-		{theString.Append ("真实穿透 ");theString.Append (equipActerWuliIner.ToString("f0"));theString.Append ("\n");}
+		{
+			theString.Append ("真实穿透 ");
+			if (equipActerWuliIner>= 0){theString.Append ( systemValues.equipAddColor);theString.Append ( "+");} 
+			else {theString.Append (systemValues.equipMinusColor);}
+			theString.Append (equipActerWuliIner.ToString("f0"));
+			theString.Append ("\n");
+			theString.Append (systemValues.colorEnd);
+		}
 		if (equipActerWuliInerPercent != 0) 
-		{theString.Append ("百分比穿透 ");theString.Append ((equipActerWuliInerPercent*100).ToString("f0"));theString.Append ("%\n");}
+		{
+			theString.Append ("百分比穿透 ");
+			if (equipActerWuliInerPercent>= 0){theString.Append ( systemValues.equipAddColor);theString.Append ( "+");} 
+			else {theString.Append (systemValues.equipMinusColor);}
+			theString.Append ((equipActerWuliInerPercent*100).ToString("f0"));
+			theString.Append ("%\n");
+			theString.Append (systemValues.colorEnd);
+		}
 		if (equipActerDamageMinusValue != 0) 
-		{theString.Append ("真实减伤 ");theString.Append (equipActerDamageMinusValue.ToString("f0"));theString.Append ("\n");}
+		{
+			theString.Append ("真实减伤 ");
+			if (equipActerDamageMinusValue>= 0){theString.Append ( systemValues.equipAddColor);theString.Append ( "+");} 
+			else {theString.Append (systemValues.equipMinusColor);}
+			theString.Append (equipActerDamageMinusValue.ToString("f0"));
+			theString.Append ("\n");
+			theString.Append (systemValues.colorEnd);
+		}
+
 		if (equipActerDamageMinusPercent != 0) 
-		{theString.Append ("百分比减伤 ");theString.Append ((equipActerDamageMinusPercent*100).ToString("f0"));theString.Append ("%\n");}
+		{
+			theString.Append ("百分比减伤 ");
+			if (equipActerDamageMinusPercent>= 0){theString.Append ( systemValues.equipAddColor);theString.Append ( "+");} 
+			else {theString.Append (systemValues.equipMinusColor);}
+			theString.Append ((equipActerDamageMinusPercent*100).ToString("f0"));
+			theString.Append ("%\n");
+			theString.Append (systemValues.colorEnd);
+		}
 		//特殊战斗属性
 		if (equipActerSuperBaldePercent != 0) 
-		{theString.Append ("暴击率 ");theString.Append ((equipActerSuperBaldePercent*100).ToString("f0"));theString.Append ("%\n");}
+		{
+			theString.Append ("暴击率 ");
+			if (equipActerSuperBaldePercent>= 0){theString.Append ( systemValues.equipAddColor);theString.Append ( "+");} 
+			else {theString.Append (systemValues.equipMinusColor);}
+			theString.Append ((equipActerSuperBaldePercent*100).ToString("f0"));
+			theString.Append ("%\n");
+			theString.Append (systemValues.colorEnd);
+		}
+
 		if (equipActerSuperBaldeAdder != 0) 
-		{theString.Append ("暴击伤害 ");theString.Append ((equipActerSuperBaldeAdder*100).ToString("f0"));theString.Append ("%\n");}
+		{
+			theString.Append ("暴击伤害 ");
+			if (equipActerSuperBaldeAdder>= 0){theString.Append ( systemValues.equipAddColor);theString.Append ( "+");} 
+			else {theString.Append (systemValues.equipMinusColor);}
+			theString.Append ((equipActerSuperBaldeAdder*100).ToString("f0"));
+			theString.Append ("%\n");
+			theString.Append (systemValues.colorEnd);
+		}
 		if (equipActerMissPercent  != 0) 
-		{theString.Append ("闪避率 ");theString.Append ((equipActerMissPercent *100).ToString("f0"));theString.Append ("%\n");}
+		{
+			theString.Append ("闪避率 ");
+			if (equipActerMissPercent >= 0){theString.Append ( systemValues.equipAddColor);theString.Append ( "+");} 
+			else {theString.Append (systemValues.equipMinusColor);}
+			theString.Append ((equipActerMissPercent *100).ToString("f0"));
+			theString.Append ("%\n");
+			theString.Append (systemValues.colorEnd);
+		}
 		if (equipActerShielderPercent  != 0) 
-		{theString.Append ("格挡率 ");theString.Append ((equipActerShielderPercent *100).ToString("f0"));theString.Append ("%\n");}
+		{
+			theString.Append ("格挡率 ");
+			if (equipActerShielderPercent>= 0){theString.Append ( systemValues.equipAddColor);theString.Append ( "+");} 
+			else {theString.Append (systemValues.equipMinusColor);}
+			theString.Append ((equipActerShielderPercent *100).ToString("f0"));
+			theString.Append ("%\n");
+			theString.Append (systemValues.colorEnd);
+		}
 		if (equipActerShielderDamageMiuns != 0) 
-		{theString.Append ("格挡真实减伤 ");theString.Append (equipActerShielderDamageMiuns.ToString("f0"));theString.Append ("\n");}
+		{
+			theString.Append ("格挡真实减伤 ");
+			if (equipActerShielderDamageMiuns>= 0){theString.Append ( systemValues.equipAddColor);theString.Append ( "+");} 
+			else {theString.Append (systemValues.equipMinusColor);}
+			theString.Append (equipActerShielderDamageMiuns.ToString("f0"));
+			theString.Append ("\n");
+			theString.Append (systemValues.colorEnd);
+		}
 		if (equipActerShielderDamageMiunsPercent != 0) 
-		{theString.Append ("格挡百分比减伤 ");theString.Append ((equipActerShielderDamageMiunsPercent *100).ToString("f0"));theString.Append ("%\n");}
+		{
+			theString.Append ("格挡百分比减伤 ");
+			if (equipActerShielderDamageMiunsPercent>= 0){theString.Append ( systemValues.equipAddColor);theString.Append ( "+");} 
+			else {theString.Append (systemValues.equipMinusColor);}
+			theString.Append ((equipActerShielderDamageMiunsPercent *100).ToString("f0"));
+			theString.Append ("%\n");
+			theString.Append (systemValues.colorEnd);
+		}
 		//物理防御属性
 		if (equipActerWuliShield != 0) 
-		{theString.Append ("护甲 ");theString.Append (equipActerWuliShield.ToString("f0"));theString.Append ("\n");}
+		{
+			theString.Append ("护甲 ");
+			if (equipActerWuliShield>= 0){theString.Append ( systemValues.equipAddColor);theString.Append ( "+");} 
+			else {theString.Append (systemValues.equipMinusColor);}
+			theString.Append (equipActerWuliShield.ToString("f0"));
+			theString.Append ("\n");
+			theString.Append (systemValues.colorEnd);
+		}
 		if (equipActerShieldMaxPercent != 0) 
-		{theString.Append ("护盾上限 ");theString.Append ((equipActerShieldMaxPercent*100).ToString("f0"));theString.Append ("%\n");}
+		{
+			theString.Append ("护盾上限 ");
+			if (equipActerShieldMaxPercent>= 0){theString.Append ( systemValues.equipAddColor);theString.Append ( "+");} 
+			else {theString.Append (systemValues.equipMinusColor);}
+			theString.Append ((equipActerShieldMaxPercent*100).ToString("f0"));
+			theString.Append ("%\n");
+			theString.Append (systemValues.colorEnd);
+		}
 		//生命吸取属性
 		if (equipActerHpSuck != 0) 
-		{theString.Append ("真实生命偷取 ");theString.Append (equipActerHpSuck.ToString("f0"));theString.Append ("\n");}
+		{
+			theString.Append ("真实生命偷取 ");
+			if (equipActerHpSuck>= 0){theString.Append ( systemValues.equipAddColor);theString.Append ( "+");} 
+			else {theString.Append (systemValues.equipMinusColor);}
+			theString.Append (equipActerHpSuck.ToString("f0"));
+			theString.Append ("\n");
+			theString.Append (systemValues.colorEnd);
+		}
 		if (equipActerHpSuckPercent != 0) 
-		{theString.Append ("百分比生命偷取 ");theString.Append ((equipActerHpSuckPercent*100).ToString("f0"));theString.Append ("%\n");}
+		{
+			theString.Append ("百分比生命偷取 ");
+			if (equipActerHpSuckPercent>= 0){theString.Append ( systemValues.equipAddColor);theString.Append ( "+");} 
+			else {theString.Append (systemValues.equipMinusColor);}
+			theString.Append ((equipActerHpSuckPercent*100).ToString("f0"));
+			theString.Append ("%\n");
+			theString.Append (systemValues.colorEnd);
+		}
 		//法力吸取属性
 		if (equipActerSpSuck != 0) 
-		{theString.Append ("真实斗气偷取 ");theString.Append (equipActerSpSuck.ToString("f0"));theString.Append ("\n");}
+		{
+			theString.Append ("真实斗气偷取 ");
+			if (equipActerSpSuck>= 0){theString.Append ( systemValues.equipAddColor);theString.Append ( "+");} 
+			else {theString.Append (systemValues.equipMinusColor);}
+			theString.Append (equipActerSpSuck.ToString("f0"));
+			theString.Append ("\n");
+			theString.Append (systemValues.colorEnd);
+		}
 		if (equipActerSpSuckPercent != 0) 
-		{theString.Append ("百分比斗气偷取 ");theString.Append ((equipActerSpSuckPercent*100).ToString("f0"));theString.Append ("%\n");}
+		{
+			theString.Append ("百分比斗气偷取 ");
+			if (equipActerSpSuckPercent>= 0){theString.Append ( systemValues.equipAddColor);theString.Append ( "+");} 
+			else {theString.Append (systemValues.equipMinusColor);}
+			theString.Append ((equipActerSpSuckPercent*100).ToString("f0"));
+			theString.Append ("%\n");
+			theString.Append (systemValues.colorEnd);
+		}
 		//额外战斗属性
 		if (equipActerDamageAdder != 0) 
-		{theString.Append ("真实最终伤害增加 ");theString.Append (equipActerDamageAdder.ToString("f0"));theString.Append ("\n");}
+		{
+			theString.Append ("真实最终伤害增加 ");
+			if (equipActerDamageAdder>= 0){theString.Append ( systemValues.equipAddColor);theString.Append ( "+");} 
+			else {theString.Append (systemValues.equipMinusColor);}
+			theString.Append (equipActerDamageAdder.ToString("f0"));
+			theString.Append ("\n");
+			theString.Append (systemValues.colorEnd);
+		}
 		if (equipActerDamageAdderPercent != 0) 
-		{theString.Append ("百分比最终伤害增加 ");theString.Append ((equipActerDamageAdderPercent*100).ToString("f0"));theString.Append ("%\n");}
+		{
+			theString.Append ("百分比最终伤害增加 ");
+			if (equipActerDamageAdderPercent>= 0){theString.Append ( systemValues.equipAddColor);theString.Append ( "+");} 
+			else {theString.Append (systemValues.equipMinusColor);}
+			theString.Append ((equipActerDamageAdderPercent*100).ToString("f0"));
+			theString.Append ("%\n");
+			theString.Append (systemValues.colorEnd);
+		}
 		//人物的速度属性
 		if (equipActerMoveSpeedPercent != 0) 
-		{theString.Append ("移动速度 ");theString.Append ((equipActerMoveSpeedPercent*100).ToString("f0"));theString.Append ("%\n");}
+		{
+			theString.Append ("移动速度 ");
+			if (equipActerMoveSpeedPercent>= 0){theString.Append ( systemValues.equipAddColor);theString.Append ( "+");} 
+			else {theString.Append (systemValues.equipMinusColor);}
+			theString.Append ((equipActerMoveSpeedPercent*100).ToString("f0"));
+			theString.Append ("%\n");
+			theString.Append (systemValues.colorEnd);
+		}
 		if (equipActerAttackSpeedPercent != 0) 
-		{theString.Append ("攻击速度 ");theString.Append ((equipActerAttackSpeedPercent*100).ToString("f0"));theString.Append ("%\n");}
+		{
+			theString.Append ("攻击速度 ");
+			if (equipActerAttackSpeedPercent>= 0){theString.Append ( systemValues.equipAddColor);theString.Append ( "+");} 
+			else {theString.Append (systemValues.equipMinusColor);}
+			theString.Append ((equipActerAttackSpeedPercent*100).ToString("f0"));
+			theString.Append ("%\n");
+			theString.Append (systemValues.colorEnd);
+		}
 		//人物的一些范围属性
 		if (equiptheAttackAreaLength != 0) 
-		{theString.Append ("攻击距离 ");theString.Append ((equiptheAttackAreaLength*100).ToString("f0"));theString.Append ("%\n");}
+		{
+			theString.Append ("攻击距离 ");
+			if (equiptheAttackAreaLength>= 0){theString.Append ( systemValues.equipAddColor);theString.Append ( "+");} 
+			else {theString.Append (systemValues.equipMinusColor);}
+			theString.Append ((equiptheAttackAreaLength*100).ToString("f0"));
+			theString.Append ("%\n");
+			theString.Append (systemValues.colorEnd);
+		}
 		if (equiptheAttackAreaAngel != 0) 
-		{theString.Append ("攻击广度 ");theString.Append (equiptheAttackAreaAngel.ToString("f0"));theString.Append ("\n");}
+		{
+			theString.Append ("攻击广度 ");
+			if (equiptheAttackAreaAngel>= 0){theString.Append ( systemValues.equipAddColor);theString.Append ( "+");} 
+			else {theString.Append (systemValues.equipMinusColor);}
+			theString.Append (equiptheAttackAreaAngel.ToString("f0"));
+			theString.Append ("\n");
+			theString.Append (systemValues.colorEnd);
+		}
 		if (equiptheViewAreaLength != 0) 
-		{theString.Append ("侦查距离 ");theString.Append (equiptheViewAreaLength.ToString("f0"));theString.Append ("\n");}
+		{
+			theString.Append ("侦查距离 ");
+			if (equiptheViewAreaLength>= 0){theString.Append ( systemValues.equipAddColor);theString.Append ( "+");} 
+			else {theString.Append (systemValues.equipMinusColor);}
+			theString.Append (equiptheViewAreaLength.ToString("f0"));
+			theString.Append ("\n");
+			theString.Append (systemValues.colorEnd);
+		}
 		if (equiptheViewAreaAngel != 0) 
-		{theString.Append ("侦查广度 ");theString.Append (equiptheViewAreaAngel.ToString("f0"));theString.Append ("\n");}
+		{
+			theString.Append ("侦查广度 ");
+			if (equiptheViewAreaAngel>= 0){theString.Append ( systemValues.equipAddColor);theString.Append ( "+");} 
+			else {theString.Append (systemValues.equipMinusColor);}
+			theString.Append (equiptheViewAreaAngel.ToString("f0"));
+			theString.Append ("\n");
+			theString.Append (systemValues.colorEnd);
+		}
 		if (equipWeight != 0)
-		{theString.Append ("负重 ");theString.Append ((equipWeight *100).ToString("f0"));theString.Append ("%\n");}
+		{
+			theString.Append ("负重 ");
+			if (equipWeight>= 0){theString.Append ( systemValues.equipMinusColor);theString.Append ( "+");} 
+			else {theString.Append (systemValues.equipAddColor);}
+			theString.Append ((equipWeight *100).ToString("f0"));
+			theString.Append ("%\n");
+			theString.Append (systemValues.colorEnd);
+		}
 		return theString.ToString();
 	}
-
+		
 	//检查是不是可以升级装备
 	public bool checkCanLvUp()
 	{
