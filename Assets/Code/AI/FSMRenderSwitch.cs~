@@ -22,7 +22,7 @@ public class FSMRenderSwitch : MonoBehaviour {
 	void OnBecameVisible()
 	{
 		//AI重新激活
-		theStage.makeAIStart();//如果一直看到，AI就会一直保持开启状态
+		//theStage.makeAIStart();//如果一直看到，AI就会一直保持开启状态
 	}
 
 //	void OnBecameInvisible()

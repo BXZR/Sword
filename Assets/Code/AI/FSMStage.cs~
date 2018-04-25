@@ -119,7 +119,7 @@ public class FSMStage : effectBasic {
 			{
 				theStateNow.OnFSMStateEnd ();//结束效果
 				theStateNow = theStateNew;
-				theStateNew.OnFSMStateStart ();//开始效果
+				theStateNow.OnFSMStateStart ();//开始效果
 			}
 		}
 	}
@@ -134,11 +134,18 @@ public class FSMStage : effectBasic {
 		//此外这也可是“怪物僵直”状态的一个做法
 		if (theAiIsActing && systemValues.isGamming)
 		{
-			if (theStateNow != null && thethis.isAlive) 
+			if (thethis.isAlive) 
 			{
-				//AI操作
-				//print ("AI is acting");
-				theStateNow.actInThisState ();
+				if (theStateNow != null) 
+				{
+					theStateNow.actInThisState ();
+				} 
+				else 
+				{
+					theStateNow = new FSM_Search ();
+					theStateNow.makeState (theMoveController , theAttackLlinkController , theAnimator ,thethis);
+					theStateNow.OnFSMStateStart ();
+				}
 			}
 			else if (isDeadMake == false) 
 			{

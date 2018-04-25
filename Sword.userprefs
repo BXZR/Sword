@@ -1,22 +1,24 @@
 ﻿<Properties StartupItem="Assembly-CSharp.csproj">
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Unity.Instance.Unity Editor" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Code\AI\FSM\FSM_Attack.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Code\AI\FSMRenderSwitch.cs">
     <Files>
       <File FileName="Assets\Code\Effects\fighterAttackEffects\ziying\eeffectZiyingArcher.cs" Line="1" Column="1" />
       <File FileName="Assets\Code\UI\basicShow\effectFlashPanel.cs" Line="1" Column="1" />
       <File FileName="Assets\Code\Player\attackLink.cs" Line="1" Column="1" />
       <File FileName="Assets\Code\Player\attackLinkController.cs" Line="1" Column="1" />
-      <File FileName="Assets\Code\Player\PlayerBasic.cs" Line="834" Column="46" />
+      <File FileName="Assets\Code\Player\PlayerBasic.cs" Line="821" Column="5" />
       <File FileName="Assets\Code\Player\extraWeapon.cs" Line="1" Column="1" />
       <File FileName="Assets\Code\Player\newMethodAttack.cs" Line="1" Column="1" />
       <File FileName="Assets\Code\systemValues.cs" Line="1" Column="1" />
       <File FileName="Assets\Code\Equips\equipBasics.cs" Line="1" Column="1" />
       <File FileName="Assets\Code\UI\systemPanel\Skill\skillPanelController.cs" Line="1" Column="1" />
       <File FileName="Assets\Code\bloodSlider\BasicMethod\BloodScaner.cs" Line="1" Column="1" />
-      <File FileName="Assets\Code\AI\FSM\FSM_Search.cs" Line="40" Column="3" />
-      <File FileName="Assets\Code\AI\FSM\FSM_RunAfter.cs" Line="35" Column="36" />
-      <File FileName="Assets\Code\AI\FSMStage.cs" Line="31" Column="58" />
+      <File FileName="Assets\Code\AI\FSM\FSM_Search.cs" Line="1" Column="1" />
+      <File FileName="Assets\Code\AI\FSM\FSM_RunAfter.cs" Line="1" Column="1" />
+      <File FileName="Assets\Code\AI\FSMStage.cs" Line="117" Column="48" />
       <File FileName="Assets\Code\AI\FSM\FSM_Attack.cs" Line="60" Column="133" />
+      <File FileName="Assets\Code\AI\FSM\FSMBasic.cs" Line="48" Column="57" />
+      <File FileName="Assets\Code\AI\FSMRenderSwitch.cs" Line="25" Column="5" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
