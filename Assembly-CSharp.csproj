@@ -138,6 +138,10 @@
      <Compile Include="Assets\Code\controllers\informationMouseShow.cs" />
      <Compile Include="Assets\Code\netWork\PUNConnect.cs" />
      <Compile Include="Assets\Code\netWork\onConnectFlash.cs" />
+     <Compile Include="Assets\Code\playerModes\playMode1.cs" />
+     <Compile Include="Assets\Code\playerModes\playMode2.cs" />
+     <Compile Include="Assets\Code\playerModes\playMode3.cs" />
+     <Compile Include="Assets\Code\playerModes\playModeBasic.cs" />
      <Compile Include="Assets\Code\props\popMaker.cs" />
      <Compile Include="Assets\Code\props\popSoulMove.cs" />
      <Compile Include="Assets\Code\props\props.cs" />

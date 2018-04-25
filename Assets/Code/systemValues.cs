@@ -24,6 +24,10 @@ public class systemValues : MonoBehaviour {
 	//游戏是否正在进行标记，如果没有再进行，各种东西都没有必要进行计算了
 	public static bool isGamming = true;
 
+	//游戏特殊的位置
+	//各种模式都用得上所以还是留一个出来
+	public Transform theSpecialTransform;
+	public static Transform theSpecialTransformStatic;
 	//网络控制节点=============================
 	static PhotonView photonView;
 	//=========================================
@@ -401,7 +405,7 @@ public class systemValues : MonoBehaviour {
 	//为此需要一组标记，而这组标记就在这个方法里面统一处理
 	public static bool isSystemUIUsing() 
 	{
-		return  systemValues.IsSystemPanelOpened; 
+		return  systemValues.IsSystemPanelOpened && systemValues.isGamming; 
 	}
 	#endregion
 
@@ -851,13 +855,14 @@ public class systemValues : MonoBehaviour {
 	#region 死亡处理，也算是游戏的收尾工作
 	//死亡的面板
 	public static GameObject theDeadPanel;
-	public static void  makeGameEnd()
+	public static void  makeGameEnd(string theInformation)
 	{
 		isGamming = false;
+		makeSystemClean ();
 		if (theDeadPanel)
 		{
 			theDeadPanel.SetActive (true);
-			theDeadPanel.GetComponent <theDeadPanel> ().makeStart ();
+			theDeadPanel.GetComponent <theDeadPanel> ().makeStart (theInformation);
 		}
 	}
 	#endregion
@@ -865,9 +870,13 @@ public class systemValues : MonoBehaviour {
 	void Start()
 	{
 		transStatic = this.transform;
+		theSpecialTransformStatic = theSpecialTransform;
 		if (systemValues.modeIndex == 1) 
 			photonView = PhotonView.Get (this);
 		//InvokeRepeating ("flashRubbish", 5f, 5f);
+		playModeBasic thePlaymode = this.GetComponent<playModeBasic>();
+		if (thePlaymode)
+			thePlaymode.OnGameStart ();
 	}
 	void OnDestroy()
 	{

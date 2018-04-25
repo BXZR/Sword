@@ -844,7 +844,7 @@ public class PlayerBasic : MonoBehaviour {
 				this.GetComponent <FSMStage>().enabled = false;
 
 			if(systemValues.thePlayer == this)
-			    systemValues.makeGameEnd();
+				systemValues.makeGameEnd("胜败，不过是兵家常事,\n我们可以，还可以从头再来。");
 		}
 		catch 
 		{
