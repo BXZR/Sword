@@ -11,7 +11,7 @@ public class FSMStage : effectBasic {
 	public FSMBasic theStateNow = new FSM_Search();
 	private PlayerBasic thethis; 
 	private Animator theAnimator;
-	public float AIThinkTimer = 1f;//AI每隔一段时间再进行思考
+	public float AIThinkTimer = 0.25f;//AI每隔一段时间再进行思考
 	//这是一个值得优化的点，在一些条件下关闭掉AI计算会非常省事
 	//AI的计算很重并且同时计算的很多
 	public bool theAiIsActing = true;//AI是否计算的标记

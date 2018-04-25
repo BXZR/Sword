@@ -28,7 +28,7 @@ public class FSM_RunAfter : FSMBasic {
 	{
 
 		//为了确保能真的攻击到，留下10%的多余空间
-		if (Vector3.Distance (this.theThis.transform.position , this.theEMY.transform .position) <=  this.theThis.theAttackAreaLength)
+		if (Vector3.Distance (this.theThis.transform.position , this.theEMY.transform .position) <=  this.theThis.theAttackAreaLength*0.8f)
 		{
 			//Debug.Log ("runafter to attack");
 			FSM_Attack attack = new FSM_Attack ();
