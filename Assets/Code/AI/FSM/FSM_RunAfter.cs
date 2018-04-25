@@ -53,6 +53,39 @@ public class FSM_RunAfter : FSMBasic {
 		return this;
 	}
 
+	public override FSMBasic moveToNextState (FSMStage theController)
+	{
+
+		//为了确保能真的攻击到，留下10%的多余空间
+		if (Vector3.Distance (this.theThis.transform.position , this.theEMY.transform .position) <=  this.theThis.theAttackAreaLength*0.8f)
+		{
+			//Debug.Log ("runafter to attack");
+			//FSM_Attack attack = new FSM_Attack ();
+			FSMBasic attack =  theController.getState(1);
+			attack.makeState (this.theMoveController, this.theAttackLlinkController,this.theAnimator, this.theThis,this.theEMY);
+			return attack;
+		}
+		if (this.theThis.transform.position.y < this.theEMY.transform.position.y-0.75 )
+		{
+			//Debug.Log ("runafter to jump");
+			//FSM_Jump jump = new FSM_Jump ();
+			FSMBasic jump =  theController.getState(2);
+			jump.makeState (this.theMoveController, this.theAttackLlinkController,this.theAnimator, this.theThis,this.theEMY);
+			return jump;
+		}
+		//Debug.Log ("theEMY name is "+ theEMY.name);
+		if (timer < 0)
+		{
+			//Debug.Log ("runafter to search");
+			//FSM_Search search = new FSM_Search ();
+			FSMBasic search =  theController.getState(4);
+			search.makeState (this.theMoveController, this.theAttackLlinkController,this.theAnimator, this.theThis);
+			return search;
+		}
+		return this;
+	}
+
+
 	//AI最简单的群体行为操作
 	//一人追杀则群体追杀
 	public override void OnChangeToThisState ()

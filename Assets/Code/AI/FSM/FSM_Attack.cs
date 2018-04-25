@@ -66,4 +66,33 @@ public class FSM_Attack : FSMBasic {
 		}
 		return this;
 	}
+
+	public override FSMBasic moveToNextState (FSMStage theController)
+	{
+		if (theEMY == null || theEMY.isAlive == false) 
+		{
+			//Debug.Log ("attack to search");
+			//FSM_Search search = new FSM_Search ();
+			FSMBasic search = theController.getState(4);
+			search.makeState (this.theMoveController, this.theAttackLlinkController,this.theAnimator, this.theThis);
+			return search;
+		}
+		if (this.theThis.transform.position.y < this.theEMY.transform.position.y -0.75)
+		{
+			//Debug.Log ("attack to jump");
+			//FSM_Jump jump = new FSM_Jump ();
+			FSMBasic  jump  = theController.getState(2);
+			jump.makeState (this.theMoveController, this.theAttackLlinkController,this.theAnimator, this.theThis,this.theEMY);
+			return jump;
+		}
+		if (Vector3.Distance (this.theThis.transform .position, this.theEMY.transform .position) >  this.theThis.theAttackAreaLength *0.8f)
+		{
+			//Debug.Log ("attack to runafter");
+			//FSM_RunAfter runafter = new FSM_RunAfter ();
+			FSMBasic runafter = theController.getState(3);
+			runafter.makeState (this.theMoveController, this.theAttackLlinkController,this.theAnimator, this.theThis,this.theEMY);
+			return runafter;
+		}
+		return this;
+	}
 }

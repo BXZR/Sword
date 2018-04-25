@@ -44,4 +44,16 @@ public class FSM_Jump : FSMBasic {
 		}
 		return this;
 	}
+	public override FSMBasic moveToNextState ( FSMStage theController)
+	{
+		if (this.theThis.transform.position .y >=  this.theEMY.transform .position.y -0.75|| timer< 0 )
+		{
+			//Debug.Log ("jump to runafter");
+			//FSM_RunAfter runafter = new FSM_RunAfter ();
+			FSMBasic runafter = theController.getState(3);
+			runafter.makeState (this.theMoveController, this.theAttackLlinkController,this.theAnimator, this.theThis,this.theEMY);
+			return runafter;
+		}
+		return this;
+	}
 }

@@ -46,6 +46,7 @@ public class FSMBasic  {
 	//思考转换到下一个状态
 	//返回下一个状态，这个状态可以是自身
 	public virtual FSMBasic moveToNextState(){return this;}
+	public virtual FSMBasic moveToNextState(FSMStage theController){return this;}
 	//状态转换的时候会发生一次的事情
 	public virtual void  OnChangeToThisState(){}
 }

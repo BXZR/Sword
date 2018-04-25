@@ -10,28 +10,32 @@ public class FSM_Search : FSMBasic {
 	public float distance = 2.5f;//视野长度
 	PlayerBasic theMainEMY = null;
 
-
-	float change(float angle)//角度转弧度的方法
-	{
-		return( angle * Mathf.PI / 180);
-	}
-
 	//个人认为比较稳健的方法
 	//传入的是攻击范围和攻击扇形角度的一半
 	//选择目标的方法，这年头普攻都是AOE
+	float searchTimer = 0.4f;
+	float searchTimerMax = 0.4f;
 	void searchAIMs()//不使用射线而是使用向量计算方法
 	{
 		if (!theThis)
 			return;
-		theEMYGet = systemValues.searchAIMs (angle , distance , theThis.transform);
-		theMainEMY = getMainEMY ();
 
+		searchTimer -= Time.deltaTime;
+		if(searchTimer <0)
+		{
+			searchTimer = searchTimerMax;
+			theEMYGet = systemValues.searchAIMs (angle, distance, theThis.transform);
+			theMainEMY = getMainEMY ();
+			//if (theMainEMY)
+			//	Debug.Log (theMainEMY.ActerName + "is found");
+		}
 	}
 
 
     //找到的目标很多，排序找到最终的目标
 	private PlayerBasic getMainEMY()
 	{
+		//Debug.Log ("first check count = "+ theEMYGet.Count);
 		for (int i = 0; i < theEMYGet.Count; i++)
 			if (theEMYGet [i].tag != "AI")
 				return theEMYGet [i];
@@ -85,6 +89,7 @@ public class FSM_Search : FSMBasic {
 		return 4;
 	}
 
+
 	public override void actInThisState ()
 	{
 		//Debug.Log ("search!");
@@ -106,5 +111,20 @@ public class FSM_Search : FSMBasic {
 			return attack;
 		}
  
+	}
+	public override FSMBasic moveToNextState (FSMStage theContrtoller)
+	{
+		//找不到目标就继续找
+		if (theMainEMY == null)
+			return this;
+		//找到了目标就转到下一个状态
+		else 
+		{
+			//Debug.Log ("search to attack");
+			FSMBasic attack = theContrtoller.getState(1);
+			attack.makeState (this.theMoveController, this.theAttackLlinkController, this.theAnimator,this.theThis,this.theMainEMY);
+			return attack;
+		}
+
 	}
 }
