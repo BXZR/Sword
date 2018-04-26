@@ -685,11 +685,11 @@ public class systemValues : MonoBehaviour {
 		return( angle * Mathf.PI / 180);
 	}
 
-	public static List<PlayerBasic> theEMY = new List<PlayerBasic> ();
+	public static List<GameObject> theEMY = new List<GameObject> ();
 	//个人认为比较稳健的方法
 	//传入的是攻击范围和攻击扇形角度的一半
 	//选择目标的方法，这年头普攻都是AOE
-	public static List<PlayerBasic> searchAIMs(float angle , float distance ,Transform theSearcherTransform)//不使用射线而是使用向量计算方法
+	public static List<GameObject> searchAIMs(float angle , float distance ,Transform theSearcherTransform)//不使用射线而是使用向量计算方法
 	{
 		//这个方法的正方向使用的是X轴正方向
 		//具体使用的时候非常需要注意正方向的朝向
@@ -704,10 +704,8 @@ public class systemValues : MonoBehaviour {
 		//print ("angleCosValue-"+angleCosValue);
 		for (int i = 0; i < emys.Length; i++)//开始对相交球体探测物体进行排查
 		{ 
-			//print (emys [i].gameObject.name);
-			PlayerBasic thePlayerAim = emys[i].GetComponent <PlayerBasic>();
 			//用alive标记减少在这里参与计算的单位数量
-			if (thePlayerAim && thePlayerAim.isAlive && emys [i].GetComponent <Collider>().gameObject != theSearcherTransform.gameObject) //相交球最大的问题就是如果自身有碰撞体，自己也会被侦测到
+			if (emys [i].gameObject != theSearcherTransform.gameObject) //相交球最大的问题就是如果自身有碰撞体，自己也会被侦测到
 			{
 				//print ("name-"+ emys [i].name);
 				Vector3 thisToEmy = emys [i].transform.position - theSearcherTransform.transform.position;//目标坐标减去自身坐标
@@ -728,10 +726,9 @@ public class systemValues : MonoBehaviour {
 				*/
 				if (cosValue >= angleCosValue)//如果cos值大于基准值，认为这个就是应该被探测的目标
 				{
-					PlayerBasic theAIM = emys [i].GetComponent<Collider> ().gameObject.GetComponent<PlayerBasic> ();
-					if (theEMY .Contains (theAIM) == false) //不重复地放到已找到的列表里面
+					if (theEMY .Contains (emys [i].gameObject) == false) //不重复地放到已找到的列表里面
 					{
-						theEMY.Add (theAIM);
+						theEMY.Add (emys [i].gameObject);
 						//print ("SeachFind "+emys [i].GetComponent<Collider> ().gameObject.name);//找到目标
 					}
 				}
@@ -845,6 +842,8 @@ public class systemValues : MonoBehaviour {
 	//反复跳转场景应该做一些清理工作
 	public static void makeSystemClean()
 	{
+		Cursor.visible = true;
+		Time.timeScale = 1f;
 		isGamming = true;
 		theShowingTexts.Clear ();
 		theSavedSprite.Clear ();
@@ -858,7 +857,6 @@ public class systemValues : MonoBehaviour {
 	public static void  makeGameEnd(string theInformation)
 	{
 		isGamming = false;
-		makeSystemClean ();
 		if (theDeadPanel)
 		{
 			theDeadPanel.SetActive (true);

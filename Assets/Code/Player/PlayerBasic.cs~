@@ -180,8 +180,8 @@ public class PlayerBasic : MonoBehaviour {
 	[HideInInspector]
 	public bool isMainfighter = false;//是玩家控制的fighter
 
-	private GUIStyle GUIShowStyleHP;//GUI显示的人物当前生命值
-	private GUIStyle GUIShowStyleSP;//GUI显示的人物当前生命值
+	public  GUISkin GUIShowStyleHP;//GUI显示的人物当前生命值
+	public  GUISkin GUIShowStyleSP;//GUI显示的人物当前生命值
 
 	private bool isStarted =false;//是否已经开启
 
@@ -750,15 +750,13 @@ public class PlayerBasic : MonoBehaviour {
 	{
 		if (isStarted && isAlive) 
 		{
-			//默认机制就是每一次恢复每秒钟的生命恢复再检查是否死亡
-
 			//这一次循环可以调用的效果都在这里
 			effectBasic[] Effects = this.GetComponentsInChildren<effectBasic> ();
 
 			//护盾是有上限的 
 			float theMaxOfShield = ActerHpMax * ActerShieldMaxPercent;
 			ActerShieldHp = Mathf.Clamp(ActerShieldHp , 0f ,theMaxOfShield ) ;
-
+			//默认机制就是每一次恢复每秒钟的生命恢复再检查是否死亡
 			if (ActerHp < ActerHpMax) 
 			{
 				float hpupValue = ActerHpUp * systemValues.updateTimeWait;
@@ -903,10 +901,8 @@ public class PlayerBasic : MonoBehaviour {
 		//只有有BloodBasic，也就是血条显示能力的Player才需要Load资源
 		if (this.GetComponent<BloodBasic> ()) 
 		{
-			GUIShowStyleHP = new GUIStyle ();
-			GUIShowStyleHP.normal.background = (Texture2D)Resources.Load ("UI/hpGUI");
-			GUIShowStyleSP = new GUIStyle ();
-			GUIShowStyleSP.normal.background = (Texture2D)Resources.Load ("UI/spGUI");
+			GUIShowStyleHP = (GUISkin)Resources.Load ("UI/hpGUISkin");
+			GUIShowStyleSP = (GUISkin)Resources.Load ("UI/spGUISkin");
 			OnGUIStringForNAmeLV = this.ActerName + "(Lv." + this.playerLv + ")";//重新做一个GUI字符串
 		}
 	}
@@ -998,7 +994,10 @@ public class PlayerBasic : MonoBehaviour {
 
 	void OnGUI()
 	{ 
-		if ( 	systemValues.isGamming &&  isShowingOnGUI  && this.isMainfighter == false &&  isAlive &&  GUIShowStyleHP!=null &&  GUIShowStyleSP!=null )
+		if (!systemValues.isGamming)
+			return;
+
+		if (isShowingOnGUI  && this.isMainfighter == false &&  isAlive &&  GUIShowStyleHP!=null &&  GUIShowStyleSP!=null )
 		{
 			if (!systemValues.isSystemUIUsing ()) 
 			{
@@ -1009,9 +1008,9 @@ public class PlayerBasic : MonoBehaviour {
 				GUI.BeginGroup (new Rect (c.x, Screen.height - c.y, 155, 100));
 				GUI.Box (Rect1 ,OnGUIStringForNAmeLV );
 				GUI.Box (Rect2, "");
-				GUI.Box (new Rect (12, 24, 120 * rotoForHp, 13), "", GUIShowStyleHP);
+				GUI.Box (new Rect (12, 24, 120 * rotoForHp, 13), "", GUIShowStyleHP.box);
 				GUI.Box (Rect3, "");
-				GUI.Box (new Rect (12, 40, 120 * rotoForSp, 13), "", GUIShowStyleSP);
+				GUI.Box (new Rect (12, 40, 120 * rotoForSp, 13), "", GUIShowStyleSP.box);
 				GUI.EndGroup ();
 			}
 		}

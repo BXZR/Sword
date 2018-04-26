@@ -5,7 +5,7 @@ using UnityEngine.AI;
 
 public class FSM_Search : FSMBasic {
 
-	List<PlayerBasic> theEMYGet   = null;
+	List<GameObject> theEMYGet   = null;
 	public float angle = 125;//视野角度范围的一半
 	public float distance = 2.5f;//视野长度
 	PlayerBasic theMainEMY = null;
@@ -36,10 +36,12 @@ public class FSM_Search : FSMBasic {
 	private PlayerBasic getMainEMY()
 	{
 		//Debug.Log ("first check count = "+ theEMYGet.Count);
-		for (int i = 0; i < theEMYGet.Count; i++)
-			if (theEMYGet [i].tag != "AI")
-				return theEMYGet [i];
-
+		for (int i = 0; i < theEMYGet.Count; i++) 
+		{
+			PlayerBasic thePlayer = theEMYGet [i].GetComponent <PlayerBasic> ();
+			if (!theEMYGet [i].tag .Equals("AI") && thePlayer && thePlayer.isAlive)
+				return thePlayer;
+		}
 		return null;
 	}
 

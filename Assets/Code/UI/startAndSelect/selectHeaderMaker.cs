@@ -33,7 +33,7 @@ public class selectHeaderMaker : MonoBehaviour {
 	void Start ()
 	{
 		makeButtons ();
-		Time.timeScale = 1f;
+
 	}
 
 	public void makeButtons()

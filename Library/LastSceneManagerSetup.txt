@@ -1,4 +1,4 @@
 sceneSetups:
-- path: Assets/Scenes/netPK.unity
+- path: Assets/Scenes/theFight2.unity
   isLoaded: 1
   isActive: 1

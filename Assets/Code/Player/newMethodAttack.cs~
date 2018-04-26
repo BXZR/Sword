@@ -10,7 +10,7 @@ public class newMethodAttack : MonoBehaviour {
 	//这个是在动画中插入关键帧的方法，没有使用碰撞检测的方法制作的
 	//但同时也有限制，就是只能用于这种唯一目标的游戏而没有办法很好地模拟武器AOE
 
-	private List<PlayerBasic> theEMY= new List<PlayerBasic> ();//为了打得爽，其实所有攻击都是AOE，AOE获取方式为自制的扇形检测
+	private List<GameObject> theEMY= new List<GameObject> ();//为了打得爽，其实所有攻击都是AOE，AOE获取方式为自制的扇形检测
 	private PlayerBasic thePlayer;//自身
 	float theDistance = 0;//距离中间变量
 
@@ -118,15 +118,15 @@ public class newMethodAttack : MonoBehaviour {
 
 
 
-	List<PlayerBasic> toDelete ;
+	List<GameObject> toDelete  = new List<GameObject> ();
+	List<PlayerBasic> toUSePlayerBasic = new List<PlayerBasic> ();
 	//如果是AI需要加入额外的检查
-	private void  checkIfISAI()
+	private void check()
 	{
-		if (toDelete == null)
-			toDelete = new List<PlayerBasic> ();
-		else
-			toDelete.Clear ();
-		
+		toDelete.Clear ();
+		toUSePlayerBasic.Clear ();
+
+		//AI之间不会自己攻击自己 
 		if (this.thePlayer.gameObject.tag == "AI") 
 		{
 			for (int i = 0; i < theEMY.Count; i++) 
@@ -141,7 +141,17 @@ public class newMethodAttack : MonoBehaviour {
 				theEMY.Remove (toDelete[i]);
 			}
 		}
+		//获取playerBasic引用用来真正地攻击
+
+		for (int i = 0; i < theEMY.Count; i++)
+		{
+			PlayerBasic PB = theEMY [i].GetComponent<PlayerBasic> ();
+			if (PB)
+				toUSePlayerBasic.Add (PB );
+		}
 	}
+
+	private List<PlayerBasic> EMYUse = new List<PlayerBasic> ();
 	//真正的攻击方法
 	private void Attack( float makeDamage)
 	{
@@ -149,27 +159,27 @@ public class newMethodAttack : MonoBehaviour {
 		float theDistanceCheck = thePlayer.theAttackAreaLength;
 		if (makeDamage >= 0) 
 		{
+			EMYUse.Clear ();
 			theDistanceCheck += makeDamage;
 			theEMY = systemValues.searchAIMs (thePlayer.theAttackAreaAngel, theDistanceCheck,thePlayer.transform);
-			checkIfISAI ();
-			//print ("theEMY.count " + theEMY.Count);
-			for (int i = 0; i < theEMY.Count; i++) 
-			{
+			check ();
 
-				theDistance = Vector3.Distance (thePlayer.transform.position, theEMY [i].transform.position);
+			//print ("theEMY.count " + theEMY.Count);
+			for (int i = 0; i < toUSePlayerBasic.Count; i++) 
+			{
+				theDistance = Vector3.Distance (thePlayer.transform.position, toUSePlayerBasic [i].transform.position);
 				//print (theDistanceCheck);
 				if (theDistance <= theDistanceCheck)
 				{
-					if (thePlayer && theEMY [i]) 
+					if (thePlayer && toUSePlayerBasic [i]) 
 					{
 						if (makeDamage >= 0)
 						{//有些时候仅仅是增加脚本，例如“斗气爆发”不具备攻击效果
-							thePlayer.OnAttack (theEMY [i], 0, false);//造成直接的伤害
-							extraDamageEffect (theEMY [i]);//添加额外的计算脚本，每个脚本的效果由脚本自己决定
+							thePlayer.OnAttack (toUSePlayerBasic [i], 0, false);//造成直接的伤害
+							extraDamageEffect (toUSePlayerBasic [i]);//添加额外的计算脚本，每个脚本的效果由脚本自己决定
 							//print(theEMY[i].name+" is being attacked");
 						}
 					}
-
 				}
 			}
 		}
