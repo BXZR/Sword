@@ -61,7 +61,7 @@ public class playMode1 : playModeBasic {
 		{
 			if (!systemValues.isSystemUIUsing ()) 
 			{
-				GUI.Box (new Rect(Screen.width*0.9f , 0 , Screen.width*0.1f,Screen.height*0.1f) , "剩余时间："+ timerForKill.ToString("f0"));
+				GUI.Box (new Rect(Screen.width*0.85f , 0 , Screen.width*0.15f,Screen.height*0.03f) , "剩余时间："+ timerForKill.ToString("f0")+"s");
 			}
 		}
 	}

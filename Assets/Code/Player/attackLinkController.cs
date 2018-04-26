@@ -264,6 +264,9 @@ public class attackLinkController :MonoBehaviour {
 	{
 		//有些东西应该保持实时，例如攻击速度的变化不允许有太多的延迟
 		controllWithPlayer ();
+
+		if (!thePlayer || thePlayer != systemValues.thePlayer)
+			return;
 		if (isStarted&& startTimer && thePlayer && thePlayer.isAlive) 
 		{
 			//存在一个等待的时间
@@ -286,10 +289,9 @@ public class attackLinkController :MonoBehaviour {
 		attackBeDelete = new List<attackLink> ();//重建对象
 		if (this.gameObject.tag == "AI") 
 			makeStart ();
-		else 
-			//不是AI，也就是游戏主人公，才会需要实时刷新检测连招信息
-			//同时这个时间也受到这个程序的统一时钟控制
-			InvokeRepeating("makeUpdate" , 0, systemValues.updateTimeWait);
+		
+		//同时这个时间也受到这个程序的统一时钟控制
+		InvokeRepeating("makeUpdate" , 0, systemValues.updateTimeWait);
 	}
 
 	//void Update () 
