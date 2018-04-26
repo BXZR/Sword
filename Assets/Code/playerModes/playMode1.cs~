@@ -38,7 +38,7 @@ public class playMode1 : playModeBasic {
 		{
 			if (!theBoss.isAlive) 
 			{
-				theGameEndInformation = "恭喜你完成了这项艰巨的试炼。";
+				theGameEndInformation = "恭喜你完成了这艰巨的试炼。";
 				return true;
 			} 
 			else if (timerForKill < 0) 

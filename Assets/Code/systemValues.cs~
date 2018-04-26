@@ -427,7 +427,7 @@ public class systemValues : MonoBehaviour {
 	//灵力相关的计算------------------------------------------------------------------------------------------------------
 	//收集的灵力数量
 	//灵力可以通过击杀目标来获取
-	public static int soulCount = 3;
+	public static int soulCount = 993;
 	//全球唯一计算灵力获取量的方法
 	public static int soulGet(PlayerBasic thePlayerIn)
 	{
@@ -465,6 +465,9 @@ public class systemValues : MonoBehaviour {
 	public static bool isMessageBoxShowing = false;//消息框打开的时候有些功能需要被限制，否则就会有UI穿透的问题
 	public static void  messageBoxShow(string showTitle , string  showText , bool autoSize = false)
 	{
+		if (!isGamming)
+			return;
+		
 		if (!theMessageProfab)
 			theMessageProfab = Resources.Load<GameObject> ("UI/MessageBox");
 
@@ -487,6 +490,9 @@ public class systemValues : MonoBehaviour {
 	}
 	public static void  messageBoxShow(string showTitle , string  showText , float timer , bool autoSize = false )
 	{
+		if (!isGamming)
+			return;
+		
 		if (!theMessageProfab)
 			theMessageProfab = Resources.Load<GameObject> ("UI/MessageBox");
 
@@ -511,6 +517,9 @@ public class systemValues : MonoBehaviour {
 
 	public static void messageTitleBoxShow(string information)
 	{
+		if (!isGamming)
+			return;
+		
 		if (!theTitleMessageBoxProfab)
 			theTitleMessageBoxProfab = Resources.Load<GameObject> ("UI/MessageBoxForTitle");
 
@@ -532,6 +541,9 @@ public class systemValues : MonoBehaviour {
 
 	public static void  choiceMessageBoxShow(string showTitle , string  showText , bool autoSize = false , MesageOperate theOperateMethod = null)
 	{
+		if (!isGamming)
+			return;
+		
 		if (!theChoiceMessageBoxProfab)
 			theChoiceMessageBoxProfab = Resources.Load<GameObject> ("UI/MessageBoxForChoice");
 

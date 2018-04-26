@@ -267,6 +267,7 @@ public class attackLinkController :MonoBehaviour {
 
 		if (!thePlayer || thePlayer != systemValues.thePlayer)
 			return;
+		
 		if (isStarted&& startTimer && thePlayer && thePlayer.isAlive) 
 		{
 			//存在一个等待的时间

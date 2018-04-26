@@ -58,7 +58,9 @@
      <Compile Include="Assets\Code\Effects\bloodShower\effectShowDamageOnBeAttack.cs" />
      <Compile Include="Assets\Code\Effects\bloodShower\extraMoveUp.cs" />
      <Compile Include="Assets\Code\Effects\effectBasic.cs" />
-     <Compile Include="Assets\Code\Effects\effectForWuling\wind.cs" />
+     <Compile Include="Assets\Code\Effects\effectForWuling\lingBasic.cs" />
+     <Compile Include="Assets\Code\Effects\effectForWuling\wind1.cs" />
+     <Compile Include="Assets\Code\Effects\effectForWuling\wuling.cs" />
      <Compile Include="Assets\Code\Effects\equipEffects\equipEffect_ExtraDamage.cs" />
      <Compile Include="Assets\Code\Effects\equipEffects\equipEffect_ExtraSuck.cs" />
      <Compile Include="Assets\Code\Effects\equipEffects\equipEffect_ExtraXieyi.cs" />

@@ -1,19 +1,18 @@
 ﻿<Properties StartupItem="Assembly-CSharp.csproj">
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Unity.Instance.Unity Editor" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Code\Player\PlayerBasic.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Code\systemValues.cs">
     <Files>
       <File FileName="Assets\Code\AI\FSMStage.cs" Line="1" Column="1" />
       <File FileName="Assets\Code\AI\FSM\FSM_Search.cs" Line="1" Column="1" />
       <File FileName="Assets\Code\AI\FSM\FSM_Attack.cs" Line="1" Column="1" />
       <File FileName="Assets\Code\Player\attackLinkController.cs" Line="1" Column="1" />
-      <File FileName="Assets\Code\systemValues.cs" Line="708" Column="59" />
+      <File FileName="Assets\Code\systemValues.cs" Line="569" Column="3" />
       <File FileName="Assets\Code\playerModes\playModeBasic.cs" Line="1" Column="1" />
-      <File FileName="Assets\Code\playerModes\playMode1.cs" Line="1" Column="1" />
-      <File FileName="Assets\Code\Player\PlayerBasic.cs" Line="826" Column="6" />
+      <File FileName="Assets\Code\playerModes\playMode1.cs" Line="41" Column="37" />
+      <File FileName="Assets\Code\Player\PlayerBasic.cs" Line="470" Column="38" />
       <File FileName="Assets\Code\UI\deadPanel\theDeadPanel.cs" Line="1" Column="1" />
       <File FileName="Assets\Code\playerModes\playMode3.cs" Line="1" Column="1" />
       <File FileName="Assets\Code\bloodSlider\BasicMethod\BloodScaner.cs" Line="1" Column="1" />
-      <File FileName="Assets\Code\bloodSlider\BasicMethod\BloodBasic.cs" Line="1" Column="1" />
       <File FileName="Assets\Code\UI\systemPanel\SystemUIController.cs" Line="1" Column="1" />
       <File FileName="Assets\Code\UI\systemPanel\BasicPanelController.cs" Line="1" Column="1" />
       <File FileName="Assets\Code\UI\startAndSelect\GameStartButton.cs" Line="1" Column="1" />
@@ -22,6 +21,10 @@
       <File FileName="Assets\Code\UI\startAndSelect\skillEffectShowingItem.cs" Line="1" Column="1" />
       <File FileName="Assets\Code\Player\newMethodAttack.cs" Line="1" Column="1" />
       <File FileName="Assets\Code\AI\FSM\FSMBasic.cs" Line="1" Column="1" />
+      <File FileName="Assets\Code\Effects\effectForWuling\wuling.cs" Line="1" Column="1" />
+      <File FileName="Assets\Code\Effects\effectForWuling\wind1.cs" Line="1" Column="1" />
+      <File FileName="Assets\Code\Effects\effectForWuling\lingBasic.cs" Line="1" Column="1" />
+      <File FileName="Assets\Code\Effects\effectBasic.cs" Line="1" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
