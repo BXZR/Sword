@@ -11,7 +11,9 @@ public class FSMRenderSwitch : MonoBehaviour {
 
 	//这并不是一个优秀的优化方法
 	//实际上这有可能会有BUG，例如敌人没办法从玩家看不到的地方千里攻击玩家
+	//此外还会有视野死角的问题
 	private FSMStage theStage = null ;
+	private bool isActing = false;
 
 	void Start () 
 	{
@@ -22,13 +24,20 @@ public class FSMRenderSwitch : MonoBehaviour {
 	void OnBecameVisible()
 	{
 		//AI重新激活
-		//theStage.makeAIStart();//如果一直看到，AI就会一直保持开启状态
+		//print("can be seen  so act");
+		CancelInvoke();
+		theStage.makeAIStart();//如果一直看到，AI就会一直保持开启状态
 	}
 
-//	void OnBecameInvisible()
-//	{
-//		if(theStage)
-//		theStage.theAiIsActing = false;
-//	}
+	void OnBecameInvisible()
+	{
+		Invoke ("makeInvoke" , 5f);
+	}
+
+	void makeInvoke()
+	{
+		if(theStage)
+		theStage.theAiIsActing = false;
+	}
 
 }

@@ -29,7 +29,7 @@ public class FSM_RunAfter : FSMBasic {
 		this.theThis.transform.LookAt (theEMY.transform);
 		if(this.theMoveController.isActiveAndEnabled)
 		if(this.theMoveController.isOnNavMesh)
-		 this.theMoveController.SetDestination(theEMY.transform .position);
+			this.theMoveController.SetDestination(theEMY.transform .position + new Vector3 (Random.value ,0,Random.value));
 
 		timer -= Time.deltaTime;
 		//Debug.Log ("runafterTimer : "+ timer);
@@ -38,8 +38,10 @@ public class FSM_RunAfter : FSMBasic {
 	public override FSMBasic moveToNextState ()
 	{
 
-		//为了确保能真的攻击到，留下10%的多余空间
-		if (Vector3.Distance (this.theThis.transform.position , this.theEMY.transform .position) <=  this.theThis.theAttackAreaLength*0.8f)
+		//为了确保能真的攻击到，留下多余空间
+		//this.theThis.theAttackAreaLength*1.5f在没有遇到之前就开始会挥舞兵器了
+		//至于移动就在于navMeshAgent了
+		if (Vector3.Distance (this.theThis.transform.position , this.theEMY.transform .position) <=  this.theThis.theAttackAreaLength*1.5f)
 		{
 			//Debug.Log ("runafter to attack");
 			FSM_Attack attack = new FSM_Attack ();
@@ -67,8 +69,10 @@ public class FSM_RunAfter : FSMBasic {
 	public override FSMBasic moveToNextState (FSMStage theController)
 	{
 
-		//为了确保能真的攻击到，留下10%的多余空间
-		if (Vector3.Distance (this.theThis.transform.position , this.theEMY.transform .position) <=  this.theThis.theAttackAreaLength*0.8f)
+		//为了确保能真的攻击到，留下多余空间
+		//this.theThis.theAttackAreaLength*1.5f在没有遇到之前就开始会挥舞兵器了
+		//至于移动就在于navMeshAgent了
+		if (Vector3.Distance (this.theThis.transform.position , this.theEMY.transform .position) <=  this.theThis.theAttackAreaLength*1.5f)
 		{
 			//Debug.Log ("runafter to attack");
 			//FSM_Attack attack = new FSM_Attack ();
@@ -102,7 +106,7 @@ public class FSM_RunAfter : FSMBasic {
 	public override void OnChangeToThisState ()
 	{
 		//Debug.Log("all move ");
-		Collider [] AIs = Physics.OverlapSphere (this.theThis.transform .position , 12f);
+		Collider [] AIs = Physics.OverlapSphere (this.theThis.transform .position , 1.3f);
 		for (int i = 0; i < AIs.Length; i++) 
 		{
 			FSMStage theStage = AIs [i].GetComponent <FSMStage> ();
