@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+public enum wulingType {wind, thunder , water ,earth , fire}
 public class lingBasic 
 {
 
@@ -12,6 +13,8 @@ public class lingBasic
 	public string lingName = "";
 	public float lingNow = 0 ;//需要100 灵力才能修炼完成
 	public float lingNeed = 100 ;//需要100 灵力才能修炼完成
+	public wulingType theType = wulingType.wind;//五灵的类型，用于查询
+
 
 	public virtual void makeStart(){}//通用初始化方法
 	public virtual string wulingInformation(){return "";}//专门的五灵信息说明

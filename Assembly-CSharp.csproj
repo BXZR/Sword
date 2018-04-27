@@ -58,8 +58,9 @@
      <Compile Include="Assets\Code\Effects\bloodShower\effectShowDamageOnBeAttack.cs" />
      <Compile Include="Assets\Code\Effects\bloodShower\extraMoveUp.cs" />
      <Compile Include="Assets\Code\Effects\effectBasic.cs" />
-     <Compile Include="Assets\Code\Effects\effectForWuling\lingBasic.cs" />
-     <Compile Include="Assets\Code\Effects\effectForWuling\wind1.cs" />
+     <Compile Include="Assets\Code\Effects\effectForWuling\lingEffects\lingBasic.cs" />
+     <Compile Include="Assets\Code\Effects\effectForWuling\lingEffects\wind1.cs" />
+     <Compile Include="Assets\Code\Effects\effectForWuling\lingEffects\wind2.cs" />
      <Compile Include="Assets\Code\Effects\effectForWuling\wuling.cs" />
      <Compile Include="Assets\Code\Effects\equipEffects\equipEffect_ExtraDamage.cs" />
      <Compile Include="Assets\Code\Effects\equipEffects\equipEffect_ExtraSuck.cs" />
@@ -133,6 +134,7 @@
      <Compile Include="Assets\Code\UI\systemPanel\Skill\skillPanelController.cs" />
      <Compile Include="Assets\Code\UI\systemPanel\SystemUIController.cs" />
      <Compile Include="Assets\Code\UI\wuling\wulingButton.cs" />
+     <Compile Include="Assets\Code\UI\wuling\wulingEffectInfromation.cs" />
      <Compile Include="Assets\Code\UI\wuling\wulingRotation.cs" />
      <Compile Include="Assets\Code\bloodSlider\BasicMethod\BloodBasic.cs" />
      <Compile Include="Assets\Code\bloodSlider\BasicMethod\BloodScaner.cs" />

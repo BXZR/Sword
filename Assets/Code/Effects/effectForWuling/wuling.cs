@@ -12,14 +12,42 @@ public class wuling : effectBasic {
 
 	//五灵效果前期需要灵力进行修炼
 	//每一种灵力修炼完成都会带来不同的效果，并且额外提灵力增长
+   
 
-	List<lingBasic> lingEffects;
+
+	public List<lingBasic> lingEffects;
+
+	void Start()
+	{
+		Init ();
+	}
 	public override void Init ()
 	{
+		theEffectName = "五灵";
 		lingEffects = new List<lingBasic> ();
-		lingEffects.Add (new wind1());
+		makeLings ();
 		makeStart ();
+		makeInformation ();
 	}
+		
+	void makeLings()
+	{
+		wind1 theWind1 = new wind1 ();
+		theWind1.makeStart ();
+		lingEffects.Add (theWind1);
+		wind2 theWind2 = new wind2 ();
+		theWind2.makeStart ();
+		lingEffects.Add (theWind2);
+	}
+
+	void makeInformation()
+	{
+		theEffectInformation = "";
+		for (int i = 0; i < lingEffects.Count; i++)
+			theEffectInformation += lingEffects [i].wulingInformation ()+"\n";
+	}
+
+	//---------------------------------------------------------------//
 
 	//在攻击的起手阶段触发
 	override public void onAttackAction()
