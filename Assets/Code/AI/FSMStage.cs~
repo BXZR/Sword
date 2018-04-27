@@ -70,6 +70,7 @@ public class FSMStage : effectBasic   {
 		theStateNow = getState(1);
 		theStateNow.makeState (this.theMoveController, this.theAttackLlinkController,this.theAnimator, this.thethis  ,attacker);
 		theStateNow.OnFSMStateStart ();
+		think ();//强制思考一下，否则会有延迟
 //		try
 //		{
 //			NavMeshAgent theAgent = this.GetComponent <NavMeshAgent> ();
@@ -106,6 +107,15 @@ public class FSMStage : effectBasic   {
 	}
 
 	//有关AI计算状态-----------------------------------------------------------
+
+	public void  moveTotheState(FSMBasic theStateIn , PlayerBasic aim )
+	{
+		theStateIn.makeState (this.theMoveController, this.theAttackLlinkController,this.theAnimator, this.thethis ,aim);
+		theStateNow.OnFSMStateEnd ();
+		theStateNow = theStateIn;
+		theStateNow.OnFSMStateStart ();
+	}
+
 	//刷新AI计算时间
 	public void makeAIStart()
 	{

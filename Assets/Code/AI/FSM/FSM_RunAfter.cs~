@@ -11,6 +11,17 @@ public class FSM_RunAfter : FSMBasic {
 		return 3;
 	}
 
+
+	public override void OnFSMStateStart ()
+	{
+		OnChangeToThisState ();
+	}
+
+	public override void OnFSMStateEnd ()
+	{
+		timer = 3f;//时间刷新
+	}
+
 	public override void actInThisState ()
 	{
 		//Debug.Log ("run after");
@@ -90,7 +101,8 @@ public class FSM_RunAfter : FSMBasic {
 	//一人追杀则群体追杀
 	public override void OnChangeToThisState ()
 	{
-		Collider [] AIs = Physics.OverlapSphere (this.theThis.transform .position , 1f);
+		//Debug.Log("all move ");
+		Collider [] AIs = Physics.OverlapSphere (this.theThis.transform .position , 12f);
 		for (int i = 0; i < AIs.Length; i++) 
 		{
 			FSMStage theStage = AIs [i].GetComponent <FSMStage> ();
@@ -100,12 +112,9 @@ public class FSM_RunAfter : FSMBasic {
 				if (theStage.theStateNow.geID () == 4 || theStage.theStateNow.geID () == 2) 
 				{
 					FSM_RunAfter runafter = new FSM_RunAfter ();
-					runafter.makeState (this.theMoveController, this.theAttackLlinkController,this.theAnimator, this.theThis,this.theEMY);
-					theStage.theStateNow = runafter;
-					theStage.theStateNow.OnChangeToThisState ();
+					theStage.moveTotheState (runafter,this.theEMY);
 				}
 			}
 		}
-		timer = 3f;
 	}
 }

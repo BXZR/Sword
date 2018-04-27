@@ -30,6 +30,11 @@ public class FSMBasic  {
 		theAnimator = theAnimatorIn;
 	}
 
+	public void makeStateForOutControl(PlayerBasic theEMYIn = null)
+	{
+		theEMY = theEMYIn;
+	}
+
 	//有些状态不需要timer，所以也就无所谓了
 	public void setTimer(float timerIn)
 	{
