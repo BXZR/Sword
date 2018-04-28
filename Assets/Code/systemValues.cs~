@@ -427,7 +427,7 @@ public class systemValues : MonoBehaviour {
 	//灵力相关的计算------------------------------------------------------------------------------------------------------
 	//收集的灵力数量
 	//灵力可以通过击杀目标来获取
-	public static int soulCount = 993;
+	public static int soulCount = 7;
 	//全球唯一计算灵力获取量的方法
 	public static int soulGet(PlayerBasic thePlayerIn)
 	{
