@@ -5,8 +5,8 @@ using UnityEngine;
 public class wind2 : lingBasic {
 
 
-	private float addPercent = 0.2f;
-	private float spup = 25f;
+	private float addPercent = 0.1f;
+	private float spup = 5f;
 	public override void makeStart ()
 	{
 		lingName = "风•阴  罡风";

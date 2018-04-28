@@ -407,9 +407,10 @@ public class PlayerBasic : MonoBehaviour {
 			}
 		   effectBasic[] EffectAim = thePlayerAim.GetComponentsInChildren<effectBasic> ();
 		    for (int i = 0; i < EffectAim.Length; i++)
-			EffectAim [i].OnBeAttack (this);
+			    EffectAim [i].OnBeAttack (this);
            //额外的状态标记改变
 		   getInFightState();
+		  // makeValueUpdate();//为了保证网络效果完全同步，属性还是更新一下吧
 
 		//print (this.ActerName +"攻击"+thePlayerAim.ActerName);
 	}
@@ -463,6 +464,7 @@ public class PlayerBasic : MonoBehaviour {
 			}
 		   //额外的状态标记改变
 		   getInFightState();
+		   //makeValueUpdate();//为了保证网络效果完全同步，属性还是更新一下吧
 	}
 
 
@@ -894,7 +896,7 @@ public class PlayerBasic : MonoBehaviour {
 	public void makeStartForPrivate()
 	{
 		//网络上强制更新各种状态
-		InvokeRepeating("makeValueUpdate" , 0 , 7f);
+		InvokeRepeating("makeValueUpdate" , 0 , 10f);
 	}
 
 	private void makeGUIStart()

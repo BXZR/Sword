@@ -21,6 +21,6 @@ public class wind1 : lingBasic {
 
 	public override string wulingInformation ()
 	{
-		return "生命恢复效果提升"+(addPercent*100).ToString("f0")+"%，额外提升效果不在触发其他生命回复特效";
+		return "生命恢复效果提升"+(addPercent*100).ToString("f0")+"%，不触发其他生命回复特效";
 	}
 }

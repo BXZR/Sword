@@ -34,10 +34,17 @@ public class wuling : effectBasic {
 	{
 		wind1 theWind1 = new wind1 ();
 		theWind1.makeStart ();
-		lingEffects.Add (theWind1);
 		wind2 theWind2 = new wind2 ();
 		theWind2.makeStart ();
+		thunder1 theThunder1 = new thunder1 ();
+		theThunder1.makeStart ();
+		thunder2 theThunder2 = new thunder2 ();
+		theThunder2.makeStart ();
+
+		lingEffects.Add (theWind1);
 		lingEffects.Add (theWind2);
+		lingEffects.Add (theThunder1);
+		lingEffects.Add (theThunder2);
 	}
 
 	void makeInformation()
