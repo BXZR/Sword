@@ -40,11 +40,29 @@ public class wuling : effectBasic {
 		theThunder1.makeStart ();
 		thunder2 theThunder2 = new thunder2 ();
 		theThunder2.makeStart ();
+		fire1 theFire1 = new fire1 ();
+		theFire1.makeStart ();
+		fire2 theFire2 = new fire2 ();
+		theFire2.makeStart ();
+		water1 theWater1 = new water1 ();
+		theWater1.makeStart ();
+		water2 theWater2 = new water2 ();
+		theWater2.makeStart ();
+		earth1 theEarth1 = new earth1 ();
+		theEarth1.makeStart ();
+		earth2 theEarth2 = new earth2 ();
+		theEarth2.makeStart ();
 
 		lingEffects.Add (theWind1);
 		lingEffects.Add (theWind2);
 		lingEffects.Add (theThunder1);
 		lingEffects.Add (theThunder2);
+		lingEffects.Add (theFire1);
+		lingEffects.Add (theFire2);
+		lingEffects.Add (theWater1);
+		lingEffects.Add (theWater2);
+		lingEffects.Add (theEarth1);
+		lingEffects.Add (theEarth2);
 	}
 
 	void makeInformation()

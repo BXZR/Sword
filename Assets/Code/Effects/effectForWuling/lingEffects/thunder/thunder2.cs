@@ -5,16 +5,16 @@ using UnityEngine;
 public class thunder2 : lingBasic {
 
 
-	private float addPercent = 0.1f;
+	private float addPercent = 0.008f;
 	public override void makeStart ()
 	{
-		lingName = "雷•阳  水脏";
+		lingName = "雷•阴  北境沧潭";
 		theType = wulingType.thunder;
 	}
 
 	public override void OnAttack (PlayerBasic user, PlayerBasic aim, float TrueDamage)
 	{
-		float damage = (aim.ActerHpMax - aim.ActerHp)  * 0.015f;
+		float damage = (aim.ActerHpMax - aim.ActerHp) * addPercent;
 		aim.ActerHp -= damage;
 		user.OnAttackWithoutEffect (aim, damage, true, true);
 
@@ -22,6 +22,6 @@ public class thunder2 : lingBasic {
 
 	public override string wulingInformation ()
 	{
-		return "攻击附加目标已损生命值1.5%的真实伤害";
+		return "攻击附加目标已损生命值"+addPercent*100+"%的真实伤害";
 	}
 }

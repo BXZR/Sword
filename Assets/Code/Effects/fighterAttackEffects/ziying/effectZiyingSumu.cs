@@ -28,9 +28,9 @@ public class effectZiyingSumu :effectBasic {
 		if ( timerForAdd > timerForEffect && theEffect) 
 		{
 			thePlayer.ActerWuliDamage -= attackAdd;
-			thePlayer.CActerWuliDamage -= attackAdd;
+			//thePlayer.CActerWuliDamage -= attackAdd;
 			thePlayer.ActerDamageMinusPercent -= damageMinusPercent;
-			thePlayer.CActerDamageMinusPercent -= damageMinusPercent;
+			//thePlayer.CActerDamageMinusPercent -= damageMinusPercent;
 			Destroy (theEffect);
 			isEffecting = false;
 		}
@@ -58,9 +58,9 @@ public class effectZiyingSumu :effectBasic {
 			theEffect.transform.SetParent (this.thePlayer.transform);
 			theEffect.transform.localPosition = new Vector3 (0, 1.2f, 0);
 			thePlayer.ActerWuliDamage += attackAdd;
-			thePlayer.CActerWuliDamage += attackAdd;
+			//thePlayer.CActerWuliDamage += attackAdd;
 			thePlayer.ActerDamageMinusPercent += damageMinusPercent;
-			thePlayer.CActerDamageMinusPercent += damageMinusPercent;
+			//thePlayer.CActerDamageMinusPercent += damageMinusPercent;
 		}
 	} 
 }

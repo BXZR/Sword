@@ -6,10 +6,10 @@ using UnityEngine;
 public class wind1 : lingBasic {
 
 
-	private float addPercent = 0.1f;
+	private float addPercent = 0.05f;
 	public override void makeStart ()
 	{
-		lingName = "风•阳  暖雾";
+		lingName = "风•阳  暖雾春风";
 		theType = wulingType.wind;
 	}
 
