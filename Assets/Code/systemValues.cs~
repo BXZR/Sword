@@ -854,6 +854,7 @@ public class systemValues : MonoBehaviour {
 	//反复跳转场景应该做一些清理工作
 	public static void makeSystemClean()
 	{
+		soulCount = 7;//回到初始，给7个灵力
 		Cursor.visible = true;
 		Time.timeScale = 1f;
 		isGamming = true;

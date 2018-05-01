@@ -279,8 +279,11 @@ public class attackLinkController :MonoBehaviour {
 			}
 		}
 		//如果不在攻击状态就重置招式攻击伤害
-		if (theAnimator && !systemValues.isAttacking (theAnimator) && thePlayer)
+		if (theAnimator && !systemValues.isAttacking (theAnimator) && thePlayer) 
+		{
 			thePlayer.extraDamageForAnimation = 0;
+			thePlayer.theAudioPlayer.audioNow = null;
+		}
 	}
 		
 	//有一些网络必要的逻辑也需要用start进行初始化一下
