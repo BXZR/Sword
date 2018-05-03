@@ -1,19 +1,26 @@
 ﻿<Properties StartupItem="Assembly-CSharp.csproj">
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Unity.Instance.Unity Editor" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Code\systemValues.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\shaders\UI.shader">
     <Files>
-      <File FileName="Assets\Code\Player\attackLink.cs" Line="307" Column="42" />
-      <File FileName="Assets\Code\systemValues.cs" Line="836" Column="61" />
+      <File FileName="Assets\Code\Player\attackLink.cs" Line="1" Column="1" />
+      <File FileName="Assets\Code\systemValues.cs" Line="1" Column="1" />
       <File FileName="Assets\Code\Effects\extraEffects\monsterBeAttack.cs" Line="1" Column="1" />
-      <File FileName="Assets\Code\Effects\extraEffects\knifeSlash\theKnifeSlashController.cs" Line="32" Column="4" />
-      <File FileName="Assets\Code\Player\PlayerBasic.cs" Line="515" Column="5" />
-      <File FileName="Assets\Code\Equips\equipPackage.cs" Line="138" Column="28" />
-      <File FileName="Assets\Code\UI\UISound\buttonWithSound.cs" Line="13" Column="28" />
-      <File FileName="Assets\Code\sound\audioPlayer.cs" Line="24" Column="2" />
-      <File FileName="Assets\Code\Player\newMethodAttack.cs" Line="78" Column="32" />
-      <File FileName="Assets\Code\Player\attackLinkController.cs" Line="285" Column="45" />
-      <File FileName="Assets\Code\props\popSoulMove.cs" Line="37" Column="18" />
-      <File FileName="Assets\Code\Effects\thingsEffect\effectSoul.cs" Line="10" Column="16" />
+      <File FileName="Assets\Code\Effects\extraEffects\knifeSlash\theKnifeSlashController.cs" Line="1" Column="1" />
+      <File FileName="Assets\Code\Player\PlayerBasic.cs" Line="1" Column="1" />
+      <File FileName="Assets\Code\Equips\equipPackage.cs" Line="1" Column="1" />
+      <File FileName="Assets\Code\UI\UISound\buttonWithSound.cs" Line="1" Column="1" />
+      <File FileName="Assets\Code\sound\audioPlayer.cs" Line="1" Column="1" />
+      <File FileName="Assets\Code\Player\newMethodAttack.cs" Line="1" Column="1" />
+      <File FileName="Assets\Code\Player\attackLinkController.cs" Line="1" Column="1" />
+      <File FileName="Assets\Code\props\popSoulMove.cs" Line="1" Column="1" />
+      <File FileName="Assets\Code\Effects\thingsEffect\effectSoul.cs" Line="1" Column="1" />
+      <File FileName="Assets\Code\Camera\cameraUse.cs" Line="1" Column="1" />
+      <File FileName="Assets\Code\Camera\REController.cs" Line="1" Column="1" />
+      <File FileName="Assets\Code\Effects\fighterAttackEffects\mulan\effectMulanBaoFa.cs" Line="1" Column="1" />
+      <File FileName="Assets\Code\Effects\fighterAttackEffects\dragon\effectDragonExtraDamage.cs" Line="1" Column="1" />
+      <File FileName="Assets\Code\UI\wuling\theExtraShapButton.cs" Line="1" Column="1" />
+      <File FileName="Assets\Code\UI\wuling\wulingEffectInfromation.cs" Line="57" Column="25" />
+      <File FileName="Assets\shaders\UI.shader" Line="1" Column="17" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

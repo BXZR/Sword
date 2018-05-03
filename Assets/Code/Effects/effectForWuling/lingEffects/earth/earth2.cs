@@ -22,5 +22,10 @@ public class earth2  : lingBasic {
 	{
 		return "受到攻击时回敬攻击者当前生命"+reDamagePercent*100+"%物理伤害";
 	}
+
+	public override int getYinYagType ()
+	{
+		return 2;
+	}
 }
 

@@ -22,4 +22,9 @@ public class water2 : lingBasic {
 	{
 		return "攻击命中额外消耗目标" + spAdd*100 +"%最大斗气";
 	}
+
+	public override int getYinYagType ()
+	{
+		return 2;
+	}
 }

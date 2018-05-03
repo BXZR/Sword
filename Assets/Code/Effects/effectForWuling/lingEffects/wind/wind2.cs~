@@ -25,4 +25,9 @@ public class wind2 : lingBasic {
 	{
 		return "暴击时最终伤害额外提高"+(addPercent*100).ToString("f0")+"%，并额外恢复"+spup+"斗气";
 	}
+
+	public override int getYinYagType ()
+	{
+		return 2;
+	}
 }

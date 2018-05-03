@@ -24,4 +24,9 @@ public class thunder2 : lingBasic {
 	{
 		return "攻击附加目标已损生命值"+addPercent*100+"%的真实伤害";
 	}
+
+	public override int getYinYagType ()
+	{
+		return 2;
+	}
 }

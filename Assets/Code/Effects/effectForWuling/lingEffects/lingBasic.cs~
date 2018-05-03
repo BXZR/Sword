@@ -15,7 +15,6 @@ public class lingBasic
 	public float lingNeed = 100 ;//需要100 灵力才能修炼完成
 	public wulingType theType = wulingType.wind;//五灵的类型，用于查询
 
-
 	public virtual void makeStart(){}//通用初始化方法
 	public virtual string wulingInformation(){return "";}//专门的五灵信息说明
 
@@ -42,5 +41,38 @@ public class lingBasic
 	virtual public void OnAddShieldHp(PlayerBasic user,float theSheildHpAdd = 0){}//增加护盾的时候的额外效果
 	virtual public void OnLvUp(PlayerBasic user){}//玩家升级的时候触发
 	virtual public void OnAddSoul(PlayerBasic user,int soulCount){}//当玩家收集到一个魂元的时候
+
+	//判断阴阳的标记
+	virtual public int getYinYagType() {return 1;}//返回阴阳标记 1是阳 2是阴
+
+
+	//有关修为
+	public float value = 0f;
+	public float valueMax = 200f;
+	public void learnWuling()
+	{
+		if (!systemValues.thePlayer)
+			return;
+		if ((valueMax - value) > systemValues.thePlayer.ActerSp) 
+		{
+			value += systemValues.thePlayer.ActerSp;
+			systemValues.thePlayer.ActerSp = 0;
+		} 
+		else 
+		{
+			value = valueMax;
+			systemValues.thePlayer.ActerSp -= (valueMax - value);
+		}
+	}
+
+	public bool isLearned()
+	{
+		return  value == valueMax;
+	}
+
+	public float getLearningPercent()
+	{
+		return  value / valueMax;
+	}
 
 }

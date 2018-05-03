@@ -48,5 +48,10 @@ public class fire2 : lingBasic {
 	{
 		return "持续灼烧目标，造成"+damageMax+"物理伤害并触发受击特效";
 	}
+
+	public override int getYinYagType ()
+	{
+		return 2;
+	}
 }
 
