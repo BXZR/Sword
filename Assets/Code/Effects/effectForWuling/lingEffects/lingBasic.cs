@@ -63,6 +63,8 @@ public class lingBasic
 			value = valueMax;
 			systemValues.thePlayer.ActerSp -= (valueMax - value);
 		}
+		systemValues.thePlayer.updateWulingEffects ();
+		systemValues.thePlayer.makeValueUpdate ();
 	}
 
 	public bool isLearned()

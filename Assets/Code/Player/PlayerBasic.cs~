@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Text;
+using System.Collections.Generic;
 
 public class PlayerBasic : MonoBehaviour {
 
@@ -953,6 +954,106 @@ public class PlayerBasic : MonoBehaviour {
 			dropEffectRpc(theEffectName);
 		}
 	}
+	//----------------------------------------------------------------------------------------------------------------------------------------------------------------//
+	public void updateWulingEffects()
+	{
+		wuling theWulingEffect = this.GetComponent <wuling> ();
+		if (!theWulingEffect)
+			return;
+		//五灵阴阳赋值
+		//风
+		float wind1 = 0f;
+		lingBasic windE1 =  getthLingWithType(theWulingEffect.lingEffects, wulingType.wind ,1 );
+		if (windE1 != null) wind1 = windE1.value;
+		float wind2 = 0f;
+		lingBasic windE2 =  getthLingWithType(theWulingEffect.lingEffects, wulingType.wind ,2 );
+		if (windE2 != null) wind2 = windE2.value;
+		//雷
+		float thunder1 = 0f;
+		lingBasic thunderE1 =  getthLingWithType(theWulingEffect.lingEffects, wulingType.thunder ,1 );
+		if (thunderE1 != null) thunder1 = thunderE1.value;
+		float thunder2 = 0f;
+		lingBasic thunderE2 =  getthLingWithType(theWulingEffect.lingEffects, wulingType.thunder ,2 );
+		if (thunderE2 != null) thunder2 = thunderE2.value ;
+		//水
+		float water1 = 0f;
+		lingBasic waterE1 =  getthLingWithType(theWulingEffect.lingEffects, wulingType.water ,1 );
+		if (waterE1 != null)  water1 = waterE1.value;
+		float water2 = 0f;
+		lingBasic waterE2 =  getthLingWithType(theWulingEffect.lingEffects, wulingType.water ,2 );
+		if (waterE2 != null)  water2 = waterE2.value;
+		//火
+		float fire1 = 0;
+		lingBasic fireE1 =  getthLingWithType(theWulingEffect.lingEffects, wulingType.fire ,1 );
+		if (fireE1 != null)  fire1 = fireE1.value;
+		float fire2 = 0;
+		lingBasic fireE2 =  getthLingWithType(theWulingEffect.lingEffects, wulingType.fire ,2 );
+		if (fireE2 != null) fire2 = fireE2.value;
+		//土
+		float earth1 = 0f;
+		lingBasic earthE1 =  getthLingWithType(theWulingEffect.lingEffects, wulingType.earth ,1 );
+		if (earthE1 != null) earth1 = earthE1.value;
+		float earth2 = 0f;
+		lingBasic earthE2 =  getthLingWithType(theWulingEffect.lingEffects, wulingType.earth ,2 );
+		if (earthE2 != null) earth2 = earthE2.value;
+
+		if (systemValues.modeIndex == 1)
+		{
+			photonView.RPC ("updateWuling", PhotonTargets.All, wind1,wind2,thunder1,thunder2,water1,water2,fire1,fire2,earth1,earth2);
+		} 
+		else 
+		{
+			//单机版这个似乎没有必要，暂时先不用
+			//updateWuling (wind1,wind2,thunder1,thunder2,water1,water2,fire1,fire2,earth1,earth2);
+		}
+	}
+
+	[PunRPC]
+	private void updateWuling(float wind1,float wind2,float thunder1,float thunder2 , float water1 , float water2 , float fire1 , float fire2 , float earth1 , float earth2)
+	{
+		wuling theWulingEffect = this.GetComponent <wuling> ();
+		if (!theWulingEffect)
+			return;
+		//五灵阴阳赋值
+		//风
+		lingBasic windE1 =  getthLingWithType(theWulingEffect.lingEffects, wulingType.wind ,1 );
+		if (windE1 != null) windE1.value = wind1;
+		lingBasic windE2 =  getthLingWithType(theWulingEffect.lingEffects, wulingType.wind ,2 );
+		if (windE2 != null) windE2.value = wind2;
+		//雷
+		lingBasic thunderE1 =  getthLingWithType(theWulingEffect.lingEffects, wulingType.thunder ,1 );
+		if (thunderE1 != null) thunderE1.value = thunder1;
+		lingBasic thunderE2 =  getthLingWithType(theWulingEffect.lingEffects, wulingType.thunder ,2 );
+		if (thunderE2 != null) thunderE2.value = thunder2;
+		//水
+		lingBasic waterE1 =  getthLingWithType(theWulingEffect.lingEffects, wulingType.water ,1 );
+		if (waterE1 != null) waterE1.value = water1;
+		lingBasic waterE2 =  getthLingWithType(theWulingEffect.lingEffects, wulingType.water ,2 );
+		if (waterE2 != null) waterE2.value = water2;
+		//火
+		lingBasic fireE1 =  getthLingWithType(theWulingEffect.lingEffects, wulingType.fire ,1 );
+		if (fireE1 != null) fireE1.value = fire1;
+		lingBasic fireE2 =  getthLingWithType(theWulingEffect.lingEffects, wulingType.fire ,2 );
+		if (fireE2 != null) fireE2.value = fire2;
+		//土
+		lingBasic earthE1 =  getthLingWithType(theWulingEffect.lingEffects, wulingType.earth ,1 );
+		if (earthE1 != null) earthE1.value = earth1;
+		lingBasic earthE2 =  getthLingWithType(theWulingEffect.lingEffects, wulingType.earth ,2 );
+		if (earthE2 != null) earthE2.value = earth2;
+	}
+
+	private lingBasic getthLingWithType(List<lingBasic>lingEffects, wulingType theTypeCheck, int yinyang)
+	{
+		for (int i = 0; i < lingEffects.Count; i++) 
+		{
+			if (lingEffects [i].theType == theTypeCheck && lingEffects [i].getYinYagType() == yinyang)
+				return lingEffects [i];
+		}
+		return null;
+	}
+
+
+	//----------------------------------------------------------------------------------------------------------------------------------------------------------------//
 
 	[PunRPC]
 	private void dropEffectRpc(string theEffectName)
