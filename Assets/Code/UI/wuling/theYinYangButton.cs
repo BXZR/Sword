@@ -23,6 +23,11 @@ public class theYinYangButton : MonoBehaviour {
 	//按钮按下的修炼
 	public  void  makeYinYangButtonUse()
 	{
+		systemValues.choiceMessageBoxShow ("五灵修炼", "修炼五灵需要消耗当前"+systemValues.learnWulingSpPercent*100+"%的斗气，是否修炼？", false, new MesageOperate (trueLearn));
+	}
+
+	private void trueLearn()
+	{
 		theWuling.learnWuling ();
 		theSliderImage.fillAmount = theWuling.getLearningPercent ();
 		theInformation.makeFlash ();

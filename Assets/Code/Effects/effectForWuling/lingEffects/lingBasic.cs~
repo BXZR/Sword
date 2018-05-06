@@ -53,10 +53,12 @@ public class lingBasic
 	{
 		if (!systemValues.thePlayer)
 			return;
-		if ((valueMax - value) > systemValues.thePlayer.ActerSp) 
+
+		float spUse = systemValues.thePlayer.ActerSp * systemValues.learnWulingSpPercent;
+		if ((valueMax - value) > spUse) 
 		{
 			value += systemValues.thePlayer.ActerSp;
-			systemValues.thePlayer.ActerSp = 0;
+			systemValues.thePlayer.ActerSp -= spUse;
 		} 
 		else 
 		{

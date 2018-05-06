@@ -282,6 +282,7 @@ public class attackLink : MonoBehaviour {
 				{
 					//法力透支的计算过程
 					float hpMinus = (this.spUse - thePlayer.ActerSp)*1.5f;
+					hpMinus = Mathf.Clamp (hpMinus , 5f,100f);
 					thePlayer.ActerHp -= hpMinus;
 					thePlayer.ActerSp = 0;
 					if (thePlayer.ActerHp < 10)

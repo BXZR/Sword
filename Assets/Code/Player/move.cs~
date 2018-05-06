@@ -176,7 +176,7 @@ public class move : MonoBehaviour {
 			if(useSP)
 			{
 			//耗蓝控制--------------------------------------------------
-			float spUse = thePlayer.ActerSpMax * 0.07f;//施展轻功是需要消耗真气的;
+			float spUse = thePlayer.ActerSpMax * 0.05f;//施展轻功是需要消耗真气的;
 			if (systemValues.modeIndex == 0)
 				UseSP (spUse);
 			if (systemValues.modeIndex == 1)//有些功能只在网络对战模式之下用就行
@@ -207,7 +207,7 @@ public class move : MonoBehaviour {
 						overGroundTimer = 0;
 					jumpTimer += 0.15f ;//如果正在跳跃就增加跳跃持续时间
 					//耗蓝控制--------------------------------------------------
-					float spUse = thePlayer.ActerSpMax * 0.03f;//施展轻功是需要消耗真气的;
+					float spUse = thePlayer.ActerSpMax * 0.05f;//施展轻功是需要消耗真气的;
 					if(systemValues.modeIndex == 0)
 						UseSP(spUse);
 					if(systemValues.modeIndex == 1)//有些功能只在网络对战模式之下用就行
@@ -297,6 +297,7 @@ public class move : MonoBehaviour {
 		{
 			//移动中的透支情况和攻击中的法力并不完全相同
 			float damageUse = SPUse - thePlayer.ActerSp;
+			damageUse = Mathf.Clamp (damageUse , 5f,100f);
 			thePlayer.ActerSp = 0;
 			thePlayer.ActerHp -= damageUse;
 			if (thePlayer.ActerHp < 10)

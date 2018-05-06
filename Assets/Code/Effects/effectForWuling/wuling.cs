@@ -112,10 +112,28 @@ public class wuling : effectBasic {
 	//在update里面调用的效果
 	override public void effectOnUpdateTime()
 	{
-		foreach (lingBasic ling in lingEffects)
-			if(ling.isLearned())
-				ling.effectOnUpdateTime(this.thePlayer);
+		foreach (lingBasic ling in lingEffects) 
+			if (ling.isLearned ()) 
+				ling.effectOnUpdateTime (this.thePlayer);
+		makeSoulAddWithWuling(systemValues.updateTimeWait* 0.2f);
 	}
+	//-----------------------------------------------------------------------------------
+	float soulGet = 0f;
+	//额外增加灵力的方法
+	private void makeSoulAddWithWuling(float adder)
+	{
+		foreach (lingBasic ling in lingEffects)
+			if (ling.isLearned ())
+				soulGet += adder;
+		if (soulGet >= 1f) 
+		{
+			systemValues.soulCount += (int)soulGet;
+			soulGet = 0f;
+		}
+		
+	}
+	//-----------------------------------------------------------------------------------
+
 	//在生命恢复到满血的时候使用
 	override public void OnHpTowardHpMax()
 	{

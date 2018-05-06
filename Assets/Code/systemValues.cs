@@ -31,6 +31,7 @@ public class systemValues : MonoBehaviour {
 	//网络控制节点=============================
 	static PhotonView photonView;
 	//=========================================
+	public static float learnWulingSpPercent = 0.75f;//修炼五灵需要消耗的当前的斗气百分比
 	#endregion
 
 	#region游戏角色信息设定查询
@@ -900,6 +901,7 @@ public class systemValues : MonoBehaviour {
 		theShowingTexts.Clear ();
 		theSavedSprite.Clear ();
 		thePopSoul.Clear ();
+		messageBoxClose ();
 	}
 	#endregion
 
