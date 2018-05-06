@@ -1,22 +1,9 @@
 ﻿<Properties StartupItem="Assembly-CSharp.csproj">
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Unity.Instance.Unity Editor" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Code\UI\wuling\theYinYangButton.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Code\Player\attackLinkController.cs">
     <Files>
-      <File FileName="Assets\Code\Effects\effectForWuling\wuling.cs" Line="139" Column="3" />
-      <File FileName="Assets\Code\UI\systemPanel\SystemUIController.cs" Line="44" Column="46" />
-      <File FileName="Assets\Code\systemValues.cs" Line="34" Column="22" />
-      <File FileName="Assets\Code\Player\attackLinkController.cs" Line="216" Column="51" />
-      <File FileName="Assets\Code\Effects\fighterAttackEffects\public\jifei.cs" Line="33" Column="17" />
-      <File FileName="Assets\Code\Effects\fighterAttackEffects\public\effectForSpeedMoveForward.cs" Line="49" Column="62" />
-      <File FileName="Assets\Code\Player\move.cs" Line="290" Column="56" />
-      <File FileName="Assets\Code\Player\attackLink.cs" Line="271" Column="58" />
-      <File FileName="Assets\Code\UI\wuling\theWulingYinYangpanel.cs" Line="40" Column="67" />
-      <File FileName="Assets\Code\UI\wuling\theYinYangButton.cs" Line="29" Column="26" />
-      <File FileName="Assets\Code\UI\wuling\wulingButton.cs" Line="38" Column="25" />
-      <File FileName="Assets\Code\Effects\effectForWuling\lingEffects\lingBasic.cs" Line="57" Column="84" />
-      <File FileName="Assets\Code\Effects\effectForWuling\lingEffects\earth\earth1.cs" Line="1" Column="1" />
-      <File FileName="Assets\Code\Effects\effectForWuling\lingEffects\earth\earth2.cs" Line="1" Column="1" />
-      <File FileName="Assets\Code\Player\PlayerBasic.cs" Line="42" Column="1" />
+      <File FileName="Assets\Code\Player\attackLink.cs" Line="1" Column="1" />
+      <File FileName="Assets\Code\Player\attackLinkController.cs" Line="11" Column="59" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

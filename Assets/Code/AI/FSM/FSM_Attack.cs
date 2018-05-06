@@ -21,10 +21,15 @@ public class FSM_Attack : FSMBasic {
 		}
 	}
 	//看向目标
+	private UnityEngine.AI.NavMeshAgent theAgent;
 	private void makeLook()
 	{
 		if(theEMY!= null &&  theThis!= null)
-		  theThis.transform.LookAt (theEMY.transform);
+ 		  theThis.transform.LookAt (theEMY.transform);
+		//疯狂贴身近战强攻
+		if(!theAgent)
+		    theAgent = this.theThis.GetComponent <UnityEngine.AI.NavMeshAgent> ();
+		theAgent.SetDestination (theEMY.transform.position);
 	}
 
 //真正的操作-----------------------------------------------------
