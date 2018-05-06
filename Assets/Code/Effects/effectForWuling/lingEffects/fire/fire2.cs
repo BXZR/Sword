@@ -5,8 +5,8 @@ using UnityEngine;
 public class fire2 : lingBasic {
 
 	private PlayerBasic theAim = null;
-	float damageMax = 25f;
-	float damageAll = 25f;
+	float damageMax = 10f;
+	float damageAll = 10f;
 	float damageSave = 0f;
 	float timer = 0f;
 	float timerAll = 0.5f;

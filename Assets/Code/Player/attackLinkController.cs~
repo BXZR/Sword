@@ -222,6 +222,7 @@ public class attackLinkController :MonoBehaviour {
 				events = Event.current;
 				if (events != null) 
 				{
+					
 					if (events.isKey && events.keyCode != KeyCode.None) 
 					{
 						keyUse = events.keyCode;

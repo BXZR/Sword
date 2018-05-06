@@ -5,7 +5,7 @@ using UnityEngine;
 public class thunder2 : lingBasic {
 
 
-	private float addPercent = 0.008f;
+	private float addPercent = 0.004f;
 	public override void makeStart ()
 	{
 		lingName = "雷•阴  北境沧潭";

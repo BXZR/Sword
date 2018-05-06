@@ -5,7 +5,7 @@ using UnityEngine;
 public class earth2  : lingBasic {
 
 
-	private float reDamagePercent  = 0.008f;
+	private float reDamagePercent  = 0.006f;
 	public override void makeStart ()
 	{
 		lingName = "土•阴  泰山压顶";

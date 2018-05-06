@@ -5,7 +5,7 @@ using UnityEngine;
 public class water1 : lingBasic {
 
 
-	float spAdd = 0.03f;
+	float spAdd = 0.04f;
 
 	public override void makeStart ()
 	{
