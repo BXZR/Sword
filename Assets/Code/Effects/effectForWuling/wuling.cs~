@@ -115,7 +115,7 @@ public class wuling : effectBasic {
 		foreach (lingBasic ling in lingEffects) 
 			if (ling.isLearned ()) 
 				ling.effectOnUpdateTime (this.thePlayer);
-		makeSoulAddWithWuling(systemValues.updateTimeWait* 0.2f);
+		makeSoulAddWithWuling(systemValues.updateTimeWait* 0.1f);
 	}
 	//-----------------------------------------------------------------------------------
 	float soulGet = 0f;

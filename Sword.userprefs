@@ -1,16 +1,19 @@
 ﻿<Properties StartupItem="Assembly-CSharp.csproj">
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Unity.Instance.Unity Editor" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Code\UI\startAndSelect\sceneSelecting.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Code\Effects\effectForWuling\wuling.cs">
     <Files>
-      <File FileName="Assets\Code\UI\startAndSelect\sceneSelecting.cs" Line="14" Column="23" />
-      <File FileName="Assets\Code\systemValues.cs" Line="950" Column="23" />
-      <File FileName="Assets\Code\UI\deadPanel\theDeadPanel.cs" Line="24" Column="21" />
+      <File FileName="Assets\Code\UI\startAndSelect\sceneSelecting.cs" Line="1" Column="1" />
+      <File FileName="Assets\Code\systemValues.cs" Line="1" Column="1" />
+      <File FileName="Assets\Code\UI\deadPanel\theDeadPanel.cs" Line="1" Column="1" />
       <File FileName="Assets\Code\playerModes\playMode1.cs" Line="1" Column="1" />
       <File FileName="Assets\Code\playerModes\playMode2.cs" Line="1" Column="1" />
       <File FileName="Assets\Code\playerModes\playMode3.cs" Line="1" Column="1" />
       <File FileName="Assets\Code\playerModes\playModeBasic.cs" Line="1" Column="1" />
-      <File FileName="Assets\Code\UI\startAndSelect\GameStartButton.cs" Line="27" Column="29" />
-      <File FileName="Assets\Code\UI\startAndSelect\netModeOptions.cs" Line="15" Column="19" />
+      <File FileName="Assets\Code\UI\startAndSelect\GameStartButton.cs" Line="1" Column="1" />
+      <File FileName="Assets\Code\UI\startAndSelect\netModeOptions.cs" Line="1" Column="1" />
+      <File FileName="Assets\Code\Player\PlayerBasic.cs" Line="1" Column="1" />
+      <File FileName="Assets\Code\UI\wuling\theYinYangButton.cs" Line="33" Column="3" />
+      <File FileName="Assets\Code\Effects\effectForWuling\wuling.cs" Line="101" Column="42" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
