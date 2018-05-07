@@ -7,7 +7,7 @@ public class systemValues : MonoBehaviour {
 	//程序面板单元
 	//也可以理解为这是每一个客户端的计分板
 
-	#region系统记录静态信息
+	#region系统记录静态参数信息
 	//用来记录这个客户端的相关内容
 	//统一invokeRepeat的调用时间
 	public static float updateTimeWait = 0.1f;
@@ -422,6 +422,59 @@ public class systemValues : MonoBehaviour {
 	public  static string equipAddColor = "<color=#009100>";//装备相比增加的内容
 	public static string equipMinusColor = "<color=#FF0000>";//装备相比减少的内容
 	public static string colorEnd = "</color>";
+	#endregion
+
+	#region 副本选择
+	//所有的副本都在这里统一设定吧
+	//后期处理可以考虑用文本将副本介绍等等内容写到文件里面去
+
+	//当前选择的场景名字的下标
+	private static int indexNowForScene = 0;
+	//真正的系统场景资源名字
+	private static string  [] theSceneNameForSystem = {"theFight2" , "theFight3"};
+	//场景名字，同时也是场景的图片的资源名字
+	private static string [] theSceneNames = {"map1" , "map2"};
+	//这个场景（副本）的说明
+	//注意这个说明的地名和真正的说明之间有'\n'
+	private static string[]   theSceneInformations = 
+	{
+		"空积城\n存在于著名游戏“荣耀”中的一个城池。传说一叶知秋和大漠孤烟两位高手初次碰面就是在这里。",
+		"迷踪峡谷\n以如迷宫一般的道路闻名，并且栖息着各种各样诡异而强大的怪物，即便是高手也必须小心谨慎。"
+	};
+	//前后获取sceneName的方法，分别是向前和向后选择
+	public static string getNowScene()
+	{
+		return theSceneNames [indexNowForScene];
+	}
+	public static string getNextScene()
+	{
+		indexNowForScene++;
+		if (indexNowForScene >= theSceneNames.Length)
+			indexNowForScene = 0;
+		return theSceneNames [indexNowForScene];
+	}
+	public static string getPreScene()
+	{
+		indexNowForScene--;
+		if (indexNowForScene < 0)
+			indexNowForScene = theSceneNames.Length - 1;
+		return theSceneNames [indexNowForScene];
+	}
+
+	public static  void sceneSelectFlash()
+	{
+		indexNowForScene = 0;
+	}
+	//获得说明
+	public static string getSceneInformaiton ()
+	{
+		return theSceneInformations [indexNowForScene];
+	}
+	//获得系统场景ID
+	public static  string getScnenForSystem()
+	{
+		return theSceneNameForSystem[indexNowForScene];
+	}
 	#endregion
 
 	#region 灵力计算
@@ -894,6 +947,7 @@ public class systemValues : MonoBehaviour {
 	//反复跳转场景应该做一些清理工作
 	public static void makeSystemClean()
 	{
+		sceneSelectFlash ();
 		soulCount = 7;//回到初始，给7个灵力
 		Cursor.visible = true;
 		Time.timeScale = 1f;

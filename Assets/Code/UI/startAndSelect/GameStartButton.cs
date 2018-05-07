@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class GameStartButton : MonoBehaviour {
 
 	//选人界面的开始按钮
-	public InputField TextIn;
+	public netModeOptions NetOption;
 	public GameObject forwardImage;//黑屏需要的图片
 	Button theButtonOfthis;//最开始的时候是不可以直接按下的
 	public selectHeaderMaker theSelectMaker;//选人控制
@@ -17,13 +17,14 @@ public class GameStartButton : MonoBehaviour {
 	{
 		if (systemValues.modeIndex == 0) 
 		{
-			Destroy (TextIn.gameObject);
+			NetOption.singleModeShow ();
 			showLabel = this.GetComponentInChildren<Text> ();
 			showLabel.text = "开始游戏";
 			isPrepareOver = true;
 		}
 		if (systemValues.modeIndex == 1) 
 		{
+			NetOption.netModeShow ();
 			PhotonNetwork.ConnectUsingSettings ("1.0");
 			showLabel = this.GetComponentInChildren<Text> ();
 			showLabel.text = "正在连接";
@@ -45,16 +46,16 @@ public class GameStartButton : MonoBehaviour {
 			Destroy (selectHead.therPlayer.gameObject);
 			forwardImage.SetActive (true);
 			selectHead.theStaticSelectedImage.SetActive (false);
-			UnityEngine.SceneManagement.SceneManager.LoadScene ("theFight2");
+			UnityEngine.SceneManagement.SceneManager.LoadScene (systemValues.getScnenForSystem());
 
 		}
 		if (systemValues.modeIndex == 1)
 		{
 			Destroy (selectHead.therPlayer.gameObject);
-			PhotonNetwork.JoinOrCreateRoom (TextIn.text, new RoomOptions { MaxPlayers = 16 }, null);
+			PhotonNetwork.JoinOrCreateRoom (NetOption.theInputForRoom.text, new RoomOptions { MaxPlayers = 16 }, null);
 			forwardImage.SetActive (true);
 			selectHead.theStaticSelectedImage.SetActive (false);
-			UnityEngine.SceneManagement.SceneManager.LoadScene ("theFight2");
+			UnityEngine.SceneManagement.SceneManager.LoadScene (systemValues.getScnenForSystem());
 
 		}
 
