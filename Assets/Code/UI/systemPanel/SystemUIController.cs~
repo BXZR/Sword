@@ -19,7 +19,7 @@ public class SystemUIController : MonoBehaviour {
 		if (systemValues.modeIndex == 0) 
 		{
 			//单机模式下算是福利，各一个时间暂停
-			//Time.timeScale = 0;
+			Time.timeScale = 0;
 		}
 		if(theChildPanels.Length >0)
 		   theChildPanels [0].gameObject.SetActive (true);

@@ -67,7 +67,7 @@ public class selectHead : MonoBehaviour {
 		GameObject theProfab = Resources.Load<GameObject> ("fighters/"+theFightName);
 		therPlayer = GameObject.Instantiate (theProfab );
 		therPlayer.transform.position = thetransForShow .position;
-		therPlayer.transform.localScale = new Vector3 (4,4,4);
+		therPlayer.transform.localScale = new Vector3 (3.5f,3.5f,3.5f);
 		therPlayer.AddComponent<extraRotate> ();
 		therPlayer.AddComponent<fixPosition> ();
 		PlayerBasic thePlayerB = therPlayer.GetComponent<PlayerBasic> ();
