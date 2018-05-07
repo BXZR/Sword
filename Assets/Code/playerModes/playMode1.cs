@@ -24,6 +24,11 @@ public class playMode1 : playModeBasic {
 		Boss.transform.position = systemValues.theSpecialTransformStatic.position;
 		theBoss = Boss.GetComponent <PlayerBasic> (); 
 		Boss.GetComponent <NavMeshAgent> ().enabled = true;
+
+		GameObject theAim = GameObject.Instantiate<GameObject> (Resources.Load<GameObject> ("effects/theAimArrow"));
+		theAim.transform.SetParent (Boss.transform);
+		theAim.transform.localPosition = new Vector3 (0f, 3.2f, 0f);
+		theAim.transform.localScale = Vector3.one;
 	}
 
  
