@@ -17,6 +17,13 @@ public class playMode1 : playModeBasic {
 	private string theGameEndInformation = "恭喜你完成了这项艰巨的试炼。";
 	private bool ended = false;
 
+
+
+	void Start()
+	{
+		OnGameStart ();
+	}
+
 	public override void OnGameStart ()
 	{
 		GameObject Boss = GameObject.Instantiate<GameObject>(Resources.Load<GameObject>("fighters/" + theBossProfabName));

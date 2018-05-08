@@ -477,6 +477,39 @@ public class systemValues : MonoBehaviour {
 	}
 	#endregion
 
+	#region 游戏模式选择
+	//游戏模式数组，其实就是在游戏的开始的时候在GM上面再加上一个脚本
+	//这种方法非常动态，但是同时在设计上就有了一些难度
+	//搞不好还需要弄一个全球的基类来做这件事
+	private static string [] gameModeAdders = {"playMode1"};
+	private static string[] gameModeName = {"限时击杀"};
+	private static string[] gameModeInformation = {"在指定时间内击杀目标即可完成任务"};
+	private static string[] gameModePicture = {"playMode1"};
+	private static int gameModeIndexNow = 0;
+	public static List<string>  getGameModeWithMove(int adder = 0)
+	{
+		List<string> theStrings = new List<string> ();
+		gameModeIndexNow += adder;
+		if (gameModeIndexNow >= gameModeAdders.Length)
+			gameModeIndexNow = 0;
+		if (gameModeIndexNow < 0)
+			gameModeIndexNow = gameModeAdders.Length - 1;
+
+		theStrings.Add (gameModeName[gameModeIndexNow]);
+		theStrings.Add (gameModeInformation[gameModeIndexNow]);
+		theStrings.Add (gameModePicture[gameModeIndexNow]);
+		return theStrings;
+	}
+
+	public static string getGameMode()
+	{
+		if (systemValues.modeIndex == 1)
+			return "";//对战模式不附加脚本
+
+		return gameModeAdders[gameModeIndexNow];
+	}
+	#endregion
+
 	#region 灵力计算
 	//灵力相关的计算------------------------------------------------------------------------------------------------------
 	//收集的灵力数量
@@ -947,6 +980,7 @@ public class systemValues : MonoBehaviour {
 	//反复跳转场景应该做一些清理工作
 	public static void makeSystemClean()
 	{
+		gameModeIndexNow = 0;
 		sceneSelectFlash ();
 		soulCount = 7;//回到初始，给7个灵力
 		Cursor.visible = true;
@@ -979,10 +1013,18 @@ public class systemValues : MonoBehaviour {
 		theSpecialTransformStatic = theSpecialTransform;
 		if (systemValues.modeIndex == 1) 
 			photonView = PhotonView.Get (this);
-		//InvokeRepeating ("flashRubbish", 5f, 5f);
-		playModeBasic thePlaymode = this.GetComponent<playModeBasic>();
-		if (thePlaymode)
-			thePlaymode.OnGameStart ();
+
+		string modePlayerString = getGameMode ();
+		print ( "The GameMode IS "+ modePlayerString);
+		try
+		{
+		if (!string.IsNullOrEmpty (modePlayerString))
+			this.gameObject.AddComponent (System.Type.GetType(modePlayerString));
+		}
+		catch(System.Exception C)
+		{
+			print (C.Message);
+		}
 	}
 	void OnDestroy()
 	{
