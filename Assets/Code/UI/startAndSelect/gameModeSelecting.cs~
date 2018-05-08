@@ -13,15 +13,31 @@ public class gameModeSelecting : MonoBehaviour {
 
 	void Start()
 	{
-		theInformations = systemValues.getGameModeWithMove();
 		theButtonForControllerImage = this.GetComponent<Image> ();
-		makeShow ();
+		if (systemValues.modeIndex == 0) 
+		{
+			theInformations = systemValues.getGameModeWithMove ();
+			makeShow ();
+		} 
+		else 
+		{
+			theButtonForControllerImage.sprite = systemValues.makeLoadSprite ("gameMode/NoMode");
+			modeNameText.text = "";
+		}
 	}
 		
 	public void newMode(int adder)
 	{
-		theInformations = systemValues.getGameModeWithMove(adder);
-		makeShow ();
+		if (systemValues.modeIndex == 0) 
+		{
+			theInformations = systemValues.getGameModeWithMove (adder);
+			makeShow ();
+		}
+		else 
+		{
+			systemValues.messageTitleBoxShow ("对战模式无法选择游戏玩法");
+		}
+
 	}
 
 
@@ -34,15 +50,23 @@ public class gameModeSelecting : MonoBehaviour {
 		string gameModeInformation = theInformations [1];
 		string gameModePicture = theInformations [2];
 
-		modeNameText.text = systemValues.rowStringToColumn( "☵" + gameModeName+"☲☯");
-		theButtonForControllerImage.sprite = systemValues.makeLoadSprite ("gameMode/"+gameModePicture);
+		modeNameText.text = systemValues.rowStringToColumn ("☵" + gameModeName + "☲☯");
+		theButtonForControllerImage.sprite = systemValues.makeLoadSprite ("gameMode/" + gameModePicture);
+
 	}
 
 	public void showInformation()
 	{
-		if (theInformations.Count > 0)
-			systemValues.messageBoxShow (theInformations [0], theInformations [1], true);
-		else
-			systemValues.messageTitleBoxShow ("无法获取信息");
+		if (systemValues.modeIndex == 0) 
+		{
+			if (theInformations.Count > 0)
+				systemValues.messageBoxShow (theInformations [0], theInformations [1], true);
+			else
+				systemValues.messageTitleBoxShow ("无法获取信息");
+		} 
+		else 
+		{
+			systemValues.messageTitleBoxShow ("对战模式无特殊游戏玩法");
+		}
 	}
 }
