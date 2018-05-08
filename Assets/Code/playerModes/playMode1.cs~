@@ -11,7 +11,7 @@ using UnityEngine.AI;
 public class playMode1 : playModeBasic {
 
 	//这个任务需要的时间
-	public float timerForKill = 50f;//这个任务需要在900秒之内完成
+	public float timerForKill = 500f;//这个任务需要在900秒之内完成
 	public string theBossProfabName = "AISoldierBoss";//为了保证灵活配置，这里就用字符串联系资源进行加载
 	private PlayerBasic theBoss;//留一个boss引用
 	private string theGameEndInformation = "恭喜你完成了这项艰巨的试炼。";

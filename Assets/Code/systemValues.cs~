@@ -1014,6 +1014,8 @@ public class systemValues : MonoBehaviour {
 		if (systemValues.modeIndex == 1) 
 			photonView = PhotonView.Get (this);
 
+		Application.targetFrameRate = 50;//默认FPS是50，没有必要太高不是.....
+
 		string modePlayerString = getGameMode ();
 		print ( "The GameMode IS "+ modePlayerString);
 		try
