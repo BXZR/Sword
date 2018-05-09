@@ -34,7 +34,7 @@ public class newMethodAttack : MonoBehaviour {
 					print (E.ToString());
 					//无法添加这个效果
 					//那么就转换成恢复效果，恢复2生命
-					thePlayer.ActerHp += 2f;
+					//thePlayer.ActerHp += 2f;
 					//print ("canNotAddSELF");
 				}
 			} 
@@ -65,7 +65,7 @@ public class newMethodAttack : MonoBehaviour {
 					print (E.ToString());
 					//无法添加这个效果
 					//那么就转换成伤害，造成2点真实伤害
-					thePlayer.OnAttack (playerAim,2,true);
+					//thePlayer.OnAttack (playerAim,2,true);
 					//print ("canNotAddEMY");
 				}
 			}

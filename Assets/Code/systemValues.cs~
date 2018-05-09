@@ -197,7 +197,7 @@ public class systemValues : MonoBehaviour {
 				attackLinkInformation theInformation = new attackLinkInformation ();
 				theInformation.attackLinkName = "";
 				theInformation.attackLinkString = "";
-				theInformation.theEffectForSelfName=  efs[i].getEffectName();
+				theInformation.theEffectForSelfName=  efs[i].getEffectName(false,false);
 				theInformation.theEffectForSelfInformaion =  efs[i].getInformation(false) +"\n"+efs[i].getExtraInformation();
 				theAttackLinkInformaitons.Add (theInformation);
 			}
@@ -229,7 +229,7 @@ public class systemValues : MonoBehaviour {
 					if(theEffect.isShowing())
 					{
 						theEffect.Init ();
-						theInformation.theEffectForEMYName = theEffect.getEffectName();
+						theInformation.theEffectForEMYName = theEffect.getEffectName(true,true);
 						showString = theEffect.getInformation (false);
 						showExtra = theEffect.getExtraInformation ();
 						if (isNullOrEmpty  (showExtra) == false)
@@ -249,8 +249,8 @@ public class systemValues : MonoBehaviour {
 					if(theEffect.isShowing())
 					{
 						theEffect.Init ();
-						theInformation.theEffectForSelfName = theEffect.getEffectName();
-						showString = theEffect.getInformation (false);
+						theInformation.theEffectForSelfName = theEffect.getEffectName(true,true);
+						showString =  theEffect.getInformation (false);
 						showExtra = theEffect.getExtraInformation ();
 						if (isNullOrEmpty (showExtra) == false)
 							showString += "\n" + showExtra;
@@ -438,8 +438,8 @@ public class systemValues : MonoBehaviour {
 	//注意这个说明的地名和真正的说明之间有'\n'
 	private static string[]   theSceneInformations = 
 	{
-		"空积城\n存在于著名游戏“荣耀”中的一个城池。传说一叶知秋和大漠孤烟两位高手初次碰面就是在这里。",
-		"迷踪峡谷\n以如迷宫一般的道路闻名，并且栖息着各种各样诡异而强大的怪物，即便是高手也必须小心谨慎。"
+		"空积城\n存在于著名游戏“荣耀”中的一个城池。传说一叶知秋和大漠孤烟两位高手初次碰面就是在这里,后来此地就成了游戏玩家的圣地。传说只要在此地击败隐藏魔兽就可以获得至尊秘宝，至今不知真假。",
+		"迷踪峡谷\n以如迷宫一般的道路闻名，并且栖息着各种各样诡异而强大的怪物，即便是高手也必须小心谨慎而入。但也正因如此，此处有着各种百年难遇的奇宝，非常有益于修行。"
 	};
 	//前后获取sceneName的方法，分别是向前和向后选择
 	public static string getNowScene()

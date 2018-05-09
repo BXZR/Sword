@@ -39,7 +39,7 @@ public class RandomSelectButton : MonoBehaviour {
 		if (isWorking == false) 
 		{
 			InvokeRepeating ("RandomWork" , 0 , 1.5f);
-			theShowText.color = Color.yellow;
+			theShowText.color = Color.magenta;
 			isWorking = true;
 		}
 		else

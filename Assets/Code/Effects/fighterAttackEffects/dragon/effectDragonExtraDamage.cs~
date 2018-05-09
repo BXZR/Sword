@@ -27,7 +27,7 @@ public class effectDragonExtraDamage : effectBasic
 			lifeTimerAll = 20f;//持续时间，同时也是针对一个目标的冷却时间
 			timerForEffect = 20f;
 			theEffectName = "损则有孚";
-			theEffectInformation = "标记目标，使之受到的下" +  damageCount  + "次攻击伤害提升" + damageAddPercent * 100 + "%\n对同一目标有"+ (lifeTimerAll-timerForEffect)+"秒的冷却时间";
+			theEffectInformation = "标记目标，使之接下来受到的" +  damageCount  + "次攻击伤害提升" + damageAddPercent * 100 + "%\n对同一目标持续"+ (lifeTimerAll)+"秒";
 			makeStart ();
 			Destroy (this,lifeTimerAll);
 		}

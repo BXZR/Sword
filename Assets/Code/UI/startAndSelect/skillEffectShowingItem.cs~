@@ -65,7 +65,7 @@ public class skillEffectShowingItem : MonoBehaviour {
 		}
 		else
 		{
-			theEffectForSelfButton.GetComponentInChildren<Text> ().text = theAttackLinkInformation.theEffectForSelfName;
+			theEffectForSelfButton.GetComponentInChildren<Text> ().text = theAttackLinkInformation.theEffectForSelfName.Split('\n')[0];
 			SelfButtonShow.showText = theAttackLinkInformation.theEffectForSelfInformaion;
 			SelfButtonShow.showTitle = theAttackLinkInformation.theEffectForSelfName;
 		}
@@ -77,7 +77,7 @@ public class skillEffectShowingItem : MonoBehaviour {
 		}
 		else
 		{
-			theEffectForEMYButton.GetComponentInChildren<Text> ().text = theAttackLinkInformation.theEffectForEMYName;
+			theEffectForEMYButton.GetComponentInChildren<Text> ().text = theAttackLinkInformation.theEffectForEMYName.Split('\n')[0];
 			EMYButtonShow.showText = theAttackLinkInformation.theEffectForEMYInformaion;
 			EMYButtonShow.showTitle = theAttackLinkInformation.theEffectForEMYName;
 		}

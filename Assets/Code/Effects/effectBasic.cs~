@@ -114,7 +114,7 @@ public class effectBasic : MonoBehaviour {
 
 	public   string getEffectInformation(){return this.theEffectInformation;}//只显示内容
 
-	public string getEffectName(bool withNewLine = true)
+	public string getEffectName(bool withNewLine = true , bool useBe = true)
 	{
 		StringBuilder theString = new StringBuilder ();
 		theString.Append (this.theEffectName);
@@ -122,13 +122,15 @@ public class effectBasic : MonoBehaviour {
 		{
 			if(withNewLine)
 				theString.Append( "\n");
-			theString.Append("（被动）");
+			if(useBe)
+			    theString.Append("（被动）");
 		} 
 		else
 		{
 			if(withNewLine)
 				theString.Append( "\n");
-			theString.Append( "（主动）");
+			if(useBe)
+			    theString.Append( "（主动）");
 		}
 		return theString.ToString();
 	}
