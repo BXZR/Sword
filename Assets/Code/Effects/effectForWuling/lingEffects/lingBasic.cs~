@@ -45,6 +45,25 @@ public class lingBasic
 	//判断阴阳的标记
 	virtual public int getYinYagType() {return 1;}//返回阴阳标记 1是阳 2是阴
 
+	//冷却计算 =======================================================================
+	public float coolingTimer = 3f;
+	public float coolingTimerMax = 3f;
+	public bool isCooled = true;
+
+	public void makeCool()
+	{
+		if (!isCooled)
+		{
+			coolingTimer -= systemValues.updateTimeWait;
+			if (coolingTimer < 0)
+			{
+				coolingTimer = coolingTimerMax;
+				isCooled = true;
+			}
+		}
+
+	}
+	//冷却计算 =======================================================================
 
 	//有关修为
 	public float value = 0f;

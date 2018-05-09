@@ -5,8 +5,8 @@ using UnityEngine;
 public class fire2 : lingBasic {
 
 	private PlayerBasic theAim = null;
-	float damageMax = 10f;
-	float damageAll = 10f;
+	float damageMax = 30f;
+	float damageAll = 30f;
 	float damageSave = 0f;
 	float timer = 0f;
 	float timerAll = 0.5f;
@@ -15,17 +15,24 @@ public class fire2 : lingBasic {
 	{
 		lingName = "火•阴  鬼狱幽焰";
 		theType = wulingType.fire;
+		coolingTimerMax = 7f;
+		coolingTimer = 7f;
 	}
 
 	public override void OnAttack (PlayerBasic user, PlayerBasic aim)
 	{
-		theAim = aim;
-		damageAll = damageMax;
-		damageSave = 0f;
+		if (isCooled) 
+		{
+			isCooled = false;
+			theAim = aim;
+			damageAll = damageMax;
+			damageSave = 0f;
+		}
 	}
 
 	public override void effectOnUpdateTime (PlayerBasic user)
 	{
+		makeCool ();
 		if (theAim) 
 		{
 			timer += systemValues.updateTimeWait;
@@ -46,7 +53,7 @@ public class fire2 : lingBasic {
 
 	public override string wulingInformation ()
 	{
-		return "持续灼烧目标，造成"+damageMax+"物理伤害并触发受击特效";
+		return "灼烧目标造成共"+damageMax+"物理伤害并触发受击特效\n灼烧持续1秒,冷却时间"+coolingTimerMax+"秒";
 	}
 
 	public override int getYinYagType ()

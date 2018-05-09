@@ -5,7 +5,7 @@ using UnityEngine;
 public class earth1  : lingBasic {
 
 
-	private float hpup  = 5f;
+	private float hpup  = 7f;
 	public override void makeStart ()
 	{
 		lingName = "土•阳  承天载物";

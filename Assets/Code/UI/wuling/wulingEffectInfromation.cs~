@@ -10,61 +10,67 @@ public class wulingEffectInfromation : MonoBehaviour {
 
 	//五灵信息分开吧，有些东西还是需要多写点的
 	private Text theText ;
+	//引用保存
+	private wuling theWuling;
+	private int  thetypeNow;
+	public Text theTitleText;
+
 	void Start()
 	{
 		theText = this.GetComponent<Text> ();
 	}
 
-	//风
-	public void makeEffectForWind()
-	{
-		if (!theText) return ;
-		thetypeNow = wulingType.wind;
-		theText.text = "风之肆拂，无阻不透";
-		theText.text += "\n\n"+getInfromationFromPlayer(wulingType.wind);
-	}
 
-	//雷
-	public void makeEffectForThunder()
+	public void makeShow(int typeIn)
 	{
 		if (!theText) return ;
-		thetypeNow = wulingType.thunder;
-		theText.text = "雷之肃敛，无坚不摧";
-		theText.text += "\n\n"+getInfromationFromPlayer(wulingType.thunder);
-	}
-
-	//水
-	public void makeEffectForWater()
-	{
-		if (!theText) return ;
-		thetypeNow = wulingType.water;
-		theText.text = "水之润下，无孔不入";
-		theText.text += "\n\n"+getInfromationFromPlayer(wulingType.water);
-	}
-
-	//火
-	public void makeEffectForFire()
-	{
-		if (!theText) return ;
-		thetypeNow = wulingType.fire;
-		theText.text = "火之炎上，无物不焚";
-		theText.text += "\n\n"+getInfromationFromPlayer(wulingType.fire);
-	}
-
-	//土
-	public void makeEffectForEarth()
-	{
-		if (!theText) return ;
-		thetypeNow = wulingType.earth;
-		theText.text = "土之养化，无物不融";
-		theText.text += "\n\n"+getInfromationFromPlayer(wulingType.earth);
+		switch (typeIn) 
+		{
+		case 1:
+			{
+				thetypeNow = typeIn;
+				showInformation (wulingType.wind);
+				makeEffectTitle("风之肆拂，无阻不透");
+			}break;
+		case 2:
+			{
+				thetypeNow = typeIn;
+				showInformation (wulingType.thunder);
+				makeEffectTitle("雷之肃敛，无坚不摧");
+			}break;
+		case 3:
+			{
+				thetypeNow = typeIn;
+				showInformation (wulingType.water);
+				makeEffectTitle("水之润下，无孔不入");
+			}break;
+		case 4:
+			{
+				thetypeNow = typeIn;
+				showInformation (wulingType.fire);
+				makeEffectTitle("火之炎上，无物不焚");
+			}break;
+		case 5:
+			{
+				thetypeNow = typeIn;
+				showInformation (wulingType.earth);
+				makeEffectTitle("土之养化，无物不融");
+			}break;
+		}
 	}
 
 
-	//引用保存
-	private wuling theWuling;
-	private wulingType thetypeNow;
+	private void showInformation(wulingType theWulingTypeIn)
+	{
+		if (!theText) return ;
+		theText.text = getInfromationFromPlayer(theWulingTypeIn);
+	}
 
+	private void makeEffectTitle(string information)
+	{
+		if (!theTitleText) return ;
+		theTitleText.text = systemValues.rowStringToColumn (information , 15);
+	}
     //私有分类方法
 	private string getInfromationFromPlayer(wulingType thetype)
 	{
@@ -91,15 +97,6 @@ public class wulingEffectInfromation : MonoBehaviour {
 	}
 	public void makeFlash()
 	{
-		if (!theText)
-			return;
-		switch (thetypeNow) 
-		{
-			case wulingType.water:{makeEffectForWater ();}break;
-			case wulingType.wind:{makeEffectForWind ();}break;
-			case wulingType.fire:{makeEffectForFire();}break;
-			case wulingType.thunder:{makeEffectForThunder ();}break;
-			case wulingType.earth:{makeEffectForEarth ();}break;
-		}
+		makeShow(thetypeNow);
 	}
 }

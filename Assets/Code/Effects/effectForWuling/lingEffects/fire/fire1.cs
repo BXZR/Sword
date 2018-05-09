@@ -5,7 +5,7 @@ using UnityEngine;
 public class fire1 : lingBasic {
 
 	private PlayerBasic theAim = null;
-	float shieldPercent = 0.15f;
+	float shieldPercent = 0.40f;
 	float damageMax = 80f;
 	float damageAll = 80f;
 	float damageSave = 0f;
@@ -17,12 +17,15 @@ public class fire1 : lingBasic {
 	{
 		lingName = "火•阳  三味真火";
 		theType = wulingType.fire;
+		coolingTimerMax = 6f;
+		coolingTimer = 6f;
 	}
 
 	public override void OnAttack (PlayerBasic user, PlayerBasic aim)
 	{
-		if (theAim == null &&  aim != theAim ) 
+		if (isCooled && theAim == null &&  aim != theAim ) 
 		{
+			isCooled = false;
 			//这里应该用备份数值
 			//永久增加效果是连C变量也会增加的
 			//但是短暂的效果只是原变量增加
@@ -35,15 +38,19 @@ public class fire1 : lingBasic {
 		}
 	}
 
+
+
+
 	public override void effectOnUpdateTime (PlayerBasic user)
 	{
+		makeCool ();
 		if (theAim) 
 		{
 			timer += systemValues.updateTimeWait;
 			if (timer >= timerAll) 
 			{
 				timer = 0f;
-				float damage = damageAll*timerAll;
+				float damage = damageAll * timerAll * 0.5f;
 				theAim.ActerWuliShield -= damage;
 				damageSave += damage;
 				if (damageSave > damageMax)
@@ -59,7 +66,7 @@ public class fire1 : lingBasic {
 
 	public override string wulingInformation ()
 	{
-		return "持续灼烧目标，效果时间内削减"+shieldPercent*100+"%物理护甲";
+		return "灼烧目标最多"+shieldPercent*100+"%物理护甲\n灼烧持续2秒,冷却时间"+coolingTimerMax+"秒";
 	}
 }
 
