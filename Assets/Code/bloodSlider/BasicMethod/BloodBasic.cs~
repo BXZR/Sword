@@ -21,7 +21,7 @@ public class BloodBasic : MonoBehaviour {
 		theRender = this.GetComponentInChildren <Renderer> ();
 		InvokeRepeating("showBlood" , 3f, 0.2f);
 	}
-
+		
 	public void flashBloodShowTimer()
 	{
 		showHpTimer = showHPTimerMax;

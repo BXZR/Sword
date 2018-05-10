@@ -990,6 +990,7 @@ public class systemValues : MonoBehaviour {
 		theSavedSprite.Clear ();
 		thePopSoul.Clear ();
 		messageBoxClose ();
+		theAreaRenders.Clear ();
 	}
 	#endregion
 
@@ -1006,6 +1007,19 @@ public class systemValues : MonoBehaviour {
 		}
 	}
 	#endregion
+
+	#region 范围信息储存
+	//死亡的面板
+	public static List< MeshRenderer > theAreaRenders = new List<MeshRenderer> ();
+
+	private static void changeShowArea()
+	{
+		if(Input.GetKeyDown(KeyCode.Tab))
+		   foreach (MeshRenderer A in theAreaRenders)
+			   A.enabled = !A.enabled;
+	}
+	#endregion
+
 	//GM的初始化==============================================================================
 	void Start()
 	{
@@ -1027,6 +1041,11 @@ public class systemValues : MonoBehaviour {
 		{
 			print (C.Message);
 		}
+	}
+
+	void Update()
+	{
+		changeShowArea ();
 	}
 	void OnDestroy()
 	{

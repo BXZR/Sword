@@ -752,6 +752,7 @@ public class PlayerBasic : MonoBehaviour {
 
 	public void updateValue()
 	{
+
 		if (isStarted && isAlive) 
 		{
 			//这一次循环可以调用的效果都在这里
@@ -1082,13 +1083,40 @@ public class PlayerBasic : MonoBehaviour {
 		//	((effectBasic)thePlayer.GetComponent (theType)).updateEffect ();
 	}
 
+
+
+	static GameObject TheAreaShowerObj;
+	GameObject theAreaShower;
+	private  void showArea()
+	{
+		if (!TheAreaShowerObj)
+			TheAreaShowerObj = Resources.Load<GameObject> ("effects/AreaShow3D");
+		theAreaShower = (GameObject)GameObject.Instantiate (TheAreaShowerObj );
+		theAreaShower.transform.SetParent (this.transform);
+		theAreaShower.transform.localPosition = Vector3.zero;
+		theAreaShower.transform.localRotation = Quaternion.identity;
+		areaShower3D shower = theAreaShower.GetComponentInChildren <areaShower3D> ();
+		systemValues.theAreaRenders.Add (shower.GetComponentInChildren<MeshRenderer>());
+		if (shower)
+		{
+			print ("show");
+			shower.makeAreaShow (theAttackAreaLength, theAttackAreaAngel);
+		}
+		else
+			print ("no shower");
+
+	}
+
 	//--------------------------回调方法---------------------------------------------------//
 	//由于这个类是一个究极的父类，因此具体的工作是不做的，但是留下了调用各种方法的方式木板
 	void Start () 
 	{
 		makeStart ();
 		makeGUIStart ();
+
+		showArea ();
 	}
+
 
 	//有些东西可以提前计算，之后直接引用啊！
 	private Rect Rect1 = new Rect (25, 0, 100, 23);

@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: a75779cf374ca3f45a08809907437cf4
+guid: 8ba89ba48c518e245862dae63c3a69be
 timeCreated: 1511219444
 licenseType: Free
 TextureImporter:
@@ -51,7 +51,7 @@ TextureImporter:
   textureFormatSet: 0
   platformSettings:
   - buildTarget: DefaultTexturePlatform
-    maxTextureSize: 128
+    maxTextureSize: 32
     textureFormat: -1
     textureCompression: 1
     compressionQuality: 50
@@ -59,7 +59,7 @@ TextureImporter:
     allowsAlphaSplitting: 0
     overridden: 0
   - buildTarget: Standalone
-    maxTextureSize: 128
+    maxTextureSize: 32
     textureFormat: -1
     textureCompression: 1
     compressionQuality: 50
@@ -67,7 +67,7 @@ TextureImporter:
     allowsAlphaSplitting: 0
     overridden: 0
   - buildTarget: Android
-    maxTextureSize: 128
+    maxTextureSize: 32
     textureFormat: -1
     textureCompression: 1
     compressionQuality: 50
@@ -75,7 +75,7 @@ TextureImporter:
     allowsAlphaSplitting: 0
     overridden: 0
   - buildTarget: WebGL
-    maxTextureSize: 128
+    maxTextureSize: 32
     textureFormat: -1
     textureCompression: 1
     compressionQuality: 50

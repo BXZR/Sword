@@ -107,6 +107,7 @@
      <Compile Include="Assets\Code\Extra\fixPosition.cs" />
      <Compile Include="Assets\Code\Extra\singleTip.cs" />
      <Compile Include="Assets\Code\Player\PlayerBasic.cs" />
+     <Compile Include="Assets\Code\Player\areaShower3D.cs" />
      <Compile Include="Assets\Code\Player\attackLink.cs" />
      <Compile Include="Assets\Code\Player\attackLinkController.cs" />
      <Compile Include="Assets\Code\Player\extraWeapon.cs" />
