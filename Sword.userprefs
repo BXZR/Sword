@@ -3,32 +3,36 @@
   <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Code\Effects\effectForWuling\lingEffects\wind\wind2.cs">
     <Files>
       <File FileName="Assets\Code\UI\startAndSelect\gameModeSelecting.cs" Line="1" Column="1" />
-      <File FileName="Assets\Code\systemValues.cs" Line="676" Column="43" />
+      <File FileName="Assets\Code\systemValues.cs" Line="1" Column="1" />
       <File FileName="Assets\Code\playerModes\playMode1.cs" Line="1" Column="1" />
       <File FileName="Assets\Code\playerModes\playModeBasic.cs" Line="1" Column="1" />
       <File FileName="Assets\Code\UI\startAndSelect\sceneSelecting.cs" Line="1" Column="1" />
       <File FileName="Assets\Code\Camera\REController.cs" Line="1" Column="1" />
       <File FileName="Assets\Code\Player\newMethodAttack.cs" Line="1" Column="1" />
-      <File FileName="Assets\Code\Player\PlayerBasic.cs" Line="421" Column="2" />
+      <File FileName="Assets\Code\Player\PlayerBasic.cs" Line="1" Column="1" />
       <File FileName="Assets\Code\UI\startAndSelect\selectHeaderMaker.cs" Line="1" Column="1" />
       <File FileName="Assets\Code\UI\startAndSelect\RandomSelectButton.cs" Line="1" Column="1" />
       <File FileName="Assets\Code\Effects\fighterAttackEffects\dragon\effectDragonMiss.cs" Line="1" Column="1" />
       <File FileName="Assets\Code\Effects\fighterAttackEffects\dragon\effectDragonExtraDamage.cs" Line="1" Column="1" />
       <File FileName="Assets\Code\UI\wuling\theYinYangButton.cs" Line="1" Column="1" />
-      <File FileName="Assets\Code\Effects\effectForWuling\lingEffects\lingBasic.cs" Line="57" Column="17" />
+      <File FileName="Assets\Code\Effects\effectForWuling\lingEffects\lingBasic.cs" Line="1" Column="1" />
       <File FileName="Assets\Code\Effects\effectForWuling\lingEffects\earth\earth1.cs" Line="1" Column="1" />
-      <File FileName="Assets\Code\Effects\effectForWuling\lingEffects\earth\earth2.cs" Line="17" Column="26" />
-      <File FileName="Assets\Code\Effects\effectForWuling\lingEffects\fire\fire1.cs" Line="8" Column="26" />
-      <File FileName="Assets\Code\Effects\effectForWuling\lingEffects\fire\fire2.cs" Line="11" Column="19" />
+      <File FileName="Assets\Code\Effects\effectForWuling\lingEffects\earth\earth2.cs" Line="1" Column="1" />
+      <File FileName="Assets\Code\Effects\effectForWuling\lingEffects\fire\fire1.cs" Line="1" Column="1" />
+      <File FileName="Assets\Code\Effects\effectForWuling\lingEffects\fire\fire2.cs" Line="1" Column="1" />
       <File FileName="Assets\Code\UI\wuling\wulingButton.cs" Line="1" Column="1" />
-      <File FileName="Assets\Code\UI\wuling\wulingEffectInfromation.cs" Line="66" Column="60" />
-      <File FileName="Assets\Code\Effects\effectForWuling\lingEffects\thunder\thunder1.cs" Line="17" Column="62" />
-      <File FileName="Assets\Code\Effects\effectForWuling\lingEffects\thunder\thunder2.cs" Line="11" Column="26" />
-      <File FileName="Assets\Code\Effects\effectForWuling\lingEffects\water\water1.cs" Line="8" Column="20" />
-      <File FileName="Assets\Code\Effects\effectForWuling\lingEffects\water\water2.cs" Line="27" Column="3" />
+      <File FileName="Assets\Code\UI\wuling\wulingEffectInfromation.cs" Line="1" Column="1" />
+      <File FileName="Assets\Code\Effects\effectForWuling\lingEffects\thunder\thunder1.cs" Line="1" Column="1" />
+      <File FileName="Assets\Code\Effects\effectForWuling\lingEffects\thunder\thunder2.cs" Line="1" Column="1" />
+      <File FileName="Assets\Code\Effects\effectForWuling\lingEffects\water\water1.cs" Line="1" Column="1" />
+      <File FileName="Assets\Code\Effects\effectForWuling\lingEffects\water\water2.cs" Line="1" Column="1" />
       <File FileName="Assets\Code\Effects\effectForWuling\wuling.cs" Line="1" Column="1" />
-      <File FileName="Assets\Code\Effects\effectForWuling\lingEffects\wind\wind1.cs" Line="24" Column="13" />
-      <File FileName="Assets\Code\Effects\effectForWuling\lingEffects\wind\wind2.cs" Line="22" Column="2" />
+      <File FileName="Assets\Code\Effects\effectForWuling\lingEffects\wind\wind1.cs" Line="1" Column="1" />
+      <File FileName="Assets\Code\Effects\effectForWuling\lingEffects\wind\wind2.cs" Line="1" Column="1" />
+      <File FileName="Assets\Code\Player\attackLinkController.cs" Line="53" Column="3" />
+      <File FileName="Assets\Code\Effects\fighterAttackEffects\mulan\effectMulanBaoFa.cs" Line="1" Column="1" />
+      <File FileName="Assets\Code\Effects\fighterAttackEffects\mulan\effectSlash.cs" Line="1" Column="1" />
+      <File FileName="Assets\Code\Player\move.cs" Line="322" Column="4" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
