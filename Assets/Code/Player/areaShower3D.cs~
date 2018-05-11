@@ -7,21 +7,27 @@ public class areaShower3D : MonoBehaviour {
 	public float innerRadius = 0.2f;     //内半径
 	public int Segments = 60;         //分割数  
 
-	private MeshFilter meshFilter;
-//
-//	void Start()
-//	{
-//		makeAreaShow(10f , 50f);
-//		print ("try to show");
-//	}
-//
-   
-	public void makeAreaShow(float areaLength , float areaAngle)
+	public MeshFilter meshFilterForAttackArea;
+	public MeshFilter meshFilterForSearchArea;
+
+
+	void Start()
 	{
-		this.GetComponent <MeshFilter>().mesh =  CreateMesh(areaLength , 0.2f , areaAngle , 60);
+		systemValues.theAreaRenders.Add (meshFilterForAttackArea.GetComponentInChildren<MeshRenderer>());
+		systemValues.theAreaRenders.Add (meshFilterForSearchArea.GetComponentInChildren<MeshRenderer>());
 	}
 
-	 Mesh CreateMesh(float radius, float innerradius ,float angledegree,int segments)
+	public void makeAreaShow (float theAttackAreaLength , float theAttackAreaAngel , float theSearchLength , float theSearchAngel)
+	{
+		meshFilterForAttackArea.mesh =  CreateMesh(theAttackAreaLength , 0.2f , theAttackAreaAngel , 60);
+		meshFilterForSearchArea.mesh =  CreateMesh(theSearchLength , 0.2f , theSearchAngel , 60);
+		meshFilterForAttackArea.transform.localRotation = Quaternion.Euler (0f, -90f+theAttackAreaAngel*0.5f,0f);
+		meshFilterForSearchArea.transform.localRotation = Quaternion.Euler (0f, -90f+theSearchAngel*0.5f,0f);
+	}
+
+
+
+	private  Mesh CreateMesh(float radius, float innerradius ,float angledegree,int segments)
 	{
 		//vertices(顶点):
 		int vertices_count = segments* 2+2;              //因为vertices(顶点)的个数与triangles（索引三角形顶点数）必须匹配

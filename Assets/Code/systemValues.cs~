@@ -1016,7 +1016,7 @@ public class systemValues : MonoBehaviour {
 	{
 		if(Input.GetKeyDown(KeyCode.Tab))
 		   foreach (MeshRenderer A in theAreaRenders)
-			   A.enabled = !A.enabled;
+				if(A) A.enabled = !A.enabled;
 	}
 	#endregion
 

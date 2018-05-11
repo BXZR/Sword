@@ -1096,14 +1096,13 @@ public class PlayerBasic : MonoBehaviour {
 		theAreaShower.transform.localPosition = Vector3.zero;
 		theAreaShower.transform.localRotation = Quaternion.identity;
 		areaShower3D shower = theAreaShower.GetComponentInChildren <areaShower3D> ();
-		systemValues.theAreaRenders.Add (shower.GetComponentInChildren<MeshRenderer>());
 		if (shower)
 		{
-			print ("show");
-			shower.makeAreaShow (theAttackAreaLength, theAttackAreaAngel);
+			//print ("show");
+			shower.makeAreaShow (theAttackAreaLength, theAttackAreaAngel ,theViewAreaLength , theViewAreaAngel);
 		}
-		else
-			print ("no shower");
+		//else
+			//print ("no shower");
 
 	}
 
