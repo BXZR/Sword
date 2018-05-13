@@ -843,9 +843,10 @@ public class PlayerBasic : MonoBehaviour {
 			this.GetComponent <BoxCollider> ().enabled = false;
 			this.GetComponent <CharacterController> ().enabled = false;
 			this.transform.position = new Vector3 (this.transform .position .x , -1.8f , this.transform .position .z);
-			if(this.GetComponent <FSMStage>())
-				this.GetComponent <FSMStage>().enabled = false;
+			shutArea();
 
+			FSMStage theFSM = this.GetComponent <FSMStage>();
+			if( theFSM ) theFSM .enabled = false;
 			if(systemValues.thePlayer == this)
 				systemValues.makeGameEnd("胜败，不过是兵家常事,\n我们可以，还可以从头再来。");
 		}
@@ -1104,6 +1105,11 @@ public class PlayerBasic : MonoBehaviour {
 		//else
 			//print ("no shower");
 
+	}
+
+	private void shutArea()
+	{
+		Destroy (theAreaShower.gameObject);
 	}
 
 	//--------------------------回调方法---------------------------------------------------//

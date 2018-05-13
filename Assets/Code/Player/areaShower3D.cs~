@@ -13,8 +13,12 @@ public class areaShower3D : MonoBehaviour {
 
 	void Start()
 	{
-		systemValues.theAreaRenders.Add (meshFilterForAttackArea.GetComponentInChildren<MeshRenderer>());
-		systemValues.theAreaRenders.Add (meshFilterForSearchArea.GetComponentInChildren<MeshRenderer>());
+		MeshRenderer ATK = meshFilterForAttackArea.GetComponentInChildren<MeshRenderer> ();
+		MeshRenderer AREA = meshFilterForSearchArea.GetComponentInChildren<MeshRenderer> ();
+		systemValues.theAreaRenders.Add (ATK);
+		systemValues.theAreaRenders.Add (AREA);
+		ATK.enabled = false;
+		AREA.enabled = false;
 	}
 
 	public void makeAreaShow (float theAttackAreaLength , float theAttackAreaAngel , float theSearchLength , float theSearchAngel)

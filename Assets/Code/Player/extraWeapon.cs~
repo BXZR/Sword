@@ -48,7 +48,7 @@ public class extraWeapon : MonoBehaviour {
 			}
 			else
 			{
-					effectBasic theEffect = playerAim.gameObject.GetComponent (theType) as effectBasic;
+				effectBasic theEffect = playerAim.gameObject.GetComponent (theType) as effectBasic;
 				theEffect.updateEffect ();
 				//print ("update");
 			}
