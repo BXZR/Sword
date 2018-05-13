@@ -1,14 +1,16 @@
 ﻿<Properties StartupItem="Assembly-CSharp.csproj">
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Unity.Instance.Unity Editor" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Code\Player\PlayerBasic.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Code\Effects\fighterAttackEffects\mulan\effectSlowDamage.cs">
     <Files>
       <File FileName="Assets\Code\Player\PlayerBasic.cs" Line="837" Column="72" />
-      <File FileName="Assets\Code\Player\areaShower3D.cs" Line="21" Column="24" />
+      <File FileName="Assets\Code\Player\areaShower3D.cs" Line="1" Column="1" />
       <File FileName="Assets\Code\systemValues.cs" Line="1" Column="1" />
-      <File FileName="Assets\Code\Player\extraWeapon.cs" Line="25" Column="27" />
+      <File FileName="Assets\Code\Player\extraWeapon.cs" Line="1" Column="1" />
       <File FileName="Assets\Code\Player\attackLinkController.cs" Line="1" Column="1" />
-      <File FileName="Assets\Code\Player\move.cs" Line="118" Column="57" />
+      <File FileName="Assets\Code\Player\move.cs" Line="1" Column="1" />
       <File FileName="Assets\Code\UI\wuling\wulingRotation.cs" Line="1" Column="1" />
+      <File FileName="Assets\Code\Camera\REController.cs" Line="1" Column="1" />
+      <File FileName="Assets\Code\Effects\fighterAttackEffects\mulan\effectSlowDamage.cs" Line="21" Column="40" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
