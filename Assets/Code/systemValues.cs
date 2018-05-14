@@ -1010,13 +1010,14 @@ public class systemValues : MonoBehaviour {
 
 	#region 范围信息储存
 	//死亡的面板
-	public static List< MeshRenderer > theAreaRenders = new List<MeshRenderer> ();
+	public static List< GameObject > theAreaRenders = new List<GameObject> ();
 
 	private static void changeShowArea()
 	{
-		if(Input.GetKeyDown(KeyCode.Tab))
-		   foreach (MeshRenderer A in theAreaRenders)
-				if(A) A.enabled = !A.enabled;
+		if (Input.GetKeyDown (KeyCode.Tab))
+			foreach (GameObject A in theAreaRenders)
+				if (A)
+					A.gameObject.SetActive (!A.activeInHierarchy);
 	}
 	#endregion
 

@@ -848,8 +848,8 @@ public class PlayerBasic : MonoBehaviour {
 			CharacterController CC = this.GetComponent <CharacterController> ();
 			if(CC) Destroy(CC );
 			//this.transform.position = new Vector3 (this.transform .position .x , 2f , this.transform .position .z);
-			if(!this.gameObject.GetComponent <Rigidbody>())
-				this.gameObject.AddComponent<Rigidbody>();
+			//if(!this.gameObject.GetComponent <Rigidbody>())
+			//	this.gameObject.AddComponent<Rigidbody>();
 			
 			shutArea();
 
@@ -857,6 +857,8 @@ public class PlayerBasic : MonoBehaviour {
 			if( theFSM ) theFSM .enabled = false;
 			if(systemValues.thePlayer == this)
 				systemValues.makeGameEnd("胜败，不过是兵家常事,\n我们可以，还可以从头再来。");
+			else
+				Destroy(this.gameObject ,7f);
 		}
 		catch 
 		{
@@ -1108,7 +1110,8 @@ public class PlayerBasic : MonoBehaviour {
 		if (shower)
 		{
 			//print ("show");
-			shower.makeAreaShow (theAttackAreaLength, theAttackAreaAngel ,theViewAreaLength , theViewAreaAngel);
+			shower.thePlayer = this;
+			shower.makeFlash ();
 		}
 		//else
 			//print ("no shower");

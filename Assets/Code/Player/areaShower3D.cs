@@ -10,15 +10,27 @@ public class areaShower3D : MonoBehaviour {
 	public MeshFilter meshFilterForAttackArea;
 	public MeshFilter meshFilterForSearchArea;
 
+	public PlayerBasic thePlayer;
+	private bool started = false;
 
 	void Start()
 	{
-		MeshRenderer ATK = meshFilterForAttackArea.GetComponentInChildren<MeshRenderer> ();
-		MeshRenderer AREA = meshFilterForSearchArea.GetComponentInChildren<MeshRenderer> ();
-		systemValues.theAreaRenders.Add (ATK);
-		systemValues.theAreaRenders.Add (AREA);
-		ATK.enabled = false;
-		AREA.enabled = false;
+		systemValues.theAreaRenders.Add (this.gameObject);
+		started = true;
+		this.gameObject.SetActive (false);
+	}
+
+	void OnEnable()
+	{
+		if(started)
+		    makeFlash ();
+	}
+
+
+	public void makeFlash()
+	{
+		if(thePlayer)
+		    makeAreaShow (thePlayer.theAttackAreaLength , thePlayer.theAttackAreaAngel , thePlayer.theViewAreaLength, thePlayer.theViewAreaAngel);
 	}
 
 	public void makeAreaShow (float theAttackAreaLength , float theAttackAreaAngel , float theSearchLength , float theSearchAngel)
