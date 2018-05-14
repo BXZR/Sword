@@ -9,7 +9,8 @@ public class water2 : lingBasic {
 
 	public override void makeStart ()
 	{
-		lingName = "水•阴  雨恨云愁";
+		lingName = "水•阴";
+		lingEffectName = "雨恨云愁";
 		theType = wulingType.water;
 		coolingTimerMax = 4f;
 		coolingTimer = 4f;
@@ -47,6 +48,6 @@ public class water2 : lingBasic {
 		
 	public override string wulingInformationForLearnOver()
 	{
-		return "初成奖励：12斗气上限";
+		return "+12斗气上限";
 	}
 }

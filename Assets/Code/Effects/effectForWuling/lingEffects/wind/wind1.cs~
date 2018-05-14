@@ -9,7 +9,8 @@ public class wind1 : lingBasic {
 	private float addPercent = 0.08f;
 	public override void makeStart ()
 	{
-		lingName = "风•阳  暖雾春风";
+		lingName = "风•阳";
+		lingEffectName = "暖雾春风";
 		theType = wulingType.wind;
 	}
 
@@ -34,6 +35,6 @@ public class wind1 : lingBasic {
 
 	public override string wulingInformationForLearnOver()
 	{
-		return "初成奖励：2%生命偷取";
+		return "+2%生命偷取";
 	}
 }

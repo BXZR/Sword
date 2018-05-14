@@ -13,7 +13,8 @@ public class fire2 : lingBasic {
 
 	public override void makeStart ()
 	{
-		lingName = "火•阴  鬼狱幽焰";
+		lingName = "火•阴";
+		lingEffectName = "鬼狱幽焰";
 		theType = wulingType.fire;
 		coolingTimerMax = 7f;
 		coolingTimer = 7f;
@@ -66,7 +67,7 @@ public class fire2 : lingBasic {
 
 	public override string wulingInformationForLearnOver()
 	{
-		return "初成奖励：3反伤";
+		return "+3反伤";
 	}
 }
 

@@ -9,9 +9,9 @@ public class water1 : lingBasic {
 
 	public override void makeStart ()
 	{
-		lingName = "水•阳  五气连波";
+		lingName = "水•阳";
+		lingEffectName = "五气连波";
 		theType = wulingType.water;
-
 	}
 
 	public override void onAttackAction (PlayerBasic user)
@@ -36,7 +36,7 @@ public class water1 : lingBasic {
 
 	public override string wulingInformationForLearnOver()
 	{
-		return "初成奖励：2%斗气偷取";
+		return "+2%斗气偷取";
 	}
 }
 

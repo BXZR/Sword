@@ -11,6 +11,7 @@ public class lingBasic
 	//阴阳五灵的效果的丰富性也就是在依靠这个类的脑洞了
 
 	public string lingName = "";
+	public string lingEffectName = "";
 	public float lingNow = 0 ;//需要100 灵力才能修炼完成
 	public float lingNeed = 100 ;//需要100 灵力才能修炼完成
 	public wulingType theType = wulingType.wind;//五灵的类型，用于查询

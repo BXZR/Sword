@@ -8,7 +8,8 @@ public class earth2  : lingBasic {
 	private float reDamagePercent  = 0.005f;
 	public override void makeStart ()
 	{
-		lingName = "土•阴  泰山压顶";
+		lingName = "土•阴";
+		lingEffectName = "泰山压顶";
 		theType = wulingType.earth;
 	}
 
@@ -39,7 +40,7 @@ public class earth2  : lingBasic {
 
 	public override string wulingInformationForLearnOver()
 	{
-		return "初成奖励：15生命上限";
+		return "+15生命上限";
 	}
 }
 

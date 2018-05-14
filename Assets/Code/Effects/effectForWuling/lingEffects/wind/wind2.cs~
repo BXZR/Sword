@@ -9,7 +9,8 @@ public class wind2 : lingBasic {
 
 	public override void makeStart ()
 	{
-		lingName = "风•阴  乱刃罡风";
+		lingName = "风•阴";
+		lingEffectName = "乱刃罡风";
 		theType = wulingType.wind;
 	}
 
@@ -39,6 +40,6 @@ public class wind2 : lingBasic {
 
 	public override string wulingInformationForLearnOver()
 	{
-		return "初成奖励：5%攻击速度";
+		return "+5%攻击速度";
 	}
 }

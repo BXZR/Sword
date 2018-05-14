@@ -8,7 +8,8 @@ public class thunder1 : lingBasic {
 	private float addPercent = 0.02f;
 	public override void makeStart ()
 	{
-		lingName = "雷•阳  心府绛宫";
+		lingName = "雷•阳";
+		lingEffectName = "心府绛宫";
 		theType = wulingType.thunder;
 		coolingTimerMax = 10f;
 		coolingTimer = 10f;
@@ -49,7 +50,7 @@ public class thunder1 : lingBasic {
 
 	public override string wulingInformationForLearnOver()
 	{
-		return "初成奖励：3%暴击率";
+		return "+3%暴击率";
 	}
 }
 

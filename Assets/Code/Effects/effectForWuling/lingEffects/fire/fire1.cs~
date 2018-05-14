@@ -15,7 +15,8 @@ public class fire1 : lingBasic {
 
 	public override void makeStart ()
 	{
-		lingName = "火•阳  三味真火";
+		lingName = "火•阳";
+		lingEffectName = "三味真火";
 		theType = wulingType.fire;
 		coolingTimerMax = 6f;
 		coolingTimer = 6f;
@@ -73,7 +74,7 @@ public class fire1 : lingBasic {
 
 	public override string wulingInformationForLearnOver()
 	{
-		return "初成奖励：5%穿甲";
+		return "+5%穿甲";
 	}
 }
 

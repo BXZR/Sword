@@ -87,7 +87,7 @@ public class wulingEffectInfromation : MonoBehaviour {
 		for (int i = 0; i < theWuling.lingEffects.Count; i++)
 			if (theWuling.lingEffects [i].theType == thetype)
 			{
-				string information = "【" + theWuling.lingEffects [i].lingName + "】\n" + theWuling.lingEffects [i].wulingInformation () + "\n";
+				string information = "【" + theWuling.lingEffects [i].lingName  +"  "+theWuling.lingEffects [i].lingEffectName +"】\n" + theWuling.lingEffects [i].wulingInformation () + "\n";
 				if (theWuling.lingEffects [i].isLearned ())
 					theinformation += systemValues.BESkillColor +  information + systemValues.colorEnd;
 				else
@@ -99,5 +99,19 @@ public class wulingEffectInfromation : MonoBehaviour {
 	public void makeFlash()
 	{
 		makeShow(thetypeNow);
+	}
+
+	//初次学成信息
+	public void getLearnedOverGetInformation()
+	{
+		string information = "";
+		for (int i = 0; i < theWuling.lingEffects.Count; i++) 
+		{
+			information += theWuling.lingEffects [i].lingName +" "+theWuling.lingEffects [i].wulingInformationForLearnOver();
+			if(theWuling.lingEffects [i].isLearned())
+				information += "【已获得】";
+			information += "\n";
+		}
+		systemValues.messageBoxShow ("初成奖励" , information , true);
 	}
 }

@@ -8,7 +8,8 @@ public class earth1  : lingBasic {
 	private float hpup  = 7f;
 	public override void makeStart ()
 	{
-		lingName = "土•阳  承天载物";
+		lingName = "土•阳";
+		lingEffectName = "承天载物";
 		theType = wulingType.earth;
 	}
 
@@ -34,7 +35,7 @@ public class earth1  : lingBasic {
 
 	public override string wulingInformationForLearnOver()
 	{
-		return "初成奖励：25护甲";
+		return "+25护甲";
 	}
 }
 
