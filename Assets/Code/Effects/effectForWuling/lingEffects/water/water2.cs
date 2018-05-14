@@ -27,7 +27,7 @@ public class water2 : lingBasic {
 	{
 		makeCool ();
 	}
-
+		
 	public override string wulingInformation ()
 	{
 		return "攻击命中额外消耗目标" + spAdd*100 +"%最大斗气\n冷却时间"+coolingTimerMax+"秒";
@@ -36,5 +36,17 @@ public class water2 : lingBasic {
 	public override int getYinYagType ()
 	{
 		return 2;
+	}
+
+	//学成奖励 --------------------------------------------------------------------------------------------//
+	public override void learnedOverGet ()
+	{
+		systemValues.thePlayer.ActerSpMax += 12f;
+		systemValues.thePlayer.CActerSpMax += 12f;
+	}
+		
+	public override string wulingInformationForLearnOver()
+	{
+		return "初成奖励：12斗气上限";
 	}
 }

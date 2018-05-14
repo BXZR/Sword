@@ -19,7 +19,7 @@ public class wind2 : lingBasic {
 		aim.ActerHp -= damage;
 		aim.OnAttackWithoutEffect (aim, damage, true, true);
 	}
-
+		
 	public override string wulingInformation ()
 	{
 		return "暴击时最终伤害额外提高"+(addPercent*100).ToString("f0")+"%";
@@ -28,5 +28,17 @@ public class wind2 : lingBasic {
 	public override int getYinYagType ()
 	{
 		return 2;
+	}
+
+	//学成奖励 --------------------------------------------------------------------------------------------//
+	public override void learnedOverGet ()
+	{
+		systemValues.thePlayer.ActerAttackSpeedPercent += 0.05f;
+		systemValues.thePlayer.CActerAttackSpeedPercent += 0.05f;
+	}
+
+	public override string wulingInformationForLearnOver()
+	{
+		return "初成奖励：5%攻击速度";
 	}
 }

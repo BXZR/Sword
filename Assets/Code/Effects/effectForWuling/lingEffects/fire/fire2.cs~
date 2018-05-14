@@ -46,11 +46,7 @@ public class fire2 : lingBasic {
 					theAim = null;
 			}
 		}
-
-
 	}
-
-
 	public override string wulingInformation ()
 	{
 		return "灼烧目标造成共"+damageMax+"物理伤害并触发受击特效\n灼烧持续1秒,冷却时间"+coolingTimerMax+"秒";
@@ -59,6 +55,18 @@ public class fire2 : lingBasic {
 	public override int getYinYagType ()
 	{
 		return 2;
+	}
+
+	//学成奖励 --------------------------------------------------------------------------------------------//
+	public override void learnedOverGet ()
+	{
+		systemValues.thePlayer.ActerWuliReDamage += 3f;
+		systemValues.thePlayer.CActerWuliReDamage += 3f;
+	}
+
+	public override string wulingInformationForLearnOver()
+	{
+		return "初成奖励：3反伤";
 	}
 }
 

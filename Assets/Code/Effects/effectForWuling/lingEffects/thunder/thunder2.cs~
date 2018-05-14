@@ -33,6 +33,7 @@ public class thunder2 : lingBasic {
 		makeCool ();
 	}
 
+
 	public override string wulingInformation ()
 	{
 		return "攻击附加目标已损生命值"+addPercent*100+"%的真实伤害\n冷却时间"+coolingTimerMax+"秒，攻击命中可减少0.5秒冷却时间";
@@ -41,5 +42,17 @@ public class thunder2 : lingBasic {
 	public override int getYinYagType ()
 	{
 		return 2;
+	}
+
+	//学成奖励 --------------------------------------------------------------------------------------------//
+	public override void learnedOverGet ()
+	{
+		systemValues.thePlayer.ActerSuperBaldeAdder += 0.03f;
+		systemValues.thePlayer.CActerSuperBaldeAdder += 0.03f;
+	}
+		
+	public override string wulingInformationForLearnOver()
+	{
+		return "初成奖励：3%暴击伤害";
 	}
 }

@@ -92,6 +92,7 @@ public class wulingEffectInfromation : MonoBehaviour {
 					theinformation += systemValues.BESkillColor +  information + systemValues.colorEnd;
 				else
 					theinformation += information;
+				theinformation += "\n";
 			}
 		return theinformation;
 	}

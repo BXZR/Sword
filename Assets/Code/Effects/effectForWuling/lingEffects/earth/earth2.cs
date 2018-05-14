@@ -18,6 +18,8 @@ public class earth2  : lingBasic {
 		user.OnAttackWithoutEffect (attacker, damage, false, true);
 	}
 
+
+
 	public override string wulingInformation ()
 	{
 		return "受到攻击时回敬攻击者当前生命"+reDamagePercent*100+"%物理伤害";
@@ -26,6 +28,18 @@ public class earth2  : lingBasic {
 	public override int getYinYagType ()
 	{
 		return 2;
+	}
+
+	//学成奖励 --------------------------------------------------------------------------------------------//
+	public override void learnedOverGet ()
+	{
+		systemValues.thePlayer.ActerHpMax += 15f;
+		systemValues.thePlayer.CActerHpMax += 15f;
+	}
+
+	public override string wulingInformationForLearnOver()
+	{
+		return "初成奖励：15生命上限";
 	}
 }
 

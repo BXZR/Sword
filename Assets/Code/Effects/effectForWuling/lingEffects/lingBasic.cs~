@@ -17,6 +17,7 @@ public class lingBasic
 
 	public virtual void makeStart(){}//通用初始化方法
 	public virtual string wulingInformation(){return "";}//专门的五灵信息说明
+	public virtual string wulingInformationForLearnOver(){return "";}//五灵初成奖励
 
 	virtual public void onAttackAction(PlayerBasic user){}//在攻击的起手阶段触发
 	virtual public void OnAttack (PlayerBasic user){}//在攻击的时候触发
@@ -70,7 +71,7 @@ public class lingBasic
 	public float valueMax = 200f;
 	public void learnWuling()
 	{
-		if (!systemValues.thePlayer)
+		if (!systemValues.thePlayer || isLearned ())
 			return;
 
 		float spUse = systemValues.thePlayer.ActerSp * systemValues.learnWulingSpPercent;
@@ -84,8 +85,14 @@ public class lingBasic
 			value = valueMax;
 			systemValues.thePlayer.ActerSp -= (valueMax - value);
 		}
+
+		//初次学成当有奖励
+		if (isLearned())
+			learnedOverGet ();
+		
 		systemValues.thePlayer.updateWulingEffects ();
 		systemValues.thePlayer.makeValueUpdate ();
+
 	}
 
 	public bool isLearned()
@@ -97,5 +104,8 @@ public class lingBasic
 	{
 		return  value / valueMax;
 	}
+
+	//初次学成奖励
+	public virtual void learnedOverGet(){}
 
 }

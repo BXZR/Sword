@@ -37,10 +37,7 @@ public class fire1 : lingBasic {
 			damageSave = 0f;
 		}
 	}
-
-
-
-
+		
 	public override void effectOnUpdateTime (PlayerBasic user)
 	{
 		makeCool ();
@@ -60,13 +57,23 @@ public class fire1 : lingBasic {
 				}
 			}
 		}
-
-
 	}
-
+		
 	public override string wulingInformation ()
 	{
 		return "灼烧目标最多"+shieldPercent*100+"%物理护甲\n灼烧持续2秒,冷却时间"+coolingTimerMax+"秒";
+	}
+
+	//学成奖励 --------------------------------------------------------------------------------------------//
+	public override void learnedOverGet ()
+	{
+		systemValues.thePlayer.ActerWuliInerPercent += 0.05f;
+		systemValues.thePlayer.CActerWuliInerPercent += 0.05f;
+	}
+
+	public override string wulingInformationForLearnOver()
+	{
+		return "初成奖励：5%穿甲";
 	}
 }
 

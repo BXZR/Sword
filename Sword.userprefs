@@ -1,10 +1,8 @@
 ﻿<Properties StartupItem="Assembly-CSharp.csproj">
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Unity.Instance.Unity Editor" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Code\playerModes\playMode2.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Code\UI\wuling\theWulingYinYangpanel.cs">
     <Files>
-      <File FileName="Assets\Code\playerModes\playMode2.cs" Line="23" Column="56" />
-      <File FileName="Assets\Code\systemValues.cs" Line="1049" Column="55" />
-      <File FileName="Assets\Code\playerModes\playMode1.cs" Line="20" Column="2" />
+      <File FileName="Assets\Code\UI\wuling\theWulingYinYangpanel.cs" Line="32" Column="38" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

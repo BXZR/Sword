@@ -19,8 +19,21 @@ public class wind1 : lingBasic {
 	}
 
 
+
 	public override string wulingInformation ()
 	{
 		return "所有生命恢复效果提升"+(addPercent*100).ToString("f0")+"%";
+	}
+
+	//学成奖励 --------------------------------------------------------------------------------------------//
+	public override void learnedOverGet ()
+	{
+		systemValues.thePlayer.ActerHpSuckPercent += 0.02f;
+		systemValues.thePlayer.CActerHpSuckPercent += 0.02f;
+	}
+
+	public override string wulingInformationForLearnOver()
+	{
+		return "初成奖励：2%生命偷取";
 	}
 }
