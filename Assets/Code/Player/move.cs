@@ -368,13 +368,18 @@ public class move : MonoBehaviour {
 	[PunRPC]
 	void playModeAnimations(string nameIn)
 	{
-		if(this.theAnimatorOfPlayer)
-		 this.theAnimatorOfPlayer.Play(nameIn);
+		if (this.theAnimatorOfPlayer) 
+		{
+			//print (this.gameObject.name+"--" + nameIn);
+			this.theAnimatorOfPlayer.Play (nameIn);
+		}
 	}
 	[PunRPC]
 	void playModeAnimationsAxis( string AxisName, float value)
 	{
-		if(this.theAnimatorOfPlayer)
+		if(!this.theAnimatorOfPlayer)
+			theAnimatorOfPlayer = this.GetComponentInChildren<Animator> ();
+		print (this.thePlayer.ActerName +"--" + value);
 		 this.theAnimatorOfPlayer.SetFloat (AxisName, value);
 	}
 
@@ -405,10 +410,10 @@ public class move : MonoBehaviour {
 		//所以只需要在适当的时候作出相应的动画就可以了
 		//但是为了保证更多的属性的控制，应该懂这种方法
 		//this.photonView.RPC ("moveForAll", PhotonTargets.All, forwardA, upA);
-		if (systemValues.modeIndex == 1 && this.photonView != null)//有些功能只在网络对战模式之下用就行
-			moveForAll (forwardA, upA);
-		else if (systemValues.modeIndex == 0)
-			moveForAll (forwardA, upA);
+		if(this.photonView == null)
+			photonView = PhotonView.Get(this);
+		
+		moveForAll (forwardA, upA);
 	}
 
 	void Start ()

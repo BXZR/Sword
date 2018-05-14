@@ -1042,11 +1042,9 @@ public class systemValues : MonoBehaviour {
 			if (!string.IsNullOrEmpty (modePlayerString))
 				this.gameObject.AddComponent (System.Type.GetType(modePlayerString));
 		}
-		catch(System.Exception C)
-		{
-			print (C.Message);
-		}
-		this.GetComponent <playModeBasic> ().OnGameStart ();
+		catch(System.Exception C){print (C.Message);}
+		playModeBasic PMB = this.GetComponent <playModeBasic> ();
+		if(PMB) PMB.OnGameStart ();
 	}
 
 	void Update()

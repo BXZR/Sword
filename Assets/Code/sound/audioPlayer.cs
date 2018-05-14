@@ -23,7 +23,7 @@ public class audioPlayer : MonoBehaviour
 
 	public void playAttackSound()//播放攻击命中的音效
 	{
-		if (theSource == null)
+		if (theSource == null || theSource.isPlaying)
 			return;
 		else if (audioNow)
 			theSource.PlayOneShot (audioNow);

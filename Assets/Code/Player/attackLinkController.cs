@@ -243,7 +243,7 @@ public class attackLinkController :MonoBehaviour {
 
 
 	//额外的一些动作控制内容
-	private void controllWithPlayer()
+	public  void speedControllWithPlayer()
 	{
 		//theAnimator.speed = thePlayer.ActerAttackSpeedPercent;
 		if (theAnimator && thePlayer && isStarted) 
@@ -254,18 +254,17 @@ public class attackLinkController :MonoBehaviour {
 	}
     
 
-//	void Update()
-//	{
-//		
-//	}
-//
+	void Update()
+	{	
+	  //有些东西应该保持实时，例如攻击速度的变化不允许有太多的延迟
+	  //为了保证网络版本的自治，这里还是应该自行控制一下的
+	  speedControllWithPlayer ();
+	}
+
 	//这里只对计时器有更新
 	//有一些内容，例如计时器，需要常常更新
 	void makeUpdate()
 	{
-		//有些东西应该保持实时，例如攻击速度的变化不允许有太多的延迟
-		controllWithPlayer ();
-
 		if (!thePlayer || thePlayer != systemValues.thePlayer)
 			return;
 		

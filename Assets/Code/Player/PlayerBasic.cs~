@@ -369,6 +369,9 @@ public class PlayerBasic : MonoBehaviour {
 	//在攻击命中的时候触发
 	public void OnAttack(PlayerBasic thePlayerAim ,float extraDamage = 0 ,bool isSimple =false,bool isExtraAttack = false)
 	{
+		//也是原则，不对已经归西的目标附加伤害了
+			if (!thePlayerAim.isAlive)
+				return;
 		//isExtraAttack表现为不用什么特殊动作直接造成伤害的条件
 		//在这里似乎多做了一次判断
 		//判断原因在于原先的攻击做法是连续的，而现在的攻击是离散的
@@ -841,8 +844,13 @@ public class PlayerBasic : MonoBehaviour {
 			this.GetComponent <move> ().enabled = false;
 			this.enabled = false;
 			this.GetComponent <BoxCollider> ().enabled = false;
-			this.GetComponent <CharacterController> ().enabled = false;
-			this.transform.position = new Vector3 (this.transform .position .x , -1.8f , this.transform .position .z);
+
+			CharacterController CC = this.GetComponent <CharacterController> ();
+			if(CC) Destroy(CC );
+			//this.transform.position = new Vector3 (this.transform .position .x , 2f , this.transform .position .z);
+			if(!this.gameObject.GetComponent <Rigidbody>())
+				this.gameObject.AddComponent<Rigidbody>();
+			
 			shutArea();
 
 			FSMStage theFSM = this.GetComponent <FSMStage>();
@@ -1240,6 +1248,8 @@ public class PlayerBasic : MonoBehaviour {
 
 		ActerDamageMinusValue = ActerDamageMinusValueIn;//真实减伤
 		ActerDamageMinusPercent = ActerDamageMinusPercentIn;//百分比减伤
+
+
 	}
  
 }
