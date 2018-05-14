@@ -60,7 +60,12 @@ public class gameModeSelecting : MonoBehaviour {
 		if (systemValues.modeIndex == 0) 
 		{
 			if (theInformations.Count > 0)
-				systemValues.messageBoxShow (theInformations [0], theInformations [1], true);
+			{
+				string informationShow = theInformations [1];
+				if(!string.IsNullOrEmpty(theInformations [3]))
+				    informationShow += "\n\n模式特效：" + systemValues.getEffectInfromationWithName (theInformations [3] , this.gameObject);
+				systemValues.messageBoxShow (theInformations [0],informationShow, true);
+			}
 			else
 				systemValues.messageTitleBoxShow ("无法获取信息");
 		} 

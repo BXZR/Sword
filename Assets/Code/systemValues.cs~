@@ -345,6 +345,9 @@ public class systemValues : MonoBehaviour {
 
 		string information = "";
 
+		if (string.IsNullOrEmpty (nameIn))
+			return "没有效果";
+
 		System.Type thetype = System.Type.GetType (nameIn);
 		effectBasic  theEf =  (effectBasic)theGameOBJ.GetComponent(thetype);
 		if (theEf == null)
@@ -481,10 +484,11 @@ public class systemValues : MonoBehaviour {
 	//游戏模式数组，其实就是在游戏的开始的时候在GM上面再加上一个脚本
 	//这种方法非常动态，但是同时在设计上就有了一些难度
 	//搞不好还需要弄一个全球的基类来做这件事
-	private static string [] gameModeAdders = {"playMode1" , "playMode2"};
-	private static string[] gameModeName = {"限时击杀" , "限时挑战"};
-	private static string[] gameModeInformation = {"在指定时间内击杀目标即可完成任务" , "60秒限时挑战最大击杀数量"};
-	private static string[] gameModePicture = {"playMode1", "playMode2"};
+	private static string [] gameModeAdders = {"playMode1" , "playMode2" , "playMode3"};
+	private static string[] gameModeName = {"限时击杀" , "限时挑战","极限生存"};
+	private static string[] gameModeInformation = {"在指定时间内击杀目标即可完成任务" , "60秒限时挑战最大击杀数量" , "争取生存240秒并获得最大击杀数"};
+	private static string[] gameModePicture = {"playMode1", "playMode2", "playMode3"};
+	private static string[] gameModeAdderEffects = {"", "playModeEffect2","playModeEffect3"};
 	private static int gameModeIndexNow = 0;
 	public static List<string>  getGameModeWithMove(int adder = 0)
 	{
@@ -498,6 +502,8 @@ public class systemValues : MonoBehaviour {
 		theStrings.Add (gameModeName[gameModeIndexNow]);
 		theStrings.Add (gameModeInformation[gameModeIndexNow]);
 		theStrings.Add (gameModePicture[gameModeIndexNow]);
+		theStrings.Add (gameModeAdderEffects[gameModeIndexNow]);
+
 		return theStrings;
 	}
 
@@ -507,6 +513,14 @@ public class systemValues : MonoBehaviour {
 			return "";//对战模式不附加脚本
 
 		return gameModeAdders[gameModeIndexNow];
+	}
+
+	public static string getGameModeExtraEffect()
+	{
+		if (systemValues.modeIndex == 1)
+			return "";//对战模式不附加脚本
+
+		return gameModeAdderEffects[gameModeIndexNow];
 	}
 	#endregion
 
@@ -1046,6 +1060,11 @@ public class systemValues : MonoBehaviour {
 		catch(System.Exception C){print (C.Message);}
 		playModeBasic PMB = this.GetComponent <playModeBasic> ();
 		if(PMB) PMB.OnGameStart ();
+
+		string effectForAdd = getGameModeExtraEffect ();
+		print (effectForAdd +" is for add" );
+		if(!string.IsNullOrEmpty(effectForAdd))
+			systemValues.thePlayer.gameObject.AddComponent (System.Type.GetType( effectForAdd));
 	}
 
 	void Update()

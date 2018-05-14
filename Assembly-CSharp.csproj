@@ -58,6 +58,8 @@
      <Compile Include="Assets\Code\Effects\bloodShower\effectShowDamageOnBeAttack.cs" />
      <Compile Include="Assets\Code\Effects\bloodShower\extraMoveUp.cs" />
      <Compile Include="Assets\Code\Effects\effectBasic.cs" />
+     <Compile Include="Assets\Code\Effects\effectForPlayMode\playModeEffect2.cs" />
+     <Compile Include="Assets\Code\Effects\effectForPlayMode\playModeEffect3.cs" />
      <Compile Include="Assets\Code\Effects\effectForWuling\lingEffects\earth\earth1.cs" />
      <Compile Include="Assets\Code\Effects\effectForWuling\lingEffects\earth\earth2.cs" />
      <Compile Include="Assets\Code\Effects\effectForWuling\lingEffects\fire\fire1.cs" />
