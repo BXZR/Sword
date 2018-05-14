@@ -481,10 +481,10 @@ public class systemValues : MonoBehaviour {
 	//游戏模式数组，其实就是在游戏的开始的时候在GM上面再加上一个脚本
 	//这种方法非常动态，但是同时在设计上就有了一些难度
 	//搞不好还需要弄一个全球的基类来做这件事
-	private static string [] gameModeAdders = {"playMode1"};
-	private static string[] gameModeName = {"限时击杀"};
-	private static string[] gameModeInformation = {"在指定时间内击杀目标即可完成任务"};
-	private static string[] gameModePicture = {"playMode1"};
+	private static string [] gameModeAdders = {"playMode1" , "playMode2"};
+	private static string[] gameModeName = {"限时击杀" , "限时挑战"};
+	private static string[] gameModeInformation = {"在指定时间内击杀目标即可完成任务" , "60秒限时挑战最大击杀数量"};
+	private static string[] gameModePicture = {"playMode1", "playMode2"};
 	private static int gameModeIndexNow = 0;
 	public static List<string>  getGameModeWithMove(int adder = 0)
 	{
@@ -1029,18 +1029,24 @@ public class systemValues : MonoBehaviour {
 			photonView = PhotonView.Get (this);
 
 		Application.targetFrameRate = 50;//默认FPS是50，没有必要太高不是.....
+		Invoke("makeGameMode" , 4f);
+	
+	}
 
+	void makeGameMode()
+	{
 		string modePlayerString = getGameMode ();
-		print ( "The GameMode IS "+ modePlayerString);
+		//print ( "The GameMode IS "+ modePlayerString);
 		try
 		{
-		if (!string.IsNullOrEmpty (modePlayerString))
-			this.gameObject.AddComponent (System.Type.GetType(modePlayerString));
+			if (!string.IsNullOrEmpty (modePlayerString))
+				this.gameObject.AddComponent (System.Type.GetType(modePlayerString));
 		}
 		catch(System.Exception C)
 		{
 			print (C.Message);
 		}
+		this.GetComponent <playModeBasic> ().OnGameStart ();
 	}
 
 	void Update()

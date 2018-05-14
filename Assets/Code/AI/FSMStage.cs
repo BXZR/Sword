@@ -42,6 +42,7 @@ public class FSMStage : effectBasic   {
 		MeshRenderer theRender = this.GetComponentInChildren<MeshRenderer>();
 		if (theRender)
 			theRender.gameObject.AddComponent <FSMRenderSwitch> ();
+		this.transform.root.tag = "AI";//打上标记方便找
 	}
 
 	public override bool isBE ()

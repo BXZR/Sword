@@ -18,12 +18,6 @@ public class playMode1 : playModeBasic {
 	private bool ended = false;
 
 
-
-	void Start()
-	{
-		OnGameStart ();
-	}
-
 	public override void OnGameStart ()
 	{
 		GameObject Boss = GameObject.Instantiate<GameObject>(Resources.Load<GameObject>("fighters/" + theBossProfabName));
