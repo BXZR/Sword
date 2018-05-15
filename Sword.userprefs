@@ -1,15 +1,18 @@
 ﻿<Properties StartupItem="Assembly-CSharp.csproj">
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Unity.Instance.Unity Editor" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Code\Effects\effectForPlayMode\playModeEffect3.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Code\sound\audioPlayer.cs">
     <Files>
       <File FileName="Assets\Code\Camera\REController.cs" Line="1" Column="1" />
-      <File FileName="Assets\Code\UI\startAndSelect\gameModeSelecting.cs" Line="66" Column="78" />
-      <File FileName="Assets\Code\systemValues.cs" Line="519" Column="3" />
-      <File FileName="Assets\Code\Effects\effectForPlayMode\playModeEffect2.cs" Line="17" Column="36" />
-      <File FileName="Assets\Code\Effects\effectBasic.cs" Line="87" Column="30" />
-      <File FileName="Assets\Code\Effects\effectForPlayMode\playModeEffect3.cs" Line="23" Column="3" />
-      <File FileName="Assets\Code\playerModes\playMode2.cs" Line="85" Column="1" />
-      <File FileName="Assets\Code\playerModes\playMode3.cs" Line="11" Column="32" />
+      <File FileName="Assets\Code\UI\startAndSelect\gameModeSelecting.cs" Line="1" Column="1" />
+      <File FileName="Assets\Code\systemValues.cs" Line="1" Column="1" />
+      <File FileName="Assets\Code\Effects\effectForPlayMode\playModeEffect2.cs" Line="1" Column="1" />
+      <File FileName="Assets\Code\Effects\effectBasic.cs" Line="1" Column="1" />
+      <File FileName="Assets\Code\Effects\effectForPlayMode\playModeEffect3.cs" Line="1" Column="1" />
+      <File FileName="Assets\Code\playerModes\playMode2.cs" Line="1" Column="1" />
+      <File FileName="Assets\Code\playerModes\playMode3.cs" Line="1" Column="1" />
+      <File FileName="Assets\Code\AI\FSM\FSM_Attack.cs" Line="34" Column="3" />
+      <File FileName="Assets\Code\Player\PlayerBasic.cs" Line="427" Column="32" />
+      <File FileName="Assets\Code\sound\audioPlayer.cs" Line="44" Column="45" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

@@ -10,6 +10,7 @@ public class audioPlayer : MonoBehaviour
 	public AudioSource theSource;//声源组件
 	[HideInInspector]//不需要设定
 	public AudioClip audioNow;//当前需要播放的音效
+	private  AudioClip audioSave = null ;//音效保存
 
 	public AudioClip attackActSource;//默认攻击动作音效
 
@@ -23,14 +24,27 @@ public class audioPlayer : MonoBehaviour
 
 	public void playAttackSound()//播放攻击命中的音效
 	{
-		if (theSource == null || theSource.isPlaying)
+		if (theSource == null)
 			return;
-		else if (audioNow)
+		
+		else if (audioNow && audioSave != audioNow) 
+		{
+			audioSave = audioNow;
 			theSource.PlayOneShot (audioNow);
+			//强制性防护，播放音效存在冷却时间，要不然群攻的时候音效各种重复播放声音实在是有点大
+			Invoke ("clearAudio" , 0.1f);
+		}
+
 		else if (theBasicAudio)
 			theSource.PlayOneShot (theBasicAudio);
 		
 		//audioNow = null;
+	}
+
+	//强制性防护，播放音效存在冷却时间，要不然群攻的时候音效各种重复播放声音实在是有点大
+	void clearAudio()
+	{
+		audioSave = null;
 	}
 
 	public void playClip(AudioClip theClip = null)//默认可以为空，播放指定的音效

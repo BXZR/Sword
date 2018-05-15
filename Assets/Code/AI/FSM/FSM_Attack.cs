@@ -29,7 +29,8 @@ public class FSM_Attack : FSMBasic {
 		//疯狂贴身近战强攻
 		if(!theAgent)
 		    theAgent = this.theThis.GetComponent <UnityEngine.AI.NavMeshAgent> ();
-		theAgent.SetDestination (theEMY.transform.position);
+		if(theAgent.isOnNavMesh)
+		    theAgent.SetDestination (theEMY.transform.position);
 	}
 
 //真正的操作-----------------------------------------------------
