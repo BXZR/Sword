@@ -484,11 +484,11 @@ public class systemValues : MonoBehaviour {
 	//游戏模式数组，其实就是在游戏的开始的时候在GM上面再加上一个脚本
 	//这种方法非常动态，但是同时在设计上就有了一些难度
 	//搞不好还需要弄一个全球的基类来做这件事
-	private static string [] gameModeAdders = {"playMode1" , "playMode2" , "playMode3"};
-	private static string[] gameModeName = {"限时击杀" , "限时挑战","极限生存"};
-	private static string[] gameModeInformation = {"在指定时间内击杀目标即可完成任务" , "60秒限时挑战最大击杀数量" , "争取生存240秒并获得最大击杀数"};
-	private static string[] gameModePicture = {"playMode1", "playMode2", "playMode3"};
-	private static string[] gameModeAdderEffects = {"", "playModeEffect2","playModeEffect3"};
+	private static string [] gameModeAdders = {"playMode1" , "playMode2" , "playMode3" , "playMode4"  };
+	private static string[] gameModeName = {"限时击杀" , "限时挑战","极限生存" , "训练模式"};
+	private static string[] gameModeInformation = {"在指定时间内击杀目标即可完成任务" , "60秒限时挑战最大击杀数量" , "争取生存240秒并获得最大击杀数" ,"没有限制，可以一直练习下去"};
+	private static string[] gameModePicture = {"playMode1", "playMode2", "playMode3" , "playMode4"};
+	private static string[] gameModeAdderEffects = {"", "playModeEffect2","playModeEffect3","playModeEffect4"};
 	private static int gameModeIndexNow = 0;
 	public static List<string>  getGameModeWithMove(int adder = 0)
 	{
@@ -1062,7 +1062,7 @@ public class systemValues : MonoBehaviour {
 		if(PMB) PMB.OnGameStart ();
 
 		string effectForAdd = getGameModeExtraEffect ();
-		print (effectForAdd +" is for add" );
+		//print (effectForAdd +" is for add" );
 		if(!string.IsNullOrEmpty(effectForAdd))
 			systemValues.thePlayer.gameObject.AddComponent (System.Type.GetType( effectForAdd));
 	}

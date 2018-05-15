@@ -19,7 +19,7 @@ public class playMode3 : playModeBasic {
 	public override void OnGameStart ()
 	{
 		count = GameObject.FindGameObjectsWithTag ("AI").Length;
-		systemValues.thePlayer.ActerSpeedOverPervnet += 0.2f; //世界BUFF，这个过后要用脚本实现
+		//systemValues.thePlayer.ActerSpeedOverPervnet += 0.2f; //世界BUFF，这个过后要用脚本实现
 	}
 
 

@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class playModeEffect3 : effectBasic {
 
+
+	private float percent = 0.15f;
+
 	void Start ()
 	{
 		Init ();
@@ -11,17 +14,26 @@ public class playModeEffect3 : effectBasic {
 
 	public override void Init ()
 	{
-		theEffectName = "一刀致命";
-		theEffectInformation = "自身受到攻击会被额外带走12%最大生命值";
+		theEffectName = "严酷训诫";
+		theEffectInformation = "敌我攻击都会额外带走目标最大生命值的"+percent*100+"%\n(此效果不会触发任何额外特效)";
 		makeStart ();
 	}
 
+	//严酷
 	public override void OnBeAttack (float damage = 0)
 	{
 		if (damage <= 0)
 			return;
 		
-		this.thePlayer.ActerHp -= this.thePlayer.ActerHpMax * 0.12f;//一刀必死
+		this.thePlayer.ActerHp -= this.thePlayer.ActerHpMax * percent;
+	}
+
+	//训诫
+	public override void OnAttack (PlayerBasic aim, float TrueDamage)
+	{
+		if (TrueDamage <= 0)
+			return;
+		aim.ActerHp -= this.thePlayer.ActerHpMax * percent;
 	}
 }
 

@@ -60,6 +60,7 @@
      <Compile Include="Assets\Code\Effects\effectBasic.cs" />
      <Compile Include="Assets\Code\Effects\effectForPlayMode\playModeEffect2.cs" />
      <Compile Include="Assets\Code\Effects\effectForPlayMode\playModeEffect3.cs" />
+     <Compile Include="Assets\Code\Effects\effectForPlayMode\playModeEffect4.cs" />
      <Compile Include="Assets\Code\Effects\effectForWuling\lingEffects\earth\earth1.cs" />
      <Compile Include="Assets\Code\Effects\effectForWuling\lingEffects\earth\earth2.cs" />
      <Compile Include="Assets\Code\Effects\effectForWuling\lingEffects\fire\fire1.cs" />
@@ -163,6 +164,7 @@
      <Compile Include="Assets\Code\playerModes\playMode1.cs" />
      <Compile Include="Assets\Code\playerModes\playMode2.cs" />
      <Compile Include="Assets\Code\playerModes\playMode3.cs" />
+     <Compile Include="Assets\Code\playerModes\playMode4.cs" />
      <Compile Include="Assets\Code\playerModes\playModeBasic.cs" />
      <Compile Include="Assets\Code\props\popMaker.cs" />
      <Compile Include="Assets\Code\props\popSoulMove.cs" />
