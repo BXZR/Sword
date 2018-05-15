@@ -10,6 +10,6 @@ public class playMode4 : playModeBasic {
 
 	public override void OnGameStart ()
 	{
-		systemValues.soulCount += 100000;
+		systemValues.soulCount = 88888;
 	}
 }
