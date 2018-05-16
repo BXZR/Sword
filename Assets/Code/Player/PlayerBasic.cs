@@ -392,11 +392,16 @@ public class PlayerBasic : MonoBehaviour {
 		    float spsuck =  makeSpSuck(damage , thePlayerAim);//计算吸蓝
 		   float reDamage = makeReDamage(thePlayerAim);;//计算反伤
 		   //单机动作控制
-		   if(systemValues.modeIndex == 0)
+		   if(systemValues.theGameSystemMode == GameSystemMode.PC)
 			thePlayerAim.OnBeAttack (damage);
 		   //有些功能只在网络对战模式之下用就行
-		   if(systemValues.modeIndex == 1 && this == systemValues.thePlayer)
-			thePlayerAim.photonView.RPC ("OnBeAttack" , PhotonTargets.All,damage);
+			if (systemValues.theGameSystemMode == GameSystemMode.NET) 
+			{
+			   if(this == systemValues.thePlayer) //游戏主人公的伤害时完全自治的
+				thePlayerAim.photonView.RPC ("OnBeAttack", PhotonTargets.All, damage);
+			   else if(this.gameObject.tag.Equals("AI")) //网络AI的伤害是各个客户端自己就计算了的，并没有强制的同步，所以还需要完善
+				thePlayerAim.OnBeAttack (damage);
+			}
 
 		    //各种附加效果
 			effectBasic[] Effects = this.GetComponentsInChildren<effectBasic> ();
@@ -440,11 +445,16 @@ public class PlayerBasic : MonoBehaviour {
 		    float spsuck =  makeSpSuck(damage , thePlayerAim);//计算吸蓝
 		    float reDamage = makeReDamage(thePlayerAim);;//计算反伤
 		//单机动作控制
-		if(systemValues.modeIndex == 0)
+		if(systemValues.theGameSystemMode == GameSystemMode.PC)
 			thePlayerAim.OnBeAttack (damage);
 		//有些功能只在网络对战模式之下用就行
-		if(systemValues.modeIndex == 1 && this == systemValues.thePlayer)
-			thePlayerAim.photonView.RPC ("OnBeAttack" , PhotonTargets.All,damage);
+		if (systemValues.theGameSystemMode == GameSystemMode.NET) 
+		{
+			if(this == systemValues.thePlayer) //游戏主人公的伤害时完全自治的
+				thePlayerAim.photonView.RPC ("OnBeAttack", PhotonTargets.All, damage);
+			else if(this.gameObject.tag.Equals("AI")) //网络AI的伤害是各个客户端自己就计算了的，并没有强制的同步，所以还需要完善
+				thePlayerAim.OnBeAttack (damage);
+		}
 		
 	     	//只有特殊的一类效果了才能够有效果，其余特效无效，所以是WithoutEffect
 			effectBasic[] Effects = this.GetComponentsInChildren<effectBasic> ();
@@ -858,17 +868,17 @@ public class PlayerBasic : MonoBehaviour {
 			if(systemValues.thePlayer == this)
 				systemValues.makeGameEnd("胜败，不过是兵家常事,\n我们可以，还可以从头再来。");
 			else
-				Destroy(this.gameObject ,7f);
+				Destroy(this.gameObject ,15f);
 		}
 		catch 
 		{
 			//print ("组件缺失或者不必存在这个组件");
 		}
-		if (systemValues.modeIndex == 1 && photonView!= null)
+		if (systemValues.theGameSystemMode == GameSystemMode.NET && photonView!= null)
 		{
 			photonView.RPC ("plaDeadAnimations", PhotonTargets.All, "dead");
 		}
-		else if (systemValues.modeIndex == 0)
+		else if (systemValues.theGameSystemMode == GameSystemMode.PC)
 		{
 			plaDeadAnimations ("dead");
 		}
@@ -879,11 +889,11 @@ public class PlayerBasic : MonoBehaviour {
 	//根据的单机模式和网络对战模式做两种操作，仅此而已
 	public void addEffects(string effectName)
 	{
-		if (systemValues.modeIndex == 1 && photonView!= null)
+		if (systemValues.theGameSystemMode == GameSystemMode.NET && photonView!= null)
 		{
 			photonView.RPC ("addEffectsForSelf", PhotonTargets.All, effectName);
 		}
-		else if (systemValues.modeIndex == 0)
+		else if (systemValues.theGameSystemMode == GameSystemMode.PC)
 		{
 			addEffectsForSelf(effectName);
 		}
@@ -897,7 +907,7 @@ public class PlayerBasic : MonoBehaviour {
 		startCValues();//因为只有服务器上面的英雄才会使用这些参数
 		InvokeRepeating("updateValue",0,systemValues .updateTimeWait);//每隔一秒钟计算额外的计算脚本
 
-		if (systemValues.modeIndex == 1) 
+		if (systemValues.theGameSystemMode == GameSystemMode.NET) 
 		{
 			photonView = PhotonView.Get (this);
 		}
@@ -930,7 +940,7 @@ public class PlayerBasic : MonoBehaviour {
 	public  void makeValueUpdate()
 	{
 		//更新网络上其他客户端这个人物的属性
-		if (systemValues.modeIndex == 1 && photonView != null) 
+		if (systemValues.theGameSystemMode == GameSystemMode.NET && photonView != null) 
 		{
 			photonView.RPC ("updateOthersValue", PhotonTargets.All, 
 				ActerHpMax, ActerHp, ActerSpMax, ActerSp , ActerHpUp, ActerSpUp,
@@ -945,7 +955,7 @@ public class PlayerBasic : MonoBehaviour {
 	}
 	public void addEffectUpdate(string theEffect)
 	{
-		if (systemValues.modeIndex == 1) 
+		if (systemValues.theGameSystemMode == GameSystemMode.NET) 
 		{
 			photonView.RPC ("addEffectRpc", PhotonTargets.All,theEffect);
 		} 
@@ -957,7 +967,7 @@ public class PlayerBasic : MonoBehaviour {
 
 	public void dropEffectUpdate(string theEffectName)
 	{
-		if (systemValues.modeIndex == 1)
+		if (systemValues.theGameSystemMode == GameSystemMode.NET)
 		{
 			photonView.RPC ("dropEffectRpc", PhotonTargets.All,theEffectName);
 		} 
@@ -1009,7 +1019,7 @@ public class PlayerBasic : MonoBehaviour {
 		lingBasic earthE2 =  getthLingWithType(theWulingEffect.lingEffects, wulingType.earth ,2 );
 		if (earthE2 != null) earth2 = earthE2.value;
 
-		if (systemValues.modeIndex == 1)
+		if (systemValues.theGameSystemMode == GameSystemMode.NET)
 		{
 			photonView.RPC ("updateWuling", PhotonTargets.All, wind1,wind2,thunder1,thunder2,water1,water2,fire1,fire2,earth1,earth2);
 		} 

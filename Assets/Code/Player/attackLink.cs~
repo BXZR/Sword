@@ -167,12 +167,12 @@ public class attackLink : MonoBehaviour {
 
 	public void attackLinkMain(int theAttackLinkIndex = 0)
 	{
-		if (systemValues.modeIndex == 1 && photonView != null)
+		if (systemValues.theGameSystemMode == GameSystemMode.NET && photonView != null)
 		{
 			this.photonView.RPC ("attackLinkEffect", PhotonTargets.All,theAttackLinkIndex);
 			this.photonView.RPC ("playAttackLinkAction", PhotonTargets.All);
 		}
-		else if (systemValues.modeIndex == 0)
+		else if (systemValues.theGameSystemMode == GameSystemMode.PC)
 		{
 			attackLinkEffect (theAttackLinkIndex);
 			playAttackLinkAction ();
@@ -226,11 +226,11 @@ public class attackLink : MonoBehaviour {
 	//网络版群体升级，单机版单独升级
 	public void makeAttackLinkUp()
 	{
-		if (systemValues.modeIndex == 1 && photonView != null)
+		if (systemValues.theGameSystemMode == GameSystemMode.NET && photonView != null)
 		{
 			this.photonView.RPC ("AttackLinkLvupNet", PhotonTargets.All);
 		}
-		else if (systemValues.modeIndex == 0)
+		else if (systemValues.theGameSystemMode == GameSystemMode.PC)
 		{
 			AttackLinkLvupNet ();
 		}

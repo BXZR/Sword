@@ -59,11 +59,11 @@ public class equipPackage : MonoBehaviour {
 	//这就需要考虑一些限制的设计了
 	public void getTheEquip( string equipName)
 	{
-		if (systemValues.modeIndex == 1 && photonView!= null)
+		if (systemValues.theGameSystemMode == GameSystemMode.NET && photonView!= null)
 		{
 			photonView.RPC ("getEquipForPrivate", PhotonTargets.All, equipName);
 		}
-		else if (systemValues.modeIndex == 0)
+		else if (systemValues.theGameSystemMode == GameSystemMode.PC)
 		{
 			getEquipForPrivate(equipName);
 		}

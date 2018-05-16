@@ -1,23 +1,24 @@
 ﻿<Properties StartupItem="Assembly-CSharp.csproj">
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Unity.Instance.Unity Editor" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Code\playerModes\playMode4.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Code\Player\PlayerBasic.cs">
     <Files>
-      <File FileName="Assets\Code\Camera\REController.cs" Line="1" Column="1" />
-      <File FileName="Assets\Code\UI\startAndSelect\gameModeSelecting.cs" Line="1" Column="1" />
-      <File FileName="Assets\Code\systemValues.cs" Line="493" Column="64" />
-      <File FileName="Assets\Code\Effects\effectForPlayMode\playModeEffect2.cs" Line="1" Column="1" />
-      <File FileName="Assets\Code\Effects\effectBasic.cs" Line="1" Column="1" />
-      <File FileName="Assets\Code\Effects\effectForPlayMode\playModeEffect3.cs" Line="1" Column="1" />
-      <File FileName="Assets\Code\playerModes\playMode2.cs" Line="57" Column="48" />
-      <File FileName="Assets\Code\playerModes\playMode3.cs" Line="57" Column="11" />
+      <File FileName="Assets\Code\AI\FSMStage.cs" Line="60" Column="33" />
+      <File FileName="Assets\Code\systemValues.cs" Line="1058" Column="5" />
+      <File FileName="Assets\Code\Camera\cameraUse.cs" Line="80" Column="2" />
+      <File FileName="Assets\Code\Equips\equipPackage.cs" Line="66" Column="63" />
+      <File FileName="Assets\Code\Player\PlayerBasic.cs" Line="357" Column="59" />
+      <File FileName="Assets\Code\Player\attackLink.cs" Line="233" Column="63" />
+      <File FileName="Assets\Code\Player\move.cs" Line="323" Column="60" />
+      <File FileName="Assets\Code\UI\startAndSelect\GameStartButton.cs" Line="85" Column="59" />
+      <File FileName="Assets\Code\UI\startAndSelect\gameModeSelecting.cs" Line="60" Column="58" />
+      <File FileName="Assets\Code\UI\startAndSelect\sceneSelecting.cs" Line="42" Column="59" />
+      <File FileName="Assets\Code\UI\startAndSelect\sceneSkipButton.cs" Line="14" Column="16" />
+      <File FileName="Assets\Code\UI\systemPanel\SystemUIController.cs" Line="19" Column="7" />
+      <File FileName="Assets\Code\controllers\gameStarter.cs" Line="61" Column="3" />
+      <File FileName="Assets\Code\AI\FSM\FSM_Search.cs" Line="36" Column="2" />
       <File FileName="Assets\Code\AI\FSM\FSM_Attack.cs" Line="1" Column="1" />
-      <File FileName="Assets\Code\Player\PlayerBasic.cs" Line="1" Column="1" />
-      <File FileName="Assets\Code\sound\audioPlayer.cs" Line="1" Column="1" />
-      <File FileName="Assets\Code\playerModes\playMode4.cs" Line="17" Column="11" />
-      <File FileName="Assets\Code\playerModes\playMode1.cs" Line="60" Column="34" />
-      <File FileName="Assets\Code\Effects\effectForPlayMode\playModeEffect4.cs" Line="1" Column="1" />
-      <File FileName="Assets\Code\Player\attackLinkController.cs" Line="28" Column="37" />
-      <File FileName="Assets\Code\playerModes\playModeBasic.cs" Line="13" Column="31" />
+      <File FileName="Assets\Code\AI\FSM\FSMBasic.cs" Line="32" Column="2" />
+      <File FileName="Assets\Code\Player\newMethodAttack.cs" Line="178" Column="22" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

@@ -3,9 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
+
+public enum AIType {PC , NET}
 public class FSMStage : effectBasic   {
 
 	//操作FSM的操作类，也就是整个AI任务的操作类
+	public AIType  theTypeForAI = AIType.PC;//默认AI都是PC的 
 	private NavMeshAgent theMoveController;//AI人物的移动控制类
 	private attackLinkController theAttackLlinkController;//AI人物的动作控制类
 	public FSMBasic theStateNow ;
@@ -24,6 +27,8 @@ public class FSMStage : effectBasic   {
 
 	void Start ()
 	{
+		makeDestroy ();
+
 		thethis = this.GetComponent <PlayerBasic> ();
 		theMoveController = this.GetComponentInChildren<NavMeshAgent> ();
 		theAttackLlinkController = this.GetComponent<attackLinkController> ();
@@ -45,6 +50,17 @@ public class FSMStage : effectBasic   {
 		this.transform.root.tag = "AI";//打上标记方便找
 	}
 
+
+	//根据不同游戏模式先销毁没必要的AI单位
+	private void makeDestroy()
+	{
+		//模式不匹配就自我删除
+		if (systemValues.theGameSystemMode == GameSystemMode.PC && this.theTypeForAI == AIType.NET ) 
+		    Destroy (this.gameObject);
+		if (systemValues.theGameSystemMode == GameSystemMode.NET && this.theTypeForAI == AIType.PC ) 
+			Destroy (this.gameObject);
+	}
+
 	public override bool isBE ()
 	{
 		return true;
@@ -62,6 +78,9 @@ public class FSMStage : effectBasic   {
 
 	public override void OnBeAttack (PlayerBasic attacker)
 	{
+		if (this.theTypeForAI == AIType.NET)
+			return;
+		
 		//Vector3 minus = new Vector3 (0f , attacker.transform.rotation.eulerAngles.y - this.transform.rotation.eulerAngles.y , 0f);
 		//this.transform.rotation = Quaternion.Lerp(this.transform.rotation , Quaternion.Euler(minus + this.transform .rotation.eulerAngles) , 360f);
 		this.transform.LookAt (attacker.transform);
@@ -185,6 +204,19 @@ public class FSMStage : effectBasic   {
 			break;
 		}
 		return theOne;
+	}
+
+
+	private void makeUpdateWithNet()
+	{
+		if (!(this.theTypeForAI == AIType.NET))
+			return;
+		
+	}
+
+	private void flash(string nameIn)
+	{
+		theStateNow.theEMY = GameObject.Find ("/"+nameIn).GetComponent <PlayerBasic>();
 	}
 	//===============================================================================
 

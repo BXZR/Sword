@@ -16,7 +16,7 @@ public class SystemUIController : MonoBehaviour {
 	//开启系统选项
 	public void startSystems()
 	{
-		if (systemValues.modeIndex == 0) 
+		if (systemValues.theGameSystemMode == GameSystemMode.PC) 
 		{
 			//单机模式下算是福利，各一个时间暂停
 			Time.timeScale = 0;

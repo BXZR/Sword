@@ -3580,7 +3580,7 @@ internal class NetworkingPeer : LoadBalancingPeer, IPhotonPeerListener
     public void RegisterPhotonView(PhotonView netView)
     {
 		//单机模式之下直接返回就好
-		if (!Application.isPlaying || systemValues.modeIndex == 0)
+		if (!Application.isPlaying || systemValues.theGameSystemMode == GameSystemMode.PC)
         {
             this.photonViewList = new Dictionary<int, PhotonView>();
             return;

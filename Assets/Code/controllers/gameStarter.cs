@@ -28,7 +28,7 @@ public class gameStarter : MonoBehaviour {
 
 		theFighterName = systemValues.getNowPlayer ();
 
-		if (systemValues.modeIndex == 1) //有些功能只在网络对战模式之下用就行
+		if (systemValues.theGameSystemMode == GameSystemMode.NET) //有些功能只在网络对战模式之下用就行
 		{
 			int indexUse = 0;
 			try
@@ -45,7 +45,7 @@ public class gameStarter : MonoBehaviour {
 			theFighter.transform.position = startPoint[indexUse].transform.position;
 		}
 		
-		else if (systemValues.modeIndex == 0) 
+		else if (systemValues.theGameSystemMode == GameSystemMode.PC) 
 		{
 			//注意目前开始点不多，最多到6，否则会有重复
 			int indexUse = 0;

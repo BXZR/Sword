@@ -14,7 +14,7 @@ public class gameModeSelecting : MonoBehaviour {
 	void Start()
 	{
 		theButtonForControllerImage = this.GetComponent<Image> ();
-		if (systemValues.modeIndex == 0) 
+		if (systemValues.theGameSystemMode == GameSystemMode.PC) 
 		{
 			theInformations = systemValues.getGameModeWithMove ();
 			makeShow ();
@@ -28,7 +28,7 @@ public class gameModeSelecting : MonoBehaviour {
 		
 	public void newMode(int adder)
 	{
-		if (systemValues.modeIndex == 0) 
+		if (systemValues.theGameSystemMode == GameSystemMode.PC) 
 		{
 			theInformations = systemValues.getGameModeWithMove (adder);
 			makeShow ();
@@ -57,7 +57,7 @@ public class gameModeSelecting : MonoBehaviour {
 
 	public void showInformation()
 	{
-		if (systemValues.modeIndex == 0) 
+		if (systemValues.theGameSystemMode == GameSystemMode.PC) 
 		{
 			if (theInformations.Count > 0)
 			{

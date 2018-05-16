@@ -27,7 +27,7 @@ public class sceneSelecting : MonoBehaviour {
 
 	public void makeNextScene()
 	{
-		if (systemValues.modeIndex == 1)
+		if (systemValues.theGameSystemMode == GameSystemMode.NET)
 			systemValues.messageTitleBoxShow ("对战模式不可以选择地图");
 		else 
 		{
@@ -39,7 +39,7 @@ public class sceneSelecting : MonoBehaviour {
 
 	public void makePreScene()
 	{
-		if (systemValues.modeIndex == 1)
+		if (systemValues.theGameSystemMode == GameSystemMode.NET)
 			systemValues.messageTitleBoxShow ("对战模式不可以选择地图");
 		else 
 		{

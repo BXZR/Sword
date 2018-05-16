@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+
+public enum GameSystemMode { NET , PC }
 public class systemValues : MonoBehaviour {
 	//程序面板单元
 	//也可以理解为这是每一个客户端的计分板
@@ -18,9 +20,7 @@ public class systemValues : MonoBehaviour {
 	//当前控制的游戏人物，留一个引用方便使用
 	public static Animator thePlayerAnimator;
 	//非常重要的参数，游戏模式
-	//0 单机模式
-	//1 网络模式
-	public static int modeIndex = 0;
+	public static GameSystemMode theGameSystemMode = GameSystemMode .PC;//默认PC
 	//游戏是否正在进行标记，如果没有再进行，各种东西都没有必要进行计算了
 	public static bool isGamming = true;
 
@@ -509,7 +509,7 @@ public class systemValues : MonoBehaviour {
 
 	public static string getGameMode()
 	{
-		if (systemValues.modeIndex == 1)
+		if (systemValues.theGameSystemMode == GameSystemMode.NET)
 			return "";//对战模式不附加脚本
 
 		return gameModeAdders[gameModeIndexNow];
@@ -517,7 +517,7 @@ public class systemValues : MonoBehaviour {
 
 	public static string getGameModeExtraEffect()
 	{
-		if (systemValues.modeIndex == 1)
+		if (systemValues.theGameSystemMode == GameSystemMode.NET)
 			return "";//对战模式不附加脚本
 
 		return gameModeAdderEffects[gameModeIndexNow];
@@ -855,7 +855,7 @@ public class systemValues : MonoBehaviour {
 	//让某一个物体出现到指定位置
 	public static  void setPositionForGameOject(string playerName , string thingName , float x , float y , float z)
 	{
-		if (systemValues.modeIndex == 1) 
+		if (systemValues.theGameSystemMode == GameSystemMode.NET) 
 		{
 			photonView.RPC ("setPositionForGameOjectRPC", PhotonTargets.All,playerName ,  thingName, x , y , z);
 		} 
@@ -1038,12 +1038,16 @@ public class systemValues : MonoBehaviour {
 	//GM的初始化==============================================================================
 	void Start()
 	{
+        //print (theGameSystemMode);
+		Application.targetFrameRate = 50;//默认FPS是50，没有必要太高不是.....
 		transStatic = this.transform;
 		theSpecialTransformStatic = theSpecialTransform;
-		if (systemValues.modeIndex == 1) 
+		if (theGameSystemMode == GameSystemMode.NET)
+		{
 			photonView = PhotonView.Get (this);
+			return;
 
-		Application.targetFrameRate = 50;//默认FPS是50，没有必要太高不是.....
+		}
 		Invoke("makeGameMode" , 4f);
 	
 	}

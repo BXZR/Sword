@@ -126,17 +126,17 @@ public class move : MonoBehaviour {
 			if(forwardA<0)
 			{
 				//单机动作控制
-				if(systemValues.modeIndex == 0)
+				if(systemValues.theGameSystemMode == GameSystemMode.PC)
 					playModeAnimations("rotatePoseBack"); 
-				if(systemValues.modeIndex == 1)//有些功能只在网络对战模式之下用就行
+				if(systemValues.theGameSystemMode == GameSystemMode.NET)//有些功能只在网络对战模式之下用就行
 				   this.photonView.RPC("playModeAnimations",PhotonTargets.All,"rotatePoseBack");
 			}
 			else
 			{
 				//单机动作控制
-				if(systemValues.modeIndex == 0)
+				if(systemValues.theGameSystemMode == GameSystemMode.PC)
 					playModeAnimations("rotatePoseForward"); 
-				if(systemValues.modeIndex == 1)//有些功能只在网络对战模式之下用就行
+				if(systemValues.theGameSystemMode == GameSystemMode.NET)//有些功能只在网络对战模式之下用就行
 				   this.photonView.RPC("playModeAnimations",PhotonTargets.All,"rotatePoseForward");
 			}
 			//.SetFloat ("up", Mathf.Asin (minus) * 0.5f);//播放动画,具体内容需要看controller
@@ -166,9 +166,9 @@ public class move : MonoBehaviour {
 		{
 			//单机动作控制
 			//this.theAnimatorOfPlayer.Play ("jump");//////////////////////////////////
-			if (systemValues.modeIndex == 1)//有些功能只在网络对战模式之下用就行
+			if (systemValues.theGameSystemMode == GameSystemMode.NET)//有些功能只在网络对战模式之下用就行
 			this.photonView.RPC ("playModeAnimations", PhotonTargets.All, "jump");
-			else if (systemValues.modeIndex == 0)
+			else if (systemValues.theGameSystemMode == GameSystemMode.PC)
 				playModeAnimations ("jump");
 
 			jumpTimer = jumpTimerMax;
@@ -177,9 +177,9 @@ public class move : MonoBehaviour {
 			{
 			//耗蓝控制--------------------------------------------------
 			float spUse = thePlayer.ActerSpMax * 0.05f;//施展轻功是需要消耗真气的;
-			if (systemValues.modeIndex == 0)
-				UseSP (spUse);
-			if (systemValues.modeIndex == 1)//有些功能只在网络对战模式之下用就行
+			if (systemValues.theGameSystemMode == GameSystemMode.PC)
+			UseSP (spUse);
+			if (systemValues.theGameSystemMode == GameSystemMode.NET)//有些功能只在网络对战模式之下用就行
 			this.photonView.RPC ("UseSP", PhotonTargets.All, spUse);
 			//-----------------------------------------------------------
 			}
@@ -208,9 +208,9 @@ public class move : MonoBehaviour {
 					jumpTimer += 0.15f ;//如果正在跳跃就增加跳跃持续时间
 					//耗蓝控制--------------------------------------------------
 					float spUse = thePlayer.ActerSpMax * 0.05f;//施展轻功是需要消耗真气的;
-					if(systemValues.modeIndex == 0)
+					if(systemValues.theGameSystemMode == GameSystemMode.PC)
 						UseSP(spUse);
-					if(systemValues.modeIndex == 1)//有些功能只在网络对战模式之下用就行
+					if(systemValues.theGameSystemMode == GameSystemMode.NET)//有些功能只在网络对战模式之下用就行
 						this.photonView.RPC("UseSP",PhotonTargets.All,spUse);
 					//-----------------------------------------------------------
 
@@ -224,9 +224,9 @@ public class move : MonoBehaviour {
 					jumpTimer += 0.07f ;//如果正在跳跃就增加跳跃持续时间
 					//耗蓝控制--------------------------------------------------
 					float spUse = thePlayer.ActerSpMax * 0.01f;//施展轻功是需要消耗真气的;
-					if(systemValues.modeIndex == 0)
+					if(systemValues.theGameSystemMode == GameSystemMode.PC)
 						UseSP(spUse);
-					if(systemValues.modeIndex == 1)//有些功能只在网络对战模式之下用就行
+					if(systemValues.theGameSystemMode == GameSystemMode.NET)//有些功能只在网络对战模式之下用就行
 						this.photonView.RPC("UseSP",PhotonTargets.All,spUse);
 					//-----------------------------------------------------------
 
@@ -313,16 +313,16 @@ public class move : MonoBehaviour {
 	{
 		if (Input.GetKey (KeyCode.LeftShift))
 		{
-			if (systemValues.modeIndex == 1)//有些功能只在网络对战模式之下用就行
+			if (systemValues.theGameSystemMode == GameSystemMode.NET)//有些功能只在网络对战模式之下用就行
 				this.photonView.RPC ("makeShift", PhotonTargets.All);
-			else if (systemValues.modeIndex == 0)
+			else if (systemValues.theGameSystemMode == GameSystemMode.PC)
 				makeShift();
 		}
 		if (Input.GetKeyUp (KeyCode.LeftShift) || thePlayer.ActerSp <20)
 		{
-			if (systemValues.modeIndex == 1)//有些功能只在网络对战模式之下用就行
+			if (systemValues.theGameSystemMode == GameSystemMode.NET)//有些功能只在网络对战模式之下用就行
 				this.photonView.RPC ("makeShiftEnd", PhotonTargets.All);
-			else if (systemValues.modeIndex == 0)
+			else if (systemValues.theGameSystemMode == GameSystemMode.PC)
 				makeShiftEnd();
 		}
 	}

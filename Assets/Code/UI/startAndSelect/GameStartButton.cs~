@@ -15,14 +15,14 @@ public class GameStartButton : MonoBehaviour {
 
 	public void makeStart()
 	{
-		if (systemValues.modeIndex == 0) 
+		if (systemValues.theGameSystemMode == GameSystemMode.PC) 
 		{
 			NetOption.singleModeShow ();
 			showLabel = this.GetComponentInChildren<Text> ();
 			showLabel.text = "开始游戏";
 			isPrepareOver = true;
 		}
-		if (systemValues.modeIndex == 1) 
+		if (systemValues.theGameSystemMode == GameSystemMode.NET) 
 		{
 			NetOption.netModeShow ();
 			PhotonNetwork.ConnectUsingSettings ("1.0");
@@ -41,7 +41,7 @@ public class GameStartButton : MonoBehaviour {
 		//跳转的时候消息框自动关闭
 		systemValues.messageBoxClose ();
 
-		if (systemValues.modeIndex == 0) 
+		if (systemValues.theGameSystemMode == GameSystemMode.PC) 
 		{
 			Destroy (selectHead.therPlayer.gameObject);
 			forwardImage.SetActive (true);
@@ -49,7 +49,7 @@ public class GameStartButton : MonoBehaviour {
 			UnityEngine.SceneManagement.SceneManager.LoadScene (systemValues.getScnenForSystem());
 
 		}
-		if (systemValues.modeIndex == 1)
+		if (systemValues.theGameSystemMode == GameSystemMode.NET)
 		{
 			Destroy (selectHead.therPlayer.gameObject);
 			PhotonNetwork.JoinOrCreateRoom (NetOption.theInputForRoom.text, new RoomOptions { MaxPlayers = 16 }, null);
@@ -64,7 +64,7 @@ public class GameStartButton : MonoBehaviour {
 	}
 	public void endGame()
 	{
-		if (systemValues.modeIndex == 1) 
+		if (systemValues.theGameSystemMode == GameSystemMode.NET) 
 		{
 			PhotonNetwork.LeaveRoom ();
 		}
@@ -82,7 +82,7 @@ public class GameStartButton : MonoBehaviour {
 
 	void Update ()
 	{
-		if (systemValues.modeIndex == 1 && PhotonNetwork.connected )
+		if (systemValues.theGameSystemMode == GameSystemMode.NET && PhotonNetwork.connected )
 		{
 			if (!isPrepareOver) 
 			{

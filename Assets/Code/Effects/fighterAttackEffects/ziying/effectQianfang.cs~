@@ -61,7 +61,7 @@ public class effectQianfang : effectBasic {
 					
 					theArrow.transform.forward = theArrow.transform.forward;
 					Destroy (theArrow, arrowLife);
-					Destroy (this.GetComponent (this.GetType ()), lifeTimerAll);
+					Destroy (this, lifeTimerAll);
 					Invoke ("shutEffecting" , arrowLife);
 				}
 			}

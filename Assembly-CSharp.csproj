@@ -108,7 +108,6 @@
      <Compile Include="Assets\Code\Equips\equipPackage.cs" />
      <Compile Include="Assets\Code\Extra\extraRotate.cs" />
      <Compile Include="Assets\Code\Extra\fixPosition.cs" />
-     <Compile Include="Assets\Code\Extra\singleTip.cs" />
      <Compile Include="Assets\Code\Player\PlayerBasic.cs" />
      <Compile Include="Assets\Code\Player\areaShower3D.cs" />
      <Compile Include="Assets\Code\Player\attackLink.cs" />
