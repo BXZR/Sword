@@ -39,9 +39,9 @@ public class effectMulanBaoFa : effectBasic
 			theEffect.transform.localPosition = new Vector3 (0, 1.25f, 0);
 
 			this.thePlayer.ActerSuperBaldePercent += superBladePercentAdd;
-			//this.thePlayer.CActerSuperBaldePercent += superBladePercentAdd;
+			this.thePlayer.CActerSuperBaldePercent += superBladePercentAdd;
 			this.thePlayer.ActerAttackSpeedPercent += attackSpeedAdd;
-			//this.thePlayer.CActerAttackSpeedPercent += attackSpeedAdd;
+			this.thePlayer.CActerAttackSpeedPercent += attackSpeedAdd;
 		}
 	}
 
@@ -63,9 +63,9 @@ public class effectMulanBaoFa : effectBasic
 		{
 			isEffecting = false;
 			this.thePlayer.ActerSuperBaldePercent -= superBladePercentAdd;
-			//this.thePlayer.CActerSuperBaldePercent -= superBladePercentAdd;
+			this.thePlayer.CActerSuperBaldePercent -= superBladePercentAdd;
 			this.thePlayer.ActerAttackSpeedPercent -= attackSpeedAdd;
-			//this.thePlayer.CActerAttackSpeedPercent -= attackSpeedAdd;
+			this.thePlayer.CActerAttackSpeedPercent -= attackSpeedAdd;
 			Destroy (theEffect);
 		}
 		if(timerForAdd > lifeTimerAll)
