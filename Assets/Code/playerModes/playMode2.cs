@@ -67,12 +67,9 @@ public class playMode2: playModeBasic {
 
 	void OnGUI()
 	{ 
-		if ( systemValues.isGamming )
-		{
-			if (!systemValues.isSystemUIUsing ()) 
-			{
+		if (systemValues.isGamming  && !systemValues.isSystemUIUsing ()) 
+	   {
 				GUI.Box (theShowRect  , rectShowString);
-			}
 		}
 	}
 

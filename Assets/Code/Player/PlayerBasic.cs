@@ -183,7 +183,7 @@ public class PlayerBasic : MonoBehaviour {
 	public bool isMainfighter = false;//是玩家控制的fighter
 
 	public  GUISkin GUIShowStyleHP;//GUI显示的人物当前生命值
-	public  GUISkin GUIShowStyleSP;//GUI显示的人物当前生命值
+	public  GUISkin GUIShowStyleSP;//GUI显示的人物当前斗气值
 
 	private bool isStarted =false;//是否已经开启
 
@@ -763,14 +763,29 @@ public class PlayerBasic : MonoBehaviour {
 	//并没有使用update方法而是使用invoke方法
 	//inovke的调用时间间隔由systemValues类进行统一配置
 
+
+	public List<effectBasic> Effects = new List<effectBasic> ();
+	List<effectBasic> adder = new List<effectBasic> ();
+
+	void flashEffects()
+	{
+		adder.Clear ();
+		for (int i = 0; i < Effects.Count; i++) 
+			if (Effects [i] != null)
+				adder.Add (Effects[i]);
+
+		Effects.Clear ();
+		for (int i = 0; i < adder.Count; i++)
+			Effects.Add (adder[i]);
+	}
+
 	public void updateValue()
 	{
-
 		if (isStarted && isAlive) 
 		{
 			//这一次循环可以调用的效果都在这里
-			effectBasic[] Effects = this.GetComponentsInChildren<effectBasic> ();
-
+			//effectBasic[] Effects = this.GetComponentsInChildren<effectBasic> ();
+			flashEffects();
 			//护盾是有上限的 
 			float theMaxOfShield = ActerHpMax * ActerShieldMaxPercent;
 			ActerShieldHp = Mathf.Clamp(ActerShieldHp , 0f ,theMaxOfShield ) ;
@@ -779,7 +794,7 @@ public class PlayerBasic : MonoBehaviour {
 			{
 				float hpupValue = ActerHpUp * systemValues.updateTimeWait;
 				ActerHp += hpupValue;
-				for (int i = 0; i < Effects.Length; i++) 
+				for (int i = 0; i < Effects.Count; i++) 
 				{
 					Effects [i].OnHpUp ();
 					Effects [i].OnHpUp (hpupValue);
@@ -798,7 +813,7 @@ public class PlayerBasic : MonoBehaviour {
 
 			float spupValue = ActerSpUp * systemValues.updateTimeWait;
 			ActerSp += spupValue;
-			for (int i = 0; i < Effects.Length; i++) 
+			for (int i = 0; i < Effects.Count; i++) 
 			{
 				Effects [i].OnSpUp ();
 				Effects [i].OnSpUp (spupValue);
@@ -818,7 +833,7 @@ public class PlayerBasic : MonoBehaviour {
 			else
 				conNameCoolingTime = conNameCoolingTimeMax;//此处多次空转赋值实际上是一个很大的浪费但是这句话非常必要
 
-			for (int i = 0; i < Effects.Length; i++)
+			for (int i = 0; i < Effects.Count; i++)
 				Effects [i] .effectOnUpdateTime ();
 			
 			//战斗状态的刷新管理
@@ -1148,6 +1163,9 @@ public class PlayerBasic : MonoBehaviour {
 	private Rect Rect1 = new Rect (25, 0, 100, 23);
 	private Rect Rect2 = new Rect (10, 23, 127, 15);
 	private Rect Rect3 = new Rect (10, 39, 127, 15);
+	private Rect RectHP = new Rect (12, 24, 120, 13);
+	private Rect RectSP = new Rect (12, 40, 120, 13);
+	private Rect RectPosition = new Rect (0, 0, 155, 100);
 	private string OnGUIStringForNAmeLV = "";
 
 	void OnGUI()
@@ -1155,7 +1173,7 @@ public class PlayerBasic : MonoBehaviour {
 		if (!systemValues.isGamming)
 			return;
 
-		if (isShowingOnGUI  && this.isMainfighter == false &&  isAlive &&  GUIShowStyleHP!=null &&  GUIShowStyleSP!=null )
+		if (isShowingOnGUI  && !this.isMainfighter  &&  isAlive &&  GUIShowStyleHP!=null &&  GUIShowStyleSP!=null )
 		{
 			if (!systemValues.isSystemUIUsing ()) 
 			{
@@ -1163,13 +1181,22 @@ public class PlayerBasic : MonoBehaviour {
 				float rotoForHp = Mathf.Clamp ((this.ActerHp / this.ActerHpMax), 0f, 1f);
 				float rotoForSp = Mathf.Clamp ((this.ActerSp / this.ActerSpMax), 0f, 1f);
 				Vector2 c = Camera.main.WorldToScreenPoint (new Vector3 (this.transform.position.x, this.transform.position.y + 1f, this.transform.position.z));
-				GUI.BeginGroup (new Rect (c.x, Screen.height - c.y, 155, 100));
+
+				RectPosition.x = c.x;
+				RectPosition.y = Screen.height - c.y;
+				RectHP.width = 120 * rotoForHp;
+				RectSP.width = 120 * rotoForSp;
+
+				GUI.BeginGroup (RectPosition);
 				GUI.Box (Rect1 ,OnGUIStringForNAmeLV );
 				GUI.Box (Rect2, "");
-				GUI.Box (new Rect (12, 24, 120 * rotoForHp, 13), "", GUIShowStyleHP.box);
+				GUI.Box (RectHP, "", GUIShowStyleHP.box);
 				GUI.Box (Rect3, "");
-				GUI.Box (new Rect (12, 40, 120 * rotoForSp, 13), "", GUIShowStyleSP.box);
+				GUI.Box (RectSP, "", GUIShowStyleSP.box);
 				GUI.EndGroup ();
+
+
+
 			}
 		}
 	}

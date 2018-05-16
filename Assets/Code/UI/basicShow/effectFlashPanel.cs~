@@ -48,16 +48,17 @@ public class effectFlashPanel : MonoBehaviour {
 			return;
 		
 		//尝试增加当前没有的effect
-		effectBasic[] theEffectbasics = systemValues.thePlayer.GetComponentsInChildren<effectBasic> ();
-		for (int i = 0; i < theEffectbasics.Length; i++)
+		//effectBasic[] theEffectbasics = systemValues.thePlayer.GetComponentsInChildren<effectBasic> ();
+		//再一次强力优化，直接使用playerBasic里面保存的引用做就可以了，连获取都没有必要再次获取
+		for (int i = 0; i < systemValues.thePlayer.Effects.Count; i++)
 		{
-			if (!theEffectbasics [i].isShowing ())
+			if (! systemValues.thePlayer.Effects[i].isShowing ())
 				continue;
 			
-			if (!checkIfIsShowing (theEffectbasics [i])) //如果这个效果没有被展示
+			if (!checkIfIsShowing ( systemValues.thePlayer.Effects[i])) //如果这个效果没有被展示
 			{
 				ButtonEffectflasher theNewEffect = new ButtonEffectflasher ();
-				theNewEffect.makeStart (theEffectShowButton,this.transform,theEffectbasics [i],EffectColor,NotEffectColor);
+				theNewEffect.makeStart (theEffectShowButton,this.transform, systemValues.thePlayer.Effects [i],EffectColor,NotEffectColor);
 				flashItem.Add (theNewEffect);
 			}
 		}

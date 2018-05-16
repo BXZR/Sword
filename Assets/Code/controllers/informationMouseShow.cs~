@@ -50,9 +50,11 @@ public class informationMouseShow : MonoBehaviour {
 
 	void OnGUI()  
 	{ 
+		if (theMethod != messageMethod.method1)
+			return;
+		
 		if(information)//如果开始显示
 		{
-
 			if(!showTextHigh)
 			{
 				if(Input .mousePosition .y >0&&Input .mousePosition .x <Screen .width -150)

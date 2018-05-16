@@ -162,11 +162,21 @@ public class effectBasic : MonoBehaviour {
 	public void makeStart()
 	{
 		thePlayer = this.GetComponentInChildren<PlayerBasic> ();
+		addThisToPlayer ();
 	}
 
-	//void OnDestroy()
-	//{
-		
-	//}
+    //动态增减游戏人物身上的效果
+	public void addThisToPlayer()
+	{
+		if (!thePlayer)
+			return;
+		thePlayer.Effects.Add (this);
+	}
 
+	public void minusThisFromPlayer()
+	{
+		if (!thePlayer)
+			return;
+		thePlayer.Effects.Remove (this);
+	}
 }

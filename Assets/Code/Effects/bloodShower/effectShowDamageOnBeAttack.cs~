@@ -121,8 +121,10 @@ public class effectShowDamageOnBeAttack : effectBasic
 		makeShowTextExtra("获得"+soulCount+"灵力" , 0);
 	}
 
+
 	void Start ()
 	{
 		makeStart ();
 	}
+		
 }

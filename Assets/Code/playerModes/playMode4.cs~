@@ -26,12 +26,9 @@ public class playMode4 : playModeBasic {
 	}
 	void OnGUI()
 	{ 
-		if ( systemValues.isGamming )
+		if (systemValues.isGamming  && !systemValues.isSystemUIUsing ()) 
 		{
-			if (!systemValues.isSystemUIUsing ()) 
-			{
-				GUI.Box (theShowRect,rectShowString);
-			}
+			GUI.Box (theShowRect,rectShowString);
 		}
 	}
 }

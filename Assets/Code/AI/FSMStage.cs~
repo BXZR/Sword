@@ -48,6 +48,8 @@ public class FSMStage : effectBasic   {
 		if (theRender)
 			theRender.gameObject.AddComponent <FSMRenderSwitch> ();
 		this.transform.root.tag = "AI";//打上标记方便找
+
+	
 	}
 
 
@@ -145,6 +147,7 @@ public class FSMStage : effectBasic   {
 		//这里可能会因为数值设定有一定时间上的误差，但是我觉得没什么所谓
 		InvokeRepeating ("angerCanculate" , 2f , 1f);
 		InvokeRepeating ("think", 2f, AIThinkTimer);
+		//InvokeRepeating ("makeUpdate", 0f, 0.04f);
 	}
 
 	void  think()
@@ -220,8 +223,8 @@ public class FSMStage : effectBasic   {
 	}
 	//===============================================================================
 
-    //很多操作都是连续的，对于AI来说或许用连续的方法计算会比较好
-	void Update () 
+
+	void makeUpdate()
 	{
 		//出于优化考虑不必让AI一直计算下去
 		//此外这也可是“怪物僵直”状态的一个做法
@@ -234,7 +237,7 @@ public class FSMStage : effectBasic   {
 					theStateNow.actInThisState ();
 				} 
 				else 
- 				{
+				{
 					//print ("no state");
 				} 
 			}
@@ -248,5 +251,11 @@ public class FSMStage : effectBasic   {
 				Destroy (this.gameObject, 15f);//尸体保留久一点似乎更好玩（尸体也是路障啊）
 			}
 		}
+	}
+
+    //很多操作都是连续的，对于AI来说或许用连续的方法计算会比较好
+	void Update () 
+	{
+		makeUpdate ();
 	}
 }

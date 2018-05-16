@@ -39,6 +39,8 @@ public class attackLinkController :MonoBehaviour {
 	private bool isStarted = false;//是否开启
 	public bool canControll = true ;//是否可以通过玩家/AI进行操作
 
+	//计算用的预存字符串，用来检查是不是AI
+	private string theSavedTag = "";
 
 
 	//检测连招的方法，每一次按键都要求检测
@@ -197,6 +199,7 @@ public class attackLinkController :MonoBehaviour {
 		
 		isStarted = true;
 
+		theSavedTag = this.gameObject.tag;
 	}
 	private void makStartExtra()//这个是用于与工程中其他的脚本进行联系的初始化
 	{
@@ -210,7 +213,7 @@ public class attackLinkController :MonoBehaviour {
 	//这个方法在Update里面是无法使用的，events会被放空
 	void OnGUI()
 	{ 
-		if (isStarted && !systemValues.isSystemUIUsing() &&!this.gameObject .tag.Equals( "AI"))
+		if (isStarted && !systemValues.isSystemUIUsing() && !theSavedTag .Equals( "AI"))
 		{
 				//为了保证更强大的兼容性暂定使用Event的方法，虽然这种方法有额外的开销
 				//InputString是一个非常强势的方法，但是比较有缺陷的就是只是针对有输出的键位有效果
@@ -222,7 +225,6 @@ public class attackLinkController :MonoBehaviour {
 				events = Event.current;
 				if (events != null) 
 				{
-					
 					if (events.isKey && events.keyCode != KeyCode.None) 
 					{
 						keyUse = events.keyCode;

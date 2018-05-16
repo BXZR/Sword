@@ -45,7 +45,7 @@ public class uiShowsForBasic : MonoBehaviour {
 		if (theHpBackSlider) 
 		{
 			if (theHpBackSlider.value > theHpSlider.value)
-				theHpBackSlider.value = Mathf.Lerp (theHpBackSlider.value, theHpSlider.value, 0.1f);
+				theHpBackSlider.value = Mathf.Lerp (theHpBackSlider.value, theHpSlider.value, 0.2f);
 			else
 				theHpBackSlider.value = theHpSlider.value;
 		}

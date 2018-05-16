@@ -352,9 +352,11 @@ public class attackLink : MonoBehaviour {
 		 return attackAray [index];//返回当前检测的字符
 	}
 
+
+	List<char> allLinkChars = new List<char> ();
 	public List<char> getCharListWithIndex(int index)
 	{
-		List<char> allLinkChars = new List<char> ();
+		allLinkChars.Clear ();
 		for (int i = 0; i < attackLinkStringSplited.Length; i++) 
 		{
 			if (attackLinkStringSplited[i].Length-1 < index)
