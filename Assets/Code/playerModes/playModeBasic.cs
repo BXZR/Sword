@@ -10,6 +10,8 @@ public class playModeBasic : MonoBehaviour {
    //而这一点额外附加的逻辑应该从这里进行分支处理
    //这里的控制是在systemValue也就是GM里面进行控制的
 
+	public 	string modeName = "";
+
 	//游戏玩法开始的时候的准备工作
 	public virtual void OnGameStart(){}
 	//玩法刷新的时候的需要做的事情，例如计时器和刷新BOSS
@@ -19,4 +21,9 @@ public class playModeBasic : MonoBehaviour {
 	public virtual bool isGameOver(){return false;}
 	//结束方法
 	public virtual void OnGameEnd(){}
+
+	//重新计算GUI内容
+	public Rect theShowRect;//GUI Rect并不需要总是在new
+	public string rectShowString = "";//GUI显示的文字
+	public virtual void flashGUI(){}
 }

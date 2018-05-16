@@ -20,8 +20,18 @@ public class playMode3 : playModeBasic {
 	{
 		count = GameObject.FindGameObjectsWithTag ("AI").Length;
 		//systemValues.thePlayer.ActerSpeedOverPervnet += 0.2f; //世界BUFF，这个过后要用脚本实现
+		modeName = systemValues.getGameModeWithMove () [0];
+
+		theShowRect = new Rect(Screen.width*0.85f , 0 , Screen.width*0.15f,Screen.height*0.05f) ;
+		rectShowString = modeName+"\n剩余时间："+ timerForKill.ToString("f0")+"s";
+		InvokeRepeating ("flashGUI", 0f, 5f);
 	}
 
+	public override void flashGUI ()
+	{
+		theShowRect = new Rect(Screen.width*0.85f , 0 , Screen.width*0.15f,Screen.height*0.05f) ;
+		rectShowString = modeName+"\n剩余时间："+ timerForKill.ToString("f0")+"s";
+	}
 
 	public override void OnGameUpdate ()
 	{
@@ -60,7 +70,7 @@ public class playMode3 : playModeBasic {
 		{
 			if (!systemValues.isSystemUIUsing ()) 
 			{
-				GUI.Box (new Rect(Screen.width*0.85f , 0 , Screen.width*0.15f,Screen.height*0.03f) , "剩余时间："+ timerForKill.ToString("f0")+"s");
+				GUI.Box (theShowRect  , rectShowString);
 			}
 		}
 	}

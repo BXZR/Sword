@@ -18,6 +18,7 @@ public class playMode1 : playModeBasic {
 	private bool ended = false;
 
 
+
 	public override void OnGameStart ()
 	{
 		GameObject Boss = GameObject.Instantiate<GameObject>(Resources.Load<GameObject>("fighters/" + theBossProfabName));
@@ -30,12 +31,24 @@ public class playMode1 : playModeBasic {
 		theAim.transform.SetParent (Boss.transform);
 		theAim.transform.localPosition = new Vector3 (0f, 3.2f, 0f);
 		theAim.transform.localScale = Vector3.one;
+
+		modeName = systemValues.getGameModeWithMove () [0];
+		theShowRect = new Rect (Screen.width * 0.85f, 0, Screen.width * 0.15f, Screen.height * 0.05f);
+		rectShowString = modeName + "\n剩余时间：" + timerForKill.ToString ("f0") + "s";
+		InvokeRepeating ("flashGUI", 0f, 5f);
 	}
 
  
 	public override void OnGameUpdate ()
 	{
 		timerForKill -= Time .deltaTime;
+	}
+
+
+	public override void flashGUI ()
+	{
+		theShowRect = new Rect (Screen.width * 0.85f, 0, Screen.width * 0.15f, Screen.height * 0.05f);
+		rectShowString = modeName + "\n剩余时间：" + timerForKill.ToString ("f0") + "s";
 	}
 
 	public override bool isGameOver ()
@@ -67,7 +80,7 @@ public class playMode1 : playModeBasic {
 		{
 			if (!systemValues.isSystemUIUsing ()) 
 			{
-				GUI.Box (new Rect(Screen.width*0.85f , 0 , Screen.width*0.15f,Screen.height*0.03f) , "剩余时间："+ timerForKill.ToString("f0")+"s");
+				GUI.Box ( theShowRect , rectShowString);
 			}
 		}
 	}

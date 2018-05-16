@@ -11,5 +11,27 @@ public class playMode4 : playModeBasic {
 	public override void OnGameStart ()
 	{
 		systemValues.soulCount = 88888;
+		modeName = systemValues.getGameModeWithMove () [0];
+
+		theShowRect = new Rect(Screen.width*0.85f , 0 , Screen.width*0.15f,Screen.height*0.03f)  ;
+		rectShowString = modeName;
+
+		InvokeRepeating ("flashGUI", 0f, 5f);
+	}
+
+	public override void flashGUI ()
+	{
+		theShowRect = new Rect(Screen.width*0.85f , 0 , Screen.width*0.15f,Screen.height*0.03f)  ;
+		rectShowString = modeName;
+	}
+	void OnGUI()
+	{ 
+		if ( systemValues.isGamming )
+		{
+			if (!systemValues.isSystemUIUsing ()) 
+			{
+				GUI.Box (theShowRect,rectShowString);
+			}
+		}
 	}
 }
