@@ -4,16 +4,17 @@ using UnityEngine;
 
 public class effectQianfang : effectBasic {
 
-	GameObject Arrow;//弹矢引用保存
-	GameObject Arrow2;//弹矢引用保存
+	static GameObject Arrow;//弹矢引用保存
+	static GameObject Arrow2;//弹矢引用保存
 	Vector3 forward;
 	float arrowLife = 0.16f;// 弹矢生存时间
 	public int arrowCounts = 5;//发射的剑气数量
 	public float hpup = 0.04f;//吸收的生命值百分比
 	public float hpupTrueUseExtra = 4f;//吸收的生命值
 	float angleForArrow = 25;//剑气角度
-	GameObject theArrow ;//真正的弹矢
 
+	static List<extraWeapon> theArrows = new List<extraWeapon> ();
+	static extraWeapon updatedArrow;
 
 	void Start ()
 	{
@@ -32,22 +33,35 @@ public class effectQianfang : effectBasic {
 		theEffectInformation ="向前方锥形发射"+arrowCounts+"束特殊剑气\n这些剑气可触发攻击效果并有额外（"+hpup*100+"%+"+hpupTrueUseExtra+"）生命偷取\n每束剑气最多对三个目标造成伤害，持续"+arrowLife+"秒" +
 			"\n冷却时间为" + (lifeTimerAll-timerForEffect) +"秒，冷却中使用此技可释放普通剑气";
 		makeStart ();
+		if(!Arrow)
+			Arrow = (GameObject)Resources.Load ("effects/ziyingarrow2");
+		if(!Arrow2)
+			Arrow2 = (GameObject)Resources.Load ("effects/ziyingarrow");
+		makeFlashList ();
+		
 		//print ("气剑指");
 		//没有控制者就不发
 		if (this.thePlayer) 
 		{
 			if (isEffecting)
 			{
+				GameObject theArrow ;
 				for (int i = 0; i < arrowCounts; i++)
 				{
 					//四元数的方法在这里似乎不是很好用
 					//forward = Quaternion.AngleAxis((float)(45*i), new Vector3(0,1,0)) *this.thePlayer.transform.forward ;
 					//print ("forward = "+ forward);
-					if(!Arrow)
-					  Arrow = (GameObject)Resources.Load ("effects/ziyingarrow2");
-
-					theArrow = (GameObject)GameObject.Instantiate (Arrow);
-					theArrow.GetComponentInChildren <extraWeapon> ().setPlayer (this.thePlayer);
+					if (theArrows.Count < i + 1 || theArrows [i] == null) {
+						theArrow = (GameObject)GameObject.Instantiate (Arrow);
+						extraWeapon A = theArrow.GetComponentInChildren <extraWeapon> ();
+						A.setPlayer (this.thePlayer);
+						theArrows.Add (A);
+					} 
+					else 
+					{
+						theArrows [i].gameObject.SetActive (true);
+						theArrow = theArrows [i].gameObject;
+					}
 
 					Vector3 positionNew = thePlayer.transform.position + new Vector3 (0, 0.8f * thePlayer.transform.localScale.y + 0.3f, forward.normalized.z * 0.1f);
 					theArrow.transform.localScale *= thePlayer.transform.localScale.y;
@@ -60,8 +74,9 @@ public class effectQianfang : effectBasic {
 						theArrow.transform.Rotate (new Vector3 (0, (float)(angleForArrow /2), 0));
 					
 					theArrow.transform.forward = theArrow.transform.forward;
-					Destroy (theArrow, arrowLife);
+					//Destroy (theArrow, arrowLife);
 					Destroy (this, lifeTimerAll);
+					Invoke ("makeArrowOver", arrowLife);
 					Invoke ("shutEffecting" , arrowLife);
 				}
 			}
@@ -69,6 +84,33 @@ public class effectQianfang : effectBasic {
 
 	} 
 
+
+	void makeFlashList()
+	{
+		List<extraWeapon > toDelete = new List<extraWeapon> ();
+		for (int i = 0; i < theArrows.Count; i++)
+			if (!theArrows [i])
+				toDelete.Add (theArrows[i]);
+
+		for (int i = 0; i < toDelete.Count; i++)
+			theArrows.Remove (toDelete[i]);
+	}
+
+	void makeArrowOver()
+	{
+		for (int i = 0; i < theArrows.Count; i++)
+			if (theArrows [i].gameObject.activeInHierarchy) 
+			{
+				theArrows [i].GetComponentInChildren <extraWeapon> ().makeFlash ();
+				theArrows [i].gameObject.SetActive (false);
+			}
+	}
+
+	void makeUpdatedArrowOver()
+	{
+		updatedArrow.GetComponentInChildren <extraWeapon> ().makeFlash ();
+		updatedArrow.gameObject.SetActive (false);
+	}
 
 
 	public override void effectOnUpdateTime ()
@@ -87,18 +129,24 @@ public class effectQianfang : effectBasic {
 			return;
 		
 		forward = this.thePlayer.transform.forward;
-		if(!Arrow2)
-		  Arrow2 = (GameObject)Resources.Load ("effects/ziyingarrow");
 
-		theArrow = (GameObject)GameObject.Instantiate (Arrow2);
-		theArrow.GetComponentInChildren <extraWeapon> ().setPlayer (this.thePlayer);
+		if (!updatedArrow) 
+		{
+			updatedArrow = ((GameObject)GameObject.Instantiate (Arrow2)).GetComponentInChildren <extraWeapon> ();
+			updatedArrow.setPlayer (this.thePlayer);
+		} 
+		else
+		{
+			updatedArrow.gameObject.SetActive (true);
+		}
 
 		Vector3 positionNew = thePlayer.transform.position + new Vector3 (0, 0.8f * thePlayer.transform.localScale.y + 0.3f, forward.normalized.z * 0.1f);
-		theArrow.transform.localScale *= thePlayer.transform.localScale.y;
-		theArrow.transform.position = positionNew;
+		updatedArrow.transform.localScale *= thePlayer.transform.localScale.y;
+		updatedArrow.transform.position = positionNew;
 
-		theArrow.transform.forward = thePlayer.transform.forward;
-		Destroy (theArrow, arrowLife);
+		updatedArrow.transform.forward = thePlayer.transform.forward;
+		//Destroy (updatedArrow, arrowLife);
+		Invoke("makeUpdatedArrowOver" , arrowLife);
 	}
 
 
