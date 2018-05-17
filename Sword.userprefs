@@ -1,6 +1,6 @@
 ﻿<Properties StartupItem="Assembly-CSharp.csproj">
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Unity.Instance.Unity Editor" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Code\UI\startAndSelect\sceneSelecting.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Code\Effects\fighterAttackEffects\ziying\eeffectZiyingArcher.cs">
     <Files>
       <File FileName="Assets\Code\Player\attackLinkController.cs" Line="1" Column="1" />
       <File FileName="Assets\Code\Player\attackLink.cs" Line="1" Column="1" />
@@ -15,9 +15,12 @@
       <File FileName="Assets\Code\AI\FSMStage.cs" Line="1" Column="1" />
       <File FileName="Assets\Code\AI\FSM\FSM_Attack.cs" Line="1" Column="1" />
       <File FileName="Assets\Code\AI\FSM\FSM_RunAfter.cs" Line="1" Column="1" />
-      <File FileName="Assets\Code\world\worldWoodRandomMove.cs" Line="21" Column="1" />
-      <File FileName="Assets\Code\systemValues.cs" Line="446" Column="47" />
+      <File FileName="Assets\Code\world\worldWoodRandomMove.cs" Line="1" Column="1" />
+      <File FileName="Assets\Code\systemValues.cs" Line="1" Column="1" />
       <File FileName="Assets\Code\UI\startAndSelect\sceneSelecting.cs" Line="56" Column="58" />
+      <File FileName="Assets\Code\UI\startAndSelect\selectHeaderMaker.cs" Line="46" Column="49" />
+      <File FileName="Assets\Code\Effects\fighterAttackEffects\ziying\eeffectZiyingArcher.cs" Line="101" Column="5" />
+      <File FileName="Assets\Code\Player\extraWeapon.cs" Line="62" Column="25" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

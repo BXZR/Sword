@@ -58,6 +58,12 @@ public class extraWeapon : MonoBehaviour {
 
 	}
 
+
+	public void makeFlash()
+	{
+		attackAims.Clear ();
+	}
+
 	List<PlayerBasic> attackAims = new List<PlayerBasic> ();
 	void OnTriggerEnter(Collider collisioner)
 	{ 

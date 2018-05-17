@@ -42,8 +42,8 @@ public class selectHeaderMaker : MonoBehaviour {
 		{
 			GameObject theButton = GameObject.Instantiate<GameObject> (Resources.Load<GameObject>("UI/SelectButton"));
 			theButton.transform.SetParent (theButtonContant.transform);
-			theButton.transform.localPosition = new Vector3 (0,0,0);
-			theButton.transform.localScale = new Vector3 (1,1,1);
+			theButton.transform.localPosition = Vector3.zero;
+			theButton.transform.localScale = Vector3.one;
 			selectHead theHead = theButton.GetComponent <selectHead> ();
 			theHead.makeStart ( systemValues.playerNamesInGame[i] , playerTitleText , playerInformationText ,  theAttackEffectItemProfab,
 			theshowContantFortheAttackEffectItem ,modePosition , i);
