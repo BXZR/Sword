@@ -434,15 +434,16 @@ public class systemValues : MonoBehaviour {
 	//当前选择的场景名字的下标
 	private static int indexNowForScene = 0;
 	//真正的系统场景资源名字
-	private static string  [] theSceneNameForSystem = {"theFight2" , "theFight3"};
+	private static string  [] theSceneNameForSystem = {"theFight2" , "theFight3" , "theFight4"};
 	//场景名字，同时也是场景的图片的资源名字
-	private static string [] theSceneNames = {"map1" , "map2"};
+	private static string [] theSceneNames = {"map1" , "map2" , "map3"};
 	//这个场景（副本）的说明
 	//注意这个说明的地名和真正的说明之间有'\n'
 	private static string[]   theSceneInformations = 
 	{
 		"空积城\n存在于著名游戏“荣耀”中的一个城池。传说一叶知秋和大漠孤烟两位高手初次碰面就是在这里,后来此地就成了游戏玩家的圣地。传说只要在此地击败隐藏魔兽就可以获得至尊秘宝，至今不知真假。",
-		"迷踪峡谷\n以如迷宫一般的道路闻名，并且栖息着各种各样诡异而强大的怪物，即便是高手也必须小心谨慎而入。但也正因如此，此处有着各种百年难遇的奇宝，非常有益于修行。"
+		"迷踪峡谷\n以如迷宫一般的道路闻名，并且栖息着各种各样诡异而强大的怪物，即便是高手也必须小心谨慎而入。但也正因如此，此处有着各种百年难遇的奇宝，非常有益于修行。",
+		"太极梅花阵\n一个很小的方寸之地上遍布梅花桩，这些梅花桩按照太极阵法缓缓移动，这是一个适合切磋的场地，很多豪杰都相约来这里一较高下。"
 	};
 	//前后获取sceneName的方法，分别是向前和向后选择
 	public static string getNowScene()

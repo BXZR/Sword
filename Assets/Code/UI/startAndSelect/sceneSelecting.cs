@@ -53,6 +53,6 @@ public class sceneSelecting : MonoBehaviour {
 	private void makeText(string information)
 	{
 		if (sceneNameText)
-			sceneNameText.text = systemValues.rowStringToColumn(  "☯☲" + information.Split ('\n') [0] +"☵");
+			sceneNameText.text = systemValues.rowStringToColumn(  "☯☲" + information.Split ('\n') [0] +"☵" , 12);
 	}
 }
