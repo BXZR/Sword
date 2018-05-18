@@ -54,6 +54,7 @@ public class equipRemakePanel : MonoBehaviour {
 		equipSkillAdderNow = theEquip;
 		equipSkillAddInformationStatic.text = systemValues.getEffectInfromationWithName (theEquip.equipName);
 		equipSkillAddInformationStatic.text += "\n【潜力要求：" + theEquip.skillValueCountAll +"】";
+
 	}
 
 	public static void getEquipForOperate(equipBasics theEquipIn)
@@ -222,8 +223,16 @@ public class equipRemakePanel : MonoBehaviour {
 			systemValues.messageTitleBoxShow ("尚未选定目标");
 			return;
 		}
-		equipBasics theEq = theEquip != null ? theEquip : equipSkillAdderNow;
-		string nameUse = theEquip != null ? theEquip.equipName : equipSkillAdderNow.equipExtraName;
+		equipBasics theEq;
+		if (systemValues.theEquipNow!= null)
+			theEq = systemValues.theEquipNow;
+	    else	
+		    theEq =  theEquip != null ? theEquip : equipSkillAdderNow;
+
+		if (theEq == null)
+			return;
+
+		string nameUse = theEq.theEquipType != equiptype.equipSkill ? theEq.equipName : theEq.equipExtraName;
 		int soulGet = 20 + systemValues.getSoulInForDestroyTheEquip(theEq);
 		systemValues.choiceMessageBoxShow ("熔锻？", "熔锻【"+nameUse+"】将会获得"+ soulGet +"灵力，但是这个物品会永远消失。\n\n是否熔锻？", true, new MesageOperate (makeTheEquipToSoul));
 
@@ -233,8 +242,18 @@ public class equipRemakePanel : MonoBehaviour {
 	void makeTheEquipToSoul()
 	{
 		theSoundController.makeSoundShow (1);
-		equipBasics theEquipUse = theEquip != null ? theEquip : equipSkillAdderNow;
-		string nameUse = theEquip != null ? theEquip.equipName : equipSkillAdderNow.equipExtraName;
+
+		equipBasics theEquipUse;
+		if (systemValues.theEquipNow!= null)
+			theEquipUse= systemValues.theEquipNow;
+		else	
+			theEquipUse =  theEquip != null ? theEquip : equipSkillAdderNow;
+
+		if (theEquipUse == null)
+			return;
+		
+		//equipBasics theEquipUse = theEquip != null ? theEquip : equipSkillAdderNow;
+		string nameUse =  theEquipUse.theEquipType != equiptype.equipSkill ? theEquipUse.equipName : theEquipUse.equipExtraName;
 
 		if (theEquipUse.isUsing)
 			theEquipUse.DropThisThing (systemValues.thePlayer);

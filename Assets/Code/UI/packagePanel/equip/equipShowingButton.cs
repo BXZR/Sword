@@ -24,7 +24,8 @@ public class equipShowingButton : MonoBehaviour {
 		{
 			//三个静态方法传递对象
 			//于是区域自治（伪观察者模式）
-
+			systemValues.theEquipNow = this.theEquip;
+			//print (systemValues.theEquipNow.equipName +"is lated selected");
 			if (theEquip.theEquipType != equiptype.equipSkill)
 			{
 				equipInformationPanel.changeEquipToIntroduct (this.theEquip);

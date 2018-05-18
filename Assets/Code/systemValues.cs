@@ -32,6 +32,7 @@ public class systemValues : MonoBehaviour {
 	static PhotonView photonView;
 	//=========================================
 	public static float learnWulingSpPercent = 0.75f;//修炼五灵需要消耗的当前的斗气百分比
+	public static equipBasics theEquipNow = null;//当前选中的注灵效果或者装备
 	#endregion
 
 	#region游戏角色信息设定查询
