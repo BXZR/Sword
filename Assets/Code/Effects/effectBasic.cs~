@@ -43,7 +43,8 @@ public class effectBasic : MonoBehaviour {
 	public virtual void Init(){}//初始化的方法
 	public virtual void effectDestory(){}//销毁的方法
 	public virtual void effectDestoryExtra(){}//手动调用的额外销毁方法
-	public virtual void makeInformation(){}
+	public virtual void makeInformation(){}//创建文字信息
+	public virtual void OnShowText(string information){}//显示特殊文字信息
 	//返回这个效果的信息
 
 
