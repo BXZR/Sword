@@ -24,9 +24,9 @@ public class theYinYangButton : MonoBehaviour {
 	public  void  makeYinYangButtonUse()
 	{
 		if (!theWuling.isLearned ())
-			systemValues.choiceMessageBoxShow ("五灵修炼", "修炼五灵需要消耗当前" + systemValues.learnWulingSpPercent * 100 + "%的斗气，是否修炼？", false, new MesageOperate (trueLearn));
+			systemValues.choiceMessageBoxShow ("五灵修炼", "修炼五灵需要最多消耗当前" + systemValues.learnWulingSpPercent * 100 + "%的斗气，是否修炼？", false, new MesageOperate (trueLearn));
 		else
-			systemValues.messageTitleBoxShow (theWuling.lingName +"已经习得");
+			systemValues.messageTitleBoxShow (theWuling.lingName + "已经领悟" );
 	}
 
 	private void trueLearn()
@@ -34,5 +34,10 @@ public class theYinYangButton : MonoBehaviour {
 		theWuling.learnWuling ();
 		theSliderImage.fillAmount = theWuling.getLearningPercent ();
 		theInformation.makeFlash ();
+		if (theWuling.isLearned ())
+		{
+			systemValues.messageBoxShow ("五灵修炼突破", "恭喜突破"+theWuling.lingName +"\n获得了额外的特殊效果");
+			this.GetComponent <buttonWithSound> ().makeSoundShow ();
+		}
 	}
 }

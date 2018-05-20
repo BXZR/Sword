@@ -309,6 +309,7 @@ public class PlayerBasic : MonoBehaviour {
 			{
 				fightingTimer = fightingTimerMax;
 				isFighting = false;
+				DamageRead /= 3f;//进入非战斗状态之后存储的伤害大幅度减少，这样就不会持续僵直
 			}
 		}
 	}
@@ -526,10 +527,10 @@ public class PlayerBasic : MonoBehaviour {
 
 			if (damage > this.ActerHpMax * 0.2f || DamageRead > this.ActerHpMax*0.45f) 
 			{ //伤害范围需要界定
-				extraDamageForAnimation = 0;//消除自身攻击效果
+				extraDamageForAnimation /= 2;//消除自身攻击效果
 				DamageRead  = 0;//重新统计伤害
 				for (int i = 0; i < Effects.Length; i++) 
-					Effects [i].OnShowText ("僵直，伤害取消");
+					Effects [i].OnShowText ("僵直，伤害减半");
 			}
 			//额外的状态标记改变
 			getInFightState();
