@@ -82,6 +82,7 @@ public class SystemUIController : MonoBehaviour {
 	{
 		if (Input.GetKeyDown (KeyCode.Escape) && systemValues.thePlayer && systemValues.isGamming) 
 		{
+			systemValues.messageBoxClose ();
 			if (systemValues.IsSystemPanelOpened == false)
 			{
 				startSystems ();

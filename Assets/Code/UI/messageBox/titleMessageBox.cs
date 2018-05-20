@@ -11,7 +11,7 @@ public class titleMessageBox : MonoBehaviour {
 	float timerMax = 140f;
 
 	//全局唯一
-	public static titleMessageBox theMessageSave;
+	//public static titleMessageBox theMessageSave;
 
 	//一个背景图
 	public Texture2D theBackPicture;

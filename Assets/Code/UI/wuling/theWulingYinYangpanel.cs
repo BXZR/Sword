@@ -17,9 +17,6 @@ public class theWulingYinYangpanel : MonoBehaviour {
 
 	public void setWuling(wulingType theType)
 	{
-		if (!systemValues.thePlayer)
-			return;
-
 		theEypeNow = theType;
 		lingBasic yinWuling = null;
 		lingBasic YangWuling = null; 

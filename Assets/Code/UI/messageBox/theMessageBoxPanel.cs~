@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class theMessageBoxPanel : MonoBehaviour {
 
 	//全局唯一
-	public static theMessageBoxPanel theMessageSave;
+	//public static theMessageBoxPanel theMessageSave;
 
 	//做一个有点意境的消息框吧
 	//OnGUI模式之下这两个无效

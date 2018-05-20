@@ -7,7 +7,7 @@ public class choiceMessageBox : MonoBehaviour {
 
 	//这个脚本描述带有选择的消息框
 	//全局唯一
-	public static choiceMessageBox theMessageSave;
+	//public static choiceMessageBox theMessageSave;
 
 	//做一个有点意境的消息框吧
 	//OnGUI模式之下这两个无效

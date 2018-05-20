@@ -670,12 +670,13 @@ public class systemValues : MonoBehaviour {
 
 	public static void messageBoxClose()
 	{
-		if (theMessageBoxPanel.theMessageSave)
-			Destroy (theMessageBoxPanel.theMessageSave.gameObject);
-		if (titleMessageBox.theMessageSave)
-			Destroy (titleMessageBox.theMessageSave.gameObject);
-		if (choiceMessageBox.theMessageSave)
-			Destroy (choiceMessageBox.theMessageSave.gameObject);
+		//print (" close message box");
+		if (theTitleMessageBoxSave)
+			theTitleMessageBoxSave.enabled = false;
+		if (theMessageBoxSave)
+			theMessageBoxSave.enabled = false;
+		if (theChoiceMessageBoxSave)
+			theChoiceMessageBoxSave.enabled = false;
 	}
 		
 	//消息框的操作OVER---------------------------------------------------------------------------------------------------------

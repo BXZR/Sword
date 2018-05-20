@@ -36,7 +36,7 @@ public class theYinYangButton : MonoBehaviour {
 		theInformation.makeFlash ();
 		if (theWuling.isLearned ())
 		{
-			systemValues.messageBoxShow ("五灵修炼突破", "恭喜突破"+theWuling.lingName +"\n获得了额外的特殊效果");
+			systemValues.messageBoxShow ("五灵修炼突破", "恭喜突破灵脉"+theWuling.lingName +"\n获得了额外的特殊效果:\n\n"+theWuling.lingEffectName + "\n" + theWuling.wulingInformation() +"\n\n并获得初成奖励："+theWuling.wulingInformationForLearnOver() , true);
 			this.GetComponent <buttonWithSound> ().makeSoundShow ();
 		}
 	}

@@ -13,6 +13,13 @@ public class worldWoodRandomMove : MonoBehaviour {
 		theRotateCenter = GameObject.Find ("/theWorld/center").transform .position;
 	}
 
+
+	void OnTriggerEnter(Collider collisioner)
+	{ 
+		PlayerBasic PB = collisioner.gameObject.GetComponent<PlayerBasic> ();
+		if (PB)
+			PB.OnBeAttack (40f);
+	}
 	void Update () 
 	{
 		this.transform.RotateAround (theRotateCenter , Vector3.up , speed  *Time .deltaTime);
