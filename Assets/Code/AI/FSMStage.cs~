@@ -49,7 +49,9 @@ public class FSMStage : effectBasic   {
 			theRender.gameObject.AddComponent <FSMRenderSwitch> ();
 		this.transform.root.tag = "AI";//打上标记方便找
 
-	
+		move theMoveControllerForPlayer = this.GetComponent <move> ();
+		if (theMoveControllerForPlayer )
+			theMoveControllerForPlayer.enabled = false;//AI不需要这个move控制移动
 	}
 
 

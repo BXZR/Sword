@@ -44,6 +44,7 @@ public class move : MonoBehaviour {
 	public bool isJumping = false;
 	public bool isOverWall = false;//站在墙边可以进行多段跳跃
 
+	Vector3 moveDirection = Vector3.zero;
 
 	public void makeStart()//初始化方法，由总控单元统一进行初始化
 	{
@@ -67,9 +68,9 @@ public class move : MonoBehaviour {
 	}  
 
 	//计时器和额外加速在这里控制
-	private void timerCheck()
+	private void timerCheck(float forwardA , float upA)
 	{
-		if (Mathf.Abs (Input.GetAxis (forwardAxisName)) > 0.1f || Mathf.Abs (Input.GetAxis (upAxisName)) > 0.1f) {//如果有输入就逐步进行检测，长按与短按的时间并不一样
+		if (Mathf.Abs (forwardA ) > 0.1f || Mathf.Abs (upA) > 0.1f) {//如果有输入就逐步进行检测，长按与短按的时间并不一样
 			keyNow += Time.deltaTime;//使用这个计时器进行计时
 
 			if (this.transform.position.y > 0.6f) 
@@ -77,10 +78,8 @@ public class move : MonoBehaviour {
 				keyNow += Time.deltaTime*2;//半空中速度积累速度更快
 			}
 
-			if (keyNow > keyTimer)//切换速度
-				speedNow = speedRun;
-			else
-				speedNow = speedNormal;
+			//切换速度
+			speedNow =  keyNow > keyTimer ? speedRun : speedNormal;
 		} 
 		else 
 		{
@@ -91,7 +90,6 @@ public class move : MonoBehaviour {
 	public void MoveForwardBack(float  AxisValue)
 	{
 		//print (this.gameObject .name +" is moving forward");
-		Vector3 moveDirection = Vector3.zero;//刷新值这个值只需要计算位置增量就可以了
 		float ZMove = 0f;
 		//单机动作控制
 		this.theAnimatorOfPlayer.SetFloat ("forward", AxisValue);//播放动画,具体内容需要看controller //////////////////////////////////
@@ -102,11 +100,8 @@ public class move : MonoBehaviour {
 		Vector3 moveDirectionAction = transform.rotation * moveDirection;//旋转角度加权
 		//在一定高度的半空中有一定的移动速度加成
 		//这个效果只有在跳跃的时候才会触发
-		if (jumpTimer > jumpTimerMax/2 && isJumping)
-			moveDirectionAction.z += ZMove * 0.25f;//在半空中有额外25%的凌空移动速度;
-
-		if (theController && theController.enabled)//有时候需要强制无法移动
-			theController.Move (moveDirectionAction);//真实地进行行动(因为使用的是characterController，因此使用坐标的方式似乎比较稳妥)
+		if (jumpTimer > jumpTimerMax * 0.5f && isJumping)
+			moveDirectionAction.z += ZMove * 0.25f;//在半空中有额外25%的凌空移动速度效率;
 		
 //		if (this.gameObject.tag == "AI")
 //		{
@@ -117,7 +112,7 @@ public class move : MonoBehaviour {
 
 	void MoveLeftAndRight(float AxisValue , float forwardA)
 	{
-		Vector3 moveDirection = Vector3.zero;
+		
 		//动作设定
 		float minus = yNow - savedYaw;
 		if (Mathf.Abs (minus) > 10)
@@ -154,8 +149,6 @@ public class move : MonoBehaviour {
 		//下面注释的两行是一个很好的思想，但是因为y周上面的移动出现跳变，会有较大幅度的上下抖动
 		moveDirection.x  += XAdd * thePlayer.ActerMoveSpeedPercent;//漫游之移动
 
-		if (theController && theController.enabled)//有时候需要强制无法移动
-			theController.Move (transform.rotation *moveDirection);//真实地进行行动(因为使用的是characterController，因此使用坐标的方式似乎比较稳妥)
 	}
 
 
@@ -237,14 +230,14 @@ public class move : MonoBehaviour {
 		if (isJumping ) 
 		{
 			//thePlayer.ActerSp -= thePlayer.ActerSpUp * Time.deltaTime;
-			jumpTimer -= Time.deltaTime;
+			jumpTimer -= Time.deltaTime *2f;
 
 			if (theController && theController.enabled)//有时候需要强制无法移动
 			{
 				float adder =  (speedNow == speedNormal ? 6f:9f) *thePlayer.ActerMoveSpeedPercent;
 				adder = Mathf.Clamp (adder ,  6f , 10f);
 				//jumpTimer越来越小表现为上冲余力越来越不足
-				jumpAction  += new Vector3 (0,jumpTimer,0) * Time .deltaTime * adder;
+				jumpAction  += new Vector3 (0,jumpTimer *2f,0) * Time .deltaTime * adder;
 			}
 
 			if (IsGrounded() && jumpTimer < 0) 
@@ -348,7 +341,7 @@ public class move : MonoBehaviour {
 			speedRun += speedAdderWithShift;
 		}
 		if(thePlayer)
-		UseSP( thePlayer.ActerSpUp* Time.deltaTime * 2f);
+		    UseSP( thePlayer.ActerSpUp* Time.deltaTime * 2f);
 	}
 
 	//移动的究极大方法
@@ -386,9 +379,11 @@ public class move : MonoBehaviour {
 	//移动的计算因为是人看到的，所以还是应该更加连贯
 	void Update ()
 	{
-		if (!isStarted || !canMove)
+		if (!isStarted || !canMove )
 			return;
-		
+
+		moveDirection = Vector3.zero;
+
 		gravtyMove ();
 
 		forwardA = Input.GetAxis (forwardAxisName);
@@ -403,8 +398,11 @@ public class move : MonoBehaviour {
 		MoveLeftAndRight (upA,forwardA );
 		Jump();
 		fastMoveCheck ();
-		timerCheck ();
+		timerCheck (forwardA , upA);
 
+		if (theController && theController.enabled)//有时候需要强制无法移动
+			theController.Move (transform.rotation *moveDirection);//真实地进行行动(因为使用的是characterController，因此使用坐标的方式似乎比较稳妥)
+		
 		//这是一个更加强制的网络移动的调用，但是实际上没有要这样做
 		//因为transform的观察已经包含了位移
 		//所以只需要在适当的时候作出相应的动画就可以了
@@ -413,7 +411,7 @@ public class move : MonoBehaviour {
 		if(this.photonView == null)
 			photonView = PhotonView.Get(this);
 		
-		moveForAll (forwardA, upA);
+		//moveForAll (forwardA, upA);
 	}
 
 	void Start ()
