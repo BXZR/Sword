@@ -255,8 +255,8 @@ public class attackLinkController :MonoBehaviour {
 		}
 	}
     
-
-	void Update()
+	//外部调用强制刷新速度参数方法
+	public void UpdateSpeed()
 	{	
 	  //有些东西应该保持实时，例如攻击速度的变化不允许有太多的延迟
 	  //为了保证网络版本的自治，这里还是应该自行控制一下的
@@ -286,6 +286,8 @@ public class attackLinkController :MonoBehaviour {
 			thePlayer.extraDamageForAnimation = 0;
 			thePlayer.theAudioPlayer.audioNow = null;
 		}
+
+		speedControllWithPlayer ();
 	}
 		
 	//有一些网络必要的逻辑也需要用start进行初始化一下

@@ -1,49 +1,16 @@
 ﻿<Properties StartupItem="Assembly-CSharp.csproj">
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Unity.Instance.Unity Editor" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Code\UI\basicShow\uiShowsForBasic.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Code\UI\ExtraControl\columnText.cs">
     <Files>
-      <File FileName="Assets\Code\Player\attackLinkController.cs" Line="1" Column="1" />
-      <File FileName="Assets\Code\Player\attackLink.cs" Line="1" Column="1" />
-      <File FileName="Assets\Code\Player\PlayerBasic.cs" Line="25" Column="19" />
-      <File FileName="Assets\Code\controllers\informationMouseShow.cs" Line="1" Column="1" />
-      <File FileName="Assets\Photon Unity Networking\UtilityScripts\NetworkCullingHandler.cs" Line="1" Column="1" />
-      <File FileName="Assets\Code\netWork\PUNConnect.cs" Line="1" Column="1" />
-      <File FileName="Assets\Code\UI\messageBox\choiceMessageBox.cs" Line="1" Column="1" />
-      <File FileName="Assets\Code\playerModes\playMode1.cs" Line="1" Column="1" />
-      <File FileName="Assets\Photon Unity Networking\UtilityScripts\ShowStatusWhenConnecting.cs" Line="1" Column="1" />
-      <File FileName="Assets\Photon Unity Networking\UtilityScripts\PointedAtGameObjectInfo.cs" Line="1" Column="1" />
-      <File FileName="Assets\Code\AI\FSMStage.cs" Line="1" Column="1" />
-      <File FileName="Assets\Code\AI\FSM\FSM_Attack.cs" Line="1" Column="1" />
-      <File FileName="Assets\Code\AI\FSM\FSM_RunAfter.cs" Line="1" Column="1" />
-      <File FileName="Assets\Code\systemValues.cs" Line="1" Column="1" />
-      <File FileName="Assets\Code\UI\startAndSelect\sceneSelecting.cs" Line="1" Column="1" />
-      <File FileName="Assets\Code\UI\startAndSelect\selectHeaderMaker.cs" Line="1" Column="1" />
-      <File FileName="Assets\Code\Effects\fighterAttackEffects\ziying\eeffectZiyingArcher.cs" Line="1" Column="1" />
-      <File FileName="Assets\Code\Player\extraWeapon.cs" Line="1" Column="1" />
-      <File FileName="Assets\Code\UI\startAndSelect\sceneSkipButton.cs" Line="1" Column="1" />
-      <File FileName="Assets\Code\Effects\fighterAttackEffects\ziying\effectQianfang.cs" Line="1" Column="1" />
-      <File FileName="Assets\Code\Effects\effectBasic.cs" Line="1" Column="1" />
-      <File FileName="Assets\Code\UI\packagePanel\equip\equipRemakePanel.cs" Line="1" Column="1" />
-      <File FileName="Assets\Code\UI\packagePanel\equip\equipShowingButton.cs" Line="1" Column="1" />
-      <File FileName="Assets\Code\UI\packagePanel\thePackagePanelShow.cs" Line="1" Column="1" />
-      <File FileName="Assets\Code\UI\packagePanel\equip\equipSelectTypeButton.cs" Line="1" Column="1" />
-      <File FileName="Assets\Code\Effects\effectForWuling\wuling.cs" Line="1" Column="1" />
-      <File FileName="Assets\Code\Effects\bloodShower\effectShowDamageOnBeAttack.cs" Line="1" Column="1" />
-      <File FileName="Assets\Code\Effects\bloodShower\extraMoveUp.cs" Line="1" Column="1" />
-      <File FileName="Assets\Code\Effects\effectForWuling\lingEffects\water\water1.cs" Line="1" Column="1" />
-      <File FileName="Assets\Code\Effects\fighterAttackEffects\public\effectForSpeedMoveForward.cs" Line="1" Column="1" />
-      <File FileName="Assets\Code\UI\wuling\theYinYangButton.cs" Line="1" Column="1" />
-      <File FileName="Assets\Code\UI\UISound\buttonWithSound.cs" Line="1" Column="1" />
-      <File FileName="Assets\Code\UI\wuling\theWulingYinYangpanel.cs" Line="1" Column="1" />
-      <File FileName="Assets\Code\theWorld\worldWoodRandomMove.cs" Line="1" Column="1" />
-      <File FileName="Assets\Code\UI\wuling\wulingButton.cs" Line="1" Column="1" />
-      <File FileName="Assets\Code\UI\basicShow\effectFlashPanel.cs" Line="1" Column="1" />
-      <File FileName="Assets\Code\UI\systemPanel\SystemUIController.cs" Line="1" Column="1" />
-      <File FileName="Assets\Code\UI\messageBox\theMessageBoxPanel.cs" Line="1" Column="1" />
-      <File FileName="Assets\Code\UI\messageBox\titleMessageBox.cs" Line="1" Column="1" />
-      <File FileName="Assets\Code\theWorld\ColliderMake.cs" Line="1" Column="1" />
-      <File FileName="Assets\Code\Player\move.cs" Line="398" Column="31" />
-      <File FileName="Assets\Code\UI\basicShow\uiShowsForBasic.cs" Line="52" Column="4" />
+      <File FileName="Assets\Code\bloodSlider\BasicMethod\BloodScaner.cs" Line="33" Column="22" />
+      <File FileName="Assets\Code\Effects\bloodShower\effectShowDamageOnBeAttack.cs" Line="29" Column="4" />
+      <File FileName="Assets\Code\Effects\bloodShower\extraMoveUp.cs" Line="96" Column="64" />
+      <File FileName="Assets\Code\Effects\effectForPlayMode\playModeEffect2.cs" Line="1" Column="1" />
+      <File FileName="Assets\Code\Effects\effectForPlayMode\playModeEffect3.cs" Line="1" Column="1" />
+      <File FileName="Assets\Code\Effects\effectForPlayMode\playModeEffect4.cs" Line="1" Column="1" />
+      <File FileName="Assets\Code\Player\areaShower3D.cs" Line="5" Column="21" />
+      <File FileName="Assets\Code\Player\PlayerBasic.cs" Line="1155" Column="32" />
+      <File FileName="Assets\Code\UI\ExtraControl\columnText.cs" Line="1" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

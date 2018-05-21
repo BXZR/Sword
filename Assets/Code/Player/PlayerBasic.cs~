@@ -695,8 +695,8 @@ public class PlayerBasic : MonoBehaviour {
 		theString.Append ((this.ActerDamageMinusPercent*100).ToString("f1"));
 		theString.Append ("%\n");
 
-		string attackLengthShow =  (this.theAttackAreaLength >0) ? this.theAttackAreaLength*100+"%   ": "[特殊]    ";
-		string attackAreaShow = (this.theAttackAreaAngel >0) ? this.theAttackAreaAngel.ToString ("f1")  : "[特殊]";
+		string attackLengthShow =  (this.theAttackAreaLength >0) ? this.theAttackAreaLength*100+"%   ": "【特殊】    ";
+		string attackAreaShow = (this.theAttackAreaAngel >0) ? this.theAttackAreaAngel.ToString ("f1")  : "【特殊】";
 
 		theString.Append ("攻击距离  ");
 		theString.Append (attackLengthShow);
@@ -802,6 +802,8 @@ public class PlayerBasic : MonoBehaviour {
 					Effects [i].OnHpUp ();
 					Effects [i].OnHpUp (hpupValue);
 				}
+				if (ActerHp > ActerHpMax) 
+					ActerHp = ActerHpMax; //最后一个修正
 			}
 			if (ActerHp < 0)
 			{
@@ -809,19 +811,18 @@ public class PlayerBasic : MonoBehaviour {
 				isAlive = false;
 				makeDeadEffect ();
 			}
-			if (ActerHp > ActerHpMax) 
-			{
-				ActerHp = ActerHpMax; //最后一个修正
-			}
 
-			float spupValue = ActerSpUp * systemValues.updateTimeWait;
-			ActerSp += spupValue;
-			for (int i = 0; i < Effects.Count; i++) 
+			if (ActerSp < ActerSpMax) 
 			{
-				Effects [i].OnSpUp ();
-				Effects [i].OnSpUp (spupValue);
+				float spupValue = ActerSpUp * systemValues.updateTimeWait;
+				ActerSp += spupValue;
+				for (int i = 0; i < Effects.Count; i++)
+				{
+					Effects [i].OnSpUp ();
+					Effects [i].OnSpUp (spupValue);
+				}
+				ActerSp = Mathf.Clamp (ActerSp, 0, ActerSpMax);
 			}
-			ActerSp = Mathf.Clamp (ActerSp, 0 , ActerSpMax );
 
 			if (!systemValues.isNullOrEmpty (conNameToEMY) || !systemValues.isNullOrEmpty(conNameToSELF)) 
 			{
@@ -854,7 +855,6 @@ public class PlayerBasic : MonoBehaviour {
 			ActerMoveSpeedPercent *= ActerSpeedOverPervnet;
 			ActerAttackSpeedPercent = Mathf.Clamp( ActerAttackSpeedPercent ,0f, ActerAttackSpeedMaxPercent);
 			ActerMoveSpeedPercent = Mathf.Clamp( ActerMoveSpeedPercent ,0f, ActerMoveSpeedMaxPercent);
-
 		}
 	}
 
