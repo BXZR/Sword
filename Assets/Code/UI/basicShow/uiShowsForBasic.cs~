@@ -60,7 +60,7 @@ public class uiShowsForBasic : MonoBehaviour {
 			theSpSlider.value = thePlayer.ActerSp / thePlayer.ActerSpMax;
 			theShieldSlider.value = thePlayer.ActerShieldHp / thePlayer.ActerHpMax;
 			jingyanImage.fillAmount = thePlayer.jingyanNow / thePlayer.jingyanMax;
-			theLvText.text = "Lv." + thePlayer.playerLv;
+			theLvText.text = thePlayer.playerLv.ToString();//"Lv." + thePlayer.playerLv;
 			makeLoseShow ();
 		}
 	}

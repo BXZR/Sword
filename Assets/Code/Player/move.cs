@@ -182,7 +182,8 @@ public class move : MonoBehaviour {
 	void Jump()
 	{
 		//刷新初始值
-		Vector3 jumpAction = Vector3.zero;
+		//Vector3 jumpAction = Vector3.zero;
+
 		//按键检测
 		if (Input.GetKeyDown (KeyCode.Space) ) 
 		{
@@ -237,7 +238,8 @@ public class move : MonoBehaviour {
 				float adder =  (speedNow == speedNormal ? 6f:9f) *thePlayer.ActerMoveSpeedPercent;
 				adder = Mathf.Clamp (adder ,  6f , 10f);
 				//jumpTimer越来越小表现为上冲余力越来越不足
-				jumpAction  += new Vector3 (0,jumpTimer *2f,0) * Time .deltaTime * adder;
+				//jumpAction  += new Vector3 (0,jumpTimer *2f,0) * Time .deltaTime * adder;
+				moveDirection += new Vector3 (0,jumpTimer *2f,0) * Time .deltaTime * adder;
 			}
 
 			if (IsGrounded() && jumpTimer < 0) 
@@ -246,9 +248,7 @@ public class move : MonoBehaviour {
 			}
 		}
 			
-	   theController.Move (jumpAction);//真实地进行行动(因为使用的是characterController，因此使用坐标的方式似乎比较稳妥)
-	   if (this.transform.position.y >= jumpMaxHeight)//高度达到一定限制之后不再允许继续向上移动
-		this.transform.position = new Vector3 (this.transform.position.x, jumpMaxHeight, this.transform.position.z);
+
 
 	}
 
@@ -259,10 +259,9 @@ public class move : MonoBehaviour {
 		//重力与是否跳跃也并没有关联
 		if (theController　 && canGravity) 
 		{
-			Vector3 moveAction = Vector3.zero;
 			//自编写的伪重力公式随着在半空中的时间的长短获得一个不断增加的向下移动的趋势
 			//重力会持续存在的
-			moveAction.y -= ((overGroundTimer * 3) + 5) * Time.deltaTime;
+			moveDirection.y -= ((overGroundTimer * 3) + 5) * Time.deltaTime;
 			if (isJumping) 
 			{
 				overGroundTimer += Time.deltaTime;//不在地上就进行计时，获得随着离地时间线性增长的向下移动的趋势
@@ -272,7 +271,6 @@ public class move : MonoBehaviour {
 			{
 				overGroundTimer = 0f;//归零
 			}
-			theController.Move (moveAction);//真实地进行行动(因为使用的是characterController，因此使用坐标的方式似乎比较稳妥)
 		}
 	}
 
@@ -376,6 +374,24 @@ public class move : MonoBehaviour {
 		 this.theAnimatorOfPlayer.SetFloat (AxisName, value);
 	}
 
+
+	//获取输入并做出一点限制
+	void getInput()
+	{
+		forwardA = Input.GetAxis (forwardAxisName);
+		upA = Input.GetAxis (upAxisName);
+		forwardA = Mathf.Abs (forwardA) < 0.6f ? 0f : forwardA;
+		upA = Mathf.Abs (upA) < 0.6f ? 0f : upA;
+	}
+
+	void trueMove()
+	{
+		if (theController && theController.enabled)//有时候需要强制无法移动
+			theController.Move (transform.rotation *moveDirection);//真实地进行行动(因为使用的是characterController，因此使用坐标的方式似乎比较稳妥)
+		if (this.transform.position.y >= jumpMaxHeight)//高度达到一定限制之后不再允许继续向上移动
+			this.transform.position = new Vector3 (this.transform.position.x, jumpMaxHeight, this.transform.position.z);
+	}
+
 	//移动的计算因为是人看到的，所以还是应该更加连贯
 	void Update ()
 	{
@@ -383,26 +399,15 @@ public class move : MonoBehaviour {
 			return;
 
 		moveDirection = Vector3.zero;
-
+		getInput ();
 		gravtyMove ();
-
-		forwardA = Input.GetAxis (forwardAxisName);
-		upA = Input.GetAxis (upAxisName);
-
-		if (Mathf.Abs (forwardA) < 0.6f)
-			forwardA = 0f;
-		if (Mathf.Abs (upA) < 0.6f)
-			upA = 0f;
-		
 		MoveForwardBack(forwardA);
 		MoveLeftAndRight (upA,forwardA );
 		Jump();
 		fastMoveCheck ();
 		timerCheck (forwardA , upA);
+		trueMove ();//真正的移动
 
-		if (theController && theController.enabled)//有时候需要强制无法移动
-			theController.Move (transform.rotation *moveDirection);//真实地进行行动(因为使用的是characterController，因此使用坐标的方式似乎比较稳妥)
-		
 		//这是一个更加强制的网络移动的调用，但是实际上没有要这样做
 		//因为transform的观察已经包含了位移
 		//所以只需要在适当的时候作出相应的动画就可以了
