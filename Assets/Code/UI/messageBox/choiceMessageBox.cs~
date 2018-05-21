@@ -79,7 +79,7 @@ public class choiceMessageBox : MonoBehaviour {
 		isClosing = true;
 	}
 
-	private void makeEndTrue()
+	public  void makeEndTrue()
 	{
 		showPercent = 0.0f;
 		systemValues.isMessageBoxShowing = false;

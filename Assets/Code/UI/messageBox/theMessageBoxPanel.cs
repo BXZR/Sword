@@ -64,15 +64,20 @@ public class theMessageBoxPanel : MonoBehaviour {
 	{
 		systemValues.isMessageBoxShowing = false;
 	}
-		
+
 	//自我销毁
 	public void makeEnd()
 	{
 		isAutoResize = false;
-		isClosing = false;
-		enabled = false;
-		showPercent = 0f;
+		isClosing = true;
+	}
+
+	public  void makeEndTrue()
+	{
+		showPercent = 0.0f;
 		systemValues.isMessageBoxShowing = false;
+		enabled = false;
+		isClosing = false;
 	}
 		
 	//初始化
@@ -166,8 +171,13 @@ public class theMessageBoxPanel : MonoBehaviour {
 		if(showPercent  < 1 && !isClosing)
 			showPercent += showPercentAdder;
 
-		if(isClosing)
+		if (isClosing)
+		{
 			showPercent -= showPercentAdder;
+			if (showPercent <= 0.5f)
+				makeEndTrue ();
+
+		}
 	}
 
 }

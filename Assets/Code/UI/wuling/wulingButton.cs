@@ -19,11 +19,16 @@ public class wulingButton : MonoBehaviour {
 	//五灵显示和修炼界面引用
 	public theWulingYinYangpanel wulingExciesePanel;
 
+	private bool isStarted = false;
+
 	//所有按钮初始化的时候都做一次
 	//这是为了保证初始的效果能够完整
-	void Start()
+	void OnEnable()
 	{
+		if (isStarted || !systemValues.thePlayer)
+			return;
 
+		isStarted = true;
 		PointerEventData theData = new PointerEventData (EventSystem.current );//创建事件数据
 		//传值：大概理解是：目标Gameobject ，事件数据 ， 类型（与那边接收的时候做匹配（大概））
 		ExecuteEvents .Execute<IPointerClickHandler> ( this.gameObject , theData ,ExecuteEvents.pointerClickHandler);

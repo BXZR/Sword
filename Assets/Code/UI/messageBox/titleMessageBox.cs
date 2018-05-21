@@ -81,7 +81,7 @@ public class titleMessageBox : MonoBehaviour {
 	}
 
 
-	void makeEnd()
+	public void makeEnd()
 	{
 		CancelInvoke ();
 		timer = 0f;

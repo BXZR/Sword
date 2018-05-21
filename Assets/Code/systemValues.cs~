@@ -662,6 +662,7 @@ public class systemValues : MonoBehaviour {
 		} 
 		else
 		{
+			//print ("make choice");
 			theChoiceMessageBoxSave.enabled = true;
 			theChoiceMessageBoxSave.isAutoResize = autoSize;
 			theChoiceMessageBoxSave.setInformation (showTitle, showText, theOperateMethod);
@@ -672,11 +673,18 @@ public class systemValues : MonoBehaviour {
 	{
 		//print (" close message box");
 		if (theTitleMessageBoxSave)
-			theTitleMessageBoxSave.enabled = false;
-		if (theMessageBoxSave)
-			theMessageBoxSave.enabled = false;
-		if (theChoiceMessageBoxSave)
-			theChoiceMessageBoxSave.enabled = false;
+			theTitleMessageBoxSave.makeEnd ();
+		if (theMessageBoxSave) 
+		{
+			theMessageBoxSave.makeEnd ();
+			theMessageBoxSave.makeEndTrue ();
+		}
+		if (theChoiceMessageBoxSave) 
+		{
+			//两段的end操作
+			theChoiceMessageBoxSave.makeEnd ();
+			theChoiceMessageBoxSave.makeEndTrue ();
+		}
 	}
 		
 	//消息框的操作OVER---------------------------------------------------------------------------------------------------------

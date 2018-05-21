@@ -30,31 +30,31 @@ public class wulingEffectInfromation : MonoBehaviour {
 			{
 				thetypeNow = typeIn;
 				showInformation (wulingType.wind);
-				makeEffectTitle("风之肆拂，无阻不透");
+				makeEffectTitle("风之肆拂•无阻不透");
 			}break;
 		case 2:
 			{
 				thetypeNow = typeIn;
 				showInformation (wulingType.thunder);
-				makeEffectTitle("雷之肃敛，无坚不摧");
+				makeEffectTitle("雷之肃敛•无坚不摧");
 			}break;
 		case 3:
 			{
 				thetypeNow = typeIn;
 				showInformation (wulingType.water);
-				makeEffectTitle("水之润下，无孔不入");
+				makeEffectTitle("水之润下•无孔不入");
 			}break;
 		case 4:
 			{
 				thetypeNow = typeIn;
 				showInformation (wulingType.fire);
-				makeEffectTitle("火之炎上，无物不焚");
+				makeEffectTitle("火之炎上•无物不焚");
 			}break;
 		case 5:
 			{
 				thetypeNow = typeIn;
 				showInformation (wulingType.earth);
-				makeEffectTitle("土之养化，无物不融");
+				makeEffectTitle("土之养化•无物不融");
 			}break;
 		}
 	}
