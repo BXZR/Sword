@@ -61,6 +61,7 @@ public class playMode3 : playModeBasic {
 		if (count > maxCount)
 			maxCount = count;
 		theGameEndInformation = "限时击杀："+count +"  最佳战绩："+maxCount;
+		isOvered = true;
 		systemValues.makeGameEnd(theGameEndInformation);
 	}
 

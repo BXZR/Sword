@@ -11,6 +11,8 @@ public class playModeBasic : MonoBehaviour {
    //这里的控制是在systemValue也就是GM里面进行控制的
 
 	public 	string modeName = "";
+	//是否完成了这个模式，打个标记
+	public bool isOvered = false;
 
 	//游戏玩法开始的时候的准备工作
 	public virtual void OnGameStart(){}

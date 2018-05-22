@@ -5,6 +5,7 @@ using UnityEngine.UI;
 
 public class theDeadPanel : MonoBehaviour {
 
+	public Image theShowingImage;
 	private Image theImage;
 	private Text theText;
 	float timer = 4f;
@@ -17,8 +18,11 @@ public class theDeadPanel : MonoBehaviour {
 		theTextToShow = "胜败，不过是兵家常事,\n我们可以，还可以从头再来。";
 		StartCoroutine (startShow());
 	}
-	public void makeStart(string thenformaiton)
+	public void makeStart(string thenformaiton , bool isOver  = false)
 	{
+		if (isOver)//完成了就不用发表遗憾感言了
+			theShowingImage.enabled = false;
+		
 		theImage = this.GetComponent <Image> ();
 		theText = this.GetComponentInChildren<Text> ();
 		theText.text = "";

@@ -58,11 +58,13 @@ public class playMode1 : playModeBasic {
 			if (!theBoss.isAlive) 
 			{
 				theGameEndInformation = "恭喜你完成了这艰巨的试炼。";
+				isOvered = true;
 				return true;
 			} 
 			else if (timerForKill < 0) 
 			{
 				theGameEndInformation = "挑战失败。";
+				isOvered = false;
 				return true;
 			}
 		}

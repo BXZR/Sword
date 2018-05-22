@@ -33,6 +33,8 @@ public class systemValues : MonoBehaviour {
 	//=========================================
 	public static float learnWulingSpPercent = 0.75f;//修炼五灵需要消耗的当前的斗气百分比
 	public static equipBasics theEquipNow = null;//当前选中的注灵效果或者装备
+	//当前游戏模式
+	public static playModeBasic playModeNow ;
 	#endregion
 
 	#region游戏角色信息设定查询
@@ -1005,6 +1007,7 @@ public class systemValues : MonoBehaviour {
 	//反复跳转场景应该做一些清理工作
 	public static void makeSystemClean()
 	{
+		playModeNow = null;
 		gameModeIndexNow = 0;
 		sceneSelectFlash ();
 		soulCount = 7;//回到初始，给7个灵力
@@ -1028,7 +1031,22 @@ public class systemValues : MonoBehaviour {
 		if (theDeadPanel)
 		{
 			theDeadPanel.SetActive (true);
-			theDeadPanel.GetComponent <theDeadPanel> ().makeStart (theInformation);
+
+			theDeadPanel.GetComponent <theDeadPanel> ().makeStart (theInformation , checkisOver());
+		}
+	}
+    //检查任务是否完成了
+	private static bool checkisOver()
+	{
+		if (systemValues.thePlayer && systemValues.playModeNow)
+		{
+			if (systemValues.thePlayer.isAlive = false)
+				return false;
+			return systemValues.playModeNow.isOvered;
+		}
+		else 
+		{
+			return false;
 		}
 	}
 	#endregion
@@ -1073,8 +1091,8 @@ public class systemValues : MonoBehaviour {
 				this.gameObject.AddComponent (System.Type.GetType(modePlayerString));
 		}
 		catch(System.Exception C){print (C.Message);}
-		playModeBasic PMB = this.GetComponent <playModeBasic> ();
-		if(PMB) PMB.OnGameStart ();
+		playModeNow = this.GetComponent <playModeBasic> ();
+		if(playModeNow ) playModeNow .OnGameStart ();
 
 		string effectForAdd = getGameModeExtraEffect ();
 		//print (effectForAdd +" is for add" );

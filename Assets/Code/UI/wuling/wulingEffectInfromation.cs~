@@ -76,20 +76,20 @@ public class wulingEffectInfromation : MonoBehaviour {
 	{
 		if (!theText) 
 		{
-			print ("There is no system text");
+			//print ("There is no system text");
 			return "";
 		}
 		string theinformation = "";
 		if (!systemValues.thePlayer) 
 		{
-			print ("There is no system Player");
+			//print ("There is no system Player");
 			return theinformation;
 		}
 		if(!theWuling)
 		    theWuling = systemValues.thePlayer.GetComponent <wuling> ();
 		if (!theWuling) 
 		{
-			print ("There is no wuling effect");
+			//print ("There is no wuling effect");
 			return theinformation;
 		}
 		

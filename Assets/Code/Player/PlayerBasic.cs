@@ -814,8 +814,6 @@ public class PlayerBasic : MonoBehaviour {
 					Effects [i].OnHpUp ();
 					Effects [i].OnHpUp (hpupValue);
 				}
-				if (ActerHp > ActerHpMax) 
-					ActerHp = ActerHpMax; //最后一个修正
 			}
 			if (ActerHp < 0)
 			{
@@ -833,8 +831,9 @@ public class PlayerBasic : MonoBehaviour {
 					Effects [i].OnSpUp ();
 					Effects [i].OnSpUp (spupValue);
 				}
-				ActerSp = Mathf.Clamp (ActerSp, 0, ActerSpMax);
 			}
+			ActerHp =Mathf.Clamp (ActerHp, 0, ActerHpMax);
+			ActerSp = Mathf.Clamp (ActerSp, 0, ActerSpMax);
 
 			if (!systemValues.isNullOrEmpty (conNameToEMY) || !systemValues.isNullOrEmpty(conNameToSELF)) 
 			{

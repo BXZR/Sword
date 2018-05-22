@@ -15,7 +15,7 @@ public class playMode4 : playModeBasic {
 
 		theShowRect = new Rect(Screen.width*0.85f , 0 , Screen.width*0.15f,Screen.height*0.03f)  ;
 		rectShowString = modeName;
-
+		isOvered = true;//练习模式什么时候都是over
 		InvokeRepeating ("flashGUI", 0f, 5f);
 	}
 
