@@ -15,12 +15,16 @@ public class theWulingYinYangpanel : MonoBehaviour {
 	public theYinYangButton theYangButton = null;
 	public theYinYangButton theYinButton = null;
 
+	private wuling theWuling = null ;//没有必要每一次都获取五灵引用
+
 	public void setWuling(wulingType theType)
 	{
 		theEypeNow = theType;
 		lingBasic yinWuling = null;
 		lingBasic YangWuling = null; 
-		wuling theWuling = systemValues.thePlayer.GetComponent <wuling> ();
+
+		if(!theWuling)
+			theWuling = systemValues.thePlayer.GetComponent <wuling> ();
 
 		for (int i = 0; i < theWuling.lingEffects.Count; i++)
 		{

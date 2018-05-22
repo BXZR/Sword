@@ -21,6 +21,7 @@ public class wuling : effectBasic {
 	{
 		Init ();
 	}
+
 	public override void Init ()
 	{
 		theEffectName = "五灵";

@@ -1007,9 +1007,11 @@ public class PlayerBasic : MonoBehaviour {
 		}
 	}
 	//----------------------------------------------------------------------------------------------------------------------------------------------------------------//
+	wuling theWulingEffect;
 	public void updateWulingEffects()
 	{
-		wuling theWulingEffect = this.GetComponent <wuling> ();
+		if (!theWulingEffect)
+		    theWulingEffect = this.GetComponent <wuling> ();
 		if (!theWulingEffect)
 			return;
 		//五灵阴阳赋值
@@ -1063,6 +1065,7 @@ public class PlayerBasic : MonoBehaviour {
 	[PunRPC]
 	private void updateWuling(float wind1,float wind2,float thunder1,float thunder2 , float water1 , float water2 , float fire1 , float fire2 , float earth1 , float earth2)
 	{
+		//这个公式网络同步的，最好还是完全获取一下我比较放心
 		wuling theWulingEffect = this.GetComponent <wuling> ();
 		if (!theWulingEffect)
 			return;

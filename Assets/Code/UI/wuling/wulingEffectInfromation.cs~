@@ -74,15 +74,24 @@ public class wulingEffectInfromation : MonoBehaviour {
     //私有分类方法
 	private string getInfromationFromPlayer(wulingType thetype)
 	{
-		if (!theText)
+		if (!theText) 
+		{
+			print ("There is no system text");
 			return "";
+		}
 		string theinformation = "";
-		if (!systemValues.thePlayer)
+		if (!systemValues.thePlayer) 
+		{
+			print ("There is no system Player");
 			return theinformation;
+		}
 		if(!theWuling)
 		    theWuling = systemValues.thePlayer.GetComponent <wuling> ();
-		if (!theWuling)
+		if (!theWuling) 
+		{
+			print ("There is no wuling effect");
 			return theinformation;
+		}
 		
 		for (int i = 0; i < theWuling.lingEffects.Count; i++)
 			if (theWuling.lingEffects [i].theType == thetype)
@@ -104,14 +113,25 @@ public class wulingEffectInfromation : MonoBehaviour {
 	//初次学成信息
 	public void getLearnedOverGetInformation()
 	{
-		string information = "";
-		for (int i = 0; i < theWuling.lingEffects.Count; i++) 
+		try
 		{
-			information += theWuling.lingEffects [i].lingName +" "+theWuling.lingEffects [i].wulingInformationForLearnOver();
-			if(theWuling.lingEffects [i].isLearned())
-				information += "【已获得】";
-			information += "\n";
+			if(!theWuling)
+				theWuling = systemValues.thePlayer.GetComponent <wuling> ();
+			
+			string information = "";
+			for (int i = 0; i < theWuling.lingEffects.Count; i++) 
+			{
+				information += theWuling.lingEffects [i].lingName +" "+theWuling.lingEffects [i].wulingInformationForLearnOver();
+				if(theWuling.lingEffects [i].isLearned())
+					information += "【已获得】";
+				information += "\n";
+			}
+			systemValues.messageBoxShow ("初成奖励" , information , true);
 		}
-		systemValues.messageBoxShow ("初成奖励" , information , true);
+		catch
+		{
+			systemValues.messageBoxShow ("出错" , "暂时无法查询得到五灵初成奖励信息" , false);
+			print ("暂时无法查询得到五灵初成奖励信息");//顺带用输出在控制台定位一下这个错误
+		}
 	}
 }
