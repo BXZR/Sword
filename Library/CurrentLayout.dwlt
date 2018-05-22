@@ -367,10 +367,10 @@ MonoBehaviour:
     width: 396
     height: 583
   m_TreeViewState:
-    scrollPos: {x: 0, y: 410}
-    m_SelectedIDs: 2cb4fdff
-    m_LastClickedID: -150484
-    m_ExpandedIDs: 2cb4fdfff271fffffaf5fffff8f6ffffe0fbffff00000000e2380000e6380000
+    scrollPos: {x: 0, y: 0}
+    m_SelectedIDs: 
+    m_LastClickedID: 0
+    m_ExpandedIDs: e0fbffff00000000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -502,9 +502,9 @@ MonoBehaviour:
   m_isRotationLocked: 0
   m_AudioPlay: 0
   m_Position:
-    m_Target: {x: 406.47537, y: 362.2931, z: -175.48993}
+    m_Target: {x: 508.074, y: 325.1748, z: -184.17682}
     speed: 2
-    m_Value: {x: 406.47537, y: 362.2931, z: -175.48993}
+    m_Value: {x: 508.074, y: 325.1748, z: -184.17682}
   m_RenderMode: 0
   m_ValidateTrueMetals: 0
   m_SceneViewState:
@@ -527,13 +527,13 @@ MonoBehaviour:
       speed: 2
       m_Value: 0
   m_Rotation:
-    m_Target: {x: -0.036463257, y: 0.020982401, z: -0.0007686147, w: -0.99911445}
+    m_Target: {x: -0.012476566, y: -0.020998897, z: 0.00025921993, w: -0.9997017}
     speed: 2
-    m_Value: {x: -0.036463257, y: 0.020982401, z: -0.0007686147, w: -0.99911445}
+    m_Value: {x: -0.012476566, y: -0.020998897, z: 0.00025921993, w: -0.9997017}
   m_Size:
-    m_Target: 914.7965
+    m_Target: 744.121
     speed: 2
-    m_Value: 914.7965
+    m_Value: 744.121
   m_Ortho:
     m_Target: 0
     speed: 2
@@ -581,18 +581,18 @@ MonoBehaviour:
     m_ShowAllHits: 0
     m_SearchArea: 0
     m_Folders:
-    - Assets/Resources/Equips/weapon
+    - Assets/Code/Player
   m_ViewMode: 1
   m_StartGridSize: 96
   m_LastFolders:
-  - Assets/Resources/Equips/weapon
+  - Assets/Code/Player
   m_LastFoldersGridSize: 96
   m_LastProjectPath: D:\gitWorks\Sword\Sword
   m_IsLocked: 0
   m_FolderTreeState:
-    scrollPos: {x: 0, y: 1208}
-    m_SelectedIDs: aa260000
-    m_LastClickedID: 9898
+    scrollPos: {x: 0, y: 639}
+    m_SelectedIDs: 98270000
+    m_LastClickedID: 10136
     m_ExpandedIDs: 000000007026000032270000362700004c27000052270000542700001e280000422800008c280000b8280000c4280000e8280000f02800000e29000036290000482900006e290000882900009c290000ce2900000a2a00004a2a00004e2a00006a2a0000d42a0000f62a0000fc2a00004a2b00004e2b00005c2b0000602b0000d62b0000fa2b00005e2c0000662c0000b22c0000f22c0000f62c0000262d0000402d0000c4470000c6470000c8470000ca470000cc470000ce470000d0470000d2470000d4470000d6470000d8470000da470000dc470000de470000e0470000e2470000e4470000e6470000e8470000ea470000ec470000ee470000f0470000f2470000f4470000f6470000f8470000fa470000fc470000fe47000000ca9a3bffffff7f
     m_RenameOverlay:
       m_UserAcceptedRename: 0

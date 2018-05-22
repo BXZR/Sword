@@ -525,7 +525,7 @@ public class PlayerBasic : MonoBehaviour {
 			//此外，重击伤害暂定为一次受到最大生命值5%以上的伤害，但这是有误差的，因为有些攻击时存在效果伤害的
 			//初步的思路是在效果中额外添加受到伤害的动作使之成为一种必然发生的动画
 
-			if (damage > this.ActerHpMax * 0.2f || DamageRead > this.ActerHpMax*0.45f) 
+			if (damage > this.ActerHpMax * 0.25f || DamageRead > this.ActerHpMax*0.45f) 
 			{ //伤害范围需要界定
 				extraDamageForAnimation /= 2;//消除自身攻击效果
 				DamageRead  = 0;//重新统计伤害
