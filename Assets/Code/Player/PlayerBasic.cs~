@@ -564,9 +564,16 @@ public class PlayerBasic : MonoBehaviour {
 		float damageMake = extraDamage;
 		if (withBasicDamageCanculate)
 			damageMake += this.ActerWuliDamage   - this. ActerWuliIner;
-		
+
+		//护甲伤害减免计算------------------------
 		float hujiaGet = thePlayerAim .ActerWuliShield*(1- this.ActerWuliInerPercent);
-		damageMake *= 1 - (hujiaGet / 1500);//固定1500就是防御的上界
+		//山寨英雄联盟的伤害减免计算公式...
+		//还是应该经常计算，因为护甲和穿透都不一定
+		float hujiaRato = Mathf.Clamp( (1f- hujiaGet / (hujiaGet + 900f)) , 0f, 1f);
+		//damageMake *= 1 - (hujiaGet  / 1500);//纯粹线性的方法，似乎娱乐性不是很够
+		damageMake *=  hujiaRato ;
+		//-----------------------------------------
+
 		damageMake += this. ActerWuliIner;
 		damageMake = damageMake * (1 + this.ActerDamageAdderPercent) + ActerDamageAdder;
 
@@ -642,6 +649,11 @@ public class PlayerBasic : MonoBehaviour {
 
 		theString.Append ("护甲  ");
 		theString.Append (this.ActerWuliShield .ToString ("f0"));
+		theString.Append ("(减免");
+		float hujiaRato = 1f - Mathf.Clamp( (1f- ActerWuliShield / (ActerWuliShield  + 900f)) , 0f, 1f);
+		theString.Append ((hujiaRato * 100).ToString("f1"));
+		theString.Append ("%)");
+
 		theString.Append ("   ");
 		theString.Append ("伤害  ");
 		theString.Append (this.ActerWuliDamage .ToString("f0"));
