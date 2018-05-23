@@ -529,8 +529,12 @@ public class PlayerBasic : MonoBehaviour {
 			{ //伤害范围需要界定
 				extraDamageForAnimation /= 2;//消除自身攻击效果
 				DamageRead  = 0;//重新统计伤害
-				for (int i = 0; i < Effects.Length; i++) 
-					Effects [i].OnShowText ("僵直，伤害减半");
+
+				if (this.ActerHp >= 0) //如果已经死了，就没有僵直，死前最后一击也不会受到任何影响
+				{
+					for (int i = 0; i < Effects.Length; i++)
+						Effects [i].OnShowText ("僵直，伤害减半");
+				}
 			}
 			//额外的状态标记改变
 			getInFightState();
