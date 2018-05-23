@@ -25,9 +25,11 @@ public class wulingButton : MonoBehaviour {
 	//这是为了保证初始的效果能够完整
 	void Start()
 	{
-		if (isStarted || !systemValues.thePlayer)
-			return;
+		theImageForLingZhu.enabled = false;
 
+		if (isStarted || !systemValues.thePlayer)
+  			return;
+		 
 		isStarted = true;
 
 		//遮掩做是为了保证第一次打开五灵界面的时候能偶一个事先就被选中了

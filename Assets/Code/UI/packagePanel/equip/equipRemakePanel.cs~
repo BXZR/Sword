@@ -38,9 +38,10 @@ public class equipRemakePanel : MonoBehaviour {
 
 	void OnEnable()
 	{
-		if (!isStarted)
+		if (isStarted == false)
 			return;
 		//界面刷新
+
 		equipSelectTypeButton.flashThePanel ();
 		thePackagePanelShow.makeFlash ();
 		equipInformationPanel.makeFlash ();

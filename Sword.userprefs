@@ -1,6 +1,6 @@
 ﻿<Properties StartupItem="Assembly-CSharp.csproj">
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Unity.Instance.Unity Editor" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Code\UI\wuling\theYinYangButton.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Code\UI\packagePanel\equip\equipSelectTypeButton.cs">
     <Files>
       <File FileName="Assets\Code\playerModes\playMode1.cs" Line="1" Column="1" />
       <File FileName="Assets\Code\playerModes\playModeBasic.cs" Line="1" Column="1" />
@@ -9,15 +9,16 @@
       <File FileName="Assets\Code\playerModes\playMode4.cs" Line="1" Column="1" />
       <File FileName="Assets\Code\systemValues.cs" Line="1" Column="1" />
       <File FileName="Assets\Code\UI\deadPanel\theDeadPanel.cs" Line="1" Column="1" />
-      <File FileName="Assets\Code\Player\PlayerBasic.cs" Line="282" Column="14" />
+      <File FileName="Assets\Code\Player\PlayerBasic.cs" Line="1" Column="1" />
       <File FileName="Assets\Code\Player\move.cs" Line="1" Column="1" />
-      <File FileName="Assets\Code\UI\packagePanel\equip\equipRemakePanel.cs" Line="28" Column="3" />
-      <File FileName="Assets\Code\UI\packagePanel\equip\equipShowingButton.cs" Line="50" Column="2" />
-      <File FileName="Assets\Code\UI\packagePanel\thePackagePanelShow.cs" Line="114" Column="7" />
-      <File FileName="Assets\Code\Player\attackLink.cs" Line="53" Column="54" />
-      <File FileName="Assets\Code\Equips\equipBasics.cs" Line="193" Column="63" />
-      <File FileName="Assets\Code\UI\wuling\theYinYangButton.cs" Line="40" Column="99" />
-      <File FileName="Assets\Code\UI\wuling\wulingButton.cs" Line="47" Column="54" />
+      <File FileName="Assets\Code\UI\packagePanel\equip\equipRemakePanel.cs" Line="45" Column="34" />
+      <File FileName="Assets\Code\UI\packagePanel\equip\equipShowingButton.cs" Line="1" Column="1" />
+      <File FileName="Assets\Code\UI\packagePanel\thePackagePanelShow.cs" Line="1" Column="1" />
+      <File FileName="Assets\Code\Player\attackLink.cs" Line="1" Column="1" />
+      <File FileName="Assets\Code\Equips\equipBasics.cs" Line="1" Column="1" />
+      <File FileName="Assets\Code\UI\wuling\theYinYangButton.cs" Line="1" Column="1" />
+      <File FileName="Assets\Code\UI\wuling\wulingButton.cs" Line="38" Column="112" />
+      <File FileName="Assets\Code\UI\packagePanel\equip\equipSelectTypeButton.cs" Line="122" Column="58" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

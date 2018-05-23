@@ -738,7 +738,7 @@ public class PlayerBasic : MonoBehaviour {
 		theString.Append ((this.ActerDamageMinusPercent*100).ToString("f1"));
 		theString.Append ("%\n");
 
-		string attackLengthShow =  (this.theAttackAreaLength >0) ? this.theAttackAreaLength*100+"%   ": "【特殊】    ";
+		string attackLengthShow =  (this.theAttackAreaLength >0) ? this.theAttackAreaLength*100+"%   ": "【特殊】";
 		string attackAreaShow = (this.theAttackAreaAngel >0) ? this.theAttackAreaAngel.ToString ("f1")  : "【特殊】";
 
 		theString.Append ("攻击距离  ");
@@ -758,7 +758,9 @@ public class PlayerBasic : MonoBehaviour {
 		//theString.Append ("/");
 		//theString.Append ((ActerMoveSpeedMaxPercent*100).ToString("f0"));
 		//theString.Append ("%");
-		theString.Append ("\n负重  ");
+		theString.Append ("\n资质  ");
+		theString.Append ((theLearnSpeed * 10).ToString ("f0"));
+		theString.Append ("   当前负重  ");
 		theString.Append ((weightPercent * 100).ToString ("f0"));
 		theString.Append ("%");
 
