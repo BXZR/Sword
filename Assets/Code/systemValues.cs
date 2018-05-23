@@ -536,7 +536,8 @@ public class systemValues : MonoBehaviour {
 	//全球唯一计算灵力获取量的方法
 	public static int soulGet(PlayerBasic thePlayerIn)
 	{
-		return (int)(thePlayerIn.ActerHpMax / 100);
+		//一次最多10000灵力，不会是负数，做一下限制吧，要不然溢出了多尴尬
+		return Mathf.Clamp( (int)(thePlayerIn.ActerHpMax / 100) , 0, 10000);
 	}
 	//升级这个装备需要的灵力数量
 	public static  int getSoulCountForEquipLvUp(equipBasics theEquip, bool withLv1 = false)

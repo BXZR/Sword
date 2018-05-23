@@ -18,7 +18,7 @@ public class popSoulMove : MonoBehaviour {
 	{
 		this.theAim = theAimIn;
 		soulCount = soulC;
-		Invoke ("theStart" , 4f);
+		Invoke ("theStart" , 4f);//转向运动
 
 	}
 
@@ -27,23 +27,27 @@ public class popSoulMove : MonoBehaviour {
 		isStart = true;
 	}
 
+	//获取灵力、和经验的方法
+	void makeGet()
+	{
+		systemValues.soulCount += soulCount;
+		theAim.addJingYan (soulCount * 2 );
+		effectBasic[] theEffects = theAim.GetComponentsInChildren<effectBasic> ();
+		for (int i = 0; i < theEffects.Length; i++)
+			theEffects [i].OnAddSoul (soulCount);
+
+		CancelInvoke ();
+		isStart = false;
+		systemValues.savePopSoul (this);
+	}
+
 	void Update ()
 	{
 		if (isStart && theAim) 
 		{
 			this.transform.position = Vector3.Lerp (this.transform.position, theAim.transform.position, 3f * Time.deltaTime);
-			if (Vector3.Distance (this.transform.position, theAim.transform.position) < 1f) 
-			{
-				systemValues.soulCount += soulCount;
-				theAim.addJingYan (soulCount * 2 );
-				effectBasic[] theEffects = theAim.GetComponentsInChildren<effectBasic> ();
-				for (int i = 0; i < theEffects.Length; i++)
-					theEffects [i].OnAddSoul (soulCount);
-
-				CancelInvoke ();
-				isStart = false;
-				systemValues.savePopSoul (this);
-			}
+			if (Vector3.Distance (this.transform.position, theAim.transform.position) < 1f)
+				makeGet ();
 		}
 		else 
 		{
