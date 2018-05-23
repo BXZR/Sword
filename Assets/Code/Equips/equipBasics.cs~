@@ -96,6 +96,9 @@ public class equipBasics : MonoBehaviour {
 	//获得装备
 	public void GetThisThing(PlayerBasic thePlayer)
 	{
+		//保存一些变动的数值的百分比
+		float hpPercent = thePlayer.ActerHp / thePlayer.ActerHpMax;
+		float spPercent = thePlayer.ActerSp / thePlayer.ActerSpMax;
 		//最基本的属性生命法力和名字
 		thePlayer.ActerHpMax += equipActerHpMax;//这个人物的生命上限
 		thePlayer.ActerSpMax += equipActerSpMax;//这个人物的法力上限
@@ -188,6 +191,10 @@ public class equipBasics : MonoBehaviour {
 		thePlayer.CtheViewAreaLength += equiptheViewAreaLength;//视野长度，在不同的模式之下。例如暗夜模式，是很有需要实际的地方的
 		thePlayer.CtheViewAreaAngel += equiptheViewAreaAngel;//视野的角度，同样，在不同的模式之下。例如暗夜模式，是很有需要实际的地方的
 		thePlayer.weightPercent += this.theEquipWeight;//装备重量，游戏角色负重
+
+		//变动数据的百分比归位
+		thePlayer.ActerHp = thePlayer.ActerHpMax * hpPercent;
+		thePlayer.ActerSp = thePlayer.ActerSpMax * spPercent;
 
 		addEffects (thePlayer);
 		thePlayer.makeValueUpdate();//网络版本需要强制更新，不能等自动的更新数值

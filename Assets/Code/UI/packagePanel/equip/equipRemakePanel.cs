@@ -125,7 +125,7 @@ public class equipRemakePanel : MonoBehaviour {
 				Destroy (es [i].gameObject);
 			}
 		}
-		equipSkillAddInformationStatic.text = "";
+		equipSkillAddInformationStatic.text = "暂无注灵效果信息";
 	}
 
 	//装备或者替换这个装备

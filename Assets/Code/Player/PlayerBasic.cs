@@ -25,6 +25,11 @@ public class PlayerBasic : MonoBehaviour {
 	[HideInInspector]
 	public int LVMax= 18;//等级上限目前为18级，当然主人公也可以一些特殊方式来突破这一层天堑
 
+	[HideInInspector]
+	public float theLearnSpeed = 1f;//这个人的资质
+	private float theLearnSpeedMin = 0.2f;//资质最差也就这样了
+	private float theLearnSpeedMax = 2f;//资质最强也不应该超过1
+
 	[HideInInspector]//为了保证设定面板的简洁，暂时隐藏之
 	public bool isAlive = true;//是否生存，默认一定是存活的，除非死了
 
@@ -271,17 +276,39 @@ public class PlayerBasic : MonoBehaviour {
 			}
 		}
 	}
+
+
+	//资质增长
+	//顺带，限制资质上下限
+	public void addZizhi()
+	{
+		theLearnSpeed += 0.1f;
+		theLearnSpeed = Mathf.Clamp (theLearnSpeed , theLearnSpeedMin , theLearnSpeedMax);
+	}
+
+
 	//升级的时候会发生什么效果放在这个里面
 	private void OnLvIp()
 	{
-		ActerWuliDamage += 4f;
-		CActerWuliDamage += 4f;
+		//theLearnSpeed就是资质，也就是学习速度
+		//每一次升级都会增加一些固有属性，但是有些人能学到很多，有些人却学不到多少
+		//这虽然并不公平，但是切实存在，有些时候还真的挺让人感到挫败的
+		//没办法.....所幸的是游戏并不是真实世界，资质也可以提升
+		//资质是需要五灵修炼的，每打通一条五灵阴阳灵脉，就能提升0.1资质
+
+		ActerWuliDamage += 4f * theLearnSpeed;
+		CActerWuliDamage += 4f * theLearnSpeed;
+
+		ActerWuliShield += 5f * theLearnSpeed;
+		CActerWuliShield += 5f * theLearnSpeed;
+
 		float hpPercent = ActerHp / ActerHpMax;
 		float spPercent = ActerSp / ActerSpMax;
-		ActerHpMax += 20f;
-		CActerHpMax += 20f;
-		ActerSpMax += 5f;
-		CActerSpMax += 5f;
+		ActerHpMax += 20f * theLearnSpeed;
+		CActerHpMax += 20f * theLearnSpeed;
+		ActerSpMax += 5f * theLearnSpeed;
+		CActerSpMax += 5f * theLearnSpeed;
+
 		ActerHp = ActerHpMax * hpPercent;
 		ActerSp = ActerSpMax * spPercent;
 		//effect效果的钩子也因该发挥效用

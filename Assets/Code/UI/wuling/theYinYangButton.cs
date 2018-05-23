@@ -36,7 +36,8 @@ public class theYinYangButton : MonoBehaviour {
 		theInformation.makeFlash ();
 		if (theWuling.isLearned ())
 		{
-			systemValues.messageBoxShow ("五灵修炼突破", "恭喜突破灵脉"+theWuling.lingName +"\n获得了额外的特殊效果:\n\n"+theWuling.lingEffectName + "\n" + theWuling.wulingInformation() +"\n\n并获得初成奖励："+theWuling.wulingInformationForLearnOver() , true);
+			systemValues.thePlayer.addZizhi ();//资质增加
+			systemValues.messageBoxShow ("五灵修炼突破", "灵脉"+theWuling.lingName +"突破成功\n【提升资质并获得五灵特效和初成奖励】\n\n"+theWuling.lingName +"特效："+theWuling.lingEffectName + "\n" + theWuling.wulingInformation() +"\n\n初成奖励："+theWuling.wulingInformationForLearnOver() , true);
 			this.GetComponent <buttonWithSound> ().makeSoundShow ();
 		}
 	}
