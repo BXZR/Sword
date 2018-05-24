@@ -38,11 +38,12 @@ public class attackLink : MonoBehaviour {
 	//**************上面是有关连招动画控制与检测的重要参数，下面是用于战斗计算等等的参数***********************/
 	private PlayerBasic thePlayer;//这个招式所使用的人
 	public float extraDamage = 0;//这个招式的额外伤害，所有的招式都拥有游戏人物基本的攻击力加成，然后技能本身有一个额外的伤害加成
+	private float excieceExtraDamage = 0;//这个招式的熟练度加成，总是使用这个招式，熟练度高伤害也会提高
 	public float spUse =0;//使用这个招式所需要的能量值
 	//public float area = 1f;//这个招式的作用范围
 	//public bool isAOE =false;//这是不是一个范围伤害（暂定范围伤害就是攻击身边所有的单位，相交球）
 
-	//因为已经确认了是二人格斗游戏，这个地方其实已经写死了
+
 	//这段脚本会被weapon脚本在攻击得手的时候触发并且添加
 	public string conNameToEMY ="";//这个招式可以为目标添加的脚本
 	public string conNameToSELF ="";//这个招式可以为自身添加的脚本
@@ -61,6 +62,8 @@ public class attackLink : MonoBehaviour {
 	public float extraDamageAdd = 0;//额外攻击伤害
 	private int  soulCostWhenLvtoMax = 100;//等级满了之后继续叠加的消耗
 	private  int  adderWhenLvtoMax = 1;//极其低性价比的叠加
+
+	PhotonView photonView;//网络控制单元
 
 	/****************************************特殊攻击方法组****************************************************/
 	//攻击检测原理：
@@ -303,7 +306,9 @@ public class attackLink : MonoBehaviour {
 			}
 
 
-			thePlayer.extraDamageForAnimation = this.extraDamage;//用这样的方式修改真正的伤害
+			excieceExtraDamage++;//熟练度增加，额外的熟练度招式伤害
+			float damageFromExcieseUse = Mathf.Clamp(excieceExtraDamage / 10 , 0f , 100f);//熟练度加成
+			thePlayer.extraDamageForAnimation = (this.extraDamage + damageFromExcieseUse );//用这个招式能够造成的额外伤害
 			if(thePlayer.theAudioPlayer!= null)
 			thePlayer .theAudioPlayer .audioNow = this.audioWhenAttack;//确定命中的时候的音效
 
@@ -415,80 +420,18 @@ public class attackLink : MonoBehaviour {
 	}
 
 
-	PhotonView photonView;//网络控制单元
 
-	//获取简略的信息，这就足够了
-	public string getInformationSimple(bool withName = true)
+
+	public string getInformation(bool isSimple = false ,  bool withName = true)//获取连招的信息
 	{
 		StringBuilder theString = new StringBuilder ();
 		if (withName)
 		{
 			theString .Append( this.skillName);
-			if (canLvup)
-				theString .Append("[可升级]");
-			else
-				theString .Append("[不可升级]");
+			if (canLvup) theString .Append("[可升级]");
+			else theString .Append("[不可升级]");
 			theString.Append ("\n");
 		}
-
-		if (canLvup) 
-		{
-			theString.Append ( "招式等级：" );
-			theString.Append ( this.theAttackLinkLv );
-			theString.Append ( "/");
-			theString.Append ( this.theAttakLinkLvMax );
-			theString.Append ( "\n");
-		}
-
-		if (this.extraDamage > 0) 
-		{
-			if (!this.thePlayer) 
-			{
-				theString.Append ("额外伤害：");
-				theString.Append (this.extraDamage.ToString ("f0"));
-				theString.Append ("\n");
-			}
-			else 
-			{
-				theString.Append ("伤害：(" );
-				theString.Append (this.thePlayer.ActerWuliDamage.ToString("f0"));
-				theString.Append ("+" );
-				theString.Append (systemValues.BESkillColor);
-				theString.Append ((int) this.extraDamage);
-				theString.Append (systemValues.colorEnd );
-				theString.Append (")\n");
-			}
-		}
-		else
-		{
-			theString.Append ("额外伤害：");
-			theString.Append (this.extraDamage );
-			theString.Append ("\n");
-		}
-
-		//information += "触发方式："+ systemValues.getAttacklinkInformationTranslated(this.attackLinkString) + "\n";
-		theString.Append ("触发方式：");
-		for (int i = 0; i < attackLinkStringSplited.Length; i++) 
-		{
-			theString.Append (systemValues.getAttacklinkInformationTranslated(attackLinkStringSplited[i]));
-			if(i<attackLinkStringSplited.Length-1 )
-				theString.Append (" / ");
-		}
-		theString.Append ("\n");
-
-		theString.Append ("斗气消耗：");
-		theString.Append (this.spUse.ToString("f0") );
-
-		return theString.ToString();
-	}
-
-
-	public string getInformation()//获取连招的信息
-	{
-		StringBuilder theString = new StringBuilder ();
-		theString.Append( "招式名称：" );
-		theString.Append( this.skillName);
-		theString.Append( "\n");
 
 		if (canLvup)
 		{
@@ -497,34 +440,42 @@ public class attackLink : MonoBehaviour {
 			theString.Append( "/");
 			theString.Append( this.theAttakLinkLvMax);		
 			theString.Append( "\n");
-
 		}
 
-		if (this.extraDamage > 0) 
+		if (this.thePlayer)
 		{
-			if (!this.thePlayer) 
-			{
-				theString.Append( "额外伤害：");
-				theString.Append( this.extraDamage.ToString("f0"));
-				theString.Append( "\n");
-			}
-			else
+			if (((int)excieceExtraDamage / 10) > 0 || this.extraDamage > 0) 
 			{
 				theString.Append ("伤害：(");
-				theString.Append ( this.thePlayer.ActerWuliDamage.ToString("f0") );
-				theString.Append ( "+" );
-				theString.Append ( systemValues.BESkillColor);
-				theString.Append ( (int) this.extraDamage );
-				theString.Append ( systemValues.colorEnd );
+				theString.Append (this.thePlayer.ActerWuliDamage.ToString ("f0"));
+				if (this.extraDamage > 0) 
+				{
+					theString.Append ("+");
+					theString.Append (systemValues.BESkillColor);
+					theString.Append ((int)this.extraDamage);
+					theString.Append (systemValues.colorEnd);
+				}
+				if (((int)excieceExtraDamage / 10) > 0) 
+				{
+					theString.Append ("+");
+					theString.Append (systemValues.SkillExtraColor);
+					theString.Append ((excieceExtraDamage / 10).ToString ("f0"));
+					theString.Append (systemValues.colorEnd);
+				}
 				theString.Append (")\n");
+			} 
+			else 
+			{
+				theString.Append ("【暂无额外伤害加成】\n");
 			}
 		}
-		else
+		else 
 		{
-			theString.Append ("额外伤害：");
-			theString.Append (this.extraDamage );
-			theString.Append ("\n");
+			theString.Append ("基础额外伤害：（");
+			theString.Append (this.extraDamage.ToString ("f0"));
+			theString.Append ("）\n");
 		}
+			
 
 		theString.Append ("触发方式：");
 		for (int i = 0; i < attackLinkStringSplited.Length; i++) 
@@ -539,7 +490,7 @@ public class attackLink : MonoBehaviour {
 		theString.Append (this.spUse);
 		theString.Append ("\n");
 
-		if(canLvup  )
+		if( !isSimple && canLvup  )
 		{
 			theString.Append("\n");
 			if (this.theAttackLinkLv < this.theAttakLinkLvMax) 
@@ -553,11 +504,10 @@ public class attackLink : MonoBehaviour {
 			}
 			else
 			{
-				theString.Append("等级已满\n");
-
 				extraDamageAdd = adderWhenLvtoMax;
 				lvupCost = soulCostWhenLvtoMax;
 
+				theString.Append("等级已满\n");
 				theString.Append("可以消耗");
 				theString.Append(soulCostWhenLvtoMax);
 				theString.Append("灵力继续增加");

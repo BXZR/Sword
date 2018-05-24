@@ -218,7 +218,7 @@ public class systemValues : MonoBehaviour {
 				theInformation.attackLinkName = ak.skillName;
 				theInformation.attackLinkString = ak.attackLinkString.Split(';')[0];
 				theInformation.thePlayer = thePlayer.GetComponentInChildren<PlayerBasic>();
-				theInformation.attackLinkInformationText = ak.getInformationSimple (false);//获取简略的信息就足够了
+				theInformation.attackLinkInformationText = ak.getInformation ( true ,false);//获取简略的信息就足够了
 
 				//if (string.IsNullOrEmpty (ak.conNameToEMY) == false) 
 				if (!isNullOrEmpty(ak.conNameToEMY)) 

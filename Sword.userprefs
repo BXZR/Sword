@@ -1,30 +1,12 @@
 ﻿<Properties StartupItem="Assembly-CSharp.csproj">
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Unity.Instance.Unity Editor" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Code\Effects\thingsEffect\effectSoul.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Code\Player\attackLink.cs">
     <Files>
-      <File FileName="Assets\Code\playerModes\playMode1.cs" Line="1" Column="1" />
-      <File FileName="Assets\Code\playerModes\playModeBasic.cs" Line="1" Column="1" />
-      <File FileName="Assets\Code\playerModes\playMode2.cs" Line="1" Column="1" />
-      <File FileName="Assets\Code\playerModes\playMode3.cs" Line="1" Column="1" />
-      <File FileName="Assets\Code\playerModes\playMode4.cs" Line="1" Column="1" />
-      <File FileName="Assets\Code\systemValues.cs" Line="800" Column="2" />
-      <File FileName="Assets\Code\UI\deadPanel\theDeadPanel.cs" Line="1" Column="1" />
-      <File FileName="Assets\Code\Player\PlayerBasic.cs" Line="25" Column="19" />
-      <File FileName="Assets\Code\Player\move.cs" Line="1" Column="1" />
-      <File FileName="Assets\Code\UI\packagePanel\equip\equipRemakePanel.cs" Line="1" Column="1" />
-      <File FileName="Assets\Code\UI\packagePanel\equip\equipShowingButton.cs" Line="1" Column="1" />
-      <File FileName="Assets\Code\UI\packagePanel\thePackagePanelShow.cs" Line="1" Column="1" />
-      <File FileName="Assets\Code\Player\attackLink.cs" Line="1" Column="1" />
-      <File FileName="Assets\Code\Equips\equipBasics.cs" Line="1" Column="1" />
-      <File FileName="Assets\Code\UI\wuling\theYinYangButton.cs" Line="1" Column="1" />
-      <File FileName="Assets\Code\UI\wuling\wulingButton.cs" Line="1" Column="1" />
-      <File FileName="Assets\Code\UI\packagePanel\equip\equipSelectTypeButton.cs" Line="1" Column="1" />
-      <File FileName="Assets\Code\props\popSoulMove.cs" Line="41" Column="22" />
-      <File FileName="Assets\Code\props\popMaker.cs" Line="1" Column="1" />
-      <File FileName="Assets\Code\props\props.cs" Line="1" Column="1" />
-      <File FileName="Assets\Code\Effects\fighterAttackEffects\public\killerGeter.cs" Line="34" Column="38" />
-      <File FileName="Assets\Code\Effects\effectBasic.cs" Line="38" Column="2" />
-      <File FileName="Assets\Code\Effects\thingsEffect\effectSoul.cs" Line="10" Column="27" />
+      <File FileName="Assets\Code\Player\newMethodAttack.cs" Line="41" Column="8" />
+      <File FileName="Assets\Code\Player\attackLinkController.cs" Line="22" Column="22" />
+      <File FileName="Assets\Code\Player\attackLink.cs" Line="310" Column="82" />
+      <File FileName="Assets\Code\systemValues.cs" Line="216" Column="21" />
+      <File FileName="Assets\Code\Effects\fighterAttackEffects\ziying\eeffectZiyingArcher.cs" Line="38" Column="3" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
