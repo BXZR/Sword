@@ -155,8 +155,8 @@ public class systemValues : MonoBehaviour {
 
 	#region连招基本信息
 	//获取连招出招表（中文）
-	public static string []  attackLinkChinese= {"上", "下", "左" , "右" , "击" , "换"};
-	public static string []  attackLinkEnglish= {"W", "S", "A" , "D" , "J" , "Q"};
+	public static string []  attackLinkChinese= {"上", "下", "左" , "右" , "击" , "换" , "止"};
+	public static string []  attackLinkEnglish= {"W", "S", "A" , "D" , "J" , "Q"  , "E"};
 	//这是一个非常天真的方法
 	public static string getAttacklinkInformationTranslated(string attacklink)
 	{

@@ -1170,7 +1170,6 @@ public class PlayerBasic : MonoBehaviour {
 	}
 
 
-
 	static GameObject TheAreaShowerObj;
 	GameObject theAreaShower;
 	private  void showArea()

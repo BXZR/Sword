@@ -11,6 +11,10 @@ public class effectForSpeedMoveForward : effectBasic {
 	//允许额外连续突进一次
 	bool isOverMove = false;
 
+	//音效动态加载
+	//因为在冷却的时候是不能发出音效的
+	public static AudioClip theSoundClip;
+
     //公有技能效果之“向前突进”
 	void Start ()
 	{
@@ -27,9 +31,16 @@ public class effectForSpeedMoveForward : effectBasic {
 		theEffedctExtraInformation = "特性：勉力冲刺，冷却中可消耗8%最大斗气再突进一次\n勉力冲刺后斗气恢复效率减少30%，直到冷却完毕";
 		makeStart ();
 		if (thePlayer)
-		{
 			theMoveController = this.thePlayer.GetComponent < CharacterController> ();
+
+		if(!theSoundClip)
+		theSoundClip = Resources.Load <AudioClip> ("sound/effectSound/speedMove");
+		if (thePlayer && theSoundClip) 
+		{
+			try{thePlayer.theAudioPlayer.playAttackActSound (theSoundClip);}
+			catch(System.Exception D){ Debug.Log (D.Message);}
 		}
+
 		Destroy (this,lifeTimerAll);
 	}
 
@@ -49,7 +60,15 @@ public class effectForSpeedMoveForward : effectBasic {
 			effectBasic[] Effects = thePlayer.GetComponentsInChildren<effectBasic> ();
 			for (int i = 0; i < Effects.Length; i++)
 				Effects [i].OnUseSP (theSPUse);
-			
+
+			if(!theSoundClip)
+				theSoundClip = Resources.Load <AudioClip> ("sound/effectSound/speedMove");
+			if (thePlayer && theSoundClip) 
+			{
+				try{thePlayer.theAudioPlayer.playAttackActSound (theSoundClip);}
+				catch(System.Exception D){ Debug.Log (D.Message);}
+			}
+				
 			isEffecting = true;
 
 		}

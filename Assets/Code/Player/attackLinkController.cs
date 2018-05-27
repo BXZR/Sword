@@ -9,6 +9,8 @@ public class attackLinkController :MonoBehaviour {
 	public attackLink[] attackLinks;//保存连招公式的数组
 	private List<attackLink> attackLinkMayUsing;//当前可能使用的操作公式
 	private List<attackLink> attackBeDelete;//删除中转站，记录需要删除的信息
+	[HideInInspector]//为了保证设定面板的简洁，暂时隐藏之
+	public attackLink theAttackLinkNow = null;//当前选中的attackLink
 	private Event events;//当前的获取的事件
 	private KeyCode keyUse;// 检测到的键值
 	public float timerForLinkAtack=0.5f;//必须在一定时间内按出来这个串，否则无法使用技能
@@ -29,8 +31,7 @@ public class attackLinkController :MonoBehaviour {
 	public string dropAnimatorName ="drop";//跌倒动画状态名称(这个名字做成默认名字因为没有必要分化)
 	[HideInInspector]//为了保证设定面板的简洁，暂时隐藏之
 	public string beHitAnimatorName ="beHit";//跌倒动画状态名称(这个名字做成默认名字因为没有必要分化)
-	[HideInInspector]//为了保证设定面板的简洁，暂时隐藏之
-	public attackLink theAttackLinkNow = null;//当前选中的attackLink
+
 	//上面这个字段用于AI对这个attackLink的值的重新学习，同时这个也是信息采集需要使用的引用
 
 	//public string basicPunchKey = "J";//基础的拳头按键
@@ -38,6 +39,7 @@ public class attackLinkController :MonoBehaviour {
 
 	private bool isStarted = false;//是否开启
 	public bool canControll = true ;//是否可以通过玩家/AI进行操作
+
 
 	//计算用的预存字符串，用来检查是不是AI
 	private string theSavedTag = "";
@@ -141,6 +143,7 @@ public class attackLinkController :MonoBehaviour {
 				//这个判断非常的重要，如果取消，任何攻击动作都有可能中间取消，这当然不符合我们的需求
 				//print("index Selected is "+selectAttackLinkIndex);
 			    //print("the selected attacklink's linkstring = "+ AL.attackLinkString);
+				theAttackLinkNow = AL;
 				AL.attackLinkMain(selectAttackLinkIndex);//发生效果
 
 				flashLink ();//更新列表
@@ -220,28 +223,37 @@ public class attackLinkController :MonoBehaviour {
 				//例如QWE等等，但是对于ctrl等等貌似无效果（作为一种替换的键位监测方案放在这里）
 				//此外值得注意的就是InputString检测到的键位输出是小写的
 				//print (Input.inputString+" isUsed");
-			if (Input.anyKeyDown && systemValues.checkCanAttackAct() ) 
+			if (Input.anyKeyDown ) 
 			{
 				events = Event.current;
-				if (events != null) 
+				if (events != null && events.keyCode != KeyCode.None) 
 				{
-					if (events.isKey && events.keyCode != KeyCode.None) 
+					if (events.isKey ) 
 					{
 						keyUse = events.keyCode;
 						string codeUse = keyUse.ToString ();
+						if (codeUse == "E") //额外附加：停止，按下这个按钮直接停止当前动作
+						{
+							theAttackLinkNow.makeStoptheAct ();
+							//print ("stop");
+						}
+						else if(systemValues.checkCanAttackAct() )
 						//if (codeUse != "J")//完全鼠标操作
 							makeAttack (codeUse);//进入连招检查
 					}
-					//这是非常大的鼻酸，目前还没有办法分出阿里鼠标不同按钮的不同 
-					//也是以很暴力的方法啊
-					else if ( events.isMouse)
-					{
-						makeAttack ("J");//进入连招检查
-					}
+				}
+				//这是非常大的弊端，目前还没有办法分出阿里鼠标不同按钮的不同 
+				//也是以很暴力的方法啊
+				else if ( events.isMouse && systemValues.checkCanAttackAct())
+				{
+					makeAttack ("J");//进入连招检查
 				}
 			}
 		}
 	}
+
+
+
 
 
 	//额外的一些动作控制内容
@@ -273,7 +285,7 @@ public class attackLinkController :MonoBehaviour {
 		if (isStarted&& startTimer && thePlayer && thePlayer.isAlive) 
 		{
 			//存在一个等待的时间
-			timerForLinkAtack -= Time.deltaTime;
+			timerForLinkAtack -= systemValues.updateTimeWait;
 			if (timerForLinkAtack <= 0) 
 			{
 				flashLink ();//列表更新

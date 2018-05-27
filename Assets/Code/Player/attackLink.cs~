@@ -249,6 +249,30 @@ public class attackLink : MonoBehaviour {
 	}
 
 
+	public void makeStoptheAct()
+	{
+		if (systemValues.theGameSystemMode == GameSystemMode.NET && photonView != null)
+		{
+			this.photonView.RPC ("stopAct", PhotonTargets.All);
+		}
+		else if (systemValues.theGameSystemMode == GameSystemMode.PC)
+		{
+			stopAct ();
+		}
+	}
+
+	[PunRPC]
+	private void stopAct()
+	{
+		this.theAnimatorOfPlayer.Play ("moveMent" , 1, 0f);
+		float SPUse = systemValues.thePlayer.ActerSpMax * 0.05f;
+		systemValues.thePlayer.ActerSp -= SPUse;
+		for (int i = 0; i < systemValues.thePlayer.Effects.Count; i++)
+			systemValues.thePlayer.Effects [i].OnUseSP (SPUse);
+		systemValues.thePlayer.makeValueUpdate ();//网络更新一下
+	}
+
+
 	[PunRPC]
 	public  virtual void attackLinkEffect(int theAttackLinkIndex = 0)//连招的效果在这里写
 	{

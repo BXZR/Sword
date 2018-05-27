@@ -11,6 +11,10 @@ public class monsterBeAttack : effectBasic{
 	bool isMoving = false;
 	private float moveSpeed = 3f;
 	//NavMeshAgent theMoveController = null;
+
+	FSMStage FS;
+	NavMeshAgent NM;
+
 	void Start ()
 	{
 		//theMoveController = this.GetComponent <NavMeshAgent> ();
@@ -30,21 +34,20 @@ public class monsterBeAttack : effectBasic{
 			isMoving = true;
 			//if(theMoveController)
 			//	theMoveController.enabled = false;
-			if (this.GetComponent <FSMStage> ())
-				this.GetComponent <FSMStage> ().enabled = false;
-			if (this.GetComponent <NavMeshAgent> ())
-				this.GetComponent <NavMeshAgent> ().isStopped = true;
+
+			FS = this.GetComponent <FSMStage> ();
+			if (FS)  FS.enabled = false;
+
+			NM =  this.GetComponent <NavMeshAgent> ();
+			if (NM && NM.isOnNavMesh)  NM .isStopped = true;
 		}
 	}
 
 	//脚本有可能根据需要提前销毁，需要保证状态能归位
 	void OnDestroy()
 	{
-		if (this.GetComponent <FSMStage> ())
-			this.GetComponent <FSMStage> ().enabled = true;
-		NavMeshAgent theAgent = this.GetComponent <NavMeshAgent> ();
-		if (theAgent && theAgent.isActiveAndEnabled)
-			theAgent.isStopped = false;
+		if (FS)  FS.enabled = true;
+		if (NM && NM.isActiveAndEnabled)  NM.isStopped = false;
 	}
 
 	void Update () 
@@ -61,10 +64,9 @@ public class monsterBeAttack : effectBasic{
 				moveTimer = moveTimerAll;
 				isMoving = false;
 
-				if (this.GetComponent <FSMStage> ())
-					this.GetComponent <FSMStage> ().enabled = true;
-				if (this.GetComponent <NavMeshAgent> ())
-					this.GetComponent <NavMeshAgent> ().isStopped = false;
+				if (FS) FS.enabled = true;
+				if (NM) NM.isStopped = false;
+
 				isEffecting = false;//标记，已经失效
 			}
 		}

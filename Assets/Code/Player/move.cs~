@@ -304,14 +304,16 @@ public class move : MonoBehaviour {
 	{
 		if (Input.GetKey (KeyCode.LeftShift))
 		{
-			if (systemValues.theGameSystemMode == GameSystemMode.NET)//有些功能只在网络对战模式之下用就行
+			//有些功能只在网络对战模式之下用就行
+			if (systemValues.theGameSystemMode == GameSystemMode.NET && this.photonView) 
 				this.photonView.RPC ("makeShift", PhotonTargets.All);
 			else if (systemValues.theGameSystemMode == GameSystemMode.PC)
 				makeShift();
 		}
 		if (Input.GetKeyUp (KeyCode.LeftShift) || thePlayer.ActerSp <20)
 		{
-			if (systemValues.theGameSystemMode == GameSystemMode.NET)//有些功能只在网络对战模式之下用就行
+			//有些功能只在网络对战模式之下用就行
+			if (systemValues.theGameSystemMode == GameSystemMode.NET && this.photonView)
 				this.photonView.RPC ("makeShiftEnd", PhotonTargets.All);
 			else if (systemValues.theGameSystemMode == GameSystemMode.PC)
 				makeShiftEnd();
