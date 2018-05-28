@@ -330,7 +330,7 @@ public class attackLink : MonoBehaviour {
 			}
 
 
-			excieceExtraDamage++;//熟练度增加，额外的熟练度招式伤害
+			excieceExtraDamage += thePlayer.theLearnSpeed ;//熟练度增加，额外的熟练度招式伤害
 			float damageFromExcieseUse = Mathf.Clamp(excieceExtraDamage / 10 , 0f , 100f);//熟练度加成
 			thePlayer.extraDamageForAnimation = (this.extraDamage + damageFromExcieseUse );//用这个招式能够造成的额外伤害
 			if(thePlayer.theAudioPlayer!= null)
@@ -483,7 +483,7 @@ public class attackLink : MonoBehaviour {
 				{
 					theString.Append ("+");
 					theString.Append (systemValues.SkillExtraColor);
-					theString.Append ((excieceExtraDamage / 10).ToString ("f0"));
+					theString.Append (( Mathf.Clamp(excieceExtraDamage / 10 , 0f , 100f)).ToString ("f0"));
 					theString.Append (systemValues.colorEnd);
 				}
 				theString.Append (")\n");
