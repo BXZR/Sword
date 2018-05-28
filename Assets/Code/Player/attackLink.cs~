@@ -189,23 +189,13 @@ public class attackLink : MonoBehaviour {
 	{
 		if (this.theAttackLinkLv < this.theAttakLinkLvMax) 
 		{
-			if (systemValues.soulCount >= lvupCost)
-			{
-				this.extraDamage += extraDamageAdd;
-				this.theAttackLinkLv++;
-				systemValues.soulCount -= lvupCost;
-					
-			}
-		} 
-		else//升到顶级之后再一次增加只能够获得很微小的增益
+			this.extraDamage += extraDamageAdd;
+			this.theAttackLinkLv++;
+		}
+		else
 		{
 			extraDamageAdd = adderWhenLvtoMax;
-			lvupCost = soulCostWhenLvtoMax;
-			if (systemValues.soulCount >= lvupCost)
-			{
-				this.extraDamage += extraDamageAdd;
-				systemValues.soulCount -= lvupCost;
-			}
+			this.extraDamage += extraDamageAdd;
 		}
 	}
 
@@ -231,11 +221,21 @@ public class attackLink : MonoBehaviour {
 	{
 		if (systemValues.theGameSystemMode == GameSystemMode.NET && photonView != null)
 		{
-			this.photonView.RPC ("AttackLinkLvupNet", PhotonTargets.All);
+			lvupCost = this.theAttackLinkLv < this.theAttakLinkLvMax ? lvupCost : soulCostWhenLvtoMax;
+			if (systemValues.soulCount >= lvupCost)
+			{
+			    this.photonView.RPC ("AttackLinkLvupNet", PhotonTargets.All);
+				systemValues.soulCount -= lvupCost;
+			}
 		}
 		else if (systemValues.theGameSystemMode == GameSystemMode.PC)
 		{
-			AttackLinkLvupNet ();
+			lvupCost = this.theAttackLinkLv < this.theAttakLinkLvMax ? lvupCost : soulCostWhenLvtoMax;
+			if (systemValues.soulCount >= lvupCost)
+			{
+				AttackLinkLvupNet ();
+				systemValues.soulCount -= lvupCost;
+			}
 		}
 	}
 	//招式升级OVER-----------------------------------------------

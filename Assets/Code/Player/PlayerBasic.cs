@@ -316,7 +316,10 @@ public class PlayerBasic : MonoBehaviour {
 		for (int i = 0; i < theEffects.Length; i++)
 			theEffects [i].OnLvUp ();
 		OnGUIStringForNAmeLV = this.ActerName + "(Lv." + this.playerLv + ")";//重新做一个GUI字符串
-		systemValues.messageTitleBoxShow ("等级提升");
+		systemValues.messageTitleBoxShow ("等级提升至"+this.playerLv+"级");
+
+		makeValueUpdate ();//强制更新网络数据
+
 	}
 	//有关经验和等级 OVER -----------------------------------------------------------------------------------------
 
