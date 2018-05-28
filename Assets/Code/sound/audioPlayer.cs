@@ -26,7 +26,7 @@ public class audioPlayer : MonoBehaviour
 	{
 		if (theSource == null)
 			return;
-		
+
 		else if (audioNow && audioSave != audioNow) 
 		{
 			audioSave = audioNow;
@@ -47,12 +47,23 @@ public class audioPlayer : MonoBehaviour
 		audioSave = null;
 	}
 
-	public void playClip(AudioClip theClip = null)//默认可以为空，播放指定的音效
+	public void playClip(AudioClip theClip = null , bool interupt = true , float speed = 1f)//默认可以为空，播放指定的音效
 	{
 		if (theSource == null)
 			return;
-		if (theClip)
+
+		if (!interupt) 
+		{
+			if (theSource.isPlaying)
+				return;
+		}
+
+		if (theClip) 
+		{
+			theSource.pitch = speed;
 			theSource.PlayOneShot (theClip);
+			theSource.pitch = 1f;//归位
+		}
 	}
 		
 	// 初始化回调方法

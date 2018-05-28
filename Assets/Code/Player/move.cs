@@ -44,6 +44,10 @@ public class move : MonoBehaviour {
 	public bool isJumping = false;
 	public bool isOverWall = false;//站在墙边可以进行多段跳跃
 
+	public bool ____________________________________;//这个是分界线，没有实际功用
+	public AudioClip theMoveSound;//移动脚步声
+	public AudioClip theJumpSound;//跳跃开始声音
+
 	Vector3 moveDirection = Vector3.zero;
 
 	public void makeStart()//初始化方法，由总控单元统一进行初始化
@@ -176,6 +180,7 @@ public class move : MonoBehaviour {
 			this.photonView.RPC ("UseSP", PhotonTargets.All, spUse);
 			//-----------------------------------------------------------
 			}
+			thePlayer.theAudioPlayer.playClip (theJumpSound);
 			isJumping = true;
 		}
 	}
@@ -244,7 +249,8 @@ public class move : MonoBehaviour {
 
 			if (IsGrounded() && jumpTimer < 0) 
 			{
-					isJumping = false;
+				thePlayer.theAudioPlayer.playClip (theMoveSound);
+				isJumping = false;
 			}
 		}
 			
@@ -394,6 +400,18 @@ public class move : MonoBehaviour {
 			this.transform.position = new Vector3 (this.transform.position.x, jumpMaxHeight, this.transform.position.z);
 	}
 
+
+	void playModeSound(float forwardA , float upA)
+	{
+		if (isJumping || !IsGrounded())
+			return;
+		if (Mathf.Abs (forwardA) > 0.25f || Mathf.Abs (upA) > 0.25f) 
+		{
+			//print ("play move sound");
+			thePlayer.theAudioPlayer.playClip (theMoveSound,false);
+		}
+	}
+
 	//移动的计算因为是人看到的，所以还是应该更加连贯
 	void Update ()
 	{
@@ -408,6 +426,7 @@ public class move : MonoBehaviour {
 		Jump();
 		fastMoveCheck ();
 		timerCheck (forwardA , upA);
+		playModeSound (forwardA, upA);
 		trueMove ();//真正的移动
 
 		//这是一个更加强制的网络移动的调用，但是实际上没有要这样做
