@@ -1,0 +1,34 @@
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.UI;
+
+public class theCenenInformationPanel : MonoBehaviour {
+
+	//场景信息面板
+	//这个界面会用来介绍场景，加成等等各种游戏信息
+	//算是游戏信息集中介绍面板
+	//设计这个面板的时候税号更加分散一点，改动一定会不少啊
+
+	public Text theTextForSceneSkill;
+
+	void Start () 
+	{
+		
+	}
+
+
+	//界面信息刷新通用方法
+	private void flashThePanel()
+	{
+		string theEffectName = systemValues.getGameModeExtraEffect ();
+		theTextForSceneSkill.text = systemValues.getEffectInfromationWithName (theEffectName);
+	}
+
+
+
+	// Update is called once per frame
+	void Update () {
+		
+	}
+}

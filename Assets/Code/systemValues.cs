@@ -1020,6 +1020,7 @@ public class systemValues : MonoBehaviour {
 		thePopSoul.Clear ();
 		messageBoxClose ();
 		theAreaRenders.Clear ();
+		wulingButton.isStarted = false;
 	}
 	#endregion
 

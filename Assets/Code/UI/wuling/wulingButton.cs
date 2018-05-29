@@ -19,7 +19,7 @@ public class wulingButton : MonoBehaviour {
 	//五灵显示和修炼界面引用
 	public theWulingYinYangpanel wulingExciesePanel;
 
-	private  static  bool isStarted = false;
+	public  static  bool isStarted = false;
 
 	//所有按钮初始化的时候都做一次
 	//这是为了保证初始的效果能够完整
@@ -58,5 +58,4 @@ public class wulingButton : MonoBehaviour {
 		theImageForLingzhuSave.enabled = true;
 	}
 
-   
 }

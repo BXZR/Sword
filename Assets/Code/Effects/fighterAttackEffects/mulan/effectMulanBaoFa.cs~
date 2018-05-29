@@ -76,7 +76,7 @@ public class effectMulanBaoFa : effectBasic
 
 	public override void updateEffect ()
 	{
-		timerForAdd += 2f;
+		timerForAdd += timeCoolingMinus;//减少冷却时间
 		thePlayer.ActerSp += spAdder;
 	}
 }

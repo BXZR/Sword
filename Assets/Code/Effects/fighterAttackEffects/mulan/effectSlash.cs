@@ -9,8 +9,8 @@ public class effectSlash :effectBasic{
 	float addPercent = 0.10f;
 
 	float changeGate = 0.25f;
-	float hpsuckOnChange = 0.03f;
-	float damageSuckMax = 30;
+	float hpsuckOnChange = 0.02f;
+	float damageSuckMax = 25;
 
 	float spAddMax = 25f;
 
