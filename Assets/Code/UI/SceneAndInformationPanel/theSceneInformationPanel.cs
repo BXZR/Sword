@@ -16,15 +16,16 @@ public class theSceneInformationPanel : MonoBehaviour {
 	public Image theScnenImage;
 	public Image theAimImage;
 
-	void Start () 
-	{
+	//void Start () 
+	//{
 		
-	}
+	//}
 
 	void OnEnable()
 	{
 		try{flashThePanel ();}
-		catch(System.Exception D) {print (D.Message);}
+		catch(System.Exception D) {
+		}//print (D.Message);}
 	}
 
 
@@ -51,8 +52,8 @@ public class theSceneInformationPanel : MonoBehaviour {
 	}
 
 
-	void Update () 
-	{
+	//void Update () 
+	//{
 		
-	}
+	//}
 }

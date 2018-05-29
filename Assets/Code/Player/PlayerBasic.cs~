@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Text;
 using System.Collections.Generic;
+using UnityEngine.AI;
 
 public class PlayerBasic : MonoBehaviour {
 
@@ -918,20 +919,28 @@ public class PlayerBasic : MonoBehaviour {
 			this.GetComponent <attackLinkController> ().enabled = false;
 			this.GetComponent <move> ().enabled = false;
 			this.enabled = false;
-			this.GetComponent <BoxCollider> ().enabled = false;
-
+			//this.GetComponent <BoxCollider> ().enabled = false;
+			BoxCollider BC = this.GetComponent <BoxCollider> ();
+			if(BC) BC.isTrigger = false;
 			CharacterController CC = this.GetComponent <CharacterController> ();
 			if(CC) Destroy(CC );
+			NavMeshAgent NV = this.GetComponent <NavMeshAgent>();
+			if(NV) Destroy(NV);
+			FSMStage theFSM = this.GetComponent <FSMStage>();
+			if( theFSM ) theFSM .enabled = false;
+
 			//this.transform.position = new Vector3 (this.transform .position .x , 2f , this.transform .position .z);
 			//if(!this.gameObject.GetComponent <Rigidbody>())
 			//	this.gameObject.AddComponent<Rigidbody>();
 			
 			shutArea();
 
-			FSMStage theFSM = this.GetComponent <FSMStage>();
-			if( theFSM ) theFSM .enabled = false;
+
 			if(systemValues.thePlayer == this)
+			{
+				print("GameOver");
 				systemValues.makeGameEnd("胜败，不过是兵家常事,\n我们可以，还可以从头再来。");
+			}
 			else
 				Destroy(this.gameObject ,15f);
 		}

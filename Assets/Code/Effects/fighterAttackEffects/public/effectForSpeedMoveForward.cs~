@@ -37,9 +37,16 @@ public class effectForSpeedMoveForward : effectBasic {
 		theSoundClip = Resources.Load <AudioClip> ("sound/effectSound/speedMove");
 		if (thePlayer && theSoundClip) 
 		{
-			try{thePlayer.theAudioPlayer.playAttackActSound (theSoundClip);}
+			try
+			{
+				thePlayer.theAudioPlayer.playAttackActSound (theSoundClip);
+				moveSpeed *= thePlayer.ActerMoveSpeedPercent;//稍微受到一点移动速度的影响
+				moveSpeed = Mathf.Clamp(moveSpeed , 18f , 22f);
+			}
 			catch(System.Exception D){ Debug.Log (D.Message);}
 		}
+
+
 
 		Destroy (this,lifeTimerAll);
 	}
