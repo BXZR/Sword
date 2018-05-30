@@ -17,20 +17,23 @@ public class GameStartButton : MonoBehaviour {
 	{
 		if (systemValues.theGameSystemMode == GameSystemMode.PC) 
 		{
-			NetOption.singleModeShow ();
+			if(NetOption)
+			    NetOption.singleModeShow ();
 			showLabel = this.GetComponentInChildren<Text> ();
 			showLabel.text = "开始游戏";
 			isPrepareOver = true;
 		}
 		if (systemValues.theGameSystemMode == GameSystemMode.NET) 
 		{
-			NetOption.netModeShow ();
+			if(NetOption)
+				NetOption.netModeShow ();
 			PhotonNetwork.ConnectUsingSettings ("1.0");
 			showLabel = this.GetComponentInChildren<Text> ();
 			showLabel.text = "正在连接";
 		}
 
-		theSelectMaker.makeFirstFighter ();
+		if(theSelectMaker)
+		    theSelectMaker.makeFirstFighter ();
 	}
 
 	public void gotoPlay()
@@ -43,9 +46,18 @@ public class GameStartButton : MonoBehaviour {
 
 		if (systemValues.theGameSystemMode == GameSystemMode.PC) 
 		{
-			Destroy (selectHead.therPlayer.gameObject);
+			if(selectHead.therPlayer)
+			   Destroy (selectHead.therPlayer.gameObject);
+			if (selectHeadForStory.therPlayer)
+				Destroy (selectHeadForStory.therPlayer.gameObject);
+			
 			forwardImage.SetActive (true);
-			selectHead.theStaticSelectedImage.SetActive (false);
+
+		 	if(selectHead.theStaticSelectedImage)
+			  selectHead.theStaticSelectedImage.SetActive (false);
+			if (selectHeadForStory.theStaticSelectedImage)
+				selectHeadForStory.theStaticSelectedImage.SetActive (false);
+
 			UnityEngine.SceneManagement.SceneManager.LoadScene (systemValues.getScnenForSystem());
 
 		}

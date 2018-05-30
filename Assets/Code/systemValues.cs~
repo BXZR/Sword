@@ -1053,6 +1053,8 @@ public class systemValues : MonoBehaviour {
 	}
 	#endregion
 
+
+
 	#region 范围信息储存
 	//死亡的面板
 	public static List< GameObject > theAreaRenders = new List<GameObject> ();
@@ -1064,6 +1066,21 @@ public class systemValues : MonoBehaviour {
 				if (A)
 					A.gameObject.SetActive (!A.activeInHierarchy);
 	}
+	#endregion
+
+	#region 游戏人物传记
+	private static string[] story = 
+	{
+		"归海一刀 魔刀神刀",
+		"郭靖 神掌非掌" ,
+		"花木兰 刺心烛心" ,
+		"慕容紫英 仙道剑道"
+	};
+	public static string  getStorySimpleInformation(int index)
+	{
+		return story [index]; 
+	}
+
 	#endregion
 
 	//GM的初始化==============================================================================
