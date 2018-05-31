@@ -1069,16 +1069,16 @@ public class systemValues : MonoBehaviour {
 	#endregion
 
 	#region 游戏人物传记
-	private static string[] story = 
+	private static string[] storySummaryName = 
 	{
-		"归海一刀 魔刀神刀",
-		"郭靖 神掌非掌" ,
-		"花木兰 刺心烛心" ,
-		"慕容紫英 仙道剑道"
+		"knife_summary",
+		"guojing_summary" ,
+		"mulan_summary" ,
+		"ziying_summary"
 	};
 	public static string  getStorySimpleInformation(int index)
 	{
-		return story [index]; 
+		return Resources.Load<TextAsset>("Stories/"+ storySummaryName [index]).text; 
 	}
 
 	#endregion
