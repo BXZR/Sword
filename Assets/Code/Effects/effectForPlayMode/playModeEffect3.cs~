@@ -5,7 +5,7 @@ using UnityEngine;
 public class playModeEffect3 : effectBasic {
 
 
-	private float percent = 0.15f;
+	private float percent = 0.10f;
 
 	void Start ()
 	{

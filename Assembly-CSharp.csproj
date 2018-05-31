@@ -61,6 +61,7 @@
      <Compile Include="Assets\Code\Effects\effectForPlayMode\playModeEffect2.cs" />
      <Compile Include="Assets\Code\Effects\effectForPlayMode\playModeEffect3.cs" />
      <Compile Include="Assets\Code\Effects\effectForPlayMode\playModeEffect4.cs" />
+     <Compile Include="Assets\Code\Effects\effectForPlayMode\playModeEffect5.cs" />
      <Compile Include="Assets\Code\Effects\effectForWuling\lingEffects\earth\earth1.cs" />
      <Compile Include="Assets\Code\Effects\effectForWuling\lingEffects\earth\earth2.cs" />
      <Compile Include="Assets\Code\Effects\effectForWuling\lingEffects\fire\fire1.cs" />
@@ -117,6 +118,8 @@
      <Compile Include="Assets\Code\Player\move.cs" />
      <Compile Include="Assets\Code\Player\newMethodAttack.cs" />
      <Compile Include="Assets\Code\Player\playerStar.cs" />
+     <Compile Include="Assets\Code\PlotUse\plotController.cs" />
+     <Compile Include="Assets\Code\PlotUse\plotItem.cs" />
      <Compile Include="Assets\Code\UI\ExtraControl\columnText.cs" />
      <Compile Include="Assets\Code\UI\SceneAndInformationPanel\theSceneInformationPanel.cs" />
      <Compile Include="Assets\Code\UI\UISound\buttonWithSound.cs" />

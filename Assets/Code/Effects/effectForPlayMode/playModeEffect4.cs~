@@ -4,7 +4,9 @@ using UnityEngine;
 
 public class playModeEffect4 : effectBasic {
 
-	float percent = 0.1f;
+
+	private float percent = 10f;
+
 	void Start ()
 	{
 		Init ();
@@ -12,19 +14,25 @@ public class playModeEffect4 : effectBasic {
 
 	public override void Init ()
 	{
-		theEffectName = "天助圣光";
-		theEffectInformation = "每秒额外恢复最大生命值和最大斗气值的"+percent *100+"%";
+		theEffectName = "一击必杀";
+		theEffectInformation = "攻击力已经毫无意义，敌我均是一击必杀";
 		makeStart ();
 	}
 
-	public override void effectOnUpdateTime ()
+	//严酷
+	public override void OnBeAttack (float damage = 0)
 	{
-		if (!thePlayer)
+		if (damage <= 0)
 			return;
-		
-		thePlayer.ActerHp += thePlayer.ActerHpMax * percent * systemValues.updateTimeWait;
-		thePlayer.ActerSp += thePlayer.ActerSpMax * percent * systemValues.updateTimeWait;
+
+		this.thePlayer.ActerHp -= this.thePlayer.ActerHpMax * percent;
+	}
+
+	//训诫
+	public override void OnAttack (PlayerBasic aim, float TrueDamage)
+	{
+		if (TrueDamage <= 0)
+			return;
+		aim.ActerHp -= this.thePlayer.ActerHpMax * percent;
 	}
 }
-
-
