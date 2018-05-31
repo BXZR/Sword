@@ -1,13 +1,20 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class plotController : MonoBehaviour {
 
 	//剧本控制单元
 	//因为剧本是线性的，所以直接会使用List就可以了
 
+	//用来显示剧本文本内容的Text
+	public Text theTextForTalk;
+	//这个是非常重要的所有剧本帧
+	[HideInInspector]
 	public List<plotItem> thePlotItems = new List<plotItem> ();
+	//当前选中的剧本帧
+	[HideInInspector]
 	public plotItem theItemNow = null;
 	private int indexNow = 0;
 
@@ -27,6 +34,8 @@ public class plotController : MonoBehaviour {
 		if (theItem)
 		{
 			theItemNow = theItem;
+			//说起来这也就是两段的初始化了
+			theItem.OnStart (theTextForTalk);
 			theItem.OnPlaytheItem ();
 		}
 	}
@@ -35,10 +44,7 @@ public class plotController : MonoBehaviour {
 	{
 
 	}
-
-
-
-
+		
 	void Start () 
 	{
 		makeStart ();

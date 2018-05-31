@@ -2,6 +2,19 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+
+//统一控制的接口
+using UnityEngine.UI;
+
+
+public interface plotActions 
+{
+	void OnStart (plotItem theItem);//开始的时候统一调用
+	void OnEnd();//结束的时候统一调用
+	void OnUpdate();//每一帧更新的时候统一调用
+}
+
+
 public class plotItem : MonoBehaviour {
 
 	//剧本信息
@@ -11,11 +24,53 @@ public class plotItem : MonoBehaviour {
 	//直接使用线性排列方式就可以了
 
 	public string thePlotIteTitle = "";//阶段性小标题
-	public string thePlotItemExtraInformation = "";//这个剧本帧的额外说明
+	public string thePlotItemExtra= "";//这个剧本帧的额外说明
 	public  float theTimeForThisItem = 5f;//这个剧本帧的持续时间
-	public AudioClip [] theSounds;//这个剧本帧需要发出来的音效组
-
 	public bool isEnd = false;
+	//各种分项的控制单元
+	public List<plotActions> Actions = new List<plotActions> ();
+
+	//一些引用的保存
+	public Text theTExtForTalk;
+	//外部调用----------------------------------------------------------------------------------------
+    //由控制单元同一控制更新
+
+
+	//每一个剧本帧在运行之前应该初始化
+	public  void  OnStart(Text textIn)
+	{
+		Actions = new List<plotActions> (this.GetComponentsInChildren<plotActions> ());
+		//print ("Actions count = " + Actions.Count);
+		theTExtForTalk = textIn;
+	}
+
+
+	//在刷新的时候的效果 
+	public void OnItemUpdate()
+	{
+		makeTimer ();
+		for (int i = 0; i < Actions.Count; i++)
+			Actions [i].OnUpdate();
+	}
+
+	//在刚开始这个剧本帧的时候的效果
+	public void OnPlaytheItem()
+	{
+
+		print (thePlotIteTitle);
+		for (int i = 0; i < Actions.Count; i++)
+			Actions [i].OnStart (this);
+	}
+
+	//在结束这个剧本帧的时候的效果吧
+	public void OnEndtheItem()
+	{
+		for (int i = 0; i < Actions.Count; i++)
+			Actions [i].OnEnd ();
+	}
+
+
+	//内部实现----------------------------------------------------------------------------------------
 
 	private void makeTimer()
 	{
@@ -25,23 +80,4 @@ public class plotItem : MonoBehaviour {
 			isEnd = true;
 	}
 
-
-    //由控制单元同一控制更新
-	//在刷新的时候的效果 
-	public void OnItemUpdate()
-	{
-		makeTimer ();
-	}
-
-	//在刚开始这个剧本帧的时候的效果
-	public void OnPlaytheItem()
-	{
-		print (thePlotIteTitle);
-	}
-
-	//在结束这个剧本帧的时候的效果吧
-	public void OnEndtheItem()
-	{
-		
-	}
 }
