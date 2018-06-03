@@ -22,7 +22,7 @@ public class effectKOKnife : effectBasic{
 	public override void Init ()
 	{
 		theEffectName = "重剑无锋";
-		theEffectInformation ="攻击命中积累刀气，拥有"+ attackCountMax +"层刀气时攻击附加目标最大生命值"+attackPercent*100+"%物理伤害\n若目标生命百分比高于自己，击退目标"+beAttackBackTimer+"秒";
+		theEffectInformation ="攻击命中积累刀气，拥有"+ attackCountMax +"层刀气时攻击附加目标最大生命"+attackPercent*100+"%物理伤害\n若目标生命百分比高于自己，击退目标"+beAttackBackTimer+"秒";
 		makeStart ();
 	}
 

@@ -70,10 +70,28 @@ public class GameStartButton : MonoBehaviour {
 			UnityEngine.SceneManagement.SceneManager.LoadScene (systemValues.getScnenForSystem());
 
 		}
+	}
 
 
+	public void getoPlayStory()
+	{
+		if(selectHead.therPlayer)
+			Destroy (selectHead.therPlayer.gameObject);
+		if (selectHeadForStory.therPlayer)
+			Destroy (selectHeadForStory.therPlayer.gameObject);
+
+		forwardImage.SetActive (true);
+
+		if(selectHead.theStaticSelectedImage)
+			selectHead.theStaticSelectedImage.SetActive (false);
+		if (selectHeadForStory.theStaticSelectedImage)
+			selectHeadForStory.theStaticSelectedImage.SetActive (false);
+
+		UnityEngine.SceneManagement.SceneManager.LoadScene (systemValues.getScnenForStory());
 
 	}
+
+
 	public void endGame()
 	{
 		if (systemValues.theGameSystemMode == GameSystemMode.NET) 
