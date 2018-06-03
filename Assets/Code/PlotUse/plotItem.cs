@@ -59,7 +59,7 @@ public class plotItem : MonoBehaviour {
 	public void OnPlaytheItem()
 	{
 
-		print (thePlotIteTitle);
+		//print (thePlotIteTitle);
 		for (int i = 0; i < Actions.Count; i++)
 			Actions [i].OnStart (this);
 	}

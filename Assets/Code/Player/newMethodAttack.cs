@@ -109,7 +109,7 @@ public class newMethodAttack : MonoBehaviour {
 			    extraEffectSELF ();//添加自身特效
 			}
 		  
-		    if (thePlayer.canAttack) 
+		if (thePlayer && thePlayer.canAttack) 
 			{
 				Attack (makeDamage);
 				//print ("attack!");

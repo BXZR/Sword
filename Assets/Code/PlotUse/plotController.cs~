@@ -47,7 +47,7 @@ public class plotController : MonoBehaviour {
 		
 	void Start () 
 	{
-		makeStart ();
+		Invoke ("makeStart", 3f);
 	}
 
 	void Update () 

@@ -9,7 +9,7 @@ public class plotTextController : MonoBehaviour, plotActions {
     
 
 	public string speakerName = "";//说话的人
-	public string speakerTalk = "";//shuochulaidehua 
+	public string speakerTalk = "";//说出来的话
 	private Text theText;
 	private string theShowString = "";
 	private int indexNow = 0;
@@ -21,6 +21,11 @@ public class plotTextController : MonoBehaviour, plotActions {
 	{
 		theText = theItem.theTExtForTalk;
 
+		if (string.IsNullOrEmpty(speakerTalk))
+			theText.transform.root.gameObject.SetActive (false);
+		else
+			theText.transform.root.gameObject.SetActive (true);
+		
 		timerWait = speakerTalk.Length == 0 ? 0.01f : theItem.theTimeForThisItem * 0.75f / speakerTalk.Length;
 		theShowString = speakerName + "\n";
 		theText.text = theShowString;
@@ -31,7 +36,8 @@ public class plotTextController : MonoBehaviour, plotActions {
 	public  void OnEnd()
 	{
 		if(theText)
-		    theText.text = "";
+			theText.transform.root.gameObject.SetActive (false);
+		
 		CancelInvoke ();
 	}
 

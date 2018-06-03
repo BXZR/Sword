@@ -18,7 +18,8 @@ public class plotTransformController : MonoBehaviour  , plotActions {
 	private Quaternion theAimQuaternion;
 
 	private plotItem theItem;
-	float timerSpeed = 1f;
+	float speedForRotate = 1f;
+	float speedForMove = 1f;
 	//没办法，接口默认pulic
 	//开始的时候统一调用
 	public  void OnStart (plotItem theItemIn)
@@ -28,7 +29,15 @@ public class plotTransformController : MonoBehaviour  , plotActions {
 		//print ("aim r = "+theAimQuaternion.eulerAngles);
 		theItem = theItemIn;
 
-		timerSpeed =  theItem.theTimeForThisItem == 0 ? 0f : 1f/theItem.theTimeForThisItem ; 
+		speedForRotate =  theItem.theTimeForThisItem == 0 ? 0f : 1f/theItem.theTimeForThisItem ;
+
+		if (theAimTransform && theTransToControl)
+		{
+			if (theItem.theTimeForThisItem > 0)
+				speedForMove = Vector3.Distance (theTransToControl.position, theAimTransform.position) / (theItem.theTimeForThisItem * 0.8f);
+			else
+				speedForMove = 0f;
+		}
 	}
 
 	//结束的时候统一调用
@@ -42,7 +51,9 @@ public class plotTransformController : MonoBehaviour  , plotActions {
 	public  void OnUpdate()
 	{
 		//print ("transform controlling");
-		theTransToControl.localRotation = Quaternion.Lerp (theTransToControl.rotation , theAimQuaternion , timerSpeed  );
+		theTransToControl.localRotation = Quaternion.Lerp (theTransToControl.rotation , theAimQuaternion , speedForRotate  );
+		if(theAimTransform && theTransToControl)
+			theTransToControl.position = Vector3.MoveTowards(theTransToControl.position , theAimTransform.position , Time.deltaTime * speedForMove);
 		//print (theTransToControl.localRotation );
 	}
 
