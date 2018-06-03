@@ -45,4 +45,10 @@ public class plotTransformController : MonoBehaviour  , plotActions {
 		theTransToControl.localRotation = Quaternion.Lerp (theTransToControl.rotation , theAimQuaternion , timerSpeed  );
 		//print (theTransToControl.localRotation );
 	}
+
+	//强制到达结束状态
+	public void OnControlEnd()
+	{
+
+	}
 }

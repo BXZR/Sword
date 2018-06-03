@@ -31,4 +31,10 @@ public class plotSoundController : MonoBehaviour , plotActions  {
 	{
 	}
 
+	//强制到达结束状态
+	public void OnControlEnd()
+	{
+
+	}
+
 }

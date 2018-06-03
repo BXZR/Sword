@@ -121,6 +121,7 @@
      <Compile Include="Assets\Code\PlotUse\plotAnimatorController.cs" />
      <Compile Include="Assets\Code\PlotUse\plotController.cs" />
      <Compile Include="Assets\Code\PlotUse\plotItem.cs" />
+     <Compile Include="Assets\Code\PlotUse\plotMusicController.cs" />
      <Compile Include="Assets\Code\PlotUse\plotSoundController.cs" />
      <Compile Include="Assets\Code\PlotUse\plotTextController.cs" />
      <Compile Include="Assets\Code\PlotUse\plotTransformController.cs" />

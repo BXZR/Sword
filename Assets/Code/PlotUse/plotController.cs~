@@ -52,19 +52,27 @@ public class plotController : MonoBehaviour {
 
 	void Update () 
 	{
-		if (theItemNow) 
-		{
-			theItemNow.OnItemUpdate ();
+		if (!theItemNow) return;
 
-			if (theItemNow.isEnd)
-			{
-				theItemNow.OnEndtheItem ();
-				indexNow++;
-				if (indexNow >= thePlotItems.Count)
-					theItemNow = null;
-				else
-					makePlay (thePlotItems [indexNow]);
-			}
+		theItemNow.OnItemUpdate ();
+
+		if (theItemNow.isEnd)
+		{
+			theItemNow.OnEndtheItem ();
+			indexNow++;
+			if (indexNow >= thePlotItems.Count)
+				theItemNow = null;
+			else
+				makePlay (thePlotItems [indexNow]);
 		}
+
+		//下面是一些操作
+		if (Input.GetKeyDown (KeyCode.Escape))
+			Time.timeScale = Time.timeScale == 0 ? 1 : 0;
+
+		if (Input.GetKeyDown (KeyCode.Space) || Input.GetMouseButtonDown (0))
+			theItemNow.OnControlEnd ();
+
+
 	}
 }

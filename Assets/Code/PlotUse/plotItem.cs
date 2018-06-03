@@ -12,6 +12,8 @@ public interface plotActions
 	void OnStart (plotItem theItem);//开始的时候统一调用
 	void OnEnd();//结束的时候统一调用
 	void OnUpdate();//每一帧更新的时候统一调用
+	//这个方法与OnEnd可以使两段控制
+	void OnControlEnd();//强制到达结束状态,但是还没有结束
 }
 
 
@@ -68,6 +70,14 @@ public class plotItem : MonoBehaviour {
 		for (int i = 0; i < Actions.Count; i++)
 			Actions [i].OnEnd ();
 	}
+
+	//强制控制，但是不是结束
+	public void OnControlEnd()
+	{
+		for (int i = 0; i < Actions.Count; i++)
+			Actions [i].OnControlEnd();
+	}
+
 
 
 	//内部实现----------------------------------------------------------------------------------------

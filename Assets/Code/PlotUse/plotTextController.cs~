@@ -41,6 +41,13 @@ public class plotTextController : MonoBehaviour, plotActions {
 
 	}
 
+	//强制到达结束状态
+	public void OnControlEnd()
+	{
+		theText.text = speakerName + "\n" +speakerTalk;
+		indexNow = speakerTalk.Length;
+	}
+
 	//私有内部方法------------------------------------------
 
 	void showTheTextWithUpdate()

@@ -27,4 +27,9 @@ public class plotAnimatorController : MonoBehaviour , plotActions  {
 	{
 	}
 
+	public void OnControlEnd()
+	{
+		
+	}
+
 }
