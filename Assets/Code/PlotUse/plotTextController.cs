@@ -10,7 +10,8 @@ public class plotTextController : MonoBehaviour, plotActions {
 
 	public string speakerName = "";//说话的人
 	public string speakerTalk = "";//说出来的话
-	private Text theText;
+
+	private plotItem thePlotItemForThis;//这个剧本帧
 	private string theShowString = "";
 	private int indexNow = 0;
 	private float timerWait =1f;
@@ -19,24 +20,28 @@ public class plotTextController : MonoBehaviour, plotActions {
 	//开始的时候统一调用
 	public  void OnStart (plotItem theItem)
 	{
-		theText = theItem.theTExtForTalk;
+		thePlotItemForThis = theItem;
 
-		if (string.IsNullOrEmpty(speakerTalk))
-			theText.transform.root.gameObject.SetActive (false);
+		if (string.IsNullOrEmpty (speakerTalk))
+			thePlotItemForThis.theTextForTalk.transform.root.gameObject.SetActive (false);
 		else
-			theText.transform.root.gameObject.SetActive (true);
-		
+			thePlotItemForThis.theTextForTalk.transform.root.gameObject.SetActive (true);
+
 		timerWait = speakerTalk.Length == 0 ? 0.01f : theItem.theTimeForThisItem * 0.75f / speakerTalk.Length;
 		theShowString = speakerName + "\n";
-		theText.text = theShowString;
+		thePlotItemForThis.theTextForTalk.text = theShowString;
 		InvokeRepeating ("showTheTextWithUpdate", 0f, timerWait);
+
+		thePlotItemForThis.HeadImage1.sprite = loadHeadImage (speakerName);
+		thePlotItemForThis.HeadImage2.sprite = loadHeadImage ("noOne");
 	}
+
 
 	//结束的时候统一调用
 	public  void OnEnd()
 	{
-		if(theText)
-			theText.transform.root.gameObject.SetActive (false);
+		if(thePlotItemForThis.theTextForTalk)
+			thePlotItemForThis.theTextForTalk.transform.root.gameObject.SetActive (false);
 		
 		CancelInvoke ();
 	}
@@ -50,20 +55,34 @@ public class plotTextController : MonoBehaviour, plotActions {
 	//强制到达结束状态
 	public void OnControlEnd()
 	{
-		theText.text = speakerName + "\n" +speakerTalk;
+		thePlotItemForThis.theTextForTalk.text = speakerName + "\n" +speakerTalk;
 		indexNow = speakerTalk.Length;
 	}
 
 	//私有内部方法------------------------------------------
 
-	void showTheTextWithUpdate()
+	private Sprite loadHeadImage(string theChineseName)
+	{
+		int index = -1;
+		for (int i = 0; i < systemValues.playerNames.Length; i++) {
+			if (systemValues.playerNames [i] == theChineseName) {
+				index = i;
+				break;
+			}
+		}
+		if (index >= 0)
+			return  systemValues.makeLoadSprite ("playerHeadPicture/"+ systemValues.playerHeadNames[index]);
+		return systemValues.makeLoadSprite ("playerHeadPicture/noOne");
+	}
+
+	private void showTheTextWithUpdate()
 	{
 		if (indexNow < speakerTalk.Length)
 		{
 			//print ("show the text");
 			theShowString += speakerTalk [indexNow];
 			indexNow++;
-			theText.text = theShowString;
+			thePlotItemForThis.theTextForTalk.text = theShowString;
 		}
 	}
 }

@@ -33,17 +33,21 @@ public class plotItem : MonoBehaviour {
 	public List<plotActions> Actions = new List<plotActions> ();
 
 	//一些引用的保存
-	public Text theTExtForTalk;
+	public Text theTextForTalk;
+	public Image HeadImage1;
+	public Image HeadImage2;
 	//外部调用----------------------------------------------------------------------------------------
     //由控制单元同一控制更新
 
 
 	//每一个剧本帧在运行之前应该初始化
-	public  void  OnStart(Text textIn)
+	public  void  OnStart(Text textIn , Image HeadPicture1 , Image headPicture2)
 	{
 		Actions = new List<plotActions> (this.GetComponentsInChildren<plotActions> ());
 		//print ("Actions count = " + Actions.Count);
-		theTExtForTalk = textIn;
+		theTextForTalk = textIn;
+		HeadImage1 = HeadPicture1;
+		HeadImage2 = headPicture2;
 	}
 
 

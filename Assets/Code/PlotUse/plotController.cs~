@@ -10,6 +10,13 @@ public class plotController : MonoBehaviour {
 
 	//用来显示剧本文本内容的Text
 	public Text theTextForTalk;
+	//人物头像
+	public Image theHeadPicture1;
+	public Image theHeadPicture2;
+
+	//剧本完成之后转到哪一个场景
+	public string theSceneWhenOver = "";
+
 	//这个是非常重要的所有剧本帧
 	[HideInInspector]
 	public List<plotItem> thePlotItems = new List<plotItem> ();
@@ -35,7 +42,7 @@ public class plotController : MonoBehaviour {
 		{
 			theItemNow = theItem;
 			//说起来这也就是两段的初始化了
-			theItem.OnStart (theTextForTalk);
+			theItem.OnStart (theTextForTalk , theHeadPicture1 ,theHeadPicture2);
 			theItem.OnPlaytheItem ();
 		}
 	}
@@ -60,8 +67,12 @@ public class plotController : MonoBehaviour {
 		{
 			theItemNow.OnEndtheItem ();
 			indexNow++;
-			if (indexNow >= thePlotItems.Count)
+			if (indexNow >= thePlotItems.Count) 
+			{
 				theItemNow = null;
+				try{UnityEngine.SceneManagement.SceneManager.LoadScene (theSceneWhenOver);}
+				catch{print ("not a scene");}
+			}
 			else
 				makePlay (thePlotItems [indexNow]);
 		}
