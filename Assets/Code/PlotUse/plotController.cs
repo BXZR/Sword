@@ -28,7 +28,6 @@ public class plotController : MonoBehaviour {
 	//初始化工作在这里完成
 	public void  makeStart()
 	{
-		Time.timeScale = 1f;//预防出现速度问题
 		thePlotItems = new List<plotItem>( this.GetComponentsInChildren<plotItem> ());
 		if(thePlotItems.Count>0)
 		   makePlay(thePlotItems[indexNow]);
@@ -50,6 +49,13 @@ public class plotController : MonoBehaviour {
 	public void makeUpdate(float timer)
 	{
 
+	}
+
+
+	public void makeSkip()
+	{
+		indexNow = thePlotItems.Count - 1;
+		makePlay (thePlotItems [indexNow]);
 	}
 		
 	void Start () 
@@ -76,12 +82,9 @@ public class plotController : MonoBehaviour {
 			else
 				makePlay (thePlotItems [indexNow]);
 		}
+			
 
-		//下面是一些操作
-		if (Input.GetKeyDown (KeyCode.Escape))
-			Time.timeScale = Time.timeScale == 0 ? 1 : 0;
-
-		if (Input.GetKeyDown (KeyCode.Space) || Input.GetMouseButtonDown (0))
+		if ((Input.GetKeyDown (KeyCode.Space) || Input.GetMouseButtonDown (0))&& !systemValues.isSystemUIUsing())
 			theItemNow.OnControlEnd ();
 
 

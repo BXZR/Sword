@@ -52,6 +52,7 @@ public class FSM_Jump : FSMBasic {
 			//FSM_RunAfter runafter = new FSM_RunAfter ();
 			FSMBasic runafter = theController.getState(3);
 			runafter.makeState (this.theMoveController, this.theAttackLlinkController,this.theAnimator, this.theThis,this.theEMY);
+			this.theThis.GetComponent <NavMeshAgent> ().enabled = true;
 			return runafter;
 		}
 		return this;

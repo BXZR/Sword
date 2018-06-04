@@ -387,7 +387,7 @@ public class equipBasics : MonoBehaviour {
 	public static string equipTrast(equipBasics newOne , equipBasics oldOne = null)
 	{
 		//装备比较是用在已经装备的装备和没有装备的装备上的，两个已经装备上的装备就不用这样了
-		if (newOne.isUsing && oldOne.isUsing)
+		if (oldOne == null ||  newOne.isUsing && oldOne.isUsing )
 			return "";
 		
 		//生命法力数值

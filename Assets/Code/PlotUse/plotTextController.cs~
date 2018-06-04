@@ -16,6 +16,8 @@ public class plotTextController : MonoBehaviour, plotActions {
 	private int indexNow = 0;
 	private float timerWait =1f;
 
+	public List<Sprite> theImageBuff = new List<Sprite> ();
+
 	//没办法，接口默认pulic
 	//开始的时候统一调用
 	public  void OnStart (plotItem theItem)
@@ -63,6 +65,12 @@ public class plotTextController : MonoBehaviour, plotActions {
 
 	private Sprite loadHeadImage(string theChineseName)
 	{
+		//检查缓冲区
+		for (int i = 0; i < theImageBuff.Count; i++)
+			if (theImageBuff [i].name == theChineseName)
+				return theImageBuff [i];
+
+		//需要加载
 		int index = -1;
 		for (int i = 0; i < systemValues.playerNames.Length; i++) {
 			if (systemValues.playerNames [i] == theChineseName) {
@@ -71,8 +79,20 @@ public class plotTextController : MonoBehaviour, plotActions {
 			}
 		}
 		if (index >= 0)
-			return  systemValues.makeLoadSprite ("playerHeadPicture/"+ systemValues.playerHeadNames[index]);
-		return systemValues.makeLoadSprite ("playerHeadPicture/noOne");
+		{
+			Sprite theSprite = systemValues.makeLoadSprite ("playerHeadPicture/" + systemValues.playerHeadNames [index]);
+			theSprite.name = theChineseName;
+			theImageBuff.Add (theSprite);
+			return theSprite;
+		}
+		else 
+		{
+			Sprite theSprite = systemValues.makeLoadSprite ("playerHeadPicture/noOne");
+			theSprite.name = theChineseName;
+			theImageBuff.Add (theSprite);
+			return theSprite;
+		}
+
 	}
 
 	private void showTheTextWithUpdate()
