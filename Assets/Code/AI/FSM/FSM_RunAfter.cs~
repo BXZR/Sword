@@ -112,6 +112,9 @@ public class FSM_RunAfter : FSMBasic {
 			FSMStage theStage = AIs [i].GetComponent <FSMStage> ();
 			if (AIs [i].tag == "AI" && theStage) 
 			{
+				if (theStage.theStateNow == null)
+					return;
+				
 				//ID = 4表示还在search，这个时候应该把自己的敌人通知给身边的单位
 				if (theStage.theStateNow.geID () == 4 || theStage.theStateNow.geID () == 2) 
 				{

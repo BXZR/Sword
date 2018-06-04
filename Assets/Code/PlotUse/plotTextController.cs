@@ -23,9 +23,9 @@ public class plotTextController : MonoBehaviour, plotActions {
 		thePlotItemForThis = theItem;
 
 		if (string.IsNullOrEmpty (speakerTalk))
-			thePlotItemForThis.theTextForTalk.transform.root.gameObject.SetActive (false);
+			thePlotItemForThis.theTextForTalk.transform.parent.gameObject.SetActive (false);
 		else
-			thePlotItemForThis.theTextForTalk.transform.root.gameObject.SetActive (true);
+			thePlotItemForThis.theTextForTalk.transform.parent.gameObject.SetActive (true);
 
 		timerWait = speakerTalk.Length == 0 ? 0.01f : theItem.theTimeForThisItem * 0.75f / speakerTalk.Length;
 		theShowString = speakerName + "\n";
@@ -41,7 +41,7 @@ public class plotTextController : MonoBehaviour, plotActions {
 	public  void OnEnd()
 	{
 		if(thePlotItemForThis.theTextForTalk)
-			thePlotItemForThis.theTextForTalk.transform.root.gameObject.SetActive (false);
+			thePlotItemForThis.theTextForTalk.transform.parent.gameObject.SetActive (false);
 		
 		CancelInvoke ();
 	}

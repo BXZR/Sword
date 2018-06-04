@@ -125,8 +125,10 @@
      <Compile Include="Assets\Code\PlotUse\plotSoundController.cs" />
      <Compile Include="Assets\Code\PlotUse\plotTextController.cs" />
      <Compile Include="Assets\Code\PlotUse\plotTransformController.cs" />
+     <Compile Include="Assets\Code\PlotUse\plotUIPictureController.cs" />
      <Compile Include="Assets\Code\UI\ExtraControl\columnText.cs" />
      <Compile Include="Assets\Code\UI\SceneAndInformationPanel\theSceneInformationPanel.cs" />
+     <Compile Include="Assets\Code\UI\Story\ImageInOut.cs" />
      <Compile Include="Assets\Code\UI\UISound\buttonWithSound.cs" />
      <Compile Include="Assets\Code\UI\UISound\panelSoundController.cs" />
      <Compile Include="Assets\Code\UI\basicShow\effectFlashPanel.cs" />
