@@ -1076,8 +1076,7 @@ public class systemValues : MonoBehaviour {
 		"mulan_summary" ,
 		"ziying_summary"
 	};
-	//private static string[] storiesScene = { "storyKnife", "storyGuojing", "storyMulan", "storyZiying" };
-	private static string[] storiesScene = { "storyKnife", "storyKnife","storyKnife","storyKnife"};
+	private static string[] storiesScene = { "storyKnife", "storyGuojing","storyMulan","storyZiying"};
 	public static string  getStorySimpleInformation(int index)
 	{
 		return Resources.Load<TextAsset>("Stories/"+ storySummaryName [index]).text; 
@@ -1085,7 +1084,7 @@ public class systemValues : MonoBehaviour {
 	//获得系统场景ID
 	public static  string getScnenForStory()
 	{
-		return storiesScene [indexNowForScene];
+		return storiesScene [indexNow];
 	}
 	#endregion
 

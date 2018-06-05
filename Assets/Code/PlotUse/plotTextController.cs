@@ -16,7 +16,7 @@ public class plotTextController : MonoBehaviour, plotActions {
 	private int indexNow = 0;
 	private float timerWait =1f;
 
-	public List<Sprite> theImageBuff = new List<Sprite> ();
+	static List<Sprite> theImageBuff = new List<Sprite> ();
 
 	//没办法，接口默认pulic
 	//开始的时候统一调用
@@ -67,7 +67,7 @@ public class plotTextController : MonoBehaviour, plotActions {
 	{
 		//检查缓冲区
 		for (int i = 0; i < theImageBuff.Count; i++)
-			if (theImageBuff [i].name == theChineseName)
+			if (theImageBuff[i] && theImageBuff [i].name == theChineseName)
 				return theImageBuff [i];
 
 		//需要加载
