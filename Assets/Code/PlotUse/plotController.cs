@@ -24,6 +24,8 @@ public class plotController : MonoBehaviour {
 	[HideInInspector]
 	public plotItem theItemNow = null;
 	private int indexNow = 0;
+	//是否正式开始了的标记
+	private bool isStarted = false;
 
 	//初始化工作在这里完成
 	public void  makeStart()
@@ -31,6 +33,7 @@ public class plotController : MonoBehaviour {
 		thePlotItems = new List<plotItem>( this.GetComponentsInChildren<plotItem> ());
 		if(thePlotItems.Count>0)
 		   makePlay(thePlotItems[indexNow]);
+		isStarted = true;
 	}
 
 
@@ -54,7 +57,13 @@ public class plotController : MonoBehaviour {
 
 	public void makeSkip()
 	{
-		indexNow = thePlotItems.Count - 1;
+		if (!isStarted)
+			return;
+		
+		for (int i = 0; i < thePlotItems.Count - 1; i++)
+			thePlotItems [i].theTimeForThisItem = 0.01f;
+		
+		//indexNow = thePlotItems.Count - 1;
 		makePlay (thePlotItems [indexNow]);
 	}
 		

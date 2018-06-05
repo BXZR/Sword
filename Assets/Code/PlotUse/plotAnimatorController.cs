@@ -6,7 +6,10 @@ public class plotAnimatorController : MonoBehaviour , plotActions  {
 
 	//每一个剧本帧的音效控制单元
 	public GameObject thePlayer;
+	//动作名称
 	public string theStateName;
+	//结束的时候的动作名称（可以为空）
+	public string theStateNameForEnd;
 	public bool loop = false;
 	private Animator theAnimator;
 	//没办法，接口默认pulic
@@ -32,7 +35,8 @@ public class plotAnimatorController : MonoBehaviour , plotActions  {
 
 	public void OnControlEnd()
 	{
-		
+		if (theAnimator && string.IsNullOrEmpty(theStateNameForEnd) == false)
+			theAnimator.Play (theStateNameForEnd);
 	}
 
 }
