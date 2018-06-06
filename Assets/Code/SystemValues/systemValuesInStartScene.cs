@@ -13,6 +13,7 @@ public class systemValuesInStartScene : MonoBehaviour {
 	void Start () 
 	{
 		systemValues.isInStory = false;
+		systemValues.indexForStory = 0;
 	}
 	
 	public void getToStoryInStartScene()

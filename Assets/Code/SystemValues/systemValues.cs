@@ -624,8 +624,8 @@ public class systemValues : MonoBehaviour {
 
 	public static void messageTitleBoxShow(string information)
 	{
-		if (!isGamming)
-			return;
+		//if (!isGamming)
+		//	return;
 		
 		if (!theTitleMessageBoxProfab)
 			theTitleMessageBoxProfab = Resources.Load<GameObject> ("UI/MessageBoxForTitle");
@@ -1022,6 +1022,8 @@ public class systemValues : MonoBehaviour {
 		messageBoxClose ();
 		theAreaRenders.Clear ();
 		wulingButton.isStarted = false;
+		isGamming = true;
+
 	}
 	#endregion
 
@@ -1030,9 +1032,10 @@ public class systemValues : MonoBehaviour {
 	public static GameObject theDeadPanel;
 	public static void  makeGameEnd(string theInformation)
 	{
-		isGamming = false;
 		if (theDeadPanel)
 		{
+			isGamming = false;
+
 			theDeadPanel.SetActive (true);
 			if (!isInStory) 
 			{ 
@@ -1051,6 +1054,7 @@ public class systemValues : MonoBehaviour {
 				theDeadPanel.GetComponent <theDeadPanel> ().makeStart (theInformation, isWin ,thisSceneName , getNextStoryScene() );
 			}
 		}
+			
 	}
     //检查任务是否完成了
 	private static bool checkisOver()
@@ -1092,7 +1096,7 @@ public class systemValues : MonoBehaviour {
 	public static bool isInStory = false;
 
 	//当前这个人物的剧本场景
-	private static int indexForStory = 0;
+	public static int indexForStory = 0;
 
 	private static string[] storySummaryName = 
 	{
@@ -1113,6 +1117,9 @@ public class systemValues : MonoBehaviour {
 		indexForStory++;
 		if(indexForStory <storiesScene[indexNow].Length )
 		  return storiesScene [indexNow][indexForStory];
+
+		//人物传记模式在全完事的时候才会彻底完事
+		//systemValues.isGamming = false;
 		return  "allStartScene";
 	}
 	//获得系统场景ID
