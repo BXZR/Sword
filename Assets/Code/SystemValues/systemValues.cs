@@ -28,6 +28,7 @@ public class systemValues : MonoBehaviour {
 	//各种模式都用得上所以还是留一个出来
 	public Transform theSpecialTransform;
 	public static Transform theSpecialTransformStatic;
+
 	//网络控制节点=============================
 	static PhotonView photonView;
 	//=========================================
@@ -1033,8 +1034,22 @@ public class systemValues : MonoBehaviour {
 		if (theDeadPanel)
 		{
 			theDeadPanel.SetActive (true);
-
-			theDeadPanel.GetComponent <theDeadPanel> ().makeStart (theInformation , checkisOver());
+			if (!isInStory) 
+			{ 
+				//free模式之下直接返回开始界面就可以了
+				theDeadPanel.GetComponent <theDeadPanel> ().makeStart (theInformation, checkisOver ());
+			} 
+			else 
+			{
+				//人物传记模式之下需要判断输赢
+				//输了就重新来过（自动）
+				//赢了就先返回开始界面
+				bool isWin = checkisOver ();
+				if (!isWin)
+					messageTitleBoxShow ("胜败乃兵家常事，大侠请重新来过");
+				string thisSceneName = UnityEngine.SceneManagement.SceneManager.GetActiveScene ().name;
+				theDeadPanel.GetComponent <theDeadPanel> ().makeStart (theInformation, isWin ,thisSceneName , getNextStoryScene() );
+			}
 		}
 	}
     //检查任务是否完成了
@@ -1069,6 +1084,16 @@ public class systemValues : MonoBehaviour {
 	#endregion
 
 	#region 游戏人物传记
+
+	//是否在人物传记中的标记
+	//这个标记会影响每一关结束之后的走向
+	//这个的刷新在systemValuesInStartScene中
+	//并且只是在开始界面进行的
+	public static bool isInStory = false;
+
+	//当前这个人物的剧本场景
+	private static int indexForStory = 0;
+
 	private static string[] storySummaryName = 
 	{
 		"knife_summary",
@@ -1076,16 +1101,35 @@ public class systemValues : MonoBehaviour {
 		"mulan_summary" ,
 		"ziying_summary"
 	};
-	private static string[] storiesScene = { "storyKnife", "storyGuojing","storyMulan","storyZiying"};
-	public static string  getStorySimpleInformation(int index)
+	private static string[][] storiesScene = new string[][]{
+		new string []{ "storyKnife" , "theFight2" ,  "storyKnife" , "theFight2"},
+		new string []{ "storyGuojing" , "theFight2" ,"storyGuojing" , "theFight2"  },
+		new string []{ "storyMulan" , "theFight2" ,"storyMulan" , "theFight2"},
+		new string []{ "storyZiying" , "theFight2" , "storyZiying" , "theFight2" }
+	};
+
+	public static string getNextStoryScene()
 	{
-		return Resources.Load<TextAsset>("Stories/"+ storySummaryName [index]).text; 
+		indexForStory++;
+		if(indexForStory <storiesScene[indexNow].Length )
+		  return storiesScene [indexNow][indexForStory];
+		return  "allStartScene";
 	}
 	//获得系统场景ID
 	public static  string getScnenForStory()
 	{
-		return storiesScene [indexNow];
+		return storiesScene [indexNow][ indexForStory];
 	}
+	public static void flashStoryErrorMove()
+	{
+		indexForStory -- ;
+	}
+
+	public static string  getStorySimpleInformation(int index)
+	{
+		return Resources.Load<TextAsset>("Stories/"+ storySummaryName [index]).text; 
+	}
+
 	#endregion
 
 	//GM的初始化==============================================================================
@@ -1099,7 +1143,6 @@ public class systemValues : MonoBehaviour {
 		{
 			photonView = PhotonView.Get (this);
 			return;
-
 		}
 		Invoke("makeGameMode" , 4f);
 	

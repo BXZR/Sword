@@ -14,9 +14,6 @@ public class plotController : MonoBehaviour {
 	public Image theHeadPicture1;
 	public Image theHeadPicture2;
 
-	//剧本完成之后转到哪一个场景
-	public string theSceneWhenOver = "";
-
 	//这个是非常重要的所有剧本帧
 	[HideInInspector]
 	public List<plotItem> thePlotItems = new List<plotItem> ();
@@ -85,7 +82,7 @@ public class plotController : MonoBehaviour {
 			if (indexNow >= thePlotItems.Count) 
 			{
 				theItemNow = null;
-				try{UnityEngine.SceneManagement.SceneManager.LoadScene (theSceneWhenOver);}
+				try{UnityEngine.SceneManagement.SceneManager.LoadScene (systemValues.getNextStoryScene());}
 				catch{print ("not a scene");}
 			}
 			else

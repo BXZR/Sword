@@ -126,6 +126,8 @@
      <Compile Include="Assets\Code\PlotUse\plotTextController.cs" />
      <Compile Include="Assets\Code\PlotUse\plotTransformController.cs" />
      <Compile Include="Assets\Code\PlotUse\plotUIPictureController.cs" />
+     <Compile Include="Assets\Code\SystemValues\systemValues.cs" />
+     <Compile Include="Assets\Code\SystemValues\systemValuesInStartScene.cs" />
      <Compile Include="Assets\Code\UI\ExtraControl\columnText.cs" />
      <Compile Include="Assets\Code\UI\SceneAndInformationPanel\theSceneInformationPanel.cs" />
      <Compile Include="Assets\Code\UI\Story\ImageInOut.cs" />
@@ -184,7 +186,6 @@
      <Compile Include="Assets\Code\props\props.cs" />
      <Compile Include="Assets\Code\sound\MusicController.cs" />
      <Compile Include="Assets\Code\sound\audioPlayer.cs" />
-     <Compile Include="Assets\Code\systemValues.cs" />
      <Compile Include="Assets\Code\theWorld\ColliderMake.cs" />
      <Compile Include="Assets\Code\theWorld\worldWoodRandomMove.cs" />
      <Compile Include="Assets\Photon Unity Networking\Plugins\PhotonNetwork\CustomTypes.cs" />
