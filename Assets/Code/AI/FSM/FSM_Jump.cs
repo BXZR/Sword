@@ -13,7 +13,13 @@ public class FSM_Jump : FSMBasic {
 	{
 		this.theThis.GetComponent <NavMeshAgent> ().enabled = true;
 		if (this.theEMY != null)
-			this.theThis.GetComponent <NavMeshAgent> ().SetDestination (theEMY.transform .position);
+		{
+			NavMeshAgent NV = this.theThis.GetComponent <NavMeshAgent> ();
+			if (NV)
+				NV.enabled = true;
+			if(NV && NV.isOnNavMesh)
+				NV.SetDestination (theEMY.transform .position);
+		}
 	}
 
 	public override void OnFSMStateStart ()

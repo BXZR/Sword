@@ -1,6 +1,6 @@
 ﻿<Properties StartupItem="Assembly-CSharp.csproj">
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Unity.Instance.Unity Editor" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Code\PlotUse\plotTransformController.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Code\AI\FSM\FSM_Jump.cs">
     <Files>
       <File FileName="Assets\Code\PlotUse\plotUIPictureController.cs" Line="1" Column="1" />
       <File FileName="Assets\Code\UI\Story\ImageInOut.cs" Line="1" Column="1" />
@@ -10,17 +10,19 @@
       <File FileName="Assets\Code\PlotUse\plotController.cs" Line="1" Column="1" />
       <File FileName="Assets\Code\Player\move.cs" Line="1" Column="1" />
       <File FileName="Assets\Code\Equips\equipBasics.cs" Line="1" Column="1" />
-      <File FileName="Assets\Code\AI\FSM\FSM_Jump.cs" Line="1" Column="1" />
-      <File FileName="Assets\Code\UI\systemPanel\SystemUIController.cs" Line="87" Column="86" />
-      <File FileName="Assets\Code\PlotUse\plotItem.cs" Line="74" Column="42" />
+      <File FileName="Assets\Code\AI\FSM\FSM_Jump.cs" Line="19" Column="23" />
+      <File FileName="Assets\Code\UI\systemPanel\SystemUIController.cs" Line="1" Column="1" />
+      <File FileName="Assets\Code\PlotUse\plotItem.cs" Line="1" Column="1" />
       <File FileName="Assets\Photon Unity Networking\Plugins\PhotonNetwork\PhotonNetwork.cs" Line="1" Column="1" />
-      <File FileName="Assets\Code\PlotUse\plotMusicController.cs" Line="1" Column="1" />
+      <File FileName="Assets\Code\PlotUse\plotMusicController.cs" Line="15" Column="1" />
       <File FileName="Assets\Code\PlotUse\plotAnimatorController.cs" Line="1" Column="1" />
-      <File FileName="Assets\Code\UI\startAndSelect\sceneSkipButton.cs" Line="25" Column="27" />
-      <File FileName="Assets\Code\SystemValues\systemValues.cs" Line="1099" Column="8" />
-      <File FileName="Assets\Code\UI\deadPanel\theDeadPanel.cs" Line="39" Column="2" />
+      <File FileName="Assets\Code\UI\startAndSelect\sceneSkipButton.cs" Line="1" Column="1" />
+      <File FileName="Assets\Code\SystemValues\systemValues.cs" Line="1" Column="1" />
+      <File FileName="Assets\Code\UI\deadPanel\theDeadPanel.cs" Line="1" Column="1" />
       <File FileName="Assets\Code\playerModes\playMode1.cs" Line="74" Column="2" />
       <File FileName="Assets\Code\SystemValues\systemValuesInStartScene.cs" Line="16" Column="16" />
+      <File FileName="Assets\Code\PlotUse\plotSoundController.cs" Line="14" Column="25" />
+      <File FileName="Assets\Code\Player\PlayerBasic.cs" Line="102" Column="32" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

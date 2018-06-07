@@ -12,6 +12,7 @@ public class plotMusicController : MonoBehaviour , plotActions  {
 	void Start ()
 	{
 		theSouce = this.GetComponent <AudioSource> ();
+		theSouce.volume = 0.6f;
 	}
 
 	//没办法，接口默认pulic

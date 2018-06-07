@@ -88,8 +88,10 @@ public class PlayerBasic : MonoBehaviour {
 	public float ActerShieldMaxPercent = 0.15f;//护盾针对最大生命值的上限
 
 	public float theAttackAreaLength;//攻击范围（非常重要，同时这个是简化版本的每一种攻击招式分开计算范围的方式）
+	[Range (-1 , 240)]
 	public float theAttackAreaAngel = 20f;//攻击范围的角度，自身前方锥形范围内都是攻击范围
 	public float theViewAreaLength = 4f;//视野长度，在不同的模式之下。例如暗夜模式，是很有需要实际的地方的
+	[Range (-1 , 240)]
 	public float theViewAreaAngel = 30f;//视野的角度，同样，在不同的模式之下。例如暗夜模式，是很有需要实际的地方的
 
 	//副本数据，在额外脚本计算的时候会有奇效------------------------------------------------------------------------
