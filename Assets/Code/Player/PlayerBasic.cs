@@ -744,7 +744,7 @@ public class PlayerBasic : MonoBehaviour {
 		theString.Append ((this.ActerDamageMinusPercent*100).ToString("f1"));
 		theString.Append ("%\n");
 
-		string attackLengthShow =  (this.theAttackAreaLength >0) ? this.theAttackAreaLength*100+"%   ": "【特殊】";
+		string attackLengthShow =  (this.theAttackAreaLength >0) ? (this.theAttackAreaLength*100).ToString("f0")+"%   ": "【特殊】";
 		string attackAreaShow = (this.theAttackAreaAngel >0) ? this.theAttackAreaAngel.ToString ("f1")  : "【特殊】";
 
 		theString.Append ("攻击距离  ");
