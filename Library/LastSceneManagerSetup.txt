@@ -1,4 +1,4 @@
 sceneSetups:
-- path: Assets/Scenes/storyKnife.unity
+- path: Assets/Scenes/storyZiying.unity
   isLoaded: 1
   isActive: 1

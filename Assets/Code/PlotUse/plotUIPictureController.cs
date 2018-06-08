@@ -13,6 +13,9 @@ public class plotUIPictureController : MonoBehaviour , plotActions  {
 	//开始的时候统一调用
 	public  void OnStart (plotItem theItem)
 	{
+		if (!theShowImage)
+			return;
+		
 		theShowImage.timer = theItem.theTimeForThisItem; 
 		if (isIn)
 			theShowImage.makeStart ();

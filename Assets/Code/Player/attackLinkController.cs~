@@ -234,7 +234,8 @@ public class attackLinkController :MonoBehaviour {
 						string codeUse = keyUse.ToString ();
 						if (codeUse == "E") //额外附加：停止，按下这个按钮直接停止当前动作
 						{
-							theAttackLinkNow.makeStoptheAct ();
+							if(theAttackLinkNow != null)
+							    theAttackLinkNow.makeStoptheAct ();
 							//print ("stop");
 						}
 						else if(systemValues.checkCanAttackAct() )

@@ -247,7 +247,8 @@ public class FSMStage : effectBasic   {
 			{
 				theAiIsActing = false;//结束循环
 				isDeadMake = true;
-				this.GetComponent <NavMeshAgent> ().enabled = false;
+				NavMeshAgent NV = this.GetComponent <NavMeshAgent> ();
+				if(NV) NV.enabled = false;
 				this.gameObject.AddComponent<Rigidbody> ();
 				this.gameObject.AddComponent<BoxCollider> ();
 				Destroy (this.gameObject, 15f);//尸体保留久一点似乎更好玩（尸体也是路障啊）
