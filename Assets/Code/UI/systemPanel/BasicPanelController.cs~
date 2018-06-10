@@ -81,7 +81,7 @@ public class BasicPanelController : MonoBehaviour {
 
 	}
 
-	void OnEnable () 
+	void makeFlash()
 	{
 		if(systemValues.thePlayer)
 		{	
@@ -97,8 +97,27 @@ public class BasicPanelController : MonoBehaviour {
 			theBasicEffectInformationText.text = systemValues.getBasicBEEffectInformation () ;
 			showStateImage (systemValues.thePlayer.gameObject);
 		}
-
 	}
+
+	void OnEnable () 
+	{
+		makeFlash ();
+	}
+
+	void Update()
+	{
+		makeFlash ();
+	}
+
+	public  void changeLingLiToSP()
+	{
+		if (systemValues.soulCount >= 2)
+			systemValues.choiceMessageBoxShow ("灵力转斗气", "消耗2灵力瞬间恢复最多25%最大斗气？\n每一次恢复斗气数值不会超过30", true, new MesageOperate (systemValues.LingLiToSP));
+		else
+			systemValues.messageTitleBoxShow ("灵力不足");
+	}
+
+
 	
    
 }

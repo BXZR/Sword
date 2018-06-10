@@ -561,6 +561,20 @@ public class systemValues : MonoBehaviour {
 		theSoulGet += theEquip.theEffectNames.Count * 20;
 		return theSoulGet;
 	}
+
+	public static void LingLiToSP()
+	{
+		if (systemValues.soulCount >=2) 
+		{
+			systemValues.soulCount-=2;
+			if (systemValues.thePlayer)
+			{
+				float spAdd = systemValues.thePlayer.ActerSpMax * 0.25f;
+					
+				systemValues.thePlayer.ActerSp += Mathf.Clamp (spAdd , 0f , 30f);
+			}
+		}
+	}
 	#endregion
 
 	#region 消息框操作
@@ -1141,6 +1155,9 @@ public class systemValues : MonoBehaviour {
 	}
 
 	#endregion
+
+
+
 
 	//GM的初始化==============================================================================
 	void Start()
