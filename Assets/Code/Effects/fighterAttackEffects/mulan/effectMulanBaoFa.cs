@@ -79,4 +79,18 @@ public class effectMulanBaoFa : effectBasic
 		timerForAdd += timeCoolingMinus;//减少冷却时间
 		thePlayer.ActerSp += spAdder;
 	}
+
+	//招式等级额外特效 ====================================================================
+	public override void SetAttackLink (attackLink attackLinkIn)
+	{
+		if (attackLinkIn && attackLinkIn.theAttackLinkLv >= 3)
+		{
+			//print ("ad");
+			DamageUseMax += 7;
+		}
+	}
+	public override string getEffectAttackLinkLVExtra ()
+	{
+		return "等级奖励：等级超过3级的招式触发此效果时\n每一击生命吸收上限增加7";
+	}
 }

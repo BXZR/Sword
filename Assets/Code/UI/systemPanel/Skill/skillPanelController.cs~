@@ -91,21 +91,7 @@ public class skillPanelController : MonoBehaviour {
 			effectBasic theselfEffect = (effectBasic)theButton.GetComponent (theType);
 			theselfEffect.Init ();
 
-			theInformationString.Append ("发动可以触发【");
-			theInformationString.Append (systemValues.SkillColorForSelf);
-			theInformationString.Append (theselfEffect.theEffectName);
-			theInformationString.Append (systemValues.colorEnd);
-			theInformationString.Append ("】");
-
-			theSkillInformationString.Append (systemValues.SkillColorForSelf);
-			theSkillInformationString.Append (theselfEffect.getInformation ());
-			theSkillInformationString.Append (systemValues.colorEnd);
-
-			theSkillInformationString.Append ("\n");
-			theSkillInformationString.Append (systemValues.SkillExtraColor );
-			theSkillInformationString.Append (theselfEffect.getExtraInformation ());
-			theSkillInformationString.Append (systemValues.colorEnd);
-
+			makeEffectInformation( theInformationString ,theSkillInformationString ,theselfEffect);
 			Destroy (theselfEffect);
 		}
 		if (systemValues.isNullOrEmpty (theAttacklink.conNameToEMY) == false) 
@@ -115,31 +101,47 @@ public class skillPanelController : MonoBehaviour {
 			//effectBasic theEMYEffect = theButton.GetComponent <effectBasic> ();
 			effectBasic theEMYEffect = (effectBasic)theButton.GetComponent (theType);
 			theEMYEffect.Init ();
-			if ( (theInformationString.Length)!= 0 )
-				theInformationString.Append( "\n");
-			
-			theInformationString.Append ("命中可以触发【");
-			theInformationString.Append (systemValues.SkillColorForEnemy);
-			theInformationString.Append (theEMYEffect.theEffectName);
-			theInformationString.Append (systemValues.colorEnd);
-			theInformationString.Append ("】");
 
-		
-			if (theSkillInformationString.Length != 0)
-				theSkillInformationString.Append("\n");
-
-			theSkillInformationString.Append (systemValues.SkillColorForEnemy);
-			theSkillInformationString.Append ( theEMYEffect.getInformation ());
-			theSkillInformationString.Append (systemValues.colorEnd);
-			theSkillInformationString.Append ("\n");
-			theSkillInformationString.Append (systemValues.SkillExtraColor);
-			theSkillInformationString.Append (theEMYEffect.getExtraInformation () );
-			theSkillInformationString.Append (systemValues.colorEnd);
-			theSkillInformationString.Append ("\n\n");
-
+			makeEffectInformation( theInformationString ,theSkillInformationString ,theEMYEffect  , false);
 			Destroy (theEMYEffect);
 		}
 		theSkillInformation = theSkillInformationString .ToString();
 		return theInformationString.ToString();
+	}
+
+	void makeEffectInformation(StringBuilder theInformationString , StringBuilder theSkillInformationString , effectBasic theEffect , bool isSelf = true)
+	{
+		string colorUse = isSelf == true ?  systemValues.SkillColorForSelf : systemValues.SkillColorForEnemy;
+
+		theInformationString.Append ("命中可以触发【");
+		theInformationString.Append (colorUse);
+		theInformationString.Append (theEffect.theEffectName);
+		theInformationString.Append (systemValues.colorEnd);
+		theInformationString.Append ("】");
+
+
+		if (theSkillInformationString.Length != 0)
+			theSkillInformationString.Append("\n\n");
+
+
+		theSkillInformationString.Append (colorUse);
+		theSkillInformationString.Append ( theEffect.getInformation ());
+		theSkillInformationString.Append (systemValues.colorEnd);
+		string skilladder = theEffect.getExtraInformation ();
+		if (string.IsNullOrEmpty (skilladder) == false) 
+		{
+			theSkillInformationString.Append ("\n");
+			theSkillInformationString.Append (systemValues.SkillExtraColor);
+			theSkillInformationString.Append (skilladder);
+			theSkillInformationString.Append (systemValues.colorEnd);
+		}
+		string lvAdder = theEffect.getEffectAttackLinkLVExtra ();
+		if (string.IsNullOrEmpty (lvAdder) == false)
+		{
+			theSkillInformationString.Append ("\n");
+			theSkillInformationString.Append (systemValues.SkillColorForLink);
+			theSkillInformationString.Append (theEffect.getEffectAttackLinkLVExtra ());
+			theSkillInformationString.Append (systemValues.colorEnd);
+		}
 	}
 }

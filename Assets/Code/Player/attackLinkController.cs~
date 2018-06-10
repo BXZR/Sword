@@ -275,7 +275,16 @@ public class attackLinkController :MonoBehaviour {
 	  //为了保证网络版本的自治，这里还是应该自行控制一下的
 	  speedControllWithPlayer ();
 	}
+		
 
+	void attackLinkFlash()
+	{
+		if (!thePlayer || !thePlayer.theAttackLinkNow)
+			return;
+
+		if (systemValues.isAttacking (this.theAnimator) == false)
+			thePlayer.theAttackLinkNow.makeFlash ();
+	}
 	//这里只对计时器有更新
 	//有一些内容，例如计时器，需要常常更新
 	void makeUpdate()
@@ -301,6 +310,7 @@ public class attackLinkController :MonoBehaviour {
 		}
 
 		speedControllWithPlayer ();
+		attackLinkFlash ();
 	}
 		
 	//有一些网络必要的逻辑也需要用start进行初始化一下

@@ -16,17 +16,17 @@ public class newMethodAttack : MonoBehaviour {
 
 	private void extraEffectSELF()
 	{
-		if (systemValues.isNullOrEmpty (thePlayer . conNameToSELF) == false) //效果不可叠加
+		if (thePlayer.theAttackLinkNow != null && systemValues.isNullOrEmpty (thePlayer.theAttackLinkNow.conNameToSELF) == false) //效果不可叠加
 		{
-			System.Type theType = System.Type.GetType (thePlayer . conNameToSELF);
+			System.Type theType = System.Type.GetType (thePlayer.theAttackLinkNow.conNameToSELF);
 			effectBasic theEffect = thePlayer.gameObject.GetComponent (theType) as effectBasic;
 			if (!theEffect)
 			{
 				try
 				{
-					thePlayer.gameObject.AddComponent (theType);
-					theEffect = thePlayer.gameObject.GetComponent (theType) as effectBasic;
+					theEffect = (effectBasic)thePlayer.gameObject.AddComponent (theType);
 					theEffect.SetAttackLinkIndex(thePlayer.EffectAttackLinkIndex);
+					theEffect.SetAttackLink(thePlayer.theAttackLinkNow);
 					thePlayer.EffectAttackLinkIndex = 0;//刷新为初始数值
 				}
 				catch (Exception E)
@@ -41,24 +41,29 @@ public class newMethodAttack : MonoBehaviour {
 			else
 			{
 				theEffect.updateEffect ();
-				theEffect.SetAttackLinkIndex(thePlayer.EffectAttackLinkIndex);
+				//theEffect.SetAttackLinkIndex(thePlayer.EffectAttackLinkIndex);
+				//theEffect.SetAttackLink(thePlayer.theAttackLinkNow);
 			}
-			thePlayer . conNameToSELF = "";
+			thePlayer.theAttackLinkNow .conNameToSELF = "";
 		}
 	}
 		
 	private void extraDamageEffect(PlayerBasic playerAim)//额外添加挂在的计算脚本
 	{
-		if (systemValues.isNullOrEmpty (thePlayer . conNameToEMY) == false)//效果不可叠加
+		if (thePlayer.theAttackLinkNow != null && systemValues.isNullOrEmpty (thePlayer.theAttackLinkNow. conNameToEMY) == false)//效果不可叠加
 		{
-			System.Type theType = System.Type.GetType (thePlayer.conNameToEMY);
+			System.Type theType = System.Type.GetType (thePlayer.theAttackLinkNow.conNameToEMY);
 			effectBasic theEffect = playerAim.gameObject.GetComponent (theType) as effectBasic;
 			if(!theEffect)
 			{
 				try
 				{
-					playerAim.gameObject.AddComponent (theType );
+					
 					//print("makeEffect");
+					theEffect = (effectBasic)playerAim.gameObject.AddComponent (theType );
+					theEffect.SetAttackLinkIndex(thePlayer.EffectAttackLinkIndex);
+					theEffect.SetAttackLink(thePlayer.theAttackLinkNow);
+					thePlayer.EffectAttackLinkIndex = 0;//刷新为初始数值
 				}
 				catch(Exception E)
 				{
@@ -72,10 +77,11 @@ public class newMethodAttack : MonoBehaviour {
 			else
 			{
 				theEffect.updateEffect ();
-				theEffect.SetAttackLinkIndex(thePlayer.EffectAttackLinkIndex);
+				//theEffect.SetAttackLinkIndex(thePlayer.EffectAttackLinkIndex);
+				//theEffect.SetAttackLink(thePlayer.theAttackLinkNow);
 				//print ("update");
 			}
-			thePlayer .conNameToEMY= "";
+			thePlayer.theAttackLinkNow .conNameToEMY= "";
 		}
 	}
 

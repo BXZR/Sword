@@ -1,31 +1,15 @@
 ﻿<Properties StartupItem="Assembly-CSharp.csproj">
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Unity.Instance.Unity Editor" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Code\Effects\fighterAttackEffects\public\jifei.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Code\Effects\fighterAttackEffects\mulan\effectMulanBaoFa.cs">
     <Files>
-      <File FileName="Assets\Code\PlotUse\plotUIPictureController.cs" Line="1" Column="1" />
-      <File FileName="Assets\Code\UI\Story\ImageInOut.cs" Line="1" Column="1" />
-      <File FileName="Assets\Code\AI\FSM\FSM_RunAfter.cs" Line="1" Column="1" />
-      <File FileName="Assets\Code\PlotUse\plotTransformController.cs" Line="1" Column="1" />
-      <File FileName="Assets\Code\PlotUse\plotTextController.cs" Line="1" Column="1" />
-      <File FileName="Assets\Code\PlotUse\plotController.cs" Line="1" Column="1" />
-      <File FileName="Assets\Code\Player\move.cs" Line="1" Column="1" />
-      <File FileName="Assets\Code\Equips\equipBasics.cs" Line="1" Column="1" />
-      <File FileName="Assets\Code\AI\FSM\FSM_Jump.cs" Line="1" Column="1" />
-      <File FileName="Assets\Code\UI\systemPanel\SystemUIController.cs" Line="1" Column="1" />
-      <File FileName="Assets\Code\PlotUse\plotItem.cs" Line="1" Column="1" />
-      <File FileName="Assets\Photon Unity Networking\Plugins\PhotonNetwork\PhotonNetwork.cs" Line="1" Column="1" />
-      <File FileName="Assets\Code\PlotUse\plotMusicController.cs" Line="1" Column="1" />
-      <File FileName="Assets\Code\PlotUse\plotAnimatorController.cs" Line="1" Column="1" />
-      <File FileName="Assets\Code\UI\startAndSelect\sceneSkipButton.cs" Line="1" Column="1" />
-      <File FileName="Assets\Code\SystemValues\systemValues.cs" Line="1" Column="1" />
-      <File FileName="Assets\Code\UI\deadPanel\theDeadPanel.cs" Line="1" Column="1" />
-      <File FileName="Assets\Code\playerModes\playMode1.cs" Line="1" Column="1" />
-      <File FileName="Assets\Code\SystemValues\systemValuesInStartScene.cs" Line="1" Column="1" />
-      <File FileName="Assets\Code\PlotUse\plotSoundController.cs" Line="1" Column="1" />
-      <File FileName="Assets\Code\Player\PlayerBasic.cs" Line="1" Column="1" />
-      <File FileName="Assets\Code\AI\FSMStage.cs" Line="250" Column="1" />
-      <File FileName="Assets\Code\Player\attackLinkController.cs" Line="238" Column="47" />
-      <File FileName="Assets\Code\Effects\fighterAttackEffects\public\jifei.cs" Line="65" Column="132" />
+      <File FileName="Assets\Code\Player\PlayerBasic.cs" Line="877" Column="3" />
+      <File FileName="Assets\Code\Effects\extraEffects\knifeSlash\theKnifeSlashController.cs" Line="1" Column="1" />
+      <File FileName="Assets\Code\Player\attackLinkController.cs" Line="1" Column="1" />
+      <File FileName="Assets\Code\Effects\fighterAttackEffects\dragon\effectDragonExtraDamage.cs" Line="92" Column="33" />
+      <File FileName="Assets\Code\SystemValues\systemValues.cs" Line="429" Column="55" />
+      <File FileName="Assets\Code\UI\systemPanel\Skill\skillPanelController.cs" Line="142" Column="68" />
+      <File FileName="Assets\Code\Player\attackLink.cs" Line="461" Column="29" />
+      <File FileName="Assets\Code\Effects\fighterAttackEffects\mulan\effectMulanBaoFa.cs" Line="90" Column="4" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

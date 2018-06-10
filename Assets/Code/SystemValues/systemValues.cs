@@ -286,16 +286,18 @@ public class systemValues : MonoBehaviour {
 				{
 					//初始化一下效果
 					System.Type theType = System.Type.GetType (ak.conNameToEMY);
-					thePlayer.gameObject.AddComponent (theType);
-					effectBasic theEffect = thePlayer.gameObject.GetComponent (theType) as effectBasic;
+					//thePlayer.gameObject.AddComponent (theType);
+					//effectBasic theEffect = thePlayer.gameObject.GetComponent (theType) as effectBasic;
+					effectBasic theEffect = thePlayer.gameObject.AddComponent (theType) as effectBasic;
 					buffer.Add (theEffect);
 				}
 				if (!isNullOrEmpty(ak.conNameToSELF )) 
 				{
 					//初始化一下效果
 					System.Type theType = System.Type.GetType (ak.conNameToSELF);
-					thePlayer.gameObject.AddComponent (theType);
-					effectBasic theEffect = thePlayer.gameObject.GetComponent (theType) as effectBasic;
+					//thePlayer.gameObject.AddComponent (theType);
+					//effectBasic theEffect = thePlayer.gameObject.GetComponent (theType) as effectBasic;
+					effectBasic theEffect = thePlayer.gameObject.AddComponent (theType) as effectBasic;
 					buffer.Add (theEffect);
 				}
 			}
@@ -424,6 +426,7 @@ public class systemValues : MonoBehaviour {
 	public static string SkillColorForSelf = "<color=#FFF809>";//橙色
 	public static string SkillColorForEnemy = "<color=#92FFFF>";//绿色
 	public static string SkillExtraColor = "<color=#AFFF3A>";//标记淡绿色
+	public static string SkillColorForLink = "<color=#9A2FF0>";//绿色
 	public static string playerNameColor = "<color=#00FF00>" ;//其实也是黄色
 	public static string playerIntroductionColor = "<color=#FF2400>";//应该是绿色
 	public  static string equipAddColor = "<color=#009100>";//装备相比增加的内容

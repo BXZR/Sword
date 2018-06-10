@@ -28,9 +28,9 @@ public class extraWeapon : MonoBehaviour {
 	private void extraDamageEffect(PlayerBasic playerAim)//额外添加挂在的计算脚本
 	{
 		
-		if (string.IsNullOrEmpty (thePlayer . conNameToEMY) == false)//效果不可叠加
+		if (  thePlayer.theAttackLinkNow != null &&  string.IsNullOrEmpty (thePlayer.theAttackLinkNow.conNameToEMY) == false)//效果不可叠加
 		{
-			System.Type theType = System.Type.GetType (thePlayer.conNameToEMY);
+			System.Type theType = System.Type.GetType (thePlayer.theAttackLinkNow.conNameToEMY);
 				if(!playerAim.gameObject.GetComponent (theType))
 			 {
 				try
@@ -52,10 +52,8 @@ public class extraWeapon : MonoBehaviour {
 				theEffect.updateEffect ();
 				//print ("update");
 			}
-			thePlayer .conNameToEMY= "";
+			thePlayer.theAttackLinkNow.conNameToEMY = "";
 		}
-
-
 	}
 
 

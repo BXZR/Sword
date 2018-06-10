@@ -47,6 +47,8 @@ public class attackLink : MonoBehaviour {
 	//这段脚本会被weapon脚本在攻击得手的时候触发并且添加
 	public string conNameToEMY ="";//这个招式可以为目标添加的脚本
 	public string conNameToSELF ="";//这个招式可以为自身添加的脚本
+	public string conNameToEMYSave ="";//这个招式可以为目标添加的脚本
+	public string conNameToSELFSave ="";//这个招式可以为自身添加的脚本
 
 	public AudioClip audioWhenAct;//在做出动作的时候就发的音效
 	public AudioClip audioWhenAttack;//招式命中的时候的音效，修改的是player身上的音效
@@ -64,6 +66,8 @@ public class attackLink : MonoBehaviour {
 	private  int  adderWhenLvtoMax = 1;//极其低性价比的叠加
 
 	PhotonView photonView;//网络控制单元
+
+ 
 
 	/****************************************特殊攻击方法组****************************************************/
 	//攻击检测原理：
@@ -122,6 +126,9 @@ public class attackLink : MonoBehaviour {
 	void Start()
 	{
 		this.theAnimatorOfPlayer = this.GetComponentInParent<Animator> ();
+		conNameToEMYSave = conNameToEMY;
+		conNameToSELFSave =conNameToSELF ;
+
 	}
 	//初始化的工作由attackLinkController统一调配
 	public void makeStart()
@@ -324,7 +331,6 @@ public class attackLink : MonoBehaviour {
 
 				for (int i = 0; i < Effects.Length; i++) 
 				{
-					Effects [i].SetAttackLinkIndex (theAttackLinkIndex);
 					Effects [i].OnUseSP (this.spUse);
 				}
 			}
@@ -336,8 +342,7 @@ public class attackLink : MonoBehaviour {
 			if(thePlayer.theAudioPlayer!= null)
 			thePlayer .theAudioPlayer .audioNow = this.audioWhenAttack;//确定命中的时候的音效
 
-			thePlayer.conNameToEMY = this.conNameToEMY;
-			thePlayer.conNameToSELF = this.conNameToSELF;
+			thePlayer.theAttackLinkNow = this;
 		}
 
 		//print (skillName+" 发动！");
@@ -452,8 +457,8 @@ public class attackLink : MonoBehaviour {
 		if (withName)
 		{
 			theString .Append( this.skillName);
-			if (canLvup) theString .Append("[可升级]");
-			else theString .Append("[不可升级]");
+			if (canLvup) theString .Append("【可升级】");
+			else theString .Append("【不可升级】");
 			theString.Append ("\n");
 		}
 
@@ -541,6 +546,13 @@ public class attackLink : MonoBehaviour {
 		}
 
 		return theString.ToString ();
+	}
+
+	public void makeFlash()
+	{
+		//每一次连招之后都需要更新连招状态
+		conNameToEMY = conNameToEMYSave;
+		conNameToSELF = conNameToSELFSave;
 	}
 
 }

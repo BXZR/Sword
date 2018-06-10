@@ -195,10 +195,9 @@ public class PlayerBasic : MonoBehaviour {
 
 	private bool isStarted =false;//是否已经开启
 
-	//[HideInInspector]//为了保证设定面板的简洁，暂时隐藏之
-	public string conNameToEMY ;//用于记录连招给出的额外buff
-	//[HideInInspector]//为了保证设定面板的简洁，暂时隐藏之
-	public string conNameToSELF;//用于记录连招给出的额外buff
+	[HideInInspector]
+	public attackLink theAttackLinkNow = null;//当前正在使用的招式
+
 	private float conNameCoolingTime = 1.5f;//如果这个特效脚本在1.5秒内还没有被使用，就认为无效
 	//（否则准备一个脚本招式，然后等半天莫名其妙生效了不是好事）
 	private float conNameCoolingTimeMax = 1.5f;
@@ -874,19 +873,20 @@ public class PlayerBasic : MonoBehaviour {
 			ActerHp =Mathf.Clamp (ActerHp, 0, ActerHpMax);
 			ActerSp = Mathf.Clamp (ActerSp, 0, ActerSpMax);
 
-			if (!systemValues.isNullOrEmpty (conNameToEMY) || !systemValues.isNullOrEmpty(conNameToSELF)) 
-			{
-				conNameCoolingTime -= systemValues.updateTimeWait;
-				if (conNameCoolingTime <= 0)
-				{
-					conNameCoolingTime = conNameCoolingTimeMax;
-					conNameToEMY = "";
-					conNameToSELF = "";
-				}
-			}
-			else
-				conNameCoolingTime = conNameCoolingTimeMax;//此处多次空转赋值实际上是一个很大的浪费但是这句话非常必要
 
+//			if (theAttackLinkNow!= null) 
+//				{
+//					conNameCoolingTime -= systemValues.updateTimeWait;
+//					if (conNameCoolingTime <= 0)
+//					{
+//						conNameCoolingTime = conNameCoolingTimeMax;
+//						theAttackLinkNow.makeFlash ();
+//						//theAttackLinkNow = null;
+//					}
+//				}
+//				else
+//					conNameCoolingTime = conNameCoolingTimeMax;//此处多次空转赋值实际上是一个很大的浪费但是这句话非常必要
+	
 			for (int i = 0; i < Effects.Count; i++)
 				Effects [i] .effectOnUpdateTime ();
 			
@@ -1106,6 +1106,7 @@ public class PlayerBasic : MonoBehaviour {
 			//单机版这个似乎没有必要，暂时先不用
 			//updateWuling (wind1,wind2,thunder1,thunder2,water1,water2,fire1,fire2,earth1,earth2);
 		}
+			
 	}
 
 	[PunRPC]

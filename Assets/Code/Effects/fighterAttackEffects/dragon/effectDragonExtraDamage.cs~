@@ -5,7 +5,7 @@ using UnityEngine;
 public class effectDragonExtraDamage : effectBasic 
 {
 
-	float damageAddPercent = 0.15f;//额外真实伤害百分比
+	float damageAddPercent = 0.12f;//额外真实伤害百分比
 	float damageCount = 3f;//生效次数
 
 	void Start () 
@@ -76,6 +76,20 @@ public class effectDragonExtraDamage : effectBasic
 		if (damageCount >= 0)
 			return this.theEffectName +"\n("+damageCount+"次)";
 		return this.theEffectName + "\n[失效]";
+	}
+
+	//招式等级额外特效 ====================================================================
+	public override void SetAttackLink (attackLink attackLinkIn)
+	{
+		if (attackLinkIn && attackLinkIn.theAttackLinkLv >= 3)
+		{
+			//print ("ad");
+			damageAddPercent += 0.06f;
+		}
+	}
+	public override string getEffectAttackLinkLVExtra ()
+	{
+		return "等级奖励：等级超过2级的招式触发此效果时\n伤害追加效果提升6%";
 	}
 
 }

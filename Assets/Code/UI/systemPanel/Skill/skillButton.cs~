@@ -14,6 +14,8 @@ public class skillButton : MonoBehaviour {
 	public string basicEffect = "";
 	//特效信息
 	public string effectInformation = "";
+	//招式等级特效奖励
+	public string effectExtraWithAttackLinkLV =  "";
 	//用来显示的文本
 	public Text theShowText;
 	//记录连招引用

@@ -37,6 +37,8 @@ public class effectBasic : MonoBehaviour {
 	virtual public void OnLvUp(){}//玩家升级的时候触发
 	virtual public void OnAddSoul(int soulCount){}//当玩家收集到一个魂元的时候
 	virtual public void SetAttackLinkIndex(int index = 0){}//有些技能效果是可以使用不同的连招按键触发的，但是这些效果完全相同，所以用这个来区分
+	virtual public void SetAttackLink(attackLink theLink = null ){}//可以从外部设定招式的等级，也就是招式的等级也可能影响招式效果
+	virtual public string getEffectAttackLinkLVExtra(){return "";}//如果招式特效受到了招式等级的影响，就应该增加额外的说明
 	//这个效果可以在中途更新，且更新方法每一种效果自己定义
 	//例如更新加长持续时间等等
 	virtual public void updateEffect(){}
