@@ -102,4 +102,18 @@ public class effectDragonArea :  effectBasic
 		return this.theEffectName+"\n[失效]";
 	}
 
+	//招式等级额外特效 ====================================================================
+	public override void SetAttackLink (attackLink attackLinkIn)
+	{
+		if (attackLinkIn && attackLinkIn.theAttackLinkLv >= 3)
+		{
+			//print ("ad");
+			countMax ++;
+		}
+	}
+	public override string getEffectAttackLinkLVExtra ()
+	{
+		return "等级奖励：等级超过3级的招式触发此效果时\n额外增加一次触发效果";
+	}
+
 }

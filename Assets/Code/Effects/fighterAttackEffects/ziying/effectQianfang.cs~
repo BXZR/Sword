@@ -165,6 +165,22 @@ public class effectQianfang : effectBasic {
 	}
 
 
+	//招式等级额外特效 ====================================================================
+	public override void SetAttackLink (attackLink attackLinkIn)
+	{
+		if (attackLinkIn && attackLinkIn.theAttackLinkLv >= 7)
+		{
+			//print ("ad");
+			arrowCounts += 2;
+		}
+	}
+	public override string getEffectAttackLinkLVExtra ()
+	{
+		return "等级奖励：等级超过7级的招式触发此效果时\n增加2束特殊剑气";
+	}
+
+
+
 	//public override void onAttackAction ()
 	//{
 

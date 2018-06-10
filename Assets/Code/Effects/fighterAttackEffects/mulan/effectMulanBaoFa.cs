@@ -83,14 +83,14 @@ public class effectMulanBaoFa : effectBasic
 	//招式等级额外特效 ====================================================================
 	public override void SetAttackLink (attackLink attackLinkIn)
 	{
-		if (attackLinkIn && attackLinkIn.theAttackLinkLv >= 3)
+		if (attackLinkIn && attackLinkIn.theAttackLinkLv >= 4)
 		{
 			//print ("ad");
-			DamageUseMax += 7;
+			DamageUseMax += 5;
 		}
 	}
 	public override string getEffectAttackLinkLVExtra ()
 	{
-		return "等级奖励：等级超过3级的招式触发此效果时\n每一击生命吸收上限增加7";
+		return "等级奖励：等级超过3级的招式触发此效果时\n每一击生命吸收上限增加5";
 	}
 }
