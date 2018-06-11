@@ -41,13 +41,13 @@ public class uiShowsForBasic : MonoBehaviour {
 	{
 		//插值法计算失血
 		//并且，只有在失血的时候才会生效
-		//其中0.4是插值的速度
+		//其中0.2是插值的速度
 		if (theHpBackSlider) 
 		{
 			if (theHpBackSlider.value > theHpSlider.value)
 				theHpBackSlider.value = Mathf.Lerp (theHpBackSlider.value, theHpSlider.value, 0.2f);
-			else
-				theHpBackSlider.value = theHpSlider.value;
+			//else
+				//theHpBackSlider.value = theHpSlider.value;
 		}
 	}	
 

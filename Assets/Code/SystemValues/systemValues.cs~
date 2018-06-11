@@ -562,6 +562,11 @@ public class systemValues : MonoBehaviour {
 		return theSoulGet;
 	}
 
+	//灵力转换斗气
+	public static bool canLingLiToSP()
+	{
+		return (systemValues.soulCount >= 2);
+	}
 	public static void LingLiToSP()
 	{
 		if (systemValues.soulCount >=2) 
@@ -572,7 +577,24 @@ public class systemValues : MonoBehaviour {
 				float spAdd = systemValues.thePlayer.ActerSpMax * 0.25f;
 					
 				systemValues.thePlayer.ActerSp += Mathf.Clamp (spAdd , 0f , 30f);
+				systemValues.thePlayer.makeValueUpdate ();
 			}
+		}
+	}
+
+	//斗气转灵力
+	public static bool canSpToLing()
+	{
+		return  (systemValues.thePlayer.ActerSp >= 40);
+	}
+
+	public static void SpToLing()
+	{
+		if (systemValues.thePlayer.ActerSp >= 40) 
+		{
+			systemValues.thePlayer.ActerSp -= 40;
+			systemValues.thePlayer.makeValueUpdate ();
+			systemValues.soulCount++;
 		}
 	}
 	#endregion

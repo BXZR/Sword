@@ -111,12 +111,19 @@ public class BasicPanelController : MonoBehaviour {
 
 	public  void changeLingLiToSP()
 	{
-		if (systemValues.soulCount >= 2)
+		if (systemValues.canLingLiToSP())
 			systemValues.choiceMessageBoxShow ("灵力转斗气", "消耗2灵力瞬间恢复最多25%最大斗气？\n每一次恢复斗气数值不会超过30", true, new MesageOperate (systemValues.LingLiToSP));
 		else
 			systemValues.messageTitleBoxShow ("灵力不足");
 	}
 
+	public void changeSpToLing()
+	{
+		if (systemValues.canSpToLing ())
+			systemValues.choiceMessageBoxShow ("斗气转灵力", "消耗40斗气转化为1灵力？", true, new MesageOperate (systemValues.SpToLing));
+		else
+			systemValues.messageTitleBoxShow ("斗气不足");
+	}
 
 	
    

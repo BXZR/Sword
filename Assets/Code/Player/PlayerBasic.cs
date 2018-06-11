@@ -198,10 +198,6 @@ public class PlayerBasic : MonoBehaviour {
 	[HideInInspector]
 	public attackLink theAttackLinkNow = null;//当前正在使用的招式
 
-	private float conNameCoolingTime = 1.5f;//如果这个特效脚本在1.5秒内还没有被使用，就认为无效
-	//（否则准备一个脚本招式，然后等半天莫名其妙生效了不是好事）
-	private float conNameCoolingTimeMax = 1.5f;
-
 	//一个游戏人物的所有的武器拥有统一的冷却时间
 	//冷却时间越短，造成伤害的时间间隔也就越短
 	[HideInInspector]
@@ -661,11 +657,6 @@ public class PlayerBasic : MonoBehaviour {
 		return spChanger;
 	}
 
-	public void flashConNameTimer()
-	{
-		conNameCoolingTime = conNameCoolingTimeMax;
-	}
-
 
 	public string getPlayerInformation(bool showHpMax = true)
 	{
@@ -818,19 +809,6 @@ public class PlayerBasic : MonoBehaviour {
 
 
 	public List<effectBasic> Effects = new List<effectBasic> ();
-	List<effectBasic> adder = new List<effectBasic> ();
-
-	void flashEffects()
-	{
-		adder.Clear ();
-		for (int i = 0; i < Effects.Count; i++) 
-			if (Effects [i] != null)
-				adder.Add (Effects[i]);
-
-		Effects.Clear ();
-		for (int i = 0; i < adder.Count; i++)
-			Effects.Add (adder[i]);
-	}
 
 	public void updateValue()
 	{
@@ -838,20 +816,18 @@ public class PlayerBasic : MonoBehaviour {
 		{
 			//这一次循环可以调用的效果都在这里
 			//effectBasic[] Effects = this.GetComponentsInChildren<effectBasic> ();
-			flashEffects();
+
 			//护盾是有上限的 
 			float theMaxOfShield = ActerHpMax * ActerShieldMaxPercent;
 			ActerShieldHp = Mathf.Clamp(ActerShieldHp , 0f ,theMaxOfShield ) ;
+
 			//默认机制就是每一次恢复每秒钟的生命恢复再检查是否死亡
+			float hpupValue = 0f;
+			float spupValue = 0f;
 			if (ActerHp < ActerHpMax) 
 			{
-				float hpupValue = ActerHpUp * systemValues.updateTimeWait;
+				hpupValue = ActerHpUp * systemValues.updateTimeWait;
 				ActerHp += hpupValue;
-				for (int i = 0; i < Effects.Count; i++) 
-				{
-					Effects [i].OnHpUp ();
-					Effects [i].OnHpUp (hpupValue);
-				}
 			}
 			if (ActerHp < 0)
 			{
@@ -862,34 +838,21 @@ public class PlayerBasic : MonoBehaviour {
 
 			if (ActerSp < ActerSpMax) 
 			{
-				float spupValue = ActerSpUp * systemValues.updateTimeWait;
+				spupValue = ActerSpUp * systemValues.updateTimeWait;
 				ActerSp += spupValue;
-				for (int i = 0; i < Effects.Count; i++)
-				{
-					Effects [i].OnSpUp ();
-					Effects [i].OnSpUp (spupValue);
-				}
 			}
 			ActerHp =Mathf.Clamp (ActerHp, 0, ActerHpMax);
 			ActerSp = Mathf.Clamp (ActerSp, 0, ActerSpMax);
 
-
-//			if (theAttackLinkNow!= null) 
-//				{
-//					conNameCoolingTime -= systemValues.updateTimeWait;
-//					if (conNameCoolingTime <= 0)
-//					{
-//						conNameCoolingTime = conNameCoolingTimeMax;
-//						theAttackLinkNow.makeFlash ();
-//						//theAttackLinkNow = null;
-//					}
-//				}
-//				else
-//					conNameCoolingTime = conNameCoolingTimeMax;//此处多次空转赋值实际上是一个很大的浪费但是这句话非常必要
-	
-			for (int i = 0; i < Effects.Count; i++)
+			for (int i = 0; i < Effects.Count; i++) 
+			{
+				Effects [i].OnHpUp ();
+				Effects [i].OnHpUp (hpupValue);
+				Effects [i].OnSpUp ();
+				Effects [i].OnSpUp (spupValue);
 				Effects [i] .effectOnUpdateTime ();
-			
+			}
+
 			//战斗状态的刷新管理
 			fightStateUpdate ();
 
