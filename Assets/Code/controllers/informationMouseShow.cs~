@@ -97,6 +97,13 @@ public class informationMouseShow : MonoBehaviour {
 		}
 	}
 
+
+	void Start()
+	{
+		if (theMethod != messageMethod.method1)
+			this.enabled = false;
+	}
+
 	void Update () 
 	{
 		if (theMethod != messageMethod.method1)

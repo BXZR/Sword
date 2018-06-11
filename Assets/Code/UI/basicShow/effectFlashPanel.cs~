@@ -26,11 +26,11 @@ public class effectFlashPanel : MonoBehaviour {
 	//每间隔一定时间刷新就可以，用Invoke
 	private void updateBuffShow()
 	{
-		//多个效果的时候新方法要比老方法开销大很多
+		//多个效果的时候新方法要比老方法开销小很多
 		//十个效果时候 老方法7.1ms 新方法1.3ms
 		//makeUpdateOld ();
-		makeUpdateNew ();
-
+		//makeUpdateNew ();
+		makeUpdateNew2();
 	}
 
 
@@ -38,29 +38,78 @@ public class effectFlashPanel : MonoBehaviour {
 	{
 		flashItem = new List<ButtonEffectflasher> ();
 		toDestroy = new List<ButtonEffectflasher> ();
-		InvokeRepeating ("updateBuffShow" , 0f , systemValues.updateTimeWait);	
+		InvokeRepeating ("updateBuffShow" , 0f , systemValues.updateTimeWait );	
 	}
 
-	//这个方法保存已经存在的引用，这样可以减少获得引用的次数，，应该比老方法要高效一点
-	void makeUpdateNew()
+
+	//---------------------------------------------------------------------------------------------------------------//
+	//尝试更加速度的刷新方式
+	void makeUpdateNew2()
 	{
 		if (!systemValues.thePlayer)
 			return;
-		
+
 		//尝试增加当前没有的effect
 		//effectBasic[] theEffectbasics = systemValues.thePlayer.GetComponentsInChildren<effectBasic> ();
 		//再一次强力优化，直接使用playerBasic里面保存的引用做就可以了，连获取都没有必要再次获取
 		for (int i = 0; i < systemValues.thePlayer.Effects.Count; i++)
 		{
-			if (! systemValues.thePlayer.Effects[i].isShowing ())
+			if ( systemValues.thePlayer.Effects[i] == null  ||  ! systemValues.thePlayer.Effects[i].isShowing () || checkIfIsShowing ( systemValues.thePlayer.Effects[i]))
 				continue;
-			
-			if (!checkIfIsShowing ( systemValues.thePlayer.Effects[i])) //如果这个效果没有被展示
-			{
-				ButtonEffectflasher theNewEffect = new ButtonEffectflasher ();
-				theNewEffect.makeStart (theEffectShowButton,this.transform, systemValues.thePlayer.Effects [i],EffectColor,NotEffectColor);
+
+				bool isNew = false;
+				ButtonEffectflasher theNewEffect = ButtonEffectflasher.getAFlasher (out isNew);
+				if (isNew)
+					theNewEffect.makeStart (theEffectShowButton, this.transform, systemValues.thePlayer.Effects [i], EffectColor, NotEffectColor);
+				else
+					theNewEffect.setEffect (systemValues.thePlayer.Effects [i]);
+
 				flashItem.Add (theNewEffect);
+
+		}
+
+		//更新显示 
+		for (int i = 0; i < flashItem.Count; i++)
+		{
+			flashItem [i].makeUpdate();
+		}
+
+		//删除处理
+		toDestroy.Clear ();
+		for (int i = 0; i < flashItem.Count; i++)
+		{
+			if (flashItem [i].theEffect == null) 
+			{
+				toDestroy.Add (flashItem [i]);
 			}
+		}
+		for (int i = 0; i < toDestroy.Count; i++) 
+		{
+			//消除，同时记录到buffer里面
+			toDestroy [i].makeDestroy ();
+			flashItem.Remove (toDestroy [i]);
+		}
+	}
+		
+	//---------------------------------------------------------------------------------------------------------------//
+	//这个方法保存已经存在的引用，这样可以减少获得引用的次数，，应该比老方法要高效一点
+	void makeUpdateNew()
+	{
+		if (!systemValues.thePlayer)
+			return;
+
+		//尝试增加当前没有的effect
+		//effectBasic[] theEffectbasics = systemValues.thePlayer.GetComponentsInChildren<effectBasic> ();
+		//再一次强力优化，直接使用playerBasic里面保存的引用做就可以了，连获取都没有必要再次获取
+		for (int i = 0; i < systemValues.thePlayer.Effects.Count; i++)
+		{
+			if (! systemValues.thePlayer.Effects[i].isShowing () || checkIfIsShowing ( systemValues.thePlayer.Effects[i]))
+				continue;
+
+			print ("check has ");
+			ButtonEffectflasher theNewEffect = new ButtonEffectflasher ();
+			theNewEffect.makeStart (theEffectShowButton,this.transform, systemValues.thePlayer.Effects [i],EffectColor,NotEffectColor);
+			flashItem.Add (theNewEffect);
 		}
 
 		//更新显示 
@@ -83,19 +132,10 @@ public class effectFlashPanel : MonoBehaviour {
 			toDestroy [i].makeDestroy ();
 			flashItem.Remove (toDestroy [i]);
 		}
+		flashItem.RemoveAll (X => X == null);
 	}
 
-	//检查这个效果是不是已经在显示中了
-	bool  checkIfIsShowing(effectBasic theEffect)
-	{
-		for (int i = 0; i < flashItem.Count; i++) 
-		{
-			if (flashItem [i].theEffect == theEffect)
-				return true;
-		}
-		return false;
-	}
-
+	//---------------------------------------------------------------------------------------------------------------//
 	//这个方法非常暴力，每一次检查都声称新的按钮，获得新的引用，并且还是多次，消耗很大
 	void makeUpdateOld()
 	{
@@ -126,6 +166,18 @@ public class effectFlashPanel : MonoBehaviour {
 			}
 		}
 	}
+
+
+	//检查这个效果是不是已经在显示中了
+	bool  checkIfIsShowing(effectBasic theEffect)
+	{
+		for (int i = 0; i < flashItem.Count; i++) 
+		{
+			if (flashItem [i].theEffect == theEffect && (theEffect!= null))
+				return true;
+		}
+		return false;
+	}
 	
 
 }
@@ -135,6 +187,23 @@ public class effectFlashPanel : MonoBehaviour {
 //这个地方的消耗实际上太过惊人了
 class ButtonEffectflasher
 {
+	public static List<ButtonEffectflasher> ButtonEffectflasherBuffer = new List<ButtonEffectflasher> ();
+	//顺带返回额外标记，是否是新的
+	public static ButtonEffectflasher getAFlasher(out bool isNewOne)
+	{
+		if (ButtonEffectflasherBuffer.Count <= 0) 
+		{
+			isNewOne = true;
+			return  new ButtonEffectflasher ();
+		}
+
+		ButtonEffectflasher A = ButtonEffectflasherBuffer [0];
+		ButtonEffectflasherBuffer.Remove (A);
+		isNewOne = false;
+		//Debug.Log("isNew =  " + isNewOne);
+		return A;
+	}
+
 	public GameObject theButton;
 	public Text  theShowText;
 	public Image theFillAmountImage;
@@ -157,6 +226,16 @@ class ButtonEffectflasher
 
 	}
 
+	//额外增加效果的时候
+	public  void setEffect( effectBasic theEffectIn)
+	{
+		theButton.gameObject.SetActive (true);
+		theEffect = theEffectIn;
+		isEffecting = theEffectIn.isEffecting;
+		theFillAmountImage.color = theEffect.isEffecting ? EffectColor : NotEffectColor;
+	}
+
+
 	public void makeUpdate()
 	{
 		if (theEffect) 
@@ -176,7 +255,8 @@ class ButtonEffectflasher
 		//应用了null的判断来做，这样就有了通知自动销毁的感觉
 		if (theEffect == null)  //效果消失就自我毁灭就好了
 		{
-			MonoBehaviour.Destroy (theButton.gameObject);
+			ButtonEffectflasherBuffer.Add (this);
+			theButton.gameObject.SetActive (false);
 		}
 	}
 }

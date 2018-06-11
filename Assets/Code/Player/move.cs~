@@ -172,13 +172,13 @@ public class move : MonoBehaviour {
 
 			if(useSP)
 			{
-			//耗蓝控制--------------------------------------------------
-			float spUse = thePlayer.ActerSpMax * 0.05f;//施展轻功是需要消耗真气的;
-			if (systemValues.theGameSystemMode == GameSystemMode.PC)
-			UseSP (spUse);
-			if (systemValues.theGameSystemMode == GameSystemMode.NET)//有些功能只在网络对战模式之下用就行
-			this.photonView.RPC ("UseSP", PhotonTargets.All, spUse);
-			//-----------------------------------------------------------
+				//耗蓝控制--------------------------------------------------
+				float spUse = thePlayer.ActerSpMax * 0.05f;//施展轻功是需要消耗真气的;
+				UseSP (spUse);
+				//有些功能只在网络对战模式之下用就行
+				if (systemValues.theGameSystemMode == GameSystemMode.NET && thePlayer)
+					thePlayer.makeValueUpdate ();
+				//-----------------------------------------------------------
 			}
 			thePlayer.theAudioPlayer.playClip (theJumpSound);
 			isJumping = true;
@@ -207,10 +207,10 @@ public class move : MonoBehaviour {
 					jumpTimer += 0.15f ;//如果正在跳跃就增加跳跃持续时间
 					//耗蓝控制--------------------------------------------------
 					float spUse = thePlayer.ActerSpMax * 0.05f;//施展轻功是需要消耗真气的;
-					if(systemValues.theGameSystemMode == GameSystemMode.PC)
-						UseSP(spUse);
-					if(systemValues.theGameSystemMode == GameSystemMode.NET)//有些功能只在网络对战模式之下用就行
-						this.photonView.RPC("UseSP",PhotonTargets.All,spUse);
+					UseSP(spUse);
+					//有些功能只在网络对战模式之下用就行
+					if (systemValues.theGameSystemMode == GameSystemMode.NET && thePlayer)
+						thePlayer.makeValueUpdate ();
 					//-----------------------------------------------------------
 
 				}
@@ -223,10 +223,10 @@ public class move : MonoBehaviour {
 					jumpTimer += 0.07f ;//如果正在跳跃就增加跳跃持续时间
 					//耗蓝控制--------------------------------------------------
 					float spUse = thePlayer.ActerSpMax * 0.01f;//施展轻功是需要消耗真气的;
-					if(systemValues.theGameSystemMode == GameSystemMode.PC)
-						UseSP(spUse);
-					if(systemValues.theGameSystemMode == GameSystemMode.NET)//有些功能只在网络对战模式之下用就行
-						this.photonView.RPC("UseSP",PhotonTargets.All,spUse);
+					UseSP(spUse);
+					//有些功能只在网络对战模式之下用就行
+					if (systemValues.theGameSystemMode == GameSystemMode.NET && thePlayer)
+						thePlayer.makeValueUpdate ();
 					//-----------------------------------------------------------
 
 				}
@@ -262,6 +262,13 @@ public class move : MonoBehaviour {
 	//有关重力的计算不论是否可以移动都应该进行
 	void gravtyMove()
 	{
+		//站立在某处的时候没有必要计算重力
+		if (IsGrounded ())
+		{
+			overGroundTimer = 0f;//归零
+			return;
+		}
+		
 		//重力与是否跳跃也并没有关联
 		if (theController　 && canGravity) 
 		{
@@ -280,7 +287,7 @@ public class move : MonoBehaviour {
 		}
 	}
 
-	[PunRPC]
+
 	private void UseSP(float SPUse)
 	{
 		if (this.thePlayer == null)
@@ -434,9 +441,6 @@ public class move : MonoBehaviour {
 		//所以只需要在适当的时候作出相应的动画就可以了
 		//但是为了保证更多的属性的控制，应该懂这种方法
 		//this.photonView.RPC ("moveForAll", PhotonTargets.All, forwardA, upA);
-		if(this.photonView == null)
-			photonView = PhotonView.Get(this);
-		
 		//moveForAll (forwardA, upA);
 	}
 
@@ -448,6 +452,8 @@ public class move : MonoBehaviour {
 			//makeStart (); 
 		}
 		theAnimatorOfPlayer = this.GetComponentInChildren<Animator> ();
+		if(this.photonView == null)
+			photonView = PhotonView.Get(this);
 
 	}
 

@@ -978,18 +978,25 @@ public class PlayerBasic : MonoBehaviour {
 	//有些地方需要强制更新
 	public  void makeValueUpdate()
 	{
-		//更新网络上其他客户端这个人物的属性
-		if (systemValues.theGameSystemMode == GameSystemMode.NET && photonView != null) 
+		try
 		{
-			photonView.RPC ("updateOthersValue", PhotonTargets.All, 
-				ActerHpMax, ActerHp, ActerSpMax, ActerSp , ActerHpUp, ActerSpUp,
-				ActerSuperBaldePercent, ActerSuperBaldeAdder, ActerMissPercent ,ActerShielderPercent,
-				ActerShielderDamageMiuns, ActerShielderDamageMiunsPercent,
-				ActerWuliDamage, ActerWuliReDamage, ActerWuliIner, ActerWuliInerPercent,
-				ActerWuliShield,  ActerHpSuck, ActerHpSuckPercent, ActerSpSuck , ActerSpSuckPercent,
-				ActerDamageAdderPercent , ActerDamageAdder , ActerMoveSpeedPercent, ActerShieldHp , ActerDamageMinusValue ,
-				ActerDamageAdderPercent ,ActerAttackSpeedPercent
-			);
+			//更新网络上其他客户端这个人物的属性
+			if (systemValues.theGameSystemMode == GameSystemMode.NET && photonView != null) 
+			{
+				photonView.RPC ("updateOthersValue", PhotonTargets.All, 
+					ActerHpMax, ActerHp, ActerSpMax, ActerSp , ActerHpUp, ActerSpUp,
+					ActerSuperBaldePercent, ActerSuperBaldeAdder, ActerMissPercent ,ActerShielderPercent,
+					ActerShielderDamageMiuns, ActerShielderDamageMiunsPercent,
+					ActerWuliDamage, ActerWuliReDamage, ActerWuliIner, ActerWuliInerPercent,
+					ActerWuliShield,  ActerHpSuck, ActerHpSuckPercent, ActerSpSuck , ActerSpSuckPercent,
+					ActerDamageAdderPercent , ActerDamageAdder , ActerMoveSpeedPercent, ActerShieldHp , ActerDamageMinusValue ,
+					ActerDamageAdderPercent ,ActerAttackSpeedPercent
+				);
+			}
+		}
+		catch
+		{
+			print ("net is not ok");
 		}
 	}
 	public void addEffectUpdate(string theEffect)
