@@ -15,7 +15,7 @@ public class uiShowsForBasic : MonoBehaviour {
 	public Text thePlayerNameText;//用来显示名字
 	public Text theLvText;//用来显示等级
 	private  PlayerBasic thePlayer;
-	private bool isStarted = false;//只有在开始之后才会刷新
+
 	public void makeStart(PlayerBasic thePlayer)
 	{
 		this.thePlayer = thePlayer;
@@ -29,11 +29,12 @@ public class uiShowsForBasic : MonoBehaviour {
 			thePlayerImage.gameObject.SetActive (false);//如果没有图就干脆就不显示吧
 		}
 		thePlayerNameText.text = makeNameText (this.thePlayer.ActerName);
-		isStarted = true;
+
 		Cursor.visible = false;//不显示鼠标
 
 		//数值更新都是用这个方法更新的，可以大量减少额外的update计算
-		InvokeRepeating ("makeUpdate", 0, systemValues.updateTimeWait);//需要完全实时显示的BasicUI
+		InvokeRepeating ("makeUpdate", 0, systemValues.updateTimeWait );//需要完全实时显示的BasicUI
+		InvokeRepeating ("makeFakeUpdate", 0, systemValues.updateTimeWait * 3f );//其实并不需要完全实时显示的BasicUI
 
 	}
 	//插值流血
@@ -51,19 +52,23 @@ public class uiShowsForBasic : MonoBehaviour {
 		}
 	}	
 
+	//刷新方法-----------------------------------------------------------------------------
 	//实时刷新
 	void makeUpdate () 
 	{
-		if (isStarted) 
-		{
-			theHpSlider.value = thePlayer.ActerHp / thePlayer.ActerHpMax;
-			theSpSlider.value = thePlayer.ActerSp / thePlayer.ActerSpMax;
-			theShieldSlider.value = thePlayer.ActerShieldHp / thePlayer.ActerHpMax;
-			jingyanImage.fillAmount = thePlayer.jingyanNow / thePlayer.jingyanMax;
-			theLvText.text = thePlayer.playerLv.ToString();//"Lv." + thePlayer.playerLv;
-			makeLoseShow ();
-		}
+		theHpSlider.value = thePlayer.ActerHp / thePlayer.ActerHpMax;
+		theSpSlider.value = thePlayer.ActerSp / thePlayer.ActerSpMax;
+		theShieldSlider.value = thePlayer.ActerShieldHp / thePlayer.ActerHpMax;
+		makeLoseShow ();
 	}
+	//伪实时刷新
+	void  makeFakeUpdate()
+	{
+		jingyanImage.fillAmount = thePlayer.jingyanNow / thePlayer.jingyanMax;
+		theLvText.text = thePlayer.playerLv.ToString();//"Lv." + thePlayer.playerLv;
+	}
+
+	//刷新方法-----------------------------------------------------------------------------
 
 	string makeNameText (string playerName)
 	{
