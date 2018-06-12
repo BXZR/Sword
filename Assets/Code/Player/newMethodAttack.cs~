@@ -105,98 +105,78 @@ public class newMethodAttack : MonoBehaviour {
 	public  void attackForAnimation( float makeDamage)//攻击方法（带伤害）
 	{
 		//print ("prepareToAttack");
-			//防止空引用
-			try
-			{
-			if (!thePlayer)
-				thePlayer = this.GetComponentInParent <PlayerBasic> ();
-			//if (!theEMY)
-				//theEMY = systemValues.getEMY (this.thePlayer.transform).GetComponent <PlayerBasic> ();
-			}
-			catch
-			{
-				//因为这个方法与动画播放的绑定比较紧密，因此在查看的界面中有可能会出问题
-				//如果没有获取到引用就说明是某些特殊的调用方式
-			}
-			if(thePlayer)
-			{
-			    extraEffectSELF ();//添加自身特效
-			}
-		  
-		if (thePlayer && thePlayer.canAttack) 
-			{
+		//防止空引用
+		try
+		{
+		if (!thePlayer)
+			thePlayer = this.GetComponentInParent <PlayerBasic> ();
+		//if (!theEMY)
+			//theEMY = systemValues.getEMY (this.thePlayer.transform).GetComponent <PlayerBasic> ();
+		}
+		catch
+		{
+			//因为这个方法与动画播放的绑定比较紧密，因此在查看的界面中有可能会出问题
+			//如果没有获取到引用就说明是某些特殊的调用方式
+		}
+		if(thePlayer)
+		{
+		    extraEffectSELF ();//添加自身特效
+		    if(thePlayer.canAttack)
 				Attack (makeDamage);
-				//print ("attack!");
-			}
+		}
 	}
 
 
-
-	List<GameObject> toDelete  = new List<GameObject> ();
-	List<PlayerBasic> toUSePlayerBasic = new List<PlayerBasic> ();
 	//如果是AI需要加入额外的检查
-	private void check()
+	private List<PlayerBasic> check()
 	{
-		toDelete.Clear ();
-		toUSePlayerBasic.Clear ();
-
-		//AI之间不会自己攻击自己 
-		if (this.thePlayer.gameObject.tag == "AI") 
-		{
-			for (int i = 0; i < theEMY.Count; i++) 
-			{
-				if (theEMY [i].tag == "AI")
-				{
-					toDelete.Add (theEMY [i]);
-				}
-			}
-			for (int i = 0; i < toDelete.Count; i++) 
-			{
-				theEMY.Remove (toDelete[i]);
-			}
-		}
-		//获取playerBasic引用用来真正地攻击
+     	//获取playerBasic引用用来真正地攻击
+		List<PlayerBasic> toUSePlayerBasic = new List<PlayerBasic> ();
+		//筛选目标
+		theEMY.RemoveAll(X => X== null );
+		//AI不会互相攻击
+		if(this.thePlayer.gameObject.tag.Equals("AI"))
+		    theEMY.RemoveAll(X => X.tag.Equals("AI"));
 
 		for (int i = 0; i < theEMY.Count; i++)
 		{
 			PlayerBasic PB = theEMY [i].GetComponent<PlayerBasic> ();
-			if (PB)
+			if (PB && PB.isAlive)//不允许鞭尸
 				toUSePlayerBasic.Add (PB );
 		}
+
+		//记录连击
+		if (thePlayer == systemValues.thePlayer)
+			systemValues.addHitCount (toUSePlayerBasic.Count);
+
+		return toUSePlayerBasic;
 	}
 
-	private List<PlayerBasic> EMYUse = new List<PlayerBasic> ();
+
 	//真正的攻击方法
 	private void Attack( float makeDamage)
 	{
+		if (!thePlayer  || makeDamage < 0)
+			return;
 		//如果makeDamage是负数，就说明制作获得效果，但是不攻击
 		float theDistanceCheck = thePlayer.theAttackAreaLength;
-		if (makeDamage >= 0) 
+		theDistanceCheck += makeDamage;
+		theEMY = systemValues.searchAIMs (thePlayer.theAttackAreaAngel, theDistanceCheck,thePlayer.transform);
+		List<PlayerBasic> toUSePlayerBasic  = check ();
+		//print ("theEMY.count " + theEMY.Count);
+		for (int i = 0; i < toUSePlayerBasic.Count; i++) 
 		{
-			EMYUse.Clear ();
-			theDistanceCheck += makeDamage;
-			theEMY = systemValues.searchAIMs (thePlayer.theAttackAreaAngel, theDistanceCheck,thePlayer.transform);
-			check ();
-
-			//print ("theEMY.count " + theEMY.Count);
-			for (int i = 0; i < toUSePlayerBasic.Count; i++) 
+			theDistance = Vector3.Distance (thePlayer.transform.position, toUSePlayerBasic [i].transform.position);
+			//print (theDistanceCheck);
+			if (theDistance <= theDistanceCheck && makeDamage >= 0)
 			{
-				theDistance = Vector3.Distance (thePlayer.transform.position, toUSePlayerBasic [i].transform.position);
-				//print (theDistanceCheck);
-				if (theDistance <= theDistanceCheck)
-				{
-					if (thePlayer && toUSePlayerBasic [i]) 
-					{
-						if (makeDamage >= 0)
-						{//有些时候仅仅是增加脚本，例如“斗气爆发”不具备攻击效果
-							thePlayer.OnAttack (toUSePlayerBasic [i], 0, false);//造成直接的伤害
-							extraDamageEffect (toUSePlayerBasic [i]);//添加额外的计算脚本，每个脚本的效果由脚本自己决定
-							//print(theEMY[i].name+" is being attacked");
-						}
-					}
-				}
+				//有些时候仅仅是增加脚本，例如“斗气爆发”不具备攻击效果
+					thePlayer.OnAttack (toUSePlayerBasic [i], 0, false);//造成直接的伤害
+					extraDamageEffect (toUSePlayerBasic [i]);//添加额外的计算脚本，每个脚本的效果由脚本自己决定
+					//print(theEMY[i].name+" is being attacked");
 			}
 		}
+
 	}
 
 }

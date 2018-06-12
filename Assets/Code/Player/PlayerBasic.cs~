@@ -844,6 +844,8 @@ public class PlayerBasic : MonoBehaviour {
 			ActerHp =Mathf.Clamp (ActerHp, 0, ActerHpMax);
 			ActerSp = Mathf.Clamp (ActerSp, 0, ActerSpMax);
 
+			//清理也是非常必要的
+			Effects.RemoveAll (X => X == null);
 			for (int i = 0; i < Effects.Count; i++) 
 			{
 				Effects [i].OnHpUp ();

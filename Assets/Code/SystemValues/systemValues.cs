@@ -1178,7 +1178,27 @@ public class systemValues : MonoBehaviour {
 
 	#endregion
 
-
+	#region 统计信息
+	//连击---------------------------------------
+	public static int hitCount = 0;
+	private static float hitTimer = 1f;
+	private static float hitTimerMax = 1f;
+	public  static void updateHit(float TimerUse)
+	{
+		hitTimer -= TimerUse * 0.6f;;
+		if (hitTimer < 0) 
+		{
+			hitTimer = hitTimerMax;
+			hitCount = 0;
+		}
+	}
+	public static void addHitCount( int count = 1)
+	{
+		hitCount += count;
+		hitTimer = hitTimerMax;
+	}
+	//-----------------------------------------------
+	#endregion
 
 
 	//GM的初始化==============================================================================
