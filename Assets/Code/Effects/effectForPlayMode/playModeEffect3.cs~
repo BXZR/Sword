@@ -5,7 +5,7 @@ using UnityEngine;
 public class playModeEffect3 : effectBasic {
 
 
-	private float percent = 0.10f;
+	private float percent = 0.12f;
 
 	void Start ()
 	{
@@ -33,7 +33,7 @@ public class playModeEffect3 : effectBasic {
 	{
 		if (TrueDamage <= 0)
 			return;
-		aim.ActerHp -= this.thePlayer.ActerHpMax * percent;
+		aim.ActerHp -= aim.ActerHpMax * percent;
 	}
 }
 
