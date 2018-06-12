@@ -20,8 +20,13 @@ public class HitText : MonoBehaviour {
 	{
 		if (systemValues.hitCount == 0)
 			theTextForShow.text = "";
-		else
+		else 
+		{
 			theTextForShow.text = systemValues.hitCount + "Hit";
+			int count = Mathf.Clamp( (int)systemValues.hitCount / 10 , 0,3);
+			for(int i = 0 ; i < count  ; i++)
+				theTextForShow.text += "!";
+		}
 
 		systemValues.updateHit (0.2f);
 	}

@@ -75,6 +75,7 @@
      <Compile Include="Assets\Code\Effects\effectForWuling\lingEffects\wind\wind2.cs" />
      <Compile Include="Assets\Code\Effects\effectForWuling\wuling.cs" />
      <Compile Include="Assets\Code\Effects\equipEffects\equipEffect_ExtraDamage.cs" />
+     <Compile Include="Assets\Code\Effects\equipEffects\equipEffect_ExtraLingYa.cs" />
      <Compile Include="Assets\Code\Effects\equipEffects\equipEffect_ExtraSuck.cs" />
      <Compile Include="Assets\Code\Effects\equipEffects\equipEffect_ExtraXieyi.cs" />
      <Compile Include="Assets\Code\Effects\extraEffects\knifeSlash\Interpolate.cs" />

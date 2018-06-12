@@ -45,7 +45,7 @@ public class uiShowsForBasic : MonoBehaviour {
 		//其中0.2是插值的速度
 		if (theHpBackSlider) 
 		{
-			if (theHpBackSlider.value > theHpSlider.value)
+			//if (theHpBackSlider.value > theHpSlider.value)
 				theHpBackSlider.value = Mathf.Lerp (theHpBackSlider.value, theHpSlider.value, 0.2f);
 			//else
 				//theHpBackSlider.value = theHpSlider.value;
