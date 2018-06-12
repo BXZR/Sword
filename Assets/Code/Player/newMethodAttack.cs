@@ -18,7 +18,11 @@ public class newMethodAttack : MonoBehaviour {
 	{
 		if (thePlayer.theAttackLinkNow != null && systemValues.isNullOrEmpty (thePlayer.theAttackLinkNow.conNameToSELF) == false) //效果不可叠加
 		{
-			System.Type theType = System.Type.GetType (thePlayer.theAttackLinkNow.conNameToSELF);
+			//System.Type theType = System.Type.GetType (thePlayer.theAttackLinkNow.conNameToSELF);
+			System.Type theType = thePlayer.theAttackLinkNow.EffectTypeForSelf;
+			if (theType == null)
+				return;
+			
 			effectBasic theEffect = thePlayer.gameObject.GetComponent (theType) as effectBasic;
 			if (!theEffect)
 			{
@@ -52,7 +56,11 @@ public class newMethodAttack : MonoBehaviour {
 	{
 		if (thePlayer.theAttackLinkNow != null && systemValues.isNullOrEmpty (thePlayer.theAttackLinkNow. conNameToEMY) == false)//效果不可叠加
 		{
-			System.Type theType = System.Type.GetType (thePlayer.theAttackLinkNow.conNameToEMY);
+			//System.Type theType = System.Type.GetType (thePlayer.theAttackLinkNow.conNameToEMY);
+			System.Type theType = thePlayer.theAttackLinkNow.EffectTypeForEMY;
+			if (theType == null)
+				return;
+
 			effectBasic theEffect = playerAim.gameObject.GetComponent (theType) as effectBasic;
 			if(!theEffect)
 			{

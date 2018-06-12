@@ -44,11 +44,34 @@ public class attackLink : MonoBehaviour {
 	//public bool isAOE =false;//这是不是一个范围伤害（暂定范围伤害就是攻击身边所有的单位，相交球）
 
 
-	//这段脚本会被weapon脚本在攻击得手的时候触发并且添加
+	//这段脚本会被weapon脚本在攻击得手的时候触发并且添加----------------------------------------
 	public string conNameToEMY ="";//这个招式可以为目标添加的脚本
 	public string conNameToSELF ="";//这个招式可以为自身添加的脚本
 	public string conNameToEMYSave ="";//这个招式可以为目标添加的脚本
 	public string conNameToSELFSave ="";//这个招式可以为自身添加的脚本
+
+	private System.Type effectTypeForEMY;
+	public 	System.Type EffectTypeForEMY
+	{
+		get 
+		{
+			if (string.IsNullOrEmpty (conNameToEMY))
+				return null;
+			return effectTypeForEMY;
+		}
+	}
+
+	private System.Type effectTypeForSelf;
+	public 	System.Type EffectTypeForSelf
+	{
+		get 
+		{
+			if (string.IsNullOrEmpty (conNameToSELF))
+				return null;
+			return effectTypeForSelf;
+		}
+	}
+	//--------------------------------------------------------------------------------
 
 	public AudioClip audioWhenAct;//在做出动作的时候就发的音效
 	public AudioClip audioWhenAttack;//招式命中的时候的音效，修改的是player身上的音效
@@ -139,6 +162,9 @@ public class attackLink : MonoBehaviour {
 		thePlayer = this.GetComponentInParent<PlayerBasic> ();
 
 		photonView = PhotonView.Get(this);
+
+		effectTypeForEMY = System.Type.GetType (conNameToEMY);
+		effectTypeForSelf = System.Type.GetType (conNameToSELF);
 	}
 
 	public virtual  void makeAttackArray()//只在初始化的时候或者需要重新构建联机字符串的时候使用
