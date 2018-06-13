@@ -34,6 +34,7 @@ public class systemValues : MonoBehaviour {
 	//=========================================
 	public static float learnWulingSpPercent = 0.75f;//修炼五灵需要消耗的当前的斗气百分比
 	public static equipBasics theEquipNow = null;//当前选中的注灵效果或者装备
+	public static equipBasics theEquipNowInShop = null;//当前选中的注灵效果或者装备(商店)
 	//当前游戏模式
 	public static playModeBasic playModeNow ;
 	#endregion

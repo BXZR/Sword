@@ -1,28 +1,12 @@
 ﻿<Properties StartupItem="Assembly-CSharp.csproj">
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Unity.Instance.Unity Editor" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Code\Effects\thingsEffect\effectSpeedUp.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Code\UI\shop\equipInformationPanelInShop.cs">
     <Files>
-      <File FileName="Assets\Code\Player\newMethodAttack.cs" Line="1" Column="1" />
-      <File FileName="Assets\Code\SystemValues\systemValues.cs" Line="557" Column="29" />
-      <File FileName="Assets\Code\UI\basicShow\HitText.cs" Line="1" Column="1" />
-      <File FileName="Assets\Code\Player\PlayerBasic.cs" Line="112" Column="40" />
-      <File FileName="Assets\Code\UI\basicShow\uiShowsForBasic.cs" Line="1" Column="1" />
-      <File FileName="Assets\Code\Effects\equipEffects\equipEffect_ExtraDamage.cs" Line="1" Column="1" />
-      <File FileName="Assets\Code\Effects\equipEffects\equipEffect_ExtraLingYa.cs" Line="1" Column="1" />
-      <File FileName="Assets\Code\Effects\fighterAttackEffects\knife\effectKOKnife.cs" Line="1" Column="1" />
-      <File FileName="Assets\Code\playerModes\playMode2.cs" Line="1" Column="1" />
-      <File FileName="Assets\Code\playerModes\playMode1.cs" Line="1" Column="1" />
-      <File FileName="Assets\Code\playerModes\playMode3.cs" Line="1" Column="1" />
-      <File FileName="Assets\Code\playerModes\playMode4.cs" Line="1" Column="1" />
-      <File FileName="Assets\Code\Effects\effectForPlayMode\playModeEffect2.cs" Line="1" Column="1" />
-      <File FileName="Assets\Code\Effects\effectForPlayMode\playModeEffect3.cs" Line="1" Column="1" />
-      <File FileName="Assets\Code\Effects\bloodShower\extraMoveUp.cs" Line="1" Column="1" />
-      <File FileName="Assets\Code\props\popSoulMove.cs" Line="1" Column="1" />
-      <File FileName="Assets\Code\UI\systemPanel\SystemUIController.cs" Line="5" Column="1" />
-      <File FileName="Assets\Code\UI\systemPanel\BasicPanelController.cs" Line="1" Column="1" />
-      <File FileName="Assets\Code\Equips\equipBasics.cs" Line="89" Column="37" />
-      <File FileName="Assets\Code\UI\packagePanel\equip\equipRemakePanel.cs" Line="237" Column="34" />
-      <File FileName="Assets\Code\Effects\thingsEffect\effectSpeedUp.cs" Line="13" Column="16" />
+      <File FileName="Assets\Code\Equips\equipBasics.cs" Line="96" Column="3" />
+      <File FileName="Assets\Code\UI\shop\equipInformationPanelInShop.cs" Line="54" Column="113" />
+      <File FileName="Assets\Code\UI\shop\equipShopSelectButton.cs" Line="6" Column="45" />
+      <File FileName="Assets\Code\UI\packagePanel\equip\equipSelectTypeButton.cs" Line="82" Column="98" />
+      <File FileName="Assets\Code\UI\packagePanel\equip\equipRemakePanel.cs" Line="56" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

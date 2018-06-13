@@ -47,7 +47,7 @@ public class equipShowingButton : MonoBehaviour {
 		}
 	}
 
-	private void makePictureShow(int type)
+	public void makePictureShow(int type)
 	{
 		//额外显示内容
 		switch (type) 

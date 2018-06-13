@@ -88,6 +88,8 @@ public class thePackagePanelShow : MonoBehaviour {
 
 	private static void makeTrast()
 	{
+		if (!theEquipPackage)
+			return;
 		//theTextForStatic.text = equipBasics.equipTrast (theEquip , null);//样例方法调用
 		switch (theEquip.theEquipType) 
 		{

@@ -13,7 +13,6 @@ public class equipPackage : MonoBehaviour {
 	private PlayerBasic thePlayer;
 	//=========================================
 	public List<equipBasics> allEquipsForSave;//没有被装备的装备都是在这里完成的
-	public List<string> equipSkills;//装备注灵的原料在这里收集
 
 	public equipBasics thEquipForHeadUsed = null;//当前装备上的头部装备
 	public equipBasics thEquipForBodyUsed = null;//当前装备上的身体装备
@@ -115,7 +114,6 @@ public class equipPackage : MonoBehaviour {
 	private void makeStart()
 	{
 		allEquipsForSave = new List<equipBasics> ();
-		equipSkills = new List<string> ();
 	}
 
 	void OnTriggerEnter(Collider collisioner)

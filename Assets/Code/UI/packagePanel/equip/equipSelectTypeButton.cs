@@ -41,7 +41,7 @@ public class equipSelectTypeButton : MonoBehaviour {
 		ExecuteEvents .Execute<IPointerClickHandler> ( this.gameObject , theData ,ExecuteEvents.pointerClickHandler);
 	}
 
-	//按下按钮选择
+	//按下按钮选择-------------------------------------------------------------------------------------------------------------------
 	public void makeClickWithType()
 	{
 		//print ("select");
@@ -62,6 +62,29 @@ public class equipSelectTypeButton : MonoBehaviour {
 		makeShow (eqs);
 		equipShowingButton.flashPicture ();
 	}
+
+	public void makeClickWithTypeFromShop()
+	{
+		//print ("select");
+		equipPackage  thePackage = this.GetComponentInParent <equipPackage> ();
+		thePackage.sortThePackage ();
+		List<equipBasics> eqs = thePackage.allEquipsForSave.FindAll(a => a!= null &&  a.isUsing == false && a.theEquipType == theTypeSelect );
+		//eqs = thePackage.getEquipWithType (eqs , theTypeSelect);
+		makeShow (eqs);
+		equipShowingButton.flashPicture ();
+	}
+
+	public void makeClickWithoutTypeFromShop()
+	{
+		//print ("select all");
+		equipPackage thePackage = this.GetComponentInParent <equipPackage> ();
+		thePackage.sortThePackage ();
+		List<equipBasics> eqs = thePackage.allEquipsForSave.FindAll(a => a!= null && a.isUsing == false);
+		makeShow (eqs);
+		equipShowingButton.flashPicture ();
+	}
+
+	//-------------------------------------------------------------------------------------------------------------------
 
 	//显示注灵内容
 	public void makeShowEquipSkillAdder()

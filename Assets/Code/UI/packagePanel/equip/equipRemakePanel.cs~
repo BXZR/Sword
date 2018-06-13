@@ -67,6 +67,9 @@ public class equipRemakePanel : MonoBehaviour {
     //开始界面操作
 	public static void ShowMake()
 	{
+		if (!theEquipButtonText)
+			return;
+		
 		if (!theEquip)
 			theEquipButtonText.text = "无效";
 	

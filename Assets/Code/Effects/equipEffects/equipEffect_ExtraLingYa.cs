@@ -5,8 +5,8 @@ using UnityEngine;
 public class equipEffect_ExtraLingYa : effectBasic {
 
 
-	int attackCountP = 10;
-	float damage = 100f;
+	int attackCountP = 7;
+	float damage = 5f;
 	int count = 0;
 	int countMax = 4;
 
@@ -33,6 +33,7 @@ public class equipEffect_ExtraLingYa : effectBasic {
 
 	public override string getOnTimeFlashInformation ()
 	{
+		count = Mathf.Clamp (systemValues.hitCount / attackCountP, 0, countMax);
 		return this.theEffectName + "\n(" + count + "层)";
 	}
 
