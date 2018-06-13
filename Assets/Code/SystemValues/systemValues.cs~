@@ -556,9 +556,10 @@ public class systemValues : MonoBehaviour {
 
 	public static int getSoulInForDestroyTheEquip(equipBasics theEquip)
 	{
-		int theSoulGet = 0;
+		int theSoulGet = (int)(theEquip.theSoulForThisEquip * 0.2f);
 		theSoulGet += 8 * (theEquip.EquipLvNow-1);
-		theSoulGet += theEquip.theEffectNames.Count * 20;
+		theSoulGet += theEquip.theEffectNames.Count * 17;
+		theSoulGet += 15;
 		return theSoulGet;
 	}
 

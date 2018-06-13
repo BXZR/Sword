@@ -1,9 +1,9 @@
 ﻿<Properties StartupItem="Assembly-CSharp.csproj">
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Unity.Instance.Unity Editor" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Code\UI\systemPanel\BasicPanelController.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Code\Effects\thingsEffect\effectSpeedUp.cs">
     <Files>
-      <File FileName="Assets\Code\Player\newMethodAttack.cs" Line="29" Column="8" />
-      <File FileName="Assets\Code\SystemValues\systemValues.cs" Line="441" Column="16" />
+      <File FileName="Assets\Code\Player\newMethodAttack.cs" Line="1" Column="1" />
+      <File FileName="Assets\Code\SystemValues\systemValues.cs" Line="557" Column="29" />
       <File FileName="Assets\Code\UI\basicShow\HitText.cs" Line="1" Column="1" />
       <File FileName="Assets\Code\Player\PlayerBasic.cs" Line="112" Column="40" />
       <File FileName="Assets\Code\UI\basicShow\uiShowsForBasic.cs" Line="1" Column="1" />
@@ -16,10 +16,13 @@
       <File FileName="Assets\Code\playerModes\playMode4.cs" Line="1" Column="1" />
       <File FileName="Assets\Code\Effects\effectForPlayMode\playModeEffect2.cs" Line="1" Column="1" />
       <File FileName="Assets\Code\Effects\effectForPlayMode\playModeEffect3.cs" Line="1" Column="1" />
-      <File FileName="Assets\Code\Effects\bloodShower\extraMoveUp.cs" Line="90" Column="2" />
-      <File FileName="Assets\Code\props\popSoulMove.cs" Line="21" Column="34" />
+      <File FileName="Assets\Code\Effects\bloodShower\extraMoveUp.cs" Line="1" Column="1" />
+      <File FileName="Assets\Code\props\popSoulMove.cs" Line="1" Column="1" />
       <File FileName="Assets\Code\UI\systemPanel\SystemUIController.cs" Line="5" Column="1" />
-      <File FileName="Assets\Code\UI\systemPanel\BasicPanelController.cs" Line="106" Column="2" />
+      <File FileName="Assets\Code\UI\systemPanel\BasicPanelController.cs" Line="1" Column="1" />
+      <File FileName="Assets\Code\Equips\equipBasics.cs" Line="89" Column="37" />
+      <File FileName="Assets\Code\UI\packagePanel\equip\equipRemakePanel.cs" Line="237" Column="34" />
+      <File FileName="Assets\Code\Effects\thingsEffect\effectSpeedUp.cs" Line="13" Column="16" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

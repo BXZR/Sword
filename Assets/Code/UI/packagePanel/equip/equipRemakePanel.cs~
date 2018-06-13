@@ -234,7 +234,7 @@ public class equipRemakePanel : MonoBehaviour {
 			return;
 
 		string nameUse = theEq.theEquipType != equiptype.equipSkill ? theEq.equipName : theEq.equipExtraName;
-		int soulGet = 20 + systemValues.getSoulInForDestroyTheEquip(theEq);
+		int soulGet = systemValues.getSoulInForDestroyTheEquip(theEq);
 		systemValues.choiceMessageBoxShow ("熔锻？", "熔锻【"+nameUse+"】将会获得"+ soulGet +"灵力，但是这个物品会永远消失。\n\n是否熔锻？", true, new MesageOperate (makeTheEquipToSoul));
 
 	}
@@ -259,7 +259,7 @@ public class equipRemakePanel : MonoBehaviour {
 		if (theEquipUse.isUsing)
 			theEquipUse.DropThisThing (systemValues.thePlayer);
 
-		int soulGet = 20 + systemValues.getSoulInForDestroyTheEquip (theEquipUse );
+		int soulGet = systemValues.getSoulInForDestroyTheEquip (theEquipUse );
 		systemValues.soulCount += soulGet;
 		systemValues.messageTitleBoxShow ("【"+nameUse+"】熔为"+soulGet+"灵力");
 		DestroyImmediate(theEquipUse.gameObject);
