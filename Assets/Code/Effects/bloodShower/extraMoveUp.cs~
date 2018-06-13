@@ -93,7 +93,7 @@ public class extraMoveUp : MonoBehaviour
 		if (isStarted) 
 		{
 			this.transform.LookAt (Camera.main.transform);
-			this.transform.position = Vector3.Lerp (this.transform.position, theTextMoveAim, Time.deltaTime / 2);
+			this.transform.position = Vector3.Lerp (this.transform.position, theTextMoveAim, 0.02f);
 			timerLife -= Time.deltaTime;
 			if (timerLife < 0)
 				makeEnd ();

@@ -226,8 +226,9 @@ public class systemValues : MonoBehaviour {
 				{
 					//初始化一下效果
 					System.Type theType = System.Type.GetType (ak.conNameToEMY);
-					thePlayer.gameObject.AddComponent (theType);
-					effectBasic theEffect = thePlayer.gameObject.GetComponent (theType) as effectBasic;
+					//thePlayer.gameObject.AddComponent (theType);
+					//effectBasic theEffect = thePlayer.gameObject.GetComponent (theType) as effectBasic;
+					effectBasic theEffect = thePlayer.gameObject.AddComponent (theType) as effectBasic;
 					buffer.Add (theEffect);
 
 					if(theEffect.isShowing())
@@ -246,8 +247,9 @@ public class systemValues : MonoBehaviour {
 				{
 					//初始化一下效果
 					System.Type theType = System.Type.GetType (ak.conNameToSELF);
-					thePlayer.gameObject.AddComponent (theType);
-					effectBasic theEffect = thePlayer.gameObject.GetComponent (theType) as effectBasic;
+					//thePlayer.gameObject.AddComponent (theType);
+					//effectBasic theEffect = thePlayer.gameObject.GetComponent (theType) as effectBasic;
+					effectBasic theEffect = thePlayer.gameObject.AddComponent (theType) as effectBasic;
 					buffer.Add (theEffect);
 
 					if(theEffect.isShowing())
@@ -358,8 +360,7 @@ public class systemValues : MonoBehaviour {
 		effectBasic  theEf =  (effectBasic)theGameOBJ.GetComponent(thetype);
 		if (theEf == null)
 		{
-			theGameOBJ.AddComponent (thetype);
-			theEf = (effectBasic)theGameOBJ.GetComponent (thetype);
+			theEf = theGameOBJ.AddComponent (thetype) as effectBasic;
 			theEf.Init ();
 		}
 		information = theEf.getInformation ();
@@ -379,8 +380,7 @@ public class systemValues : MonoBehaviour {
 		effectBasic  theEf =  (effectBasic)theGameOBJ.GetComponent(thetype);
 		if (theEf == null)
 		{
-			theGameOBJ.AddComponent (thetype);
-			theEf = (effectBasic)theGameOBJ.GetComponent (thetype);
+			theEf = theGameOBJ.AddComponent (thetype) as effectBasic;
 			theEf.Init ();
 		}
 		information = theEf.theEffectName;

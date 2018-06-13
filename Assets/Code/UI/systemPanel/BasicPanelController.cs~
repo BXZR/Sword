@@ -104,9 +104,17 @@ public class BasicPanelController : MonoBehaviour {
 		makeFlash ();
 	}
 
+	//这里不太适合用Invoke,所以用timer了
+	float timer = 0f;
+	float timerMax = 1f;
 	void Update()
 	{
-		makeFlash ();
+		timer += Time.deltaTime;
+		if (timer >= timerMax) 
+		{
+			timer = 0f;
+			makeFlash ();
+		}
 	}
 
 	public  void changeLingLiToSP()
@@ -124,7 +132,5 @@ public class BasicPanelController : MonoBehaviour {
 		else
 			systemValues.messageTitleBoxShow ("斗气不足");
 	}
-
-	
-   
+		
 }
