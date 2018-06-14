@@ -75,7 +75,7 @@ public class equipInformationPanelInShop : MonoBehaviour {
 		string theShowTitle = theEquipStatic != null ?  theEquipStatic.equipName : "";
 		systemValues.messageBoxShow ( theShowTitle , theShowString , autoSize: true );
 	}
-
+		
 	void Start () 
 	{
 		theButtonImage = theButton.GetComponent <Image> ();
@@ -83,5 +83,6 @@ public class equipInformationPanelInShop : MonoBehaviour {
 		makeSTART ();
 		showEquipInformation ();
 	}
+
 
 }

@@ -150,6 +150,7 @@
      <Compile Include="Assets\Code\UI\packagePanel\thePackagePanelShow.cs" />
      <Compile Include="Assets\Code\UI\shop\equipInformationPanelInShop.cs" />
      <Compile Include="Assets\Code\UI\shop\equipShopSelectButton.cs" />
+     <Compile Include="Assets\Code\UI\shop\theShop.cs" />
      <Compile Include="Assets\Code\UI\startAndSelect\GameStartButton.cs" />
      <Compile Include="Assets\Code\UI\startAndSelect\RandomSelectButton.cs" />
      <Compile Include="Assets\Code\UI\startAndSelect\SelectSceneForFree\UIStateShowImage.cs" />

@@ -14,7 +14,8 @@ public class equipSelectTypeButton : MonoBehaviour {
 	private equipSelectTypeButton  thisButton;//自身保存引用
 	public static equipSelectTypeButton theButtonSave;//静态保存
 	public Image SelectedHighLightPicture;//选中的时候的按钮
-
+	public bool isPlayerPackage = true;//因为背包一共两种可能，一种是游戏玩家身上的，另一种是商店的
+	public static bool isPlayerPackageStatic = true;//因为背包一共两种可能，一种是游戏玩家身上的，另一种是商店的
 
 	public static void flashThePanel()
 	{
@@ -22,10 +23,21 @@ public class equipSelectTypeButton : MonoBehaviour {
 			return;
 
 		//theButtonSave.makePress ();
-		if (theButtonSave.isAllType)
-			theButtonSave.makeClickWithoutType ();
+
+		if (isPlayerPackageStatic)
+		{
+			if (theButtonSave.isAllType)
+				theButtonSave.makeClickWithoutType ();
+			else
+				theButtonSave.makeClickWithType ();
+		}
 		else
-			theButtonSave.makeClickWithType ();
+		{
+			if (theButtonSave.isAllType)
+				theButtonSave.makeClickWithoutTypeFromShop ();
+			else
+				theButtonSave.makeClickWithTypeFromShop ();
+		}
 	}
 
 
@@ -148,6 +160,7 @@ public class equipSelectTypeButton : MonoBehaviour {
 	void Start()
 	{
 		thisButton = this;
+		isPlayerPackageStatic = isPlayerPackage;
 		makePress ();//反正是初始化的时候调用一次Start，那就所有按钮都调用一次吧，竞争一下最后一个被按下的就是选中的
 	}
 }

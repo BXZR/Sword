@@ -28,6 +28,7 @@ public class equipShowingButton : MonoBehaviour {
 			//print (systemValues.theEquipNow.equipName +"is lated selected");
 			if (theEquip.theEquipType != equiptype.equipSkill)
 			{
+				
 				equipInformationPanel.changeEquipToIntroduct (this.theEquip);
 				//返回两个装备对比的结果（可能会很长，需要控制）
 				thePackagePanelShow.setNewEquip (this.theEquip);
@@ -66,8 +67,12 @@ public class equipShowingButton : MonoBehaviour {
 				if (selectedEffectPictureSave)
 					selectedEffectPictureSave.enabled = false;
 				selectedEffectPictureSave = this.selectedEffectPicture;
-				if(selectedEffectPictureSave)
-				selectedEffectPictureSave.enabled = true;
+				if (selectedEffectPictureSave) 
+				{
+					selectedEffectPictureSave.enabled = true;
+					this.selectedEffectPicture.enabled = true;
+					print ("show");
+				}
 			}
 			break;
 		}

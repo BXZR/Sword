@@ -18,7 +18,7 @@ public class equipEffect_ExtraLingYa : effectBasic {
 	public override void Init ()
 	{
 		theEffectName = "灵牙";
-		theEffectInformation = "第"+attackCountP +"层连击提供额外"+damage+"物理伤害\n最多"+countMax+"层";
+		theEffectInformation = "第"+attackCountP +"层连击提供额外"+damage+"物理伤害(最多"+countMax+"层)";
 
 		makeStart ();
 	}

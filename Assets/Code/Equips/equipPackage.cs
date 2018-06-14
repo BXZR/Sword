@@ -21,7 +21,7 @@ public class equipPackage : MonoBehaviour {
 	public equipBasics thEquipForExtraUsed1 = null;//当前装备上的饰品装备1
 	public equipBasics thEquipForExtraUsed2 = null;//当前装备上的饰品装备2
 	public AudioClip theGetEquipSoundClip = null;//获得装备的时候播放的音效
-
+	public Transform extraPackage ;//额外初始化包裹
 //下面两个方法可能会有引用回收的问题，暂时先不用=====================================================================
 //根据类别查询装备
 //如果返回所有已经获得的装备，就直接访问allEquipsForSave
@@ -51,6 +51,25 @@ public class equipPackage : MonoBehaviour {
 	void Start()
 	{
 		thePlayer = this.GetComponent <PlayerBasic> ();
+		allEquipsForSave = new List<equipBasics> ();
+
+		//对于默认自带的装备，还是应该获取一下
+		equipBasics[] eqs = this.GetComponentsInChildren<equipBasics> ();
+		for (int i = 0; i < eqs.Length; i++) 
+		{
+			allEquipsForSave.Add (eqs [i]);
+			eqs [i].gameObject.SetActive (false);
+		}
+		if (extraPackage) 
+		{
+			eqs = extraPackage.GetComponentsInChildren<equipBasics> ();
+			for (int i = 0; i < eqs.Length; i++) 
+			{
+				allEquipsForSave.Add (eqs [i]);
+				eqs [i].gameObject.SetActive (false);
+			}
+		}
+
 	}
 
 
