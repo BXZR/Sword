@@ -12,30 +12,28 @@ public class equipSelectTypeButton : MonoBehaviour {
 	public bool isAllType = false;//选择类型，如果是treu这就是选择全部
 	public GameObject theShowingButtonProfab;//显示按钮的预设物，需要各种初始化
 	private equipSelectTypeButton  thisButton;//自身保存引用
-	public static equipSelectTypeButton theButtonSave;//静态保存
+	public static equipSelectTypeButton theButtonSaveForPlayer;//静态保存
+	public static equipSelectTypeButton theButtonSaveForShop;//静态保存
 	public Image SelectedHighLightPicture;//选中的时候的按钮
 	public bool isPlayerPackage = true;//因为背包一共两种可能，一种是游戏玩家身上的，另一种是商店的
-	public static bool isPlayerPackageStatic = true;//因为背包一共两种可能，一种是游戏玩家身上的，另一种是商店的
 
 	public static void flashThePanel()
 	{
-		if (!theButtonSave)
-			return;
-
-		//theButtonSave.makePress ();
-
-		if (isPlayerPackageStatic)
+		if (theButtonSaveForPlayer ) 
 		{
-			if (theButtonSave.isAllType)
-				theButtonSave.makeClickWithoutType ();
+			if (theButtonSaveForPlayer.isAllType)
+				theButtonSaveForPlayer.makeClickWithoutType ();
 			else
-				theButtonSave.makeClickWithType ();
-
-			if (theButtonSave.isAllType)
-				theButtonSave.makeClickWithoutTypeFromShop ();
+				theButtonSaveForPlayer.makeClickWithType ();
+		} 
+		if (theButtonSaveForShop) 
+		{
+			if (theButtonSaveForShop.isAllType)
+				theButtonSaveForShop.makeClickWithoutTypeFromShop ();
 			else
-				theButtonSave.makeClickWithTypeFromShop ();
+				theButtonSaveForShop.makeClickWithTypeFromShop ();
 		}
+
 	}
 
 
@@ -55,6 +53,9 @@ public class equipSelectTypeButton : MonoBehaviour {
 	public void makeClickWithType()
 	{
 		//print ("select");
+		if (!systemValues.thePlayer)
+			return;
+
 		equipPackage  thePackage = systemValues.thePlayer.GetComponent <equipPackage> ();
 		thePackage.sortThePackage ();
 		List<equipBasics> eqs = thePackage.allEquipsForSave.FindAll(a => a!= null &&  a.isUsing == false && a.theEquipType == theTypeSelect );
@@ -66,6 +67,9 @@ public class equipSelectTypeButton : MonoBehaviour {
 	public void makeClickWithoutType()
 	{
 		//print ("select all");
+		if (!systemValues.thePlayer)
+			return;
+		
 		equipPackage thePackage = systemValues.thePlayer.GetComponent <equipPackage> ();
 		thePackage.sortThePackage ();
 		List<equipBasics> eqs = thePackage.allEquipsForSave.FindAll(a => a!= null && a.isUsing == false && a.theEquipType != equiptype.equipSkill  );
@@ -104,12 +108,6 @@ public class equipSelectTypeButton : MonoBehaviour {
 
 	//-------------------------------------------------------------------------------------------------------------------
 
-	//显示注灵内容
-	public void makeShowEquipSkillAdder()
-	{
-		theButtonSave = thisButton ;
-	}
-
 
 	private void makeShow(List<equipBasics> eqs)
 	{
@@ -128,6 +126,8 @@ public class equipSelectTypeButton : MonoBehaviour {
 			for (; i < es.Length; i++) 
 			{
 				es [i].theEquip = eqs [i];
+				if (es [i] is equipShopSelectButton)
+					(es [i] as equipShopSelectButton).theValueText.text = eqs [i].theSoulForThisEquip.ToString();
 				es [i].GetComponent <Image> ().sprite = systemValues.makeLoadSprite ("equipPicture/" + eqs [i].theEquipType + "/" + eqs [i].equipPictureName);
 			}
 			for (; i < eqs.Count; i++) 
@@ -136,7 +136,11 @@ public class equipSelectTypeButton : MonoBehaviour {
 				theButton.transform.SetParent (theViewFather.transform);
 				//theButton.GetComponentInChildren<Text> ().text = "";
 				//theButton.GetComponentInChildren<Text> ().text = eqs [i].equipName;
-				theButton.GetComponent <equipShowingButton> ().theEquip = eqs [i];
+				equipShowingButton theButtonEQ = theButton.GetComponent <equipShowingButton> ();
+				theButtonEQ.theEquip = eqs [i];
+				if (theButtonEQ is equipShopSelectButton)
+					(theButtonEQ as equipShopSelectButton).theValueText.text = eqs [i].theSoulForThisEquip.ToString();
+				
 				theButton.GetComponent <Image> ().sprite = systemValues.makeLoadSprite ("equipPicture/" + eqs [i].theEquipType + "/" + eqs [i].equipPictureName);
 				//因为有grid控件，所以这些都没有必要使用了
 			}
@@ -149,6 +153,8 @@ public class equipSelectTypeButton : MonoBehaviour {
 			for (; i < eqs.Count; i++) 
 			{
 				es [i].theEquip = eqs [i];
+				if (es [i] is equipShopSelectButton)
+					(es [i] as equipShopSelectButton).theValueText.text = eqs [i].theSoulForThisEquip.ToString();
 				es [i].GetComponent <Image> ().sprite = systemValues.makeLoadSprite ("equipPicture/" + eqs [i].theEquipType + "/" + eqs [i].equipPictureName);
 			}
 			for (; i>=0 && i < es.Length; i++) 
@@ -156,17 +162,34 @@ public class equipSelectTypeButton : MonoBehaviour {
 				Destroy (es [i].gameObject);
 			}
 		}
-		if (theButtonSave)
-			theButtonSave.SelectedHighLightPicture.enabled = false;
-		theButtonSave = thisButton ;
-		if (theButtonSave)
-			theButtonSave.SelectedHighLightPicture.enabled = true;
+
+		makeSave ();
+	}
+
+
+	void  makeSave()
+	{
+		if (isPlayerPackage)
+		{
+			if (theButtonSaveForPlayer)
+				theButtonSaveForPlayer.SelectedHighLightPicture.enabled = false;
+			theButtonSaveForPlayer = thisButton;
+			if (theButtonSaveForPlayer)
+				theButtonSaveForPlayer.SelectedHighLightPicture.enabled = true;
+		} 
+		else 
+		{
+			if (theButtonSaveForShop)
+				theButtonSaveForShop.SelectedHighLightPicture.enabled = false;
+			theButtonSaveForShop = thisButton;
+			if (theButtonSaveForShop)
+				theButtonSaveForShop.SelectedHighLightPicture.enabled = true;
+		}
 	}
 		
 	void Start()
 	{
 		thisButton = this;
-		isPlayerPackageStatic = isPlayerPackage;
-		makePress ();//反正是初始化的时候调用一次Start，那就所有按钮都调用一次吧，竞争一下最后一个被按下的就是选中的
+		//makePress ();//反正是初始化的时候调用一次Start，那就所有按钮都调用一次吧，竞争一下最后一个被按下的就是选中的
 	}
 }

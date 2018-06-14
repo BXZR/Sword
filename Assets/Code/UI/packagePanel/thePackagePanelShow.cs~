@@ -13,6 +13,7 @@ public class thePackagePanelShow : MonoBehaviour {
 	public equipShowingButton theShowButton;
 	public equipShowingButton theExtraButton1;
 	public equipShowingButton theExtraButton2;
+	public equipShowingButton godButton;
 	//静态变量保存
 	static Text theTextForStatic;
 	public static equipBasics theEquip;
@@ -23,6 +24,7 @@ public class thePackagePanelShow : MonoBehaviour {
 	static equipShowingButton staticShoeButton;
 	static equipShowingButton staticExtraButton1;
 	static equipShowingButton staticExtraButton2;
+	static equipShowingButton staticgodButton;
 
 	static Text staticHeadButtonText ;
 	static Text  staticBodyButtonText ;
@@ -31,11 +33,14 @@ public class thePackagePanelShow : MonoBehaviour {
 	static Text  staticExtraButton1Text ;
 	static Text  staticExtraButton2Text ;
 
-
+	private bool Started = false;
 	//因为背包的东西可能会经常换，所以暂时还真需要适时刷新
 	//等待后面的事件机制完全了或许就好了
 	void Start()
 	{
+		//if (Started || !systemValues.thePlayer)
+		//	return;
+		
 		theEquipPackage = systemValues.thePlayer.GetComponent < equipPackage> ();
 
 		theTextForStatic = theEquipMinusShowText ;
@@ -45,6 +50,7 @@ public class thePackagePanelShow : MonoBehaviour {
 		staticShoeButton = theShowButton;
 		staticExtraButton1 = theExtraButton1;
 		staticExtraButton2 = theExtraButton2;
+		staticgodButton = godButton;
 
 		staticHeadButtonText = theHeadButton.GetComponentInChildren<Text>();
 		staticBodyButtonText = staticBodyButton.GetComponentInChildren<Text>();
@@ -54,6 +60,8 @@ public class thePackagePanelShow : MonoBehaviour {
 		staticExtraButton2Text = staticExtraButton2.GetComponentInChildren<Text>();
 
 		makeFlash ();
+
+		//Started = true;
 	}
 		
 	public static void makeFlash()
@@ -64,6 +72,7 @@ public class thePackagePanelShow : MonoBehaviour {
 		staticShoeButton.theEquip = theEquipPackage.thEquipForShoeUsed;
 		staticExtraButton1.theEquip = theEquipPackage.thEquipForExtraUsed1;
 		staticExtraButton2.theEquip = theEquipPackage.thEquipForExtraUsed2;
+		staticgodButton.theEquip = theEquipPackage.thEquipForGod;
 
 		staticHeadButtonText.text = staticHeadButton .theEquip != null ? staticHeadButton .theEquip.equipName : "[尚未装备]";
 		staticBodyButtonText .text =  staticBodyButton .theEquip != null ? staticBodyButton .theEquip.equipName : "[尚未装备]";
@@ -71,6 +80,10 @@ public class thePackagePanelShow : MonoBehaviour {
 		staticShoeButtonText .text = staticShoeButton.theEquip != null ? staticShoeButton.theEquip.equipName : "[尚未装备]";
 		staticExtraButton1Text .text = staticExtraButton1.theEquip != null ? staticExtraButton1.theEquip.equipName : "[尚未装备]";
 		staticExtraButton2Text.text  = staticExtraButton2.theEquip != null ? staticExtraButton2.theEquip.equipName : "[尚未装备]";
+		if (staticgodButton.theEquip != null)
+			staticgodButton.GetComponent <Image> ().sprite = systemValues.makeLoadSprite ("equipPicture/god/" + staticgodButton.theEquip.equipPictureName);
+		else
+			staticgodButton.GetComponent <Image> ().sprite = null;
 		theTextForStatic.text = "";
 	}
 
@@ -120,7 +133,9 @@ public class thePackagePanelShow : MonoBehaviour {
 				}
 			}
 			break;
-
+		case equiptype.god:
+			theTextForStatic.text =  equipBasics.equipTrast (theEquip, theEquipPackage.thEquipForGod);
+			break;
 		}
 
 	}
@@ -153,6 +168,9 @@ public class thePackagePanelShow : MonoBehaviour {
 					else
 						theEquipPackage.thEquipForExtraUsed2 = null;
 				}
+				break;
+			case equiptype.god:
+				theEquipPackage.thEquipForGod = null;
 				break;
 			}
 			theEquip.DropThisThing (systemValues.thePlayer);
@@ -226,6 +244,17 @@ public class thePackagePanelShow : MonoBehaviour {
 						theEquipPackage.thEquipForExtraUsed1 = theEquip;
 						theEquip.GetThisThing (systemValues.thePlayer);
 					}
+				}
+				break;
+			case equiptype.god:
+				{
+					if (theEquipPackage.thEquipForGod != null)
+					{					
+						oldEquipName = theEquipPackage.thEquipForGod .equipName;
+						theEquipPackage.thEquipForGod .DropThisThing (systemValues.thePlayer);
+					}
+					theEquipPackage.thEquipForGod = theEquip;
+					theEquip.GetThisThing (systemValues.thePlayer);
 				}
 				break;
 			}
