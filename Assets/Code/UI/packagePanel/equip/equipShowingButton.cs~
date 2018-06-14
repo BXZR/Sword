@@ -71,7 +71,7 @@ public class equipShowingButton : MonoBehaviour {
 				{
 					selectedEffectPictureSave.enabled = true;
 					this.selectedEffectPicture.enabled = true;
-					print ("show");
+					//print ("show");
 				}
 			}
 			break;

@@ -5,7 +5,7 @@ using UnityEngine;
 public class theShop : MonoBehaviour {
 
 	//这是真正的商店逻辑
-	private equipPackage thePackage;
+	public equipPackage thePackage;
 
 	void Start()
 	{
@@ -15,7 +15,7 @@ public class theShop : MonoBehaviour {
 	void OnEnable()
 	{
 		try{makeFlash ();}
-		catch {print ("初始化未完成");}
+		catch(System.Exception E) {print ("error!\n"+E.Message);}
 	}
 
 	public void buyTheEquip()

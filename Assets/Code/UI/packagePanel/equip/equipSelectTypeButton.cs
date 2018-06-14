@@ -30,9 +30,7 @@ public class equipSelectTypeButton : MonoBehaviour {
 				theButtonSave.makeClickWithoutType ();
 			else
 				theButtonSave.makeClickWithType ();
-		}
-		else
-		{
+
 			if (theButtonSave.isAllType)
 				theButtonSave.makeClickWithoutTypeFromShop ();
 			else
@@ -78,22 +76,30 @@ public class equipSelectTypeButton : MonoBehaviour {
 	public void makeClickWithTypeFromShop()
 	{
 		//print ("select");
-		equipPackage  thePackage = this.GetComponentInParent <equipPackage> ();
-		thePackage.sortThePackage ();
-		List<equipBasics> eqs = thePackage.allEquipsForSave.FindAll(a => a!= null &&  a.isUsing == false && a.theEquipType == theTypeSelect );
-		//eqs = thePackage.getEquipWithType (eqs , theTypeSelect);
-		makeShow (eqs);
-		equipShowingButton.flashPicture ();
+		theShop  sp = this.GetComponentInParent <theShop> ();
+		if (sp && sp.thePackage)
+		{
+			equipPackage thePackage = sp.thePackage;
+			thePackage.sortThePackage ();
+			List<equipBasics> eqs = thePackage.allEquipsForSave.FindAll (a => a != null && a.isUsing == false && a.theEquipType == theTypeSelect);
+			//eqs = thePackage.getEquipWithType (eqs , theTypeSelect);
+			makeShow (eqs);
+			equipShowingButton.flashPicture ();
+		}
 	}
 
 	public void makeClickWithoutTypeFromShop()
 	{
 		//print ("select all");
-		equipPackage thePackage = this.GetComponentInParent <equipPackage> ();
-		thePackage.sortThePackage ();
-		List<equipBasics> eqs = thePackage.allEquipsForSave.FindAll(a => a!= null && a.isUsing == false);
-		makeShow (eqs);
-		equipShowingButton.flashPicture ();
+		theShop  sp = this.GetComponentInParent <theShop> ();
+		if (sp && sp.thePackage)
+		{
+			equipPackage thePackage = sp.thePackage;
+			thePackage.sortThePackage ();
+			List<equipBasics> eqs = thePackage.allEquipsForSave.FindAll (a => a != null && a.isUsing == false);
+			makeShow (eqs);
+			equipShowingButton.flashPicture ();
+		}
 	}
 
 	//-------------------------------------------------------------------------------------------------------------------

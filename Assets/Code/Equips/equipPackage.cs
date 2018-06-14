@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 public class equipPackage : MonoBehaviour {
 	//这个类同来描述玩家的装备信息
@@ -103,9 +104,11 @@ public class equipPackage : MonoBehaviour {
 	//这将会是一个开销挺大的方法，或有优化
 	List<equipBasics> theSortBuffer = new List<equipBasics> ();
 	List<equipBasics> theNewPackage = new List<equipBasics> ();
-	equiptype[] thetypes = { equiptype.weapon, equiptype.body, equiptype.head, equiptype.shoe, equiptype.extra , equiptype.equipSkill };
+	equiptype[] thetypes = { equiptype.weapon, equiptype.body, equiptype.head, equiptype.shoe, equiptype.extra , equiptype.equipSkill  , equiptype.god };
 	public void sortThePackage()
 	{
+		try
+		{
 		//这里还真的需要新建一个副本对象
 		theNewPackage = new List<equipBasics> ();
 		for (int k = 0; k < thetypes.Length; k++)
@@ -125,6 +128,11 @@ public class equipPackage : MonoBehaviour {
 		}
 		allEquipsForSave = theNewPackage;
 		//print ("sorted count = "+ allEquipsForSave.Count);
+		}
+		catch(Exception X) 
+		{
+			print (X.Message);
+		}
 	}
 		
 

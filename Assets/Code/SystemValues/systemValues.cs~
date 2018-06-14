@@ -802,6 +802,7 @@ public class systemValues : MonoBehaviour {
 	//加载图像全局工具方法
 	public static  Sprite makeLoadSprite(string textureName)
 	{
+
 		Sprite theSprite = theSavedSprite.Find (x => x.name == textureName);
 	    if (theSprite != null)
 			return theSprite;
@@ -810,6 +811,7 @@ public class systemValues : MonoBehaviour {
 		theSprite = Sprite .Create(theTextureIn,new Rect (0,0,theTextureIn.width,theTextureIn.height),new Vector2 (0,0));
 		theSprite.name = textureName;
 		theSavedSprite.Add (theSprite);
+		//print (textureName);
 		return theSprite;
 	}
 	#endregion
