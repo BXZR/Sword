@@ -78,6 +78,7 @@
      <Compile Include="Assets\Code\Effects\equipEffects\equipEffect_ExtraLingYa.cs" />
      <Compile Include="Assets\Code\Effects\equipEffects\equipEffect_ExtraSuck.cs" />
      <Compile Include="Assets\Code\Effects\equipEffects\equipEffect_ExtraXieyi.cs" />
+     <Compile Include="Assets\Code\Effects\equipEffects\equipEffect_mojian.cs" />
      <Compile Include="Assets\Code\Effects\extraEffects\knifeSlash\Interpolate.cs" />
      <Compile Include="Assets\Code\Effects\extraEffects\knifeSlash\MeleeWeaponTrail.cs" />
      <Compile Include="Assets\Code\Effects\extraEffects\knifeSlash\theKnifeSlashController.cs" />

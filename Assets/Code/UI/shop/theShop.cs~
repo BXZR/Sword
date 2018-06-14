@@ -6,10 +6,11 @@ public class theShop : MonoBehaviour {
 
 	//这是真正的商店逻辑
 	public equipPackage thePackage;
-
+	private  panelSoundController theSoundController;
 	void Start()
 	{
 		thePackage = this.GetComponent <equipPackage> ();
+		theSoundController = this.GetComponent <panelSoundController> ();
 	}
 
 	void OnEnable()
@@ -20,7 +21,7 @@ public class theShop : MonoBehaviour {
 
 	public void buyTheEquip()
 	{
-		if (systemValues.theEquipNowInShop.theSoulForThisEquip == null)
+		if (systemValues.theEquipNowInShop == null)
 		{
 			systemValues.messageTitleBoxShow ("尚未选定装备");
 			return;
@@ -36,6 +37,7 @@ public class theShop : MonoBehaviour {
 		thePackage.allEquipsForSave.Remove (systemValues.theEquipNowInShop);
 		systemValues.thePlayer.GetComponent <equipPackage> ().allEquipsForSave.Add (systemValues.theEquipNowInShop);
 		makeFlash ();
+		theSoundController.makeSoundShow (0);
 	}
 
 	public void makeFlash()

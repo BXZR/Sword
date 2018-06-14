@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class FSM_RunAfter : FSMBasic {
 
@@ -14,6 +15,7 @@ public class FSM_RunAfter : FSMBasic {
 
 	public override void OnFSMStateStart ()
 	{
+		this.theThis.GetComponent <NavMeshAgent> ().enabled = true;
 		OnChangeToThisState ();
 	}
 
