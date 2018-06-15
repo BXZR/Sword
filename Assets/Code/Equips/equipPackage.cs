@@ -105,30 +105,32 @@ public class equipPackage : MonoBehaviour {
 	//这将会是一个开销挺大的方法，或有优化
 	List<equipBasics> theSortBuffer = new List<equipBasics> ();
 	List<equipBasics> theNewPackage = new List<equipBasics> ();
-	equiptype[] thetypes = { equiptype.weapon, equiptype.body, equiptype.head, equiptype.shoe, equiptype.extra , equiptype.equipSkill  , equiptype.god };
 	public void sortThePackage()
 	{
 		try
 		{
-		//这里还真的需要新建一个副本对象
-		theNewPackage = new List<equipBasics> ();
-		for (int k = 0; k < thetypes.Length; k++)
-		{
-			theSortBuffer.Clear ();
-			for (int i = 0; i < allEquipsForSave.Count; i++) 
-			{
-				if (allEquipsForSave [i].theEquipType == thetypes[k] && allEquipsForSave [i]!=null)
-					theSortBuffer.Add (allEquipsForSave [i]);
+			theNewPackage.Clear();
+			foreach (equiptype theType in Enum.GetValues( typeof(equiptype)))
+			{	
+				theSortBuffer.Clear ();
+				for (int i = 0; i < allEquipsForSave.Count; i++) 
+				{
+					if (allEquipsForSave [i] && allEquipsForSave [i].theEquipType == theType )
+						theSortBuffer.Add (allEquipsForSave [i]);
+				}
+				if (theSortBuffer.Count == 0)
+					continue;
+				
+				quickSort (theSortBuffer, 0, theSortBuffer.Count-1);
+				//for (int i = 0; i < theSortBuffer.Count; i++)
+				//	theNewPackage.Add (theSortBuffer[i]);
+				theNewPackage.AddRange(theSortBuffer);
 			}
-//			if (theSortBuffer.Count == 0)
-//				continue;
-			
-			quickSort (theSortBuffer, 0, theSortBuffer.Count-1);
-			for (int i = 0; i < theSortBuffer.Count; i++)
-				theNewPackage.Add (theSortBuffer[i]);
-		}
-		allEquipsForSave = theNewPackage;
-		//print ("sorted count = "+ allEquipsForSave.Count);
+			//重新进行赋值
+			allEquipsForSave.Clear();
+			//for (int i = 0; i < theNewPackage.Count; i++)
+			//	allEquipsForSave.Add (theNewPackage[i]);
+			allEquipsForSave.AddRange(theNewPackage);
 		}
 		catch(Exception X) 
 		{
@@ -136,8 +138,6 @@ public class equipPackage : MonoBehaviour {
 		}
 	}
 		
-
-
 	//初始化
 	private void makeStart()
 	{
