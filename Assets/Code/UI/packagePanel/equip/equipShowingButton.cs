@@ -10,6 +10,14 @@ public class equipShowingButton : MonoBehaviour {
 	public static Image selectedEffectPictureSave;
 	public static Image selectedEffectPictureForSkill;
 	public Image selectedEffectPicture;
+	[HideInInspector]
+	public Image theEquipImage = null;
+
+	public void makeStart()
+	{
+		if(theEquipImage == null)
+		theEquipImage = this.GetComponent <Image> ();
+	}
 
 	//按下的时候的功能
 	public void makeClickForSelect()

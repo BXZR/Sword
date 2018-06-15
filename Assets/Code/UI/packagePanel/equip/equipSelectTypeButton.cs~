@@ -125,23 +125,13 @@ public class equipSelectTypeButton : MonoBehaviour {
 			int i = 0;
 			for (; i < es.Length; i++) 
 			{
-				es [i].theEquip = eqs [i];
-				if (es [i] is equipShopSelectButton)
-					(es [i] as equipShopSelectButton).theValueText.text = eqs [i].theSoulForThisEquip.ToString();
-				es [i].GetComponent <Image> ().sprite = systemValues.makeLoadSprite ("equipPicture/" + eqs [i].theEquipType + "/" + eqs [i].equipPictureName);
+				makeEquipShowingButton (es[i] , eqs[i]);
 			}
 			for (; i < eqs.Count; i++) 
 			{
-				GameObject theButton = GameObject.Instantiate<GameObject> (theShowingButtonProfab);
+				equipShowingButton theButton = GameObject.Instantiate<GameObject> (theShowingButtonProfab).GetComponent<equipShowingButton>();
 				theButton.transform.SetParent (theViewFather.transform);
-				//theButton.GetComponentInChildren<Text> ().text = "";
-				//theButton.GetComponentInChildren<Text> ().text = eqs [i].equipName;
-				equipShowingButton theButtonEQ = theButton.GetComponent <equipShowingButton> ();
-				theButtonEQ.theEquip = eqs [i];
-				if (theButtonEQ is equipShopSelectButton)
-					(theButtonEQ as equipShopSelectButton).theValueText.text = eqs [i].theSoulForThisEquip.ToString();
-				
-				theButton.GetComponent <Image> ().sprite = systemValues.makeLoadSprite ("equipPicture/" + eqs [i].theEquipType + "/" + eqs [i].equipPictureName);
+				makeEquipShowingButton (theButton , eqs[i]);
 				//因为有grid控件，所以这些都没有必要使用了
 			}
 			//print ("重建次数："+( i- es.Length));
@@ -152,10 +142,7 @@ public class equipSelectTypeButton : MonoBehaviour {
 			int i = 0;
 			for (; i < eqs.Count; i++) 
 			{
-				es [i].theEquip = eqs [i];
-				if (es [i] is equipShopSelectButton)
-					(es [i] as equipShopSelectButton).theValueText.text = eqs [i].theSoulForThisEquip.ToString();
-				es [i].GetComponent <Image> ().sprite = systemValues.makeLoadSprite ("equipPicture/" + eqs [i].theEquipType + "/" + eqs [i].equipPictureName);
+				makeEquipShowingButton (es[i] , eqs[i]);
 			}
 			for (; i>=0 && i < es.Length; i++) 
 			{
@@ -164,6 +151,17 @@ public class equipSelectTypeButton : MonoBehaviour {
 		}
 
 		makeSave ();
+	}
+
+	void makeEquipShowingButton(equipShowingButton theButtonEQ , equipBasics theEquip)
+	{
+		//equipShowingButton theButtonEQ = theButton.GetComponent <equipShowingButton> ();
+		theButtonEQ.makeStart ();
+		theButtonEQ.theEquip = theEquip;
+		if (theButtonEQ is equipShopSelectButton)
+			(theButtonEQ as equipShopSelectButton).theValueText.text =theEquip.theSoulForThisEquip.ToString();
+
+		theButtonEQ .theEquipImage.sprite  = systemValues.makeLoadSprite ("equipPicture/" + theEquip.theEquipType + "/" + theEquip.equipPictureName);
 	}
 
 

@@ -144,11 +144,7 @@ public class newMethodAttack : MonoBehaviour {
 			if (PB && PB.isAlive)//不允许鞭尸
 				toUSePlayerBasic.Add (PB );
 		}
-
-		//记录连击
-		if (thePlayer == systemValues.thePlayer)
-			systemValues.addHitCount (toUSePlayerBasic.Count);
-
+			
 		return toUSePlayerBasic;
 	}
 
@@ -174,6 +170,11 @@ public class newMethodAttack : MonoBehaviour {
 					thePlayer.OnAttack (toUSePlayerBasic [i], 0, false);//造成直接的伤害
 					extraDamageEffect (toUSePlayerBasic [i]);//添加额外的计算脚本，每个脚本的效果由脚本自己决定
 					//print(theEMY[i].name+" is being attacked");
+
+				//记录连击
+				if (thePlayer == systemValues.thePlayer)
+					systemValues.addHitCount (1);
+				
 			}
 		}
 

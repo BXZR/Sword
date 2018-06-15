@@ -15,6 +15,7 @@ public class equipShopSelectButton : equipShowingButton {
 	{
 		theValueText .text = this.theEquip.theSoulForThisEquip.ToString();
 	}
+		
 
 	//按下的时候的功能
 	public void makeClickForSelect()
