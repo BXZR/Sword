@@ -1219,6 +1219,8 @@ public class systemValues : MonoBehaviour {
 			return;
 		}
 		Invoke("makeGameMode" , 4f);
+
+		theHoverPanel = GameObject.Find("/CanvasForFight/theHoverPanel");
 	
 	}
 

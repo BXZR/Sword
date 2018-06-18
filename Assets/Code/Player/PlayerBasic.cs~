@@ -953,6 +953,7 @@ public class PlayerBasic : MonoBehaviour {
 			photonView = PhotonView.Get (this);
 		}
 
+		Effects = new List<effectBasic> ();
 		isStarted = true;
 	}
 

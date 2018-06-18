@@ -15,9 +15,18 @@ public class theHoverPanel : MonoBehaviour {
 	private string theNextSceneName = "allStartScene";
 	private float timer = 4f;//操作时间
 
+	void Start()
+	{
+		makeTheStartMode ();
+	}
+
 	public void makeTheStartMode()
 	{
-		
+		theShowStringText = this.GetComponentInChildren <Text> ();
+		theImage = this.GetComponent <Image> ();
+		theShowStringText.text = "";
+
+		StartCoroutine (startShow());
 	}
 
 	public void  makeTheEndMode(string thenformaiton = "" , bool isOver  = false  , string thisScnenName = "allStartScene" , string nextScnenName = "allStartScene")
@@ -33,13 +42,13 @@ public class theHoverPanel : MonoBehaviour {
 		if (!isOver)
 			systemValues.flashStoryErrorMove ();
 		
-		StartCoroutine (startShow());
+		StartCoroutine (endShow());
 	}
 
 
 	//=============================================================================//
 
-	IEnumerator startShow()
+	IEnumerator endShow()
 	{
 		theImage.CrossFadeAlpha (0,0.01f , true);
 		yield return new WaitForSeconds(0.01f);
@@ -49,5 +58,15 @@ public class theHoverPanel : MonoBehaviour {
 		yield return new WaitForSeconds(timer);
 		try{ UnityEngine.SceneManagement.SceneManager.LoadScene (theNextSceneName); }
 		catch { UnityEngine.SceneManagement.SceneManager.LoadScene ("allStartScene"); }
+	}
+
+	IEnumerator startShow()
+	{
+		yield return new WaitForSeconds(3.5f);
+		theImage.CrossFadeAlpha (1,0.01f , true);
+		yield return new WaitForSeconds(0.01f);
+		theImage.CrossFadeAlpha (0,2f, true);
+		yield return new WaitForSeconds(2f);
+		this.gameObject.SetActive (false);
 	}
 }
