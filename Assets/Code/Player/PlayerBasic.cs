@@ -81,6 +81,7 @@ public class PlayerBasic : MonoBehaviour {
 
 	public float ActerMoveSpeedPercent = 1f;//移动速度百分比，在移动的时候会有这个速度百分比加成
 	public float ActerAttackSpeedPercent = 1f;//攻击速度百分比，所有的动作的速度会受到这个限制
+	[Range (0.3f , 4f)]
 	public float ActerSpeedOverPervnet = 1f;//因为攻击速度和移动速度收到装备，负重等等因素的控制，所以很难受到外界控制，而这个参数就是这目标，最终加成
 
 	public float ActerShieldHp = 0;//护盾的生命值

@@ -1052,7 +1052,8 @@ public class systemValues : MonoBehaviour {
 	//反复跳转场景应该做一些清理工作
 	public static void makeSystemClean()
 	{
-		thePlayer.Effects.Clear ();
+		if(thePlayer)
+		    thePlayer.Effects.Clear ();
 		playModeNow = null;
 		gameModeIndexNow = 0;
 		sceneSelectFlash ();

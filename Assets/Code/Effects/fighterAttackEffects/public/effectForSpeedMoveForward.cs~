@@ -46,8 +46,9 @@ public class effectForSpeedMoveForward : effectBasic {
 			catch(System.Exception D){ Debug.Log (D.Message);}
 		}
 
-
-
+		//突进会受到当前移动速度的影响增加上限，但是不会跌破下限
+		if(thePlayer)
+		moveSpeed *= Mathf.Clamp (thePlayer.ActerMoveSpeedPercent, 1f, 3f);
 		Destroy (this,lifeTimerAll);
 	}
 
