@@ -10,13 +10,13 @@ public class gameStarter : MonoBehaviour {
 	public cameraUse theCamera;//摄像机跟随控制单元
 	public uiShowsForBasic theUIController;//UI刷新新信息控制单元
 	GameObject theFighter ;
-	public GameObject theForwardImage;//没有准备好就黑屏
-	public GameObject theDeadPanel;//记录下来这个引用
+
+	public GameObject theHoverPanel;//记录下来这个引用
 	private MusicController theMusicController;//音乐控制单元
+
 	void Start()
 	{
-		systemValues.theDeadPanel = theDeadPanel;
-		theDeadPanel.SetActive (false);
+		systemValues.theHoverPanel = theHoverPanel;
 		Invoke ("makeStart", 2.5f);
 	}
 
@@ -78,8 +78,6 @@ public class gameStarter : MonoBehaviour {
 		    theCamera.thePlayer = thePlayerPrivate;
 	     	thePlayerPrivate.GetComponent <move> ().makeStart ();
 		    theUIController.makeStart ( thePlayerPrivate);
-			theForwardImage.SetActive (false);//先不要删除，不知道什么时候还会用到
-		 
 	}
 
 	//额外整体控制

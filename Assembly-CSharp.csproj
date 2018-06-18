@@ -139,10 +139,10 @@
      <Compile Include="Assets\Code\UI\basicShow\effectFlashPanel.cs" />
      <Compile Include="Assets\Code\UI\basicShow\soulShowText.cs" />
      <Compile Include="Assets\Code\UI\basicShow\uiShowsForBasic.cs" />
-     <Compile Include="Assets\Code\UI\deadPanel\theDeadPanel.cs" />
      <Compile Include="Assets\Code\UI\messageBox\choiceMessageBox.cs" />
      <Compile Include="Assets\Code\UI\messageBox\theMessageBoxPanel.cs" />
      <Compile Include="Assets\Code\UI\messageBox\titleMessageBox.cs" />
+     <Compile Include="Assets\Code\UI\overOrStartHoverPanel\theHoverPanel.cs" />
      <Compile Include="Assets\Code\UI\packagePanel\equip\equipInformationPanel.cs" />
      <Compile Include="Assets\Code\UI\packagePanel\equip\equipPersonForAllInforamtion.cs" />
      <Compile Include="Assets\Code\UI\packagePanel\equip\equipRemakePanel.cs" />

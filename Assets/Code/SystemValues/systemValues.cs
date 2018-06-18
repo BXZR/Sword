@@ -1052,6 +1052,7 @@ public class systemValues : MonoBehaviour {
 	//反复跳转场景应该做一些清理工作
 	public static void makeSystemClean()
 	{
+		thePlayer.Effects.Clear ();
 		playModeNow = null;
 		gameModeIndexNow = 0;
 		sceneSelectFlash ();
@@ -1072,18 +1073,18 @@ public class systemValues : MonoBehaviour {
 
 	#region 死亡处理，也算是游戏的收尾工作
 	//死亡的面板
-	public static GameObject theDeadPanel;
+	public static GameObject theHoverPanel;
 	public static void  makeGameEnd(string theInformation)
 	{
-		if (theDeadPanel)
+		if (theHoverPanel)
 		{
 			isGamming = false;
 
-			theDeadPanel.SetActive (true);
+			theHoverPanel.SetActive (true);
 			if (!isInStory) 
 			{ 
 				//free模式之下直接返回开始界面就可以了
-				theDeadPanel.GetComponent <theDeadPanel> ().makeStart (theInformation, checkisOver ());
+				theHoverPanel.GetComponent <theHoverPanel> ().makeTheEndMode(theInformation, checkisOver ());
 			} 
 			else 
 			{
@@ -1094,7 +1095,7 @@ public class systemValues : MonoBehaviour {
 				if (!isWin)
 					messageTitleBoxShow ("胜败乃兵家常事，大侠请重新来过");
 				string thisSceneName = UnityEngine.SceneManagement.SceneManager.GetActiveScene ().name;
-				theDeadPanel.GetComponent <theDeadPanel> ().makeStart (theInformation, isWin ,thisSceneName , getNextStoryScene() );
+				theHoverPanel.GetComponent <theHoverPanel> ().makeTheEndMode(theInformation, isWin ,thisSceneName , getNextStoryScene() );
 			}
 		}
 			
