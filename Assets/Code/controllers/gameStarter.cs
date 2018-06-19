@@ -49,6 +49,7 @@ public class gameStarter : MonoBehaviour {
 			theFighter = GameObject.Instantiate<GameObject> (Resources.Load<GameObject> ("fighters/" + theFighterName));
 			theFighter.transform.position = startPoint[indexUse].transform.position;
 		}
+
 		Invoke("makeNetStart",1f);
 	}
 		
@@ -75,6 +76,10 @@ public class gameStarter : MonoBehaviour {
 		    theCamera.thePlayer = thePlayerPrivate;
 	     	thePlayerPrivate.GetComponent <move> ().makeStart ();
 		    theUIController.makeStart ( thePlayerPrivate);
+
+			//开始阶段给加一个无敌buff
+			theFighter.gameObject.AddComponent<wudi>();
+
 	}
 
 	//额外整体控制

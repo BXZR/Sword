@@ -664,7 +664,7 @@ public class PlayerBasic : MonoBehaviour {
 		StringBuilder theString = new StringBuilder ();
 		theString.Append ("生命值上限  ");
 		theString.Append ((int)this.ActerHpMax);
-		theString.Append ("");
+		theString.Append ("  ");
 		theString.Append ("斗气值上限  ");
 		theString.Append ((int)this.ActerSpMax) ;
 		theString.Append ("\n");
