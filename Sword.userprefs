@@ -1,20 +1,23 @@
 ﻿<Properties StartupItem="Assembly-CSharp.csproj">
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Unity.Instance.Unity Editor" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Code\Player\PlayerBasic.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Code\UI\systemPanel\Skill\skillPanelController.cs">
     <Files>
       <File FileName="Assets\Code\UI\packagePanel\equip\equipSelectTypeButton.cs" Line="1" Column="1" />
       <File FileName="Assets\Code\UI\packagePanel\equip\equipShowingButton.cs" Line="1" Column="1" />
       <File FileName="Assets\Code\UI\shop\equipShopSelectButton.cs" Line="1" Column="1" />
       <File FileName="Assets\Code\UI\overOrStartHoverPanel\theHoverPanel.cs" Line="1" Column="1" />
-      <File FileName="Assets\Code\SystemValues\systemValues.cs" Line="1" Column="1" />
-      <File FileName="Assets\Code\controllers\gameStarter.cs" Line="64" Column="42" />
+      <File FileName="Assets\Code\controllers\gameStarter.cs" Line="1" Column="1" />
       <File FileName="Assets\Code\UI\basicShow\effectFlashPanel.cs" Line="1" Column="1" />
       <File FileName="Assets\Code\Player\PlayerBasic.cs" Line="664" Column="50" />
-      <File FileName="Assets\Code\Effects\fighterAttackEffects\public\effectForSpeedMoveForward.cs" Line="7" Column="1" />
-      <File FileName="Assets\Code\Effects\fighterAttackEffects\public\wudi.cs" Line="20" Column="38" />
-      <File FileName="Assets\Code\Effects\fighterAttackEffects\public\jifei.cs" Line="101" Column="1" />
+      <File FileName="Assets\Code\Effects\fighterAttackEffects\public\effectForSpeedMoveForward.cs" Line="1" Column="1" />
+      <File FileName="Assets\Code\Effects\fighterAttackEffects\public\wudi.cs" Line="26" Column="3" />
+      <File FileName="Assets\Code\Effects\fighterAttackEffects\public\jifei.cs" Line="1" Column="1" />
       <File FileName="Assets\Code\Effects\fighterAttackEffects\public\killerGeter.cs" Line="1" Column="1" />
-      <File FileName="Assets\Code\Effects\fighterAttackEffects\knife\effectMonk.cs" Line="96" Column="2" />
+      <File FileName="Assets\Code\Effects\fighterAttackEffects\knife\effectMonk.cs" Line="79" Column="3" />
+      <File FileName="Assets\Code\SystemValues\systemValues.cs" Line="442" Column="16" />
+      <File FileName="Assets\Code\UI\shop\theShop.cs" Line="41" Column="3" />
+      <File FileName="Assets\Code\Player\attackLink.cs" Line="535" Column="24" />
+      <File FileName="Assets\Code\UI\systemPanel\Skill\skillPanelController.cs" Line="111" Column="2" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

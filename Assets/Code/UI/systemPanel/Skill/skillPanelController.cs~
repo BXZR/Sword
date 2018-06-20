@@ -112,8 +112,9 @@ public class skillPanelController : MonoBehaviour {
 	void makeEffectInformation(StringBuilder theInformationString , StringBuilder theSkillInformationString , effectBasic theEffect , bool isSelf = true)
 	{
 		string colorUse = isSelf == true ?  systemValues.SkillColorForSelf : systemValues.SkillColorForEnemy;
-
-		theInformationString.Append ("命中可以触发【");
+		string theTitle = isSelf == true ? "发动可触发" : "命中可触发";
+		theInformationString.Append (theTitle);
+		theInformationString.Append ("【");
 		theInformationString.Append (colorUse);
 		theInformationString.Append (theEffect.theEffectName);
 		theInformationString.Append (systemValues.colorEnd);

@@ -40,6 +40,43 @@ public class theShop : MonoBehaviour {
 		theSoundController.makeSoundShow (0);
 	}
 
+	//这个游戏什么玩意都可以透支
+	public void buyTheEquipHard()
+	{
+		if (systemValues.theEquipNowInShop == null)
+		{
+			systemValues.messageTitleBoxShow ("尚未选定装备");
+			return;
+		}
+
+		if (systemValues.soulCount >= systemValues.theEquipNowInShop.theSoulForThisEquip)
+			buyTheEquip ();
+		else
+		{
+			int extraSoul = systemValues.theEquipNowInShop.theSoulForThisEquip - systemValues.soulCount;
+			bool canChange = true;
+			string changeInformation = systemValues.HpSpToLinginformation (extraSoul  , out  canChange ); 
+			if (canChange) 
+			{
+				systemValues.choiceMessageBoxShow ("透支购买" , "需要透支\n"+changeInformation +"\n是否透支购买？" , true , new MesageOperate(hardChange));
+			} 
+			else 
+			{
+				systemValues.messageTitleBoxShow (changeInformation);
+			}
+			
+		}
+	}
+
+
+	void hardChange()
+	{
+		int extraSoul = systemValues.theEquipNowInShop.theSoulForThisEquip - systemValues.soulCount;
+		systemValues.HpSpToLing (extraSoul);
+		buyTheEquip ();
+	}
+		
+
 	public void makeFlash()
 	{
 		systemValues.theEquipNowInShop = null;

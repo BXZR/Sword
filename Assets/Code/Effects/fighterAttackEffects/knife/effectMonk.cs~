@@ -84,12 +84,12 @@ public class effectMonk :effectBasic{
 		if (attackLinkIn && attackLinkIn.theAttackLinkLv >= 3)
 		{
 			//print ("ad");
-			maxEMYCountForUse += 1;
+			basicDamage *= 1.15f;
 		}
 	}
 	public override string getEffectAttackLinkLVExtra ()
 	{
-		return "等级奖励：等级超过3级的招式触发此效果时\n最大层数追加1层";
+		return "等级奖励：等级超过3级的招式触发此效果时\n每一层的治疗效果提升15%";
 	}
 
 }

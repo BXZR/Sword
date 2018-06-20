@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class wudi : effectBasic {
+
+	int  count = 0;
+	int countMax = 2;
 	void Start ()
 	{
 		Init ();
@@ -10,8 +13,13 @@ public class wudi : effectBasic {
 
 	public override void OnBeAttack (float damage = 0)
 	{
-		if (thePlayer)
+		if (thePlayer) 
+		{
 			thePlayer.ActerHp += damage;
+			count++;
+			if (count >= countMax)
+			Destroy (this);
+		}
 	}
 
 	public override void Init ()
@@ -20,7 +28,7 @@ public class wudi : effectBasic {
 		lifeTimerAll = 8f;//每一个段时间才能够使用这个伤害
 		timerForEffect = 8f; 
 		theEffectName = "无敌金身";
-		theEffectInformation ="受到伤害会直接返还损失的生命";
+		theEffectInformation ="受到伤害会直接返还损失的生命,最多抵挡两次攻击";
 		makeStart ();
 		Destroy (this,lifeTimerAll);
 	}
@@ -28,5 +36,10 @@ public class wudi : effectBasic {
 	{
 		addTimer ();
 		//print ("timer add = "+ timerForAdd);
+	}
+
+	public override string getOnTimeFlashInformation ()
+	{
+		return this.theEffectName +"\n("+count+"/"+countMax + ")";
 	}
 }

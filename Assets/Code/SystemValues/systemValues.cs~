@@ -427,7 +427,7 @@ public class systemValues : MonoBehaviour {
 	public static string SkillColorForSelf = "<color=#FFF809>";//橙色
 	public static string SkillColorForEnemy = "<color=#92FFFF>";//绿色
 	public static string SkillExtraColor = "<color=#AFFF3A>";//标记淡绿色
-	public static string SkillColorForLink = "<color=#3225FD>";//绿色
+	public static string SkillColorForLink = "<color=#EE55DD>";//粉色
 	public static string playerNameColor = "<color=#00FF00>" ;//其实也是黄色
 	public static string playerIntroductionColor = "<color=#FF2400>";//应该是绿色
 	public  static string equipAddColor = "<color=#009100>";//装备相比增加的内容
@@ -599,6 +599,52 @@ public class systemValues : MonoBehaviour {
 			systemValues.soulCount++;
 		}
 	}
+	//完全透支转化介绍
+	public static string HpSpToLinginformation(int extraLing , out bool canchange)
+	{
+		int spChange = (int )systemValues.thePlayer.ActerSp / 40;
+		float spUse = 0f;
+		if (spChange >= extraLing) 
+		{
+			canchange = true;
+			spUse = extraLing * 40;
+			return "灵力：" + spUse;
+		}
+		else
+		{
+			spUse = spChange * 40;
+			int hpExtraCount = extraLing - spChange;
+			float HpUse = hpExtraCount * 35;
+			if (HpUse > systemValues.thePlayer.ActerHp) 
+			{
+				canchange = false;
+				return "到达透支极限，不可转化";
+			}
+			canchange = true;
+			return   "灵力：" + spUse +"\n生命： "+ HpUse;
+		}
+	}
+	//真正的转化过程
+	public static void HpSpToLing(int extraLing)
+	{
+		systemValues.soulCount += extraLing;
+
+		int spChange = (int)systemValues.thePlayer.ActerSp / 40;
+
+		//开始透支
+		float spUse = extraLing * 40;
+		if (spChange >= extraLing) 
+		{
+			systemValues.thePlayer.ActerSp -= spUse;
+		}
+		else
+		{
+			int hpExtraCount = extraLing - spChange;
+			float HpUse =hpExtraCount * 35;
+			systemValues.thePlayer.ActerHp -= HpUse;
+		}
+	}
+
 	#endregion
 
 	#region 消息框操作
