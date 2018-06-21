@@ -7,6 +7,10 @@ public class theShop : MonoBehaviour {
 	//这是真正的商店逻辑
 	public equipPackage thePackage;
 	private  panelSoundController theSoundController;
+	public equiptype theShopTypeNow = equiptype.all;
+	private  int pageIndex = 0;//装备商店东西太多，应该分页显示
+	private  int countPerPage = 15;//每一页显示的装备数量
+
 	void Start()
 	{
 		thePackage = this.GetComponent <equipPackage> ();
@@ -18,6 +22,35 @@ public class theShop : MonoBehaviour {
 		try{makeFlash ();}
 		catch(System.Exception E) {print ("error!\n"+E.Message);}
 	}
+
+
+
+	//分页获取装备--------------------------------------------------------------------------------------
+	public List<equipBasics> getEquipWithPage(equiptype  theTypeSelect, int pageMove = 0 , bool flashIndex = true )
+	{
+		if (flashIndex)
+			pageIndex = 0;
+		
+		theShopTypeNow = theTypeSelect;
+
+		thePackage.sortThePackage ();
+		List<equipBasics> eqs = thePackage.allEquipsForSave.FindAll (a => a != null && a.isUsing == false && ( a.theEquipType == theTypeSelect || theTypeSelect == equiptype.all));
+
+		int lastIndex = pageIndex + countPerPage;
+		int getLength = lastIndex < eqs.Count ? countPerPage : (eqs.Count - pageIndex);
+
+		List<equipBasics> eqs2 = eqs.GetRange (pageIndex , getLength);
+
+		pageIndex = lastIndex;
+		if (lastIndex >= eqs.Count || lastIndex < 0)
+		{
+			//print ("flash 0");
+			pageIndex = 0;
+		}
+		return eqs2;
+	}
+
+	//----------------------------------------------------------------------------------------------------
 
 	public void buyTheEquip()
 	{

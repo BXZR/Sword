@@ -24,6 +24,8 @@ public class equipPackage : MonoBehaviour {
 	public equipBasics thEquipForGod = null;//当前装备上的神器
 	public AudioClip theGetEquipSoundClip = null;//获得装备的时候播放的音效
 	public Transform extraPackage ;//额外初始化包裹
+
+
 //下面两个方法可能会有引用回收的问题，暂时先不用=====================================================================
 //根据类别查询装备
 //如果返回所有已经获得的装备，就直接访问allEquipsForSave
@@ -73,7 +75,6 @@ public class equipPackage : MonoBehaviour {
 		}
 
 	}
-
 
 	//因为网络传输的传输的内容是需要传参数的，所以尽可能希望这个参数能足够简单
 	//这就需要考虑一些限制的设计了

@@ -1,23 +1,15 @@
 ﻿<Properties StartupItem="Assembly-CSharp.csproj">
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Unity.Instance.Unity Editor" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Code\UI\systemPanel\Skill\skillPanelController.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Code\UI\shop\trastPanelForShop.cs">
     <Files>
-      <File FileName="Assets\Code\UI\packagePanel\equip\equipSelectTypeButton.cs" Line="1" Column="1" />
-      <File FileName="Assets\Code\UI\packagePanel\equip\equipShowingButton.cs" Line="1" Column="1" />
-      <File FileName="Assets\Code\UI\shop\equipShopSelectButton.cs" Line="1" Column="1" />
-      <File FileName="Assets\Code\UI\overOrStartHoverPanel\theHoverPanel.cs" Line="1" Column="1" />
-      <File FileName="Assets\Code\controllers\gameStarter.cs" Line="1" Column="1" />
-      <File FileName="Assets\Code\UI\basicShow\effectFlashPanel.cs" Line="1" Column="1" />
-      <File FileName="Assets\Code\Player\PlayerBasic.cs" Line="664" Column="50" />
-      <File FileName="Assets\Code\Effects\fighterAttackEffects\public\effectForSpeedMoveForward.cs" Line="1" Column="1" />
-      <File FileName="Assets\Code\Effects\fighterAttackEffects\public\wudi.cs" Line="26" Column="3" />
-      <File FileName="Assets\Code\Effects\fighterAttackEffects\public\jifei.cs" Line="1" Column="1" />
-      <File FileName="Assets\Code\Effects\fighterAttackEffects\public\killerGeter.cs" Line="1" Column="1" />
-      <File FileName="Assets\Code\Effects\fighterAttackEffects\knife\effectMonk.cs" Line="79" Column="3" />
-      <File FileName="Assets\Code\SystemValues\systemValues.cs" Line="442" Column="16" />
-      <File FileName="Assets\Code\UI\shop\theShop.cs" Line="41" Column="3" />
-      <File FileName="Assets\Code\Player\attackLink.cs" Line="535" Column="24" />
-      <File FileName="Assets\Code\UI\systemPanel\Skill\skillPanelController.cs" Line="111" Column="2" />
+      <File FileName="Assets\Code\UI\shop\theShop.cs" Line="47" Column="6" />
+      <File FileName="Assets\Code\UI\packagePanel\equip\equipShowingButton.cs" Line="42" Column="30" />
+      <File FileName="Assets\Code\UI\packagePanel\equip\equipSelectTypeButton.cs" Line="91" Column="16" />
+      <File FileName="Assets\Code\UI\shop\equipShopSelectButton.cs" Line="34" Column="28" />
+      <File FileName="Assets\Code\UI\shop\equipInformationPanelInShop.cs" Line="6" Column="1" />
+      <File FileName="Assets\Code\UI\packagePanel\thePackagePanelShow.cs" Line="142" Column="1" />
+      <File FileName="Assets\Code\UI\shop\trastPanelForShop.cs" Line="64" Column="34" />
+      <File FileName="Assets\Code\Equips\equipBasics.cs" Line="388" Column="70" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

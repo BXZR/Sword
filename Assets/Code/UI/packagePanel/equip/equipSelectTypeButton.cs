@@ -26,12 +26,10 @@ public class equipSelectTypeButton : MonoBehaviour {
 			else
 				theButtonSaveForPlayer.makeClickWithType ();
 		} 
+
 		if (theButtonSaveForShop) 
 		{
-			if (theButtonSaveForShop.isAllType)
-				theButtonSaveForShop.makeClickWithoutTypeFromShop ();
-			else
-				theButtonSaveForShop.makeClickWithTypeFromShop ();
+			theButtonSaveForShop.makeClickWithTypeFromShop ();
 		}
 
 	}
@@ -62,6 +60,7 @@ public class equipSelectTypeButton : MonoBehaviour {
 		//eqs = thePackage.getEquipWithType (eqs , theTypeSelect);
 		makeShow (eqs);
 		equipShowingButton.flashPicture ();
+		makeSave ();
 	}
 
 	public void makeClickWithoutType()
@@ -75,7 +74,10 @@ public class equipSelectTypeButton : MonoBehaviour {
 		List<equipBasics> eqs = thePackage.allEquipsForSave.FindAll(a => a!= null && a.isUsing == false && a.theEquipType != equiptype.equipSkill  );
 		makeShow (eqs);
 		equipShowingButton.flashPicture ();
+		makeSave ();
 	}
+
+
 
 	public void makeClickWithTypeFromShop()
 	{
@@ -83,28 +85,37 @@ public class equipSelectTypeButton : MonoBehaviour {
 		theShop  sp = this.GetComponentInParent <theShop> ();
 		if (sp && sp.thePackage)
 		{
-			equipPackage thePackage = sp.thePackage;
-			thePackage.sortThePackage ();
-			List<equipBasics> eqs = thePackage.allEquipsForSave.FindAll (a => a != null && a.isUsing == false && a.theEquipType == theTypeSelect);
-			//eqs = thePackage.getEquipWithType (eqs , theTypeSelect);
+			List<equipBasics> eqs = sp.getEquipWithPage(theTypeSelect , 0);
+			makeShow (eqs);
+			equipShowingButton.flashPicture ();
+			makeSave ();
+		}
+	}
+
+	public void makeClickWithTypeWithShopTypeFront()
+	{
+		//print ("select");
+		theShop  sp = this.GetComponentInParent <theShop> ();
+		if (sp && sp.thePackage)
+		{
+			List<equipBasics> eqs = sp.getEquipWithPage(sp.theShopTypeNow , 1 , false);
 			makeShow (eqs);
 			equipShowingButton.flashPicture ();
 		}
 	}
 
-	public void makeClickWithoutTypeFromShop()
+	public void makeClickWithTypeWithShopTypeBack()
 	{
-		//print ("select all");
+		//print ("select");
 		theShop  sp = this.GetComponentInParent <theShop> ();
 		if (sp && sp.thePackage)
 		{
-			equipPackage thePackage = sp.thePackage;
-			thePackage.sortThePackage ();
-			List<equipBasics> eqs = thePackage.allEquipsForSave.FindAll (a => a != null && a.isUsing == false);
+			List<equipBasics> eqs = sp.getEquipWithPage(sp.theShopTypeNow , -1 , false);
 			makeShow (eqs);
 			equipShowingButton.flashPicture ();
 		}
 	}
+
 
 	//-------------------------------------------------------------------------------------------------------------------
 
@@ -149,8 +160,6 @@ public class equipSelectTypeButton : MonoBehaviour {
 				Destroy (es [i].gameObject);
 			}
 		}
-
-		makeSave ();
 	}
 
 	void makeEquipShowingButton(equipShowingButton theButtonEQ , equipBasics theEquip)

@@ -7,7 +7,7 @@ using System.Text;
 
 //五种装备类型分别对应 头部 身体 武器 鞋子 饰品
 //equipSkill对应注灵，这不是真正的装备，而是装备的装备
-public enum equiptype {head,body,weapon,shoe,extra,equipSkill,god}
+public enum equiptype {head,body,weapon,shoe,extra,equipSkill,god,all}
 public class equipBasics : MonoBehaviour {
 
 	//这个类是装备，物品等等相关东西的基类
@@ -523,7 +523,7 @@ public class equipBasics : MonoBehaviour {
 		theString.Append (newOne.equipName);
 		if (oldOne != null) 
 		{
-			theString.Append ("  对比  ");
+			theString.Append ("  对比  已装备的");
 			theString.Append (oldOne.equipName);
 		}
 		theString.Append ("\n");

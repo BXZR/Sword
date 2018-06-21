@@ -31,6 +31,7 @@ public class equipShopSelectButton : equipShowingButton {
 			systemValues.theEquipNowInShop = this.theEquip;
 			//print (systemValues.theEquipNow.equipName +"is lated selected");
 			equipInformationPanelInShop.changeEquipToIntroduct (this.theEquip);
+			trastPanelForShop.makeTrast (this.theEquip);
 			makePictureShow(1);
 		}
 		else 
