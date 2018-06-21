@@ -59,16 +59,11 @@ public class trastPanelForShop : MonoBehaviour {
 			case equiptype.extra:
 				{
 					if (theEquipPackage.thEquipForExtraUsed1 != null)
-					{
-						if (theEquipPackage.thEquipForExtraUsed2 != null) //两个饰品都装备了就跟第一个做对比
-							return equipBasics.equipTrast (theEquip, theEquipPackage.thEquipForExtraUsed1);
-						else //第二件饰品如果没有装备那么直接就不用对比
-							return equipBasics.equipTrast (theEquip, theEquipPackage.thEquipForExtraUsed2);
-					} 
-					else 
-					{    //第一件饰品已经有了空缺就直接用这个空缺就好了
-						return  equipBasics.equipTrast (theEquip, theEquipPackage.thEquipForExtraUsed1);
-					}
+					//第一件饰品已经有了空缺就直接用
+							return  equipBasics.equipTrast (theEquip, theEquipPackage.thEquipForExtraUsed1);
+				   //两个饰品都装备了就跟第一个做对比
+				    else
+						return equipBasics.equipTrast (theEquip, theEquipPackage.thEquipForExtraUsed2);
 				}
 				break;
 			case equiptype.god:
