@@ -165,6 +165,7 @@ public class attackLink : MonoBehaviour {
 
 		effectTypeForEMY = System.Type.GetType (conNameToEMY);
 		effectTypeForSelf = System.Type.GetType (conNameToSELF);
+		canculateCost ();
 	}
 
 	public virtual  void makeAttackArray()//只在初始化的时候或者需要重新构建联机字符串的时候使用

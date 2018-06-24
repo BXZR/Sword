@@ -31,7 +31,7 @@ public class skillInformationPanel : MonoBehaviour {
 		{
 			theLinkNow.canculateCost ();
 			theLinkNow.makeAttackLinkUp ();
-			theShowButton.attackLinkBasicInformation = theLinkNow.getInformation (false);
+			theShowButton.makeFlash ();
 			makeShow ();//重新显示内容
 		}
 	}
@@ -57,11 +57,10 @@ public class skillInformationPanel : MonoBehaviour {
 		theSkillEffectInformationText.text = theShowButton.basicEffect + "\n\n" + theShowButton.effectInformation;
 		theSkillLvUpInformationText.text = theShowButton.theAttackkLinkLvUpInformation;
 
-		if (string.IsNullOrEmpty (theSkillEffectInformationText.text))
+		if (string.IsNullOrEmpty (theSkillEffectInformationText.text.Trim()))
 			theSkillEffectInformationText.text = "此招式无可触发特效";
-		//theAttacklink.canculateCost ();
-		//attackLinkBasicInformation = theAttacklink.getInformation ();
-		//theShowText.text = attackLinkBasicInformation + "\n" + 
+		if (string.IsNullOrEmpty (theSkillLvUpInformationText.text.Trim()))
+			theSkillLvUpInformationText.text = "此招式无法升级";
 
 	}
 }

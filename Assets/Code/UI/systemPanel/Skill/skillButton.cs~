@@ -28,11 +28,20 @@ public class skillButton : MonoBehaviour {
 	//可能有一些特殊的初始化需要按照一定顺序进行
 	public void makeStart()
 	{
+		makeFlash ();
+	}
+
+	public void makeFlash()
+	{
 		theAttackLinkName = theAttacklink.skillName;
 		if (theAttacklink.canLvup)
 			theAttackLinkName += "\nLV." + theAttacklink.theAttackLinkLv;
 		else
 			theAttackLinkName += "\n[不可升级]";
+
+		attackLinkBasicInformation = theAttacklink.getInformation (false);
+		theAttackkLinkLvUpInformation = theAttacklink.getLvUpInfotrmation ();
+
 	}
 
 	public void makeShow()
