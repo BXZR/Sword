@@ -170,6 +170,7 @@
      <Compile Include="Assets\Code\UI\systemPanel\Operate\SliderForSystemSetting.cs" />
      <Compile Include="Assets\Code\UI\systemPanel\Operate\SliderForVolumn.cs" />
      <Compile Include="Assets\Code\UI\systemPanel\Skill\skillButton.cs" />
+     <Compile Include="Assets\Code\UI\systemPanel\Skill\skillInformationPanel.cs" />
      <Compile Include="Assets\Code\UI\systemPanel\Skill\skillPanelController.cs" />
      <Compile Include="Assets\Code\UI\systemPanel\SystemUIController.cs" />
      <Compile Include="Assets\Code\UI\wuling\theExtraShapButton.cs" />

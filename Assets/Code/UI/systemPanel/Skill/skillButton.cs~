@@ -8,6 +8,10 @@ public class skillButton : MonoBehaviour {
   //技能效果界面的选择按钮
   //也是生成的过程中保存各种显示信息的地方
 
+	//招式名称
+	public string theAttackLinkName = "";
+	//招式升级信息
+	public string theAttackkLinkLvUpInformation = "";
 	//基础的连招信息
 	public string attackLinkBasicInformation = "";
 	//是否触发特效
@@ -17,36 +21,22 @@ public class skillButton : MonoBehaviour {
 	//招式等级特效奖励
 	public string effectExtraWithAttackLinkLV =  "";
 	//用来显示的文本
-	public Text theShowText;
+	public skillInformationPanel theInformationPanel;
 	//记录连招引用
 	public attackLink theAttacklink;
 
 	//可能有一些特殊的初始化需要按照一定顺序进行
 	public void makeStart()
 	{
-		if (theAttacklink.canLvup == false)
-			Destroy (this.transform.Find("Lvup").gameObject);
+		theAttackLinkName = theAttacklink.skillName;
+		if (theAttacklink.canLvup)
+			theAttackLinkName += "\nLV." + theAttacklink.theAttackLinkLv;
+		else
+			theAttackLinkName += "\n[不可升级]";
 	}
 
 	public void makeShow()
 	{
-		theAttacklink.canculateCost ();
-		attackLinkBasicInformation = theAttacklink.getInformation ();
-		theShowText.text = attackLinkBasicInformation + "\n" + basicEffect + "\n\n" + effectInformation;
-
+		theInformationPanel.SetAttackLink (this.theAttacklink , this);
 	}
-
-	//升级按钮对应的方法
-	public void makeLvUp()
-	{
-		if (theAttacklink)
-		{
-			theAttacklink.canculateCost ();
-			theAttacklink.makeAttackLinkUp ();
-			attackLinkBasicInformation = theAttacklink.getInformation ();
-			makeShow ();//重新显示内容
-		}
-		
-	}
-
 }

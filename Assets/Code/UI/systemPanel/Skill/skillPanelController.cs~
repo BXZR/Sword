@@ -13,7 +13,7 @@ public class skillPanelController : MonoBehaviour {
 	//生成的按钮摆放的位置
 	public Transform theButtonFather;
 	//显示信息的Text
-	public Text theInformationText;
+	public skillInformationPanel theInformationPanel;
 	//是否已经建立建立一次就可以了
 	private bool isBuilt = false;
 	//保存下来的引用
@@ -55,16 +55,17 @@ public class skillPanelController : MonoBehaviour {
 			for (int i = 0; i < buttons.Length; i++)
 				Destroy (buttons[i].gameObject);
 			
-			theInformationText.text = "";
+
 			attackLink[] theAttacklinks = systemValues.thePlayer.GetComponentsInChildren < attackLink > ();
 			for (int i = 0; i < theAttacklinks.Length; i++) 
 			{
 				GameObject theButton = GameObject.Instantiate<GameObject> (theSkillButtonProfab);
 				theButton.transform.SetParent (theButtonFather.transform);
 				skillButton theSkillInformation = theButton.GetComponent <skillButton> ();
-				theSkillInformation.attackLinkBasicInformation = theAttacklinks [i].getInformation ();
+				theSkillInformation.attackLinkBasicInformation = theAttacklinks [i].getInformation ( false);
 				theSkillInformation.basicEffect = getAttacklinkEffectInformation (theAttacklinks [i], theButton, out theSkillInformation.effectInformation);
-				theSkillInformation.theShowText = theInformationText;
+				theSkillInformation.theAttackkLinkLvUpInformation = theAttacklinks [i].getLvUpInfotrmation ();
+				theSkillInformation.theInformationPanel = theInformationPanel;
 				theSkillInformation.theAttacklink = theAttacklinks[i];
 				theButton.GetComponentInChildren<Text> ().text = theAttacklinks [i].skillName;
 				theSkillInformation.makeStart ();

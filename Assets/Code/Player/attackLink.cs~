@@ -477,7 +477,7 @@ public class attackLink : MonoBehaviour {
 
 
 
-	public string getInformation(bool isSimple = false ,  bool withName = true)//获取连招的信息
+	public string getInformation(bool withName = true)//获取连招的信息
 	{
 		StringBuilder theString = new StringBuilder ();
 		if (withName)
@@ -488,7 +488,7 @@ public class attackLink : MonoBehaviour {
 			theString.Append ("\n");
 		}
 
-		if (canLvup)
+		if (withName && canLvup)
 		{
 			theString.Append( "招式等级：");
 			theString.Append( this.theAttackLinkLv);
@@ -530,7 +530,6 @@ public class attackLink : MonoBehaviour {
 			theString.Append (this.extraDamage.ToString ("f0"));
 			theString.Append ("）\n");
 		}
-			
 
 		theString.Append ("触发方式：");
 		for (int i = 0; i < attackLinkStringSplited.Length; i++) 
@@ -544,16 +543,20 @@ public class attackLink : MonoBehaviour {
 		theString.Append ("斗气消耗：");
 		theString.Append (this.spUse);
 		theString.Append ("\n");
+		return theString.ToString ();
+	}
 
-		if( !isSimple && canLvup  )
+	public string getLvUpInfotrmation()
+	{
+		StringBuilder theString = new StringBuilder ();
+		if(  canLvup  )
 		{
-			theString.Append("\n");
 			if (this.theAttackLinkLv < this.theAttakLinkLvMax) 
 			{
 				theString.Append("升级所需灵力：");
 				theString.Append(this.lvupCost);
 				theString.Append("\n");
-				theString.Append("升级增加额外伤害：");
+				theString.Append("升级增加伤害：");
 				theString.Append((int)this.extraDamageAdd );
 				theString.Append("\n");
 			}
@@ -570,7 +573,6 @@ public class attackLink : MonoBehaviour {
 				theString.Append("额外伤害\n");
 			}
 		}
-
 		return theString.ToString ();
 	}
 

@@ -38,7 +38,7 @@ public class effectFlashPanel : MonoBehaviour {
 	{
 		flashItem = new List<ButtonEffectflasher> ();
 		toDestroy = new List<ButtonEffectflasher> ();
-		InvokeRepeating ("updateBuffShow" , 0f , systemValues.updateTimeWait );	
+		InvokeRepeating ("updateBuffShow" , 1f , systemValues.updateTimeWait );	
 	}
 
 
