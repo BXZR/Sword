@@ -178,6 +178,11 @@ public class effectFlashPanel : MonoBehaviour {
 		}
 		return false;
 	}
+
+	void OnDestroy()
+	{
+		ButtonEffectflasher.ButtonEffectflasherBuffer.Clear ();
+	}
 	
 
 }

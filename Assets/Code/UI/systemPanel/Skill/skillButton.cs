@@ -46,6 +46,7 @@ public class skillButton : MonoBehaviour {
 
 	public void makeShow()
 	{
+		makeFlash ();
 		theInformationPanel.SetAttackLink (this.theAttacklink , this);
 	}
 }

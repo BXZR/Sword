@@ -40,6 +40,8 @@ public class attackLink : MonoBehaviour {
 	public float extraDamage = 0;//这个招式的额外伤害，所有的招式都拥有游戏人物基本的攻击力加成，然后技能本身有一个额外的伤害加成
 	private float excieceExtraDamage = 0;//这个招式的熟练度加成，总是使用这个招式，熟练度高伤害也会提高
 	public float spUse =0;//使用这个招式所需要的能量值
+	public float excieceExtraDamageAddLvUp = 12;//这个招式的熟练度加成升级的时候增加的熟练度
+	public float excieceExtraDamageMax = 100;//熟练度额外伤害的上限
 	//public float area = 1f;//这个招式的作用范围
 	//public bool isAOE =false;//这是不是一个范围伤害（暂定范围伤害就是攻击身边所有的单位，相交球）
 
@@ -225,12 +227,14 @@ public class attackLink : MonoBehaviour {
 		{
 			this.extraDamage += extraDamageAdd;
 			this.theAttackLinkLv++;
+			excieceExtraDamage += excieceExtraDamageAddLvUp;
 		}
 		else
 		{
 			extraDamageAdd = adderWhenLvtoMax;
 			this.extraDamage += extraDamageAdd;
 		}
+
 	}
 
 	//计算招式升级需要的魂元数量
@@ -364,7 +368,7 @@ public class attackLink : MonoBehaviour {
 
 
 			excieceExtraDamage += thePlayer.theLearnSpeed ;//熟练度增加，额外的熟练度招式伤害
-			float damageFromExcieseUse = Mathf.Clamp(excieceExtraDamage / 10 , 0f , 100f);//熟练度加成
+			float damageFromExcieseUse = Mathf.Clamp(excieceExtraDamage / 10 , 0f , excieceExtraDamageMax);//熟练度加成
 			thePlayer.extraDamageForAnimation = (this.extraDamage + damageFromExcieseUse );//用这个招式能够造成的额外伤害
 			if(thePlayer.theAudioPlayer!= null)
 			thePlayer .theAudioPlayer .audioNow = this.audioWhenAttack;//确定命中的时候的音效
@@ -541,9 +545,17 @@ public class attackLink : MonoBehaviour {
 		}
 		theString.Append ("\n");
 
+		theString.Append ("熟练度：");
+		theString.Append (Mathf.Clamp(excieceExtraDamage , 0f , excieceExtraDamageMax *10));
+		theString.Append ("\n");
+
 		theString.Append ("斗气消耗：");
 		theString.Append (this.spUse);
 		theString.Append ("\n");
+
+
+
+
 		return theString.ToString ();
 	}
 
@@ -554,11 +566,13 @@ public class attackLink : MonoBehaviour {
 		{
 			if (this.theAttackLinkLv < this.theAttakLinkLvMax) 
 			{
-				theString.Append("升级所需灵力：");
+				theString.Append("灵力开销：");
 				theString.Append(this.lvupCost);
 				theString.Append("\n");
-				theString.Append("升级增加伤害：");
+				theString.Append("伤害增加：");
 				theString.Append((int)this.extraDamageAdd );
+				theString.Append("\n熟练度增加：");
+				theString.Append((int)this.excieceExtraDamageAddLvUp );
 				theString.Append("\n");
 			}
 			else
