@@ -28,7 +28,7 @@ public class wudi : effectBasic {
 		lifeTimerAll = 8f;//每一个段时间才能够使用这个伤害
 		timerForEffect = 8f; 
 		theEffectName = "无敌金身";
-		theEffectInformation ="受到伤害会直接返还损失的生命,最多抵挡两次攻击";
+		theEffectInformation ="受到伤害会直接返还损失的生命,最多抵挡两次攻击\n最多持续8秒";
 		makeStart ();
 		Destroy (this,lifeTimerAll);
 	}
