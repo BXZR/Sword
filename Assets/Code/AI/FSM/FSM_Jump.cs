@@ -11,20 +11,17 @@ public class FSM_Jump : FSMBasic {
 
 	public override void OnFSMStateEnd ()
 	{
-		this.theThis.GetComponent <NavMeshAgent> ().enabled = true;
-		if (this.theEMY != null)
+
+		if (this.theMoveController && this.theEMY != null)
 		{
-			NavMeshAgent NV = this.theThis.GetComponent <NavMeshAgent> ();
-			if (NV)
-				NV.enabled = true;
-			if(NV && NV.isOnNavMesh)
-				NV.SetDestination (theEMY.transform .position);
+			this.theMoveController.enabled = true;
+			this.theMoveController.SetDestination (theEMY.transform .position);
 		}
 	}
 
 	public override void OnFSMStateStart ()
 	{
-		this.theThis.GetComponent <NavMeshAgent> ().enabled = false;
+		this.theMoveController.enabled = false;
 		timer = 1.8f;
 	}
 
@@ -58,7 +55,7 @@ public class FSM_Jump : FSMBasic {
 			//FSM_RunAfter runafter = new FSM_RunAfter ();
 			FSMBasic runafter = theController.getState(3);
 			runafter.makeState (this.theMoveController, this.theAttackLlinkController,this.theAnimator, this.theThis,this.theEMY);
-			this.theThis.GetComponent <NavMeshAgent> ().enabled = true;
+			this.theMoveController.enabled = true;
 			return runafter;
 		}
 		return this;

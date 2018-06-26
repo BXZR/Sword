@@ -15,7 +15,7 @@ public class FSM_RunAfter : FSMBasic {
 
 	public override void OnFSMStateStart ()
 	{
-		this.theThis.GetComponent <NavMeshAgent> ().enabled = true;
+		this.theMoveController.enabled = true;
 		OnChangeToThisState ();
 	}
 
@@ -29,10 +29,18 @@ public class FSM_RunAfter : FSMBasic {
 		//Debug.Log ("run after");
 		theAnimator.Play("rotatePoseForward");
 		this.theThis.transform.LookAt (theEMY.transform);
-		if(this.theMoveController.isActiveAndEnabled)
-		if(this.theMoveController.isOnNavMesh)
-			this.theMoveController.SetDestination(theEMY.transform .position + new Vector3 (Random.value ,0,Random.value));
-
+		if (this.theMoveController.isActiveAndEnabled)
+		if (this.theMoveController.isOnNavMesh && this.theMoveController.hasPath)
+			this.theMoveController.SetDestination (theEMY.transform.position + new Vector3 (Random.value, 0, Random.value));
+		else 
+		{
+			this.theMoveController.enabled = false;
+			Vector3 theAim  = Vector3.Lerp (this.theMoveController.transform.position, theEMY.transform.position, 0.35f);
+			this.theMoveController.transform.position = theAim;
+			this.theMoveController.enabled = true;
+			this.theMoveController.SetDestination (theAim);
+		}
+		
 		timer -= Time.deltaTime;
 		//Debug.Log ("runafterTimer : "+ timer);
 	}

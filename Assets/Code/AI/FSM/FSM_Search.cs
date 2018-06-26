@@ -6,8 +6,8 @@ using UnityEngine.AI;
 public class FSM_Search : FSMBasic {
 
 	List<GameObject> theEMYGet   = null;
-	public float angle = 125;//视野角度范围的一半
-	public float distance = 2.5f;//视野长度
+	//public float angle = 125;//视野角度范围的一半
+	//public float distance = 2.5f;//视野长度
 	PlayerBasic theMainEMY = null;
 
 	//个人认为比较稳健的方法
@@ -24,7 +24,8 @@ public class FSM_Search : FSMBasic {
 		if(searchTimer <0)
 		{
 			searchTimer = searchTimerMax;
-			theEMYGet = systemValues.searchAIMs (angle, distance, theThis.transform);
+
+			theEMYGet = systemValues.searchAIMs (this.theThis.theViewAreaAngel, this.theThis.theViewAreaLength , theThis.transform);
 			theMainEMY = getMainEMY ();
 			//if (theMainEMY)
 			//	Debug.Log (theMainEMY.ActerName + "is found");
