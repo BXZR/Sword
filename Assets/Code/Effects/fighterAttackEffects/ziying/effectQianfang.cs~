@@ -7,11 +7,11 @@ public class effectQianfang : effectBasic {
 	static GameObject Arrow;//弹矢引用保存
 	static GameObject Arrow2;//弹矢引用保存
 	Vector3 forward;
-	float arrowLife = 0.16f;// 弹矢生存时间
+	float arrowLife = 0.25f;// 弹矢生存时间
 	public int arrowCounts = 5;//发射的剑气数量
 	public float hpup = 0.04f;//吸收的生命值百分比
 	public float hpupTrueUseExtra = 4f;//吸收的生命值
-	float angleForArrow = 25;//剑气角度
+	float angleForArrow = 22;//剑气角度
 
 	static List<extraWeapon> theArrows = new List<extraWeapon> ();
 	static extraWeapon updatedArrow;
@@ -30,7 +30,7 @@ public class effectQianfang : effectBasic {
 		lifeTimerAll = 6f;
 		timerForEffect = 0.2f;
 		theEffectName = "千方残光剑";
-		theEffectInformation ="向前方锥形发射"+arrowCounts+"束特殊剑气\n这些剑气可触发攻击效果并有额外（"+hpup*100+"%+"+hpupTrueUseExtra+"）生命偷取\n每束剑气最多对三个目标造成伤害，持续"+arrowLife+"秒" +
+		theEffectInformation ="向前方锥形发射"+arrowCounts+"束特殊剑气\n攻击命中额外追加（"+hpup*100+"%+"+hpupTrueUseExtra+"）生命偷取\n每束剑气最多对三个目标造成伤害，持续"+arrowLife+"秒" +
 			"\n冷却时间为" + (lifeTimerAll-timerForEffect) +"秒，冷却中使用此技可释放普通剑气";
 		makeStart ();
 		if(!Arrow)
@@ -172,11 +172,12 @@ public class effectQianfang : effectBasic {
 		{
 			//print ("ad");
 			arrowCounts += 2;
+			hpup += 0.03f;
 		}
 	}
 	public override string getEffectAttackLinkLVExtra ()
 	{
-		return "等级奖励：等级超过7级的招式触发此效果时\n增加2束特殊剑气";
+		return "等级奖励：等级超过7级的招式触发此效果时\n增加2束特殊剑气，并追加3%生命偷取效果";
 	}
 
 

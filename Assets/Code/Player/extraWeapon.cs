@@ -85,6 +85,11 @@ public class extraWeapon : MonoBehaviour {
 				extraDamageEffect (playerAim);//添加额外的计算脚本，每个脚本的效果由脚本自己决定
 				//print("弹矢撞击！");
 				//Destroy(this.gameObject);
+				if (attackAims.Count >= damageCount)
+				{
+					makeFlash ();
+					gameObject.SetActive (false);
+				}
 			}
 		} 
 

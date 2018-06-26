@@ -20,7 +20,7 @@ public class skillInformationPanel : MonoBehaviour {
 		theLinkNow = theLink;
 		theShowButton = theButton;
 		makeShow ();
-		theSkillLvupButton.interactable = theLinkNow.canLvup;
+
 	}
 
 
@@ -47,11 +47,11 @@ public class skillInformationPanel : MonoBehaviour {
 
 		if (!theLinkNow ) 
 		{
-			print ("no2");
+			print ("noLink");
 			return;
 		}
 
-		
+		theSkillLvupButton.interactable = ( theLinkNow.canLvup  &&  theLinkNow.theAttackLinkLv < theLinkNow.theAttakLinkLvMax );
 		theSkillNameText.text = theShowButton.theAttackLinkName;
 		theSkillBasicInformationText.text = theShowButton.attackLinkBasicInformation;
 		theSkillEffectInformationText.text = theShowButton.basicEffect + "\n\n" + theShowButton.effectInformation;

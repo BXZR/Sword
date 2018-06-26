@@ -8,6 +8,8 @@ public class effectForSpeedMoveForward : effectBasic {
 	private int indexUse = 0;
 	private float moveSpeed = 20f;
 	private float hengPercent = 0.75f;//横向突进速度百分比
+	private  float spupMinus = 0.3f;//斗气恢复效率减少率
+	private float spUsePercent = 0.08f;//最大百分比斗气消耗
 	//允许额外连续突进一次
 	bool isOverMove = false;
 
@@ -28,7 +30,7 @@ public class effectForSpeedMoveForward : effectBasic {
 		timerForEffect = 0.15f;
 		theEffectName = "突进";
 		theEffectInformation = "迅速向指定方向移动一小段距离\n持续"+timerForEffect+"秒，冷却"+(lifeTimerAll-timerForEffect)+"秒\n横向突进速度是前向突进速度的"+hengPercent*100+"%";
-		theEffedctExtraInformation = "特性：勉力冲刺，冷却中可消耗8%最大斗气再突进一次\n勉力冲刺后斗气恢复效率减少30%，直到冷却完毕";
+		theEffedctExtraInformation = "特性：勉力冲刺，冷却中可再突进一次\n勉力冲刺立即消耗"+ spUsePercent*100 +"%最大斗气\n随后斗气恢复效率减少"+spupMinus*100+"%，直到冷却完毕";
 		makeStart ();
 		if (thePlayer)
 			theMoveController = this.thePlayer.GetComponent < CharacterController> ();
@@ -63,7 +65,7 @@ public class effectForSpeedMoveForward : effectBasic {
 
 			timerForEffect = timerForEffect + timerForAdd;
 
-			float theSPUse = thePlayer.ActerSpMax * 0.08f;
+			float theSPUse = thePlayer.ActerSpMax * spUsePercent;
 			thePlayer.ActerSp -= theSPUse;
 			effectBasic[] Effects = thePlayer.GetComponentsInChildren<effectBasic> ();
 			for (int i = 0; i < Effects.Length; i++)
@@ -107,7 +109,7 @@ public class effectForSpeedMoveForward : effectBasic {
 		//斗气恢复效率减半
 		if (isOverMove) 
 		{
-			thePlayer.ActerSp -= thePlayer.ActerSpUp * 0.3f * systemValues.updateTimeWait;
+			thePlayer.ActerSp -= thePlayer.ActerSpUp * spupMinus * systemValues.updateTimeWait;
 		}
 
 	}

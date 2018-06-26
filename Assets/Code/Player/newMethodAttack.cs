@@ -45,8 +45,9 @@ public class newMethodAttack : MonoBehaviour {
 			else
 			{
 				theEffect.updateEffect ();
-				//theEffect.SetAttackLinkIndex(thePlayer.EffectAttackLinkIndex);
-				//theEffect.SetAttackLink(thePlayer.theAttackLinkNow);
+				theEffect.SetAttackLinkIndex(thePlayer.EffectAttackLinkIndex);
+				theEffect.SetAttackLink(thePlayer.theAttackLinkNow);
+				thePlayer.EffectAttackLinkIndex = 0;//刷新为初始数值
 			}
 			thePlayer.theAttackLinkNow .conNameToSELF = "";
 		}
