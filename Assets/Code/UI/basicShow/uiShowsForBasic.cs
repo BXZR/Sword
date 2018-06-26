@@ -28,6 +28,7 @@ public class uiShowsForBasic : MonoBehaviour {
 		{
 			thePlayerImage.gameObject.SetActive (false);//如果没有图就干脆就不显示吧
 		}
+
 		thePlayerNameText.text = makeNameText (this.thePlayer.ActerName);
 
 		Cursor.visible = false;//不显示鼠标

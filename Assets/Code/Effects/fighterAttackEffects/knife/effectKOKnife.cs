@@ -7,7 +7,7 @@ public class effectKOKnife : effectBasic{
 	int attackCount = 0;
 	int attackCountMax = 5;
 	float attackPercent= 0.02f;
-	float beAttackBackTimer = 0.15f;
+
 	void Start ()
 	{
 		Init ();
@@ -19,10 +19,17 @@ public class effectKOKnife : effectBasic{
 		return true;
 	}
 
+	public override void OnLvUp ()
+	{
+		//print ("lvup");
+		attackPercent += 0.004f;
+		theEffectInformation = "攻击命中积累刀气，最多" + attackCountMax + "层\n满刀气攻击附加目标最大生命" + (attackPercent * 100).ToString("f1") + "%物理伤害\n伤害百分比可随等级提升";
+	}
+
 	public override void Init ()
 	{
 		theEffectName = "重剑无锋";
-		theEffectInformation ="攻击命中积累刀气，拥有"+ attackCountMax +"层刀气时攻击附加目标最大生命"+attackPercent*100+"%物理伤害\n若目标生命百分比高于自己，击退目标"+beAttackBackTimer+"秒";
+		theEffectInformation = "攻击命中积累刀气，最多" + attackCountMax + "层\n满刀气攻击附加目标最大生命" + (attackPercent * 100).ToString("f1") + "%物理伤害\n伤害百分比可随等级提升";
 		makeStart ();
 	}
 
@@ -34,11 +41,7 @@ public class effectKOKnife : effectBasic{
 			float damage = aim.ActerHpMax * attackPercent;
 			this.thePlayer.OnAttackWithoutEffect (aim,damage,false,true);
 			attackCount = 0;
-			if ((aim.ActerHp / aim.ActerHpMax) > (this.thePlayer.ActerHp / this.thePlayer.ActerHpMax))
-			{
-				aim.gameObject.AddComponent<monsterBeAttack> ();
-				Destroy (aim.gameObject.GetComponent<monsterBeAttack> (), beAttackBackTimer);
-			}
+
 		}
 	 
 	}

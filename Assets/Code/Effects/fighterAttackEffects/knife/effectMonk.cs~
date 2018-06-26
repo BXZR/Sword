@@ -5,10 +5,11 @@ using UnityEngine;
 public class effectMonk :effectBasic{
 
 	float basicDamage = 15f;//每一个单位能够给出的伤害
-	bool isUsed = false;
-	int  EMYCoutExtraEffect = 2;//多于这些敌人触发额外效果
+	float hpupRate = 0.7f;//生命回复百分比
 	int maxEMYCountForUse = 6;//最多触发层数
 	int EMYCount  = 0;
+	float beAttackBackTimer = 0.15f;
+
 	void Start ()
 	{
 		Init ();
@@ -36,34 +37,35 @@ public class effectMonk :effectBasic{
 
 	public override void OnAttack (PlayerBasic aim)
 	{
-		if (isUsed == false) 
+		//特殊伤害只能够生效一次
+		if (isEffecting) 
 		{
 			EMYCount = Mathf.Clamp(getCount (),0,maxEMYCountForUse);
 			float damage =  EMYCount  * basicDamage;
 			aim.ActerHp -= damage;
 			this.thePlayer.OnAttackWithoutEffect (aim, damage, true, true);
 
-			if (EMYCount > EMYCoutExtraEffect) 
-			{
-				thePlayer.ActerHp += damage;
-				//附加的各种效果
-				effectBasic [] effects = this.thePlayer.GetComponents<effectBasic> ();
-				foreach (effectBasic EF in effects)
-					EF.OnHpUp ( damage);
-			}
-
-			isUsed = true;
+			damage *= hpupRate;
+			thePlayer.ActerHp += damage;
+			//附加的各种效果
+			effectBasic [] effects = this.thePlayer.GetComponents<effectBasic> ();
+			foreach (effectBasic EF in effects)
+				EF.OnHpUp ( damage);
+			
 			isEffecting = false;//标记，已经失效
+
+
+			Destroy (aim.gameObject.AddComponent<monsterBeAttack> (), beAttackBackTimer);
 		}
 	}
 
 	public override void Init ()
 	{
 		//print ("灭却浮屠发动");
-		lifeTimerAll = 4f;//每一个段时间才能够使用这个伤害
-		timerForEffect = 4f; 
+		lifeTimerAll = 5f;//每一个段时间才能够使用这个伤害
+		timerForEffect = 5f; 
 		theEffectName = "灭却浮屠";
-		theEffectInformation ="下一击追加(身边敌人数量×"+basicDamage+"真实伤害)\n若持有两层以上效果，额外伤害可用于治疗自身\n额外伤害最多"+maxEMYCountForUse+"层，冷却时间"+  (lifeTimerAll) +"秒";
+		theEffectInformation ="攻击追加(身边敌人数×"+basicDamage+")真实伤害\n击退目标"+beAttackBackTimer+"秒,恢复额外伤害七成的生命值\n额外伤害最多"+maxEMYCountForUse+"层，冷却时间"+  (lifeTimerAll) +"秒";
 		makeStart ();
 		Destroy (this,lifeTimerAll);
 	}

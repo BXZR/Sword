@@ -15,31 +15,28 @@ public class effectThreeKnife : effectBasic {
 	float acterhpUp = 25;//直接回复的生命值
 	float actershieldHp = 40;//获得的护盾值
 	//第三次
-	float damagePercent = 0.035f;//追加的斩杀效果伤害百分比
+	float damagePercent = 0.07f;//追加的斩杀效果伤害百分比
 
 	void Start () 
 	{
 		Init ();//进行初始化
-
-	
 	}
 
-	void OnDestroy()
-	{
-		//第一次
-		if(theAim)
-			theAim .ActerWuliDamage += damageMinus;
-	}
+	//void OnDestroy()
+	//{
+		
+	//}
 
 	public override void Init ()
 	{
-		lifeTimerAll = 3f;
+		lifeTimerAll = 7f;
 		timerForEffect = 3f;
 		theEffectName = "摩诃婆娑";
-		theEffectInformation ="在"+lifeTimerAll+"秒内的三次攻击命中触发不同特效：\n";
-		theEffectInformation += "第一次，削减目标"+aimDamageMinus*100+"%攻击力，最多"+lifeTimerAll+"秒\n";
+		theEffectInformation ="在"+timerForEffect+"秒内的三次攻击命中触发不同特效：\n";
+		theEffectInformation += "第一次，削减目标"+aimDamageMinus*100+"%攻击力，最多"+timerForEffect+"秒\n";
 		theEffectInformation += "第二次，恢复"+acterhpUp+"生命值,获得"+actershieldHp+"护盾\n";
-		theEffectInformation += "第三次，额外造成目标"+damagePercent*100+"%已损生命真实伤害";
+		theEffectInformation += "第三次，额外造成目标"+damagePercent*100+"%已损生命真实伤害\n";
+		theEffectInformation += "冷却时间：" +(lifeTimerAll - timerForEffect ) +"秒";
 		makeStart ();
 		Destroy (this.GetComponent (this.GetType()),lifeTimerAll);
 
@@ -50,12 +47,18 @@ public class effectThreeKnife : effectBasic {
 	public override void effectOnUpdateTime ()
 	{
 		addTimer ();
-		//print ("timer add = "+ timerForAdd);
+		if (isEffecting && timerForAdd > timerForEffect) 
+		{
+			isEffecting = false;
+			//第一次
+			if(theAim)
+				theAim .ActerWuliDamage += damageMinus;
+		}
 	}
 
 	public override void OnAttack (PlayerBasic aim)
 	{
-		if(thePlayer)
+		if(thePlayer && isEffecting)
 		{ 
 			//第一次是伴随着初始化的
 			if (step == 0)

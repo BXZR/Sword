@@ -22,7 +22,7 @@ public class PlayerBasic : MonoBehaviour {
 	[HideInInspector]
 	public  float jingyanNow = 0;
 	[HideInInspector]
-	public  float jingyanMax = 100;
+	public  float jingyanMax = 50;
 	[HideInInspector]
 	public int LVMax= 18;//等级上限目前为18级，当然主人公也可以一些特殊方式来突破这一层天堑
 
@@ -264,7 +264,7 @@ public class PlayerBasic : MonoBehaviour {
 		{
 			lvAdd = (int)  (jingyanNow / jingyanMax);
 			jingyanNow =  jingyanNow % jingyanMax;
-			jingyanMax += 50f;
+			jingyanMax += 25f;
 		}
 		for(int i = 0 ; i <lvAdd ; i++ )
 		{
@@ -314,6 +314,7 @@ public class PlayerBasic : MonoBehaviour {
 		effectBasic [] theEffects = this.GetComponentsInChildren<effectBasic>();
 		for (int i = 0; i < theEffects.Length; i++)
 			theEffects [i].OnLvUp ();
+		
 		OnGUIStringForNAmeLV = this.ActerName + "(Lv." + this.playerLv + ")";//重新做一个GUI字符串
 		systemValues.messageTitleBoxShow ("等级提升至"+this.playerLv+"级");
 
