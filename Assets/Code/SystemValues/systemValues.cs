@@ -1275,10 +1275,17 @@ public class systemValues : MonoBehaviour {
 			(
 				(x,y) =>
 				{
-					int value = Convert.ToInt32(x.name) -  Convert.ToInt32(y.name);
-					if(value <0) return -1;
-					if(value >0) return 1;
-					return 0;
+					try
+					{
+						int value = Convert.ToInt32(x.name) -  Convert.ToInt32(y.name);
+						if(value <0) return -1;
+						if(value >0) return 1;
+						return 0;
+					}
+					catch
+					{
+						return 0;
+					}
 				}
 			);
 		}

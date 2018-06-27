@@ -170,14 +170,17 @@ public class effectQianfang : effectBasic {
 	{
 		if (attackLinkIn && attackLinkIn.theAttackLinkLv >= 7)
 		{
-			//print ("ad");
-			arrowCounts += 2;
 			hpup += 0.03f;
+		}
+
+		if (attackLinkIn && attackLinkIn.theAttackLinkLv >= 12)
+		{
+			arrowCounts += 2;
 		}
 	}
 	public override string getEffectAttackLinkLVExtra ()
 	{
-		return "招式等级奖励\n7级招式: 增加2束特殊剑气，并追加3%生命偷取效果";
+		return "招式等级奖励\n7级招式: 追加3%生命偷取效果\n12级招式: 特殊剑气增加两束";
 	}
 
 
