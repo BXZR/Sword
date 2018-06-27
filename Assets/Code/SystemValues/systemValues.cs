@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using System;
 
 
 public enum GameSystemMode { NET , PC }
@@ -49,7 +50,7 @@ public class systemValues : MonoBehaviour {
 	public static string [] playerBackMusic = {"bahuangfu"  , "kai", "fightMusic", "canglangjianfu"};
 
 	//选人界面的逻辑
-	private static int indexNow = 0 ;
+	private static int indexNow = 3 ;
 	public static  void setIndexForPlayer(int indexIn)
 	{
 		indexNow = indexIn;
@@ -1251,6 +1252,43 @@ public class systemValues : MonoBehaviour {
 	}
 	//-----------------------------------------------
 	#endregion
+
+
+	//游戏信息包括制作人信息，键位表等等给玩家直接看的东西
+	#region 游戏信息
+	private static bool Introductionloaded = false;
+	static List<Sprite> theSpritesForIntroduction= new List<Sprite> ();
+	public static List<Sprite> getGameIntroduction()
+	{
+		if (!Introductionloaded)
+		{
+			Texture2D[] pictures = Resources.LoadAll <Texture2D> ("Introduction");
+			theSpritesForIntroduction= new List<Sprite> ();
+			for (int i = 0; i < pictures.Length; i++) 
+			{
+				Sprite theSprite  = Sprite.Create (pictures [i], new Rect (0, 0, pictures [i].width, pictures [i].height), new Vector2 (0, 0));
+				theSprite.name = pictures [i].name;
+				theSpritesForIntroduction.Add (theSprite);
+			}
+			Introductionloaded = true;
+			theSpritesForIntroduction.Sort
+			(
+				(x,y) =>
+				{
+					int value = Convert.ToInt32(x.name) -  Convert.ToInt32(y.name);
+					if(value <0) return -1;
+					if(value >0) return 1;
+					return 0;
+				}
+			);
+		}
+
+		return theSpritesForIntroduction;
+	}
+	 
+
+	#endregion
+
 
 
 	//GM的初始化==============================================================================

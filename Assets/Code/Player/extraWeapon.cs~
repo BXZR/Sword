@@ -83,6 +83,12 @@ public class extraWeapon : MonoBehaviour {
 
 				thePlayer.OnAttack(playerAim);//造成直接的伤害
 				extraDamageEffect (playerAim);//添加额外的计算脚本，每个脚本的效果由脚本自己决定
+
+				//记录连击
+				if (thePlayer == systemValues.thePlayer)
+					systemValues.addHitCount (1);
+
+
 				//print("弹矢撞击！");
 				//Destroy(this.gameObject);
 				if (attackAims.Count >= damageCount)
