@@ -81,7 +81,7 @@ public class effectDragonExtraDamage : effectBasic
 	//招式等级额外特效 ====================================================================
 	public override void SetAttackLink (attackLink attackLinkIn)
 	{
-		if (attackLinkIn && attackLinkIn.theAttackLinkLv >= 3)
+		if (attackLinkIn && attackLinkIn.theAttackLinkLv >= 8)
 		{
 			//print ("ad");
 			damageAddPercent += 0.06f;
@@ -89,7 +89,7 @@ public class effectDragonExtraDamage : effectBasic
 	}
 	public override string getEffectAttackLinkLVExtra ()
 	{
-		return "等级奖励：等级超过2级的招式触发此效果时\n伤害追加效果提升6%";
+		return "招式等级奖励\n8级招式: 伤害追加效果提升6%";
 	}
 
 }

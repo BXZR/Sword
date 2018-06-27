@@ -91,6 +91,6 @@ public class effectMulanBaoFa : effectBasic
 	}
 	public override string getEffectAttackLinkLVExtra ()
 	{
-		return "等级奖励：等级超过3级的招式触发此效果时\n每一击生命吸收上限增加5";
+		return "招式等级奖励\n3级招式: 生命吸收上限增加5";
 	}
 }

@@ -87,8 +87,6 @@ public class attackLink : MonoBehaviour {
 	public int theAttackLinkLv = 1;//当前招式等级
 	public int theAttakLinkLvMax = 18;//最大等级上限
 	public float extraDamageAdd = 0;//额外攻击伤害
-	private int  soulCostWhenLvtoMax = 100;//等级满了之后继续叠加的消耗
-	private  int  adderWhenLvtoMax = 1;//极其低性价比的叠加
 
 	PhotonView photonView;//网络控制单元
 
@@ -223,6 +221,8 @@ public class attackLink : MonoBehaviour {
 	[PunRPC]
 	private void AttackLinkLvupNet()
 	{
+		//网络各个端也需要重新加上增长值
+		canculateCost ();
 		if (this.theAttackLinkLv < this.theAttakLinkLvMax) 
 		{
 			this.extraDamage += extraDamageAdd;
@@ -231,7 +231,6 @@ public class attackLink : MonoBehaviour {
 		}
 		else
 		{
-			extraDamageAdd = adderWhenLvtoMax;
 			this.extraDamage += extraDamageAdd;
 		}
 
@@ -259,7 +258,7 @@ public class attackLink : MonoBehaviour {
 	{
 		if (systemValues.theGameSystemMode == GameSystemMode.NET && photonView != null)
 		{
-			lvupCost = this.theAttackLinkLv < this.theAttakLinkLvMax ? lvupCost : soulCostWhenLvtoMax;
+			lvupCost = this.theAttackLinkLv < this.theAttakLinkLvMax ? lvupCost : 0;
 			if (systemValues.soulCount >= lvupCost)
 			{
 			    this.photonView.RPC ("AttackLinkLvupNet", PhotonTargets.All);
@@ -268,7 +267,7 @@ public class attackLink : MonoBehaviour {
 		}
 		else if (systemValues.theGameSystemMode == GameSystemMode.PC)
 		{
-			lvupCost = this.theAttackLinkLv < this.theAttakLinkLvMax ? lvupCost : soulCostWhenLvtoMax;
+			lvupCost = this.theAttackLinkLv < this.theAttakLinkLvMax ? lvupCost : 0;
 			if (systemValues.soulCount >= lvupCost)
 			{
 				AttackLinkLvupNet ();
@@ -577,15 +576,7 @@ public class attackLink : MonoBehaviour {
 			}
 			else
 			{
-				extraDamageAdd = adderWhenLvtoMax;
-				lvupCost = soulCostWhenLvtoMax;
-
 				theString.Append("等级已满\n");
-				theString.Append("可以消耗");
-				theString.Append(soulCostWhenLvtoMax);
-				theString.Append("灵力继续增加");
-				theString.Append(extraDamageAdd);
-				theString.Append("额外伤害\n");
 			}
 		}
 		return theString.ToString ();

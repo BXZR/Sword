@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class effectMonk :effectBasic{
 
-	float basicDamage = 15f;//每一个单位能够给出的伤害
+	float basicDamage = 20f;//每一个单位能够给出的伤害
 	float hpupRate = 0.7f;//生命回复百分比
-	int maxEMYCountForUse = 6;//最多触发层数
+	int maxEMYCountForUse = 5;//最多触发层数
 	int EMYCount  = 0;
 	float beAttackBackTimer = 0.15f;
 
@@ -62,7 +62,7 @@ public class effectMonk :effectBasic{
 	public override void Init ()
 	{
 		//print ("灭却浮屠发动");
-		lifeTimerAll = 6f;//每一个段时间才能够使用这个伤害
+		lifeTimerAll = 9f;//每一个段时间才能够使用这个伤害
 		timerForEffect = 2f; 
 		theEffectName = "灭却浮屠";
 		theEffectInformation ="下一击追加(身边敌人数×"+basicDamage+")真实伤害\n击退目标"+beAttackBackTimer+"秒,恢复额外伤害七成的生命值\n额外伤害最多"+maxEMYCountForUse+"层，冷却时间"+  (lifeTimerAll) +"秒";
@@ -92,15 +92,22 @@ public class effectMonk :effectBasic{
 	//招式等级额外特效 ====================================================================
 	public override void SetAttackLink (attackLink attackLinkIn)
 	{
-		if (attackLinkIn && attackLinkIn.theAttackLinkLv >= 3)
+		if (attackLinkIn && attackLinkIn.theAttackLinkLv >= 5)
 		{
 			//print ("ad");
-			basicDamage *= 1.15f;
+			basicDamage *= 1.1f;
 		}
+
+		if (attackLinkIn && attackLinkIn.theAttackLinkLv >= 12)
+		{
+			//print ("ad");
+			maxEMYCountForUse +=2;
+		}
+
 	}
 	public override string getEffectAttackLinkLVExtra ()
 	{
-		return "等级奖励：等级超过3级的招式触发此效果时\n每一层的治疗效果提升15%";
+		return "招式等级奖励\n5级招式: 总伤害提升10%\n12级招式: 伤害层数增加2";
 	}
 
 }

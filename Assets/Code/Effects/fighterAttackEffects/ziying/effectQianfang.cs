@@ -177,7 +177,7 @@ public class effectQianfang : effectBasic {
 	}
 	public override string getEffectAttackLinkLVExtra ()
 	{
-		return "等级奖励：等级超过7级的招式触发此效果时\n增加2束特殊剑气，并追加3%生命偷取效果";
+		return "招式等级奖励\n7级招式: 增加2束特殊剑气，并追加3%生命偷取效果";
 	}
 
 
