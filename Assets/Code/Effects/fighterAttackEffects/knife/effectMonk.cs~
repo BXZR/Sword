@@ -62,10 +62,10 @@ public class effectMonk :effectBasic{
 	public override void Init ()
 	{
 		//print ("灭却浮屠发动");
-		lifeTimerAll = 5f;//每一个段时间才能够使用这个伤害
-		timerForEffect = 5f; 
+		lifeTimerAll = 6f;//每一个段时间才能够使用这个伤害
+		timerForEffect = 2f; 
 		theEffectName = "灭却浮屠";
-		theEffectInformation ="攻击追加(身边敌人数×"+basicDamage+")真实伤害\n击退目标"+beAttackBackTimer+"秒,恢复额外伤害七成的生命值\n额外伤害最多"+maxEMYCountForUse+"层，冷却时间"+  (lifeTimerAll) +"秒";
+		theEffectInformation ="下一击追加(身边敌人数×"+basicDamage+")真实伤害\n击退目标"+beAttackBackTimer+"秒,恢复额外伤害七成的生命值\n额外伤害最多"+maxEMYCountForUse+"层，冷却时间"+  (lifeTimerAll) +"秒";
 		makeStart ();
 		Destroy (this,lifeTimerAll);
 	}
@@ -73,6 +73,15 @@ public class effectMonk :effectBasic{
 	{
 		addTimer ();
 		//print ("timer add = "+ timerForAdd);
+		if (isEffecting && timerForAdd > timerForEffect) 
+		{
+			isEffecting = false;
+		}
+		if(timerForAdd > lifeTimerAll)
+		{
+			Destroy (this);
+		}
+
 	}
 
 	public override string getOnTimeFlashInformation ()
