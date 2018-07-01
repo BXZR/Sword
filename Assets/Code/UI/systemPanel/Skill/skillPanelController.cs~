@@ -87,9 +87,10 @@ public class skillPanelController : MonoBehaviour {
 		if (systemValues.isNullOrEmpty (theAttacklink.conNameToSELF) == false) 
 		{
 			System.Type theType = System.Type.GetType (theAttacklink.conNameToSELF);
-		    theButton.gameObject.AddComponent (theType);
-			//effectBasic theselfEffect = theButton.GetComponent <effectBasic> ();
-			effectBasic theselfEffect = (effectBasic)theButton.GetComponent (theType);
+		    //theButton.gameObject.AddComponent (theType);
+			////effectBasic theselfEffect = theButton.GetComponent <effectBasic> ();
+			//effectBasic theselfEffect = (effectBasic)theButton.GetComponent (theType);
+			effectBasic theselfEffect = (effectBasic)theButton.gameObject.AddComponent (theType);
 			theselfEffect.Init ();
 
 			makeEffectInformation( theInformationString ,theSkillInformationString ,theselfEffect);
@@ -98,9 +99,10 @@ public class skillPanelController : MonoBehaviour {
 		if (systemValues.isNullOrEmpty (theAttacklink.conNameToEMY) == false) 
 		{
 			System.Type theType = System.Type.GetType (theAttacklink.conNameToEMY);
-			theButton.gameObject.AddComponent (theType);
-			//effectBasic theEMYEffect = theButton.GetComponent <effectBasic> ();
-			effectBasic theEMYEffect = (effectBasic)theButton.GetComponent (theType);
+			//theButton.gameObject.AddComponent (theType);
+			////effectBasic theEMYEffect = theButton.GetComponent <effectBasic> ();
+			//effectBasic theEMYEffect = (effectBasic)theButton.GetComponent (theType);
+			effectBasic theEMYEffect = (effectBasic)theButton.gameObject.AddComponent (theType);
 			theEMYEffect.Init ();
 
 			makeEffectInformation( theInformationString ,theSkillInformationString ,theEMYEffect  , false);

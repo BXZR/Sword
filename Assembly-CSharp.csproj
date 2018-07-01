@@ -108,6 +108,7 @@
      <Compile Include="Assets\Code\Effects\thingsEffect\effectSoul.cs" />
      <Compile Include="Assets\Code\Effects\thingsEffect\effectSpeedUp.cs" />
      <Compile Include="Assets\Code\Effects\thingsEffect\effectSpup.cs" />
+     <Compile Include="Assets\Code\Effects\thingsEffect\effectSuck.cs" />
      <Compile Include="Assets\Code\Equips\equipBasics.cs" />
      <Compile Include="Assets\Code\Equips\equipPackage.cs" />
      <Compile Include="Assets\Code\Extra\cursor.cs" />
