@@ -12,7 +12,9 @@ public class effectSlash :effectBasic{
 	float hpsuckOnChange = 0.02f;
 	float damageSuckMax = 25;
 
-	float spAddMax = 25f;
+	float spsuckPercent = 0.4f;
+
+	float spAddMax = 15f;
 
 	private int mode = 0; //记录当前状态
 
@@ -35,7 +37,7 @@ public class effectSlash :effectBasic{
 		mode = 0;
 		theEffectName = "劫刃";
 		//注意的是，最大生命值每回合都会更新的，这个最大生命值的削弱仅仅限制于本回合(如果削减最大斗气值就太变态了)
-		theEffectInformation = "额外获得" + hpsuckAdd * 100 + "%的生命偷取\n攻击时拥有" + ranNumber * 10 + "%机会使最终伤害提升" + addPercent * 100 + "%\n恢复额外伤害值的斗气，最多" + spAddMax + "斗气";
+		theEffectInformation = "额外获得" + hpsuckAdd * 100 + "%的生命偷取\n攻击时拥有" + ranNumber * 10 + "%机会使最终伤害提升" + addPercent * 100 + "%\n并且恢复额外伤害40%斗气，最多" + spAddMax + "斗气";
 		theEffedctExtraInformation = "特性：魔中佛，生命低于" + changeGate * 100 + "%转为【红莲】\n"+ lifeTimerAll+"秒内被动转化只会发生一次";
 		makeStart ();
 
@@ -64,7 +66,8 @@ public class effectSlash :effectBasic{
 			{
 				float makeDamage = TrueDamage * addPercent;
 				this.thePlayer.OnAttackWithoutEffect (aim,makeDamage,true,true);
-				this.thePlayer.ActerSp += Mathf.Clamp( makeDamage,0, spAddMax );
+				this.thePlayer.ActerSp += Mathf.Clamp( makeDamage * spsuckPercent  ,0, spAddMax );
+				this.thePlayer.makeValueUpdate ();
 			}
 		}
 	}

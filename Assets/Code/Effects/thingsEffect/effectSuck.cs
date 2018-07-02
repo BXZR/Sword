@@ -8,7 +8,7 @@ public class effectSuck : effectBasic {
 	int  count = 0;
 	int countMax =3;
 	float speednow = 0f;
-	float speedMax = 0.3f;
+	float speedMax = 0.15f;
 	float addCount = 0;
 	float addMax = 100;
 
@@ -20,13 +20,27 @@ public class effectSuck : effectBasic {
 
 	public override void Init ()
 	{
-		lifeTimerAll = 120f;//每一个段时间才能够使用这个伤害
-		timerForEffect = 120f; 
+		lifeTimerAll = 90f;//每一个段时间才能够使用这个伤害
+		timerForEffect = 90f; 
 		theEffectName = "吸神诀";
-		theEffectInformation = "闪避、格挡触发时回复40%最大斗气\n攻击起手吸取身边所有目标1%最大生命值\n每第4次攻击附加以下额外效果：\n吸取目标2%最大生命值，暴击时吸收双倍\n永久吸取目标3%攻击力和护甲(上限100次)\n攻速和移速加成效果提升2%(上限30%)";
+		theEffectInformation = "闪避、格挡触发时回复40%最大斗气\n攻击起手吸取身边所有目标1%最大生命值\n每第4次攻击附加以下额外效果：\n吸取目标2%最大生命值，暴击时吸收双倍\n永久吸取目标3%攻击力和护甲(上限100次)\n攻速和移速加成效果提升1%(上限15%)";
 		theEffedctExtraInformation = "特性：吸神之意，受到攻击时将伤害的7%转化为护盾\n特性：吸海无涯，升级时额外增加2%护盾上限";
 		makeStart ();
+		Destroy (this,lifeTimerAll);
+
+		if (thePlayer && thePlayer.playerLv >= 3) 
+		{
+			thePlayer.ActerSpSuckPercent += 0.06f;
+			thePlayer.CActerSpSuckPercent += 0.06f;
+		}
+
 	}
+
+	public override string getEffectAttackLinkLVExtra ()
+	{
+		return "等级奖励\n获得吸神诀时等级超过2级，额外永久获得6%斗气偷取";
+	}
+
 
 	public override void OnAttack (PlayerBasic aim, float TrueDamage)
 	{
@@ -46,8 +60,8 @@ public class effectSuck : effectBasic {
 
 			if (speednow < speedMax)
 			{
-				thePlayer.ActerSpeedOverPervnet += 0.02f;
-				speednow +=  0.02f;
+				thePlayer.ActerSpeedOverPervnet += 0.01f;
+				speednow +=  0.01f;
 			}
 			makeSuck (aim , 0.02f);
 		}
