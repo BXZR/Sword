@@ -194,13 +194,13 @@ public class equipPackage : MonoBehaviour {
 		int first = low;
 		int last = high;
 		equipBasics keySave = theP [low];
-		char  keyValue = theP[low].equipName[0];
+		int  keyValue = theP[low].theSoulForThisEquip;
 		while (low < high)
 		{
-			while (low < high && theP[high].equipName[0] >= keyValue)
+			while (low < high && theP[high].theSoulForThisEquip >= keyValue)
 				high--;
 			theP[low] = theP[high];
-			while (low < high && theP[low].equipName[0] <= keyValue)
+			while (low < high && theP[low].theSoulForThisEquip <= keyValue)
 				low++;
 			theP[high] = theP[low];
 		}
