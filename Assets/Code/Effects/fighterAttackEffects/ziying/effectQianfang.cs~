@@ -11,7 +11,7 @@ public class effectQianfang : effectBasic {
 	public int arrowCounts = 5;//发射的剑气数量
 	public float hpup = 0.04f;//吸收的生命值百分比
 	public float hpupTrueUseExtra = 4f;//吸收的生命值
-	float angleForArrow = 22;//剑气角度
+	float angleForArrow = 13;//剑气角度
 
 	static List<extraWeapon> theArrows = new List<extraWeapon> ();
 	static extraWeapon updatedArrow;
@@ -27,7 +27,7 @@ public class effectQianfang : effectBasic {
 	}
 	public override void Init ()
 	{
-		lifeTimerAll = 6f;
+		lifeTimerAll = 5.5f;
 		timerForEffect = 0.2f;
 		theEffectName = "千方残光剑";
 		theEffectInformation ="向前方锥形发射"+arrowCounts+"束特殊剑气\n攻击命中额外追加（"+hpup*100+"%+"+hpupTrueUseExtra+"）生命偷取\n每束剑气最多对三个目标造成伤害，持续"+arrowLife+"秒" +

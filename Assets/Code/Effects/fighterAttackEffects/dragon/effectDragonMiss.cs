@@ -4,8 +4,10 @@ using UnityEngine;
 
 public class effectDragonMiss : effectBasic{
 
-	float spupOnAttack = 5;
-	float hpupPercent = 0.1f;
+	float spupOnAttack = 6;
+	float hpupPercent = 0.30f;
+	float maxPercent = 0.20f;
+
 	void Start () 
 	{
 		Init ();//进行初始化
@@ -19,10 +21,10 @@ public class effectDragonMiss : effectBasic{
 	public override void Init ()
 	{
 		//print("<或跃在渊>正在初始化");
-		lifeTimerAll = 3f;
-		timerForEffect = 3f;
+		lifeTimerAll = 5f;
+		timerForEffect = 5f;
 		theEffectName = "龙战于野";
-		theEffectInformation = "攻击命中回复"+spupOnAttack+"斗气,每1%斗气提高伤害0.15%\n此外，所有生命回复效果提升"+hpupPercent *100+"%，持续"+lifeTimerAll+"秒";
+		theEffectInformation = "攻击命中回复"+spupOnAttack+"斗气,每1%斗气提高伤害"+maxPercent+"%\n此外，所有生命回复效果提升"+hpupPercent *100+"%，持续"+lifeTimerAll+"秒";
 		makeStart ();
 		Destroy (this,lifeTimerAll);
 	}
@@ -38,7 +40,7 @@ public class effectDragonMiss : effectBasic{
 		if (thePlayer) 
 		{
 			this.thePlayer.ActerSp += spupOnAttack;
-			float damage = TrueDamage * this.thePlayer.ActerSp * 0.15f / this.thePlayer.ActerSpMax;
+			float damage = TrueDamage * this.thePlayer.ActerSp * maxPercent / this.thePlayer.ActerSpMax;
 			this.thePlayer.OnAttackWithoutEffect (aim, damage, false, true);
 		}
 	}

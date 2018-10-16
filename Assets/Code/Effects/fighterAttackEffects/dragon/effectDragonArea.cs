@@ -7,7 +7,7 @@ public class effectDragonArea :  effectBasic
 	public float shieldAdd = 20f;
 	public float hpupOnBeAttack = 5f;
 	public float damageInPercentForUp = 0.03f;
-	public float spUseOnBeAttackPercent = 0.03f;
+	public float spUseOnBeAttackPercent = 0.02f;
 	public float spUse = 3f;
 	public int countMax = 4;
 	private GameObject theEffectProfab;
