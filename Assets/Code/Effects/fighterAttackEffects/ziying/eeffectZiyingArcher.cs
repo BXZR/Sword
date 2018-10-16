@@ -22,7 +22,7 @@ public class eeffectZiyingArcher : effectBasic {
 		lifeTimerAll = 0.25f;
 		timerForEffect = 0.25f;
 		theEffectName = "气剑指";
-		theEffectInformation ="将剑气凝于手指激射而出用作普攻\n剑气可对命中的最多三个目标造成伤害\n"+lifeTimerAll +"秒内只能发射一束剑气\n无法发射剑气时触发可以恢复10斗气";
+		theEffectInformation ="将剑气凝于手指激射而出用作普攻\n剑气可对命中的最多三个目标造成伤害\n"+lifeTimerAll +"秒内只能发射一束剑气\n无法发射剑气时触发可以返还10斗气";
 		//这个效果算是气剑指的特性，并且也是手速狂魔的福音，手速快的话在高攻速的时候就是无消耗输出
 		makeStart ();
 		if (!Arrow) //加载资源仅仅需要一次，后面的引用就好了

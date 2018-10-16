@@ -62,19 +62,23 @@ public class effectThreeKnife : effectBasic {
 		{ 
 			//第一次是伴随着初始化的
 			if (step == 0)
-			{ //第一次削减攻击力
+			{ 
+				//第一次削减攻击力
 				theAim = aim;
 				damageMinus = aim.ActerWuliDamage * aimDamageMinus;
 				theAim.ActerWuliDamage -= damageMinus;
 				step++;
 			} 
 
-			if (step == 1) {//第二次，偷取生命值
+			if (step == 1)
+			{
+				//第二次，偷取生命值
 				hpup ();
 				step++;
 			} 
 			else if (step == 2) 
 			{
+				//第三次，追加伤害
 				float damage = (aim.ActerHpMax - aim.ActerHp) * damagePercent;
 				aim.ActerHp -= damage;
 				this.thePlayer.OnAttackWithoutEffect (aim, damage, true, true);

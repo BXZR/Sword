@@ -84,8 +84,17 @@ public class effectZiying :effectBasic{
 	public override string getOnTimeFlashInformation ()
 	{
 		if (isEffecting)
-			return this.theEffectName;
-		return this.theEffectName + "\n(充能中)";
+		{
+			if (thePlayer.isFighting == false)
+				return this.theEffectName + "积累";
+			return this.theEffectName ;
+		} 
+		else
+		{
+			if (thePlayer.isFighting == false)
+				return this.theEffectName + "积累\n[充能中]";
+			return this.theEffectName + "\n[充能中]";
+		}
 	}
 
 	public override void effectOnUpdateTime ()
