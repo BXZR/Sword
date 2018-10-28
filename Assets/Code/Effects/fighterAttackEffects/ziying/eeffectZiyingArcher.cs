@@ -77,7 +77,7 @@ public class eeffectZiyingArcher : effectBasic {
 			//print ("theExtraX = "+ extraX);
 			ArrowUsing.transform.Rotate (new Vector3 ( extraX, 0, 0), Space.Self);
 
-			Vector3 positionNew = thePlayer.transform.position + new Vector3 (0, 0.8f * thePlayer.transform.localScale.y + 0.3f, forward.normalized.z * 0.1f);
+			Vector3 positionNew = thePlayer.transform.position + new Vector3 (0, 0.8f * thePlayer.transform.localScale.y + 0.3f, forward.normalized.z * 0.07f);
 			ArrowUsing.transform.localScale *= thePlayer.transform.localScale.y;
 			ArrowUsing.transform.position = positionNew;
 

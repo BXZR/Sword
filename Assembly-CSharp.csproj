@@ -186,6 +186,7 @@
      <Compile Include="Assets\Code\bloodSlider\BasicMethod\BloodScaner.cs" />
      <Compile Include="Assets\Code\controllers\gameStarter.cs" />
      <Compile Include="Assets\Code\controllers\informationMouseShow.cs" />
+     <Compile Include="Assets\Code\monsters\monsterFactory.cs" />
      <Compile Include="Assets\Code\netWork\PUNConnect.cs" />
      <Compile Include="Assets\Code\netWork\onConnectFlash.cs" />
      <Compile Include="Assets\Code\playerModes\playMode1.cs" />

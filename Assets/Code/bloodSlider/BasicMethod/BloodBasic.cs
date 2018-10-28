@@ -24,6 +24,8 @@ public class BloodBasic : MonoBehaviour {
 		
 	public void flashBloodShowTimer()
 	{
+		if (!thePlayer)
+			return;
 		showHpTimer = showHPTimerMax;
 		thePlayer.isShowingOnGUI = true;
 	}
