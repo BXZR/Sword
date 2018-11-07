@@ -13,10 +13,10 @@
       <File FileName="Assets\Code\Effects\fighterAttackEffects\knife\effectMonk.cs" Line="1" Column="1" />
       <File FileName="Assets\Code\Effects\fighterAttackEffects\knife\effectThreeKnife.cs" Line="1" Column="1" />
       <File FileName="Assets\Code\Effects\fighterAttackEffects\knife\effectKOKnife.cs" Line="1" Column="1" />
-      <File FileName="Assets\Code\monsters\monsterFactory.cs" Line="21" Column="86" />
-      <File FileName="Assets\Code\bloodSlider\BasicMethod\BloodBasic.cs" Line="28" Column="11" />
-      <File FileName="Assets\Code\Effects\fighterAttackEffects\ziying\eeffectZiyingArcher.cs" Line="80" Column="148" />
-      <File FileName="Assets\Code\Effects\fighterAttackEffects\ziying\effectQianfang.cs" Line="66" Column="150" />
+      <File FileName="Assets\Code\monsters\monsterFactory.cs" Line="20" Column="49" />
+      <File FileName="Assets\Code\bloodSlider\BasicMethod\BloodBasic.cs" Line="1" Column="1" />
+      <File FileName="Assets\Code\Effects\fighterAttackEffects\ziying\eeffectZiyingArcher.cs" Line="80" Column="118" />
+      <File FileName="Assets\Code\Effects\fighterAttackEffects\ziying\effectQianfang.cs" Line="181" Column="54" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
