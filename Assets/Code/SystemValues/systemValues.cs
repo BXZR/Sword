@@ -10,7 +10,7 @@ public class systemValues : MonoBehaviour {
 	//程序面板单元
 	//也可以理解为这是每一个客户端的计分板
 
-	#region系统记录静态参数信息
+	#region 系统记录静态参数信息
 	//用来记录这个客户端的相关内容
 	//统一invokeRepeat的调用时间
 	public static float updateTimeWait = 0.1f;
@@ -40,7 +40,7 @@ public class systemValues : MonoBehaviour {
 	public static playModeBasic playModeNow ;
 	#endregion
 
-	#region游戏角色信息设定查询
+	#region 游戏角色信息设定查询
 	//游戏角色相关信息设定和查询
 	public static string[] playerNames = { "归海一刀", "郭靖" ,"花木兰" , "慕容紫英"};
 	//head picture 被保存在里面与图片是对应的
@@ -98,7 +98,7 @@ public class systemValues : MonoBehaviour {
 	}
 	#endregion
 
-	#region连招状态检查
+	#region 连招状态检查
 	//动画层1只有在这个状态之下才可以运行战斗动画
 	public static string [] canAttackStateInBasicLayer = {"moveMent","rotatePoseBack" ,"rotatePoseForward","jump"};
 	public static string canAttackStateInAttackLayer = "moveMent";
@@ -156,7 +156,7 @@ public class systemValues : MonoBehaviour {
 	}
 	#endregion
 
-	#region连招基本信息
+	#region 连招基本信息
 	//获取连招出招表（中文）
 	public static string []  attackLinkChinese= {"上", "下", "左" , "右" , "击" , "换" , "止"};
 	public static string []  attackLinkEnglish= {"W", "S", "A" , "D" , "J" , "Q"  , "E"};
@@ -183,7 +183,7 @@ public class systemValues : MonoBehaviour {
 	}
 	#endregion
 
-	#region获取连招、效果信息
+	#region 获取连招、效果信息
 	//工具方法，更为复杂的方法
 	//用于连招的显示按钮等等信息的全部获取
 	public static List < attackLinkInformation>  getEffectInformationsMore(GameObject thePlayer,bool withAttackLinkEffect = false)
@@ -400,7 +400,7 @@ public class systemValues : MonoBehaviour {
 	}
 	#endregion
 
-	#region系统状态检查
+	#region 系统状态检查
 	//UI界面选项是否已经开启
 	//这是一个通用的全局检查用标记
 	private  static  bool isSystemPanelOpened = true;
@@ -895,7 +895,7 @@ public class systemValues : MonoBehaviour {
 	}
 	#endregion
 
-	#region通用静态方法
+	# region 通用静态方法
 
 
 	private static float change(float angle)//角度转弧度的方法
@@ -1093,9 +1093,9 @@ public class systemValues : MonoBehaviour {
 
 		return new string(charArray);
 	}
-	#endregion
+ 	#endregion
 
-	#region系统清理
+	#region 系统清理
 	//反复跳转场景应该做一些清理工作
 	public static void makeSystemClean()
 	{

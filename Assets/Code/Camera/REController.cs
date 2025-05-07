@@ -18,10 +18,10 @@ public class REController : MonoBehaviour {
 		Screen.SetResolution (screenHeight, screenWidth, true, 60);
 		this.GetComponent <Camera > ().aspect = (float)screenHeight / (float)screenWidth;
 
-		if (Application.platform != RuntimePlatform.Android)
-		{
-			Screen.fullScreen = false; //这个游戏强制窗口模式（因为强制了分辨率）
-		}
+		//if (Application.platform != RuntimePlatform.Android)
+		//{
+		//	Screen.fullScreen = false; //这个游戏强制窗口模式（因为强制了分辨率）
+		//}
 
 		//Screen.fullScreen = false;需要做两遍，否则就会出现不正确的情况
 		//但是如果将GUI的影片播放延迟一小点时间就不会出现问题

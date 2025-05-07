@@ -1,7 +1,7 @@
 fileFormatVersion: 2
 guid: b805cf4e6ed529f43aa5cecf6b074430
 ModelImporter:
-  serializedVersion: 19
+  serializedVersion: 22
   fileIDToRecycleName:
     100000: 000
     100002: Bip01
@@ -70,44 +70,26 @@ ModelImporter:
     100128: Bone07
     100130: Bone08
     100132: Bone09
-    100134: GuoJin
-    100136: //RootNode
-    100138: HH____
-    100140: HH____
-    100142: HH_______
-    100144: HH_______
-    100146: HH_______
-    100148: HH_______
-    100150: HH_______1
-    100152: HH_______2
-    100154: HH__________
-    100156: HH__________
-    100158: HH__________
-    100160: HH__________
-    100162: HH__________
-    100164: HH__________
-    100166: HH__________
-    100168: HH__________
-    100170: HH__________
-    100172: HH__________
-    100174: "HH_\u4E0A\u81C2\u53F3"
-    100176: "HH_\u4E0A\u81C2\u5DE6"
-    100178: "HH_\u524D\u81C2\u53F3"
-    100180: "HH_\u524D\u81C2\u5DE6"
-    100182: "HH_\u5634"
-    100184: "HH_\u5927\u817F\u53F3"
-    100186: "HH_\u5927\u817F\u5DE6"
-    100188: "HH_\u5934"
-    100190: "HH_\u5C0F\u817F\u53F3"
-    100192: "HH_\u5C0F\u817F\u5DE6"
-    100194: "HH_\u624B\u53F3"
-    100196: "HH_\u624B\u5DE6"
-    100198: "HH_\u80A9\u8180\u53F3"
-    100200: "HH_\u80A9\u8180\u5DE6"
-    100202: "HH_\u811A\u53F3"
-    100204: "HH_\u811A\u5DE6"
-    100206: "HH_\u8EAF\u5E721"
-    100208: "HH_\u8EAF\u5E722"
+    100134: //RootNode
+    100136: GuoJin
+    100138: "HH_\u4E0A\u81C2\u53F3"
+    100140: "HH_\u4E0A\u81C2\u5DE6"
+    100142: "HH_\u524D\u81C2\u53F3"
+    100144: "HH_\u524D\u81C2\u5DE6"
+    100146: "HH_\u5634"
+    100148: "HH_\u5927\u817F\u53F3"
+    100150: "HH_\u5927\u817F\u5DE6"
+    100152: "HH_\u5934"
+    100154: "HH_\u5C0F\u817F\u53F3"
+    100156: "HH_\u5C0F\u817F\u5DE6"
+    100158: "HH_\u624B\u53F3"
+    100160: "HH_\u624B\u5DE6"
+    100162: "HH_\u80A9\u8180\u53F3"
+    100164: "HH_\u80A9\u8180\u5DE6"
+    100166: "HH_\u811A\u53F3"
+    100168: "HH_\u811A\u5DE6"
+    100170: "HH_\u8EAF\u5E721"
+    100172: "HH_\u8EAF\u5E722"
     400000: 000
     400002: Bip01
     400004: Bip01 Footsteps
@@ -177,51 +159,43 @@ ModelImporter:
     400132: Bone09
     400134: //RootNode
     400136: GuoJin
-    400138: HH____
-    400140: HH____
-    400142: HH_______
-    400144: HH_______
-    400146: HH_______
-    400148: HH_______
-    400150: HH_______1
-    400152: HH_______2
-    400154: HH__________
-    400156: HH__________
-    400158: HH__________
-    400160: HH__________
-    400162: HH__________
-    400164: HH__________
-    400166: HH__________
-    400168: HH__________
-    400170: HH__________
-    400172: HH__________
-    400174: "HH_\u4E0A\u81C2\u53F3"
-    400176: "HH_\u4E0A\u81C2\u5DE6"
-    400178: "HH_\u524D\u81C2\u53F3"
-    400180: "HH_\u524D\u81C2\u5DE6"
-    400182: "HH_\u5634"
-    400184: "HH_\u5927\u817F\u53F3"
-    400186: "HH_\u5927\u817F\u5DE6"
-    400188: "HH_\u5934"
-    400190: "HH_\u5C0F\u817F\u53F3"
-    400192: "HH_\u5C0F\u817F\u5DE6"
-    400194: "HH_\u624B\u53F3"
-    400196: "HH_\u624B\u5DE6"
-    400198: "HH_\u80A9\u8180\u53F3"
-    400200: "HH_\u80A9\u8180\u5DE6"
-    400202: "HH_\u811A\u53F3"
-    400204: "HH_\u811A\u5DE6"
-    400206: "HH_\u8EAF\u5E721"
-    400208: "HH_\u8EAF\u5E722"
+    400138: "HH_\u4E0A\u81C2\u53F3"
+    400140: "HH_\u4E0A\u81C2\u5DE6"
+    400142: "HH_\u524D\u81C2\u53F3"
+    400144: "HH_\u524D\u81C2\u5DE6"
+    400146: "HH_\u5634"
+    400148: "HH_\u5927\u817F\u53F3"
+    400150: "HH_\u5927\u817F\u5DE6"
+    400152: "HH_\u5934"
+    400154: "HH_\u5C0F\u817F\u53F3"
+    400156: "HH_\u5C0F\u817F\u5DE6"
+    400158: "HH_\u624B\u53F3"
+    400160: "HH_\u624B\u5DE6"
+    400162: "HH_\u80A9\u8180\u53F3"
+    400164: "HH_\u80A9\u8180\u5DE6"
+    400166: "HH_\u811A\u53F3"
+    400168: "HH_\u811A\u5DE6"
+    400170: "HH_\u8EAF\u5E721"
+    400172: "HH_\u8EAF\u5E722"
     4300000: GuoJin
-    7400000: Take 001
     9500000: //RootNode
-    11100000: //RootNode
     13700000: GuoJin
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: "\u90ED\u9756\u8EAB\u4F53"
+    second: {fileID: 2100000, guid: 88aa610be80bbaa419bc6a29b265a707, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: "\u90ED\u9756\u9970\u54C1rr"
+    second: {fileID: 2100000, guid: a4f98147470dc3d4988445553acd7ac7, type: 2}
   materials:
     importMaterials: 1
     materialName: 0
     materialSearch: 1
+    materialLocation: 0
   animations:
     legacyGenerateAnimations: 4
     bakeSimulation: 0
@@ -234,12 +208,14 @@ ModelImporter:
     animationImportWarnings: 
     animationRetargetingWarnings: 
     animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
     animationCompression: 3
     animationRotationError: 0.5
     animationPositionError: 0.5
     animationScaleError: 0.5
     animationWrapMode: 0
     extraExposedTransformPaths: []
+    extraUserProperties: []
     clipAnimations: []
     isReadable: 1
   meshes:
@@ -247,13 +223,18 @@ ModelImporter:
     globalScale: 1
     meshCompression: 0
     addColliders: 0
+    importVisibility: 0
     importBlendShapes: 1
+    importCameras: 0
+    importLights: 0
     swapUVChannels: 0
     generateSecondaryUV: 0
     useFileUnits: 1
     optimizeMeshForGPU: 1
     keepQuads: 0
     weldVertices: 1
+    preserveHierarchy: 0
+    indexFormat: 1
     secondaryUVAngleDistortion: 8
     secondaryUVAreaDistortion: 15.000001
     secondaryUVHardAngle: 88
@@ -263,6 +244,7 @@ ModelImporter:
     normalSmoothAngle: 60
     normalImportMode: 0
     tangentImportMode: 4
+    normalCalculationMode: 0
   importAnimation: 0
   copyAvatar: 0
   humanDescription:
